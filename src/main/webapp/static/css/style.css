@@ -11,6 +11,15 @@
 	font-weight: normal;
 }
 
+body a,
+.toggle-btn span {
+	transition: 0.2s all;
+	-webkit-transition: 0.2s all;
+	-o-transition: 0.2s all;
+	-moz-transition: 0.2s all;
+	-ms-transition: 0.2s all;
+}
+
 
 /* clearfix */
 
@@ -55,8 +64,6 @@ body {
 	width: 130px;
 	position: fixed;
 	height: 100%;
-	z-index: 100;
-	overflow: hidden;
 }
 
 .main-content {
@@ -76,13 +83,10 @@ body {
 	left: 130px;
 	z-index: 1000;
 	width: 100%;
-	padding-bottom: 2px;
 }
 
 .content-head-section {
 	background-color: #fff;
-	border-bottom: 2px #CCC solid;
-	min-height: 54px;
 	max-width: 100%;
 }
 
@@ -98,6 +102,65 @@ body {
 
 .toggle-btn span {
 	color: rgb(182, 180, 180);
+}
+
+.stickey-menu .left-side {
+	width: 40px;
+}
+
+.stickey-menu .left-side ul li a {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	padding: 1rem;
+	position: relative;
+}
+
+.stickey-menu .left-side ul li a span.menu-text {
+	position: absolute;
+	background: #65CEA7;
+	padding: 10px;
+	left: 40px;
+	top: 0;
+	min-width: 173px;
+	text-align: left;
+	z-index: 100;
+	display: none;
+}
+
+.stickey-menu .left-side ul li a span.menu-text::after {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(0, 0, 0, 0);
+	border-right-color: #65CEA7;
+	border-width: 6px;
+	margin-top: -6px;
+}
+
+.stickey-menu .main-content {
+	margin-left: 40px;
+}
+
+.stickey-menu .content-head {
+	left: 40px;
+}
+
+.stickey-menu .content-head-right {
+	margin-right: 55px;
+}
+
+.show-stickey-menu {
+	width: 200px !important;
+}
+
+.show-stickey-menu span.menu-text {
+	display: block !important;
 }
 
 .serach-form {
