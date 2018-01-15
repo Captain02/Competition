@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.HolidayMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Holiday">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="startday" jdbcType="TIMESTAMP" property="startday" />
+    <result column="endday" jdbcType="TIMESTAMP" property="endday" />
+    <result column="holidaydays" jdbcType="INTEGER" property="holidaydays" />
+    <result column="test" jdbcType="VARCHAR" property="test" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
+    <result column="processInstanceId" jdbcType="VARCHAR" property="processinstanceid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, startday, endday, holidaydays, test, reason, enclosure, processInstanceId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from holiday
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from holiday
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Holiday">
+    insert into holiday (id, type, startday, 
+      endday, holidaydays, test, 
+      reason, enclosure, processInstanceId
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{startday,jdbcType=TIMESTAMP}, 
+      #{endday,jdbcType=TIMESTAMP}, #{holidaydays,jdbcType=INTEGER}, #{test,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Holiday">
+    insert into holiday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="startday != null">
+        startday,
+      </if>
+      <if test="endday != null">
+        endday,
+      </if>
+      <if test="holidaydays != null">
+        holidaydays,
+      </if>
+      <if test="test != null">
+        test,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="enclosure != null">
+        enclosure,
+      </if>
+      <if test="processinstanceid != null">
+        processInstanceId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startday != null">
+        #{startday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endday != null">
+        #{endday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidaydays != null">
+        #{holidaydays,jdbcType=INTEGER},
+      </if>
+      <if test="test != null">
+        #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstanceid != null">
+        #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Holiday">
+    update holiday
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startday != null">
+        startday = #{startday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endday != null">
+        endday = #{endday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidaydays != null">
+        holidaydays = #{holidaydays,jdbcType=INTEGER},
+      </if>
+      <if test="test != null">
+        test = #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstanceid != null">
+        processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Holiday">
+    update holiday
+    set type = #{type,jdbcType=VARCHAR},
+      startday = #{startday,jdbcType=TIMESTAMP},
+      endday = #{endday,jdbcType=TIMESTAMP},
+      holidaydays = #{holidaydays,jdbcType=INTEGER},
+      test = #{test,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      processInstanceId = #{processinstanceid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- List<Holiday> list(); -->
+  <select id="list"  resultType="Holiday">
+  	select 
+    <include refid="Base_Column_List"/>
+    from holiday
+  </select>
+  
+</mapper>

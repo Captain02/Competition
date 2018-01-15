@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.ReimbursementMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Reimbursement">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="money" jdbcType="REAL" property="money" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="detailed" jdbcType="VARCHAR" property="detailed" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="processInstanceId" jdbcType="VARCHAR" property="processinstanceid" />
+    <result column="test" jdbcType="VARCHAR" property="test" />
+    <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, money, type, detailed, date, processInstanceId, test, enclosure
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reimbursement
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reimbursement
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Reimbursement">
+    insert into reimbursement (id, money, type, 
+      detailed, date, processInstanceId, 
+      test, enclosure)
+    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=REAL}, #{type,jdbcType=VARCHAR}, 
+      #{detailed,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{processinstanceid,jdbcType=VARCHAR}, 
+      #{test,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Reimbursement">
+    insert into reimbursement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="detailed != null">
+        detailed,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="processinstanceid != null">
+        processInstanceId,
+      </if>
+      <if test="test != null">
+        test,
+      </if>
+      <if test="enclosure != null">
+        enclosure,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="detailed != null">
+        #{detailed,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processinstanceid != null">
+        #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="test != null">
+        #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Reimbursement">
+    update reimbursement
+    <set>
+      <if test="money != null">
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="detailed != null">
+        detailed = #{detailed,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processinstanceid != null">
+        processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="test != null">
+        test = #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Reimbursement">
+    update reimbursement
+    set money = #{money,jdbcType=REAL},
+      type = #{type,jdbcType=VARCHAR},
+      detailed = #{detailed,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      test = #{test,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

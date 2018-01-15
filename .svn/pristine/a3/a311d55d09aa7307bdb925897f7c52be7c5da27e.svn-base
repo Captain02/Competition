@@ -1,0 +1,75 @@
+package com.hanming.oa.model;
+
+import java.util.Date;
+
+public class Holiday {
+    private Integer id;
+
+    private Date startday;
+
+    private Date endday;
+
+    private String holidaydays;
+
+    private String test;
+
+    private String reason;
+
+    private String enclosure;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getStartday() {
+        return startday;
+    }
+
+    public void setStartday(Date startday) {
+        this.startday = startday;
+    }
+
+    public Date getEndday() {
+        return endday;
+    }
+
+    public void setEndday(Date endday) {
+        this.endday = endday;
+    }
+
+    public String getHolidaydays() {
+        return holidaydays;
+    }
+
+    public void setHolidaydays(String holidaydays) {
+        this.holidaydays = holidaydays == null ? null : holidaydays.trim();
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test == null ? null : test.trim();
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason == null ? null : reason.trim();
+    }
+
+    public String getEnclosure() {
+        return enclosure;
+    }
+
+    public void setEnclosure(String enclosure) {
+        this.enclosure = enclosure == null ? null : enclosure.trim();
+    }
+}

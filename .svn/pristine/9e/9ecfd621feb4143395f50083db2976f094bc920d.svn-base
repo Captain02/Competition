@@ -1,0 +1,35 @@
+package com.hanming.oa.model;
+
+public class UserHoliday {
+    private Integer id;
+
+    private Integer userid;
+
+    private Integer holidayid;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+	public Integer getHolidayid() {
+		return holidayid;
+	}
+
+	public void setHolidayid(Integer holidayid) {
+		this.holidayid = holidayid;
+	}
+
+
+}

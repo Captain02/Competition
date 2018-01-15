@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.HolidayMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Holiday">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="startDay" jdbcType="TIMESTAMP" property="startday" />
+    <result column="endDay" jdbcType="TIMESTAMP" property="endday" />
+    <result column="holidayDays" jdbcType="VARCHAR" property="holidaydays" />
+    <result column="test" jdbcType="VARCHAR" property="test" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, startDay, endDay, holidayDays, test, reason, enclosure
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from holiday
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from holiday
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Holiday">
+    insert into holiday (id, startDay, endDay, 
+      holidayDays, test, reason, 
+      enclosure)
+    values (#{id,jdbcType=INTEGER}, #{startday,jdbcType=TIMESTAMP}, #{endday,jdbcType=TIMESTAMP}, 
+      #{holidaydays,jdbcType=VARCHAR}, #{test,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{enclosure,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Holiday">
+    insert into holiday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="startday != null">
+        startDay,
+      </if>
+      <if test="endday != null">
+        endDay,
+      </if>
+      <if test="holidaydays != null">
+        holidayDays,
+      </if>
+      <if test="test != null">
+        test,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="enclosure != null">
+        enclosure,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="startday != null">
+        #{startday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endday != null">
+        #{endday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidaydays != null">
+        #{holidaydays,jdbcType=VARCHAR},
+      </if>
+      <if test="test != null">
+        #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Holiday">
+    update holiday
+    <set>
+      <if test="startday != null">
+        startDay = #{startday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endday != null">
+        endDay = #{endday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidaydays != null">
+        holidayDays = #{holidaydays,jdbcType=VARCHAR},
+      </if>
+      <if test="test != null">
+        test = #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Holiday">
+    update holiday
+    set startDay = #{startday,jdbcType=TIMESTAMP},
+      endDay = #{endday,jdbcType=TIMESTAMP},
+      holidayDays = #{holidaydays,jdbcType=VARCHAR},
+      test = #{test,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

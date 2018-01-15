@@ -1,0 +1,41 @@
+package com.hanming.oa.dao;
+
+import java.util.List;
+
+import com.hanming.oa.model.Role;
+import com.hanming.oa.model.User;
+
+public interface UserMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(User record);
+
+    int insertSelective(User record);
+
+    User selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
+
+	User selectByUsername(String username);
+
+	List<User> list();
+	
+	int userCount();
+
+	List<User> selectLikeUsername(String name);
+	
+	List<User> selectLikename(String name);
+
+	User selectByPrimaryKeyWithDeptAndRole(Integer id);
+
+	List<String> selectAllResource(Integer userId);
+
+	List<String> selectAllRole(Integer userId);
+
+	Role selectRoleByUserId(Integer id);
+
+	List<User> listNotStaff();
+
+}

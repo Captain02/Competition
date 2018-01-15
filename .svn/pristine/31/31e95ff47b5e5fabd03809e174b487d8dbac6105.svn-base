@@ -1,0 +1,17 @@
+package com.hanming.oa.dao;
+
+import com.hanming.oa.model.reimbursement;
+
+public interface reimbursementMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(reimbursement record);
+
+    int insertSelective(reimbursement record);
+
+    reimbursement selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(reimbursement record);
+
+    int updateByPrimaryKey(reimbursement record);
+}

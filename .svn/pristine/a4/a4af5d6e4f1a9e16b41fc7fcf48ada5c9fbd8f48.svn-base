@@ -1,0 +1,34 @@
+package com.hanming.oa.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hanming.oa.dao.HolidayMapper;
+import com.hanming.oa.dao.UserHolidayMapper;
+import com.hanming.oa.model.Holiday;
+import com.hanming.oa.model.UserHoliday;
+
+@Service
+public class HolidayService {
+
+	@Autowired
+	HolidayMapper holidayMapper;
+	@Autowired
+	UserHolidayMapper userHolidayMapper;
+
+	public int insertHoliday(Holiday holiday) {
+		int i = holidayMapper.insertSelective(holiday);
+		return i;
+	}
+
+	public void insertUserHoliday(UserHoliday userHoliday) {
+		userHolidayMapper.insertSelective(userHoliday);
+	}
+
+	public List<Holiday> list() {
+		List<Holiday> list = holidayMapper.list();
+		return list;
+	}
+}

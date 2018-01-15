@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.DepartmentUserMapper">
+	<resultMap id="BaseResultMap" type="com.hanming.oa.model.DepartmentUser">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="departmentId" jdbcType="INTEGER" property="departmentid" />
+		<result column="userId" jdbcType="INTEGER" property="userid" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, departmentId, userId
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_department_user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_department_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hanming.oa.model.DepartmentUser">
+		insert into t_department_user (id, departmentId, userId
+		)
+		values (#{id,jdbcType=INTEGER}, #{departmentid,jdbcType=INTEGER},
+		#{userid,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hanming.oa.model.DepartmentUser">
+		insert into t_department_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="departmentid != null">
+				departmentId,
+			</if>
+			<if test="userid != null">
+				userId,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="departmentid != null">
+				#{departmentid,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.DepartmentUser">
+		update t_department_user
+		<set>
+			<if test="departmentid != null">
+				departmentId = #{departmentid,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				userId = #{userid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.DepartmentUser">
+		update t_department_user
+		set departmentId = #{departmentid,jdbcType=INTEGER},
+		userId = #{userid,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- void updateByUserId(DepartmentUser departmentUser); -->
+	<update id="updateByUserId" parameterType="DepartmentUser">
+		update t_department_user
+		set departmentId = #{departmentid,jdbcType=INTEGER}
+		where userId = #{userid,jdbcType=INTEGER}
+	</update>
+
+	<!-- void deleteByUserId(Integer id); -->
+	<delete id="deleteByUserId" parameterType="Integer">
+		delete from t_department_user
+		where userId = #{id}
+	</delete>
+</mapper>

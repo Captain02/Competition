@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.UserMapper">
+	<resultMap id="BaseResultMap" type="com.hanming.oa.model.User">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sex" jdbcType="VARCHAR" property="sex" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="qq" jdbcType="VARCHAR" property="qq" />
+		<result column="edu" jdbcType="VARCHAR" property="edu" />
+	</resultMap>
+	
+	<!-- 带有部门和角色的返回值 -->
+	<resultMap id="WithDeptAndRole" type="com.hanming.oa.model.User">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sex" jdbcType="VARCHAR" property="sex" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="qq" jdbcType="VARCHAR" property="qq" />
+		<result column="edu" jdbcType="VARCHAR" property="edu" />
+		<!-- 联合查询出部门的字段 -->
+		<association property="department" javaType="Department">
+			<id column="tdId" property="id" />
+			<result column="tdName" property="name"/>
+		</association>
+		
+		<association property="role" javaType="Role">
+			<id column="trId" property="id"/>
+			<result column="trName" property="name"/>
+		</association>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, username, password, name, sex, phone, qq, edu
+	</sql>
+	
+	<!-- 带有部门和角色的查询sql -->
+	<sql id="WithDepAndRole">
+		tu.id,tu.username,tu.`password`,tu.`name`,tu.sex,tu.phone,tu.qq,tu.edu,td.id as tdId,tr.id as trId, td.`name` as tdName,tr.`name` as trName
+	</sql>
+	
+	<!-- 连表语句 -->
+	<sql id="linkSql">
+		FROM t_user tu
+		LEFT JOIN t_department_user tdu ON tdu.userId = tu.id
+		LEFT JOIN t_department td ON td.id = tdu.departmentId
+		LEFT JOIN t_user_role tur ON tu.id = tur.userId
+		LEFT JOIN t_role tr ON tur.roleId = tr.id
+	</sql>
+	
+	<!-- User selectByPrimaryKeyWithDeptAndRole(Integer id); -->
+	<select id="selectByPrimaryKeyWithDeptAndRole" parameterType="java.lang.Integer"
+		resultMap="WithDeptAndRole">
+		select
+		<include refid="WithDepAndRole" />
+		<include refid="linkSql" />
+		where tu.id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hanming.oa.model.User">
+		insert into t_user (id, username, password,
+		name, sex, phone, qq,
+		edu)
+		values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{edu,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.User">
+		insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="qq != null">
+				qq,
+			</if>
+			<if test="edu != null">
+				edu,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null">
+				#{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="edu != null">
+				#{edu,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.User">
+		update t_user
+		<set>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null">
+				qq = #{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="edu != null">
+				edu = #{edu,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.User">
+		update t_user
+		set username = #{username,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		qq = #{qq,jdbcType=VARCHAR},
+		edu = #{edu,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- User selectByUsername(String username); -->
+	<select id="selectByUsername" parameterType="String" resultMap="WithDeptAndRole">
+		select
+		<include refid="WithDepAndRole" />
+		<include refid="linkSql"></include>
+		where username = #{username}
+	</select>
+	
+	<!-- List<User> list(); -->
+	<select id="list" resultMap="WithDeptAndRole">
+		select
+		<include refid="WithDepAndRole" />
+		<include refid="linkSql"></include>
+	</select>
+	
+	<!-- int userCount(); -->
+	<select id="userCount" resultType="int">
+		select count(*) from t_user
+	</select>
+
+	<!-- List<User> selectLikeUsername(String name); -->
+	<select id="selectLikeUsername" parameterType="String" resultMap="WithDeptAndRole">
+		select
+		<include refid="WithDepAndRole" />
+		<include refid="linkSql"></include>
+		where tu.username like '%' #{name} '%'
+	</select>
+	
+	<!-- List<User> selectLikename(String name); -->
+	<select id="selectLikename" parameterType="String" resultMap="WithDeptAndRole">
+		select
+		<include refid="WithDepAndRole" />
+		<include refid="linkSql"></include>
+		where tu.name like '%' #{name} '%'
+	</select>
+	
+	<!-- List<String> selectAllResource(Integer userId); -->
+	<select id="selectAllResource" parameterType="Integer" resultType="String">
+		SELECT tre.url
+		FROM t_resource tre
+		LEFT JOIN t_role_resource trs ON trs.resourceId = tre.id
+		LEFT JOIN t_role tr ON tr.id = trs.roleId
+		LEFT JOIN t_user_role tru ON tru.roleId = tr.id
+		LEFT JOIN t_user tu ON tu.id = tru.userId
+		WHERE 
+		tu.id=#{userId} 
+	</select>
+	
+	<!-- List<String> selectAllRole(Integer userId); -->
+	<select id="selectAllRole" parameterType="Integer" resultType="String">
+		SELECT tr.sn
+		FROM t_role tr
+		LEFT JOIN t_user_role tur ON tur.roleId = tr.id
+		LEFT JOIN t_user tu ON tu.id = tur.userId
+		WHERE 
+		tu.id=#{id}
+	</select>
+	
+	<!-- Role selectRoleByUserId(Integer id); -->
+	<select id="selectRoleByUserId" parameterType="Integer" resultType="Role">
+		SELECT tr.`name`,tr.sn
+		FROM t_role tr
+		LEFT JOIN t_user_role tur ON tur.roleId = tr.id
+		LEFT JOIN t_user tu ON tu.id = tur.userId
+		WHERE 
+		tu.id=#{id}
+	</select>
+	
+	
+</mapper>

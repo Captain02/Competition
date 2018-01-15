@@ -1,0 +1,17 @@
+package com.hanming.oa.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.hanming.oa.model.Reimbursement;
+
+@Service
+public class ReimbursementService {
+
+
+	public void addReimbursement(String persons, MultipartFile file, Reimbursement holiday) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

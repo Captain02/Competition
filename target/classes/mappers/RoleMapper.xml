@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.hanming.oa.model.Role">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sn" jdbcType="VARCHAR" property="sn" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, sn
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_role
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_role
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hanming.oa.model.Role">
+		insert into t_role (id, name, sn)
+		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{sn,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hanming.oa.model.Role">
+		insert into t_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="sn != null">
+				sn,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null">
+				#{sn,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Role">
+		update t_role
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sn != null">
+				sn = #{sn,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Role">
+		update t_role
+		set name = #{name,jdbcType=VARCHAR},
+		sn = #{sn,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- List<Role> list(); -->
+	<select id="list" resultType="Role">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_role
+	</select>
+
+	<!-- List<Role> listLikeName(String name); -->
+	<select id="listLikeName" parameterType="String" resultType="Role">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_role
+		where name like "%" #{name} "%"
+	</select>
+
+	<!-- List<User> selectUserByRoleId(Integer id); -->
+	<select id="selectUserByRoleId" parameterType="Integer"
+		resultType="User">
+		SELECT tu.username,tu.`name`,tu.id
+		FROM t_user tu
+		LEFT JOIN t_user_role tur ON
+		tu.id = tur.userId
+		LEFT JOIN t_role tr ON tur.roleId = tr.id
+		WHERE
+		tr.id=#{id}
+	</select>
+
+	<!-- List<User> selectUserByRoleIdLikeName(); -->
+	<select id="selectUserByRoleIdLikeName" parameterType="RoleIdAndName"
+		resultType="User">
+		SELECT tu.username,tu.`name`,tu.id
+		FROM t_user tu
+		LEFT JOIN t_user_role tur ON
+		tu.id = tur.userId
+		LEFT JOIN t_role tr ON tur.roleId = tr.id
+		WHERE
+		tr.id=#{id} AND tu.name like "%" #{name} "%"
+	</select>
+
+	<!-- int selectUserCountByRoleId(Integer id); -->
+	<select id="selectUserCountByRoleId" parameterType="Integer"
+		resultType="Integer">
+		select count(*)
+		from t_user tu
+		LEFT JOIN t_user_role tur ON tu.id = tur.userId
+		LEFT JOIN t_role tr ON tur.roleId = tr.id
+		WHERE tr.id=#{id}
+	</select>
+
+	<!-- List<Resource> RoleHasResource(Integer id); -->
+	<select id="RoleHasResource" parameterType="Integer" resultType="Resource">
+		select tre.id,tre.`column`,tre.`name`,tre.permission,tre.url
+		FROM t_resource tre
+		LEFT JOIN t_role_resource trr ON trr.resourceId=tre.id
+		LEFT JOIN t_role tr ON trr.roleId = tr.id
+		WHERE tr.id=#{id}
+	</select>
+
+</mapper>

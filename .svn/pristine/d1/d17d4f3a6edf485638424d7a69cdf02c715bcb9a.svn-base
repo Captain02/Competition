@@ -1,0 +1,48 @@
+package com.hanming.oa.testService;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.hanming.oa.dao.ReimbursementMapper;
+import com.hanming.oa.model.Reimbursement;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:/spring/spring-dao.xml" })
+public class ReimbursementDaoTest {
+
+	@Autowired
+	ReimbursementMapper reimbursementMapper;
+
+	@Test
+	public void listLikeStateType() {
+
+		List<Reimbursement> list = reimbursementMapper.listLikeStateType("", "");
+	}
+
+	@Test
+	public void dataAnalysisByMonth() {
+		List<Map<String, Float>> list = reimbursementMapper.dataAnalysisByMonth("2017");
+		Map<Object, Object> map = new LinkedHashMap<>();
+		for (Map<String, Float> mapForDataAnalysisByMonth : list) {
+			Object month = null;
+			Object money = null;
+			for (Map.Entry<String, Float> entry : mapForDataAnalysisByMonth.entrySet()) {
+				if ("month".equals(entry.getKey())) {
+					month = entry.getValue();
+				} else if ("month".equals(entry.getKey())) {
+					money = entry.getValue();
+				}
+			}
+			map.put(month, money);
+		}
+		
+	}
+
+}

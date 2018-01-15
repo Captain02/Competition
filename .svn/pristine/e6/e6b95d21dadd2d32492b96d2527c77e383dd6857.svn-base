@@ -1,0 +1,178 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>报销管理</title>
+		<%
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
+			<jsp:include page="iniCssHref.jsp"></jsp:include>
+
+	</head>
+
+	<body>
+
+		<body class="bg-common">
+
+			<section>
+
+				<!-- 页面模版，每页左侧区域固定不变 -->
+
+				<jsp:include page="iniLeftMenu.jsp"></jsp:include>
+				<div class="main-content">
+
+					<!-- 页面模版，每页主体部分头部按需更改 -->
+					<div class="content-head content-head-section">
+
+						<a href="" class="toggle-btn">
+							<span class="glyphicon glyphicon-th-list"></span>
+						</a>
+
+
+
+
+						<jsp:include page="iniUserInfo.jsp"></jsp:include>
+
+						<div class="clearfix"></div>
+
+					</div>
+
+					<!-- 页面模版，按需更改 -->
+					<div class="wrapper">
+
+						<div class="om-header">
+							<jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
+
+							<div class="om-header-right ">
+								<button id="all2" type="button" class="btn btn-default btn-sm">
+									全部</button>
+								<button id="all" type="button" class="btn btn-warning btn-sm">
+									待审批</button>
+								<button id="addButton" onclick="window.location.href='/OA02/admin/holiday/add'" type="button" class="btn btn-success btn-sm">
+									<i>+</i>我要报销
+								</button>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="om-wrapper">
+							<div class="row">
+								<div class="col-sm-12">
+
+									<header class="om-wrapper-header">报销 / 总数：</header>
+
+									<div class="om-wrpper-body">
+										<form action="" id="user-list" class="user-list">
+											<table class="table table-hover general-table">
+												<thead>
+													<tr>
+														<th class="hidden-phone">报销日期</th>
+														<th>状态</th>
+														<th>结果</th>
+														<th>金额</th>
+														<th>进度</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>1</td>
+														<td>1</td>
+														<td>1</td>
+														<td>1</td>
+														<td>1</td>
+														<td>
+															<div class="btn-group">
+																<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																	操作
+																	<span class="caret"></span>
+																</button>
+																<ul class="dropdown-menu">
+																	<li>
+																		<a href="">编辑</a>
+																	</li>
+																	<li role="separator" class="divider"></li>
+																	<li>
+																		<a href="">删除</a>
+																	</li>
+
+																	<li role="separator" class="divider"></li>
+																	<li>
+																		<a href="">正常</a>
+																	</li>
+
+																</ul>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+
+											</table>
+										</form>
+									</div>
+
+								</div>
+
+							</div>
+
+							<!-- 分页 -->
+							<div class="page-area">
+								<div class="container page-possiton">
+									<nav aria-label="Page navigation">
+										<ul class="pagination pagination-control">
+											<li>
+												<a href="${APP_PATH}/admin/user/list?pn=1">首页</a>
+											</li>
+											<c:if test="${pageInfo.hasPreviousPage}">
+												<li>
+													<a href="${APP_PATH}/admin/user/list?pn=${pageInfo.pageNum-1}" aria-label="Previous">
+														<span aria-hidden="true">&laquo;</span>
+													</a>
+												</li>
+											</c:if>
+											<c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
+												<c:if test="${pageNum==pageInfo.pageNum}">
+													<li class="active">
+														<a href="#">${pageNum}</a>
+													</li>
+												</c:if>
+												<c:if test="${pageNum!=pageInfo.pageNum}">
+													<li>
+														<a href="${APP_PATH}/admin/user/list?pn=${pageNum}">${pageNum}</a>
+													</li>
+												</c:if>
+											</c:forEach>
+
+											<c:if test="${pageInfo.hasNextPage }">
+												<li>
+													<a href="${APP_PATH}/admin/user/list?pn=${pageInfo.pageNum+1}" aria-label="Next">
+														<span aria-hidden="true">&raquo;</span>
+													</a>
+												</li>
+											</c:if>
+
+											<li>
+												<a href="${APP_PATH}/admin/user/list?pn=${pageInfo.pages}" aria-label="Next">
+													<span aria-hidden="true">末页</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+		</body>
+
+	</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- Dao层配置文件，实现了Spring与Mybatis框架的整合 -->
+
+	<!-- 解析数据库连接信息 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 配置数据源 -->
+	<bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="driverClass" value="${jdbc.driverClassName}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialPoolSize" value="${jdbc.pool.init}" />
+		<property name="minPoolSize" value="${jdbc.pool.minPoolSize}" />
+		<property name="maxPoolSize" value="${jdbc.pool.maxPoolSize}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="checkoutTimeout" value="60000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="idleConnectionTestPeriod" value="6000000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="maxIdleTime" value="600000" />
+	</bean>
+
+	<!-- MyBatis 集成Spring必须配置的项 1、配置sqlsessionFactory实例 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="pooledDataSource"></property>
+		<!-- 扫描sql配置文件，即mapper对应的xml文件 -->
+		<property name="mapperLocations" value="classpath:/mappers/*.xml"></property>
+		<!-- 扫描实体类包这样mapper文件可以使用简单类名多个用;隔开 -->
+		<property name="typeAliasesPackage" value="com/hanming/oa/model"></property>
+		<!-- 配置mybatis全局配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+
+	<!-- MyBatis 集成 Spring 必须配置的项 2，可以不配置 id -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 给出须要被扫描的 Dao 接口 -->
+		<property name="basePackage" value="com.hanming.oa.dao" />
+	</bean>
+
+	<!-- 添加事务注解支持 -->
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="pooledDataSource"></property>
+	</bean>
+
+	<!-- 导入Activiti配置 -->
+	<import resource="classpath:spring/spring-activiti.xml"/>
+	
+	
+	<!-- <aop:config>
+		<aop:pointcut expression="execution(* com.hanming.oa.service.Impl..*(..))"
+			id="txPoint" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint" />
+	</aop:config>
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice> -->
+
+</beans>

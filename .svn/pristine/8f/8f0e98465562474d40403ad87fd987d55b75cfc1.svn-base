@@ -1,0 +1,90 @@
+package com.hanming.oa.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.hanming.oa.dao.ReimbursementMapper;
+import com.hanming.oa.dao.UserReimbursementMapper;
+import com.hanming.oa.model.Reimbursement;
+import com.hanming.oa.model.UserReimbursement;
+
+@Service
+public class ReimbursementService {
+
+	@Autowired
+	ReimbursementMapper reimbursementMapper;
+	@Autowired
+	UserReimbursementMapper userReimbursementMapper;
+	@Autowired
+	RuntimeService runtimeService;
+	@Autowired
+	TaskService taskService;
+
+	@Transactional
+	public void addReimbursement(String persons, MultipartFile file, Reimbursement reimbursement) {
+		Map<String, Object> variables = new HashMap<String, Object>();
+		variables.put("Ass1", SecurityUtils.getSubject().getSession().getAttribute("username"));
+		if (!("".equals(persons))) {
+			if (persons.contains("-")) {
+				String[] personsStr = persons.split("-");
+				for (int i = 0; i < personsStr.length; i++) {
+					variables.put("Ass" + (i + 2), personsStr[i]);
+				}
+			}
+		}
+
+		// 添加相关数据
+		reimbursement.setTest("审核中");
+		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
+			reimbursement.setEnclosure("E:\\testuoload\\" + file.getOriginalFilename());
+		}
+		UserReimbursement userReimbursement = new UserReimbursement();
+		userReimbursement.setUserid((Integer) SecurityUtils.getSubject().getSession().getAttribute("id"));
+		insertReimbursement(reimbursement);
+		userReimbursement.setReimbursementid(reimbursement.getId());
+		insertUserReimbursement(userReimbursement);
+		// 设置启动流程变量
+		variables.put("reimbursementId", reimbursement.getId());
+		// 启动流程
+		ProcessInstance pi = runtimeService.startProcessInstanceByKey("helloword", variables);
+		// 根据流程实例Id查询任务
+		Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
+		// 完成 学生填写请假单任务
+		taskService.complete(task.getId());
+		// 修改状态
+		reimbursement.setProcessinstanceid(pi.getProcessInstanceId());
+		updateReimbursement(reimbursement);
+	}
+
+	private void insertUserReimbursement(UserReimbursement userReimbursement) {
+
+		userReimbursementMapper.insertSelective(userReimbursement);
+	}
+
+	private void updateReimbursement(Reimbursement reimbursement) {
+		reimbursementMapper.updateByPrimaryKeySelective(reimbursement);
+
+	}
+
+	private void insertReimbursement(Reimbursement reimbursement) {
+
+		reimbursementMapper.insertSelective(reimbursement);
+	}
+
+	public List<Reimbursement> listLikeStateType(String state, String type) {
+		
+		return reimbursementMapper.listLikeStateType(state,type);
+	}
+
+}

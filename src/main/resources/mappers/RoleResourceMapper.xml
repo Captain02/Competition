@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.RoleResourceMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.RoleResource">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="roleId" jdbcType="INTEGER" property="roleid" />
+    <result column="resourceId" jdbcType="INTEGER" property="resourceid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, roleId, resourceId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_role_resource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_role_resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.RoleResource">
+    insert into t_role_resource (id, roleId, resourceId
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, #{resourceid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.RoleResource">
+    insert into t_role_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleid != null">
+        roleId,
+      </if>
+      <if test="resourceid != null">
+        resourceId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="resourceid != null">
+        #{resourceid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.RoleResource">
+    update t_role_resource
+    <set>
+      <if test="roleid != null">
+        roleId = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="resourceid != null">
+        resourceId = #{resourceid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.RoleResource">
+    update t_role_resource
+    set roleId = #{roleid,jdbcType=INTEGER},
+      resourceId = #{resourceid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- void deleteByRoleId(Integer id); -->
+  <delete id="deleteByRoleId" parameterType="Integer">
+  	delete from t_role_resource
+    where roleId = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- void addRoleResource(Integer roleId, Integer resourceId); -->
+  <insert id="addRoleResource" parameterType="map">
+  	INSERT INTO t_role_resource(roleId,resourceId)
+        VALUES(#{roleId},#{resourceId})
+  </insert>
+
+</mapper>

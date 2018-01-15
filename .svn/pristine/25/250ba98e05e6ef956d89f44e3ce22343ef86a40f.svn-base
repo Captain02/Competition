@@ -1,0 +1,614 @@
+@font-face {
+	font-family: "fzlt";
+	src: url(../fonts/fzlt-webfont.eot);
+	/* IE9 */
+	src: url(../fonts/fzlt-webfont.eot?#iefix) format("embedded-opentype"), /* IE6-IE8 */
+	url(../fonts/fzlt-webfont.woff) format("woff"), /* chrome, firefox */
+	/* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+	url(../fonts/fzlt-webfont.ttf) format("truetype"), url(../fonts/fzlt-webfont.svg#SentyZHAO) format("svg");
+	/* iOS 4.1- */
+	font-style: normal;
+	font-weight: normal;
+}
+
+
+/* clearfix */
+
+.clearfix::before,
+.clearfix::after {
+	content: "";
+	display: table;
+}
+
+.clearfix::after {
+	clear: both;
+}
+
+
+/* 閸忕厧顔恑e */
+
+.clearfix {
+	zoom: 1;
+}
+
+body {
+	/*閼奉亜鐣炬稊澶婄摟娴ｏ拷 */
+	font-family: fzlt 'Microsoft Yahei UI' '微软雅黑';
+}
+
+.bg {
+	background-color: rgba(253, 249, 249, 0.877);
+}
+
+.bg-common {
+	background-color: #424f63;
+}
+
+
+/* index start */
+
+.row {
+	margin: 0;
+}
+
+.left-side {
+	width: 130px;
+	position: fixed;
+	height: 100%;
+	z-index: 100;
+	overflow: hidden;
+}
+
+.main-content {
+	margin-left: 130px;
+	background-color: #eff0f4;
+	min-height: 987px;
+	padding-top: 50px;
+}
+
+.dropdown-menu>li {
+	text-align: center;
+}
+
+.content-head {
+	position: fixed;
+	top: 0;
+	left: 130px;
+	z-index: 1000;
+	width: 100%;
+	padding-bottom: 2px;
+}
+
+.content-head-section {
+	background-color: #fff;
+	border-bottom: 2px #CCC solid;
+	min-height: 54px;
+	max-width: 100%;
+}
+
+.toggle-btn {
+	width: 52px;
+	height: 50px;
+	font-size: 20px;
+	padding: 15px;
+	cursor: pointer;
+	float: left;
+	border-right: 1px solid #e7e7e7;
+}
+
+.toggle-btn span {
+	color: rgb(182, 180, 180);
+}
+
+.serach-form {
+	float: left;
+}
+
+.serach-form select,
+.serach-form input {
+	float: left;
+	width: 250px;
+	margin: 7px 0 0 10px;
+}
+
+.serach-form button {
+	margin: 7px 0 0 10px;
+}
+
+.content-head-right {
+	position: absolute;
+	right: 0;
+	margin-right: 160px;
+}
+
+.login-info>li {
+	float: left;
+	display: inline-block;
+	position: relative;
+}
+
+.login-info>li>a {
+	color: #000;
+	display: inline-block;
+	line-height: 54px;
+	padding: 0 10px;
+}
+
+.login-info>li>a>i {
+	font-size: 2rem;
+	color: #b6b4b4;
+	display: block;
+	line-height: 54px;
+	padding: 0 10px;
+}
+
+.wrapper {
+	padding: 15px;
+}
+
+.welcome-text h2 {
+	font-family: fzlt;
+	color: #424f63;
+}
+
+.welcome-text a {
+	font-family: fzlt;
+	color: #65CEA7;
+	font-weight: bold;
+}
+
+
+/* login start */
+
+.top-title {
+	font-size: 4rem;
+	color: #1069a4;
+	letter-spacing: 1px;
+	line-height: 1;
+	margin: 3rem 0 3rem;
+	padding: 3rem 0;
+	text-align: center;
+}
+
+.top-logo {
+	top: 3px;
+	font-weight: bold;
+}
+
+.login-area {
+	padding: 40px;
+	max-width: 700px;
+	margin: 0 auto;
+	overflow: hidden;
+	background: #f5f5f5;
+	border: 4px solid #ededed;
+	border-radius: 10px;
+}
+
+.login-form {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.nav-user>li>a {
+	display: block;
+	padding: 1rem 1.8rem;
+}
+
+.nav-user>li span.left-list-icon {
+	margin-right: 1rem;
+	text-align: center;
+}
+
+.errorMessage {
+	font-family: fzlt;
+	color: red;
+	letter-spacing: 1px;
+	font-size: 12px;
+}
+
+
+/* 闁插秴鍟揵s鐞涖劌宕� */
+
+.input-group-addon {
+	background-color: #f5f5f5;
+}
+
+.input-username,
+.input-password {
+	top: 0px;
+}
+
+.check-rem {
+	font-family: fzlt;
+	margin: 20px 0;
+}
+
+.check-rem input[type='checkbox'] {
+	border: 1px solid #ededed;
+}
+
+
+/* footer */
+
+.footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	line-height: 80px;
+	background-color: #1069a4;
+	border-top: 7px solid #0a5685;
+	text-align: center;
+	font-family: fzlt;
+	font-size: 1.4rem;
+	color: #fff;
+	letter-spacing: 1px;
+	margin-top: 127px;
+}
+
+
+/* omPage start */
+
+.om-content {
+	background: #eff0f4;
+	min-height: 1000px;
+}
+
+
+/* om-header */
+
+.om-header {
+	padding: 1.5rem;
+	padding-right: 0;
+}
+
+.om-list {
+	padding-left: 1.5rem;
+}
+
+.om-list a {
+	display: inline-block;
+	margin-left: 1rem;
+	font-size: 16px;
+	color: #65CEA7;
+}
+
+.om-header-right {
+	float: right !important;
+}
+
+.om-header-right i {
+	display: inline-block;
+	font-weight: bold;
+	margin-right: 1rem;
+}
+
+
+/* om-wrapper */
+
+.om-wrapper {
+	min-height: 700px;
+	background-color: #fff;
+	padding: 0 1rem;
+	position: relative;
+}
+
+.om-wrapper-header {
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+	padding: 1.5rem 0;
+	text-transform: uppercase;
+	color: #535351;
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+
+.om-wrpper-body {
+	padding-top: 1.5rem;
+}
+
+.page-area {
+	position: absolute;
+	bottom: 30px;
+	right: 100px;
+}
+
+.pagination-control {
+	float: right;
+}
+
+
+/* child style */
+
+
+/* user start */
+
+table thead tr th {
+	text-align: center;
+	font-weight: 800;
+	letter-spacing: 1px;
+}
+
+table tbody tr td {
+	text-align: center;
+	font-weight: 400;
+	vertical-align: middle;
+}
+
+
+/* add start */
+
+.form-group {
+	border-bottom: 1px solid #eff2f7;
+	padding-bottom: 15px;
+}
+
+.form-group::before,
+.form-group::after {
+	content: "";
+	display: table;
+}
+
+.form-group::after {
+	clear: both;
+}
+
+form#addUserInfo header {
+	font-family: fzlt;
+	color: #7a7676;
+	font-size: 1.4rem;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.control-label {
+	display: block;
+	text-align: right;
+	padding-top: 7px;
+	color: #535351;
+	font-size: 1.4rem;
+	font-family: fzlt;
+	font-weight: normal;
+}
+
+.control-label span {
+	color: #a31515;
+}
+
+.radio-inline {
+	padding-top: 5px;
+}
+
+
+/* 前端校验样式 */
+
+.has-error-page {
+	font-size: 12px;
+	color: #a31515;
+}
+
+.has-error-page i {
+	display: inline-block;
+	padding-right: 5px;
+}
+
+.has-error-success {
+	font-size: 12px;
+	color: #0c9e13;
+}
+
+.has-error-success i {
+	display: inline-block;
+	padding-right: 5px;
+}
+
+
+/* 校验样式 */
+
+.has-error>span {
+	font-size: 12px;
+	color: #a31515;
+}
+
+.has-success>span {
+	font-size: 12px;
+	color: #0c9e13;
+}
+
+.has-error>span>i,
+.has-success>span>i {
+	display: inline-block;
+	padding-right: 5px;
+}
+
+
+/* 请假页 */
+
+.holiday-table thead tr th {
+	text-align: center;
+}
+
+.holiday-table tbody tr td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.btn-person {
+	font-size: 60px;
+	color: #65CEA7;
+	border: none;
+	cursor: pointer;
+}
+
+.serach-person-header {
+	background: #65CEA7;
+	color: #fff;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	border: none;
+}
+
+.person-List li>a {
+	color: #65CEA7;
+}
+
+.person-List li {
+	margin-bottom: 6px;
+	border-bottom: 1px #ddd solid;
+	padding: 15px;
+	cursor: pointer;
+}
+
+.serach-person-footer {
+	border-top: none;
+}
+
+.form-group a {
+	color: #65CEA7;
+}
+
+.form-group a span.spare-dot {
+	color: red;
+	font-weight: bold;
+	height: 20px;
+	line-height: 20px;
+	display: inline-block;
+}
+
+.person-name-area {
+	float: left;
+	height: 64px;
+	line-height: 32px;
+}
+
+.person-name-area>a {
+	cursor: pointer;
+}
+
+.cf tr td a {
+	font-size: 16px;
+	color: #65CEA7;
+}
+
+
+/* 个人主页 */
+
+.person-desk h1 {
+	color: #49586e;
+	font-size: 2rem;
+	margin: 0 0 5px 0;
+	text-transform: uppercase;
+}
+
+.btn-info {
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+}
+
+.tools a:hover,
+.tools a.active {
+	background: #65cea7;
+	color: #fff;
+}
+
+.btn-group.open .dropdown-toggle,
+.btn-white.active,
+.btn:active,
+.btn.active {
+	box-shadow: none;
+}
+
+.tools .btn-default.active:hover {
+	background: #65cea7;
+	color: #fff;
+}
+
+.tools a {
+	background: #E3E4E8;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color: #858582;
+	float: left;
+	margin-left: 3px;
+	padding: 10px;
+	text-decoration: none;
+	padding: 5px;
+}
+
+.modal-header {
+	background: #65CEA7;
+	color: #fff;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	border: none;
+}
+
+ul.p-info li {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+ul.p-info .title {
+	width: 40%;
+}
+
+ul.p-info .title,
+ul.p-info .desk {
+	float: left;
+}
+
+ul.p-info .desk {
+	width: 60%;
+	color: #65cea7;
+}
+
+ul.p-info .title,
+ul.p-info .desk {
+	float: left;
+}
+
+
+/* 请假条页 */
+
+.blog h1 {
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #424242;
+	font-weight: 400;
+	margin: 0px 0 10px 0;
+	line-height: 30px;
+}
+
+.blog h1 a {
+	color: #424242;
+}
+
+.blog .auth-row {
+	color: #c8c8c8;
+	font-weight: 300;
+	padding-bottom: 20px;
+	font-size: 14px;
+}
+
+
+/* approve pagae */
+
+.approve .control-label {
+	text-align: left;
+}
+
+.approve .right {
+	text-align: right;
+}
+
+.approve .approve-result span {
+	margin: 0 5px;
+}
+
+
+/* 数据分析页 */
+
+.charts .om-wrapper {
+	min-height: 0;
+}
