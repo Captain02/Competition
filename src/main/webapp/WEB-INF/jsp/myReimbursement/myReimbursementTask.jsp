@@ -156,6 +156,9 @@
 													</c:if>
 													<td>
 													<c:if test="${herfPage==0}">
+													<a class="btn btn-warning btn-xs btn-assign" title="指派">
+																<i class="glyphicon glyphicon-hand-right"></i>
+															</a>
 														<a href="${APP_PATH}/admin/myReimbursementTask/examinationPage/${reimbursement.id}/${pageInfo.pageNum}" class="btn btn-success btn-info btn-xs" title="完成">
 															<i class="glyphicon glyphicon-ok-sign "></i>
 														</a>
