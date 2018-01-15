@@ -2,6 +2,8 @@ package com.hanming.oa.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -78,8 +80,8 @@ public class HolidayController {
 	// 我要请假
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Holiday holiday) {
-		holidayService.addholiday(persons, file, holiday);
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Holiday holiday,HttpServletRequest request) {
+		holidayService.addholiday(persons, file, holiday, request);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加请假条");
 		return Msg.success();

@@ -21,6 +21,8 @@ public class UserHolidayByHolidayId {
 
 	private String processinstanceid;
 
+	private String filename;
+
 	private Integer tuId;
 
 	private String username;
@@ -30,6 +32,14 @@ public class UserHolidayByHolidayId {
 	private String department;
 
 	private String role;
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
 	public String getDepartment() {
 		return department;

@@ -112,7 +112,7 @@
                                                 </tbody>
                                             </table>
                                             
-                                            <span style="float: left; padding:8px 20px 0 0;">这里显示文件名</span>
+                                            <span style="float: left; padding:8px 20px 0 0;">${userHolidayByHolidayId.filename}</span>
                                         </div>
  
                                         <!--endprint-->

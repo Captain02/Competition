@@ -3,93 +3,103 @@ package com.hanming.oa.model;
 import java.sql.Date;
 
 public class Holiday {
-    private Integer id;
+	private Integer id;
 
-    private String type;
+	private String type;
 
-    private Date startday;
+	private Date startday;
 
-    private Date endday;
+	private Date endday;
 
-    private Integer holidaydays;
+	private Integer holidaydays;
 
-    private String test;
+	private String test;
 
-    private String reason;
+	private String reason;
 
-    private String enclosure;
+	private String enclosure;
 
-    private String processinstanceid;
+	private String processinstanceid;
 
-    public Integer getId() {
-        return id;
-    }
+	private String filename;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getFilename() {
+		return filename;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Date getStartday() {
-        return startday;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setStartday(Date startday) {
-        this.startday = startday;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public Date getEndday() {
-        return endday;
-    }
+	public void setType(String type) {
+		this.type = type == null ? null : type.trim();
+	}
 
-    public void setEndday(Date endday) {
-        this.endday = endday;
-    }
+	public Date getStartday() {
+		return startday;
+	}
 
-    public Integer getHolidaydays() {
-        return holidaydays;
-    }
+	public void setStartday(Date startday) {
+		this.startday = startday;
+	}
 
-    public void setHolidaydays(Integer holidaydays) {
-        this.holidaydays = holidaydays;
-    }
+	public Date getEndday() {
+		return endday;
+	}
 
-    public String getTest() {
-        return test;
-    }
+	public void setEndday(Date endday) {
+		this.endday = endday;
+	}
 
-    public void setTest(String test) {
-        this.test = test == null ? null : test.trim();
-    }
+	public Integer getHolidaydays() {
+		return holidaydays;
+	}
 
-    public String getReason() {
-        return reason;
-    }
+	public void setHolidaydays(Integer holidaydays) {
+		this.holidaydays = holidaydays;
+	}
 
-    public void setReason(String reason) {
-        this.reason = reason == null ? null : reason.trim();
-    }
+	public String getTest() {
+		return test;
+	}
 
-    public String getEnclosure() {
-        return enclosure;
-    }
+	public void setTest(String test) {
+		this.test = test == null ? null : test.trim();
+	}
 
-    public void setEnclosure(String enclosure) {
-        this.enclosure = enclosure == null ? null : enclosure.trim();
-    }
+	public String getReason() {
+		return reason;
+	}
 
-    public String getProcessinstanceid() {
-        return processinstanceid;
-    }
+	public void setReason(String reason) {
+		this.reason = reason == null ? null : reason.trim();
+	}
 
-    public void setProcessinstanceid(String string) {
-        this.processinstanceid = string;
-    }
+	public String getEnclosure() {
+		return enclosure;
+	}
+
+	public void setEnclosure(String enclosure) {
+		this.enclosure = enclosure == null ? null : enclosure.trim();
+	}
+
+	public String getProcessinstanceid() {
+		return processinstanceid;
+	}
+
+	public void setProcessinstanceid(String string) {
+		this.processinstanceid = string;
+	}
 }

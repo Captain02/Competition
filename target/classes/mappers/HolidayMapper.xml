@@ -13,7 +13,7 @@
     <result column="processInstanceId" jdbcType="VARCHAR" property="processinstanceid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, type, startday, endday, holidaydays, test, reason, enclosure, processInstanceId
+    id, type, startday, endday, holidaydays, test, reason, enclosure, processInstanceId,filename
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,11 +28,11 @@
   <insert id="insert" parameterType="com.hanming.oa.model.Holiday">
     insert into holiday (id, type, startday, 
       endday, holidaydays, test, 
-      reason, enclosure, processInstanceId
+      reason, enclosure, processInstanceId,setFilename
       )
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{startday,jdbcType=TIMESTAMP}, 
       #{endday,jdbcType=TIMESTAMP}, #{holidaydays,jdbcType=INTEGER}, #{test,jdbcType=VARCHAR}, 
-      #{reason,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR}
+      #{reason,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR},#{filename,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Holiday">
@@ -65,6 +65,9 @@
       <if test="processinstanceid != null">
         processInstanceId,
       </if>
+      <if test="filename != null">
+        filename,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -93,6 +96,9 @@
       </if>
       <if test="processinstanceid != null">
         #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -123,6 +129,9 @@
       <if test="processinstanceid != null">
         processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
       </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR}
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -135,7 +144,8 @@
       test = #{test,jdbcType=VARCHAR},
       reason = #{reason,jdbcType=VARCHAR},
       enclosure = #{enclosure,jdbcType=VARCHAR},
-      processInstanceId = #{processinstanceid,jdbcType=VARCHAR}
+      processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -148,7 +158,7 @@
   
   <!-- Holiday selectHolidayByHolidayId(Integer holidayId); -->
   <select id="selectHolidayByHolidayId" resultType="UserHolidayByHolidayId" parameterType="Integer">
-  	SELECT ho.id,ho.type,ho.startday,ho.endday,ho.holidaydays,ho.test,ho.reason,ho.enclosure,ho.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
+  	SELECT ho.id,ho.type,ho.startday,ho.endday,ho.holidaydays,ho.test,ho.reason,ho.enclosure,ho.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department,ho.filename filename
 	FROM holiday ho
 	LEFT JOIN user_holiday uh ON uh.holidayId = ho.id
 	LEFT JOIN t_user tu ON tu.id = uh.userId

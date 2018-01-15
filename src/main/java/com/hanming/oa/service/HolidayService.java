@@ -1,8 +1,13 @@
 package com.hanming.oa.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -51,9 +56,9 @@ public class HolidayService {
 		holidayMapper.updateByPrimaryKeySelective(holiday);
 	}
 
-	//我要请假
+	// 我要请假
 	@Transactional
-	public void addholiday(String persons, MultipartFile file, Holiday holiday) {
+	public void addholiday(String persons, MultipartFile file, Holiday holiday, HttpServletRequest request) {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("Ass1", SecurityUtils.getSubject().getSession().getAttribute("username"));
 		if (!("".equals(persons))) {
@@ -68,24 +73,40 @@ public class HolidayService {
 		// 添加相关数据
 		holiday.setTest("审核中");
 		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
-			holiday.setEnclosure("E:\\testuoload\\" + file.getOriginalFilename());
+			String path = request.getSession().getServletContext().getRealPath("upload");
+			holiday.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			holiday.setFilename(file.getOriginalFilename());
+			File dir = new File(path, new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			// MultipartFile自带的解析方法
+			try {
+				file.transferTo(dir);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
 		}
-		UserHoliday userHoliday = new UserHoliday();
-		userHoliday.setUserid((Integer) SecurityUtils.getSubject().getSession().getAttribute("id"));
-		insertHoliday(holiday);
-		userHoliday.setHolidayid(holiday.getId());
-		insertUserHoliday(userHoliday);
-		// 启动流程
-		variables.put("holidayId", holiday.getId());
-		// 启动流程
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey("helloword", variables);
-		// 根据流程实例Id查询任务
-		Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-		// 完成 学生填写请假单任务
-		taskService.complete(task.getId());
-		// 修改状态
-		holiday.setProcessinstanceid(pi.getProcessInstanceId());
-		updateHoliday(holiday);
+		 UserHoliday userHoliday = new UserHoliday();
+		 userHoliday.setUserid((Integer)
+		 SecurityUtils.getSubject().getSession().getAttribute("id"));
+		 insertHoliday(holiday);
+		 userHoliday.setHolidayid(holiday.getId());
+		 insertUserHoliday(userHoliday);
+		 // 启动流程
+		 variables.put("holidayId", holiday.getId());
+		 // 启动流程
+		 ProcessInstance pi = runtimeService.startProcessInstanceByKey("helloword",
+		 variables);
+		 // 根据流程实例Id查询任务
+		 Task task =
+		 taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
+		 // 完成 学生填写请假单任务
+		 taskService.complete(task.getId());
+		 // 修改状态
+		 holiday.setProcessinstanceid(pi.getProcessInstanceId());
+		 updateHoliday(holiday);
 	}
 
 	public UserHolidayByHolidayId selectHolidayByHolidayId(Integer holidayId) {
@@ -99,30 +120,30 @@ public class HolidayService {
 	}
 
 	public List<Holiday> listLikeStateType(String state, String type) {
-		List<Holiday> holiday = holidayMapper.listLikeStateType(state,type);
+		List<Holiday> holiday = holidayMapper.listLikeStateType(state, type);
 		return holiday;
 	}
 
 	public Holiday selectHolidayByProcessInstanceIdLikeStateType(String processInstanceId, String state, String type) {
-		Holiday holiday = holidayMapper.selectHolidayByProcessInstanceIdLikeStateType(processInstanceId,state,type);
+		Holiday holiday = holidayMapper.selectHolidayByProcessInstanceIdLikeStateType(processInstanceId, state, type);
 		return holiday;
 	}
 
 	public List<Holiday> selectCreatByMeLikeStateType(Integer userId, String state, String type) {
-		List<Holiday> list = holidayMapper.selectCreatByMeLikeStateType(userId,state,type);
+		List<Holiday> list = holidayMapper.selectCreatByMeLikeStateType(userId, state, type);
 		return list;
 	}
 
-	public List<HolidayAndExaminationTime> selectExaminationByMeLikeStateType(String username, String state, String type) {
-		List<HolidayAndExaminationTime> list = holidayMapper.selectExaminationByMeLikeStateType(username,state,type);
+	public List<HolidayAndExaminationTime> selectExaminationByMeLikeStateType(String username, String state,
+			String type) {
+		List<HolidayAndExaminationTime> list = holidayMapper.selectExaminationByMeLikeStateType(username, state, type);
 		return list;
 	}
 
 	public List<HolidayAndExaminationTime> selectCompleteByMeLikeStateType(String username, String state, String type) {
-		List<HolidayAndExaminationTime> list = holidayMapper.selectCompleteByMeLikeStateType(username,state,type);
-		
-		
+		List<HolidayAndExaminationTime> list = holidayMapper.selectCompleteByMeLikeStateType(username, state, type);
+
 		return list;
 	}
-	
+
 }
