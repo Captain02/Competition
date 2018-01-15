@@ -22,6 +22,8 @@ public class UserReimbursementByReimbursementId {
 
 	private Integer tuId;
 
+	private String filename;
+
 	private String username;
 
 	private String name;
@@ -29,6 +31,14 @@ public class UserReimbursementByReimbursementId {
 	private String department;
 
 	private String role;
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
 	public Integer getId() {
 		return id;

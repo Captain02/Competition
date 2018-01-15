@@ -3,83 +3,93 @@ package com.hanming.oa.model;
 import java.sql.Date;
 
 public class Reimbursement {
-    private Integer id;
+	private Integer id;
 
-    private Float money;
+	private Float money;
 
-    private String type;
+	private String type;
 
-    private String detailed;
+	private String detailed;
 
-    private Date date;
+	private Date date;
 
-    private String processinstanceid;
+	private String processinstanceid;
 
-    private String test;
+	private String test;
 
-    private String enclosure;
+	private String enclosure;
 
-    public Integer getId() {
-        return id;
-    }
+	private String filename;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getFilename() {
+		return filename;
+	}
 
-    public Float getMoney() {
-        return money;
-    }
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
-    public void setMoney(Float money) {
-        this.money = money;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+	public Float getMoney() {
+		return money;
+	}
 
-    public String getDetailed() {
-        return detailed;
-    }
+	public void setMoney(Float money) {
+		this.money = money;
+	}
 
-    public void setDetailed(String detailed) {
-        this.detailed = detailed == null ? null : detailed.trim();
-    }
+	public String getType() {
+		return type;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setType(String type) {
+		this.type = type == null ? null : type.trim();
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public String getDetailed() {
+		return detailed;
+	}
 
-    public String getProcessinstanceid() {
-        return processinstanceid;
-    }
+	public void setDetailed(String detailed) {
+		this.detailed = detailed == null ? null : detailed.trim();
+	}
 
-    public void setProcessinstanceid(String processinstanceid) {
-        this.processinstanceid = processinstanceid == null ? null : processinstanceid.trim();
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public String getTest() {
-        return test;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setTest(String test) {
-        this.test = test == null ? null : test.trim();
-    }
+	public String getProcessinstanceid() {
+		return processinstanceid;
+	}
 
-    public String getEnclosure() {
-        return enclosure;
-    }
+	public void setProcessinstanceid(String processinstanceid) {
+		this.processinstanceid = processinstanceid == null ? null : processinstanceid.trim();
+	}
 
-    public void setEnclosure(String enclosure) {
-        this.enclosure = enclosure == null ? null : enclosure.trim();
-    }
+	public String getTest() {
+		return test;
+	}
+
+	public void setTest(String test) {
+		this.test = test == null ? null : test.trim();
+	}
+
+	public String getEnclosure() {
+		return enclosure;
+	}
+
+	public void setEnclosure(String enclosure) {
+		this.enclosure = enclosure == null ? null : enclosure.trim();
+	}
 }

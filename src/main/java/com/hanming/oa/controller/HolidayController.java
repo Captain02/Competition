@@ -1,8 +1,15 @@
 package com.hanming.oa.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -80,7 +87,8 @@ public class HolidayController {
 	// 我要请假
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Holiday holiday,HttpServletRequest request) {
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Holiday holiday,
+			HttpServletRequest request) {
 		holidayService.addholiday(persons, file, holiday, request);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加请假条");
@@ -136,12 +144,43 @@ public class HolidayController {
 		Task task = taskService.createTaskQuery() // 创建任务查询
 				.processInstanceId(userHolidayByHolidayId.getProcessinstanceid())// 根据流程实例Id查询当前任务
 				.singleResult();
-		
-		if (task!=null) {
+
+		if (task != null) {
 			model.addAttribute("approver", task.getAssignee());
 		}
 		model.addAttribute("userHolidayByHolidayId", userHolidayByHolidayId);
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看假条");
 		return "holiday/holidayNote";
+	}
+
+	// 文件下载
+	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
+			throws Exception {
+
+		UserHolidayByHolidayId holidayByHolidayId = holidayService.selectHolidayByHolidayId(id);
+
+		// 获取文件
+		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
+				+ holidayByHolidayId.getEnclosure();
+		// 获取输入流
+		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
+		// 假如以中文名下载的话
+		String filename = holidayByHolidayId.getFilename();
+		// 转码，免得文件名中文乱码
+		filename = URLEncoder.encode(filename, "UTF-8");
+		// 设置文件下载头
+		response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+		// 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+		response.setContentType("multipart/form-data");
+		BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+		int len = 0;
+		byte[] bs = new byte[1024];
+		while ((len = bis.read(bs)) != -1) {
+			out.write(bs, 0, len);
+			out.flush();
+		}
+		out.close();
+		bis.close();
 	}
 }

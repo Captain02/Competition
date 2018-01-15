@@ -1,9 +1,14 @@
 package com.hanming.oa.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -36,7 +41,7 @@ public class ReimbursementService {
 	TaskService taskService;
 
 	@Transactional
-	public void addReimbursement(String persons, MultipartFile file, Reimbursement reimbursement) {
+	public void addReimbursement(String persons, MultipartFile file, Reimbursement reimbursement,HttpServletRequest request) {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("Ass1", SecurityUtils.getSubject().getSession().getAttribute("username"));
 		if (!("".equals(persons))) {
@@ -51,7 +56,19 @@ public class ReimbursementService {
 		// 添加相关数据
 		reimbursement.setTest("审核中");
 		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
-			reimbursement.setEnclosure("E:\\testuoload\\" + file.getOriginalFilename());
+			String path = request.getSession().getServletContext().getRealPath("upload");
+			reimbursement.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			reimbursement.setFilename(file.getOriginalFilename());
+			File dir = new File(path,new Date().toString().replace(":", "-")+file.getOriginalFilename());
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			
+			try {
+				file.transferTo(dir);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
 		}
 		UserReimbursement userReimbursement = new UserReimbursement();
 		userReimbursement.setUserid((Integer) SecurityUtils.getSubject().getSession().getAttribute("id"));

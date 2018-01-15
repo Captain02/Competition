@@ -13,7 +13,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, money, type, detailed, date, processInstanceId, test, enclosure
+    id, money, type, detailed, date, processInstanceId, test, enclosure,filename
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +28,10 @@
   <insert id="insert" parameterType="com.hanming.oa.model.Reimbursement">
     insert into reimbursement (id, money, type, 
       detailed, date, processInstanceId, 
-      test, enclosure)
+      test, enclosure,filename)
     values (#{id,jdbcType=INTEGER}, #{money,jdbcType=REAL}, #{type,jdbcType=VARCHAR}, 
       #{detailed,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{processinstanceid,jdbcType=VARCHAR}, 
-      #{test,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR})
+      #{test,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Reimbursement">
     insert into reimbursement
@@ -60,6 +60,9 @@
       <if test="enclosure != null">
         enclosure,
       </if>
+      <if test="filename != null">
+        filename,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -85,6 +88,9 @@
       </if>
       <if test="enclosure != null">
         #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -112,6 +118,9 @@
       <if test="enclosure != null">
         enclosure = #{enclosure,jdbcType=VARCHAR},
       </if>
+      <if test="enclosure != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -123,7 +132,8 @@
       date = #{date,jdbcType=TIMESTAMP},
       processInstanceId = #{processinstanceid,jdbcType=VARCHAR},
       test = #{test,jdbcType=VARCHAR},
-      enclosure = #{enclosure,jdbcType=VARCHAR}
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
  
@@ -169,7 +179,7 @@
 
   <!-- UserReimbursementByReimbursementId selectReimbursementByReimbursementId(@Param("reimbursementId")Integer reimbursementId); -->
   <select id="selectReimbursementByReimbursementId" resultType="UserReimbursementByReimbursementId">
-  	SELECT re.id,re.money,re.type,re.detailed,re.date,re.processInstanceId,re.test,re.enclosure,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
+  	SELECT re.id,re.money,re.type,re.detailed,re.date,re.processInstanceId,re.filename filename,re.test,re.enclosure,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
 	FROM reimbursement re
 	LEFT JOIN user_reimbursement ur ON ur.reimbursementId = re.id
 	LEFT JOIN t_user tu ON tu.id = ur.userId

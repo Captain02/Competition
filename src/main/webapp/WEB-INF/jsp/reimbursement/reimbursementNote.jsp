@@ -118,11 +118,11 @@
                                                 </tbody>
                                             </table>
 
-                                            <span style="float: left; padding:8px 20px 0 0;">这里显示文件名</span>
+                                            <span style="float: left; padding:8px 20px 0 0;">${userReimbursementByReimbursementId.filename!=null?userReimbursementByReimbursementId.filename:'无附件'}</span>
                                         </div>
 
                                         <!--endprint-->
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" onclick="window.location.href='${APP_PATH}/admin/reimbursement/down/${userReimbursementByReimbursementId.id}'">
                                             <span class="glyphicon glyphicon-arrow-down"></span>下载附件
                                         </button>
                                     </div>

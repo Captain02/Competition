@@ -236,9 +236,11 @@ $(function(){
 				</div>
 
 				<!-- 底部按钮 -->
-				<div class="modal-footer serach-person-footer">
-					<button type="button" class="btn btn-default btn-success yes">确认</button>
-				</div>
+				 <form action="${APP_PATH}/admin/reimbursement/list" method="get">
+					<div class="modal-footer serach-person-footer">
+						<button type="submit" class="btn btn-default btn-success yes">确认</button>
+					</div>
+				</form>
 
 			</div>
 		</div>
