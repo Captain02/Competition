@@ -65,18 +65,23 @@ body {
 	height: 100%;
 	z-index: 9999;
 }
-.nav-hover{
-	background-color: rgb(53,63,79);
+
+.nav-hover {
+	background-color: rgb(53, 63, 79);
 }
-.nav-hover a{
-	color:rgb(101,206,167);
+
+.nav-hover a {
+	color: rgb(101, 206, 167);
 }
-.nav-hover-stickety{
+
+.nav-hover-stickety {
 	background-color: white;
 }
-.nav-hover-stickety a span.glyphicon{
+
+.nav-hover-stickety a span.glyphicon {
 	color: black;
 }
+
 .main-content {
 	margin-left: 130px;
 	background-color: #eff0f4;
@@ -386,6 +391,7 @@ body {
 	float: right;
 }
 
+
 /* user start */
 
 table thead tr th {
@@ -443,7 +449,6 @@ form#addUserInfo header {
 .radio-inline {
 	padding-top: 5px;
 }
-
 
 .has-error-page {
 	font-size: 12px;
@@ -676,4 +681,24 @@ ul.p-info .desk {
 .charts .om-wrapper {
 	min-height: 0;
 	margin-top: 15px;
+}
+
+
+/* 物品页 */
+
+.label {
+	display: inline;
+	padding: .2em .6em .3em;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+}
+
+.label-success {
+	background-color: #5cb85c;
 }

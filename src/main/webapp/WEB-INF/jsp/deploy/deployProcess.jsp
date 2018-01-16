@@ -59,7 +59,6 @@ function deleAll() {
 		empNames += $(this).parents("tr").find("td:eq(2)").text()+",";
 		ids += $(this).parents("tr").find("td:eq(1)").text()+"-";
 	})
-	alert(ids);
 	if (confirm("确认删除"+empNames+"吗？")) {
 		//发送ajax请求
 		  $.ajax({
@@ -72,7 +71,7 @@ function deleAll() {
 					 ShowEle('.yes','hide','.no','hide','.down','show');
 				}else{
 					$('#myModal').modal('show');
-					ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败,该部门还存在人员!' + '</b>');
+					ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败' + '</b>');
 					ShowEle('.yes','hide','.no','hide','.down','show');
 				}
 			}

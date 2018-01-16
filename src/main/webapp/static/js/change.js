@@ -44,24 +44,22 @@ $(function () {
         })
     }
 
-//No.2 左侧导航栏效果
-var menuLi = $('.nav-user li');
-	for(var i = 0; i<menuLi.length; i++){
-		$(menuLi[i]).mousemove(function(){
-			if(bodyClass.hasClass('stickey-menu')){
-				$(this).addClass('nav-hover-stickety');
-			}
-			else{
-				$(this).addClass('nav-hover');
-			}
-		});
-		$(menuLi[i]).mouseout(function(){
-			if(bodyClass.hasClass('stickey-menu')){
-				$(this).removeClass('nav-hover-stickety');
-			}
-			else{
-				$(this).removeClass('nav-hover');
-			}
-		});
-	}
+    //No.2 左侧导航栏效果
+    var menuLi = $('.nav-user li');
+    for (var i = 0; i < menuLi.length; i++) {
+        $(menuLi[i]).mousemove(function () {
+            if (bodyClass.hasClass('stickey-menu')) {
+                $(this).addClass('nav-hover-stickety');
+            } else {
+                $(this).addClass('nav-hover');
+            }
+        });
+        $(menuLi[i]).mouseout(function () {
+            if (bodyClass.hasClass('stickey-menu')) {
+                $(this).removeClass('nav-hover-stickety');
+            } else {
+                $(this).removeClass('nav-hover');
+            }
+        });
+    }
 });

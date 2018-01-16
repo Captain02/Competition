@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>流程部署</title>
+<title>流程定义</title>
 
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
@@ -17,7 +17,6 @@
 
 </head>
 
-<body>
 <body class="bg-common">
 
 	<section>
@@ -69,11 +68,7 @@
 						</h3>
 					</div>
 
-					<div class="om-header-right">
-						<button id="delButton" type="button" class="btn btn-danger ">
-							<i>-</i>批量删除
-						</button>
-					</div>
+					
 					<div class="clearfix"></div>
 				</div>
 
