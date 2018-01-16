@@ -15,26 +15,42 @@
    pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-
+<!-- 控制按钮的状态以及模态框展示的信息 -->
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
+<!-- 初始状态下，关闭按钮是隐藏的 -->
+$(function(){
+	ShowEle('.down','hide');
+});
 $(document).on("click",".dele",function(){
 	var name = $(this).parents("tr").find("td:eq(2)").text();
 	var ids = $(this).attr("value");
-	if (confirm("确认删除"+name+"吗？")) {
-		$.ajax({
-			url:"${APP_PATH}/admin/deploy/dele/"+ids,
-			type:"DELETE",
-			success:function(result) {
-				if (result.code==100) {
-					alert("删除成功");
-				}else{
-					alert("删除失败");
+	 ShowTips('.modal-title','删除确认？','.modal-body','确认删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '吗？');
+	 $('.yes').click(function(){
+		 $.ajax({
+				url:"${APP_PATH}/admin/deploy/dele/"+ids,
+				type:"DELETE",
+				success:function(result) {
+					if (result.code==100) {
+						 $('#myModal').modal('show');
+						 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '的相关信息');
+						 ShowEle('.yes','hide','.no','hide','.down','show');
+					}else{
+						$('#myModal').modal('show');
+						ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败,该部门还存在人员!' + '</b>');
+						ShowEle('.yes','hide','.no','hide','.down','show');
+					}
 				}
-			}
-		})
-	}
+			})
+
+	 });
+		
 	
-})
+	 $('.no').click(function(){
+			$('#myModal').modal('hide');
+		});
+		ShowEle('.yes','show','.no','show');
+});
 
 function deleAll() {
 	var empNames = "";
@@ -138,7 +154,7 @@ function deleAll() {
 
                                             <thead>
                                                 <tr>
-                                                <th><input type="checkbox" name="selectAll"></th>
+                                                <th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
                                                     <th>编号</th>
                                                     <th>流程名称</th>
                                                     <th>部署时间</th>
@@ -149,7 +165,9 @@ function deleAll() {
                                             <tbody>
 												<c:forEach items="${pageInfo.list}" var="deploy">
 	                                                <tr>
-	                                                <td><input type="checkbox" name="selectThisLine" class="selectThisLine"></td>
+	                                                <td>
+	                                                   <input type="checkbox" name="selectItem" class="selectItem">
+	                                                </td>
 	                                                    <td>${deploy.id}</td>
 	                                                    <td>${deploy.name}</td>
 	                                                    <td><fmt:formatDate value="${deploy.deploymentTime }" pattern="yyyy-MM-dd"/></td>
@@ -161,7 +179,7 @@ function deleAll() {
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                                <li>
-	                                                                    <a class="dele" value="${deploy.id}">删除</a>
+	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">删除</a>
 	                                                                </li>
 	                                                            </ul>
 	                                                        </div>
@@ -229,6 +247,33 @@ function deleAll() {
             </div>
 
         </section>
+        
+         <!-- 模态框 -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-warning yes">确认</button>
+        <button type="button" class="btn btn-success no">取消</button>
+        
+        <!-- 用于页面跳转的按钮 -->
+        <form action="${APP_PATH}/admin/department/list">
+        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
+        	<button type="submit" class="btn btn-danger down">关闭</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
     </body>
 
