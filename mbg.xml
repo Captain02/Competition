@@ -38,11 +38,14 @@
 
 		<!-- 指定每个表的生成策略 -->
 		
-		<table tableName="user_reimbursement" domainObjectName="UserReimbursement"
+		<table tableName="user_things" domainObjectName="UserThings"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		
+		<table tableName="things" domainObjectName="Things"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
 
 	</context>
 </generatorConfiguration>

@@ -16,7 +16,7 @@ public class ThingsTaskController {
 			@RequestParam(value = "type", defaultValue = "类型") String type, Model model) {
 		
 		
-		return "thingsTask/thingsTask";
+		return "things/things";
 	}
 	
 }
