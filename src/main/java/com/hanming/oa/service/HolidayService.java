@@ -143,4 +143,9 @@ public class HolidayService {
 		return list;
 	}
 
+	public List<Holiday> selectListHolidayByProcessInstanceId(List<String> listProcessinstanceid) {
+		List<Holiday> listHolidayByProcessInstanceId = holidayMapper.selectListHolidayByProcessInstanceId(listProcessinstanceid);
+		return listHolidayByProcessInstanceId;
+	}
+
 }

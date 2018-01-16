@@ -260,4 +260,15 @@
     </where>
   </select>
   
+  <!-- List<Holiday> selectListHolidayByProcessInstanceId(StringBuffer holidayByProcessInstance); -->
+  <select id="selectListHolidayByProcessInstanceId" resultType="Holiday">
+	select 
+    <include refid="Base_Column_List" />
+    from holiday
+    where processinstanceid IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </select>
+  
 </mapper>

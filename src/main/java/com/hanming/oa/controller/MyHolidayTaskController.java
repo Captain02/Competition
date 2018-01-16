@@ -59,21 +59,30 @@ public class MyHolidayTaskController {
 			@RequestParam(value = "herfPage", defaultValue = "0") String herfPage, Model model) {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
 		List<Holiday> list = new ArrayList<>();
-		PageInfo<Holiday> pageInfo = null;
-		PageHelper.startPage(pn, 12);
+		List<String> listProcessinstanceid = new ArrayList<>();
 		if (Integer.parseInt(herfPage) == 0) {
 			List<Task> Tasks = taskService.createTaskQuery().taskAssignee(username).list();
 			for (Task task : Tasks) {
 				Holiday holiday = holidayService
 						.selectHolidayByProcessInstanceIdLikeStateType(task.getProcessInstanceId(), state, type);
 				if (holiday != null) {
-					list.add(holiday);
+					listProcessinstanceid.add(holiday.getProcessinstanceid());
 				}
 			}
+			System.out.println(listProcessinstanceid);
+			PageInfo<Holiday> pageInfo = null;
+			PageHelper.startPage(pn, 12);
+			list = holidayService.selectListHolidayByProcessInstanceId(listProcessinstanceid);
+			pageInfo = new PageInfo<Holiday>(list, 5);
+			model.addAttribute("pageInfo", pageInfo);
 		}
 		if (Integer.parseInt(herfPage) == 1) {
 			Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+			PageInfo<Holiday> pageInfo = null;
+			PageHelper.startPage(pn, 12);
 			list = holidayService.selectCreatByMeLikeStateType(userId,state, type);
+			pageInfo = new PageInfo<Holiday>(list, 5);
+			model.addAttribute("pageInfo", pageInfo);
 		}
 		if (Integer.parseInt(herfPage) == 2) {
 			PageInfo<HolidayAndExaminationTime> pageInfo2 = null;
@@ -108,12 +117,12 @@ public class MyHolidayTaskController {
 			
 		
 		}
-		pageInfo = new PageInfo<Holiday>(list, 5);
+//		pageInfo = new PageInfo<Holiday>(list, 5);
+//		model.addAttribute("pageInfo", pageInfo);
 
 		List<User> userlist = userService.list();
 		model.addAttribute("userlist", userlist);
 
-		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
 		model.addAttribute("herfPage", herfPage);
