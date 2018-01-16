@@ -36,8 +36,10 @@ public class DeployService {
 			}
 		} else {
 			List<String> processInstanceId = getProcessInstanceIdBySingleDeploymentId(ids);
-			holidayService.deleteHolidayByProcessInstanceId(processInstanceId);
-			reimbursementService.deleteReimbursementServiceByProcessInstanceId(processInstanceId);
+			if (processInstanceId.size()>0) {
+				holidayService.deleteHolidayByProcessInstanceId(processInstanceId);
+				reimbursementService.deleteReimbursementServiceByProcessInstanceId(processInstanceId);
+			}
 			repositoryService.deleteDeployment(ids, true);
 		}
 	}
