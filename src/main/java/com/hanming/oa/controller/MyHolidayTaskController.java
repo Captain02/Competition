@@ -2,14 +2,11 @@ package com.hanming.oa.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
@@ -60,6 +57,8 @@ public class MyHolidayTaskController {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
 		List<Holiday> list = new ArrayList<>();
 		List<String> listProcessinstanceid = new ArrayList<>();
+		
+		//查询指派给我的假期任务
 		if (Integer.parseInt(herfPage) == 0) {
 			List<Task> Tasks = taskService.createTaskQuery().taskAssignee(username).list();
 			for (Task task : Tasks) {
@@ -75,7 +74,10 @@ public class MyHolidayTaskController {
 			list = holidayService.selectListHolidayByProcessInstanceId(listProcessinstanceid);
 			pageInfo = new PageInfo<Holiday>(list, 5);
 			model.addAttribute("pageInfo", pageInfo);
+			logger.info(username + "=====查询指派给我的假期任务");
 		}
+		
+		//查询由我创建的假期任务
 		if (Integer.parseInt(herfPage) == 1) {
 			Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 			PageInfo<Holiday> pageInfo = null;
@@ -83,22 +85,21 @@ public class MyHolidayTaskController {
 			list = holidayService.selectCreatByMeLikeStateType(userId,state, type);
 			pageInfo = new PageInfo<Holiday>(list, 5);
 			model.addAttribute("pageInfo", pageInfo);
+			logger.info(username + "=====查询由我创建的假期任务");
 		}
+		
+		//查询由我解决的假期任务
 		if (Integer.parseInt(herfPage) == 2) {
 			PageInfo<HolidayAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
 			List<HolidayAndExaminationTime> holidayAndExaminationTimelist = holidayService.selectExaminationByMeLikeStateType(username,state, type);
 			pageInfo2 = new PageInfo<HolidayAndExaminationTime>(holidayAndExaminationTimelist, 5);
 
-			//List<User> userlist = userService.list();
-			//model.addAttribute("userlist", userlist);
-
 			model.addAttribute("pageInfo", pageInfo2);
-			model.addAttribute("state", state);
-			model.addAttribute("type", type);
-			model.addAttribute("herfPage", herfPage);
-			return "myHolidayTask/myHolidayTask";
+			logger.info(username + "=====查询由我解决的假期任务");
 		}
+		
+		//查询由我完成的假期任务
 		if (Integer.parseInt(herfPage) == 3) {
 			
 			PageInfo<HolidayAndExaminationTime> pageInfo2 = null;
@@ -106,19 +107,10 @@ public class MyHolidayTaskController {
 			List<HolidayAndExaminationTime> holidayAndExaminationTimelist = holidayService.selectCompleteByMeLikeStateType(username,state, type);
 			pageInfo2 = new PageInfo<HolidayAndExaminationTime>(holidayAndExaminationTimelist, 5);
 
-			//List<User> userlist = userService.list();
-			//model.addAttribute("userlist", userlist);
 
 			model.addAttribute("pageInfo", pageInfo2);
-			model.addAttribute("state", state);
-			model.addAttribute("type", type);
-			model.addAttribute("herfPage", herfPage);
-			return "myHolidayTask/myHolidayTask";
-			
-		
+			logger.info(username + "=====查询由我完成的假期任务");
 		}
-//		pageInfo = new PageInfo<Holiday>(list, 5);
-//		model.addAttribute("pageInfo", pageInfo);
 
 		List<User> userlist = userService.list();
 		model.addAttribute("userlist", userlist);
@@ -126,7 +118,7 @@ public class MyHolidayTaskController {
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
 		model.addAttribute("herfPage", herfPage);
-		logger.info(username + "=====查询给我的假期审批");
+		
 		return "myHolidayTask/myHolidayTask";
 	}
 

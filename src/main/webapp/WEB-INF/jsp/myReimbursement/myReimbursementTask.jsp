@@ -187,11 +187,11 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pagination-control">
 									<li>
-										<a href="${APP_PATH}/admin/myTask/myHolidayTask?pn=1&type=${type}&state=${state}&herfPage=${herfPage}">首页</a>
+										<a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask?pn=1&type=${type}&state=${state}&herfPage=${herfPage}">首页</a>
 									</li>
 									<c:if test="${pageInfo.hasPreviousPage}">
 										<li>
-											<a href="${APP_PATH}/admin/myTask/myHolidayTask?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}&herfPage=${herfPage}"
+											<a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}&herfPage=${herfPage}"
 											    aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
 											</a>
@@ -206,14 +206,14 @@
 										</c:if>
 										<c:if test="${pageNum!=pageInfo.pageNum}">
 											<li>
-												<a href="${APP_PATH}/admin/myTask/myHolidayTask?pn=${pageNum}&type=${type}&state=${state}&herfPage=${herfPage}">${pageNum}</a>
+												<a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask?pn=${pageNum}&type=${type}&state=${state}&herfPage=${herfPage}">${pageNum}</a>
 											</li>
 										</c:if>
 									</c:forEach>
 
 									<c:if test="${pageInfo.hasNextPage }">
 										<li>
-											<a href="${APP_PATH}/admin/myTask/myHolidayTask?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}&herfPage=${herfPage}"
+											<a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}&herfPage=${herfPage}"
 											    aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
@@ -221,7 +221,7 @@
 									</c:if>
 
 									<li>
-										<a href="${APP_PATH}/admin/myTask/myHolidayTask?pn=${pageInfo.pages}&type=${type}&state=${state}&herfPage=${herfPage}" aria-label="Next">
+										<a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask?pn=${pageInfo.pages}&type=${type}&state=${state}&herfPage=${herfPage}" aria-label="Next">
 											<span aria-hidden="true">末页</span>
 										</a>
 									</li>

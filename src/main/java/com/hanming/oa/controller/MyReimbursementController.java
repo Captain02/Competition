@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hanming.oa.model.HolidayAndExaminationTime;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementAndExaminationTime;
 import com.hanming.oa.model.User;
@@ -55,63 +54,68 @@ public class MyReimbursementController {
 
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
 		List<Reimbursement> list = new ArrayList<>();
-		PageInfo<Reimbursement> pageInfo = null;
-		PageHelper.startPage(pn, 12);
+		List<String> listProcessinstanceid = new ArrayList<>();
 
+		//查询指派给我的报销
 		if (Integer.parseInt(herfPage) == 0) {
 			List<Task> Tasks = taskService.createTaskQuery().taskAssignee(username).list();
 			for (Task task : Tasks) {
 				Reimbursement reimbursement = reimbursementService
 						.selectReimbursementByProcessInstanceIdLikeStateType(task.getProcessInstanceId(), state, type);
 				if (reimbursement != null) {
-					list.add(reimbursement);
+					listProcessinstanceid.add(reimbursement.getProcessinstanceid());
 				}
 			}
+			
+			PageInfo<Reimbursement> pageInfo = null;
+			PageHelper.startPage(pn, 12);
+			list = reimbursementService.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
+			pageInfo = new PageInfo<Reimbursement>(list, 5);
+			
+			model.addAttribute("pageInfo", pageInfo);
+			logger.info(username + "=====查询指派给我的报销");
 		}
+		
+		//查询由我创建的报销
 		if (Integer.parseInt(herfPage) == 1) {
 			Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+			PageInfo<Reimbursement> pageInfo = null;
+			PageHelper.startPage(pn, 12);
 			list = reimbursementService.selectCreatByMeLikeStateType(userId,state, type);
+			pageInfo = new PageInfo<Reimbursement>(list, 5);
+			
+			model.addAttribute("pageInfo", pageInfo);
+			logger.info(username + "=====查询由我创建的报销");
 		}
+		
+		//查询由我解决的报销
 		if (Integer.parseInt(herfPage) == 2) {
 			PageInfo<ReimbursementAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
 			List<ReimbursementAndExaminationTime> reimbursementAndExaminationTimelist = reimbursementService.selectExaminationByMeLikeStateType(username,state, type);
 			pageInfo2 = new PageInfo<ReimbursementAndExaminationTime>(reimbursementAndExaminationTimelist, 5);
 
-			//List<User> userlist = userService.list();
-			//model.addAttribute("userlist", userlist);
-
 			model.addAttribute("pageInfo", pageInfo2);
-			model.addAttribute("state", state);
-			model.addAttribute("type", type);
-			model.addAttribute("herfPage", herfPage);
-			return "myReimbursement/myReimbursementTask";
+			logger.info(username + "=====查询由我解决的报销");
 		}
+		
+		//查询由我完成的报销
 		if (Integer.parseInt(herfPage) == 3) {
 			PageInfo<ReimbursementAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
 			List<ReimbursementAndExaminationTime> reimbursementExaminationTimelist = reimbursementService.selectCompleteByMeLikeStateType(username,state, type);
 			pageInfo2 = new PageInfo<ReimbursementAndExaminationTime>(reimbursementExaminationTimelist, 5);
 
-			//List<User> userlist = userService.list();
-			//model.addAttribute("userlist", userlist);
-
 			model.addAttribute("pageInfo", pageInfo2);
-			model.addAttribute("state", state);
-			model.addAttribute("type", type);
-			model.addAttribute("herfPage", herfPage);
+			logger.info(username + "=====查询由我完成的报销");
 		}
-
-		pageInfo = new PageInfo<Reimbursement>(list, 5);
 
 		List<User> userlist = userService.list();
 		model.addAttribute("userlist", userlist);
 
-		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
 		model.addAttribute("herfPage", herfPage);
-		logger.info(username + "=====查询给我的假期审批");
 
 		return "myReimbursement/myReimbursementTask";
 	}

@@ -241,4 +241,16 @@
 	    </if>
 	</where>
   </select>
+  
+  <!-- List<Reimbursement> selectListReimbursementByProcessInstanceId(List<String> listProcessinstanceid); -->
+  <select id="selectListReimbursementByProcessInstanceId" resultType="Reimbursement">
+	select 
+    <include refid="Base_Column_List" />
+    from reimbursement
+    where processinstanceid IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </select>
+  
 </mapper>

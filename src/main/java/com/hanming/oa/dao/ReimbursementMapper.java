@@ -35,4 +35,6 @@ public interface ReimbursementMapper {
 	List<ReimbursementAndExaminationTime> selectExaminationByMeLikeStateType(@Param("username") String username, @Param("state") String state, @Param("type") String type);
 
 	List<ReimbursementAndExaminationTime> selectCompleteByMeLikeStateType(@Param("username") String username, @Param("state") String state, @Param("type") String type);
+
+	List<Reimbursement> selectListReimbursementByProcessInstanceId(List<String> listProcessinstanceid);
 }

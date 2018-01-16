@@ -160,4 +160,9 @@ public class ReimbursementService {
 		return reimbursementExaminationTimelist;
 	}
 
+	public List<Reimbursement> selectListReimbursementByProcessInstanceId(List<String> listProcessinstanceid) {
+		List<Reimbursement> listReimbursement = reimbursementMapper.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
+		return listReimbursement;
+	}
+
 }
