@@ -1,4 +1,12 @@
 
 /target/
 
-*.class  
+*.class
+
+/m2e-wtp/
+
+.classpath
+
+/.svn/
+
+/.settings/
