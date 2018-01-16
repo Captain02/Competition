@@ -66,13 +66,15 @@ public class MyReimbursementController {
 					listProcessinstanceid.add(reimbursement.getProcessinstanceid());
 				}
 			}
-			
+			if (listProcessinstanceid.size()>0) {
+				
 			PageInfo<Reimbursement> pageInfo = null;
 			PageHelper.startPage(pn, 12);
 			list = reimbursementService.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
 			pageInfo = new PageInfo<Reimbursement>(list, 5);
 			
 			model.addAttribute("pageInfo", pageInfo);
+			}
 			logger.info(username + "=====查询指派给我的报销");
 		}
 		

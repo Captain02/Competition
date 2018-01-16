@@ -59,17 +59,24 @@ function deleAll() {
 		empNames += $(this).parents("tr").find("td:eq(2)").text()+",";
 		ids += $(this).parents("tr").find("td:eq(1)").text()+"-";
 	})
+	alert(ids);
 	if (confirm("确认删除"+empNames+"吗？")) {
 		//发送ajax请求
-		 $.ajax({
+		  $.ajax({
 			url:"${APP_PATH}/admin/deploy/dele/"+ids,
 			type:"DELETE",
 			success:function(result){
 				if (result.code==100) {
-					alert("成功");
+					 $('#myModal').modal('show');
+					 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '的相关信息');
+					 ShowEle('.yes','hide','.no','hide','.down','show');
+				}else{
+					$('#myModal').modal('show');
+					ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败,该部门还存在人员!' + '</b>');
+					ShowEle('.yes','hide','.no','hide','.down','show');
 				}
 			}
-		}) 
+		})  
 	}
 }
 </script>
@@ -265,7 +272,7 @@ function deleAll() {
         <button type="button" class="btn btn-success no">取消</button>
         
         <!-- 用于页面跳转的按钮 -->
-        <form action="${APP_PATH}/admin/department/list">
+        <form action="${APP_PATH}/admin/deploy/list">
         	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
         	<button type="submit" class="btn btn-danger down">关闭</button>
         </form>

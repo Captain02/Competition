@@ -79,6 +79,7 @@ public class DeployController {
 	@ResponseBody
 	@RequestMapping(value = "/dele/{ids}", method = RequestMethod.DELETE)
 	public Msg dele(@PathVariable("ids") String ids) {
+		System.out.println("+++++++++++++++++++++++++++++++"+ids);
 		if (ids.contains("-")) {
 			String[] idsStr = ids.split("-");
 			for (String str : idsStr) {
