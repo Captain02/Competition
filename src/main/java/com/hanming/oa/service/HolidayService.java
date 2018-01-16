@@ -148,4 +148,8 @@ public class HolidayService {
 		return listHolidayByProcessInstanceId;
 	}
 
+	public void deleteHolidayByProcessInstanceId(List<String> processInstanceId) {
+		holidayMapper.deleteHolidayByProcessInstanceId(processInstanceId);
+	}
+
 }

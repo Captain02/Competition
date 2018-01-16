@@ -56,7 +56,7 @@ public class MyReimbursementController {
 		List<Reimbursement> list = new ArrayList<>();
 		List<String> listProcessinstanceid = new ArrayList<>();
 
-		//查询指派给我的报销
+		// 查询指派给我的报销
 		if (Integer.parseInt(herfPage) == 0) {
 			List<Task> Tasks = taskService.createTaskQuery().taskAssignee(username).list();
 			for (Task task : Tasks) {
@@ -66,46 +66,47 @@ public class MyReimbursementController {
 					listProcessinstanceid.add(reimbursement.getProcessinstanceid());
 				}
 			}
-			if (listProcessinstanceid.size()>0) {
-				
-			PageInfo<Reimbursement> pageInfo = null;
-			PageHelper.startPage(pn, 12);
-			list = reimbursementService.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
-			pageInfo = new PageInfo<Reimbursement>(list, 5);
-			
-			model.addAttribute("pageInfo", pageInfo);
+			if (listProcessinstanceid.size() > 0) {
+				PageInfo<Reimbursement> pageInfo = null;
+				PageHelper.startPage(pn, 12);
+				list = reimbursementService.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
+				pageInfo = new PageInfo<Reimbursement>(list, 5);
+
+				model.addAttribute("pageInfo", pageInfo);
 			}
 			logger.info(username + "=====查询指派给我的报销");
 		}
-		
-		//查询由我创建的报销
+
+		// 查询由我创建的报销
 		if (Integer.parseInt(herfPage) == 1) {
 			Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 			PageInfo<Reimbursement> pageInfo = null;
 			PageHelper.startPage(pn, 12);
-			list = reimbursementService.selectCreatByMeLikeStateType(userId,state, type);
+			list = reimbursementService.selectCreatByMeLikeStateType(userId, state, type);
 			pageInfo = new PageInfo<Reimbursement>(list, 5);
-			
+
 			model.addAttribute("pageInfo", pageInfo);
 			logger.info(username + "=====查询由我创建的报销");
 		}
-		
-		//查询由我解决的报销
+
+		// 查询由我解决的报销
 		if (Integer.parseInt(herfPage) == 2) {
 			PageInfo<ReimbursementAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
-			List<ReimbursementAndExaminationTime> reimbursementAndExaminationTimelist = reimbursementService.selectExaminationByMeLikeStateType(username,state, type);
+			List<ReimbursementAndExaminationTime> reimbursementAndExaminationTimelist = reimbursementService
+					.selectExaminationByMeLikeStateType(username, state, type);
 			pageInfo2 = new PageInfo<ReimbursementAndExaminationTime>(reimbursementAndExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
 			logger.info(username + "=====查询由我解决的报销");
 		}
-		
-		//查询由我完成的报销
+
+		// 查询由我完成的报销
 		if (Integer.parseInt(herfPage) == 3) {
 			PageInfo<ReimbursementAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
-			List<ReimbursementAndExaminationTime> reimbursementExaminationTimelist = reimbursementService.selectCompleteByMeLikeStateType(username,state, type);
+			List<ReimbursementAndExaminationTime> reimbursementExaminationTimelist = reimbursementService
+					.selectCompleteByMeLikeStateType(username, state, type);
 			pageInfo2 = new PageInfo<ReimbursementAndExaminationTime>(reimbursementExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
@@ -124,9 +125,10 @@ public class MyReimbursementController {
 
 	// 转发到批注页面
 	@RequestMapping(value = "/examinationPage/{reimbursementId}/{pn}", method = RequestMethod.GET)
-	public String examinationPage(@PathVariable("pn") Integer pn, @PathVariable("reimbursementId") Integer reimbursementId,
-			Model model) {
-		UserReimbursementByReimbursementId userReimbursementByReimbursementId = reimbursementService.selectReimbursementByReimbursementId(reimbursementId);
+	public String examinationPage(@PathVariable("pn") Integer pn,
+			@PathVariable("reimbursementId") Integer reimbursementId, Model model) {
+		UserReimbursementByReimbursementId userReimbursementByReimbursementId = reimbursementService
+				.selectReimbursementByReimbursementId(reimbursementId);
 
 		// 根据流程实例ID查询任务对象
 		Task task = taskService.createTaskQuery() // 创建任务查询
@@ -144,8 +146,9 @@ public class MyReimbursementController {
 			Collections.reverse(commentList);
 		}
 
-		model.addAttribute("enclosureName", "".equals(userReimbursementByReimbursementId.getEnclosure().substring(14)) ? "没有附件"
-				: userReimbursementByReimbursementId.getEnclosure().substring(14));
+		model.addAttribute("enclosureName",
+				"".equals(userReimbursementByReimbursementId.getEnclosure().substring(14)) ? "没有附件"
+						: userReimbursementByReimbursementId.getEnclosure().substring(14));
 		model.addAttribute("comment", commentList);
 		model.addAttribute("userReimbursementByReimbursementId", userReimbursementByReimbursementId);
 
@@ -154,5 +157,5 @@ public class MyReimbursementController {
 
 		return "myReimbursement/reimbursementExamination";
 	}
-	
+
 }

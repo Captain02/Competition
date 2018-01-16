@@ -253,4 +253,13 @@
     </foreach>
   </select>
   
+  <!-- void deleteReimbursementServiceByProcessInstanceId(List<String> processInstanceId); -->
+  <delete id="deleteReimbursementServiceByProcessInstanceId">
+  	delete from reimbursement
+  	where processinstanceid IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
 </mapper>

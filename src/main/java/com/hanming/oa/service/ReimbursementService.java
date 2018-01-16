@@ -165,4 +165,8 @@ public class ReimbursementService {
 		return listReimbursement;
 	}
 
+	public void deleteReimbursementServiceByProcessInstanceId(List<String> processInstanceId) {
+		reimbursementMapper.deleteReimbursementServiceByProcessInstanceId(processInstanceId);
+	}
+
 }

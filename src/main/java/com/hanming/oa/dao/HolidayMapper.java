@@ -38,4 +38,6 @@ public interface HolidayMapper {
 	List<HolidayAndExaminationTime> selectCompleteByMeLikeStateType(@Param("username")String username, @Param("state") String state, @Param("type") String type);
 
 	List<Holiday> selectListHolidayByProcessInstanceId(List<String> listProcessinstanceid);
+
+	void deleteHolidayByProcessInstanceId(List<String> processInstanceId);
 }

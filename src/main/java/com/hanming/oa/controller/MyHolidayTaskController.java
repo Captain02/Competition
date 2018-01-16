@@ -57,8 +57,8 @@ public class MyHolidayTaskController {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
 		List<Holiday> list = new ArrayList<>();
 		List<String> listProcessinstanceid = new ArrayList<>();
-		
-		//查询指派给我的假期任务
+
+		// 查询指派给我的假期任务
 		if (Integer.parseInt(herfPage) == 0) {
 			List<Task> Tasks = taskService.createTaskQuery().taskAssignee(username).list();
 			for (Task task : Tasks) {
@@ -68,45 +68,48 @@ public class MyHolidayTaskController {
 					listProcessinstanceid.add(holiday.getProcessinstanceid());
 				}
 			}
-			System.out.println(listProcessinstanceid);
-			PageInfo<Holiday> pageInfo = null;
-			PageHelper.startPage(pn, 12);
-			list = holidayService.selectListHolidayByProcessInstanceId(listProcessinstanceid);
-			pageInfo = new PageInfo<Holiday>(list, 5);
-			model.addAttribute("pageInfo", pageInfo);
+			if (listProcessinstanceid.size() > 0) {
+				PageInfo<Holiday> pageInfo = null;
+				PageHelper.startPage(pn, 12);
+				list = holidayService.selectListHolidayByProcessInstanceId(listProcessinstanceid);
+				pageInfo = new PageInfo<Holiday>(list, 5);
+
+				model.addAttribute("pageInfo", pageInfo);
+			}
 			logger.info(username + "=====查询指派给我的假期任务");
 		}
-		
-		//查询由我创建的假期任务
+
+		// 查询由我创建的假期任务
 		if (Integer.parseInt(herfPage) == 1) {
 			Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 			PageInfo<Holiday> pageInfo = null;
 			PageHelper.startPage(pn, 12);
-			list = holidayService.selectCreatByMeLikeStateType(userId,state, type);
+			list = holidayService.selectCreatByMeLikeStateType(userId, state, type);
 			pageInfo = new PageInfo<Holiday>(list, 5);
 			model.addAttribute("pageInfo", pageInfo);
 			logger.info(username + "=====查询由我创建的假期任务");
 		}
-		
-		//查询由我解决的假期任务
+
+		// 查询由我解决的假期任务
 		if (Integer.parseInt(herfPage) == 2) {
 			PageInfo<HolidayAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
-			List<HolidayAndExaminationTime> holidayAndExaminationTimelist = holidayService.selectExaminationByMeLikeStateType(username,state, type);
+			List<HolidayAndExaminationTime> holidayAndExaminationTimelist = holidayService
+					.selectExaminationByMeLikeStateType(username, state, type);
 			pageInfo2 = new PageInfo<HolidayAndExaminationTime>(holidayAndExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
 			logger.info(username + "=====查询由我解决的假期任务");
 		}
-		
-		//查询由我完成的假期任务
+
+		// 查询由我完成的假期任务
 		if (Integer.parseInt(herfPage) == 3) {
-			
+
 			PageInfo<HolidayAndExaminationTime> pageInfo2 = null;
 			PageHelper.startPage(pn, 12);
-			List<HolidayAndExaminationTime> holidayAndExaminationTimelist = holidayService.selectCompleteByMeLikeStateType(username,state, type);
+			List<HolidayAndExaminationTime> holidayAndExaminationTimelist = holidayService
+					.selectCompleteByMeLikeStateType(username, state, type);
 			pageInfo2 = new PageInfo<HolidayAndExaminationTime>(holidayAndExaminationTimelist, 5);
-
 
 			model.addAttribute("pageInfo", pageInfo2);
 			logger.info(username + "=====查询由我完成的假期任务");
@@ -118,12 +121,12 @@ public class MyHolidayTaskController {
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
 		model.addAttribute("herfPage", herfPage);
-		
+
 		return "myHolidayTask/myHolidayTask";
 	}
 
 	// 转发到批注页面
-	@RequestMapping(value = "/examinationPage/{holidayId}/{pn}",method=RequestMethod.GET)
+	@RequestMapping(value = "/examinationPage/{holidayId}/{pn}", method = RequestMethod.GET)
 	public String examinationPage(@PathVariable("pn") Integer pn, @PathVariable("holidayId") Integer holidayId,
 			Model model) {
 		UserHolidayByHolidayId userHolidayByHolidayId = holidayService.selectHolidayByHolidayId(holidayId);
@@ -162,7 +165,8 @@ public class MyHolidayTaskController {
 			@RequestParam("nowComment") String nowComment, @RequestParam("id") String holidayId,
 			@RequestParam("state") String state) {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
-		int i = MyHolidayTaskService.agreeExamination(username,userHolidayByHolidayId,nowComment,holidayId,Integer.parseInt(state));
+		int i = MyHolidayTaskService.agreeExamination(username, userHolidayByHolidayId, nowComment, holidayId,
+				Integer.parseInt(state));
 		if (i == 1) {
 			logger.info(username + "=====跳转同意假条审批");
 			return Msg.success();

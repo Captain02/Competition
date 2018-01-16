@@ -271,4 +271,33 @@
     </foreach>
   </select>
   
+  <!-- void deleteHolidayByProcessInstanceId(List<String> processInstanceId); -->
+  <delete id="deleteHolidayByProcessInstanceId">
+  	delete from holiday 
+	where processinstanceid IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
+  
+  
+  
+  
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
