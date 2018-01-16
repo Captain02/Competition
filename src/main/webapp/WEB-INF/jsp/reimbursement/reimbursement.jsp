@@ -131,11 +131,11 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pagination-control">
 									<li>
-										<a href="${APP_PATH}/admin/reimbursement/list?pn=1">首页</a>
+										<a href="${APP_PATH}/admin/reimbursement/list?pn=1&type=${type}&state=${state}">首页</a>
 									</li>
 									<c:if test="${pageInfo.hasPreviousPage}">
 										<li>
-											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum-1}" aria-label="Previous">
+											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}" aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
 											</a>
 										</li>
@@ -148,21 +148,21 @@
 										</c:if>
 										<c:if test="${pageNum!=pageInfo.pageNum}">
 											<li>
-												<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageNum}">${pageNum}</a>
+												<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageNum}&type=${type}&state=${state}">${pageNum}</a>
 											</li>
 										</c:if>
 									</c:forEach>
 
 									<c:if test="${pageInfo.hasNextPage }">
 										<li>
-											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum+1}" aria-label="Next">
+											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}" aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 										</li>
 									</c:if>
 
 									<li>
-										<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pages}" aria-label="Next">
+										<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pages}&type=${type}&state=${state}" aria-label="Next">
 											<span aria-hidden="true">末页</span>
 										</a>
 									</li>

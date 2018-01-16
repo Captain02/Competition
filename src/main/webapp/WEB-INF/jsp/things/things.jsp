@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -32,14 +33,15 @@
                     <span class="glyphicon glyphicon-th-list"></span>
                 </a>
 
-                <form action="/OA02/admin/holiday/list" class="serach-form" method="get">
+                <form action="/OA02/admin/things/list" class="serach-form" method="get">
 
-                    <input class="form-control" type="text" placeholder="用途" value="">
+                    <input class="form-control" type="text" name="name" placeholder="物品名称" value="">
 
-                    <select class="form-control" name="result">
-                        <option>结果</option>
-                        <option>同意</option>
-                        <option>拒绝</option>
+                    <select class="form-control" name="state">
+                        <option>状态</option>
+                        <option>审核通过</option>
+                        <option>未通过</option>
+                        <option>审核中</option>
                     </select>
                     <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -59,16 +61,7 @@
 
                 <div class="om-header">
 
-                    <div class="om-header-left">
-                        <h3>
-                            <span class="om-title">审批管理</span>
-                            <span class="om-list">
-                                <a href="/OA02/admin/holiday/list">请假</a>
-                                <a href="/OA02/admin/reimbursement/list">报销</a>
-                                <a href="/OA02/admin/role/list">物品</a>
-                            </span>
-                        </h3>
-                    </div>
+                     <jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
 
                     <div class="om-header-right ">
                         <button id="addButton" onclick="window.location.href='/OA02/admin/holiday/add'" type="button" class="btn btn-success btn-sm">
@@ -82,7 +75,7 @@
                     <div class="row ">
                         <div class="col-sm-12 ">
 
-                            <header class="om-wrapper-header ">领用 / 总数：</header>
+                            <header class="om-wrapper-header ">领用 / 总数：${pageInfo.total }</header>
 
                             <div class="om-wrpper-body ">
                                 <table class="table table-hover holiday-table">
@@ -90,38 +83,39 @@
                                         <tr>
                                             <th>用途</th>
                                             <th>物品名称</th>
-                                            <th>领取时间</th>
+                                            <th>申请时间</th>
                                             <th>状态</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-                                            <td>办公用品</td>
-                                            <td>打印机</td>
-                                            <td>2017-1-1</td>
-                                            <td>
-                                                <span class="label label-success">正常</span>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        操作
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a href="">查看物品</a>
-                                                        </li>
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>
-                                                            <a href="">查看进度</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+										<c:forEach items="${pageInfo.list }" var="things">
+	                                        <tr>
+	                                            <td>${things.purpose}</td>
+	                                            <td>${things.name}</td>
+	                                            <td>${things.date}</td>
+	                                            <td>
+	                                                <span class="label label-success">${things.state}</span>
+	                                            </td>
+	                                            <td>
+	                                                <div class="btn-group">
+	                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	                                                        操作
+	                                                        <span class="caret"></span>
+	                                                    </button>
+	                                                    <ul class="dropdown-menu">
+	                                                        <li>
+	                                                            <a href="">查看物品</a>
+	                                                        </li>
+	                                                        <li role="separator" class="divider"></li>
+	                                                        <li>
+	                                                            <a href="">查看进度</a>
+	                                                        </li>
+	                                                    </ul>
+	                                                </div>
+	                                            </td>
+	                                        </tr>
+										</c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -133,37 +127,46 @@
                     <div class="page-area ">
                         <div class="container page-possiton ">
 
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination pagination-control">
-                                    <li>
-                                        <a href="/OA02/admin/holiday/list?pn=1&type=类型&state=状态">首页</a>
-                                    </li>
+                          <nav aria-label="Page navigation">
+								<ul class="pagination pagination-control">
+									<li>
+										<a href="${APP_PATH}/admin/things/list?pn=1&name=${name}&state=${state}">首页</a>
+									</li>
+									<c:if test="${pageInfo.hasPreviousPage}">
+										<li>
+											<a href="${APP_PATH}/admin/things/list?pn=${pageInfo.pageNum-1}&name=${name}&state=${state}" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+									</c:if>
+									<c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
+										<c:if test="${pageNum==pageInfo.pageNum}">
+											<li class="active">
+												<a href="#">${pageNum}</a>
+											</li>
+										</c:if>
+										<c:if test="${pageNum!=pageInfo.pageNum}">
+											<li>
+												<a href="${APP_PATH}/admin/things/list?pn=${pageNum}&name=${name}&state=${state}">${pageNum}</a>
+											</li>
+										</c:if>
+									</c:forEach>
 
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
+									<c:if test="${pageInfo.hasNextPage }">
+										<li>
+											<a href="${APP_PATH}/admin/things/list?pn=${pageInfo.pageNum+1}&name=${name}&state=${state}" aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</c:if>
 
-                                    <li>
-                                        <a href="/OA02/admin/holiday/list?pn=2&type=类型&state=状态">2</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/OA02/admin/holiday/list?pn=3&type=类型&state=状态">3</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/OA02/admin/holiday/list?pn=2&type=类型&state=状态" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/OA02/admin/holiday/list?pn=3&type=类型&state=状态" aria-label="Next">
-                                            <span aria-hidden="true">末页</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+									<li>
+										<a href="${APP_PATH}/admin/things/list?pn=${pageInfo.pages}&name=${name}&state=${state}" aria-label="Next">
+											<span aria-hidden="true">末页</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
                         </div>
                     </div>
 

@@ -11,7 +11,7 @@ public class Things {
 
     private Date date;
 
-    private String reason;
+    private String name;
 
     private String state;
 
@@ -53,15 +53,15 @@ public class Things {
         this.date = date;
     }
 
-    public String getReason() {
-        return reason;
-    }
+    public String getName() {
+		return name;
+	}
 
-    public void setReason(String reason) {
-        this.reason = reason == null ? null : reason.trim();
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getState() {
+	public String getState() {
         return state;
     }
 

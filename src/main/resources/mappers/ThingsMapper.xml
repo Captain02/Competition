@@ -6,14 +6,14 @@
     <result column="purpose" jdbcType="VARCHAR" property="purpose" />
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
-    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
     <result column="filename" jdbcType="VARCHAR" property="filename" />
     <result column="processInstanceId" jdbcType="VARCHAR" property="processinstanceid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, purpose, number, date, reason, state, enclosure, filename, processInstanceId
+    id, purpose, number, date, name, state, enclosure, filename, processInstanceId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,11 +27,11 @@
   </delete>
   <insert id="insert" parameterType="com.hanming.oa.model.Things">
     insert into things (id, purpose, number, 
-      date, reason, state, 
+      date, name, state, 
       enclosure, filename, processInstanceId
       )
     values (#{id,jdbcType=INTEGER}, #{purpose,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{date,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
       #{enclosure,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR}
       )
   </insert>
@@ -50,8 +50,8 @@
       <if test="date != null">
         date,
       </if>
-      <if test="reason != null">
-        reason,
+      <if test="name != null">
+        name,
       </if>
       <if test="state != null">
         state,
@@ -79,8 +79,8 @@
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
       </if>
-      <if test="reason != null">
-        #{reason,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
@@ -108,8 +108,8 @@
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
-      <if test="reason != null">
-        reason = #{reason,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=VARCHAR},
@@ -131,11 +131,27 @@
     set purpose = #{purpose,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
       date = #{date,jdbcType=TIMESTAMP},
-      reason = #{reason,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       enclosure = #{enclosure,jdbcType=VARCHAR},
       filename = #{filename,jdbcType=VARCHAR},
       processInstanceId = #{processinstanceid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- List<Things> listLikeStateType(String state, String purpose); -->
+  <select id="listLikeStateType" resultType="Things">
+   select 
+   <include refid="Base_Column_List" />
+   from things
+   <where>
+	    <if test="state != '状态'">
+	          state = #{state}
+	    </if>
+	    <if test="name != ''">
+	         AND name = #{name}
+	    </if>
+    </where>
+  </select>
+  
 </mapper>

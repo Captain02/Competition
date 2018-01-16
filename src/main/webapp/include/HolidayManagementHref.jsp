@@ -9,7 +9,7 @@
 		<span class="om-title">审批管理</span> <span class="om-list"> <a
 			href="${APP_PATH}/admin/holiday/list">请假</a> <a
 			href="${APP_PATH}/admin/reimbursement/list">报销</a> <a
-			href="${APP_PATH}/admin/thingsTask/list">物品</a>
+			href="${APP_PATH}/admin/things/list">物品</a>
 		</span>
 	</h3>
 </div>
