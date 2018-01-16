@@ -55,10 +55,23 @@ $(document).on("click",".dele",function(){
 function deleAll() {
 	var empNames = "";
 	var ids = "";
-	$.each($(".selectThisLine:checked"),function(){
-		empNames += $(this).parents("tr").find("td:eq(2)").text()+",";
-		ids += $(this).parents("tr").find("td:eq(1)").text()+"-";
-	})
+	var everyLineChildren = $('tbody tr td input[type="checkbox"]');
+	
+	for(var i = 0; i<everyLineChildren.length; i++){
+		if($(everyLineChildren[i]).is(":checked")){
+			if(i == everyLineChildren.length-1){
+				ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html();
+				empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html();
+			}
+			else{
+				ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html() + '-';
+				empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html() + ',';
+			}
+		}
+	}
+	console.log(ids);
+	console.log(empNames);
+	
 	if (confirm("确认删除"+empNames+"吗？")) {
 		//发送ajax请求
 		  $.ajax({
@@ -172,14 +185,14 @@ function deleAll() {
 												<c:forEach items="${pageInfo.list}" var="deploy">
 	                                                <tr>
 	                                                <td>
-	                                                   <input type="checkbox" name="selectItem" class="selectItem">
+	                                                   <input type="checkbox" name="selectItem" class="selectItem" value="selectItem">
 	                                                </td>
 	                                                    <td>${deploy.id}</td>
 	                                                    <td>${deploy.name}</td>
 	                                                    <td><fmt:formatDate value="${deploy.deploymentTime }" pattern="yyyy-MM-dd"/></td>
 	                                                    <td>
 	                                                        <div class="btn-group">
-	                                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                                                操作
 	                                                                <span class="caret"></span>
 	                                                            </button>
