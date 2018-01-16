@@ -71,8 +71,6 @@
                     </div>
 
                     <div class="om-header-right ">
-                        <button onclick="" class="btn btn-default">全部</button>
-                        <button onclick="/oagood/approval" class="btn btn-warning" style="padding:4px;">待审批</button>
                         <button id="addButton" onclick="window.location.href='/OA02/admin/holiday/add'" type="button" class="btn btn-success btn-sm">
                             <i>+</i>我要领用
                         </button>
