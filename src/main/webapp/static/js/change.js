@@ -2,9 +2,9 @@
 /**
  * 
  */
-// 动画脚本
+// 页面交互效果
 
-// No.1 隐藏侧边栏动画
+// No.1 隐藏侧边栏效果
 $(function () {
     var flag = 1;
     var toggleBtn = $('.toggle-btn');
@@ -28,6 +28,7 @@ $(function () {
             $('body').removeClass('stickey-menu');
             flag = 1;
         }
+        return false;
     })
     //在缩小状态下显示提示框
     for (var i = 0; i < menuText.length; i++) {
@@ -43,4 +44,24 @@ $(function () {
         })
     }
 
-})
+//No.2 左侧导航栏效果
+var menuLi = $('.nav-user li');
+	for(var i = 0; i<menuLi.length; i++){
+		$(menuLi[i]).mousemove(function(){
+			if(bodyClass.hasClass('stickey-menu')){
+				$(this).addClass('nav-hover-stickety');
+			}
+			else{
+				$(this).addClass('nav-hover');
+			}
+		});
+		$(menuLi[i]).mouseout(function(){
+			if(bodyClass.hasClass('stickey-menu')){
+				$(this).removeClass('nav-hover-stickety');
+			}
+			else{
+				$(this).removeClass('nav-hover');
+			}
+		});
+	}
+});

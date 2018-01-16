@@ -14,7 +14,6 @@
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-
 </head>
 
 

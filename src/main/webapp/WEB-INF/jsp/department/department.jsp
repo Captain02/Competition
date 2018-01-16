@@ -14,7 +14,7 @@
     %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 
-
+<script src="${APP_PATH}/static/js/change.js"></script>
 <script type="text/javascript">
 <!-- 初始状态下，关闭按钮是隐藏的 -->
 $(function(){
