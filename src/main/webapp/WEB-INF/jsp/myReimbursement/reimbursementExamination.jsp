@@ -23,7 +23,7 @@ $(function(){
 })
 function examination(state) {
 	$.ajax({
-		url:"${APP_PATH}/admin/myTask/agreeExamination",
+		url:"${APP_PATH}/admin/myReimbursementTask/agreeExamination",
 		data:"state="+state+"&"+$("#examinationFrom").serialize(),
 		type:"POST",
 		success:function(result){

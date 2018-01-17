@@ -92,7 +92,7 @@
 					</select>
 					<select class="form-control" name="state">
 						<option>状态</option>
-						<option>通过</option>
+						<option>已通过</option>
 						<option>未通过</option>
 						<option>审核中</option>
 					</select>
