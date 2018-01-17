@@ -172,7 +172,7 @@ function addHoliday() {
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input name="holidaydays" type="text" placeholder="请输入请假日期" value="" class="form-control">
+                                                        <input name="holidaydays" type="text" placeholder="请输入请假天数" value="" class="form-control">
                                                     </div>
 
                                                 </div>
@@ -202,12 +202,27 @@ function addHoliday() {
                                                     </div>
 
                                                 </div>
+                                                
+ 											 	<!-- 流程选择区域 -->
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label for="" class="control-label">
+                                                            流程选择
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                         <select name="type" class="form-control">
+                                                            <option value="标准流程">标准流程</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
 
                                                 <!-- 审批人填写区域 -->
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
-                                                            审批人
+                                                            审批人（点击可删除）
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">

@@ -145,14 +145,7 @@ $(function(){
 															style="height: 94px;" class="form-control"></textarea>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="col-sm-2 col-sm-2 control-label"> <span>*</span>报销日期
-													</label>
-													<div class="col-sm-10">
-														<input name="date" class="form-control"
-															placeholder="请选择报销日期" type="text" id="mydatepicker2">
-													</div>
-												</div>
+												
 											</div>
 
 
@@ -163,9 +156,18 @@ $(function(){
 													<input id="file" type="file" name="file">
 												</div>
 											</div>
+											
+											<div class="form-group">
+												<label class="col-sm-2 col-sm-2 control-label">流程选择</label>
+												<div class="col-sm-10">
+													<select name="type" class="form-control">
+                                                            <option value="标准流程">标准流程</option>
+                                                        </select>
+												</div>
+											</div>
 
 											<div class="form-group">
-												<label class="col-sm-2 col-sm-2 control-label">审批人(点击头像可删除)</label>
+												<label class="col-sm-2 col-sm-2 control-label">审批人(点击可删除)</label>
 												<div class="col-sm-10">
 													<!-- 填入点击的审批人信息 -->
 													<div class="person-name-area person-name-list"></div>
