@@ -59,10 +59,10 @@
 					<jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
 
 					<div class="om-header-right ">
-					<button id="addButton" onclick="window.location.href='/OA02/admin/reimbursement/dataAnalysisPage'" type="button" class="btn btn-warning btn-sm">
+					<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/dataAnalysisPage'" type="button" class="btn btn-warning btn-sm">
 							<i class=" glyphicon glyphicon-globe" ></i>数据分析
 						</button>
-						<button id="addButton" onclick="window.location.href='/OA02/admin/reimbursement/add'" type="button" class="btn btn-success btn-sm">
+						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/add'" type="button" class="btn btn-success btn-sm">
 							<i>+</i>我要报销
 						</button>
 					</div>

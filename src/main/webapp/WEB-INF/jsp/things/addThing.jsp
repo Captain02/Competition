@@ -32,16 +32,16 @@
             ShowEle('.yes', 'hide');
         });
 
-        function addReimbursement() {
+        function addthingsForm() {
             var persons = "";
             $.each($(".addPerson"), function () {
                 persons += $(this).text() + "-";
             })
-            var formData = new FormData($("#addReimbursement")[0]);
+            var formData = new FormData($("#thingsForm")[0]);
             formData.append('persons', persons);
             //发送ajax请求
             $.ajax({
-                url: "/OA02/admin/reimbursement/add",
+                url: "${APP_PATH}/admin/things/add",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -121,13 +121,13 @@
                                             </button>
                                             <strong>注意!</strong> 领用单状态为正常后(可在列表操作中设置为“正常”)，就不能再编辑！后续流程等待审批人操作。
                                         </div>
-                                        <form class="form-horizontal adminex-form" id="addReimbursement" novalidate="novalidate">
+                                        <form class="form-horizontal adminex-form" id="thingsForm" novalidate="novalidate">
                                             <div class="form-group">
                                                 <label class="col-sm-2 col-sm-2 control-label">
                                                     <span>*</span>物品用途
                                                 </label>
                                                 <div class="col-sm-10">
-                                                    <input name="thingName" class="form-control" placeholder="如办公用品 必填" type="text">
+                                                    <input name="purpose" class="form-control" placeholder="如办公用品 必填" type="text">
                                                 </div>
                                             </div>
                                             <!-- 此处以后可以动态的添加明细 -->
@@ -138,7 +138,7 @@
                                                         <span>*</span>物品名称
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <input name="money" class="form-control" placeholder="请输入物品名称" type="text">
+                                                        <input name="name" class="form-control" placeholder="请输入物品名称" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -146,7 +146,7 @@
                                                         <span>*</span>领用数量
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <input name="type" class="form-control" placeholder="请输入报销类型，如采购经费、活动经费" type="number">
+                                                        <input name="number" class="form-control" placeholder="请输入报销类型，如采购经费、活动经费" type="number">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -169,7 +169,7 @@
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">图片</label>
+                                                <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>
                                                 <div class="col-sm-10">
                                                     <input id="file" type="file" name="file">
                                                 </div>
@@ -187,7 +187,7 @@
                                             <div class="form-group">
                                                 <label class="col-lg-2 col-sm-2 control-label"></label>
                                                 <div class="col-lg-10">
-                                                    <button type="button" onclick="addReimbursement()" class="btn btn-primary btn-success">提交保存</button>
+                                                    <button type="button" onclick="addthingsForm()" class="btn btn-primary btn-success">提交保存</button>
                                                     <span class="add-error-ms" style="color:red;"></span>
                                                 </div>
                                             </div>

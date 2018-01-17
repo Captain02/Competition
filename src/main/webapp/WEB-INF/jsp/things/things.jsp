@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>物品管理</title>
-
+<%
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
     <jsp:include page="iniCssHref.jsp"></jsp:include>
 
 </head>
@@ -64,7 +66,7 @@
                      <jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
 
                     <div class="om-header-right ">
-                        <button id="addButton" onclick="window.location.href='/OA02/admin/holiday/add'" type="button" class="btn btn-success btn-sm">
+                        <button id="addButton" onclick="window.location.href='${APP_PATH}/admin/things/add'" type="button" class="btn btn-success btn-sm">
                             <i>+</i>我要领用
                         </button>
                     </div>

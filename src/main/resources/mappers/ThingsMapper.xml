@@ -3,17 +3,18 @@
 <mapper namespace="com.hanming.oa.dao.ThingsMapper">
   <resultMap id="BaseResultMap" type="com.hanming.oa.model.Things">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="number" jdbcType="INTEGER" property="number" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
     <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
     <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
     <result column="filename" jdbcType="VARCHAR" property="filename" />
     <result column="processInstanceId" jdbcType="VARCHAR" property="processinstanceid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, purpose, number, date, name, state, enclosure, filename, processInstanceId
+    id, name, number, date, purpose, state, details, enclosure, filename, processInstanceId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,24 +26,24 @@
     delete from things
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hanming.oa.model.Things">
-    insert into things (id, purpose, number, 
-      date, name, state, 
-      enclosure, filename, processInstanceId
-      )
-    values (#{id,jdbcType=INTEGER}, #{purpose,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{date,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{enclosure,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR}
-      )
+  <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.Things">
+    insert into things (id, name, number, 
+      date, purpose, state, 
+      details, enclosure, filename, 
+      processInstanceId)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{date,jdbcType=TIMESTAMP}, #{purpose,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{details,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
+      #{processinstanceid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.Things">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Things">
     insert into things
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="purpose != null">
-        purpose,
+      <if test="name != null">
+        name,
       </if>
       <if test="number != null">
         number,
@@ -50,11 +51,14 @@
       <if test="date != null">
         date,
       </if>
-      <if test="name != null">
-        name,
+      <if test="purpose != null">
+        purpose,
       </if>
       <if test="state != null">
         state,
+      </if>
+      <if test="details != null">
+        details,
       </if>
       <if test="enclosure != null">
         enclosure,
@@ -70,8 +74,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="purpose != null">
-        #{purpose,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="number != null">
         #{number,jdbcType=INTEGER},
@@ -79,11 +83,14 @@
       <if test="date != null">
         #{date,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
       </if>
       <if test="enclosure != null">
         #{enclosure,jdbcType=VARCHAR},
@@ -99,8 +106,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Things">
     update things
     <set>
-      <if test="purpose != null">
-        purpose = #{purpose,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="number != null">
         number = #{number,jdbcType=INTEGER},
@@ -108,11 +115,14 @@
       <if test="date != null">
         date = #{date,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
       </if>
       <if test="enclosure != null">
         enclosure = #{enclosure,jdbcType=VARCHAR},
@@ -128,11 +138,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Things">
     update things
-    set purpose = #{purpose,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
       date = #{date,jdbcType=TIMESTAMP},
-      name = #{name,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
       enclosure = #{enclosure,jdbcType=VARCHAR},
       filename = #{filename,jdbcType=VARCHAR},
       processInstanceId = #{processinstanceid,jdbcType=VARCHAR}
@@ -153,5 +164,4 @@
 	    </if>
     </where>
   </select>
-  
 </mapper>

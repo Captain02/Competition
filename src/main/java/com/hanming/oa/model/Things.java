@@ -5,15 +5,17 @@ import java.util.Date;
 public class Things {
     private Integer id;
 
-    private String purpose;
+    private String name;
 
     private Integer number;
 
     private Date date;
 
-    private String name;
+    private String purpose;
 
     private String state;
+
+    private String details;
 
     private String enclosure;
 
@@ -29,12 +31,12 @@ public class Things {
         this.id = id;
     }
 
-    public String getPurpose() {
-        return purpose;
+    public String getName() {
+        return name;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose == null ? null : purpose.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getNumber() {
@@ -53,20 +55,28 @@ public class Things {
         this.date = date;
     }
 
-    public String getName() {
-		return name;
-	}
+    public String getPurpose() {
+        return purpose;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setPurpose(String purpose) {
+        this.purpose = purpose == null ? null : purpose.trim();
+    }
 
-	public String getState() {
+    public String getState() {
         return state;
     }
 
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details == null ? null : details.trim();
     }
 
     public String getEnclosure() {

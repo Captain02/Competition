@@ -1,6 +1,4 @@
 
-/target/
-
 *.class
 
 /m2e-wtp/
@@ -12,3 +10,5 @@
 /.settings/
 
 /classes/
+
+/target/

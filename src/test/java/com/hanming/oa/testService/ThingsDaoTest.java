@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hanming.oa.dao.ThingsMapper;
-import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.Things;
 
 @RunWith(SpringJUnit4ClassRunner.class)

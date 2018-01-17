@@ -1,11 +1,8 @@
 package com.hanming.oa.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.validation.Valid;
@@ -32,8 +29,8 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.service.DepartmentService;
 import com.hanming.oa.service.DepartmentUserService;
 import com.hanming.oa.service.RoleService;
-import com.hanming.oa.service.UserService;
 import com.hanming.oa.service.UserRoleService;
+import com.hanming.oa.service.UserService;
 
 @Controller
 @RequestMapping("/admin/user")
