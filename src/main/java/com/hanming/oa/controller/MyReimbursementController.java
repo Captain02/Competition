@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementAndExaminationTime;
 import com.hanming.oa.model.User;
@@ -156,6 +158,23 @@ public class MyReimbursementController {
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====跳转审批假条页面");
 
 		return "myReimbursement/reimbursementExamination";
+	}
+
+	// 指派任务
+	@ResponseBody
+	@RequestMapping(value = "/assignTask", method = RequestMethod.POST)
+	public Msg assignTask(@RequestParam("assignProcessinstanceid") String assignProcessinstanceid,
+			@RequestParam("assignUsername") String assignUsername) {
+		System.out.println("+++++++++++++++++"+assignProcessinstanceid);
+		System.out.println("++++++"+assignUsername);
+		Task task = taskService.createTaskQuery() // 创建任务查询
+				.processInstanceId(assignProcessinstanceid)// 根据流程实例Id查询当前任务
+				.singleResult();
+		task.setAssignee(assignUsername);
+		taskService.saveTask(task);
+
+		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====指派请假任务");
+		return Msg.success();
 	}
 
 }

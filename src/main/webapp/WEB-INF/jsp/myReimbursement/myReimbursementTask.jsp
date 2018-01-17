@@ -24,7 +24,7 @@
 			$('#myModal').modal('show');
 			var btnAssignPreviousSbiling = $(this).prev().attr('value');
 			console.log(btnAssignPreviousSbiling);
-			$('#assignHolidayProcessinstanceid').val(btnAssignPreviousSbiling);
+			$('#assignProcessinstanceid').val(btnAssignPreviousSbiling);
 		});
 
 		var locationHref = location.href.split('herfPage=');
@@ -35,15 +35,13 @@
 	});
 
 	function assignTask(object) {
-		var assignHolidayProcessinstanceid = $(
-			"#assignHolidayProcessinstanceid").val();
+		var assignProcessinstanceid = $(
+			"#assignProcessinstanceid").val();
 		var assignUsername = $(object).prev().val();
 		$.ajax({
-			url: "${APP_PATH}/admin/myTask/assignTask",
+			url: "${APP_PATH}/admin/myReimbursementTask/assignTask",
 			type: "POST",
-			data: "assignHolidayProcessinstanceid=" +
-				assignHolidayProcessinstanceid + "&assignUsername=" +
-				assignUsername,
+			data: "assignProcessinstanceid="+assignProcessinstanceid+"&assignUsername="+assignUsername,
 			success: function (result) {
 				if (result.code == 100) {
 					$('#myModal').modal('show');
@@ -156,6 +154,7 @@
 													</c:if>
 													<td>
 													<c:if test="${herfPage==0}">
+													<input id="reimbursementProcessinstanceid" value="${reimbursement.processinstanceid}" type="hidden">
 													<a class="btn btn-warning btn-xs btn-assign" title="指派">
 																<i class="glyphicon glyphicon-hand-right"></i>
 															</a>
@@ -269,7 +268,7 @@
 									<td style="width:20%;">${user.role.name}</td>
 									<td>
 										<!-- hidden 1 -->
-										<input id="assignHolidayProcessinstanceid" type="hidden" value="">
+										<input id="assignProcessinstanceid" type="hidden" value="">
 										<input id="assignUsername" type="hidden" value="${user.username}">
 										<button class="btn btn-defalut btn-success btn-sm" onclick="assignTask(this)">
 											<span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
@@ -282,7 +281,7 @@
 				</div>
 
 				<div class="modal-footer">
-				<form action="${APP_PATH}/admin/myTask/myHolidayTask" method="get">
+				<form action="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask" method="get">
 					<input type="hidden" value="${state}" name="state">
 					<input type="hidden" value="${pageInfo.pageNum}" name="pn">
 					<input type="hidden" value="${type}" name="type">
