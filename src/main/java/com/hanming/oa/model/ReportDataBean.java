@@ -1,4 +1,4 @@
-package com.hanming.oa.controller;
+package com.hanming.oa.model;
 
 import java.util.List;
 

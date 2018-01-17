@@ -147,8 +147,8 @@ public class MyHolidayTaskController {
 			Collections.reverse(commentList);
 		}
 
-		model.addAttribute("enclosureName", "".equals(userHolidayByHolidayId.getEnclosure().substring(14)) ? "没有附件"
-				: userHolidayByHolidayId.getEnclosure().substring(14));
+		model.addAttribute("enclosureName", "".equals(userHolidayByHolidayId.getFilename()) ? "没有附件"
+				: userHolidayByHolidayId.getFilename());
 		model.addAttribute("comment", commentList);
 		model.addAttribute("userHolidayByHolidayId", userHolidayByHolidayId);
 

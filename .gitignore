@@ -1,6 +1,4 @@
 
-*.class
-
 /m2e-wtp/
 
 .classpath
@@ -12,3 +10,6 @@
 /classes/
 
 /target/
+*.class
+target/classes/com/hanming/oa/controller/ThingsTaskController.class
+

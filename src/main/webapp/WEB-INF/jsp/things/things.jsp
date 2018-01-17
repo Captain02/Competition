@@ -111,7 +111,7 @@
 	                                                        </li>
 	                                                        <li role="separator" class="divider"></li>
 	                                                        <li>
-	                                                            <a href="">查看进度</a>
+	                                                            <a href="${APP_PATH}/admin/things/showCurrentView/${things.processinstanceid}">查看进度</a>
 	                                                        </li>
 	                                                    </ul>
 	                                                </div>
