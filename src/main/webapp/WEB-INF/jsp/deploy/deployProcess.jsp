@@ -45,7 +45,6 @@ $(document).on("click",".dele",function(){
 
 	 });
 		
-	
 	 $('.no').click(function(){
 			$('#myModal').modal('hide');
 		});
@@ -56,40 +55,56 @@ function deleAll() {
 	var empNames = "";
 	var ids = "";
 	var everyLineChildren = $('tbody tr td input[type="checkbox"]');
+	var ifHavechecked = everyLineChildren.is(":checked");
 	
-	for(var i = 0; i<everyLineChildren.length; i++){
-		if($(everyLineChildren[i]).is(":checked")){
-			if(i == everyLineChildren.length-1){
-				ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html();
-				empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html();
-			}
-			else{
-				ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html() + '-';
-				empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html() + ',';
-			}
-		}
+	//一旦进入判断，就说明没有复选框被选中
+	if(!ifHavechecked){
+		$('#myModal').modal('show');
+		 ShowTips('.modal-title','错误的操作！','.modal-body','<b style = "color:#d9534f;">请至少选择一行</b>' );
+		 ShowEle('.yes','hide','.no','hide','.down','hide');
+		 setTimeout(function(){
+			$('#myModal').modal('hide');
+		 },1000);
 	}
-	console.log(ids);
-	console.log(empNames);
-	
-	if (confirm("确认删除"+empNames+"吗？")) {
-		//发送ajax请求
-		  $.ajax({
-			url:"${APP_PATH}/admin/deploy/dele/"+ids,
-			type:"DELETE",
-			success:function(result){
-				if (result.code==100) {
-					 $('#myModal').modal('show');
-					 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '的相关信息');
-					 ShowEle('.yes','hide','.no','hide','.down','show');
-				}else{
-					$('#myModal').modal('show');
-					ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败' + '</b>');
-					ShowEle('.yes','hide','.no','hide','.down','show');
+	else{
+		for(var i = 0; i<everyLineChildren.length; i++){
+			if($(everyLineChildren[i]).is(":checked")){
+				if(i == everyLineChildren.length-1){
+					ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html();
+					empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html();
+				}
+				else{
+					ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html() + '-';
+					empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html() + ',';
 				}
 			}
-		})  
+		}
+		$('#myModal').modal('show');
+		ShowTips('.modal-title','删除确认？','.modal-body','确认删除' + '<b style = "color:#c9302c;">' + empNames + '</b>' + '吗？');
+		ShowEle('.yes','show','.no','show','.down','hide');
 	}
+	$('.yes').click(function(){
+		 $.ajax({
+				url:"${APP_PATH}/admin/deploy/dele/"+ids,
+				type:"DELETE",
+				success:function(result){
+					if (result.code==100) {
+						 $('#myModal').modal('show');
+						 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + empNames + '</b>' + '的相关信息');
+						 ShowEle('.yes','hide','.no','hide','.down','show');
+					}else{
+						$('#myModal').modal('show');
+						ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败' + '</b>');
+						ShowEle('.yes','hide','.no','hide','.down','show');
+					}
+				}
+			})  
+	});
+	
+	
+	
+
+	
 }
 </script>
 </head>
