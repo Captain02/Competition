@@ -17,10 +17,10 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
 <link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <!-- 添加审批人 -->
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
+<!-- 控制按钮的状态以及模态框展示的信息 -->
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
 $(function(){
 	ShowEle('.yes','hide');

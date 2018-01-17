@@ -13,8 +13,7 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <!-- Date -->
-<link rel="stylesheet"
-	href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
+<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
 <link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
 
 
@@ -196,8 +195,7 @@ $(function(){
 
 			</div>
 		</div>
-		<script type="text/javascript"
-			src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
+		<script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
 		<script type="text/javascript">
 			$('#mydatepicker2').dcalendarpicker({
 				format : 'yyyy-mm-dd'
