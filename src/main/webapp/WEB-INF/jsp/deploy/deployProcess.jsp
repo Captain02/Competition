@@ -21,6 +21,26 @@
 <!-- 初始状态下，关闭按钮是隐藏的 -->
 $(function(){
 	ShowEle('.down','hide');
+	<!-- 实现全选/反选 -->
+	var selectAll = document.getElementById('selectAll');
+    var selectItems = document.getElementsByName('selectItem');
+
+    selectAll.onclick = function () {
+        for (var i = 0; i < selectItems.length; i++) {
+            selectItems[i].checked = selectAll.checked;
+        }
+    }
+
+    for (var i = 0; i < selectItems.length; i++) {
+        selectItems[i].onclick = function () {
+            selectAll.checked = true;
+            for (var j = 0; j < selectItems.length; j++) {
+                if (!selectItems[j].checked) {
+                    selectAll.checked = false;
+                }
+            }
+        }
+    }
 });
 $(document).on("click",".dele",function(){
 	var name = $(this).parents("tr").find("td:eq(2)").text();
@@ -100,10 +120,6 @@ function deleAll() {
 				}
 			})  
 	});
-	
-	
-	
-
 	
 }
 </script>
