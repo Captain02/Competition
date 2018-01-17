@@ -231,7 +231,10 @@
                     <ul class="person-List">
 
                         <!-- 在此遍历出审核人员 -->
-
+						<c:forEach items="${user}" var="user">
+							<li><a>${user.username}</a>:${user.name }:${user.role.name}
+							</li>
+						</c:forEach>
 
 
 
