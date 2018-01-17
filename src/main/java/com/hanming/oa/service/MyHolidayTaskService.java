@@ -35,24 +35,25 @@ public class MyHolidayTaskService {
 		// 修改假条
 		Holiday holiday = new Holiday();
 		if (state==0) {
-			holiday.setTest("审核通过");
-			variables.put("msg", "通过");
+			holiday.setTest("已通过");
+			variables.put("msg", "已通过");
 			variables.put("completePeople", username);
 		}else if (state==1) {
-			holiday.setTest("审核不通过");
+			holiday.setTest("未通过");
+			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
 		}else {
 			holiday.setTest("审核中");
 			variables.put("msg", "审核中");
 		}
-		holiday.setTest("审核通过");
+//		holiday.setTest("审核通过");
 		holiday.setId(userHolidayByHolidayId.getId());
 		holidayService.updateHoliday(holiday);
 
 		// 设置流程变量
 		variables.put("getHolidaydays", userHolidayByHolidayId.getHolidaydays());
 		// 设置用户id
-		Authentication.setAuthenticatedUserId(userHolidayByHolidayId.getName());
+		Authentication.setAuthenticatedUserId(username);
 		// 添加批注信息
 		taskService.addComment(task.getId(), userHolidayByHolidayId.getProcessinstanceid(), nowComment);
 		// 完成任务

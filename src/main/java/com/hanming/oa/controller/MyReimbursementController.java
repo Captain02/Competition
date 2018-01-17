@@ -47,6 +47,7 @@ public class MyReimbursementController {
 	MyReimbursementTaskService myReimbursementTaskService;
 	@Autowired
 	UserService userService;
+	
 
 	@RequestMapping(value = "/myReimbursementTask", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
@@ -160,13 +161,33 @@ public class MyReimbursementController {
 		return "myReimbursement/reimbursementExamination";
 	}
 
+	// 是否同意报销
+	@ResponseBody
+	@RequestMapping(value = "/agreeExamination", method = RequestMethod.POST)
+	public Msg agreeExamination(UserReimbursementByReimbursementId UserReimbursementByReimbursementId,
+			@RequestParam("nowComment") String nowComment, @RequestParam("id") String reimbursementId,
+			@RequestParam("state") String state) {
+		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
+		int i = myReimbursementTaskService.agreeExamination(username, UserReimbursementByReimbursementId, nowComment, reimbursementId,
+				Integer.parseInt(state));
+		if (Integer.parseInt(state) == 1) {
+			logger.info(username + "=====跳转不同意报销审批");
+			return Msg.success();
+		}else if (Integer.parseInt(state) == 0) {
+			logger.info(username + "=====跳转同意报销审批");
+			return Msg.success();
+		}else{
+			logger.info(username + "=====向下一个人递送报销审批");
+			return Msg.success();
+		}
+
+	}
+
 	// 指派任务
 	@ResponseBody
 	@RequestMapping(value = "/assignTask", method = RequestMethod.POST)
 	public Msg assignTask(@RequestParam("assignProcessinstanceid") String assignProcessinstanceid,
 			@RequestParam("assignUsername") String assignUsername) {
-		System.out.println("+++++++++++++++++"+assignProcessinstanceid);
-		System.out.println("++++++"+assignUsername);
 		Task task = taskService.createTaskQuery() // 创建任务查询
 				.processInstanceId(assignProcessinstanceid)// 根据流程实例Id查询当前任务
 				.singleResult();

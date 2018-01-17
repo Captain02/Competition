@@ -92,7 +92,7 @@ public class ReimbursementService {
 		userReimbursementMapper.insertSelective(userReimbursement);
 	}
 
-	private void updateReimbursement(Reimbursement reimbursement) {
+	public void updateReimbursement(Reimbursement reimbursement) {
 		reimbursementMapper.updateByPrimaryKeySelective(reimbursement);
 
 	}

@@ -44,7 +44,7 @@ public class MyHolidayTaskController {
 	@Autowired
 	HistoryService historyService;
 	@Autowired
-	MyHolidayTaskService MyHolidayTaskService;
+	MyHolidayTaskService myHolidayTaskService;
 	@Autowired
 	UserService userService;
 
@@ -158,21 +158,25 @@ public class MyHolidayTaskController {
 		return "myHolidayTask/holidayExamination";
 	}
 
-	// 同意请假
+	// 是否同意请假
 	@ResponseBody
 	@RequestMapping(value = "/agreeExamination", method = RequestMethod.POST)
 	public Msg agreeExamination(UserHolidayByHolidayId userHolidayByHolidayId,
 			@RequestParam("nowComment") String nowComment, @RequestParam("id") String holidayId,
 			@RequestParam("state") String state) {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
-		int i = MyHolidayTaskService.agreeExamination(username, userHolidayByHolidayId, nowComment, holidayId,
+		myHolidayTaskService.agreeExamination(username, userHolidayByHolidayId, nowComment, holidayId,
 				Integer.parseInt(state));
-		if (i == 1) {
+		if (Integer.parseInt(state) == 1) {
+			logger.info(username + "=====跳转不同意假条审批");
+			return Msg.success();
+		}else if (Integer.parseInt(state) == 0) {
 			logger.info(username + "=====跳转同意假条审批");
 			return Msg.success();
+		}else{
+			logger.info(username + "=====向下一个人递送假条审批");
+			return Msg.success();
 		}
-		return Msg.fail();
-
 	}
 
 	// 指派任务
