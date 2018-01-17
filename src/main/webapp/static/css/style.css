@@ -357,7 +357,10 @@ body {
 	font-weight: bold;
 	margin-right: 1rem;
 }
-
+.om-header-left span.om-list a:hover{
+	color: #000;
+	text-decoration: underline;
+}
 
 /* om-wrapper */
 
@@ -557,7 +560,10 @@ form#addUserInfo header {
 	font-size: 16px;
 	color: #65CEA7;
 }
-
+.cf tr td a:hover{
+	color: #000;
+	text-decoration: underline;
+}
 
 /* 个人主页 */
 
@@ -659,7 +665,9 @@ ul.p-info .desk {
 	padding-bottom: 20px;
 	font-size: 14px;
 }
-
+.blog .auth-row a{
+	color: #c8c8c8;
+}
 
 /* approve pagae */
 
