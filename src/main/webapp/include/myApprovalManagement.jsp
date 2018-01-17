@@ -9,7 +9,7 @@
 			<span class="om-list">
 				<a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask">请假</a>
 				<a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask">报销</a>
-				<a href="">物品</a>
+				<a href="${APP_PATH}/admin/myThingsTask/myThingsTask">物品</a>
 		</span>
 	</h3>
 </div>

@@ -34,8 +34,8 @@ import com.hanming.oa.service.UserService;
 
 @Controller
 @RequestMapping("/admin/myReimbursementTask")
-public class MyReimbursementController {
-	private static final Logger logger = LoggerFactory.getLogger(MyReimbursementController.class);
+public class MyReimbursementTaskController {
+	private static final Logger logger = LoggerFactory.getLogger(MyReimbursementTaskController.class);
 
 	@Autowired
 	TaskService taskService;

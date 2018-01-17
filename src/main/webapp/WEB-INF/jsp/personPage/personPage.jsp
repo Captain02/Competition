@@ -140,7 +140,7 @@
 													<tr>
 														<td><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask">请假</a></td>
 														<td><a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask">报销</a></td>
-														<td><a href="${APP_PATH}/admin/myTask/myHolidayTask">物品</a></td>
+														<td><a href="${APP_PATH}/admin/myThingsTask/myThingsTask">物品</a></td>
 													</tr>
 												</thead>
 												<tbody>
