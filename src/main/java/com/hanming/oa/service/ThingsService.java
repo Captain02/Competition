@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hanming.oa.dao.ThingsMapper;
 import com.hanming.oa.dao.UserThingsMapper;
 import com.hanming.oa.model.Things;
+import com.hanming.oa.model.ThingsAndExaminationTime;
 import com.hanming.oa.model.UserThings;
 import com.hanming.oa.model.UserThingsByThingsId;
 
@@ -104,6 +105,33 @@ public class ThingsService {
 	public UserThingsByThingsId selectUserThingsByThingsId(Integer thingsId) {
 		UserThingsByThingsId userThingsByThingsId = thingsMapper.selectUserThingsByThingsId(thingsId);
 		return userThingsByThingsId;
+	}
+
+	public Things selectThingsByProcessInstanceIdLikeStateName(String processInstanceId, String state, String name) {
+		Things things = thingsMapper.selectThingsByProcessInstanceIdLikeStateName(processInstanceId,state,name);
+		
+		return things;
+	}
+
+	public List<Things> selectListThingsByProcessInstanceId(List<String> listProcessinstanceid) {
+		List<Things> list = thingsMapper.selectListThingsByProcessInstanceId(listProcessinstanceid);
+		return list;
+	}
+
+	public List<Things> selectCreatByMeLikeStateName(Integer userId, String state, String name) {
+		List<Things> list = thingsMapper.selectCreatByMeLikeStateName(userId,state,name);
+		return list;
+	}
+
+	public List<ThingsAndExaminationTime> selectExaminationByMeLikeStateName(String username, String state,
+			String name) {
+		List<ThingsAndExaminationTime> thingsAndExaminationTime = thingsMapper.selectExaminationByMeLikeStateName(username,state,name);
+		return thingsAndExaminationTime;
+	}
+
+	public List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(String username, String state, String name) {
+		List<ThingsAndExaminationTime> list = thingsMapper.selectCompleteByMeLikeStateName(username,state,name);
+		return list;
 	}
 
 
