@@ -22,6 +22,7 @@ import com.hanming.oa.dao.ThingsMapper;
 import com.hanming.oa.dao.UserThingsMapper;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.UserThings;
+import com.hanming.oa.model.UserThingsByThingsId;
 
 @Service
 public class ThingsService {
@@ -98,6 +99,11 @@ public class ThingsService {
 
 	private void insertThings(Things things) {
 		thingsMapper.insertSelective(things);
+	}
+
+	public UserThingsByThingsId selectUserThingsByThingsId(Integer thingsId) {
+		UserThingsByThingsId userThingsByThingsId = thingsMapper.selectUserThingsByThingsId(thingsId);
+		return userThingsByThingsId;
 	}
 
 

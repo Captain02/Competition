@@ -31,6 +31,8 @@ import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.User;
+import com.hanming.oa.model.UserReimbursementByReimbursementId;
+import com.hanming.oa.model.UserThingsByThingsId;
 import com.hanming.oa.service.ThingsService;
 import com.hanming.oa.service.UserService;
 
@@ -123,6 +125,23 @@ public class ThingsTaskController {
 		mav.setViewName("holiday/currentView");
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行显示当前流程图");
 		return mav;
+	}
+
+	// 查看物品单
+	@RequestMapping(value = "/thingsNote/{thingsId}", method = RequestMethod.GET)
+	public String holidayNote(@PathVariable("thingsId") Integer thingsId, Model model) {
+		UserThingsByThingsId userThingsByThingsId = thingsService.selectUserThingsByThingsId(thingsId);
+
+		Task task = taskService.createTaskQuery() // 创建任务查询
+				.processInstanceId(userThingsByThingsId.getProcessinstanceid())// 根据流程实例Id查询当前任务
+				.singleResult();
+
+		if (task != null) {
+			model.addAttribute("approver", task.getAssignee());
+		}
+		model.addAttribute("userThingsByThingsId", userThingsByThingsId);
+		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看报销单");
+		return "things/thingsNote";
 	}
 
 }

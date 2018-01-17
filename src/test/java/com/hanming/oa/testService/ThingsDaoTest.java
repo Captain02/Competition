@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hanming.oa.dao.ThingsMapper;
 import com.hanming.oa.model.Things;
+import com.hanming.oa.model.UserThingsByThingsId;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/spring-dao.xml" })
@@ -24,6 +25,12 @@ public class ThingsDaoTest {
 		for (Things Things : list) {
 			System.out.println("++++++++++++++"+Things.getDate());
 		}
+	}
+	
+	@Test
+	public void selectUserThingsByThingsId() {
+		UserThingsByThingsId thingsId2 = thingsMapper.selectUserThingsByThingsId(2);
+		System.out.println(thingsId2.getName());
 	}
 
 }

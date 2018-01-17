@@ -79,7 +79,7 @@
                                             <button onclick=" doPrint();" class="pull-right btn">打 印</button>
                                         </h1>
                                         <p class="text-center auth-row"> By
-                                            <a href="" style="color: #c8c8c8;">李白</a> | 2017-12-15 11:51</p>
+                                            <a href="" style="color: #c8c8c8;">${userReimbursementByReimbursementId.name}</a> | ${userReimbursementByReimbursementId.date}</p>
 
                                         <!--startprint-->
                                         <div id="print">

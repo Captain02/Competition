@@ -41,7 +41,7 @@
 
                     <select class="form-control" name="state">
                         <option>状态</option>
-                        <option>审核通过</option>
+                        <option>已通过</option>
                         <option>未通过</option>
                         <option>审核中</option>
                     </select>
@@ -107,7 +107,7 @@
 	                                                    </button>
 	                                                    <ul class="dropdown-menu">
 	                                                        <li>
-	                                                            <a href="">查看物品</a>
+	                                                            <a href="${APP_PATH}/admin/things/thingsNote/${things.id}">查看物品</a>
 	                                                        </li>
 	                                                        <li role="separator" class="divider"></li>
 	                                                        <li>

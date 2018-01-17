@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.Things;
+import com.hanming.oa.model.UserThingsByThingsId;
 
 public interface ThingsMapper {
     int deleteByPrimaryKey(Integer id);
@@ -20,4 +21,6 @@ public interface ThingsMapper {
     int updateByPrimaryKey(Things record);
     
     List<Things> listLikeStateType(@Param("state") String state, @Param("name") String name);
+
+	UserThingsByThingsId selectUserThingsByThingsId(Integer thingsId);
 }

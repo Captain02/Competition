@@ -75,7 +75,7 @@
                                             <button onclick=" doPrint();" class="pull-right btn">打 印</button>
                                         </h1>
                                         <p class="text-center auth-row"> By
-                                            <a href="">李白</a> | 2017-12-15 11:51</p>
+                                            <a href="">${userThingsByThingsId.name}</a> | ${userThingsByThingsId.date}</p>
 
                                         <!--startprint-->
                                         <div id="print">
@@ -86,36 +86,36 @@
                                                     </tr>
                                                     <tr>
                                                         <td width="72">姓名</td>
-                                                        <td width="62">${userHolidayByHolidayId.name}</td>
+                                                        <td width="62">${userThingsByThingsId.name}</td>
                                                         <td width="70">部门</td>
-                                                        <td width="77">${userHolidayByHolidayId.department}</td>
+                                                        <td width="77">${userThingsByThingsId.department}</td>
                                                         <td width="80">职位</td>
-                                                        <td width="93">${userHolidayByHolidayId.role}</td>
+                                                        <td width="93">${userThingsByThingsId.role}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>日期</td>
-                                                        <td colspan="5"></td>
+                                                        <td colspan="5">${userThingsByThingsId.date}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>物品用途</td>
-                                                        <td colspan="5"></td>
+                                                        <td colspan="5">${userThingsByThingsId.purpose}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>物品详情</td>
-                                                        <td colspan="5">自己用</td>
+                                                        <td colspan="5">${userThingsByThingsId.details}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>物品名称</td>
-                                                        <td colspan="5"></td>
+                                                        <td colspan="5">${userThingsByThingsId.thingsName}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                             
-                                            <span style="float: left; padding:8px 20px 0 0;">${userHolidayByHolidayId.filename!=null?userHolidayByHolidayId.filename:'无附件'}</span>
+                                            <span style="float: left; padding:8px 20px 0 0;">${userThingsByThingsId.filename!=null?userThingsByThingsId.filename:'无附件'}</span>
                                         </div>
  
                                         <!--endprint-->
-                                        <button type="button" class="btn btn-default" onclick="window.location.href='${APP_PATH}/admin/holiday/down/${userHolidayByHolidayId.id}'">
+                                        <button type="button" class="btn btn-default" onclick="window.location.href='${APP_PATH}/admin/things/down/${userHolidayByHolidayId.id}'">
                                             <span class="glyphicon glyphicon-arrow-down"></span>下载附件
                                         </button>
                                     </div>
