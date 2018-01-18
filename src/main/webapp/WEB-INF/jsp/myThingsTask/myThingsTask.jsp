@@ -41,7 +41,7 @@
                 "#assignHolidayProcessinstanceid").val();
             var assignUsername = $(object).prev().val();
             $.ajax({
-                url: "/OA02/admin/myHolidayTask/assignTask",
+                url: "${APP_PATH}/admin/myHolidayTask/assignTask",
                 type: "POST",
                 data: "assignHolidayProcessinstanceid=" +
                     assignHolidayProcessinstanceid + "&assignUsername=" +
@@ -78,63 +78,23 @@
                     <span class="glyphicon glyphicon-th-list"></span>
                 </a>
 
-                <form action="/OA02/admin/myHolidayTask/myHolidayTask" class="serach-form" method="get">
+                <form action="${APP_PATH}/admin/things/list" class="serach-form" method="get">
 
-                    <select class="form-control" name="type">
-                        <option>类型</option>
-                        <option>事假</option>
-                        <option>病假</option>
-                        <option>年假</option>
-                        <option>调休</option>
-                        <option>婚假</option>
-                        <option>产假</option>
-                        <option>陪产假</option>
-                        <option>路途假</option>
-                        <option>其它</option>
-                    </select>
+                    <input class="form-control" type="text" name="name" placeholder="物品名称" value="${name}">
+
                     <select class="form-control" name="state">
                         <option>状态</option>
-                        <option>通过</option>
+                        <option>已通过</option>
                         <option>未通过</option>
                         <option>审核中</option>
                     </select>
-                    <input type="hidden" value="0" name="herfPage" />
                     <button type="submit" class="btn btn-primary">搜索</button>
+
                     <div class="clearfix"></div>
                 </form>
 
-
-
                 <!-- 此处显示登录所用的用户名以及职位，用include标签包含进来 -->
-                <div class="content-head-right">
-                    <ul class="login-info">
-                        <li>
-                            <a href="">
-                                <i class="glyphicon glyphicon-comment"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <span>欢迎！</span>
-                            <a href="#" data-toggle="dropdown">
-                                超级管理员
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li>
-                                    <a href="#">个人主页</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="/OA02/admin/user/changePassword/140">修改密码</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a href="/OA02/logout">退出</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                <jsp:include page="iniUserInfo.jsp"></jsp:include>
 
                 <div class="clearfix"></div>
 
@@ -152,12 +112,12 @@
                         <div class="col-sm-12">
 
                             <header class="om-wrapper-header">
-                                任务 / 总数：
+                                任务 / 总数：${pageInfo.total}
                                 <span class="tools pull-right">
-                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=0" class="btn btn-default active">指派给我</a>
-                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=1" class="btn btn-default">由我创建</a>
-                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=2" class="btn btn-default">由我解决</a>
-                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=3" class="btn btn-default">由我完成</a>
+                                    <a href="${APP_PATH}/admin/myThingsTask/myThingsTask?herfPage=0" class="btn btn-default active">指派给我</a>
+                                    <a href="${APP_PATH}/admin/myThingsTask/myThingsTask?herfPage=1" class="btn btn-default">由我创建</a>
+                                    <a href="${APP_PATH}/admin/myThingsTask/myThingsTask?herfPage=2" class="btn btn-default">由我解决</a>
+                                    <a href="${APP_PATH}/admin/myThingsTask/myThingsTask?herfPage=3" class="btn btn-default">由我完成</a>
                                 </span>
                             </header>
 
@@ -171,33 +131,49 @@
                                                 <th>物品名称</th>
                                                 <th>申请时间</th>
                                                 <th>状态</th>
-                                                <th>操作</th>
+                                                <c:if test="${herfPage==2}">
+													<th>到达时间</th>
+												</c:if>
+												<c:if test="${herfPage==2||herfPage==3}">
+													<th>审批时间</th>
+												</c:if>
+												<th>操作</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-
-                                            <tr>
-                                                <td>工作</td>
-                                                <td>打印机</td>
-                                                <td>2017-1-1</td>
-                                                <td>审核通过</td>
-                                                <td>
-                                                    <!-- this hidden -->
-
-                                                    <input id="holidayProcessinstanceid" value="5" type="hidden">
-                                                    <a class="btn btn-warning btn-xs btn-assign" title="指派">
-                                                        <i class="glyphicon glyphicon-hand-right"></i>
-                                                    </a>
-                                                    <a href="/OA02/admin/myHolidayTask/examinationPage/15/1" class="btn btn-success btn-info btn-xs" title="完成">
-                                                        <i class="glyphicon glyphicon-ok-sign "></i>
-                                                    </a>
-
-                                                    <a href="/OA02/admin/holiday/holidayNote/15" class="btn btn-danger btn-xs" title="查看">
-                                                        <i class="glyphicon glyphicon-eye-open "></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+											<c:forEach items="${pageInfo.list}" var="things">
+	                                            <tr>
+	                                                <td>${things.purpose}</td>
+	                                                <td>${things.name}</td>
+	                                                <td>${things.date}</td>
+	                                                <td>${things.state}</td>
+	                                                <c:if test="${herfPage==2}">
+														<td>
+															<fmt:formatDate value="${things.startExaminationTime}" pattern="yyyy-mm-dd hh:dd:ss" />
+														</td>
+													</c:if>
+													<c:if test="${herfPage==2||herfPage==3}">
+														<td>
+															<fmt:formatDate value="${things.examinationTime}" pattern="yyyy-mm-dd hh:dd:ss" />
+														</td>
+													</c:if>
+													<td>
+													<c:if test="${herfPage==0}">
+														<input id="reimbursementProcessinstanceid" value="${things.processinstanceid}" type="hidden">
+													<a class="btn btn-warning btn-xs btn-assign" title="指派">
+																<i class="glyphicon glyphicon-hand-right"></i>
+															</a>
+														<a href="${APP_PATH}/admin/myThingsTask/examinationPage/${things.id}/${pageInfo.pageNum}" class="btn btn-success btn-info btn-xs" title="完成">
+															<i class="glyphicon glyphicon-ok-sign "></i>
+														</a>
+													</c:if>
+													<a href="${APP_PATH}/admin/myThingsTask/thingsNote/${things.id}" class="btn btn-danger btn-xs" title="查看">
+															<i class="glyphicon glyphicon-eye-open "></i>
+													</a>
+													</td>
+	                                            </tr>
+											</c:forEach>
                                         </tbody>
 
                                     </table>
@@ -213,30 +189,48 @@
                         <div class="container page-possiton ">
 
                             <nav aria-label="Page navigation">
-                                <ul class="pagination pagination-control">
-                                    <li>
-                                        <a href="/OA02/admin/myHolidayTask/myHolidayTask?pn=1&type=类型&state=状态&herfPage=0">首页</a>
-                                    </li>
+								<ul class="pagination pagination-control">
+									<li>
+										<a href="${APP_PATH}/admin/myThingsTask/myThingsTask?pn=1&type=${type}&state=${state}&herfPage=${herfPage}">首页</a>
+									</li>
+									<c:if test="${pageInfo.hasPreviousPage}">
+										<li>
+											<a href="${APP_PATH}/admin/myThingsTask/myThingsTask?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}&herfPage=${herfPage}"
+											    aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+									</c:if>
 
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="/OA02/admin/myHolidayTask/myHolidayTask?pn=2&type=类型&state=状态&herfPage=0">2</a>
-                                    </li>
+									<c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
+										<c:if test="${pageNum==pageInfo.pageNum}">
+											<li class="active">
+												<a href="#">${pageNum}</a>
+											</li>
+										</c:if>
+										<c:if test="${pageNum!=pageInfo.pageNum}">
+											<li>
+												<a href="${APP_PATH}/admin/myThingsTask/myThingsTask?pn=${pageNum}&type=${type}&state=${state}&herfPage=${herfPage}">${pageNum}</a>
+											</li>
+										</c:if>
+									</c:forEach>
 
-                                    <li>
-                                        <a href="/OA02/admin/myHolidayTask/myHolidayTask?pn=2&type=类型&state=状态&herfPage=0" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/OA02/admin/myHolidayTask/myHolidayTask?pn=2&type=类型&state=状态&herfPage=0" aria-label="Next">
-                                            <span aria-hidden="true">末页</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+									<c:if test="${pageInfo.hasNextPage }">
+										<li>
+											<a href="${APP_PATH}/admin/myThingsTask/myThingsTask?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}&herfPage=${herfPage}"
+											    aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</c:if>
+
+									<li>
+										<a href="${APP_PATH}/admin/myThingsTask/myThingsTask?pn=${pageInfo.pages}&type=${type}&state=${state}&herfPage=${herfPage}" aria-label="Next">
+											<span aria-hidden="true">末页</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
                         </div>
                     </div>
 
@@ -268,31 +262,32 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>asdasd</td>
-                                <td>asdasdasd</td>
-                                <td style="width:20%;">财务部</td>
-                                <td style="width:20%;">admin</td>
-                                <td>
-                                    <!-- hidden 1 -->
-                                    <input id="assignHolidayProcessinstanceid" type="hidden" value="">
-                                    <input id="assignUsername" type="hidden" value="asdasd">
-                                    <button class="btn btn-defalut btn-success btn-sm" onclick="assignTask(this)">
-                                        <span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
-                                    </button>
-                                </td>
-                            </tr>
+							<c:forEach items="${userlist}" var="user">
+								<tr>
+									<td>${user.username}</td>
+									<td>${user.name}</td>
+									<td style="width:20%;">${user.department.name}</td>
+									<td style="width:20%;">${user.role.name}</td>
+									<td>
+										<!-- hidden 1 -->
+										<input id="assignProcessinstanceid" type="hidden" value="">
+										<input id="assignUsername" type="hidden" value="${user.username}">
+										<button class="btn btn-defalut btn-success btn-sm" onclick="assignTask(this)">
+											<span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
+										</button>
+									</td>
+								</tr>
+							</c:forEach>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="modal-footer">
-                    <form action="/OA02/admin/myHolidayTask/myHolidayTask" method="get">
-                        <input type="hidden" value="状态" name="state">
-                        <input type="hidden" value="1" name="pn">
-                        <input type="hidden" value="类型" name="type">
-                        <input type="hidden" value="0" name="herfPage">
+                    <form action="${APP_PATH}/admin/myHolidayTask/myHolidayTask" method="get">
+                        <input type="hidden" value="${state}" name="state">
+                        <input type="hidden" value="${pn}" name="pn">
+                        <input type="hidden" value="${name}" name="name">
+                        <input type="hidden" value="${herfPage}" name="herfPage">
                         <button type="submit" class="btn btn-success yes">确认</button>
                     </form>
                 </div>
