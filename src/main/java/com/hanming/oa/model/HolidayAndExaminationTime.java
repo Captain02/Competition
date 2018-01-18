@@ -18,22 +18,12 @@ public class HolidayAndExaminationTime {
 	private String reason;
 
 	private String enclosure;
-	
-	private String date;
 
 	private String processinstanceid;
 
 	private java.util.Date startExaminationTime;
 
 	private java.util.Date examinationTime;
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
 
 	public Integer getId() {
 		return id;

@@ -90,7 +90,6 @@ public class HolidayService {
 		}
 		UserHoliday userHoliday = new UserHoliday();
 		userHoliday.setUserid((Integer) SecurityUtils.getSubject().getSession().getAttribute("id"));
-		
 		insertHoliday(holiday);
 		userHoliday.setHolidayid(holiday.getId());
 		insertUserHoliday(userHoliday);
