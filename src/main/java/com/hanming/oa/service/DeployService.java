@@ -1,17 +1,23 @@
 package com.hanming.oa.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.zip.ZipInputStream;
 
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.hanming.oa.dao.DeployeMapper;
 
 @Service
 public class DeployService {
@@ -26,7 +32,12 @@ public class DeployService {
 	HolidayService holidayService;
 	@Autowired
 	ReimbursementService reimbursementService;
+	@Autowired
+	DeployeMapper deployeMapper;
+	@Autowired
+	DeployService deployService;
 
+	// 删除流程部署
 	@Transactional
 	public void deleDeploy(String ids) {
 		if (ids.contains("-")) {
@@ -76,6 +87,28 @@ public class DeployService {
 			listProcessInstance.add(historicProcessInstance.getId());
 		}
 		return listProcessInstance;
+	}
+
+	public void updataPersonNumberByDeployId(String id, Integer num) {
+		deployeMapper.updataPersonNumberByDeployId(id, num);
+	}
+
+	//流程部署
+	@Transactional
+	public void addDeploye(MultipartFile file, Integer num) {
+		Deployment deploy;
+		try {
+			// 开始部署
+			deploy = repositoryService.createDeployment()// 创建部署
+					.name(file.getOriginalFilename())// 需要部署流程名称
+					.addZipInputStream(new ZipInputStream(file.getInputStream()))// 添加zip输入流
+					.deploy();
+			deployService.updataPersonNumberByDeployId(deploy.getId(), num);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

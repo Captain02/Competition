@@ -7,6 +7,7 @@ import java.util.zip.ZipInputStream;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,12 +74,9 @@ public class DeployController {
 	// 添上传流程部署ZIP文件
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(MultipartFile file) throws IOException {
-		repositoryService.createDeployment()// 创建部署
-				.name(file.getOriginalFilename())// 需要部署流程名称
-				.addZipInputStream(new ZipInputStream(file.getInputStream()))// 添加zip输入流
-				.deploy();// 开始部署
-		return "deploy/add";
+	public Msg add(MultipartFile file,@RequestParam(value="num",defaultValue="1")Integer num) throws IOException {
+		deployService.addDeploye(file,num);
+		return Msg.success();
 	}
 
 	// 员工单个和批量删除
