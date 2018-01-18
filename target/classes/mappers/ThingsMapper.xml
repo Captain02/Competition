@@ -164,17 +164,4 @@
 	    </if>
     </where>
   </select>
-  
-  <!-- UserThingsByThingsId selectUserThingsByThingsId(Integer thingsId); -->
-  <select id="selectUserThingsByThingsId" resultType="UserThingsByThingsId">
-  SELECT th.`name` thingsName, th.id,th.number,th.date,th.purpose,th.state,th.details,th.enclosure,th.filename,th.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
-	FROM things th
-	LEFT JOIN user_things ust ON ust.thingsId=th.id
-	LEFT JOIN t_user tu ON tu.id = ust.userId
-	LEFT JOIN t_department_user  tdu ON tdu.userId = tu.id
-	LEFT JOIN t_department td ON td.id = tdu.departmentId
-	LEFT JOIN t_user_role tur ON tur.userId = tu.id
-	LEFT JOIN t_role tr ON tr.id = tur.roleId
-	WHERE th.id =#{thingsId}
-  </select>
 </mapper>
