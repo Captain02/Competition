@@ -14,7 +14,6 @@
 <script type="text/javascript">
 	function saveDeploy() {
 		var formData = new FormData($("#fileForm")[0]);
-		alert(formData);
 		$.ajax({
 			url : "${APP_PATH}/admin/deploy/add",
 			type : "POST",
