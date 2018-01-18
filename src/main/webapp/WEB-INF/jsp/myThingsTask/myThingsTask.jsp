@@ -26,7 +26,7 @@
                 $('#myModal').modal('show');
                 var btnAssignPreviousSbiling = $(this).prev().attr('value');
                 console.log(btnAssignPreviousSbiling);
-                $('#assignHolidayProcessinstanceid').val(btnAssignPreviousSbiling);
+                $('#assignThingProcessinstanceid').val(btnAssignPreviousSbiling);
             });
 
             var locationHref = location.href.split('herfPage=');
@@ -37,14 +37,14 @@
         });
 
         function assignTask(object) {
-            var assignHolidayProcessinstanceid = $(
-                "#assignHolidayProcessinstanceid").val();
+            var assignThingProcessinstanceid = $(
+                "#assignThingProcessinstanceid").val();
             var assignUsername = $(object).prev().val();
             $.ajax({
-                url: "${APP_PATH}/admin/myHolidayTask/assignTask",
+                url: "${APP_PATH}/admin/myThingsTask/assignTask",
                 type: "POST",
-                data: "assignHolidayProcessinstanceid=" +
-                    assignHolidayProcessinstanceid + "&assignUsername=" +
+                data: "assignThingProcessinstanceid=" +
+                    assignThingProcessinstanceid + "&assignUsername=" +
                     assignUsername,
                 success: function (result) {
                     if (result.code == 100) {
@@ -159,7 +159,7 @@
 													</c:if>
 													<td>
 													<c:if test="${herfPage==0}">
-														<input id="reimbursementProcessinstanceid" value="${things.processinstanceid}" type="hidden">
+														<input id="thingsProcessinstanceid" value="${things.processinstanceid}" type="hidden">
 													<a class="btn btn-warning btn-xs btn-assign" title="指派">
 																<i class="glyphicon glyphicon-hand-right"></i>
 															</a>
@@ -269,7 +269,7 @@
 									<td style="width:20%;">${user.role.name}</td>
 									<td>
 										<!-- hidden 1 -->
-										<input id="assignProcessinstanceid" type="hidden" value="">
+										<input id="assignThingProcessinstanceid" type="hidden" value="">
 										<input id="assignUsername" type="hidden" value="${user.username}">
 										<button class="btn btn-defalut btn-success btn-sm" onclick="assignTask(this)">
 											<span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
@@ -282,7 +282,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <form action="${APP_PATH}/admin/myHolidayTask/myHolidayTask" method="get">
+                    <form action="${APP_PATH}/admin/myThingsTask/myThingsTask" method="get">
                         <input type="hidden" value="${state}" name="state">
                         <input type="hidden" value="${pn}" name="pn">
                         <input type="hidden" value="${name}" name="name">
