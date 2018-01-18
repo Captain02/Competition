@@ -17,6 +17,8 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<script  src="${APP_PATH}/static/js/btnNav.js"></script>
+
 <script type="text/javascript">
 	$(function () {
 		ShowEle('.yes', 'hide');
@@ -27,11 +29,6 @@
 			$('#assignHolidayProcessinstanceid').val(btnAssignPreviousSbiling);
 		});
 
-		var locationHref = location.href.split('herfPage=');
-		var thisPagelocationHref = locationHref[1];
-		var toolsA = $('.tools > a');
-		$(toolsA[thisPagelocationHref]).addClass('active');
-		$(toolsA[thisPagelocationHref]).siblings().removeClass('active');
 	});
 
 	function assignTask(object) {
@@ -122,7 +119,7 @@
 							<header class="om-wrapper-header">
 								任务 / 总数：${pageInfo.total}
 								<span class="tools pull-right">
-									<a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask?herfPage=0" class="btn btn-default active">指派给我</a>
+									<a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask?herfPage=0" class="btn btn-default">指派给我</a>
 									<a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask?herfPage=1" class="btn btn-default">由我创建</a>
 									<a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask?herfPage=2" class="btn btn-default">由我解决</a>
 									<a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask?herfPage=3" class="btn btn-default">由我完成</a>

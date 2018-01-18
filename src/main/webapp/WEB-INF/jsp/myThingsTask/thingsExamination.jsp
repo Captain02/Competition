@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>请假审批</title>
+    <title>物品审批</title>
 
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
@@ -21,6 +21,8 @@
 $(function(){
 	$('.not-change').attr('disabled','diasbled');
 })
+
+// 在此处发送批准申请的ajax请求
 function examination(state) {
 	$.ajax({
 		url:"${APP_PATH}/admin/myHolidayTask/agreeExamination",
@@ -73,41 +75,68 @@ function examination(state) {
                                 <header class="om-wrapper-header">审批</header>
 
                                 <div class="om-wrpper-body">
-                                    <sf:form id="examinationFrom" modelAttribute="userHolidayByHolidayId">
-                                        <sf:hidden path="processinstanceid" />
-                                        <sf:hidden path="id" />
-                                        <!-- 请假人填写区域 -->
+                                
+                                        <!-- 物品申请人填写区域 -->
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
-                                                   	 请假人：
+                                                  	 物品申请人：
                                                 </label>
                                             </div>
-
                                             <div class="col-sm-4">
-                                                <sf:input path="name" type="text" class="form-control not-change" />
+                                                <input type="text" class="form-control not-change" />
+                                                
                                             </div>
-
+                                            
+											<!--申请日期 -->
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label right">
-                                                    	请假天数：
+                                                    	申请日期：
                                                 </label>
                                             </div>
-
                                             <div class="col-sm-4">
-                                                <sf:input path="holidaydays" type="text" class="form-control not-change" />
+                                                <input type="text" class="form-control not-change" />
                                             </div>
                                         </div>
 
-                                        <!-- 请假原因填写区域 -->
+                                        <!-- 物品名称填写区域 -->
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
-                                                   	 请假原因：
+                                                   	物品名称：
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
-                                                <sf:textarea path="reason" style="height:90px;" class="form-control not-change"></sf:textarea>
+                                                <input class="form-control not-change">
+                                            </div>
+
+                                        </div>
+                                        
+                                         <!-- 物品数量填写区域 -->
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label for="" class="control-label">
+                                                   	数量：
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input class="form-control not-change">
+                                            </div>
+
+                                        </div>
+                                        
+                                       
+                                        
+                                        
+                                         <!-- 物品用途填写区域 -->
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label for="" class="control-label">
+                                                   	用途：
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input class="form-control not-change">
                                             </div>
 
                                         </div>
@@ -120,10 +149,10 @@ function examination(state) {
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
-                                                <textarea name="nowComment" style="height:90px;" class="form-control"></textarea>
+                                                <textarea style="height:90px;" class="form-control"></textarea>
                                             </div>
                                         </div>
-									 </sf:form>
+
                                         <!--结果选择 -->
                                         <div class="form-group">
                                             <div class="col-sm-2">
@@ -138,6 +167,7 @@ function examination(state) {
                                                          <span class="glyphicon glyphicon-arrow-up"></span>提交给上一级</button>
                                                  </div>
                                              </div>
+                                             
                                              <!--查看附件 -->
                                              <div class="form-group">
                                                  <div class="col-sm-2">
