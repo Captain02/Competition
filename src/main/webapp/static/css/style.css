@@ -213,10 +213,10 @@ body {
 }
 
 .login-info>li>a>i {
-	font-size: 2rem;
-	color: #b6b4b4;
+	font-size: 1.5rem;
+	color: #000;
 	display: block;
-	line-height: 54px;
+	line-height: 50px;
 	padding: 0 10px;
 }
 
@@ -328,15 +328,7 @@ body {
 	background: #eff0f4;
 	min-height: 1000px;
 }
-
-
 /* om-header */
-
-.om-header {
-	padding: 1.5rem;
-	padding-right: 0;
-}
-
 .om-list {
 	padding-left: 1.5rem;
 }

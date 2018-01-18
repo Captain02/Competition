@@ -101,13 +101,7 @@
                         <div class="om-header">
 
                             <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
-                            <div class="header-nav pull-left">
-                            <ul class="header-nav-list">
-                            <li>OA</li>
-                            <li>组织管理</li>
-                            <li>员工</li>
-                            </ul>
-                            </div>
+                           
                             <div class="om-header-right">
                                 <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/user/add'">
                                     <i>+</i>添加新员工</button>

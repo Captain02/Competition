@@ -18,10 +18,9 @@
    %>
    <jsp:include page="iniCssHref.jsp"></jsp:include>
 
-    <script src="static/js/ctrolButton.js"></script>
+    <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
     <script type="text/javascript">
         $(function () {
-           
             $('.btn-assign').click(function () {
                 $('#myModal').modal('show');
                 var btnAssignPreviousSbiling = $(this).prev().attr('value');
@@ -48,18 +47,15 @@
                     assignUsername,
                 success: function (result) {
                     if (result.code == 100) {
-                        $('#myModal').modal('show');
-                        ShowTips('.modal-title', '执行结果', '.modal-body','<b style = "color:#5cb85c;">指派成功</b>');
-                        
+                    	$('#myModal').modal('show');
+    					ShowTips('.modal-title', '执行结果', '.modal-body','<b style = "color:#5cb85c;">指派成功</b>');
+    					ShowEle('.yes', 'show');
                     }
                 }
             })
         }
     </script>
 </head>
-
-
-
 <body class="bg-common">
 
     <section>
@@ -111,7 +107,7 @@
                         <div class="col-sm-12">
 
                             <header class="om-wrapper-header">
-                                任务 / 总数：${pageInfo.total}
+                                	任务 / 总数：${pageInfo.total}
                                 <span class="tools pull-right">
                                     <a href="${APP_PATH}/admin/myThingsTask/myThingsTask?herfPage=0" class="btn btn-default active">指派给我</a>
                                     <a href="${APP_PATH}/admin/myThingsTask/myThingsTask?herfPage=1" class="btn btn-default">由我创建</a>
