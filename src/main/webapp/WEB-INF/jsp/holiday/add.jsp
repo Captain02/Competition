@@ -24,7 +24,21 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
 <script type="text/javascript">
 $(function(){
 	ShowEle('.yes','hide');
+	
+	//获取当前选择的流程允许的最多审批人数量，并显示在页面中
+	$('.processDes').css('display','none');
+	var selectProcessKey = $('.selectProcessKey option');
+	for(var i = 0; i<selectProcessKey.length;i++){
+		$(selectProcessKey[i]).click(function(){
+			alert($(this).val());
+		})
+	}
 });
+
+
+
+
+
 function addHoliday() {
 	var persons = "";
 	$.each($(".addPerson"),function(){
@@ -116,7 +130,7 @@ function addHoliday() {
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
                                                             <span>*</span>
-                                                            类　　型
+                                                         	   类　　型
                                                         </label>
                                                     </div>
 
@@ -207,15 +221,20 @@ function addHoliday() {
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
-                                                            流程选择
+                                                           	 流程选择
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                         <select name="ProcessKey" class="form-control">
+                                                         <select name="ProcessKey" class="form-control selectProcessKey">
+                                                            <option value="tip">请选择一个审批流程</option>
                                                          	<c:forEach items="${processKey}" var="key">
                                                             	<option value="${key}">${key}</option>
                                                          	</c:forEach>
                                                         </select>
+                                                        <p class="processDes" style="color:#65CEA7"> 
+			                                            	所选审批流程：<span class="processName" style="color:red;">helloworld</span>
+			                                            	可添加的审批人数量：<span class="processPersonNum" style="color:red;">4</span>
+                                            				</p>
                                                     </div>
 
                                                 </div>
@@ -224,7 +243,7 @@ function addHoliday() {
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
-                                                            审批人（点击可删除）
+                                                           	 审批人（点击可删除）
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
@@ -277,7 +296,9 @@ function addHoliday() {
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h4 class="modal-title" id="myModalLabel">审批人</h4>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                            	审批人
+                                            </h4>
                                         </div>
 
                                         <!-- 主体 -->

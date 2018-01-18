@@ -2,7 +2,7 @@ $(function () {
     //获得所有的审阅人标签
     var lis = $('.person-List > li');
 
-    //点击添加啊按钮显示模态框
+    //点击添加按钮显示模态框
     $('.btn-person').click(function () {
         $('#myModal').modal('show');
         $('.add-error-ms').html('');
