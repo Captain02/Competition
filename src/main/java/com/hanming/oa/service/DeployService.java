@@ -93,7 +93,7 @@ public class DeployService {
 		deployeMapper.updataPersonNumberByDeployId(id, num);
 	}
 
-	//流程部署
+	// 流程部署
 	@Transactional
 	public void addDeploye(MultipartFile file, Integer num) {
 		Deployment deploy;
@@ -109,6 +109,11 @@ public class DeployService {
 			e.printStackTrace();
 		}
 
+	}
+
+	public List<String> selectProcessKey() {
+		List<String> list = deployeMapper.selectProcessKey();
+		return list;
 	}
 
 }

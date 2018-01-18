@@ -211,8 +211,10 @@ function addHoliday() {
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                         <select name="type" class="form-control">
-                                                            <option value="标准流程">标准流程</option>
+                                                         <select name="ProcessKey" class="form-control">
+                                                         	<c:forEach items="${processKey}" var="key">
+                                                            	<option value="${key}">${key}</option>
+                                                         	</c:forEach>
                                                         </select>
                                                     </div>
 

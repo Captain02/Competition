@@ -33,13 +33,14 @@ import com.hanming.oa.model.Things;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserReimbursementByReimbursementId;
 import com.hanming.oa.model.UserThingsByThingsId;
+import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.ThingsService;
 import com.hanming.oa.service.UserService;
 
 @Controller
 @RequestMapping("/admin/things")
-public class ThingsTaskController {
-	private static final Logger logger = LoggerFactory.getLogger(ThingsTaskController.class);
+public class ThingsController {
+	private static final Logger logger = LoggerFactory.getLogger(ThingsController.class);
 
 	@Autowired
 	ThingsService thingsService;
@@ -51,6 +52,8 @@ public class ThingsTaskController {
 	RepositoryService repositoryService;
 	@Autowired
 	RuntimeService runtimeService;
+	@Autowired
+	DeployService deployService;
 
 	// 查询物品申请
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -75,6 +78,8 @@ public class ThingsTaskController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
 		List<User> list = userService.listNotStaff();
+		List<String> ProcessKey = deployService.selectProcessKey();
+		model.addAttribute("processKey", ProcessKey);
 		model.addAttribute("user", list);
 		return "things/addThing";
 	}

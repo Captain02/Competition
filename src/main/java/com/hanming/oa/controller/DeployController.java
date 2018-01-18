@@ -84,7 +84,6 @@ public class DeployController {
 	@RequestMapping(value = "/dele/{ids}", method = RequestMethod.DELETE)
 	public Msg dele(@PathVariable("ids") String ids) {
 		
-		System.out.println("+++++++++++++++++++++++++++++++"+ids);
 		deployService.deleDeploy(ids);
 		
 		return Msg.success();

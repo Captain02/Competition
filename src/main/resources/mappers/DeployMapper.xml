@@ -8,4 +8,10 @@
     where ID_ = #{id}
 </update>
 
+<!-- List<String> selectProcessKey(); -->
+<select id="selectProcessKey" resultType="String">
+	select DISTINCT KEY_
+	from act_re_procdef
+</select>
+
 </mapper>

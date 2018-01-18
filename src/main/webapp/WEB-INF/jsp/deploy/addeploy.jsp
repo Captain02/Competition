@@ -94,7 +94,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input name="" type="number" class="form-control">
+                                                        <input name="num" type="number" class="form-control">
                                                     </div>
 
                                                 </div>

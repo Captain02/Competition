@@ -1,5 +1,7 @@
 package com.hanming.oa.testService;
 
+import java.util.List;
+
 import org.activiti.engine.impl.persistence.deploy.Deployer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,5 +21,12 @@ public class DeployDaoTest {
 	@Test
 	public void updataPersonNumberByDeployId() {
 		deployeMapper.updataPersonNumberByDeployId("helloword:2:77504", 2);
+	}
+	
+	@Test
+	public void selectProcessKey() {
+		List<String> list = deployeMapper.selectProcessKey();
+		System.out.println(list);
+		
 	}
 }

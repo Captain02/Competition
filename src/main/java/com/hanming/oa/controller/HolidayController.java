@@ -39,6 +39,7 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserHolidayByHolidayId;
+import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.HolidayService;
 import com.hanming.oa.service.UserService;
 
@@ -57,6 +58,8 @@ public class HolidayController {
 	TaskService taskService;
 	@Autowired
 	RepositoryService repositoryService;
+	@Autowired
+	DeployService deployService;
 
 	// 请假列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -80,6 +83,8 @@ public class HolidayController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
 		List<User> list = userService.listNotStaff();
+		List<String> ProcessKey = deployService.selectProcessKey();
+		model.addAttribute("processKey", ProcessKey);
 		model.addAttribute("user", list);
 		return "holiday/add";
 	}

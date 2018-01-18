@@ -39,6 +39,7 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserReimbursementByReimbursementId;
+import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.ReimbursementService;
 import com.hanming.oa.service.UserService;
 
@@ -57,6 +58,8 @@ public class ReimbursementController {
 	RepositoryService repositoryService;
 	@Autowired
 	RuntimeService runtimeService;
+	@Autowired
+	DeployService deployService;
 
 	// 查询列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -82,6 +85,8 @@ public class ReimbursementController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
 		List<User> list = userService.listNotStaff();
+		List<String> ProcessKey = deployService.selectProcessKey();
+		model.addAttribute("processKey", ProcessKey);
 		model.addAttribute("user", list);
 		return "reimbursement/add";
 	}
