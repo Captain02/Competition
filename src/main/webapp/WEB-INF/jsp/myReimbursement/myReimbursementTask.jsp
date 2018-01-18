@@ -154,7 +154,7 @@
 													</c:if>
 													<td>
 													<c:if test="${herfPage==0}">
-														<input id="reimbursementProcessinstanceid" value="${reimbursement.processinstanceid}" type="hidden">
+													<input id="reimbursementProcessinstanceid" value="${reimbursement.processinstanceid}" type="hidden">
 													<a class="btn btn-warning btn-xs btn-assign" title="指派">
 																<i class="glyphicon glyphicon-hand-right"></i>
 															</a>
