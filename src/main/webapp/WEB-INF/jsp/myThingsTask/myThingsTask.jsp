@@ -284,7 +284,7 @@
                 <div class="modal-footer">
                     <form action="${APP_PATH}/admin/myThingsTask/myThingsTask" method="get">
                         <input type="hidden" value="${state}" name="state">
-                        <input type="hidden" value="${pn}" name="pn">
+                        <input type="hidden" value="${pageInfo.pageNum}" name="pn">
                         <input type="hidden" value="${name}" name="name">
                         <input type="hidden" value="${herfPage}" name="herfPage">
                         <button type="submit" class="btn btn-success yes">确认</button>
