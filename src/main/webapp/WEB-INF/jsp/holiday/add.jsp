@@ -32,6 +32,7 @@ $(function(){
 	for(var i = 0; i<selectProcessKey.length;i++){
 		$(selectProcessKey[i]).click(function(){
 			selectProcessKeyName = $(this).val();
+			console.log(selectProcessKeyName);
 			alert(selectProcessKeyName);
 			$.ajax({
 				url:"${APP_PATH}/admin/holiday/numberByKey",
