@@ -147,10 +147,10 @@
                             <header class="om-wrapper-header">
                                 任务 / 总数：
                                 <span class="tools pull-right">
-                                    <a href="/OA02/admin/myThingsTask/myThingsTask?herfPage=0" class="btn btn-default active">指派给我</a>
-                                    <a href="/OA02/admin/myThingsTask/myThingsTask?herfPage=1" class="btn btn-default">由我创建</a>
-                                    <a href="/OA02/admin/myThingsTask/myThingsTask?herfPage=2" class="btn btn-default">由我解决</a>
-                                    <a href="/OA02/admin/myThingsTask/myThingsTask?herfPage=3" class="btn btn-default">由我完成</a>
+                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=0" class="btn btn-default active">指派给我</a>
+                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=1" class="btn btn-default">由我创建</a>
+                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=2" class="btn btn-default">由我解决</a>
+                                    <a href="/OA02/admin/myHolidayTask/myHolidayTask?herfPage=3" class="btn btn-default">由我完成</a>
                                 </span>
                             </header>
 
