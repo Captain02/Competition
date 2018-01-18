@@ -80,7 +80,7 @@ function examination(state) {
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
-                                                   	 请假人：
+                                                    请假人：
                                                 </label>
                                             </div>
 
@@ -90,7 +90,7 @@ function examination(state) {
 
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label right">
-                                                    	请假天数：
+                                                    请假天数：
                                                 </label>
                                             </div>
 
@@ -103,7 +103,7 @@ function examination(state) {
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
-                                                   	 请假原因：
+                                                    请假原因：
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
@@ -116,7 +116,7 @@ function examination(state) {
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
-                                                    	批注：
+                                                    批注：
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
@@ -142,7 +142,7 @@ function examination(state) {
                                              <div class="form-group">
                                                  <div class="col-sm-2">
                                                      <label for="" class="control-label">
-                                                        	 附件:
+                                                         附件:
                                                      </label>
                                                  </div>
                                                  <div class="col-sm-10 approve-result">
