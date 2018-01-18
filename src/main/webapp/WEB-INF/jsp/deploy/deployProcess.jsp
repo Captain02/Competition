@@ -74,6 +74,7 @@ $(document).on("click",".dele",function(){
 function deleAll() {
 	var empNames = "";
 	var ids = "";
+<<<<<<< HEAD
 	var everyLineChildren = $('tbody tr td input[type="checkbox"]');
 	var ifHavechecked = everyLineChildren.is(":checked");
 	
@@ -96,6 +97,26 @@ function deleAll() {
 				else{
 					ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html() + '-';
 					empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html() + ',';
+=======
+	$.each($(".selectThisLine:checked"),function(){
+		empNames += $(this).parents("tr").find("td:eq(2)").text()+",";
+		ids += $(this).parents("tr").find("td:eq(1)").text()+"-";
+	})
+	if (confirm("确认删除"+empNames+"吗？")) {
+		//发送ajax请求
+		  $.ajax({
+			url:"${APP_PATH}/admin/deploy/dele/"+ids,
+			type:"DELETE",
+			success:function(result){
+				if (result.code==100) {
+					 $('#myModal').modal('show');
+					 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '的相关信息');
+					 ShowEle('.yes','hide','.no','hide','.down','show');
+				}else{
+					$('#myModal').modal('show');
+					ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败' + '</b>');
+					ShowEle('.yes','hide','.no','hide','.down','show');
+>>>>>>> parent of dad4154... Merge branch 'master' of https://github.com/Captain02/Competition
 				}
 			}
 		}
@@ -216,14 +237,14 @@ function deleAll() {
 												<c:forEach items="${pageInfo.list}" var="deploy">
 	                                                <tr>
 	                                                <td>
-	                                                   <input type="checkbox" name="selectItem" class="selectItem" value="selectItem">
+	                                                   <input type="checkbox" name="selectItem" class="selectItem">
 	                                                </td>
 	                                                    <td>${deploy.id}</td>
 	                                                    <td>${deploy.name}</td>
 	                                                    <td><fmt:formatDate value="${deploy.deploymentTime }" pattern="yyyy-MM-dd"/></td>
 	                                                    <td>
 	                                                        <div class="btn-group">
-	                                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	                                                                操作
 	                                                                <span class="caret"></span>
 	                                                            </button>
