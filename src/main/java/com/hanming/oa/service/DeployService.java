@@ -116,4 +116,9 @@ public class DeployService {
 		return list;
 	}
 
+	public Integer selectNumByProcessDefinitionKey(String key) {
+		Integer num = deployeMapper.selectNumByProcessDefinitionKey(key);
+		return num;
+	}
+
 }

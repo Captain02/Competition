@@ -2,7 +2,6 @@ package com.hanming.oa.testService;
 
 import java.util.List;
 
-import org.activiti.engine.impl.persistence.deploy.Deployer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +27,11 @@ public class DeployDaoTest {
 		List<String> list = deployeMapper.selectProcessKey();
 		System.out.println(list);
 		
+	}
+	
+	@Test
+	public void selectNumByProcessDefinitionKey() {
+		Integer integer = deployeMapper.selectNumByProcessDefinitionKey("helloword");
+		System.out.println(integer);
 	}
 }

@@ -10,4 +10,7 @@ public interface DeployeMapper {
 
 	List<String> selectProcessKey();
 
+	Integer selectNumByProcessDefinitionKey(String key);
+
+
 }

@@ -33,6 +33,14 @@ $(function(){
 		$(selectProcessKey[i]).click(function(){
 			selectProcessKeyName = $(this).val();
 			alert(selectProcessKeyName);
+			$.ajax({
+				url:"${APP_PATH}/admin/holiday/numberByKey",
+				data:"selectProcessKeyName="+selectProcessKeyName,
+				Type:"GET",
+				success:function(result){
+					console.log(result);
+				}
+			})
 		})
 	}
 });

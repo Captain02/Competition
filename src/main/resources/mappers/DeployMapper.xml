@@ -14,4 +14,11 @@
 	from act_re_procdef
 </select>
 
+<!-- Integer selectNumByProcessDefinitionKey(String key); -->
+<select id="selectNumByProcessDefinitionKey" parameterType="String" resultType="Integer">
+ 	select peopleNumber
+	from act_re_procdef
+	where KEY_ = #{key} AND VERSION_ = (select max(VERSION_) from act_re_procdef)
+</select>
+
 </mapper>

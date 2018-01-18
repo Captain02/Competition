@@ -77,5 +77,7 @@ public class ThingsDaoTest {
 			System.out.println(thingsAndExaminationTime.getExaminationTime());
 		}
 	}
+	
+	
 
 }
