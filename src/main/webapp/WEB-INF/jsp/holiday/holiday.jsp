@@ -107,7 +107,7 @@
                                             <c:forEach items="${pageInfo.list }" var="holiday">
 	                                            <tr>
 	                                                <td>${holiday.type}</td>
-	                                                <td>${holiday.startday}</td>
+	                                                <td>${holiday.date}</td>
 	                                                <td>${holiday.holidaydays}</td>
 	                                                <td>${holiday.reason}</td>
 	                                                <td>${holiday.test}</td>

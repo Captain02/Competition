@@ -7,6 +7,8 @@ public class UserHolidayByHolidayId {
 
 	private String type;
 
+	private String date;
+
 	private Date startday;
 
 	private Date endday;
@@ -32,6 +34,14 @@ public class UserHolidayByHolidayId {
 	private String department;
 
 	private String role;
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public String getFilename() {
 		return filename;

@@ -9,7 +9,7 @@ public class ThingsAndExaminationTime {
 
     private Integer number;
 
-    private Date date;
+    private String date;
 
     private String purpose;
 
@@ -51,11 +51,11 @@ public class ThingsAndExaminationTime {
 		this.number = number;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

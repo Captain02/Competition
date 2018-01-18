@@ -9,7 +9,7 @@ public class Things {
 
     private Integer number;
 
-    private Date date;
+    private String date;
 
     private String purpose;
 
@@ -47,15 +47,15 @@ public class Things {
         this.number = number;
     }
 
-    public Date getDate() {
-        return date;
-    }
+    public String getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    public String getPurpose() {
+	public String getPurpose() {
         return purpose;
     }
 
