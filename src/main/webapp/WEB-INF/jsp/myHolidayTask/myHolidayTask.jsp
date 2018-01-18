@@ -133,7 +133,7 @@
 										<thead>
 											<tr>
 												<th>类型</th>
-												<th class="hidden-phone hidden-xs">请假日期</th>
+												<th class="hidden-phone hidden-xs">申请日期</th>
 												<th>天数</th>
 												<th>原因</th>
 												<th>状态</th>
@@ -151,7 +151,7 @@
 											<c:forEach items="${pageInfo.list}" var="holiday">
 												<tr>
 													<td>${holiday.type}</td>
-													<td>${holiday.startday}</td>
+													<td>${holiday.date}</td>
 													<td>${holiday.holidaydays}</td>
 													<td>${holiday.reason}</td>
 													<td>${holiday.test}</td>

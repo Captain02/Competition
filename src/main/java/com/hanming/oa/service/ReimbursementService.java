@@ -2,6 +2,7 @@ package com.hanming.oa.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,6 +72,9 @@ public class ReimbursementService {
 		}
 		UserReimbursement userReimbursement = new UserReimbursement();
 		userReimbursement.setUserid((Integer) SecurityUtils.getSubject().getSession().getAttribute("id"));
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		
 		insertReimbursement(reimbursement);
 		userReimbursement.setReimbursementid(reimbursement.getId());
 		insertUserReimbursement(userReimbursement);
