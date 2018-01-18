@@ -6,57 +6,74 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>我要领用</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>我要领用</title>
 
-    <%
-	 pageContext.setAttribute("APP_PATH", request.getContextPath());
-    %>
+<%
+pageContext.setAttribute("APP_PATH", request.getContextPath());
+  %>
+
+<!-- Date -->
+<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
+<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
+
+<jsp:include page="iniCssHref.jsp"></jsp:include>
+
+<!-- 添加审批人 -->
+<script src="${APP_PATH}/static/js/addPerson.js"></script>
+
+<!-- 控制按钮的状态以及模态框展示的信息 -->
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+
+<script type="text/javascript">
+
+$(function () {
+    ShowEle('.yes', 'hide');
+
     
-	<!-- Date -->
-	<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
-	<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
-
-    <jsp:include page="iniCssHref.jsp"></jsp:include>
-   
-    <!-- 添加审批人 -->
-	<script src="${APP_PATH}/static/js/addPerson.js"></script>
-	
-    <!-- 控制按钮的状态以及模态框展示的信息 -->
-	<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
     
-    <script type="text/javascript">
-        $(function () {
-            ShowEle('.yes', 'hide');
-        });
+    
+		//返回人数的ajax
+		$.ajax({
+			url:"${APP_PATH}/admin/things/selectProcessKeyName",
+			type:"GET",
+			data:"selectProcessKeyName="+selectProcessKeyName,
+			success:function(result){
+				console.log(result.extend.num);
+			}
+		})
 
-        function addthingsForm() {
-            var persons = "";
-            $.each($(".addPerson"), function () {
-                persons += $(this).text() + "-";
-            })
-            var formData = new FormData($("#thingsForm")[0]);
-            formData.append('persons', persons);
-            //发送ajax请求
-            $.ajax({
-                url: "${APP_PATH}/admin/things/add",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (result) {
-                    if (result.code == 100) {
-                        $('#myModal').modal('show');
-                        ShowTips('.modal-title', '操作结果', '.modal-body', '<b style = "color:#5cb85c;">' +
-                            '已成功提交报销申请' + '</b>');
-                        ShowEle('.yes', 'show');
-                    }
-                }
-            })
+
+
+});
+
+function addthingsForm() {
+    var persons = "";
+    $.each($(".addPerson"), function () {
+        persons += $(this).text() + "-";
+    })
+    var formData = new FormData($("#thingsForm")[0]);
+    formData.append('persons', persons);
+    //发送ajax请求
+    $.ajax({
+        url: "${APP_PATH}/admin/things/add",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (result) {
+            if (result.code == 100) {
+                $('#myModal').modal('show');
+                ShowTips('.modal-title', '操作结果', '.modal-body', '<b style = "color:#5cb85c;">' +
+                    '已成功提交报销申请' + '</b>');
+                ShowEle('.yes', 'show');
+            }
         }
-    </script>
+    })
+}
+</script>
 
 </head>
 

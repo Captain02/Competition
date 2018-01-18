@@ -23,32 +23,50 @@
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
+
+
 $(function(){
 	ShowEle('.yes','hide');
+
+	
+	
+	
+				$.ajax({
+					url:"${APP_PATH}/admin/reimbursement/selectProcessKeyName",
+					type:"GET",
+					data:"selectProcessKeyName="+selectProcessKeyName,
+					success:function(result){
+						console.log(result.extend.num);
+					}
+				})
+
 });
-	function addReimbursement() {
-		var persons = "";
-		$.each($(".addPerson"), function() {
-			persons += $(this).text() + "-";
-		})
-		var formData = new FormData($("#addReimbursement")[0]);
-		formData.append('persons', persons);
-		//发送ajax请求
-		$.ajax({
-			url : "${APP_PATH}/admin/reimbursement/add",
-			type : "POST",
-			data : formData,
-			contentType : false,
-			processData : false,
-			success : function(result) {
-				if (result.code == 100) {
-					$('#myModal').modal('show');
-					ShowTips('.modal-title','操作结果','.modal-body','<b style = "color:#5cb85c;">' + '已成功提交报销申请' + '</b>');
-					ShowEle('.yes','show');
-				}
+
+
+
+function addReimbursement() {
+	var persons = "";
+	$.each($(".addPerson"), function() {
+		persons += $(this).text() + "-";
+	})
+	var formData = new FormData($("#addReimbursement")[0]);
+	formData.append('persons', persons);
+	//发送ajax请求
+	$.ajax({
+		url : "${APP_PATH}/admin/reimbursement/add",
+		type : "POST",
+		data : formData,
+		contentType : false,
+		processData : false,
+		success : function(result) {
+			if (result.code == 100) {
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','操作结果','.modal-body','<b style = "color:#5cb85c;">' + '已成功提交报销申请' + '</b>');
+				ShowEle('.yes','show');
 			}
-		})
-	}
+		}
+	})
+}
 </script>
 
 </head>
