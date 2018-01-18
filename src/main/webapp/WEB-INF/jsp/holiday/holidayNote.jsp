@@ -102,7 +102,10 @@
                                                     </tr>
                                                     <tr>
                                                         <td>日期</td>
-                                                        <td colspan="5">${userHolidayByHolidayId.startday}</td>
+                                                        <td>开始日期</td>
+                                                        <td>${userHolidayByHolidayId.startday}</td>
+                                                        <td>结束日期</td>
+                                                        <td>这里是结束日期</td>
                                                     </tr>
                                                     <tr>
                                                         <td>天数</td>

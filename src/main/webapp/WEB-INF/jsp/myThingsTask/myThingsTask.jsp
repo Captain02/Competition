@@ -21,7 +21,7 @@
     <script src="static/js/ctrolButton.js"></script>
     <script type="text/javascript">
         $(function () {
-            ShowEle('.yes', 'hide');
+           
             $('.btn-assign').click(function () {
                 $('#myModal').modal('show');
                 var btnAssignPreviousSbiling = $(this).prev().attr('value');
@@ -49,9 +49,8 @@
                 success: function (result) {
                     if (result.code == 100) {
                         $('#myModal').modal('show');
-                        ShowTips('.modal-title', '执行结果', '.modal-body',
-                            '<b style = "color:#5cb85c;">指派成功</b>');
-                        ShowEle('.yes', 'show');
+                        ShowTips('.modal-title', '执行结果', '.modal-body','<b style = "color:#5cb85c;">指派成功</b>');
+                        
                     }
                 }
             })
