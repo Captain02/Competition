@@ -147,5 +147,13 @@ public class ThingsController {
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看报销单");
 		return "things/thingsNote";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/selectProcessKeyName", method = RequestMethod.GET)
+	public Msg numberByKey(@RequestParam("selectProcessKeyName") String key) {
+		Integer num = deployService.selectNumByProcessDefinitionKey(key);
+
+		return Msg.success().add("num", num);
+	}
 
 }

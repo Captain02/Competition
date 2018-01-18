@@ -202,5 +202,14 @@ public class ReimbursementController {
 		out.close();
 		bis.close();
 	}
+	
+	// 获得流程定义的KEY对应的人数
+	@ResponseBody
+	@RequestMapping(value = "/selectProcessKeyName", method = RequestMethod.GET)
+	public Msg numberByKey(@RequestParam("selectProcessKeyName") String key) {
+		Integer num = deployService.selectNumByProcessDefinitionKey(key);
+
+		return Msg.success().add("num", num);
+	}
 
 }
