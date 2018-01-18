@@ -75,7 +75,7 @@ function examination(state) {
                                 <header class="om-wrapper-header">审批</header>
 
                                 <div class="om-wrpper-body">
-                                	<sf:form id="examinationFrom" modelAttribute="userReimbursementByReimbursementId">
+                                
                                         <!-- 物品申请人填写区域 -->
                                         <div class="form-group">
                                             <div class="col-sm-2">
@@ -152,7 +152,7 @@ function examination(state) {
                                                 <textarea style="height:90px;" class="form-control"></textarea>
                                             </div>
                                         </div>
-									</sf:form>
+
                                         <!--结果选择 -->
                                         <div class="form-group">
                                             <div class="col-sm-2">
