@@ -12,7 +12,7 @@ public class UserReimbursementByReimbursementId {
 
 	private String detailed;
 
-	private Date date;
+	private String date;
 
 	private String processinstanceid;
 
@@ -72,11 +72,11 @@ public class UserReimbursementByReimbursementId {
 		this.detailed = detailed;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

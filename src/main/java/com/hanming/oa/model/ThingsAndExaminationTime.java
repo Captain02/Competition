@@ -2,7 +2,7 @@ package com.hanming.oa.model;
 
 import java.sql.Date;
 
-public class Things {
+public class ThingsAndExaminationTime {
 	private Integer id;
 
 	private String name;
@@ -23,6 +23,10 @@ public class Things {
 
 	private String processinstanceid;
 
+	private java.util.Date startExaminationTime;
+
+	private java.util.Date examinationTime;
+
 	public Integer getId() {
 		return id;
 	}
@@ -36,7 +40,7 @@ public class Things {
 	}
 
 	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
+		this.name = name;
 	}
 
 	public Integer getNumber() {
@@ -60,7 +64,7 @@ public class Things {
 	}
 
 	public void setPurpose(String purpose) {
-		this.purpose = purpose == null ? null : purpose.trim();
+		this.purpose = purpose;
 	}
 
 	public String getState() {
@@ -68,7 +72,7 @@ public class Things {
 	}
 
 	public void setState(String state) {
-		this.state = state == null ? null : state.trim();
+		this.state = state;
 	}
 
 	public String getDetails() {
@@ -76,7 +80,7 @@ public class Things {
 	}
 
 	public void setDetails(String details) {
-		this.details = details == null ? null : details.trim();
+		this.details = details;
 	}
 
 	public String getEnclosure() {
@@ -84,7 +88,7 @@ public class Things {
 	}
 
 	public void setEnclosure(String enclosure) {
-		this.enclosure = enclosure == null ? null : enclosure.trim();
+		this.enclosure = enclosure;
 	}
 
 	public String getFilename() {
@@ -92,7 +96,7 @@ public class Things {
 	}
 
 	public void setFilename(String filename) {
-		this.filename = filename == null ? null : filename.trim();
+		this.filename = filename;
 	}
 
 	public String getProcessinstanceid() {
@@ -100,6 +104,23 @@ public class Things {
 	}
 
 	public void setProcessinstanceid(String processinstanceid) {
-		this.processinstanceid = processinstanceid == null ? null : processinstanceid.trim();
+		this.processinstanceid = processinstanceid;
 	}
+
+	public java.util.Date getStartExaminationTime() {
+		return startExaminationTime;
+	}
+
+	public void setStartExaminationTime(java.util.Date startExaminationTime) {
+		this.startExaminationTime = startExaminationTime;
+	}
+
+	public java.util.Date getExaminationTime() {
+		return examinationTime;
+	}
+
+	public void setExaminationTime(java.util.Date examinationTime) {
+		this.examinationTime = examinationTime;
+	}
+
 }
