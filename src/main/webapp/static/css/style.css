@@ -167,7 +167,7 @@ body {
 }
 
 .stickey-menu .content-head-right {
-	margin-right: 55px;
+	margin-right: 70px;
 }
 
 .show-stickey-menu {
@@ -210,6 +210,10 @@ body {
 	display: inline-block;
 	line-height: 54px;
 	padding: 0 10px;
+}
+.login-info>li>a:hover{
+	background-color: rgb(66,79,99);
+	color: #65CEA7;
 }
 
 .login-info>li>a>i {

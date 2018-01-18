@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>添加新流程</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -30,7 +30,6 @@
 </script>
 
 </head>
-<body>
 	<body class="bg-common">
 		<section>
 	
@@ -46,9 +45,7 @@
 				<a href="" class="toggle-btn"> <span
 					class="glyphicon glyphicon-th-list"></span>
 				</a>
-	
-			
-	
+
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 	
 				<div class="clearfix"></div>
@@ -80,8 +77,35 @@
 	
 								<div class="om-wrpper-body">
 									<form action="" id="fileForm" enctype="multipart/form-data">
-										选择文件：<input type="file" name="file"> 
-										<input type="button" onclick="saveDeploy()" value="上传" class="btn btn-defult btn-success">
+									<div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label for="" class="control-label" style="text-align: left">
+                                                           	 选择流程文件
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <input id="file" name="file" type="file">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label for="" class="control-label" style="text-align: left">
+                                                           	进行审批的总人数
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <input name="" type="number" class="form-control">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label for="" class="control-label" style="text-align: left">
+                                                           	<input type="button" onclick="saveDeploy()" value="上传" class="btn btn-defult btn-success">
+                                                        </label>
+                                                    </div>
+                                                </div>
 									</form>
 								</div>
 	
