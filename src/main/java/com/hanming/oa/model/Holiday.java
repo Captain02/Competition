@@ -23,6 +23,16 @@ public class Holiday {
 
 	private String filename;
 
+	private String date;
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	public String getFilename() {
 		return filename;
 	}

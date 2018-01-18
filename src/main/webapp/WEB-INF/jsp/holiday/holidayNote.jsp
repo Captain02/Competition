@@ -75,7 +75,7 @@
                                             <button onclick=" doPrint();" class="pull-right btn">打 印</button>
                                         </h1>
                                         <p class="text-center auth-row"> By
-                                            <a href="">${userHolidayByHolidayId.name}</a> | 2017-12-15 11:51</p>
+                                            <a href="">${userHolidayByHolidayId.name}</a> | ${userHolidayByHolidayId.date}</p>
 
                                         <!--startprint-->
                                         <div id="print">
