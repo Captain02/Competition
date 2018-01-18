@@ -1,7 +1,5 @@
 package com.hanming.oa.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -22,7 +20,6 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
-import org.junit.runners.Parameterized.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +42,6 @@ import com.hanming.oa.model.UserHolidayByHolidayId;
 import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.HolidayService;
 import com.hanming.oa.service.UserService;
-import com.sun.mail.imap.protocol.MessageSet;
 
 @Controller
 @RequestMapping("/admin/holiday")
@@ -96,12 +92,17 @@ public class HolidayController {
 	// 我要请假
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Holiday holiday,
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons,
+			@RequestParam("processDefinitionKey") String processDefinitionKey, Holiday holiday,
 			HttpServletRequest request) {
-		holidayService.addholiday(persons, file, holiday, request);
+		int i = holidayService.addholiday(persons, file, holiday, request, processDefinitionKey);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加请假条");
-		return Msg.success();
+		if (i==1) {
+			return Msg.success();
+		}else {
+			return Msg.fail();
+		}
 	}
 
 	// 查询当前流程图

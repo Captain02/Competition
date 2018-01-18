@@ -58,7 +58,8 @@ public class HolidayService {
 
 	// 我要请假
 	@Transactional
-	public void addholiday(String persons, MultipartFile file, Holiday holiday, HttpServletRequest request) {
+	public int addholiday(String persons, MultipartFile file, Holiday holiday, HttpServletRequest request,
+			String processDefinitionKey) {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("Ass1", SecurityUtils.getSubject().getSession().getAttribute("username"));
 		if (!("".equals(persons))) {
@@ -96,14 +97,19 @@ public class HolidayService {
 		// 启动流程
 		variables.put("holidayId", holiday.getId());
 		// 启动流程
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey("helloword", variables);
-		// 根据流程实例Id查询任务
-		Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-		// 完成 学生填写请假单任务
-		taskService.complete(task.getId());
-		// 修改状态
-		holiday.setProcessinstanceid(pi.getProcessInstanceId());
-		updateHoliday(holiday);
+		if (processDefinitionKey.equals("请选择一个审批流程")) {
+			return 0;
+		}else {
+			ProcessInstance pi = runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
+			// 根据流程实例Id查询任务
+			Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
+			// 完成 学生填写请假单任务
+			taskService.complete(task.getId());
+			// 修改状态
+			holiday.setProcessinstanceid(pi.getProcessInstanceId());
+			updateHoliday(holiday);
+			return 1;
+		}
 	}
 
 	public UserHolidayByHolidayId selectHolidayByHolidayId(Integer holidayId) {
@@ -144,7 +150,8 @@ public class HolidayService {
 	}
 
 	public List<Holiday> selectListHolidayByProcessInstanceId(List<String> listProcessinstanceid) {
-		List<Holiday> listHolidayByProcessInstanceId = holidayMapper.selectListHolidayByProcessInstanceId(listProcessinstanceid);
+		List<Holiday> listHolidayByProcessInstanceId = holidayMapper
+				.selectListHolidayByProcessInstanceId(listProcessinstanceid);
 		return listHolidayByProcessInstanceId;
 	}
 

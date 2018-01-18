@@ -27,7 +27,7 @@ import com.hanming.oa.model.UserThingsByThingsId;
 
 @Service
 public class ThingsService {
-	
+
 	@Autowired
 	ThingsMapper thingsMapper;
 	@Autowired
@@ -38,11 +38,12 @@ public class ThingsService {
 	UserThingsMapper userThingsMapper;
 
 	public List<Things> listLikeStateType(String state, String name) {
-		List<Things> list = thingsMapper.listLikeStateType(state,name);
+		List<Things> list = thingsMapper.listLikeStateType(state, name);
 		return list;
 	}
 
-	public void addThings(String persons, MultipartFile file, Things things, HttpServletRequest request) {
+	public int addThings(String persons, MultipartFile file, Things things, HttpServletRequest request,
+			String processDefinitionKey) {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("Ass1", SecurityUtils.getSubject().getSession().getAttribute("username"));
 		if (!("".equals(persons))) {
@@ -60,11 +61,11 @@ public class ThingsService {
 			String path = request.getSession().getServletContext().getRealPath("upload");
 			things.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
 			things.setFilename(file.getOriginalFilename());
-			File dir = new File(path,new Date().toString().replace(":", "-")+file.getOriginalFilename());
+			File dir = new File(path, new Date().toString().replace(":", "-") + file.getOriginalFilename());
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			
+
 			try {
 				file.transferTo(dir);
 			} catch (IllegalStateException | IOException e) {
@@ -78,17 +79,22 @@ public class ThingsService {
 		insertUserThings(userThings);
 		// 设置启动流程变量
 		variables.put("thingsId", things.getId());
-		// 启动流程
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey("helloword", variables);
-		// 根据流程实例Id查询任务
-		Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-		// 完成 学生填写请假单任务
-		taskService.complete(task.getId());
-		// 修改状态
-		things.setProcessinstanceid(pi.getProcessInstanceId());
-		updateThings(things);
-	}
 
+		if (processDefinitionKey.equals("请选择一个审批流程")) {
+			return 0;
+		} else {
+			// 启动流程
+			ProcessInstance pi = runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
+			// 根据流程实例Id查询任务
+			Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
+			// 完成 学生填写请假单任务
+			taskService.complete(task.getId());
+			// 修改状态
+			things.setProcessinstanceid(pi.getProcessInstanceId());
+			updateThings(things);
+			return 1;
+		}
+	}
 
 	private void updateThings(Things things) {
 		thingsMapper.updateByPrimaryKeySelective(things);
@@ -108,8 +114,8 @@ public class ThingsService {
 	}
 
 	public Things selectThingsByProcessInstanceIdLikeStateName(String processInstanceId, String state, String name) {
-		Things things = thingsMapper.selectThingsByProcessInstanceIdLikeStateName(processInstanceId,state,name);
-		
+		Things things = thingsMapper.selectThingsByProcessInstanceIdLikeStateName(processInstanceId, state, name);
+
 		return things;
 	}
 
@@ -119,20 +125,20 @@ public class ThingsService {
 	}
 
 	public List<Things> selectCreatByMeLikeStateName(Integer userId, String state, String name) {
-		List<Things> list = thingsMapper.selectCreatByMeLikeStateName(userId,state,name);
+		List<Things> list = thingsMapper.selectCreatByMeLikeStateName(userId, state, name);
 		return list;
 	}
 
 	public List<ThingsAndExaminationTime> selectExaminationByMeLikeStateName(String username, String state,
 			String name) {
-		List<ThingsAndExaminationTime> thingsAndExaminationTime = thingsMapper.selectExaminationByMeLikeStateName(username,state,name);
+		List<ThingsAndExaminationTime> thingsAndExaminationTime = thingsMapper
+				.selectExaminationByMeLikeStateName(username, state, name);
 		return thingsAndExaminationTime;
 	}
 
 	public List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(String username, String state, String name) {
-		List<ThingsAndExaminationTime> list = thingsMapper.selectCompleteByMeLikeStateName(username,state,name);
+		List<ThingsAndExaminationTime> list = thingsMapper.selectCompleteByMeLikeStateName(username, state, name);
 		return list;
 	}
-
 
 }

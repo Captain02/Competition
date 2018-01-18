@@ -40,7 +40,8 @@ public class ReimbursementService {
 	TaskService taskService;
 
 	@Transactional
-	public void addReimbursement(String persons, MultipartFile file, Reimbursement reimbursement,HttpServletRequest request) {
+	public int addReimbursement(String persons, MultipartFile file, Reimbursement reimbursement,
+			HttpServletRequest request, String processDefinitionKey) {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("Ass1", SecurityUtils.getSubject().getSession().getAttribute("username"));
 		if (!("".equals(persons))) {
@@ -58,11 +59,11 @@ public class ReimbursementService {
 			String path = request.getSession().getServletContext().getRealPath("upload");
 			reimbursement.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
 			reimbursement.setFilename(file.getOriginalFilename());
-			File dir = new File(path,new Date().toString().replace(":", "-")+file.getOriginalFilename());
+			File dir = new File(path, new Date().toString().replace(":", "-") + file.getOriginalFilename());
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			
+
 			try {
 				file.transferTo(dir);
 			} catch (IllegalStateException | IOException e) {
@@ -76,15 +77,20 @@ public class ReimbursementService {
 		insertUserReimbursement(userReimbursement);
 		// 设置启动流程变量
 		variables.put("reimbursementId", reimbursement.getId());
-		// 启动流程
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey("helloword", variables);
-		// 根据流程实例Id查询任务
-		Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
-		// 完成 学生填写请假单任务
-		taskService.complete(task.getId());
-		// 修改状态
-		reimbursement.setProcessinstanceid(pi.getProcessInstanceId());
-		updateReimbursement(reimbursement);
+		if (processDefinitionKey.equals("")) {
+			return 0;
+		}else {
+			// 启动流程
+			ProcessInstance pi = runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
+			// 根据流程实例Id查询任务
+			Task task = taskService.createTaskQuery().processInstanceId(pi.getProcessInstanceId()).singleResult();
+			// 完成 学生填写请假单任务
+			taskService.complete(task.getId());
+			// 修改状态
+			reimbursement.setProcessinstanceid(pi.getProcessInstanceId());
+			updateReimbursement(reimbursement);
+			return 1;
+		}
 	}
 
 	private void insertUserReimbursement(UserReimbursement userReimbursement) {
@@ -155,12 +161,14 @@ public class ReimbursementService {
 
 	public List<ReimbursementAndExaminationTime> selectCompleteByMeLikeStateType(String username, String state,
 			String type) {
-		List<ReimbursementAndExaminationTime> reimbursementExaminationTimelist = reimbursementMapper.selectCompleteByMeLikeStateType(username,state,type);
+		List<ReimbursementAndExaminationTime> reimbursementExaminationTimelist = reimbursementMapper
+				.selectCompleteByMeLikeStateType(username, state, type);
 		return reimbursementExaminationTimelist;
 	}
 
 	public List<Reimbursement> selectListReimbursementByProcessInstanceId(List<String> listProcessinstanceid) {
-		List<Reimbursement> listReimbursement = reimbursementMapper.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
+		List<Reimbursement> listReimbursement = reimbursementMapper
+				.selectListReimbursementByProcessInstanceId(listProcessinstanceid);
 		return listReimbursement;
 	}
 

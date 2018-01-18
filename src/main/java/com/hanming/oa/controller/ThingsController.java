@@ -87,11 +87,16 @@ public class ThingsController {
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Things things,
-			HttpServletRequest request) {
-		thingsService.addThings(persons, file, things, request);
+			HttpServletRequest request, String processDefinitionKey) {
+		
+		int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加我要申请物品");
-		return Msg.success();
+		if (i == 1) {
+			return Msg.success();
+		} else {
+			return Msg.fail();
+		}
 	}
 
 	// 查询当前流程图
@@ -147,7 +152,8 @@ public class ThingsController {
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看报销单");
 		return "things/thingsNote";
 	}
-	
+
+	// 获得流程定义的KEY对应的人数
 	@ResponseBody
 	@RequestMapping(value = "/selectProcessKeyName", method = RequestMethod.GET)
 	public Msg numberByKey(@RequestParam("selectProcessKeyName") String key) {

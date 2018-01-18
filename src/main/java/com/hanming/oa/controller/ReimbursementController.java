@@ -95,11 +95,16 @@ public class ReimbursementController {
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Reimbursement reimbursement,
-			HttpServletRequest request) {
-		reimbursementService.addReimbursement(persons, file, reimbursement, request);
+			HttpServletRequest request, String processDefinitionKey) {
+		int i = reimbursementService.addReimbursement(persons, file, reimbursement, request, processDefinitionKey);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加报销");
-		return Msg.success();
+		
+		if (i==1) {
+			return Msg.success();
+		}else {
+			return Msg.fail();
+		}
 	}
 
 	// 查询当前流程图
@@ -177,7 +182,8 @@ public class ReimbursementController {
 	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
 			throws Exception {
 
-		UserReimbursementByReimbursementId reimbursementByReimbursementId = reimbursementService.selectReimbursementByReimbursementId(id);
+		UserReimbursementByReimbursementId reimbursementByReimbursementId = reimbursementService
+				.selectReimbursementByReimbursementId(id);
 
 		// 获取文件
 		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
@@ -202,7 +208,7 @@ public class ReimbursementController {
 		out.close();
 		bis.close();
 	}
-	
+
 	// 获得流程定义的KEY对应的人数
 	@ResponseBody
 	@RequestMapping(value = "/selectProcessKeyName", method = RequestMethod.GET)
