@@ -5,24 +5,24 @@ import java.sql.Date;
 public class ThingsAndExaminationTime {
 	private Integer id;
 
-    private String name;
+	private String name;
 
-    private Integer number;
+	private Integer number;
 
-    private Date date;
+	private String date;
 
-    private String purpose;
+	private String purpose;
 
-    private String state;
+	private String state;
 
-    private String details;
+	private String details;
 
-    private String enclosure;
+	private String enclosure;
 
-    private String filename;
+	private String filename;
 
-    private String processinstanceid;
-	
+	private String processinstanceid;
+
 	private java.util.Date startExaminationTime;
 
 	private java.util.Date examinationTime;
@@ -51,11 +51,11 @@ public class ThingsAndExaminationTime {
 		this.number = number;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -122,5 +122,5 @@ public class ThingsAndExaminationTime {
 	public void setExaminationTime(java.util.Date examinationTime) {
 		this.examinationTime = examinationTime;
 	}
-	
+
 }

@@ -38,8 +38,8 @@ import com.hanming.oa.service.UserService;
 
 @Controller
 @RequestMapping("/admin/things")
-public class ThingsTaskController {
-	private static final Logger logger = LoggerFactory.getLogger(ThingsTaskController.class);
+public class ThingsController {
+	private static final Logger logger = LoggerFactory.getLogger(ThingsController.class);
 
 	@Autowired
 	ThingsService thingsService;
