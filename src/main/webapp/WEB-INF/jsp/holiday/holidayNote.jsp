@@ -101,11 +101,10 @@
                                                         <td colspan="5">${userHolidayByHolidayId.reason}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>日期</td>
                                                         <td>开始日期</td>
-                                                        <td>这里放开始日期</td>
+                                                        <td>${userHolidayByHolidayId.startday}</td>
                                                         <td>结束日期</td>
-                                                        <td>这里放结束日期</td>
+                                                        <td>${userHolidayByHolidayId.endday}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>天数</td>
