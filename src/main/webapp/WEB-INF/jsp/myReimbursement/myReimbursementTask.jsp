@@ -15,7 +15,7 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-
+<script  src="${APP_PATH}/static/js/btnNav.js"></script>
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
 	$(function () {
@@ -26,12 +26,6 @@
 			console.log(btnAssignPreviousSbiling);
 			$('#assignProcessinstanceid').val(btnAssignPreviousSbiling);
 		});
-
-		var locationHref = location.href.split('herfPage=');
-		var thisPagelocationHref = locationHref[1];
-		var toolsA = $('.tools > a');
-		$(toolsA[thisPagelocationHref]).addClass('active');
-		$(toolsA[thisPagelocationHref]).siblings().removeClass('active');
 	});
 
 	function assignTask(object) {
