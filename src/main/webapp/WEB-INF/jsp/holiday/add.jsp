@@ -27,22 +27,11 @@ $(function(){
 	
 	//获取当前选择的流程允许的最多审批人数量，并显示在页面中
 	$('.processDes').css('display','none');
-	var selectProcessKey = $('.selectProcessKey option');
-	var selectProcessKeyName = '';
-	for(var i = 0; i<selectProcessKey.length;i++){
-		$(selectProcessKey[i]).click(function(){
-			selectProcessKeyName = $(this).val();
-			alert(selectProcessKeyName);
-			$.ajax({
-				url:"${APP_PATH}/admin/holiday/numberByKey",
-				data:"selectProcessKeyName="+selectProcessKeyName,
-				Type:"GET",
-				success:function(result){
-					console.log(result);
-				}
-			})
-		})
-	}
+	
+	$('.selectProcessKey').change(function(){
+		alert($(this).val());
+	})
+	
 });
 
 
