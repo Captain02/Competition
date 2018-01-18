@@ -104,7 +104,7 @@
                                                         <td>开始日期</td>
                                                         <td colspan="2">${userHolidayByHolidayId.startday}</td>
                                                         <td>结束日期</td>
-                                                        <td colspan="2">${userHolidayByHolidayId.endtday}</td>
+                                                        <td colspan="2">${userHolidayByHolidayId.endday}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>天数</td>
