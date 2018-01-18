@@ -9,7 +9,7 @@ public class UserThingsByThingsId {
 
 	private Integer number;
 
-	private String date;
+	private Date date;
 
 	private String purpose;
 
@@ -65,11 +65,11 @@ public class UserThingsByThingsId {
 		this.number = number;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

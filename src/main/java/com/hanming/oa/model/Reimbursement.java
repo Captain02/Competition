@@ -11,7 +11,7 @@ public class Reimbursement {
 
 	private String detailed;
 
-	private String date;
+	private Date date;
 
 	private String processinstanceid;
 
@@ -61,11 +61,11 @@ public class Reimbursement {
 		this.detailed = detailed == null ? null : detailed.trim();
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
