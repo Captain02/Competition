@@ -6,7 +6,6 @@
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="startday" jdbcType="TIMESTAMP" property="startday" />
     <result column="endday" jdbcType="TIMESTAMP" property="endday" />
-    <result column="date" jdbcType="TIMESTAMP" property="date" />
     <result column="holidaydays" jdbcType="INTEGER" property="holidaydays" />
     <result column="test" jdbcType="VARCHAR" property="test" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
@@ -14,7 +13,7 @@
     <result column="processInstanceId" jdbcType="VARCHAR" property="processinstanceid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, type, startday, endday, holidaydays, test, reason, enclosure, processInstanceId,filename,date
+    id, type, startday, endday, holidaydays, test, reason, enclosure, processInstanceId,filename
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -159,7 +158,7 @@
   
   <!-- Holiday selectHolidayByHolidayId(Integer holidayId); -->
   <select id="selectHolidayByHolidayId" resultType="UserHolidayByHolidayId" parameterType="Integer">
-  	SELECT ho.date,ho.id,ho.type,ho.startday,ho.endday,ho.holidaydays,ho.test,ho.reason,ho.enclosure,ho.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department,ho.filename filename
+  	SELECT ho.id,ho.type,ho.startday,ho.endday,ho.holidaydays,ho.test,ho.reason,ho.enclosure,ho.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department,ho.filename filename
 	FROM holiday ho
 	LEFT JOIN user_holiday uh ON uh.holidayId = ho.id
 	LEFT JOIN t_user tu ON tu.id = uh.userId
@@ -212,7 +211,7 @@
   <!-- List<Holiday> selectCreatByMeLikeStateType(@Param("state") String state, @Param("type") String type); -->
   <select id="selectCreatByMeLikeStateType" resultType="Holiday">
   	SELECT 
-	ho.date,ho.id, ho.type, ho.startday, ho.endday, ho.holidaydays, ho.test, ho.reason, ho.enclosure, ho.processInstanceId
+	ho.id, ho.type, ho.startday, ho.endday, ho.holidaydays, ho.test, ho.reason, ho.enclosure, ho.processInstanceId
 	FROM holiday ho
 	LEFT JOIN user_holiday  uh ON uh.holidayId = ho.id
 	LEFT JOIN t_user tu ON tu.id = uh.userId
@@ -230,7 +229,7 @@
   <!-- List<Holiday> selectExaminationByMeLikeStateType(@Param("username")String username, @Param("state") String state, @Param("type") String type); -->
   <select id="selectExaminationByMeLikeStateType" resultType="HolidayAndExaminationTime">
   	SELECT 
-  	ho.date,ho.id, ho.type, ho.startday, ho.endday, ho.holidaydays, ho.test, ho.reason, ho.enclosure, ho.processInstanceId,aha.END_TIME_ as examinationTime, aha.START_TIME_ as startExaminationTime
+  	ho.id, ho.type, ho.startday, ho.endday, ho.holidaydays, ho.test, ho.reason, ho.enclosure, ho.processInstanceId,aha.END_TIME_ as examinationTime, aha.START_TIME_ as startExaminationTime
 	FROM holiday ho
 	LEFT JOIN act_hi_actinst aha ON aha.PROC_INST_ID_=ho.processInstanceId
 	<where>
@@ -243,11 +242,10 @@
 	    </if>
     </where>
   </select>
-  
   <!-- List<HolidayAndExaminationTime> selectCompleteByMeLikeStateType(@Param("username")String username, @Param("state") String state, @Param("type") String type); -->
   <select id="selectCompleteByMeLikeStateType" resultType="HolidayAndExaminationTime">
     SELECT 
-	ho.date,ho.id, ho.type, ho.startday, ho.endday, ho.holidaydays, ho.test, ho.reason, ho.enclosure, ho.processInstanceId,ahv.LAST_UPDATED_TIME_ AS examinationTime
+	ho.id, ho.type, ho.startday, ho.endday, ho.holidaydays, ho.test, ho.reason, ho.enclosure, ho.processInstanceId,ahv.LAST_UPDATED_TIME_ AS examinationTime
 	FROM holiday ho
 	LEFT JOIN act_hi_varinst ahv ON ahv.PROC_INST_ID_=ho.processInstanceId
 	<where>
