@@ -1,9 +1,13 @@
 package com.hanming.oa.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -11,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +27,9 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.ThingsAndExaminationTime;
 import com.hanming.oa.model.User;
+import com.hanming.oa.model.UserHolidayByHolidayId;
+import com.hanming.oa.model.UserThingsByThingsId;
+import com.hanming.oa.service.MyThingsTaskService;
 import com.hanming.oa.service.ThingsService;
 import com.hanming.oa.service.UserService;
 
@@ -36,6 +44,10 @@ public class MyThingsTaskController {
 	UserService userService;
 	@Autowired
 	ThingsService thingsService;
+	@Autowired
+	HistoryService historyService;
+	@Autowired
+	MyThingsTaskService myThingsTaskService;
 
 	@RequestMapping(value = "/myThingsTask", method = RequestMethod.GET)
 	public String myThingsTask(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
@@ -127,6 +139,60 @@ public class MyThingsTaskController {
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====指派物品申请任务");
 		return Msg.success();
+	}
+
+	// 转发到批注页面
+	@RequestMapping(value = "/examinationPage/{thingsId}/{pn}", method = RequestMethod.GET)
+	public String examinationPage(@PathVariable("pn") Integer pn, @PathVariable("thingsId") Integer thingsId,
+			Model model) {
+		UserThingsByThingsId userThingsByThingsId = thingsService.selectUserThingsByThingsId(thingsId);
+
+		// 根据流程实例ID查询任务对象
+		Task task = taskService.createTaskQuery() // 创建任务查询
+				.processInstanceId(userThingsByThingsId.getProcessinstanceid())// 根据流程实例Id查询当前任务
+				.singleResult();
+
+		// 根据任务ID查询历史任务流程
+		HistoricTaskInstance hti = historyService.createHistoricTaskInstanceQuery().taskId(task.getId()).singleResult();
+
+		// 封装审批记录
+		List<Comment> commentList = null;
+		if (hti != null) {
+			commentList = taskService.getProcessInstanceComments(hti.getProcessInstanceId());
+			// 集合元素反转
+			Collections.reverse(commentList);
+		}
+
+		model.addAttribute("enclosureName",
+				"".equals(userThingsByThingsId.getFilename()) ? "没有附件" : userThingsByThingsId.getFilename());
+		model.addAttribute("comment", commentList);
+		model.addAttribute("userThingsByThingsId", userThingsByThingsId);
+
+		model.addAttribute("pn", pn);
+		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====跳转审批假条页面");
+
+		return "myThingsTask/thingsExamination";
+	}
+
+	// 是否同意请假
+	@ResponseBody
+	@RequestMapping(value = "/agreeExamination", method = RequestMethod.POST)
+	public Msg agreeExamination(UserThingsByThingsId userThingsByThingsId,
+			@RequestParam("nowComment") String nowComment, @RequestParam("id") String thingsId,
+			@RequestParam("state") String state) {
+		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
+		myThingsTaskService.agreeExamination(username, userThingsByThingsId, nowComment, thingsId,
+				Integer.parseInt(state));
+		if (Integer.parseInt(state) == 1) {
+			logger.info(username + "=====跳转不同意假条审批");
+			return Msg.success();
+		} else if (Integer.parseInt(state) == 0) {
+			logger.info(username + "=====跳转同意假条审批");
+			return Msg.success();
+		} else {
+			logger.info(username + "=====向下一个人递送假条审批");
+			return Msg.success();
+		}
 	}
 
 }
