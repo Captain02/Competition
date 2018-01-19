@@ -141,5 +141,4 @@ public class ThingsService {
 		return list;
 	}
 
-
 }

@@ -34,5 +34,4 @@ public interface ThingsMapper {
 	List<ThingsAndExaminationTime> selectExaminationByMeLikeStateName(@Param("username") String username, @Param("state") String state, @Param("name") String name);
 
 	List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(@Param("username") String username, @Param("state") String state, @Param("name") String name);
-
 }

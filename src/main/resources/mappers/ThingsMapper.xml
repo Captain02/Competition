@@ -258,9 +258,4 @@
 	</where>
   </select>
   
-  <!-- UserThingsByThingsId selectThingsByThingsId(Integer thingsId); -->
-  <select id="selectThingsByThingsId" resultType="UserThingsByThingsId">
-  	select 
-  </select>
-  
 </mapper>
