@@ -43,8 +43,8 @@ public class MyReimbursementTaskService {
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
 		}else {
-//			reimbursement.setTest("审核中");
-//			variables.put("msg", "审核中");
+			reimbursement.setTest("审核中");
+			variables.put("msg", "审核中");
 			variables.put("completePeople", username);
 		}
 //		reimbursement.setTest("审核通过");

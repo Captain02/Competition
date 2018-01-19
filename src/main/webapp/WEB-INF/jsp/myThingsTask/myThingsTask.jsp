@@ -165,7 +165,7 @@
 															<i class="glyphicon glyphicon-ok-sign "></i>
 														</a>
 													</c:if>
-													<a href="${APP_PATH}/admin/myThingsTask/thingsNote/${things.id}" class="btn btn-danger btn-xs" title="查看">
+													<a href="${APP_PATH}/admin/things/thingsNote/${things.id}" class="btn btn-danger btn-xs" title="查看">
 															<i class="glyphicon glyphicon-eye-open "></i>
 													</a>
 													</td>

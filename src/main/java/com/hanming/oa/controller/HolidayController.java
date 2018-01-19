@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -41,6 +43,7 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserHolidayByHolidayId;
 import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.HolidayService;
+import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
 
 @Controller
@@ -60,6 +63,8 @@ public class HolidayController {
 	RepositoryService repositoryService;
 	@Autowired
 	DeployService deployService;
+	@Autowired
+	UpDownFileService upDownFileService;
 
 	// 请假列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -165,33 +170,55 @@ public class HolidayController {
 
 	// 文件下载
 	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
-	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
-			throws Exception {
-
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request){
+		
 		UserHolidayByHolidayId holidayByHolidayId = holidayService.selectHolidayByHolidayId(id);
 
-		// 获取文件
-		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
-				+ holidayByHolidayId.getEnclosure();
-		// 获取输入流
-		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
-		// 假如以中文名下载的话
-		String filename = holidayByHolidayId.getFilename();
-		// 转码，免得文件名中文乱码
-		filename = URLEncoder.encode(filename, "UTF-8");
-		// 设置文件下载头
-		response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-		// 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-		response.setContentType("multipart/form-data");
-		BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-		int len = 0;
-		byte[] bs = new byte[1024];
-		while ((len = bis.read(bs)) != -1) {
-			out.write(bs, 0, len);
-			out.flush();
+		try {
+			upDownFileService.down(response, request,holidayByHolidayId,"ExaminationFile");
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		out.close();
-		bis.close();
+//		UserHolidayByHolidayId holidayByHolidayId = holidayService.selectHolidayByHolidayId(id);
+//
+//		// 获取文件
+//		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
+//				+ holidayByHolidayId.getEnclosure();
+//		// 获取输入流
+//		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
+//		// 假如以中文名下载的话
+//		String filename = holidayByHolidayId.getFilename();
+//		// 转码，免得文件名中文乱码
+//		filename = URLEncoder.encode(filename, "UTF-8");
+//		// 设置文件下载头
+//		response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+//		// 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+//		response.setContentType("multipart/form-data");
+//		BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+//		int len = 0;
+//		byte[] bs = new byte[1024];
+//		while ((len = bis.read(bs)) != -1) {
+//			out.write(bs, 0, len);
+//			out.flush();
+//		}
+//		out.close();
+//		bis.close();
 	}
 
 	// 获得流程定义的KEY对应的人数

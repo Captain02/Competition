@@ -154,7 +154,7 @@ function examination(state) {
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
-													<textarea style="height: 90px;"class="form-control not-change"></textarea>
+													<sf:textarea path="details" style="height:90px;" class="form-control not-change"></sf:textarea>
                                             </div>
 
                                         </div>
