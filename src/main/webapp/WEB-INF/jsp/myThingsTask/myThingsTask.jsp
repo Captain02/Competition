@@ -35,6 +35,8 @@
             $(toolsA[thisPagelocationHref]).siblings().removeClass('active');
         });
 
+        
+        //指派
         function assignTask(object) {
             var assignThingProcessinstanceid = $(
                 "#assignThingProcessinstanceid").val();
