@@ -103,7 +103,7 @@ function examination(state) {
                                         </div>
 										
 										<!--物品名称 -->
-										<div class="form-group">
+										
 										 <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
@@ -115,7 +115,7 @@ function examination(state) {
                                             </div>
 
                                         </div>
-										</div>
+										
 										
 										<!--数量 -->
 										<div class="form-group">
@@ -142,6 +142,19 @@ function examination(state) {
                                             </div>
                                             <div class="col-sm-10">
 													<sf:input path="purpose" type="text" class="form-control not-change" /> 
+                                            </div>
+
+                                        </div>
+                                        
+										<!--领用详情 -->
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label for="" class="control-label">
+                                                    	领用详情：
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-10">
+													<textarea style="height: 90px;"class="form-control not-change"></textarea>
                                             </div>
 
                                         </div>
