@@ -31,22 +31,21 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
 
 $(function () {
     ShowEle('.yes', 'hide');
-
-    
-    
-    
+    $('.selectProcessKey').change(function(){
+    	var selectProcessKeyName = $(this).val();
+		$('.addprocessPerson').removeClass('noProcessPerson');
 		//返回人数的ajax
 		$.ajax({
 			url:"${APP_PATH}/admin/things/selectProcessKeyName",
 			type:"GET",
 			data:"selectProcessKeyName="+selectProcessKeyName,
 			success:function(result){
-				console.log(result.extend.num);
+				$('.processName').html(selectProcessKeyName);
+                $('.processPersonNum').html(result.extend.num);
+                $('.processPersonNum').attr('value',result.extend.num);
 			}
 		})
-
-
-
+    })
 });
 
 function addthingsForm() {
@@ -185,10 +184,11 @@ function addthingsForm() {
                                                 </div>
                                             </div>
                                             
-                                            <div class="form-group">
+                                            <div class="form-group ">
 												<label class="col-sm-2 col-sm-2 control-label" >流程选择</label>
 												<div class="col-sm-10">
-													<select name="ProcessKey" class="form-control">
+													<select name="ProcessKey" class="form-control selectProcessKey">
+													<option value="tip" style="display: none;">请选择一个审批流程</option>
 	                                                   	<c:forEach items="${processKey}" var="key">
 	                                                      	<option value="${key}">${key}</option>
 	                                                   	</c:forEach>
@@ -196,7 +196,7 @@ function addthingsForm() {
 												</div>
 											</div>
 
-                                            <div class="form-group">
+                                            <div class="form-group addprocessPerson noProcessPerson">
                                                 <label class="col-sm-2 col-sm-2 control-label">审批人(点击可删除)</label>
                                                 <div class="col-sm-10">
                                                     <!-- 填入点击的审批人信息 -->
@@ -244,7 +244,9 @@ function addthingsForm() {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">审批人</h4>
+                    <h4 class="modal-title" id="myModalLabel">审批人
+                                                                （当前审批流程：<span class="processName"></span>
+                                                                 请添加<span class="processPersonNum"></span>位审批人）</h4>
                 </div>
 
                 <!-- 主体 -->

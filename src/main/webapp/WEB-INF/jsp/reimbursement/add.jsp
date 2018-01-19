@@ -27,18 +27,21 @@
 
 $(function(){
 	ShowEle('.yes','hide');
-
-	
-	
-	
-				$.ajax({
-					url:"${APP_PATH}/admin/reimbursement/selectProcessKeyName",
-					type:"GET",
-					data:"selectProcessKeyName="+selectProcessKeyName,
-					success:function(result){
-						console.log(result.extend.num);
-					}
-				})
+	//获取当前选择的流程允许的最多审批人数量，并显示在页面中
+	$('.selectProcessKey').change(function(){
+		var selectProcessKeyName = $(this).val();
+		$('.addprocessPerson').removeClass('noProcessPerson');
+		$.ajax({
+			url:"${APP_PATH}/admin/reimbursement/selectProcessKeyName",
+			type:"GET",
+			data:"selectProcessKeyName="+selectProcessKeyName,
+			success:function(result){
+				$('.processName').html(selectProcessKeyName);
+                $('.processPersonNum').html(result.extend.num);
+                $('.processPersonNum').attr('value',result.extend.num);
+			}
+		})
+	})
 
 });
 
@@ -178,7 +181,8 @@ function addReimbursement() {
 											<div class="form-group">
 												<label class="col-sm-2 col-sm-2 control-label">流程选择</label>
 												<div class="col-sm-10">
-													<select name="ProcessKey" class="form-control">
+													<select name="ProcessKey" class="form-control selectProcessKey">
+                                                        <option value="tip" style="display: none;">请选择一个审批流程</option>
 	                                                   	<c:forEach items="${processKey}" var="key">
 	                                                      	<option value="${key}">${key}</option>
 	                                                   	</c:forEach>
@@ -186,7 +190,7 @@ function addReimbursement() {
 												</div>
 											</div>
 
-											<div class="form-group">
+											<div class="form-group addprocessPerson noProcessPerson">
 												<label class="col-sm-2 col-sm-2 control-label">审批人(点击可删除)</label>
 												<div class="col-sm-10">
 													<!-- 填入点击的审批人信息 -->
@@ -237,7 +241,11 @@ function addReimbursement() {
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">审批人</h4>
+					<h4 class="modal-title" id="myModalLabel">
+					审批人
+                                                                （当前审批流程：<span class="processName"></span>
+                                                                 请添加<span class="processPersonNum"></span>位审批人）
+					</h4>
 				</div>
 
 				<!-- 主体 -->

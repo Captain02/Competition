@@ -102,7 +102,7 @@
                         <ul class="login-info">
                             <li>
                                 <a href="">
-                                    <i class="glyphicon glyphicon-comment"></i>
+                                    <i class="glyphicon glyphicon-envelope"></i>
                                 </a>
                             </li>
                             <li>

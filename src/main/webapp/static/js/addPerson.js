@@ -26,9 +26,9 @@ $(function () {
         $(lis[i]).click(function () {
             var aText = $(this).children('a').html();
             var aPersonName = $('.serach-person-name');
-
-            if (personNum.length > 3) {
-                $('.add-error-ms').html('最多只能添加四个审批人!');
+            var acPersonNum = parseInt($('.processPersonNum').attr('value'));
+            if (personNum.length > acPersonNum-1) {
+                $('.add-error-ms').html('最多只能添加' + acPersonNum + '位审批人!');
                 $('#myModal').modal('hide');
                 return false;
             }

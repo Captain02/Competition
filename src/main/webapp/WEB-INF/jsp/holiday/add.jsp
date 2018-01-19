@@ -17,33 +17,28 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
 <link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 添加审批人 -->
-<script src="${APP_PATH}/static/js/addPerson.js"></script>
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
 $(function(){
 	ShowEle('.yes','hide');
-	
 	//获取当前选择的流程允许的最多审批人数量，并显示在页面中
-	$('.processDes').css('display','none');
 	$('.selectProcessKey').change(function(){
-		var selectProcessKeyName = $(this).val(); 
+		var selectProcessKeyName = $(this).val();
+		$('.addprocessPerson').removeClass('noProcessPerson');
 		$.ajax({
 			url:"${APP_PATH}/admin/holiday/selectProcessKeyName",
 			type:"GET",
 			data:"selectProcessKeyName="+selectProcessKeyName,
 			success:function(result){
-				console.log(result.extend.num);
+ 				$('.processName').html(selectProcessKeyName);
+                $('.processPersonNum').html(result.extend.num);
+                $('.processPersonNum').attr('value',result.extend.num);
 			}
 		})
 	})
 	
 });
-
-
-
-
 
 function addHoliday() {
 	var persons = "";
@@ -69,6 +64,8 @@ function addHoliday() {
 	})  
 }
 </script>
+<!-- 添加审批人 -->
+<script src="${APP_PATH}/static/js/addPerson.js"></script>
 </head>
 
         <body class="bg-common">
@@ -161,7 +158,7 @@ function addHoliday() {
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
                                                             <span>*</span>
-                                                            请假日期
+                                                           	 请假日期
                                                         </label>
                                                     </div>
 
@@ -188,7 +185,7 @@ function addHoliday() {
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
                                                             <span>*</span>
-                                                            请假天数
+                                                            	请假天数
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
@@ -202,7 +199,7 @@ function addHoliday() {
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
                                                             <span>*</span>
-                                                            请假事由
+                                                            	请假事由
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
@@ -214,7 +211,7 @@ function addHoliday() {
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
-                                                            凭　证
+                                                            	凭　证
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
@@ -232,21 +229,17 @@ function addHoliday() {
                                                     </div>
                                                     <div class="col-sm-10">
                                                          <select name="ProcessKey" class="form-control selectProcessKey">
-                                                            <option value="tip">请选择一个审批流程</option>
+                                                            <option value="tip" style="display: none;">请选择一个审批流程</option>
                                                          	<c:forEach items="${processKey}" var="key">
                                                             	<option value="${key}">${key}</option>
                                                          	</c:forEach>
                                                         </select>
-                                                        <p class="processDes" style="color:#65CEA7"> 
-			                                            	所选审批流程：<span class="processName" style="color:red;">helloworld</span>
-			                                            	可添加的审批人数量：<span class="processPersonNum" style="color:red;">4</span>
-                                            				</p>
                                                     </div>
 
                                                 </div>
 
                                                 <!-- 审批人填写区域 -->
-                                                <div class="form-group">
+                                                <div class="form-group addprocessPerson noProcessPerson">
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label">
                                                            	 审批人（点击可删除）
@@ -304,6 +297,8 @@ function addHoliday() {
                                             </button>
                                             <h4 class="modal-title" id="myModalLabel">
                                             	审批人
+                                            	（当前审批流程：<span class="processName"></span>
+                                            	请添加<span class="processPersonNum"></span>位审批人）
                                             </h4>
                                         </div>
 
