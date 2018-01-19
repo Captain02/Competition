@@ -74,9 +74,9 @@ function examination(state) {
                                 <header class="om-wrapper-header">审批</header>
 
                                 <div class="om-wrpper-body">
-<%--                                     <sf:form id="examinationFrom" modelAttribute="userHolidayByHolidayId"> --%>
-<%--                                         <sf:hidden path="processinstanceid" /> --%>
-<%--                                         <sf:hidden path="id" /> --%>
+                                     <sf:form id="examinationFrom" modelAttribute="userThingsByThingsId"> 
+                                         <sf:hidden path="processinstanceid" /> 
+                                         <sf:hidden path="id" /> 
                                         <!--领用人-->
                                         <div class="form-group">
                                             <div class="col-sm-2">
@@ -86,8 +86,7 @@ function examination(state) {
                                             </div>
 
                                             <div class="col-sm-4">
-<%--                                                <sf:input path="name" type="text" class="form-control not-change" /> --%>
-													<input path="name" type="text" class="form-control not-change" />
+                                                <sf:input path="name" type="text" class="form-control not-change" /> 
 
                                             </div>
                                             
@@ -99,9 +98,7 @@ function examination(state) {
                                             </div>
 
                                             <div class="col-sm-4">
-<%--                                                 <sf:input path="holidaydays" type="text" class="form-control not-change" /> --%>
-<%--                                                 <sf:input path="holidaydays" type="text" class="form-control not-change" /> --%>
-													 <input type="text" class="form-control not-change" />
+                                                 <sf:input path="date" type="text" class="form-control not-change" /> 
                                             </div>
                                         </div>
 										
@@ -114,8 +111,7 @@ function examination(state) {
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
-<%--                                                 <sf:textarea path="reason" style="height:90px;" class="form-control not-change"></sf:textarea> --%>
-													 <input type="text" class="form-control not-change" ></input>
+                                                 <sf:input path="thingsName" type="text" class="form-control not-change" /> 
                                             </div>
 
                                         </div>
@@ -130,8 +126,7 @@ function examination(state) {
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
-<%--                                                 <sf:textarea path="reason" style="height:90px;" class="form-control not-change"></sf:textarea> --%>
-													 <input type="text" class="form-control not-change" ></input>
+													 <sf:input path="number" type="text" class="form-control not-change" /> 
                                             </div>
 
                                         </div>
@@ -146,8 +141,7 @@ function examination(state) {
                                                 </label>
                                             </div>
                                             <div class="col-sm-10">
-<%--                                                 <sf:textarea path="reason" style="height:90px;" class="form-control not-change"></sf:textarea> --%>
-													 <input class="form-control not-change" type="text"></input>
+													<sf:input path="purpose" type="text" class="form-control not-change" /> 
                                             </div>
 
                                         </div>
@@ -164,7 +158,7 @@ function examination(state) {
                                             </div>
                                         </div>
                                         
-<%-- 									 </sf:form> --%>
+ 									 </sf:form> 
                                         <!--结果选择 -->
                                         <div class="form-group">
                                             <div class="col-sm-2">
