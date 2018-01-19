@@ -164,4 +164,98 @@
 	    </if>
     </where>
   </select>
+  
+  <!-- UserThingsByThingsId selectUserThingsByThingsId(Integer thingsId); -->
+  <select id="selectUserThingsByThingsId" resultType="UserThingsByThingsId">
+  SELECT th.`name` thingsName, th.id,th.number,th.date,th.purpose,th.state,th.details,th.enclosure,th.filename,th.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
+	FROM things th
+	LEFT JOIN user_things ust ON ust.thingsId=th.id
+	LEFT JOIN t_user tu ON tu.id = ust.userId
+	LEFT JOIN t_department_user  tdu ON tdu.userId = tu.id
+	LEFT JOIN t_department td ON td.id = tdu.departmentId
+	LEFT JOIN t_user_role tur ON tur.userId = tu.id
+	LEFT JOIN t_role tr ON tr.id = tur.roleId
+	WHERE th.id =#{thingsId}
+  </select>
+  
+  <!-- Things selectThingsByProcessInstanceIdLikeStateName(String processInstanceId, String state, String name); -->
+  <select id="selectThingsByProcessInstanceIdLikeStateName" resultType="Things">
+  	select 
+   <include refid="Base_Column_List" />
+   from things
+   <where>
+   		processInstanceId = #{processInstanceId}
+	    <if test="state != '状态'">
+	         AND state = #{state}
+	    </if>
+	    <if test="name != ''">
+	         AND name = #{name}
+	    </if>
+    </where>
+  </select>
+  
+  <!-- List<Things> selectListThingsByProcessInstanceId(List<String> listProcessinstanceid); -->
+  <select id="selectListThingsByProcessInstanceId" resultType="Things">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from things
+  	where processinstanceid IN
+  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+  	#{item}
+  	</foreach>
+  </select>
+  
+  <!-- List<Things> selectCreatByMeLikeStateName(@Param("userId")Integer userId, @Param("state")String state, @Param("name")String name); -->
+  <select id="selectCreatByMeLikeStateName" resultType="Things">
+  	SELECT 
+	th.id, th.`name`, number, date, purpose, state, details, enclosure, filename, processInstanceId
+	FROM things th
+	LEFT JOIN user_things ut ON ut.thingsId = th.id
+	LEFT JOIN t_user tu ON tu.id = ut.userId
+	<where>
+    	tu.id = #{userId}
+	    <if test="state != '状态'">
+	         AND state = #{state}
+	    </if>
+	    <if test="name != ''">
+	         AND name = #{name}
+	    </if>
+    </where>
+  </select>
+  
+  <!-- List<ThingsAndExaminationTime> selectExaminationByMeLikeStateName(String username, String state, String name); -->
+  <select id="selectExaminationByMeLikeStateName" resultType="ThingsAndExaminationTime">
+  	SELECT 
+	th.id, th.`name`, number, date, purpose, state, details, enclosure, filename, processInstanceId,aha.END_TIME_ as examinationTime, aha.START_TIME_ as startExaminationTime
+	FROM things th
+	LEFT JOIN act_hi_actinst aha ON aha.PROC_INST_ID_=th.processInstanceId
+	<where>
+    	aha.ASSIGNEE_ = #{username}
+	    <if test="state != '状态'">
+	         AND state = #{state}
+	    </if>
+	    <if test="name != ''">
+	         AND name = #{name}
+	    </if>
+    </where>
+  </select>
+  
+  <!-- List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(@Param("username") String username, @Param("state") String state, @Param("name") String name); -->
+  <select id="selectCompleteByMeLikeStateName" resultType="ThingsAndExaminationTime">
+  	SELECT 
+	th.id, th.`name`, number, date, purpose, state, details, enclosure, filename, processInstanceId,ahv.LAST_UPDATED_TIME_ AS examinationTime
+	FROM things th
+	LEFT JOIN act_hi_varinst ahv ON ahv.PROC_INST_ID_=th.processInstanceId
+	<where>
+		ahv.TEXT_=#{username}
+		AND ahv.NAME_='completePeople'
+		<if test="state != '状态'">
+	         AND state = #{state}
+	    </if>
+	    <if test="name != ''">
+	         AND name = #{name}
+	    </if>
+	</where>
+  </select>
+  
 </mapper>

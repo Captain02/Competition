@@ -215,7 +215,7 @@
 	FROM reimbursement re
 	LEFT JOIN act_hi_actinst aha ON aha.PROC_INST_ID_=re.processInstanceId
 	<where>
-    	aha.ASSIGNEE_='admin'
+    	aha.ASSIGNEE_ = #{username}
 	    <if test="state != '状态'">
 	         AND test = #{state}
 	    </if>
@@ -233,6 +233,7 @@
 	LEFT JOIN act_hi_varinst ahv ON ahv.PROC_INST_ID_=re.processInstanceId
 	<where>
 		ahv.TEXT_=#{username}
+		AND ahv.NAME_='completePeople'
 		<if test="state != '状态'">
 	         AND test = #{state}
 	    </if>
