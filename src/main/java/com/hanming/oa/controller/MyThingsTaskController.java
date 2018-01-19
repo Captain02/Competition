@@ -27,7 +27,6 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.ThingsAndExaminationTime;
 import com.hanming.oa.model.User;
-import com.hanming.oa.model.UserHolidayByHolidayId;
 import com.hanming.oa.model.UserThingsByThingsId;
 import com.hanming.oa.service.MyThingsTaskService;
 import com.hanming.oa.service.ThingsService;
