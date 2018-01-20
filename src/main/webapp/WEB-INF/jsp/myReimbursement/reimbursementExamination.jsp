@@ -196,7 +196,7 @@ function examination(state) {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
-      <form action="${APP_PATH}/admin/myTask/myHolidayTask" method="get">
+      <form action="${APP_PATH}/admin/myThingsTask/myThingsTask" method="get">
       <div class="modal-body">
       </div>
 	      <div class="modal-footer">
