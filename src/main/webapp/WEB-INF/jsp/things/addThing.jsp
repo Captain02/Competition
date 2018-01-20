@@ -12,8 +12,8 @@
 <title>我要领用</title>
 
 <%
-pageContext.setAttribute("APP_PATH", request.getContextPath());
-  %>
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
 
 <!-- Date -->
 <link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
@@ -40,6 +40,7 @@ $(function () {
 			type:"GET",
 			data:"selectProcessKeyName="+selectProcessKeyName,
 			success:function(result){
+				$('.processTips').removeClass('noProcessPerson');
 				$('.processName').html(selectProcessKeyName);
                 $('.processPersonNum').html(result.extend.num);
                 $('.processPersonNum').attr('value',result.extend.num);
@@ -193,6 +194,12 @@ function addthingsForm() {
 	                                                      	<option value="${key}">${key}</option>
 	                                                   	</c:forEach>
                                                   </select>
+                                                  
+                                                    <p class="processTips noProcessPerson">
+                                                        	选择了<span class="processName"></span>流程，
+                                                        	最多添加<span class="processPersonNum"></span>位审批人
+                                                   </p>
+                                                        
 												</div>
 											</div>
 

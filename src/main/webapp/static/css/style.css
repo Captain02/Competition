@@ -674,13 +674,10 @@ ul.p-info .title, ul.p-info .desk {
 .label-success {
 	background-color: #5cb85c;
 }
-
-/* .processDes { */
-/* 	display: none; */
-/* } */
-
-.select-change .processDes,
-.select-change .processName{
-	display: block;
-	letter-spacing: 2px;
+.processTips{
+	margin-top: 10px;
+	color: #65CEA7;
+}
+.processTips span{
+	color: red;
 }

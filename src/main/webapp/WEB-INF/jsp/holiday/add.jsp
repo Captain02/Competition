@@ -26,11 +26,13 @@ $(function(){
 	$('.selectProcessKey').change(function(){
 		var selectProcessKeyName = $(this).val();
 		$('.addprocessPerson').removeClass('noProcessPerson');
+		$('.processTips').removeClass('noProcessPerson');
 		$.ajax({
 			url:"${APP_PATH}/admin/holiday/selectProcessKeyName",
 			type:"GET",
 			data:"selectProcessKeyName="+selectProcessKeyName,
 			success:function(result){
+				console.log(selectProcessKeyName + result.extend.num);
  				$('.processName').html(selectProcessKeyName);
                 $('.processPersonNum').html(result.extend.num);
                 $('.processPersonNum').attr('value',result.extend.num);
@@ -234,6 +236,12 @@ function addHoliday() {
                                                             	<option value="${key}">${key}</option>
                                                          	</c:forEach>
                                                         </select>
+                                                        
+                                                        <p class="processTips noProcessPerson">
+                                                        	选择了<span class="processName"></span>流程，
+                                                        	最多添加<span class="processPersonNum"></span>位审批人
+                                                        </p>
+                                                        
                                                     </div>
 
                                                 </div>
@@ -241,7 +249,7 @@ function addHoliday() {
                                                 <!-- 审批人填写区域 -->
                                                 <div class="form-group addprocessPerson noProcessPerson">
                                                     <div class="col-sm-2">
-                                                        <label for="" class="control-label">
+                                                        <label for="" class="control-label text-center">
                                                            	 审批人（点击可删除）
                                                         </label>
                                                     </div>

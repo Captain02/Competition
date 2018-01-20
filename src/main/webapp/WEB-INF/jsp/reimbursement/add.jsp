@@ -31,6 +31,7 @@ $(function(){
 	$('.selectProcessKey').change(function(){
 		var selectProcessKeyName = $(this).val();
 		$('.addprocessPerson').removeClass('noProcessPerson');
+		$('.processTips').removeClass('noProcessPerson');
 		$.ajax({
 			url:"${APP_PATH}/admin/reimbursement/selectProcessKeyName",
 			type:"GET",
@@ -187,6 +188,12 @@ function addReimbursement() {
 	                                                      	<option value="${key}">${key}</option>
 	                                                   	</c:forEach>
 	                                                  </select>
+	                                                  
+	                                                    <p class="processTips noProcessPerson">
+                                                        	选择了<span class="processName"></span>流程，
+                                                        	最多添加<span class="processPersonNum"></span>位审批人
+                                                        </p>
+                                                        
 												</div>
 											</div>
 
