@@ -191,7 +191,7 @@ function addReimbursement() {
 	                                                  
 	                                                    <p class="processTips noProcessPerson">
                                                         	选择了<span class="processName"></span>流程，
-                                                        	最多添加<span class="processPersonNum"></span>位审批人
+                                                        	请添加<span class="processPersonNum"></span>位审批人
                                                         </p>
                                                         
 												</div>
