@@ -76,6 +76,7 @@ public class ThingsService {
 		userThings.setUserid((Integer) SecurityUtils.getSubject().getSession().getAttribute("id"));
 		insertThings(things);
 		userThings.setThingsid(things.getId());
+		
 		insertUserThings(userThings);
 		// 设置启动流程变量
 		variables.put("thingsId", things.getId());
@@ -101,7 +102,7 @@ public class ThingsService {
 	}
 
 	private void insertUserThings(UserThings userThings) {
-		userThingsMapper.updateByPrimaryKeySelective(userThings);
+		userThingsMapper.insertSelective(userThings);
 	}
 
 	private void insertThings(Things things) {

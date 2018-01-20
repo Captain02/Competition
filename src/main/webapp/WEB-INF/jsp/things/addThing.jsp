@@ -171,7 +171,7 @@ function addthingsForm() {
                                                         <span>*</span>领用详情
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <textarea name="detailed" placeholder="领用详情" style="height: 94px;" class="form-control"></textarea>
+                                                        <textarea name="details" placeholder="领用详情" style="height: 94px;" class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                                
@@ -274,7 +274,7 @@ function addthingsForm() {
                 </div>
 
                 <!-- 底部按钮 -->
-                <form action="/OA02/admin/reimbursement/list" method="get">
+                <form action="/OA02/admin/things/list" method="get">
                     <div class="modal-footer serach-person-footer">
                         <button type="submit" class="btn btn-default btn-success yes">确认</button>
                     </div>
