@@ -5,7 +5,7 @@
 <update id="updataPersonNumberByDeployId">
   update act_re_procdef
     set peopleNumber = #{num}
-    where ID_ = #{id}
+    where DEPLOYMENT_ID_ = #{id}
 </update>
 
 <!-- List<String> selectProcessKey(); -->
