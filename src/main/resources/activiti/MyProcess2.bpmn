@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
-  <process id="helloword2" name="My process" isExecutable="true">
+  <process id="helloword3" name="My process" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <userTask id="usertask1" name="User Task" activiti:assignee="#{Ass1}"></userTask>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"></sequenceFlow>
     <userTask id="usertask2" name="User Task" activiti:assignee="#{Ass2}"></userTask>
-    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask2">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${msg=='审核中'}]]></conditionExpression>
-    </sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
     <sequenceFlow id="flow3" sourceRef="usertask2" targetRef="endevent1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${msg=='未通过'||msg=='已通过'}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="flow4" sourceRef="usertask1" targetRef="endevent1">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${msg=='未通过'||msg=='已通过'}]]></conditionExpression>
-    </sequenceFlow>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_helloword2">
-    <bpmndi:BPMNPlane bpmnElement="helloword2" id="BPMNPlane_helloword2">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_helloword3">
+    <bpmndi:BPMNPlane bpmnElement="helloword3" id="BPMNPlane_helloword3">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="470.0" y="120.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
@@ -41,12 +36,6 @@
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="487.0" y="375.0"></omgdi:waypoint>
         <omgdi:waypoint x="487.0" y="440.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
-        <omgdi:waypoint x="540.0" y="237.0"></omgdi:waypoint>
-        <omgdi:waypoint x="687.0" y="237.0"></omgdi:waypoint>
-        <omgdi:waypoint x="687.0" y="457.0"></omgdi:waypoint>
-        <omgdi:waypoint x="505.0" y="457.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

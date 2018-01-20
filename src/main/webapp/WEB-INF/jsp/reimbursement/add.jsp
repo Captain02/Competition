@@ -182,7 +182,7 @@ function addReimbursement() {
 											<div class="form-group">
 												<label class="col-sm-2 col-sm-2 control-label">流程选择</label>
 												<div class="col-sm-10">
-													<select name="ProcessKey" class="form-control selectProcessKey">
+													<select name="processDefinitionKey" class="form-control selectProcessKey">
                                                         <option value="tip" style="display: none;">请选择一个审批流程</option>
 	                                                   	<c:forEach items="${processKey}" var="key">
 	                                                      	<option value="${key}">${key}</option>
