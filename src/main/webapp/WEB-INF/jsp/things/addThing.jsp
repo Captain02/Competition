@@ -26,27 +26,27 @@
 
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<!-- 动态显示流程审批人数量 -->
+<script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
 
 <script type="text/javascript">
 
 $(function () {
     ShowEle('.yes', 'hide');
+    //根据流程的不同，动态显示可添加的审批人数量
     $('.selectProcessKey').change(function(){
     	var selectProcessKeyName = $(this).val();
-		$('.addprocessPerson').removeClass('noProcessPerson');
 		//返回人数的ajax
 		$.ajax({
 			url:"${APP_PATH}/admin/things/selectProcessKeyName",
 			type:"GET",
 			data:"selectProcessKeyName="+selectProcessKeyName,
 			success:function(result){
-				$('.processTips').removeClass('noProcessPerson');
-				$('.processName').html(selectProcessKeyName);
-                $('.processPersonNum').html(result.extend.num);
-                $('.processPersonNum').attr('value',result.extend.num);
+				activeShowProcessPerson(selectProcessKeyName,result);
 			}
 		})
     })
+    
 });
 
 function addthingsForm() {

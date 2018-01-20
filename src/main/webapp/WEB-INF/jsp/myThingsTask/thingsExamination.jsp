@@ -17,6 +17,7 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<script src="${APP_PATH}/static/js/controlAprovalOpinoin.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.not-change').attr('disabled','diasbled');
@@ -28,16 +29,7 @@ function examination(state) {
  		data:"state="+state+"&"+$("#examinationFrom").serialize(),
  		type:"POST",
  		success:function(result){
- 			
- 			//返回的状态
- 			console.log(result.extend.state);
- 			
- 			
- 			
- 			if (result.code==100) {
- 				$('#myModal').modal('show');
- 				ShowTips('.modal-title','执行结果','.modal-body','<b style = "color:#5cb85c;">成功批准该申请人的申请</b>');
- 			}
+ 			controlAprovalOpinoin(result);
  		}
  	})
 }

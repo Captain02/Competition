@@ -22,27 +22,27 @@
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<!-- 动态显示流程审批人数量 -->
+<script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
 <script type="text/javascript">
 
 
 $(function(){
 	ShowEle('.yes','hide');
-	//获取当前选择的流程允许的最多审批人数量，并显示在页面中
+	
+	//根据所选流程的不同，动态显示可添加的审批人数量
 	$('.selectProcessKey').change(function(){
 		var selectProcessKeyName = $(this).val();
-		$('.addprocessPerson').removeClass('noProcessPerson');
-		$('.processTips').removeClass('noProcessPerson');
 		$.ajax({
 			url:"${APP_PATH}/admin/reimbursement/selectProcessKeyName",
 			type:"GET",
 			data:"selectProcessKeyName="+selectProcessKeyName,
 			success:function(result){
-				$('.processName').html(selectProcessKeyName);
-                $('.processPersonNum').html(result.extend.num);
-                $('.processPersonNum').attr('value',result.extend.num);
+				activeShowProcessPerson(selectProcessKeyName,result);
 			}
 		})
 	})
+	
 
 });
 
