@@ -19,6 +19,8 @@ public class MyReimbursementTaskService {
 	TaskService taskService;
 	@Autowired
 	ReimbursementService reimbursementService;
+	@Autowired
+	DeployService deployService;
 	
 	
 
@@ -43,7 +45,13 @@ public class MyReimbursementTaskService {
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
 		}else {
-			reimbursement.setTest("审核中");
+			
+			//判断是否有下一审批人
+			int i = deployService.getNextTaskNodeByProcessInstanceId(userReimbursementByReimbursementId.getProcessinstanceid());
+			if (i==0) {
+				return 0;
+			}
+			
 			variables.put("msg", "审核中");
 			variables.put("completePeople", username);
 		}

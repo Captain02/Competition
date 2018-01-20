@@ -46,13 +46,15 @@ public class MyHolidayTaskService {
 			variables.put("completePeople", username);
 		}else {
 			
+			//判断是否有下一审批人
 			int i = deployService.getNextTaskNodeByProcessInstanceId(userHolidayByHolidayId.getProcessinstanceid());
 			if (i==0) {
 				return 0;
 			}
 			
-			holiday.setTest("审核中");
+			//holiday.setTest("审核中");
 			variables.put("msg", "审核中");
+			variables.put("completePeople", username);
 		}
 //		holiday.setTest("审核通过");
 		holiday.setId(userHolidayByHolidayId.getId());

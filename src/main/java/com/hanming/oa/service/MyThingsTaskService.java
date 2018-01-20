@@ -19,6 +19,8 @@ public class MyThingsTaskService {
 	TaskService taskService;
 	@Autowired
 	HolidayService holidayService;
+	@Autowired
+	DeployService deployService;
 
 	public int agreeExamination(String username, UserThingsByThingsId userThingsByThingsId, String nowComment,
 			String thingsId, int state) {
@@ -40,8 +42,16 @@ public class MyThingsTaskService {
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
 		} else {
+			
+			//判断是否有下一审批人
+			int i = deployService.getNextTaskNodeByProcessInstanceId(userThingsByThingsId.getProcessinstanceid());
+			if (i==0) {
+				return 0;
+			}
+			
 			holiday.setTest("审核中");
 			variables.put("msg", "审核中");
+			variables.put("completePeople", username);
 		}
 		// holiday.setTest("审核通过");
 		holiday.setId(userThingsByThingsId.getId());

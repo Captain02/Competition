@@ -47,7 +47,6 @@ public class MyReimbursementTaskController {
 	MyReimbursementTaskService myReimbursementTaskService;
 	@Autowired
 	UserService userService;
-	
 
 	@RequestMapping(value = "/myReimbursementTask", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
@@ -168,17 +167,21 @@ public class MyReimbursementTaskController {
 			@RequestParam("nowComment") String nowComment, @RequestParam("id") String reimbursementId,
 			@RequestParam("state") String state) {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
-		int i = myReimbursementTaskService.agreeExamination(username, UserReimbursementByReimbursementId, nowComment, reimbursementId,
-				Integer.parseInt(state));
-		if (Integer.parseInt(state) == 1) {
-			logger.info(username + "=====跳转不同意报销审批");
-			return Msg.success();
-		}else if (Integer.parseInt(state) == 0) {
-			logger.info(username + "=====跳转同意报销审批");
-			return Msg.success();
-		}else{
-			logger.info(username + "=====向下一个人递送报销审批");
-			return Msg.success();
+		int i = myReimbursementTaskService.agreeExamination(username, UserReimbursementByReimbursementId, nowComment,
+				reimbursementId, Integer.parseInt(state));
+		if (i == 1) {
+			if (Integer.parseInt(state) == 1) {
+				logger.info(username + "=====跳转不同意报销审批");
+				return Msg.success();
+			} else if (Integer.parseInt(state) == 0) {
+				logger.info(username + "=====跳转同意报销审批");
+				return Msg.success();
+			} else {
+				logger.info(username + "=====向下一个人递送报销审批");
+				return Msg.success();
+			}
+		} else {
+			return Msg.fail().add("NoNextNode", "NoNextNode");
 		}
 
 	}

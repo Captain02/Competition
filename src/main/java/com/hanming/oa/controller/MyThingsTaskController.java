@@ -180,19 +180,22 @@ public class MyThingsTaskController {
 			@RequestParam("nowComment") String nowComment, @RequestParam("id") String thingsId,
 			@RequestParam("state") String state) {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
-		myThingsTaskService.agreeExamination(username, userThingsByThingsId, nowComment, thingsId,
+		int i = myThingsTaskService.agreeExamination(username, userThingsByThingsId, nowComment, thingsId,
 				Integer.parseInt(state));
-		if (Integer.parseInt(state) == 1) {
-			logger.info(username + "=====跳转不同意假条审批");
-			return Msg.success();
-		} else if (Integer.parseInt(state) == 0) {
-			logger.info(username + "=====跳转同意假条审批");
-			return Msg.success();
+		if (i == 1) {
+			if (Integer.parseInt(state) == 1) {
+				logger.info(username + "=====跳转不同意假条审批");
+				return Msg.success();
+			} else if (Integer.parseInt(state) == 0) {
+				logger.info(username + "=====跳转同意假条审批");
+				return Msg.success();
+			} else {
+				logger.info(username + "=====向下一个人递送假条审批");
+				return Msg.success();
+			}
 		} else {
-			logger.info(username + "=====向下一个人递送假条审批");
-			return Msg.success();
+			return Msg.fail().add("NoNextNode", "NoNextNode");
 		}
 	}
-
 
 }
