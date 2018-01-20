@@ -22,18 +22,24 @@ $(function(){
 	$('.not-change').attr('disabled','diasbled');
 })
 function examination(state) {
-// 	ajax请求按需更改
-// 	$.ajax({
-// 		url:"${APP_PATH}/admin/myHolidayTask/agreeExamination",
-// 		data:"state="+state+"&"+$("#examinationFrom").serialize(),
-// 		type:"POST",
-// 		success:function(result){
-// 			if (result.code==100) {
-// 				$('#myModal').modal('show');
-// 				ShowTips('.modal-title','执行结果','.modal-body','<b style = "color:#5cb85c;">成功批准该申请人的申请</b>');
-// 			}
-// 		}
-// 	})
+ 	//ajax请求按需更改
+ 	$.ajax({
+ 		url:"${APP_PATH}/admin/myThingsTask/agreeExamination",
+ 		data:"state="+state+"&"+$("#examinationFrom").serialize(),
+ 		type:"POST",
+ 		success:function(result){
+ 			
+ 			//返回的状态
+ 			console.log(result.extend.state);
+ 			
+ 			
+ 			
+ 			if (result.code==100) {
+ 				$('#myModal').modal('show');
+ 				ShowTips('.modal-title','执行结果','.modal-body','<b style = "color:#5cb85c;">成功批准该申请人的申请</b>');
+ 			}
+ 		}
+ 	})
 }
 
 </script>
@@ -246,7 +252,7 @@ function examination(state) {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
-      <form action="${APP_PATH}/admin/myHolidayTask/myHolidayTask" method="get">
+      <form action="${APP_PATH}/admin/myThingsTask/myHolidayTask" method="get">
       <div class="modal-body">
       </div>
 	      <div class="modal-footer">

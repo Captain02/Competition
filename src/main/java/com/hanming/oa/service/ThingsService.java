@@ -96,7 +96,7 @@ public class ThingsService {
 		}
 	}
 
-	private void updateThings(Things things) {
+	public void updateThings(Things things) {
 		thingsMapper.updateByPrimaryKeySelective(things);
 	}
 

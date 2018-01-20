@@ -173,7 +173,7 @@ public class MyThingsTaskController {
 		return "myThingsTask/thingsExamination";
 	}
 
-	// 是否同意请假
+	// 是否同意物品
 	@ResponseBody
 	@RequestMapping(value = "/agreeExamination", method = RequestMethod.POST)
 	public Msg agreeExamination(UserThingsByThingsId userThingsByThingsId,
@@ -184,14 +184,14 @@ public class MyThingsTaskController {
 				Integer.parseInt(state));
 		if (i == 1) {
 			if (Integer.parseInt(state) == 1) {
-				logger.info(username + "=====跳转不同意假条审批");
-				return Msg.success();
+				logger.info(username + "=====跳转不同意物品审批");
+				return Msg.success().add("state", state);
 			} else if (Integer.parseInt(state) == 0) {
-				logger.info(username + "=====跳转同意假条审批");
-				return Msg.success();
+				logger.info(username + "=====跳转同意物品审批");
+				return Msg.success().add("state", state);
 			} else {
-				logger.info(username + "=====向下一个人递送假条审批");
-				return Msg.success();
+				logger.info(username + "=====向下一个人递送物品审批");
+				return Msg.success().add("state", state);
 			}
 		} else {
 			return Msg.fail().add("NoNextNode", "NoNextNode");

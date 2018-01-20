@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hanming.oa.model.Holiday;
+import com.hanming.oa.model.Things;
 import com.hanming.oa.model.UserThingsByThingsId;
 
 @Service
@@ -21,6 +22,8 @@ public class MyThingsTaskService {
 	HolidayService holidayService;
 	@Autowired
 	DeployService deployService;
+	@Autowired
+	ThingsService thingsService;
 
 	public int agreeExamination(String username, UserThingsByThingsId userThingsByThingsId, String nowComment,
 			String thingsId, int state) {
@@ -32,13 +35,13 @@ public class MyThingsTaskService {
 				.singleResult();
 
 		// 修改假条
-		Holiday holiday = new Holiday();
+		Things things = new Things();
 		if (state == 0) {
-			holiday.setTest("已通过");
+			things.setState("已通过");
 			variables.put("msg", "已通过");
 			variables.put("completePeople", username);
 		} else if (state == 1) {
-			holiday.setTest("未通过");
+			things.setState("已通过");
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
 		} else {
@@ -49,13 +52,13 @@ public class MyThingsTaskService {
 				return 0;
 			}
 			
-			holiday.setTest("审核中");
+			things.setState("已通过");
 			variables.put("msg", "审核中");
 			variables.put("completePeople", username);
 		}
 		// holiday.setTest("审核通过");
-		holiday.setId(userThingsByThingsId.getId());
-		holidayService.updateHoliday(holiday);
+		things.setId(userThingsByThingsId.getId());
+		thingsService.updateThings(things);
 
 		// 设置流程变量
 		//variables.put("getHolidaydays", userThingsByThingsId.getHolidaydays());

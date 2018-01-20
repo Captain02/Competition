@@ -172,13 +172,13 @@ public class MyReimbursementTaskController {
 		if (i == 1) {
 			if (Integer.parseInt(state) == 1) {
 				logger.info(username + "=====跳转不同意报销审批");
-				return Msg.success();
+				return Msg.success().add("state", state);
 			} else if (Integer.parseInt(state) == 0) {
 				logger.info(username + "=====跳转同意报销审批");
-				return Msg.success();
+				return Msg.success().add("state", state);
 			} else {
 				logger.info(username + "=====向下一个人递送报销审批");
-				return Msg.success();
+				return Msg.success().add("state", state);
 			}
 		} else {
 			return Msg.fail().add("NoNextNode", "NoNextNode");
