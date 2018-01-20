@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -41,6 +43,7 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserReimbursementByReimbursementId;
 import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.ReimbursementService;
+import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
 
 @Controller
@@ -60,6 +63,8 @@ public class ReimbursementController {
 	RuntimeService runtimeService;
 	@Autowired
 	DeployService deployService;
+	@Autowired
+	UpDownFileService upDownFileService;
 
 	// 查询列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -179,13 +184,34 @@ public class ReimbursementController {
 
 	// 文件下载
 	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
-	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request)
-			throws Exception {
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request){
 
 		UserReimbursementByReimbursementId reimbursementByReimbursementId = reimbursementService
 				.selectReimbursementByReimbursementId(id);
+		
+		try {
+			upDownFileService.down(response, request, reimbursementByReimbursementId, "ExaminationFile");
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		// 获取文件
+		/*// 获取文件
 		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
 				+ reimbursementByReimbursementId.getEnclosure();
 		// 获取输入流
@@ -206,7 +232,7 @@ public class ReimbursementController {
 			out.flush();
 		}
 		out.close();
-		bis.close();
+		bis.close();*/
 	}
 
 	// 获得流程定义的KEY对应的人数

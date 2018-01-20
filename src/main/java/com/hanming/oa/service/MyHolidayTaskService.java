@@ -21,6 +21,8 @@ public class MyHolidayTaskService {
 	TaskService taskService;
 	@Autowired
 	HolidayService holidayService;
+	@Autowired
+	DeployService deployService;
 
 	
 	@Transactional
@@ -43,6 +45,12 @@ public class MyHolidayTaskService {
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
 		}else {
+			
+			int i = deployService.getNextTaskNodeByProcessInstanceId(userHolidayByHolidayId.getProcessinstanceid());
+			if (i==0) {
+				return 0;
+			}
+			
 			holiday.setTest("审核中");
 			variables.put("msg", "审核中");
 		}

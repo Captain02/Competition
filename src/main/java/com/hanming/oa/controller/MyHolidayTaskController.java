@@ -147,8 +147,8 @@ public class MyHolidayTaskController {
 			Collections.reverse(commentList);
 		}
 
-		model.addAttribute("enclosureName", "".equals(userHolidayByHolidayId.getFilename()) ? "没有附件"
-				: userHolidayByHolidayId.getFilename());
+		model.addAttribute("enclosureName",
+				"".equals(userHolidayByHolidayId.getFilename()) ? "没有附件" : userHolidayByHolidayId.getFilename());
 		model.addAttribute("comment", commentList);
 		model.addAttribute("userHolidayByHolidayId", userHolidayByHolidayId);
 
@@ -165,17 +165,22 @@ public class MyHolidayTaskController {
 			@RequestParam("nowComment") String nowComment, @RequestParam("id") String holidayId,
 			@RequestParam("state") String state) {
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
-		myHolidayTaskService.agreeExamination(username, userHolidayByHolidayId, nowComment, holidayId,
+		int i = myHolidayTaskService.agreeExamination(username, userHolidayByHolidayId, nowComment, holidayId,
 				Integer.parseInt(state));
-		if (Integer.parseInt(state) == 1) {
-			logger.info(username + "=====跳转不同意假条审批");
-			return Msg.success();
-		}else if (Integer.parseInt(state) == 0) {
-			logger.info(username + "=====跳转同意假条审批");
-			return Msg.success();
-		}else{
-			logger.info(username + "=====向下一个人递送假条审批");
-			return Msg.success();
+
+		if (i == 1) {
+			if (Integer.parseInt(state) == 1) {
+				logger.info(username + "=====跳转不同意假条审批");
+				return Msg.success();
+			} else if (Integer.parseInt(state) == 0) {
+				logger.info(username + "=====跳转同意假条审批");
+				return Msg.success();
+			} else {
+				logger.info(username + "=====向下一个人递送假条审批");
+				return Msg.success();
+			}
+		}else {
+			return Msg.fail().add("NoNextNode", "NoNextNode");
 		}
 	}
 

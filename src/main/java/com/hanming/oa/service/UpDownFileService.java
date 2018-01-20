@@ -1,27 +1,18 @@
 package com.hanming.oa.service;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Reimbursement;
@@ -34,14 +25,13 @@ import com.hanming.oa.model.UserThingsByThingsId;
 public class UpDownFileService {
 
 	// 文件下载
-	public void down(HttpServletResponse response, HttpServletRequest request, Object obj,String dirName)
+	public void down(HttpServletResponse response, HttpServletRequest request, Object obj, String dirName)
 			throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, IOException {
 
 		String enclosure = null;
 
 		String filename = null;
-		
 
 		if (obj instanceof UserHolidayByHolidayId) {
 			enclosure = ((UserHolidayByHolidayId) obj).getEnclosure();
@@ -55,19 +45,14 @@ public class UpDownFileService {
 		} else if (obj instanceof Reimbursement) {
 			enclosure = ((Reimbursement) obj).getEnclosure();
 			filename = ((Reimbursement) obj).getFilename();
-		}else if (obj instanceof Things) {
+		} else if (obj instanceof Things) {
 			enclosure = ((Things) obj).getEnclosure();
 			filename = ((Things) obj).getFilename();
-		}else if (obj instanceof UserThingsByThingsId) {
+		} else if (obj instanceof UserThingsByThingsId) {
 			enclosure = ((UserThingsByThingsId) obj).getEnclosure();
 			filename = ((UserThingsByThingsId) obj).getFilename();
 		}
 
-		
-		
-		
-		
-		
 		// 获取文件
 		String fileName = request.getSession().getServletContext().getRealPath(dirName) + "/" + enclosure;
 		// 获取输入流
@@ -91,5 +76,6 @@ public class UpDownFileService {
 		bis.close();
 
 	}
+
 
 }

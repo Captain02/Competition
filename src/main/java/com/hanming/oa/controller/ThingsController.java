@@ -1,8 +1,11 @@
 package com.hanming.oa.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -34,6 +37,7 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserThingsByThingsId;
 import com.hanming.oa.service.DeployService;
 import com.hanming.oa.service.ThingsService;
+import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
 
 @Controller
@@ -53,6 +57,8 @@ public class ThingsController {
 	RuntimeService runtimeService;
 	@Autowired
 	DeployService deployService;
+	@Autowired
+	UpDownFileService upDownFileService;
 
 	// 查询物品申请
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -88,7 +94,7 @@ public class ThingsController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Things things,
 			HttpServletRequest request, String processDefinitionKey) {
-		
+
 		int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加我要申请物品");
@@ -160,6 +166,35 @@ public class ThingsController {
 		Integer num = deployService.selectNumByProcessDefinitionKey(key);
 
 		return Msg.success().add("num", num);
+	}
+
+	// 文件下载
+	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) {
+		UserThingsByThingsId userThingsByThingsId = thingsService.selectUserThingsByThingsId(id);
+		
+		try {
+			upDownFileService.down(response, request, userThingsByThingsId, "ExaminationFile");
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

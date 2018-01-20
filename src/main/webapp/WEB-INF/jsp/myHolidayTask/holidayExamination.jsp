@@ -30,6 +30,8 @@ function examination(state) {
 			if (result.code==100) {
 				$('#myModal').modal('show');
 				ShowTips('.modal-title','执行结果','.modal-body','<b style = "color:#5cb85c;">成功批准该申请人的申请</b>');
+			}else{
+				console.log(result.extend.NoNextNode);
 			}
 		}
 	})
