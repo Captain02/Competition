@@ -58,7 +58,6 @@ public class UpDownFileService {
 		// 获取输入流
 		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
 		// 假如以中文名下载的话
-
 		// 转码，免得文件名中文乱码
 		filename = URLEncoder.encode(filename, "UTF-8");
 		// 设置文件下载头

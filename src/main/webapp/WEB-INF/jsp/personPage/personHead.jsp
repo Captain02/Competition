@@ -23,8 +23,15 @@
 				$('.upLoad').click(function(){
 					var imgBase64 = $('#download').html();
 					//发送ajax链接
-					
-					
+					$.ajax({
+				        url: '${APP_PATH}/admin/personPage/upPersonHeadFile', // 要上传的地址
+				        type: 'POST',
+				        data: 'imgData='+imgBase64,
+				        dataType: 'json',
+				        success: function (data) {
+				            console.log(data);
+				        }
+				    });
 					
 				})
 			})
