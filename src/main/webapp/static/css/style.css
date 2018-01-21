@@ -681,3 +681,35 @@ ul.p-info .title, ul.p-info .desk {
 .processTips span{
 	color: red;
 }
+
+/*头像预览*/
+.img-preview {
+  float: left;
+  margin-bottom: .5rem;
+  margin-right: .5rem;
+  overflow: hidden;
+}
+
+.img-preview > img {
+  max-width: 100%;
+}
+.preview-lg {
+  height: 9rem;
+  width: 16rem;
+}
+
+.preview-md {
+  height: 4.5rem;
+  width: 8rem;
+}
+
+.preview-sm {
+  height: 2.25rem;
+  width: 4rem;
+}
+
+.preview-xs {
+  height: 1.125rem;
+  margin-right: 0;
+  width: 2rem;
+}
