@@ -119,6 +119,10 @@
                                     <li>
                                         <a href="${APP_PATH}/admin/user/changePassword/<sh:principal property="id" />">修改密码</a>
                                     </li>
+                                     <li role="separator" class="divider"></li>
+			                             <li>
+			                                <a href="${APP_PATH}/admin/user/changePassword/<sh:principal property="id" />">更换头像</a>
+			                            </li>
                                     <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="${APP_PATH}/logout">退出</a>
