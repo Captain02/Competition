@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.UserService;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/admin/personPage")
@@ -24,5 +24,11 @@ public class PersonPageController {
 		
 		model.addAttribute("user", user);
 		return "personPage/personPage";
+	}
+	
+	@RequestMapping(value="/personPage",method=RequestMethod.GET)
+	public String personHead() {
+		
+		return "personPage/personHead";
 	}
 }

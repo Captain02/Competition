@@ -28,7 +28,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                              <li>
-                                <a href="${APP_PATH}/admin/user/changePassword/<sh:principal property="id" />">更换头像</a>
+                                <a href="${APP_PATH}/admin/personPage/personPage">更换头像</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
