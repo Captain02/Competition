@@ -58,10 +58,12 @@ public class ThingsService {
 		// 添加相关数据
 		things.setState("审核中");
 		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
-			String path = request.getSession().getServletContext().getRealPath("upload");
-			things.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			String path = request.getSession().getServletContext().getRealPath("ExaminationFile");
+			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
+			
+			things.setEnclosure(fileName);
 			things.setFilename(file.getOriginalFilename());
-			File dir = new File(path, new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			File dir = new File(path, fileName);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}

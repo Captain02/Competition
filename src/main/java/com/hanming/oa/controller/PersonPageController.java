@@ -1,6 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -16,8 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.PersonHead;
 import com.hanming.oa.model.User;
+import com.hanming.oa.service.PersonHeadService;
 import com.hanming.oa.service.UserService;
 
 @Controller
@@ -26,6 +29,8 @@ public class PersonPageController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	PersonHeadService personHeadService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -42,23 +47,25 @@ public class PersonPageController {
 		return "personPage/personHead";
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/upPersonHeadFile", method = RequestMethod.POST)
-	public String upPersonHeadFile(@RequestParam(value = "imgData") String dataURL, HttpServletRequest request) {
+	public Msg upPersonHeadFile(@RequestParam(value = "imgData") String dataURL, HttpServletRequest request) {
 		FileOutputStream write = null;
+		PersonHead personHead = new PersonHead();
 
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		System.out.println("++++ :"+dataURL);
-
-		//String base64 = dataURL.substring(dataURL.indexOf(",") + 1);
-		//System.out.println(base64);
-		byte[] decoderBytes = Base64.getDecoder().decode(dataURL);
+		
+		//处理字符串
+		String replaceAll = dataURL.replaceAll(" ", "+").substring(dataURL.indexOf(",") + 1);
+		byte[] decoderBytes = Base64.getDecoder().decode(replaceAll);
 
 		File file = new File(request.getSession().getServletContext().getRealPath("personHeadFile"));
 		if (!file.exists()) {
 			file.mkdirs();
 		}
 		try {
-			write = new FileOutputStream(file);
+			write = new FileOutputStream(
+					new File(request.getSession().getServletContext().getRealPath("personHeadFile"),userId + ".png"));
 			write.write(decoderBytes);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -67,17 +74,20 @@ public class PersonPageController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
+
 			try {
 				write.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		}
 
-		return "personPage/personHead";
+		}
+		
+		personHeadService.insertPersonHead();
+		
+
+		return Msg.success();
 	}
 
 }

@@ -74,10 +74,12 @@ public class HolidayService {
 		// 添加相关数据
 		holiday.setTest("审核中");
 		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
-			String path = request.getSession().getServletContext().getRealPath("upload");
-			holiday.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			String path = request.getSession().getServletContext().getRealPath("ExaminationFile");
+			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
+			
+			holiday.setEnclosure(fileName);
 			holiday.setFilename(file.getOriginalFilename());
-			File dir = new File(path, new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			File dir = new File(path, fileName);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}

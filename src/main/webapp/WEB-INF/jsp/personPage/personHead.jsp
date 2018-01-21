@@ -27,7 +27,6 @@
 				        url: '${APP_PATH}/admin/personPage/upPersonHeadFile', // 要上传的地址
 				        type: 'POST',
 				        data: 'imgData='+imgBase64,
-				        dataType: 'json',
 				        success: function (data) {
 				            console.log(data);
 				        }

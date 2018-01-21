@@ -56,10 +56,12 @@ public class ReimbursementService {
 		// 添加相关数据
 		reimbursement.setTest("审核中");
 		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
-			String path = request.getSession().getServletContext().getRealPath("upload");
-			reimbursement.setEnclosure(new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			String path = request.getSession().getServletContext().getRealPath("ExaminationFile");
+			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
+			
+			reimbursement.setEnclosure(fileName);
 			reimbursement.setFilename(file.getOriginalFilename());
-			File dir = new File(path, new Date().toString().replace(":", "-") + file.getOriginalFilename());
+			File dir = new File(path,fileName);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
