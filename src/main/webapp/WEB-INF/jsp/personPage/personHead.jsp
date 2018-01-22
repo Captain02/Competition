@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
 	<!DOCTYPE html>
 	<html lang="en">
 
@@ -11,7 +12,6 @@
 
 		<%
 			pageContext.setAttribute("APP_PATH", request.getContextPath());
-			pageContext.setAttribute("PERSONHEAD", request.getSession().getServletContext().getRealPath("personHeadFile"));
 		%>
 			<jsp:include page="iniCssHref.jsp"></jsp:include>
 			<link rel="stylesheet" href="${APP_PATH}/static/css/cropper.css">
@@ -28,8 +28,10 @@
 				        url: '${APP_PATH}/admin/personPage/upPersonHeadFile', // 要上传的地址
 				        type: 'POST',
 				        data: 'imgData='+imgBase64,
-				        success: function (data) {
-				            console.log(data);
+				        success: function (result) {
+				            if (result.code==100) {
+								alert("上传成功");
+							}
 				        }
 				    });
 					
@@ -201,7 +203,7 @@
 
 								</div>
 
-							<img alt="" src="${PERSONHEAD}\140.png">
+							<img alt="" src="${APP_PATH}/personHeadFile/<sh:principal property="id" />.png">
 
 
 								<!-- 操作区域 -->

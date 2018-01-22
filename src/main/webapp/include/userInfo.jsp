@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
         <%
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
