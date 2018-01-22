@@ -11,6 +11,7 @@
 
 		<%
 			pageContext.setAttribute("APP_PATH", request.getContextPath());
+			pageContext.setAttribute("PERSONHEAD", request.getSession().getServletContext().getRealPath("personHeadFile"));
 		%>
 			<jsp:include page="iniCssHref.jsp"></jsp:include>
 			<link rel="stylesheet" href="${APP_PATH}/static/css/cropper.css">
@@ -200,7 +201,7 @@
 
 								</div>
 
-
+							<img alt="" src="${PERSONHEAD}\140.png">
 
 
 								<!-- 操作区域 -->
