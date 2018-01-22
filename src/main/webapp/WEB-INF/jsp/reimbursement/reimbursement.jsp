@@ -13,6 +13,23 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<script src="${APP_PATH}/static/js/selectAll.js"></script>
+
+<script type="text/javascript">
+		//单个删除
+		
+		//批量删除
+		function deleAll() {
+			//执行此方法，得到所选择的id
+			selectAllTips();
+			var ids = $('.ids').val();
+			
+			$('.yes').click(function(){
+				//发送ajax请求
+			})
+		}
+	</script>
 
 </head>
 
@@ -65,6 +82,10 @@
 						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/add'" type="button" class="btn btn-success btn-sm">
 							<i>+</i>我要报销
 						</button>
+						 <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
+                                <i>-</i>批量删除
+                          </button>
+                          <input type="hidden" value=""  class="ids"/>
 					</div>
 
 					<div class="clearfix"></div>
@@ -81,6 +102,7 @@
 									<table class="table table-hover general-table">
 										<thead>
 											<tr>
+											<th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
 												<th>类型</th>
 												<th>状态</th>
 												<th>金额</th>
@@ -91,8 +113,11 @@
 										<tbody>
 											<c:forEach items="${pageInfo.list}" var="reimbursement">
 												<tr>
-													<td>${reimbursement.type}</td>
-													<td>${reimbursement.test}</td>
+												  <td>
+	                                                   <input type="checkbox" name="selectItem" class="selectItem">
+	                                                </td>
+													<td>${reimbursement.type}<input type="hidden" value="${reimbursement.processinstanceid}" /></td>
+													<td><span class="label label-success">${reimbursement.test}</span></td>
 													<td>${reimbursement.money}</td>
 													<td>${reimbursement.date}</td>
 													<td>
@@ -109,6 +134,10 @@
 																<li>
 																	<a href="${APP_PATH}/admin/reimbursement/showCurrentView/${reimbursement.processinstanceid}">查看进度</a>
 																</li>
+																  <li role="separator" class="divider"></li>
+		                                                        <li>
+		                                                            <a href="">删除</a>
+		                                                        </li>
 	
 															</ul>
 														</div>
@@ -177,6 +206,32 @@
 
 	</section>
 
+   <!-- 模态框 -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-warning yes">确认</button>
+        <button type="button" class="btn btn-success no">取消</button>
+        
+        <!-- 用于页面跳转的按钮 -->
+        <form action="${APP_PATH}/admin/deploy/list">
+        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
+        	<button type="submit" class="btn btn-danger down">关闭</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 
 	</html>

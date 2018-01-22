@@ -10,10 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>物品管理</title>
-<%
-	pageContext.setAttribute("APP_PATH", request.getContextPath());
-%>
+	<%
+		pageContext.setAttribute("APP_PATH", request.getContextPath());
+	%>
     <jsp:include page="iniCssHref.jsp"></jsp:include>
+    <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+	<script src="${APP_PATH}/static/js/selectAll.js"></script>
+	
+	<script type="text/javascript">
+		//单个删除
+		
+		//批量删除
+		function deleAll() {
+			//执行此方法，得到所选择的id
+			selectAllTips();
+			var ids = $('.ids').val();
+			
+			$('.yes').click(function(){
+				//发送ajax请求
+			})
+		}
+	</script>
 
 </head>
 
@@ -69,6 +86,10 @@
                         <button id="addButton" onclick="window.location.href='${APP_PATH}/admin/things/add'" type="button" class="btn btn-success btn-sm">
                             <i>+</i>我要领用
                         </button>
+                         <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
+                                <i>-</i>批量删除
+                         </button>
+                          <input type="hidden" value=""  class="ids"/>
                     </div>
                     <div class="clearfix "></div>
                 </div>
@@ -83,6 +104,7 @@
                                 <table class="table table-hover holiday-table">
                                     <thead>
                                         <tr>
+                                        <th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
                                             <th>用途</th>
                                             <th>物品名称</th>
                                             <th>申请时间</th>
@@ -93,7 +115,10 @@
                                     <tbody>
 										<c:forEach items="${pageInfo.list }" var="things">
 	                                        <tr>
-	                                            <td>${things.purpose}</td>
+	                                          	<td>
+	                                             <input type="checkbox" name="selectItem" class="selectItem">
+	                                          	</td>
+	                                            <td>${things.purpose}<input type="hidden" value="${things.processinstanceid}" /></td>
 	                                            <td>${things.name}</td>
 	                                            <td>${things.date}</td>
 	                                            <td>
@@ -102,7 +127,7 @@
 	                                            <td>
 	                                                <div class="btn-group">
 	                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	                                                        操作
+	                                                        	操作
 	                                                        <span class="caret"></span>
 	                                                    </button>
 	                                                    <ul class="dropdown-menu">
@@ -112,6 +137,10 @@
 	                                                        <li role="separator" class="divider"></li>
 	                                                        <li>
 	                                                            <a href="${APP_PATH}/admin/things/showCurrentView/${things.processinstanceid}">查看进度</a>
+	                                                        </li>
+	                                                          <li role="separator" class="divider"></li>
+	                                                        <li>
+	                                                            <a href="">删除</a>
 	                                                        </li>
 	                                                    </ul>
 	                                                </div>
@@ -180,6 +209,32 @@
 
 
 
+   <!-- 模态框 -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-warning yes">确认</button>
+        <button type="button" class="btn btn-success no">取消</button>
+        
+        <!-- 用于页面跳转的按钮 -->
+        <form action="${APP_PATH}/admin/deploy/list">
+        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
+        	<button type="submit" class="btn btn-danger down">关闭</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 
 </html>

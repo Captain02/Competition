@@ -17,30 +17,11 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<script src="${APP_PATH}/static/js/selectAll.js"></script>
 <script type="text/javascript">
 <!-- 初始状态下，关闭按钮是隐藏的 -->
 $(function(){
 	ShowEle('.down','hide');
-	<!-- 实现全选/反选 -->
-	var selectAll = document.getElementById('selectAll');
-    var selectItems = document.getElementsByName('selectItem');
-
-    selectAll.onclick = function () {
-        for (var i = 0; i < selectItems.length; i++) {
-            selectItems[i].checked = selectAll.checked;
-        }
-    }
-
-    for (var i = 0; i < selectItems.length; i++) {
-        selectItems[i].onclick = function () {
-            selectAll.checked = true;
-            for (var j = 0; j < selectItems.length; j++) {
-                if (!selectItems[j].checked) {
-                    selectAll.checked = false;
-                }
-            }
-        }
-    }
 });
 $(document).on("click",".dele",function(){
 	var name = $(this).parents("tr").find("td:eq(2)").text();
@@ -72,37 +53,10 @@ $(document).on("click",".dele",function(){
 });
 
 function deleAll() {
-	var empNames = "";
-	var ids = "";
-	var everyLineChildren = $('tbody tr td input[type="checkbox"]');
-	var ifHavechecked = everyLineChildren.is(":checked");
+	//执行此方法，得到所选择的id
+	selectAllTips();
+	var ids = $('.ids').val();
 	
-	//一旦进入判断，就说明没有复选框被选中
-	if(!ifHavechecked){
-		$('#myModal').modal('show');
-		 ShowTips('.modal-title','错误的操作！','.modal-body','<b style = "color:#d9534f;">请至少选择一行</b>' );
-		 ShowEle('.yes','hide','.no','hide','.down','hide');
-		 setTimeout(function(){
-			$('#myModal').modal('hide');
-		 },1000);
-	}
-	else{
-		for(var i = 0; i<everyLineChildren.length; i++){
-			if($(everyLineChildren[i]).is(":checked")){
-				if(i == everyLineChildren.length-1){
-					ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html();
-					empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html();
-				}
-				else{
-					ids += $(everyLineChildren[i]).parent().parent().children('td').eq(1).html() + '-';
-					empNames += $(everyLineChildren[i]).parent().parent().children('td').eq(2).html() + ',';
-				}
-			}
-		}
-		$('#myModal').modal('show');
-		ShowTips('.modal-title','删除确认？','.modal-body','确认删除' + '<b style = "color:#c9302c;">' + empNames + '</b>' + '吗？');
-		ShowEle('.yes','show','.no','show','.down','hide');
-	}
 	$('.yes').click(function(){
 		 $.ajax({
 				url:"${APP_PATH}/admin/deploy/dele/"+ids,
@@ -110,7 +64,7 @@ function deleAll() {
 				success:function(result){
 					if (result.code==100) {
 						 $('#myModal').modal('show');
-						 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + empNames + '</b>' + '的相关信息');
+						 ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">已成功删除！</b>');
 						 ShowEle('.yes','hide','.no','hide','.down','show');
 					}else{
 						$('#myModal').modal('show');
@@ -186,6 +140,7 @@ function deleAll() {
                             <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
                                 <i>-</i>批量删除
                             </button>
+                            <input type="hidden" value=""  class="ids"/>
                         </div>
 
 
@@ -218,13 +173,13 @@ function deleAll() {
 	                                                <td>
 	                                                   <input type="checkbox" name="selectItem" class="selectItem">
 	                                                </td>
-	                                                    <td>${deploy.id}</td>
+	                                                    <td>${deploy.id} <input type="hidden" value="${deploy.id}" /></td>
 	                                                    <td>${deploy.name}</td>
 	                                                    <td><fmt:formatDate value="${deploy.deploymentTime }" pattern="yyyy-MM-dd"/></td>
 	                                                    <td>
 	                                                        <div class="btn-group">
 	                                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                                                操作
+	                                                                	操作
 	                                                                <span class="caret"></span>
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
