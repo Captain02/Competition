@@ -223,7 +223,6 @@
     </where>
   </select>
   
-  
   <!-- List<ThingsAndExaminationTime> selectExaminationByMeLikeStateName(String username, String state, String name); -->
   <select id="selectExaminationByMeLikeStateName" resultType="ThingsAndExaminationTime">
   	SELECT 
@@ -239,7 +238,7 @@
 	         AND name = '%' #{name} '%'
 	    </if>
     </where>
-  </select> -->
+  </select>
   
   <!-- List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(@Param("username") String username, @Param("state") String state, @Param("name") String name); -->
   <select id="selectCompleteByMeLikeStateName" resultType="ThingsAndExaminationTime">
@@ -258,8 +257,8 @@
 	    </if>
 	</where>
   </select>
-  <!-- 
-  UserThingsByThingsId selectThingsByThingsId(Integer thingsId);
+  
+  <!-- UserThingsByThingsId selectThingsByThingsId(Integer thingsId); -->
   <select id="selectThingsByThingsId" resultType="UserThingsByThingsId">
   	SELECT th.id,th.`name` AS thingsName,th.number,th.date,th.purpose,th.state,th.details,th.enclosure,th.filename,th.processInstanceId ,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
 	FROM things th
@@ -270,7 +269,7 @@
 	LEFT JOIN t_user_role tur ON tur.userId = tu.id
 	LEFT JOIN t_role tr ON tr.id = tur.roleId
 	WHERE th.id =#{thingsId}
-  </select> -->
+  </select>
   
   <!-- void deleteThingsByProcessInstanceId(List<String> idsList); -->
   <delete id="deleteThingsByProcessInstanceId">
