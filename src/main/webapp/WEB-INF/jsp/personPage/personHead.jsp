@@ -23,7 +23,9 @@
 			$(function(){
 				$('.upLoad').click(function(){
 					var imgBase64 = $('#download').html();
-					//发送ajax链接
+					var imgUploaded = $('#uploadedImg').html();
+					console.log(imgUploaded);
+					//发送ajax链接,上传裁剪过后的图片
 					$.ajax({
 				        url: '${APP_PATH}/admin/personPage/upPersonHeadFile', // 要上传的地址
 				        type: 'POST',
@@ -34,6 +36,10 @@
 							}
 				        }
 				    });
+					//发送ajax链接，上传原图
+					if(imgUploaded != ''){
+						
+					}
 					
 				})
 			})
@@ -164,7 +170,7 @@
 											
 										<!--确定按钮 -->
 										 <div class="btn-group btn-group-crop">
-								          <button type="button" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
+								          <button type="button" class="btn btn-success btn-sure" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
 								            <span class="docs-tooltip" data-toggle="tooltip">
 								            	  确定
 								            </span>
@@ -187,6 +193,7 @@
 									                <button type="button" class="btn btn-default" data-dismiss="modal">不满意</button>
 									                <button class="btn btn-primary upLoad">上传</button>
 									                <span id="download" style="display: none;"></span>
+									                <span id="uploadedImg" style="display: none;"></span>
 									              </div>
 									            </div>
 									          </div>

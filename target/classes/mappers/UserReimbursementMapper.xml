@@ -68,4 +68,14 @@
       reimbursementId = #{reimbursementid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- void deleteByReimbursementIdList(List<Integer> hids); -->
+  <delete id="deleteByReimbursementIdList">
+  	delete from user_reimbursement 
+	where reimbursementId IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
 </mapper>

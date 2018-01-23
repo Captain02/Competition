@@ -43,8 +43,11 @@ $(function() {
 			dataScaleY.value = typeof data.scaleY !== 'undefined' ? data.scaleY: '';
 		}
 	};
+	
+	//应用配置裁剪的框配置
 	var cropper = new Cropper(image, options);
 	
+	//获取裁剪区域的base64链接
 	var URL = window.URL || window.webkitURL;
 	var originalImageURL = image.src;
 	var uploadedImageType = 'image/jpeg';
@@ -175,11 +178,12 @@ $(function() {
 		    }
 		  };
 		  
-		  //上传图片
+		  
+		  //上传图片，得到blob链接
 		  var inputImage = document.getElementById('inputImage');
-
 		  if (URL) {
 		    inputImage.onchange = function () {
+		      showPreview(this);
 		      var files = this.files;
 		      var file;
 
@@ -207,4 +211,18 @@ $(function() {
 		    inputImage.parentNode.className += ' disabled';
 		  }
 		  
+		
+		  
+		 //blob图像转base64
+		  function showPreview(source) {  
+	            var file = source.files[0];  
+	            if(window.FileReader) {  
+	                var fr = new FileReader();  
+	                fr.onloadend = function(e) {  
+	                	$('#uploadedImg').html(e.target.result);
+	                };  
+	                fr.readAsDataURL(file);  
+	            }  
+	        }  
+		 
 })
