@@ -1,13 +1,7 @@
 package com.hanming.oa.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,14 +64,24 @@ public class HolidayController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			@RequestParam(value = "state", defaultValue = "状态") String state,
-			@RequestParam(value = "type", defaultValue = "类型") String type, Model model) {
-		PageInfo<Holiday> pageInfo = null;
-		PageHelper.startPage(pn, 8);
-		List<Holiday> list = null;
-		list = holidayService.listLikeStateType(state, type);
-		pageInfo = new PageInfo<Holiday>(list, 5);
-
-		model.addAttribute("pageInfo", pageInfo);
+			@RequestParam(value = "type", defaultValue = "类型") String type,
+			@RequestParam(value = "approved", defaultValue = "全部") String approved, Model model) {
+		if (approved.equals("已审批")) {
+			PageInfo<Holiday> pageInfo = null;
+			PageHelper.startPage(pn, 8);
+			List<Holiday> list = null;
+			list = holidayService.listLikeTypeAndApproved(state, type);
+			pageInfo = new PageInfo<Holiday>(list, 5);
+			model.addAttribute("pageInfo", pageInfo);
+		} else {
+			PageInfo<Holiday> pageInfo = null;
+			PageHelper.startPage(pn, 8);
+			List<Holiday> list = null;
+			list = holidayService.listLikeStateType(state, type);
+			pageInfo = new PageInfo<Holiday>(list, 5);
+			model.addAttribute("pageInfo", pageInfo);
+		}
+		model.addAttribute("approved", approved);
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行请假列表");
@@ -210,7 +214,7 @@ public class HolidayController {
 	@ResponseBody
 	@RequestMapping(value = "/dele/{ids}", method = RequestMethod.GET)
 	public Msg deleteTask(@PathVariable("ids") String ids) {
-		
+
 		holidayService.deleteHolidayTaskByProcessInstanceId(ids);
 
 		return Msg.success();

@@ -182,6 +182,11 @@ public class HolidayService {
 		
 	}
 
+	public List<Holiday> listLikeTypeAndApproved(String state, String type) {
+		List<Holiday> list = holidayMapper.listLikeTypeAndApproved(state,type);
+		return list;
+	}
+
 	
 
 }

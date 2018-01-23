@@ -39,4 +39,6 @@ public interface ReimbursementMapper {
 	List<Reimbursement> selectListReimbursementByProcessInstanceId(List<String> listProcessinstanceid);
 
 	void deleteReimbursementServiceByProcessInstanceId(List<String> processInstanceId);
+
+	List<Reimbursement> listLikeTypeAndApproved(@Param("state") String state, @Param("type") String type);
 }

@@ -64,16 +64,29 @@ public class ThingsController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			@RequestParam(value = "state", defaultValue = "状态") String state,
-			@RequestParam(value = "name", defaultValue = "") String name, Model model) {
-		PageInfo<Things> pageInfo = null;
-		PageHelper.startPage(pn, 8);
-		List<Things> list = null;
-		list = thingsService.listLikeStateType(state, name);
-		pageInfo = new PageInfo<Things>(list, 5);
+			@RequestParam(value = "name", defaultValue = "") String name,
+			@RequestParam(value = "approved", defaultValue = "全部") String approved, Model model) {
+		if (approved.equals("已审批")) {
+			PageInfo<Things> pageInfo = null;
+			PageHelper.startPage(pn, 8);
+			List<Things> list = null;
+			list = thingsService.listLikeTypeAndApproved(state, name);
+			pageInfo = new PageInfo<Things>(list, 5);
+			
+			model.addAttribute("pageInfo", pageInfo);
+		}else {
+			PageInfo<Things> pageInfo = null;
+			PageHelper.startPage(pn, 8);
+			List<Things> list = null;
+			list = thingsService.listLikeStateType(state, name);
+			pageInfo = new PageInfo<Things>(list, 5);
+			
+			model.addAttribute("pageInfo", pageInfo);
+		}
 
-		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("approved", approved);
 		model.addAttribute("state", state);
-		model.addAttribute("purpose", name);
+		model.addAttribute("name", name);
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====查询物品申请");
 
 		return "things/things";
@@ -172,7 +185,7 @@ public class ThingsController {
 	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
 	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) {
 		UserThingsByThingsId userThingsByThingsId = thingsService.selectUserThingsByThingsId(id);
-		
+
 		try {
 			upDownFileService.down(response, request, userThingsByThingsId, "ExaminationFile");
 		} catch (NoSuchMethodException e) {
@@ -194,7 +207,17 @@ public class ThingsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	// 删除任务
+	@ResponseBody
+	@RequestMapping(value = "/dele/{ids}", method = RequestMethod.GET)
+	public Msg deleteTask(@PathVariable("ids") String ids) {
+
+		thingsService.deleteThingsTaskByProcessInstanceId(ids);
+
+		return Msg.success();
 	}
 
 }

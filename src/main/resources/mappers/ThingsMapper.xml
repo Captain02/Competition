@@ -160,7 +160,7 @@
 	          state = #{state}
 	    </if>
 	    <if test="name != ''">
-	         AND name = #{name}
+	         AND name = '%' #{name} '%'
 	    </if>
     </where>
   </select>
@@ -218,12 +218,14 @@
 	         AND state = #{state}
 	    </if>
 	    <if test="name != ''">
-	         AND name = #{name}
+	         AND name = '%' #{name} '%'
 	    </if>
     </where>
   </select>
   
+  
   <!-- List<ThingsAndExaminationTime> selectExaminationByMeLikeStateName(String username, String state, String name); -->
+  <!-- 
   <select id="selectExaminationByMeLikeStateName" resultType="ThingsAndExaminationTime">
   	SELECT 
 	th.id, th.`name`, number, date, purpose, state, details, enclosure, filename, processInstanceId,aha.END_TIME_ as examinationTime, aha.START_TIME_ as startExaminationTime
@@ -235,10 +237,10 @@
 	         AND state = #{state}
 	    </if>
 	    <if test="name != ''">
-	         AND name = #{name}
+	         AND name = '%' #{name} '%'
 	    </if>
     </where>
-  </select>
+  </select> -->
   
   <!-- List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(@Param("username") String username, @Param("state") String state, @Param("name") String name); -->
   <select id="selectCompleteByMeLikeStateName" resultType="ThingsAndExaminationTime">
@@ -253,14 +255,47 @@
 	         AND state = #{state}
 	    </if>
 	    <if test="name != ''">
-	         AND name = #{name}
+	         AND name = '%' #{name} '%'
 	    </if>
 	</where>
   </select>
   
   <!-- UserThingsByThingsId selectThingsByThingsId(Integer thingsId); -->
   <select id="selectThingsByThingsId" resultType="UserThingsByThingsId">
+  	SELECT th.id,th.`name` AS thingsName,th.number,th.date,th.purpose,th.state,th.details,th.enclosure,th.filename,th.processInstanceId ,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department
+	FROM things th
+	LEFT JOIN user_things uh ON uh.thingsId = th.id
+	LEFT JOIN t_user tu ON tu.id = uh.userId
+	LEFT JOIN t_department_user  tdu ON tdu.userId = tu.id
+	LEFT JOIN t_department td ON td.id = tdu.departmentId
+	LEFT JOIN t_user_role tur ON tur.userId = tu.id
+	LEFT JOIN t_role tr ON tr.id = tur.roleId
+	WHERE th.id =#{thingsId}
+  </select>
+  
+  <!-- void deleteThingsByProcessInstanceId(List<String> idsList); -->
+  <delete id="deleteThingsByProcessInstanceId">
+  	delete from things
+  	where processinstanceid IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
+  <!-- List<Things> listLikeTypeAndApproved(@Param("state") String state, @Param("name") String name); -->
+  <select id="listLikeTypeAndApproved" resultType="Things">
   	select 
+    <include refid="Base_Column_List" />
+    from things
+    <where>
+    	state != '审核中'
+	    <if test="state != '状态'">
+	         AND state = #{state}
+	    </if>
+	    <if test="name != ''">
+	         AND name = '%' #{name} '%'
+	    </if>
+    </where>
   </select>
   
 </mapper>

@@ -263,4 +263,20 @@
     </foreach>
   </delete>
   
+  <!-- List<Reimbursement> listLikeTypeAndApproved(@Param("state") String state, @Param("type") String type); -->
+  <select id="listLikeTypeAndApproved" resultType="Reimbursement">
+  	select 
+    <include refid="Base_Column_List" />
+    from reimbursement
+    <where>
+    	test != '审核中'
+	    <if test="state != '状态'">
+	        AND test = #{state}
+	    </if>
+	    <if test="type != '类型'">
+	         AND type = #{type}
+	    </if>
+    </where>
+  </select>
+  
 </mapper>

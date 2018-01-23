@@ -35,4 +35,8 @@ public interface ThingsMapper {
 
 	List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(@Param("username") String username, @Param("state") String state, @Param("name") String name);
 
+	void deleteThingsByProcessInstanceId(List<String> idsList);
+
+	List<Things> listLikeTypeAndApproved(@Param("state") String state, @Param("name") String name);
+
 }

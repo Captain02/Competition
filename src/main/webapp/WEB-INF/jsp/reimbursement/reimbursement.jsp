@@ -26,7 +26,12 @@
 			var ids = $('.ids').val();
 			
 			$('.yes').click(function(){
-				//发送ajax请求
+				$.ajax({
+					url:"${APP_PATH}/admin/reimbursement/dele/"+ids,
+					type:"GET",
+					success:function(result) {
+					}
+				})
 			})
 		}
 	</script>
@@ -51,7 +56,9 @@
 
 
 				<form action="${APP_PATH}/admin/reimbursement/list" class="serach-form" method="get">
-
+					
+					<input type="hidden" name="approved" value="${approved}">	
+					
                      <select class="form-control" name="state">
 	                     <option>状态</option>
 	                     <option>已通过</option>
@@ -82,17 +89,23 @@
 						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/add'" type="button" class="btn btn-success btn-sm">
 							<i>+</i>我要报销
 						</button>
-						 <button id="delButton" type="button" class="btn btn-success fnish-process" onclick="">
+						<c:if test="${approved == '全部'}">
+						 <button id="delButton" type="button" class="btn btn-success fnish-process" onclick="window.location.href='${APP_PATH}/admin/reimbursement/list?approved=已审批'">
                                 <i class="glyphicon glyphicon-check"></i>已审批
-                            </button>
+                           </button>
+                           </c:if>
+                           <c:if test="${approved != '全部'}">
+                           <button id="delButton" type="button" class="btn btn-warning do-process" onclick="window.location.href='${APP_PATH}/admin/reimbursement/list?approved=全部'">
+                               <i class="glyphicon glyphicon-time"></i>全部
+                           </button>
+                           </c:if>
                             
-                             
-                            <button id="delButton" type="button" class="btn btn-warning do-process" onclick="">
-                                <i class="glyphicon glyphicon-time"></i>未审批
-                            </button>
-						 <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
-                                <i>-</i>批量删除
-                          </button>
+                          <c:if test="${approved != '全部'}">
+							  <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
+	                                <i>-</i>批量删除
+	                          </button>
+                          </c:if>
+                          
                           <input type="hidden" value=""  class="ids"/>
 					</div>
 
@@ -110,7 +123,9 @@
 									<table class="table table-hover general-table">
 										<thead>
 											<tr>
-											<th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
+											<c:if test="${approved != '全部'}">
+												<th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
+											</c:if>
 												<th>类型</th>
 												<th>状态</th>
 												<th>金额</th>
@@ -121,9 +136,11 @@
 										<tbody>
 											<c:forEach items="${pageInfo.list}" var="reimbursement">
 												<tr>
-												  <td>
-	                                                   <input type="checkbox" name="selectItem" class="selectItem">
-	                                                </td>
+													<c:if test="${approved != '全部'}">
+													   <td>
+		                                                   <input type="checkbox" name="selectItem" class="selectItem">
+		                                                </td>
+													</c:if>
 													<td>${reimbursement.type}<input type="hidden" value="${reimbursement.processinstanceid}" /></td>
 													<td><span class="label label-success">${reimbursement.test}</span></td>
 													<td>${reimbursement.money}</td>
@@ -142,10 +159,12 @@
 																<li>
 																	<a href="${APP_PATH}/admin/reimbursement/showCurrentView/${reimbursement.processinstanceid}">查看进度</a>
 																</li>
-																  <li role="separator" class="divider"></li>
-		                                                        <li>
-		                                                            <a href="">删除</a>
-		                                                        </li>
+																<c:if test="${approved != '全部'}">
+																	  <li role="separator" class="divider"></li>
+			                                                        <li>
+			                                                            <a href="${APP_PATH}/admin/reimbursement/dele/${reimbursement.processinstanceid}">删除</a>
+			                                                        </li>
+																</c:if>
 	
 															</ul>
 														</div>
@@ -168,11 +187,11 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pagination-control">
 									<li>
-										<a href="${APP_PATH}/admin/reimbursement/list?pn=1&type=${type}&state=${state}">首页</a>
+										<a href="${APP_PATH}/admin/reimbursement/list?pn=1&type=${type}&state=${state}&approved=${approved}">首页</a>
 									</li>
 									<c:if test="${pageInfo.hasPreviousPage}">
 										<li>
-											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}" aria-label="Previous">
+											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}&approved=${approved}" aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
 											</a>
 										</li>
@@ -185,21 +204,21 @@
 										</c:if>
 										<c:if test="${pageNum!=pageInfo.pageNum}">
 											<li>
-												<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageNum}&type=${type}&state=${state}">${pageNum}</a>
+												<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageNum}&type=${type}&state=${state}&approved=${approved}">${pageNum}</a>
 											</li>
 										</c:if>
 									</c:forEach>
 
 									<c:if test="${pageInfo.hasNextPage }">
 										<li>
-											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}" aria-label="Next">
+											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}&approved=${approved}" aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 										</li>
 									</c:if>
 
 									<li>
-										<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pages}&type=${type}&state=${state}" aria-label="Next">
+										<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pages}&type=${type}&state=${state}&approved=${approved}" aria-label="Next">
 											<span aria-hidden="true">末页</span>
 										</a>
 									</li>
@@ -232,6 +251,7 @@
         
         <!-- 用于页面跳转的按钮 -->
         <form action="${APP_PATH}/admin/deploy/list">
+        	<input type="hidden" value="${approved}" name="approved">
         	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
         	<button type="submit" class="btn btn-danger down">关闭</button>
         </form>

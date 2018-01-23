@@ -2,10 +2,12 @@ package com.hanming.oa.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,10 +18,12 @@ import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.dao.ThingsMapper;
 import com.hanming.oa.dao.UserThingsMapper;
+import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.ThingsAndExaminationTime;
 import com.hanming.oa.model.UserThings;
@@ -36,6 +40,8 @@ public class ThingsService {
 	TaskService taskService;
 	@Autowired
 	UserThingsMapper userThingsMapper;
+	@Autowired
+	PublicTaskService publicTaskService;
 
 	public List<Things> listLikeStateType(String state, String name) {
 		List<Things> list = thingsMapper.listLikeStateType(state, name);
@@ -141,6 +147,27 @@ public class ThingsService {
 
 	public List<ThingsAndExaminationTime> selectCompleteByMeLikeStateName(String username, String state, String name) {
 		List<ThingsAndExaminationTime> list = thingsMapper.selectCompleteByMeLikeStateName(username, state, name);
+		return list;
+	}
+
+	@Transactional
+	public void deleteThingsTaskByProcessInstanceId(String ids) {
+		String[] idsStr = ids.split("-");
+		List<String> idsList = Arrays.asList(idsStr);
+		List<Things> things = thingsMapper.selectListThingsByProcessInstanceId(idsList);
+		List<Integer> hids = things.stream()
+									.map(Things::getId)
+									.collect(Collectors.toList());
+
+		publicTaskService.deleTaskByProcessInstanceId(idsList);
+		
+		thingsMapper.deleteThingsByProcessInstanceId(idsList);
+		
+		userThingsMapper.deleteByHolidayIdList(hids);
+	}
+
+	public List<Things> listLikeTypeAndApproved(String state, String name) {
+		List<Things> list = thingsMapper.listLikeTypeAndApproved(state,name);
 		return list;
 	}
 

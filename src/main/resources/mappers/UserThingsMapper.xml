@@ -68,4 +68,13 @@
       thingsId = #{thingsid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- void deleteByHolidayIdList(List<Integer> hids); -->
+  <delete id="deleteByHolidayIdList">
+  	delete from user_things 
+	where thingsId IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
 </mapper>

@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import com.hanming.oa.model.UserReimbursement;
 
 public interface UserReimbursementMapper {
@@ -14,4 +16,6 @@ public interface UserReimbursementMapper {
     int updateByPrimaryKeySelective(UserReimbursement record);
 
     int updateByPrimaryKey(UserReimbursement record);
+
+	void deleteByReimbursementIdList(List<Integer> hids);
 }

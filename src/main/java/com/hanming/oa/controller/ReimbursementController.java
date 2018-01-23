@@ -70,15 +70,25 @@ public class ReimbursementController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			@RequestParam(value = "state", defaultValue = "状态") String state,
-			@RequestParam(value = "type", defaultValue = "类型") String type, Model model) {
+			@RequestParam(value = "type", defaultValue = "类型") String type,
+			@RequestParam(value = "approved", defaultValue = "全部") String approved, Model model) {
+		if (approved.equals("已审批")) {
+			PageInfo<Reimbursement> pageInfo = null;
+			PageHelper.startPage(pn, 8);
+			List<Reimbursement> list = null;
+			list = reimbursementService.listLikeTypeAndApproved(state, type);
+			pageInfo = new PageInfo<Reimbursement>(list, 5);
+			model.addAttribute("pageInfo", pageInfo);
+		} else {
+			PageInfo<Reimbursement> pageInfo = null;
+			PageHelper.startPage(pn, 8);
+			List<Reimbursement> list = null;
+			list = reimbursementService.listLikeStateType(state, type);
+			pageInfo = new PageInfo<Reimbursement>(list, 5);
+			model.addAttribute("pageInfo", pageInfo);
+		}
 
-		PageInfo<Reimbursement> pageInfo = null;
-		PageHelper.startPage(pn, 8);
-		List<Reimbursement> list = null;
-		list = reimbursementService.listLikeStateType(state, type);
-		pageInfo = new PageInfo<Reimbursement>(list, 5);
-
-		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("approved", approved);
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行报销列表");
@@ -104,10 +114,10 @@ public class ReimbursementController {
 		int i = reimbursementService.addReimbursement(persons, file, reimbursement, request, processDefinitionKey);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加报销");
-		
-		if (i==1) {
+
+		if (i == 1) {
 			return Msg.success();
-		}else {
+		} else {
 			return Msg.fail();
 		}
 	}
@@ -184,11 +194,11 @@ public class ReimbursementController {
 
 	// 文件下载
 	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
-	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request){
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) {
 
 		UserReimbursementByReimbursementId reimbursementByReimbursementId = reimbursementService
 				.selectReimbursementByReimbursementId(id);
-		
+
 		try {
 			upDownFileService.down(response, request, reimbursementByReimbursementId, "ExaminationFile");
 		} catch (NoSuchMethodException e) {
@@ -211,28 +221,20 @@ public class ReimbursementController {
 			e.printStackTrace();
 		}
 
-		/*// 获取文件
-		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
-				+ reimbursementByReimbursementId.getEnclosure();
-		// 获取输入流
-		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
-		// 假如以中文名下载的话
-		String filename = reimbursementByReimbursementId.getFilename();
-		// 转码，免得文件名中文乱码
-		filename = URLEncoder.encode(filename, "UTF-8");
-		// 设置文件下载头
-		response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-		// 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-		response.setContentType("multipart/form-data");
-		BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-		int len = 0;
-		byte[] bs = new byte[1024];
-		while ((len = bis.read(bs)) != -1) {
-			out.write(bs, 0, len);
-			out.flush();
-		}
-		out.close();
-		bis.close();*/
+		/*
+		 * // 获取文件 String fileName =
+		 * request.getSession().getServletContext().getRealPath("upload") + "/" +
+		 * reimbursementByReimbursementId.getEnclosure(); // 获取输入流 InputStream bis = new
+		 * BufferedInputStream(new FileInputStream(new File(fileName))); // 假如以中文名下载的话
+		 * String filename = reimbursementByReimbursementId.getFilename(); //
+		 * 转码，免得文件名中文乱码 filename = URLEncoder.encode(filename, "UTF-8"); // 设置文件下载头
+		 * response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+		 * // 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+		 * response.setContentType("multipart/form-data"); BufferedOutputStream out =
+		 * new BufferedOutputStream(response.getOutputStream()); int len = 0; byte[] bs
+		 * = new byte[1024]; while ((len = bis.read(bs)) != -1) { out.write(bs, 0, len);
+		 * out.flush(); } out.close(); bis.close();
+		 */
 	}
 
 	// 获得流程定义的KEY对应的人数
@@ -242,6 +244,16 @@ public class ReimbursementController {
 		Integer num = deployService.selectNumByProcessDefinitionKey(key);
 
 		return Msg.success().add("num", num);
+	}
+
+	// 删除任务
+	@ResponseBody
+	@RequestMapping(value = "/dele/{ids}", method = RequestMethod.GET)
+	public Msg deleteTask(@PathVariable("ids") String ids) {
+
+		reimbursementService.deleteHolidayTaskByProcessInstanceId(ids);
+
+		return Msg.success();
 	}
 
 }

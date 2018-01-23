@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -75,6 +76,15 @@ public class ReimbursementDaoTest {
 		for (ReimbursementAndExaminationTime reimbursementAndExaminationTime : list) {
 			System.out.println(reimbursementAndExaminationTime.getExaminationTime());
 		}
+	}
+	
+	@Test
+	public void listLikeTypeAndApproved() {
+		List<Reimbursement> list = reimbursementMapper.listLikeTypeAndApproved("状态", "类型");
+		List<String> list2 = list.stream()
+			.map(Reimbursement::getTest)
+			.collect(Collectors.toList());
+		list2.forEach(System.out::println);
 	}
 
 }

@@ -41,4 +41,6 @@ public interface HolidayMapper {
 
 	void deleteHolidayByProcessInstanceId(List<String> processInstanceId);
 
+	List<Holiday> listLikeTypeAndApproved(@Param("state")String state, @Param("type")String type);
+
 }

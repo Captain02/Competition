@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.dao.ReimbursementMapper;
 import com.hanming.oa.dao.UserReimbursementMapper;
+import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementAndExaminationTime;
 import com.hanming.oa.model.UserReimbursement;
@@ -38,6 +40,8 @@ public class ReimbursementService {
 	RuntimeService runtimeService;
 	@Autowired
 	TaskService taskService;
+	@Autowired
+	PublicTaskService publicTaskService;
 
 	@Transactional
 	public int addReimbursement(String persons, MultipartFile file, Reimbursement reimbursement,
@@ -176,6 +180,28 @@ public class ReimbursementService {
 
 	public void deleteReimbursementServiceByProcessInstanceId(List<String> processInstanceId) {
 		reimbursementMapper.deleteReimbursementServiceByProcessInstanceId(processInstanceId);
+	}
+
+	@Transactional
+	public void deleteHolidayTaskByProcessInstanceId(String ids) {
+		String[] idsStr = ids.split("-");
+		List<String> idsList = Arrays.asList(idsStr);
+		List<Reimbursement> reimbursements = reimbursementMapper.selectListReimbursementByProcessInstanceId(idsList);
+		List<Integer> hids = reimbursements.stream()
+									.map(Reimbursement::getId)
+									.collect(Collectors.toList());
+
+		publicTaskService.deleTaskByProcessInstanceId(idsList);
+		
+		reimbursementMapper.deleteReimbursementServiceByProcessInstanceId(idsList);
+		
+		userReimbursementMapper.deleteByReimbursementIdList(hids);
+		
+	}
+
+	public List<Reimbursement> listLikeTypeAndApproved(String state, String type) {
+		List<Reimbursement> list = reimbursementMapper.listLikeTypeAndApproved(state,type);
+		return list;
 	}
 
 }

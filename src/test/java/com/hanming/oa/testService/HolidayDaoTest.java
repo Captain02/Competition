@@ -1,6 +1,7 @@
 package com.hanming.oa.testService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,4 +99,14 @@ public class HolidayDaoTest {
 			System.out.println(holiday2.getExaminationTime());
 		}
 	}
+	
+	@Test
+	public void listLikeTypeAndApproved() {
+		List<Holiday> list = holidayMapper.listLikeTypeAndApproved("已通过", "类型");
+		List<String> list2 = list.stream()
+			.map(Holiday::getTest)
+			.collect(Collectors.toList());
+		list2.forEach(System.out::println);
+	}
+
 }

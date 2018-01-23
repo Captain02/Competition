@@ -21,4 +21,6 @@ public interface UserThingsMapper {
     int updateByPrimaryKey(UserThings record);
     
     List<Things> listLikeStateType(@Param("state") String state, @Param("name") String name);
+
+	void deleteByHolidayIdList(List<Integer> hids);
 }
