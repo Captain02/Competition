@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
-		<%
-			pageContext.setAttribute("APP_PATH", request.getContextPath());
-%>
+        <%
+	      pageContext.setAttribute("APP_PATH", request.getContextPath());
+		%>
             <!-- 此处显示登录所用的用户名以及职位，用include标签包含进来 -->
             <div class="content-head-right">
                 <ul class="login-info">
@@ -15,6 +15,7 @@
                     <li>
                         <span>欢迎！</span>
                         <a href="#" data-toggle="dropdown">
+                        <img alt="" src="${APP_PATH}/personHeadFile/<sh:principal property="id" />.png" class="person-img">
                             <sh:principal property="name"></sh:principal>
                             <span class="caret"></span>
                         </a>

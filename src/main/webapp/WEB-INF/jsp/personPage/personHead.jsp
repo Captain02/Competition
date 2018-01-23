@@ -64,11 +64,11 @@
 							<div class="panel-body">
 
 								<!-- 预览区域 -->
-								<div class="col-md-9">
+								<div class="col-md-8">
 
 									<!--用户上传的图片-->
 									<div style="height: 500px;" class="img-container">
-										<img src="${APP_PATH}/static/em.jpg" alt="picture" id="image" class="img-responsive">
+										<img src="${APP_PATH}/personHeadFile/<sh:principal property="id" />old.png" alt="暂无头像" id="image" class="img-responsive">
 									</div>
 
 									<!--工具栏 -->
@@ -200,24 +200,35 @@
 
 										</div>
 									</div>
-
-									
-
-
 								</div>
 
-							<img alt="" src="${APP_PATH}/personHeadFile/<sh:principal property="id" />.png">
 
 
 								<!-- 操作区域 -->
-								<div class="col-md-3">
+								<div class="col-md-4">
 
 									<!--额外的预览区域 -->
 									<div class="preview clearfix">
-										<div class="img-preview preview-lg"></div>
-										<div class="img-preview preview-md"></div>
-										<div class="img-preview preview-sm"></div>
-										<div class="img-preview preview-xs"></div>
+										
+										<div class="col-md-12">
+										
+										  <div class="img-preview preview-lg"></div>
+											
+										</div>
+										<div class="col-md-12">
+										 	<div class="img-preview preview-md"></div></div>
+										   
+											
+										</div>
+										<div class="col-md-12">
+										 	<div class="img-preview preview-sm"></div>
+											
+										</div>
+										<div class="col-md-12">
+										 
+										 		<div class="img-preview preview-xs"></div>
+											
+										</div>
 									</div>
 									
 									<!--存放裁剪数据 -->
