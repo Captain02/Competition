@@ -10,6 +10,8 @@
 		<result column="phone" jdbcType="VARCHAR" property="phone" />
 		<result column="qq" jdbcType="VARCHAR" property="qq" />
 		<result column="edu" jdbcType="VARCHAR" property="edu" />
+		<result column="headFile" jdbcType="VARCHAR" property="headFile" />
+		<result column="oldHeadFile" jdbcType="VARCHAR" property="oldHeadFile" />
 	</resultMap>
 	
 	<!-- 带有部门和角色的返回值 -->
@@ -22,6 +24,8 @@
 		<result column="phone" jdbcType="VARCHAR" property="phone" />
 		<result column="qq" jdbcType="VARCHAR" property="qq" />
 		<result column="edu" jdbcType="VARCHAR" property="edu" />
+		<result column="headFile" jdbcType="VARCHAR" property="headFile" />
+		<result column="oldHeadFile" jdbcType="VARCHAR" property="oldHeadFile" />
 		<!-- 联合查询出部门的字段 -->
 		<association property="department" javaType="Department">
 			<id column="tdId" property="id" />
@@ -35,12 +39,12 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		id, username, password, name, sex, phone, qq, edu
+		id, username, password, name, sex, phone, qq, edu,headFile,oldHeadFile
 	</sql>
 	
 	<!-- 带有部门和角色的查询sql -->
 	<sql id="WithDepAndRole">
-		tu.id,tu.username,tu.`password`,tu.`name`,tu.sex,tu.phone,tu.qq,tu.edu,td.id as tdId,tr.id as trId, td.`name` as tdName,tr.`name` as trName
+		tu.oldHeadFile,tu.headFile,tu.id,tu.username,tu.`password`,tu.`name`,tu.sex,tu.phone,tu.qq,tu.edu,td.id as tdId,tr.id as trId, td.`name` as tdName,tr.`name` as trName
 	</sql>
 	
 	<!-- 连表语句 -->
@@ -74,13 +78,15 @@
 	</delete>
 	<insert id="insert" parameterType="com.hanming.oa.model.User">
 		insert into t_user (id, username, password,
-		name, sex, phone, qq,
-		edu)
+		name, sex, phone, qq,headFile,
+		edu,oldHeadFile)
 		values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
 		#{password,jdbcType=VARCHAR},
 		#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
 		#{qq,jdbcType=VARCHAR},
-		#{edu,jdbcType=VARCHAR})
+		#{headFile,jdbcType=VARCHAR},
+		#{edu,jdbcType=VARCHAR},
+		#{oldHeadFile,jdbcType=VARCHAR}	)
 	</insert>
 	<insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.User">
 		insert into t_user
@@ -109,6 +115,12 @@
 			<if test="edu != null">
 				edu,
 			</if>
+			<if test="headFile != null">
+				headFile,
+			</if>
+			<if test="oldHeadFile != null">
+				oldHeadFile,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -134,6 +146,12 @@
 			</if>
 			<if test="edu != null">
 				#{edu,jdbcType=VARCHAR},
+			</if>
+			<if test="headFile != null">
+				#{headFile,jdbcType=VARCHAR},
+			</if>
+			<if test="oldHeadFile != null">
+				#{oldHeadFile,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -161,6 +179,12 @@
 			<if test="edu != null">
 				edu = #{edu,jdbcType=VARCHAR},
 			</if>
+			<if test="headFile != null">
+				headFile = #{headFile,jdbcType=VARCHAR},
+			</if>
+			<if test="oldHeadFile != null">
+				oldHeadFile = #{oldHeadFile,jdbcType=VARCHAR},
+			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -173,6 +197,8 @@
 		phone = #{phone,jdbcType=VARCHAR},
 		qq = #{qq,jdbcType=VARCHAR},
 		edu = #{edu,jdbcType=VARCHAR}
+		headFile = #{headFile,jdbcType=VARCHAR}
+		oldHeadFile = #{oldHeadFile,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 

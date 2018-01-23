@@ -54,7 +54,7 @@
 								<div class="panel">
 									<div class="panel-body">
 										<div class="profile-pic text-center">
-										<img src="${APP_PATH}/personHeadFile/<sh:principal property="id" />.png" alt="" />
+										<img src="${APP_PATH}/personHeadFile/<sh:principal property="headFile" />" alt="" />
 										</div>
 									</div>
 								</div>

@@ -16,18 +16,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.Things;
+import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserHolidayByHolidayId;
 import com.hanming.oa.model.UserReimbursementByReimbursementId;
 import com.hanming.oa.model.UserThingsByThingsId;
 
 @Service
 public class UpDownFileService {
+	
+	@Autowired
+	UserService userService;
 
 	// 文件下载
 	public void down(HttpServletResponse response, HttpServletRequest request, Object obj, String dirName)
@@ -116,6 +121,11 @@ public class UpDownFileService {
 			}
 
 		}
+		
+		User user = userService.selectByPrimaryKey(userId);
+		user.setHeadFile(userId + ".png");
+		user.setOldHeadFile(userId + "old.png");
+		userService.updateByPrimaryKeySelective(user);
 	}
 
 }

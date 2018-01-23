@@ -15,7 +15,7 @@
                     <li>
                         <span>欢迎！</span>
                         <a href="#" data-toggle="dropdown">
-                        <img alt="" src="${APP_PATH}/personHeadFile/<sh:principal property="id" />.png" class="person-img">
+                        <img alt="" src="${APP_PATH}/personHeadFile/<sh:principal property="headFile" />" class="person-img">
                             <sh:principal property="name"></sh:principal>
                             <span class="caret"></span>
                         </a>
