@@ -68,7 +68,7 @@
 
 									<!--用户上传的图片-->
 									<div style="height: 500px;" class="img-container">
-										<img src="${APP_PATH}/personHeadFile/<sh:principal property="id" />old.png" alt="暂无头像" id="image" class="img-responsive">
+										<img src="${APP_PATH}/personHeadFile/<sh:principal property="oldHeadFile" />" alt="暂无头像" id="image" class="img-responsive">
 									</div>
 
 									<!--工具栏 -->
