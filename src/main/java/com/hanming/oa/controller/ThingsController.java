@@ -127,6 +127,10 @@ public class ThingsController {
 		Task task = taskService.createTaskQuery() // 创建任务查询
 				.processInstanceId(processInstanceId)// 根据流程实例Id查询当前任务
 				.singleResult();
+		if (task == null) {
+			mav.setViewName("NoView");
+			return mav;
+		}
 		// 获取流程定义id
 		String processDefinitionId = task.getProcessDefinitionId();
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery() // 创建流程定义查询
