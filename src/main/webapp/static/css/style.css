@@ -612,6 +612,22 @@ ul.p-info .desk {
 ul.p-info .title, ul.p-info .desk {
 	float: left;
 }
+.login-info .person-img{
+	vertical-align: middle;
+    margin-right: 5px;
+    width: 26px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+.profile-pic img{
+	border: 5px solid #F1F2F7;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    height: 150px;
+    margin: 10px 0;
+    width: 150px;
+}
 
 /* 请假条页 */
 .blog h1 {
@@ -694,26 +710,26 @@ ul.p-info .title, ul.p-info .desk {
   max-width: 100%;
 }
 .preview-lg {
-  height: 9rem;
-  width: 16rem;
+  height: 20rem;
+  width: 20rem;
 }
 
 .preview-md {
-  height: 4.5rem;
-  width: 8rem;
+  height: 15rem;
+  width: 15rem;
 }
 
 .preview-sm {
-  height: 2.25rem;
-  width: 4rem;
+  height: 10rem;
+  width: 10rem;
 }
 
 .preview-xs {
-  height: 1.125rem;
+  height: 5rem;
   margin-right: 0;
-  width: 2rem;
+  width: 5rem;
 }
 .modal-body canvas{
-	max-width: 100%;
-	max-height: 100%;
+	max-width: 300px;
+	max-height: 300px;
 }

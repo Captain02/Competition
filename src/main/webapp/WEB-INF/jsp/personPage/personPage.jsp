@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +53,9 @@
 							<div class="col-md-12">
 								<div class="panel">
 									<div class="panel-body">
-										<div class="profile-pic text-center">这里显示头像</div>
+										<div class="profile-pic text-center">
+										<img src="${APP_PATH}/personHeadFile/<sh:principal property="id" />.png" alt="" />
+										</div>
 									</div>
 								</div>
 							</div>

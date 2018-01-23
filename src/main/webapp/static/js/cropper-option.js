@@ -24,7 +24,7 @@ $(function() {
 		preview : '.img-preview',
 		viewMode : 1,
 		dragMode : 'move',
-		aspectRatio : 16 / 9,
+		aspectRatio : 1,
 		autoCropArea : 0.6,
 		restore : false,
 		guides : false,
