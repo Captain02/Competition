@@ -1,11 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Base64;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -18,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
-import com.hanming.oa.model.PersonHead;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.PersonHeadService;
+import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
 
 @Controller
@@ -31,6 +25,8 @@ public class PersonPageController {
 	UserService userService;
 	@Autowired
 	PersonHeadService personHeadService;
+	@Autowired
+	UpDownFileService upDownFileService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -49,43 +45,16 @@ public class PersonPageController {
 
 	@ResponseBody
 	@RequestMapping(value = "/upPersonHeadFile", method = RequestMethod.POST)
-	public Msg upPersonHeadFile(@RequestParam(value = "imgData") String dataURL, HttpServletRequest request) {
-		FileOutputStream write = null;
-		PersonHead personHead = new PersonHead();
+	public Msg upPersonHeadFile(@RequestParam(value = "imgData") String dataURL,
+			@RequestParam(value = "oldImg", defaultValue = "") String oldImg, HttpServletRequest request) {
+		// PersonHead personHead = new PersonHead();
 
-		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
-		//处理字符串
-		String replaceAll = dataURL.replaceAll(" ", "+").substring(dataURL.indexOf(",") + 1);
-		byte[] decoderBytes = Base64.getDecoder().decode(replaceAll);
-
-		File file = new File(request.getSession().getServletContext().getRealPath("personHeadFile"));
-		if (!file.exists()) {
-			file.mkdirs();
+		upDownFileService.upPersonHead(dataURL, request, "");
+		if (!("".equals(oldImg))) {
+			upDownFileService.upPersonHead(oldImg, request, "old");
 		}
-		try {
-			write = new FileOutputStream(
-					new File(request.getSession().getServletContext().getRealPath("personHeadFile"),userId + ".png"));
-			write.write(decoderBytes);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
 
-			try {
-				write.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		
-		personHeadService.insertPersonHead();
-		
+		// personHeadService.insertPersonHead();
 
 		return Msg.success();
 	}

@@ -29,17 +29,13 @@
 					$.ajax({
 				        url: '${APP_PATH}/admin/personPage/upPersonHeadFile', // 要上传的地址
 				        type: 'POST',
-				        data: 'imgData='+imgBase64,
+				        data: 'imgData='+imgBase64+"&oldImg="+imgUploaded,
 				        success: function (result) {
 				            if (result.code==100) {
 								alert("上传成功");
 							}
 				        }
 				    });
-					//发送ajax链接，上传原图
-					if(imgUploaded != ''){
-						
-					}
 					
 				})
 			})

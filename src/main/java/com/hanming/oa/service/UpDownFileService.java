@@ -4,15 +4,20 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLEncoder;
+import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Reimbursement;
@@ -76,5 +81,41 @@ public class UpDownFileService {
 
 	}
 
+	@Transactional
+	public void upPersonHead(String dataURL, HttpServletRequest request, String filename) {
+		FileOutputStream write = null;
+
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+
+		// 处理字符串
+		String replaceAll = dataURL.replaceAll(" ", "+").substring(dataURL.indexOf(",") + 1);
+		byte[] decoderBytes = Base64.getDecoder().decode(replaceAll);
+
+		File file = new File(request.getSession().getServletContext().getRealPath("personHeadFile"));
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		try {
+			write = new FileOutputStream(
+					new File(request.getSession().getServletContext().getRealPath("personHeadFile"),
+							userId + filename + ".png"));
+			write.write(decoderBytes);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			try {
+				write.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
 
 }
