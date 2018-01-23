@@ -2,10 +2,12 @@ package com.hanming.oa.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +39,8 @@ public class HolidayService {
 	RuntimeService runtimeService;
 	@Autowired
 	TaskService taskService;
+	@Autowired
+	PublicTaskService publicTaskService;
 
 	public int insertHoliday(Holiday holiday) {
 		int i = holidayMapper.insertSelective(holiday);
@@ -160,5 +164,24 @@ public class HolidayService {
 	public void deleteHolidayByProcessInstanceId(List<String> processInstanceId) {
 		holidayMapper.deleteHolidayByProcessInstanceId(processInstanceId);
 	}
+
+	@Transactional
+	public void deleteHolidayTaskByProcessInstanceId(String ids) {
+		String[] idsStr = ids.split("-");
+		List<String> idsList = Arrays.asList(idsStr);
+		List<Holiday> holidays = holidayMapper.selectListHolidayByProcessInstanceId(idsList);
+		List<Integer> hids = holidays.stream()
+									.map(Holiday::getId)
+									.collect(Collectors.toList());
+
+		publicTaskService.deleTaskByProcessInstanceId(idsList);
+		
+		holidayMapper.deleteHolidayByProcessInstanceId(idsList);
+		
+		userHolidayMapper.deleteByHolidayIdList(hids);
+		
+	}
+
+	
 
 }

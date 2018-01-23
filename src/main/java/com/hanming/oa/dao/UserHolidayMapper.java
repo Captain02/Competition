@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import com.hanming.oa.model.UserHoliday;
 
 public interface UserHolidayMapper {
@@ -14,4 +16,6 @@ public interface UserHolidayMapper {
     int updateByPrimaryKeySelective(UserHoliday record);
 
     int updateByPrimaryKey(UserHoliday record);
+
+	void deleteByHolidayIdList(List<Integer> hids);
 }

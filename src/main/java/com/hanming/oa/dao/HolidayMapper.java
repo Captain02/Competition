@@ -40,4 +40,5 @@ public interface HolidayMapper {
 	List<Holiday> selectListHolidayByProcessInstanceId(List<String> listProcessinstanceid);
 
 	void deleteHolidayByProcessInstanceId(List<String> processInstanceId);
+
 }

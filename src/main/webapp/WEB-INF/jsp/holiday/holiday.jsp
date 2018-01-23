@@ -28,7 +28,12 @@
 			var ids = $('.ids').val();
 			
 			$('.yes').click(function(){
-				//发送ajax请求
+				$.ajax({
+					url:"${APP_PATH}/admin/holiday/dele/"+ids,
+					type:"GET",
+					success:function(result) {
+					}
+				})
 			})
 		}
 	</script>
@@ -154,7 +159,7 @@
 	                                                            </li>
 	                                                              <li role="separator" class="divider"></li>
 	                                                        <li>
-	                                                            <a href="">删除</a>
+	                                                            <a href="${APP_PATH}/admin/holiday/dele/${holiday.processinstanceid}">删除</a>
 	                                                        </li>
 	                                                        </ul>
 	                                                    </div>

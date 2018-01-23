@@ -103,9 +103,9 @@ public class HolidayController {
 		int i = holidayService.addholiday(persons, file, holiday, request, processDefinitionKey);
 
 		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加请假条");
-		if (i==1) {
+		if (i == 1) {
 			return Msg.success();
-		}else {
+		} else {
 			return Msg.fail();
 		}
 	}
@@ -170,12 +170,12 @@ public class HolidayController {
 
 	// 文件下载
 	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
-	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request){
-		
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) {
+
 		UserHolidayByHolidayId holidayByHolidayId = holidayService.selectHolidayByHolidayId(id);
 
 		try {
-			upDownFileService.down(response, request,holidayByHolidayId,"ExaminationFile");
+			upDownFileService.down(response, request, holidayByHolidayId, "ExaminationFile");
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -195,30 +195,6 @@ public class HolidayController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		UserHolidayByHolidayId holidayByHolidayId = holidayService.selectHolidayByHolidayId(id);
-//
-//		// 获取文件
-//		String fileName = request.getSession().getServletContext().getRealPath("upload") + "/"
-//				+ holidayByHolidayId.getEnclosure();
-//		// 获取输入流
-//		InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
-//		// 假如以中文名下载的话
-//		String filename = holidayByHolidayId.getFilename();
-//		// 转码，免得文件名中文乱码
-//		filename = URLEncoder.encode(filename, "UTF-8");
-//		// 设置文件下载头
-//		response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-//		// 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-//		response.setContentType("multipart/form-data");
-//		BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-//		int len = 0;
-//		byte[] bs = new byte[1024];
-//		while ((len = bis.read(bs)) != -1) {
-//			out.write(bs, 0, len);
-//			out.flush();
-//		}
-//		out.close();
-//		bis.close();
 	}
 
 	// 获得流程定义的KEY对应的人数
@@ -228,6 +204,16 @@ public class HolidayController {
 		Integer num = deployService.selectNumByProcessDefinitionKey(key);
 
 		return Msg.success().add("num", num);
+	}
+
+	// 删除任务
+	@ResponseBody
+	@RequestMapping(value = "/dele/{ids}", method = RequestMethod.GET)
+	public Msg deleteTask(@PathVariable("ids") String ids) {
+		
+		holidayService.deleteHolidayTaskByProcessInstanceId(ids);
+
+		return Msg.success();
 	}
 
 }
