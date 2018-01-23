@@ -100,12 +100,27 @@
                         <jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
                         
                         <div class="om-header-right ">
+                        
                             <button id="addButton" onclick="window.location.href='${APP_PATH}/admin/holiday/add'" type="button" class="btn btn-success btn-sm">
                                 <i>+</i>我要请假
                             </button>
+                            
+                            <button id="delButton" type="button" class="btn btn-success fnish-process" onclick="">
+                                <i class="glyphicon glyphicon-check"></i>已审批
+                            </button>
+                            
+                             
+                            <button id="delButton" type="button" class="btn btn-warning do-process" onclick="">
+                                <i class="glyphicon glyphicon-time"></i>未审批
+                            </button>
+                            
                             <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
                                 <i>-</i>批量删除
                             </button>
+                            
+                          	   
+                           
+                            
                             <input type="hidden" value=""  class="ids"/>
                         </div>
 
