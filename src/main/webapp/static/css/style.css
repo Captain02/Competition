@@ -528,9 +528,11 @@ form#addUserInfo header {
 .person-name-area>a {
 	cursor: pointer;
 }
-.noProcessPerson{
+
+.noProcessPerson {
 	display: none;
 }
+
 .cf tr td a {
 	font-size: 16px;
 	color: #65CEA7;
@@ -612,21 +614,28 @@ ul.p-info .desk {
 ul.p-info .title, ul.p-info .desk {
 	float: left;
 }
-.login-info .person-img{
+
+.login-info .person-img {
 	vertical-align: middle;
-    margin-right: 5px;
-    width: 26px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+	margin-right: 5px;
+	width: 26px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 }
-.profile-pic img{
+
+.profile-pic img {
 	border: 5px solid #F1F2F7;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    height: 150px;
-    margin: 10px 0;
-    width: 150px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	height: 150px;
+	margin: 10px 0;
+	width: 150px;
+}
+
+.wrapper div.row {
+	margin-left: -15px;
+	margin-right: -15px;
 }
 
 /* 请假条页 */
@@ -690,46 +699,133 @@ ul.p-info .title, ul.p-info .desk {
 .label-success {
 	background-color: #5cb85c;
 }
-.processTips{
+
+.processTips {
 	margin-top: 10px;
 	color: #65CEA7;
 }
-.processTips span{
+
+.processTips span {
 	color: red;
 }
 
 /*头像预览*/
 .img-preview {
-  float: left;
-  margin-bottom: .5rem;
-  margin-right: .5rem;
-  overflow: hidden;
+	float: left;
+	margin-bottom: .5rem;
+	margin-right: .5rem;
+	overflow: hidden;
 }
 
-.img-preview > img {
-  max-width: 100%;
+.img-preview>img {
+	max-width: 100%;
 }
+
 .preview-lg {
-  height: 20rem;
-  width: 20rem;
+	height: 20rem;
+	width: 20rem;
 }
 
 .preview-md {
-  height: 15rem;
-  width: 15rem;
+	height: 15rem;
+	width: 15rem;
 }
 
 .preview-sm {
-  height: 10rem;
-  width: 10rem;
+	height: 10rem;
+	width: 10rem;
 }
 
 .preview-xs {
-  height: 5rem;
-  margin-right: 0;
-  width: 5rem;
+	height: 5rem;
+	margin-right: 0;
+	width: 5rem;
 }
-.modal-body canvas{
+
+.modal-body canvas {
 	max-width: 300px;
 	max-height: 300px;
+}
+/*知识分享*/
+.panel-heading {
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+	padding: 15px;
+	text-transform: uppercase;
+	color: #535351;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.person-img img {
+	float: left;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+.activity-list li {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eff0f4;
+}
+
+.activity-desk {
+	margin-left: 70px;
+}
+
+.activity-desk h5 {
+	color: #2a323f;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.activity-desk a.user-name {
+	color: #65CEA7;
+}
+
+.activity-desk span.activity-title a {
+	color: #2a323f;
+	font-weight: 500;
+}
+
+.text-muted {
+	color: #999;
+}
+
+.text-muted i.glyphicon {
+	margin: 0 5px;
+	top: 3px;
+}
+
+.text-muted a.my-control {
+	color: #65CEA7;
+}
+
+.text-muted span {
+	margin: 0 5px;
+}
+
+.blog-post ul li a {
+	line-height: 35px;
+	color: #837f7e;
+}
+
+.blog-post h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #424242;
+	font-weight: bold;
+	padding-top: 0px;
+	margin-top: 0;
+}
+
+.p-follow-btn {
+	background: #eff0f4;
+	color: #a4a4a4 !important;
+}
+.answer{
+	color:#999 !important;
 }

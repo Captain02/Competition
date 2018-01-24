@@ -43,11 +43,11 @@
 			<!-- 页面模版，按需更改 -->
 			<div class="wrapper">
 
-				<div class="row">
+				<div class="row person-area">
 
 					<!-- 左侧 -->
 					<div class="col-md-4">
-						<div class="row">
+						<div class="row person-area">
 
 							<!-- 头像显示区 -->
 							<div class="col-md-12">
