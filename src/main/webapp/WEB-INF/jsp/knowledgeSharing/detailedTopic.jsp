@@ -69,7 +69,7 @@
 									<ul class="activity-list">
 										<c:forEach items="${bbsDetailedTopic.comments}" var="comments">
 										
-											<c:if test="${comments.repliesId != 0}">
+											<c:if test="${comments.repliesId == 0}">
 												<li>
 													<div class="person-img">
 														<a href="">	
@@ -98,7 +98,7 @@
 													</li>
 											</c:if>
 											
-											<c:if test="${comments.repliesId == 0}">
+											<c:if test="${comments.repliesId != 0}">
 												<li>
 													<div class="person-img">
 														<a href="">	
