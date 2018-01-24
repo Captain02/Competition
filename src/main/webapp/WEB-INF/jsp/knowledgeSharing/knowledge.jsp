@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>详细内容</title>
+<title>知识分享</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -20,7 +21,7 @@
 			<!-- 页面模版，每页主体部分头部按需更改 -->
 			<div class="content-head content-head-section">
 				<a href="" class="toggle-btn"> <span
-					class="glyphicon glyphicon-th-list"></span>
+					class="glyphicon Sglyphicon-th-list"></span>
 				</a>
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 				<div class="clearfix"></div>
@@ -34,84 +35,93 @@
 						</h3>
 					</div>
 
-				
+					<div class="om-header-right">
+						<a href="" class="btn btn-warning btn-sm">我的知识</a>
+						<a href="" class="btn btn-success btn-sm">全部知识</a> 
+						<a href="" class="btn btn-success btn-sm">+分享知识</a>
+					</div>
+
 
 					<div class="clearfix"></div>
 				</div>
 				
-			    <div class="row">
-                     <!--详细内容 -->
-					<div class="row">
-						<div class="blog">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="panel">
+									<div class="panel-heading">精彩分享</div>
 									<div class="panel-body">
-										<!--显示知识详细内容 -->
-										<div class="single-blog">
-										
-										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-thumbs-up" title="点赞"></i></a>
-										<a href="" class="btn p-follow-btn"><i class=" glyphicon glyphicon-heart" title="收藏"></i></a>
-										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-comment" title="评论"></i></a>
-										</div>
+										<ul class="activity-list">
+											<!--此处li标签应遍历生成 -->
+											<c:forEach items="${pageInfo.list}" var="bbsDisplayTopic">
+												<li>
+													<div class="person-img">
+														<a href="">	
+															<!--此处放头像 -->
+															<img src="${APP_PATH}/personHeadFile/${bbsDisplayTopic.userHeadFile}" alt="" />
+														</a>
+													</div>
+													<div class="activity-desk">
+														<h5 class="">
+															<!--此处放用户名 -->
+															<a href="" class="user-name">${bbsDisplayTopic.userName}</a>
+															<span class="activity-title">
+																<!--此处放动态标题 -->
+																<a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic/${bbsDisplayTopic.id}">${bbsDisplayTopic.title}</a>
+															</span>
+														</h5>
+														
+														<!--此处放动态描述-->
+														<p class="text-muted">${bbsDisplayTopic.sketch}</p>
+														
+														<!--此处放动态操作-->
+														<p class="pull-right text-muted">
+															<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
+															<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
+															<i class="glyphicon glyphicon-thumbs-up"></i>${bbsDisplayTopic.like}
+															<i class=" glyphicon glyphicon-heart"></i>${bbsDisplayTopic.collection}
+															<i class="glyphicon glyphicon-comment"></i>${bbsDisplayTopic.comment}
+															<span class="activity-time">${bbsDisplayTopic.date}</span>
+														</p>
+													</div>
+												</li>
+											</c:forEach>
+										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					
-					<!--显示评论和回复操作 -->
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel">
-								<header class="panel-heading">精彩点评</header>
-								<div class="panel-body">
-									<ul class="activity-list">
-										<li>
-											<div class="person-img">
-												<a href="">	
-													<!--此处放头像 -->
-													<img src="${APP_PATH}/static/em.jpg" alt="" />
-												</a>
-											</div>
-											
-											<div class="activity-desk">
-													<h5 class="">
-														<!--此处放评论者用户名 -->
-														<a href="" class="user-name">李白</a>
-														<span class="activity-title">
-															<!--此处放评论内容 -->
-															<span>下一版本更精彩</span>
-														</span>
-													</h5>
-													
-													<!--此处放评论时间-->
-													<p class="text-muted">
-													2017-03-28 15:57
-													<!-- 回复按钮 -->
-													<span><a href="" class="answer">回复</a></span>
-													</p>
-													
-													
-													
-													
-												</div>
-										</li>
-									</ul>
-									<form action="" method="post" class="form-horizontal">
-										<div class="form-group">
-						                    <div class="col-sm-12">
-						                      <textarea name="comment" rows="6" class="form-control" placeholder="精彩评论不断……"></textarea>
-						                      <br>
-						                      <input name="knowid" value="" type="hidden">
-						                      <button type="submit" class="btn btn-success pull-right">我来点评</button>
-						                    </div>
-                  						</div>
-									</form>
+					<div class="col-md-4">
+						<div class="panel">
+							<div class="panel-body">
+								<div class="blog-post">
+									<h3>分类</h3>
+								<ul>
+                  
+				                  <li> <a href="">企业文化</a> </li>
+				                  
+				                  <li> <a href="">管理知识</a> </li>
+				                  
+				                  <li> <a href="">财务知识</a> </li>
+				                  
+				                  <li> <a href="">技术分享</a> </li>
+				                  
+				                  <li> <a href="">服务器</a> </li>
+				                  
+				                  <li> <a href="">市场营销</a> </li>
+				                  
+				                  <li> <a href="">运营</a> </li>
+				                  
+				                  <li> <a href="">随笔</a> </li>
+                  
+                				</ul>
 								</div>
 							</div>
 						</div>
 					</div>
-			    </div>
+				</div>
 				
 			</div>
 		</div>

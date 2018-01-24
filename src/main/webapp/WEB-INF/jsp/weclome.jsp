@@ -52,7 +52,7 @@
                         </a>
                 </li>
                 <li>
-                    <a href="http://">
+                    <a href="${APP_PATH}/admin/KnowledgeSharing/list">
                         <span class="glyphicon glyphicon-duplicate left-list-icon"></span>
                         <span class="menu-text">知识分享</span>
                         </a>

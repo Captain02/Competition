@@ -42,10 +42,22 @@
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table> -->
-		<table tableName="personHead" domainObjectName="PersonHead"
+		<!-- <table tableName="BBSTopic" domainObjectName="BBSTopic"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table> -->
+		<table tableName="BBSReplies" domainObjectName="BBSReplies"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
+		<!-- <table tableName="BBSLabelTopic" domainObjectName="BBSLabelTopic"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+		<table tableName="BBSLabel" domainObjectName="BBSLabel"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table> -->
 
 	</context>
 </generatorConfiguration>

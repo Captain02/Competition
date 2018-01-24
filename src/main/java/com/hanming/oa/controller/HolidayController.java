@@ -69,15 +69,13 @@ public class HolidayController {
 		if (approved.equals("已审批")) {
 			PageInfo<Holiday> pageInfo = null;
 			PageHelper.startPage(pn, 8);
-			List<Holiday> list = null;
-			list = holidayService.listLikeTypeAndApproved(state, type);
+			List<Holiday> list = holidayService.listLikeTypeAndApproved(state, type);
 			pageInfo = new PageInfo<Holiday>(list, 5);
 			model.addAttribute("pageInfo", pageInfo);
 		} else {
 			PageInfo<Holiday> pageInfo = null;
 			PageHelper.startPage(pn, 8);
-			List<Holiday> list = null;
-			list = holidayService.listLikeStateType(state, type);
+			List<Holiday> list = holidayService.listLikeStateType(state, type);
 			pageInfo = new PageInfo<Holiday>(list, 5);
 			model.addAttribute("pageInfo", pageInfo);
 		}
