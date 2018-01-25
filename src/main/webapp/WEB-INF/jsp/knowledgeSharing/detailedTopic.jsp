@@ -49,10 +49,30 @@
 									<div class="panel-body">
 										<!--显示知识详细内容 -->
 										<div class="single-blog">
-										
+											<!--这里是动态的标题-->
+											<h1 class="text-center">
+												<a href="">OPMS 1.2 版本更新发布</a>
+											</h1>
+											
+											<!--这里是作者姓名和发布时间-->
+											<p class="text-center auth-row"> By <a href="">李白</a> |   2017-03-28 </p>
+											
+											<!--这里是动态正文，使用文本编辑器格式化好的-->
+											<div>
+												
+											</div>
+											
+											
 										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-thumbs-up" title="点赞"></i></a>
 										<a href="" class="btn p-follow-btn"><i class=" glyphicon glyphicon-heart" title="收藏"></i></a>
 										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-comment" title="评论"></i></a>
+										
+										<!--这里是动态的分类-->
+										<p class="pull-right activity-order">
+											分类：
+										    <span>计算机、服务器、心得和经验</span>
+										</p>
+										
 										</div>
 									</div>
 								</div>
@@ -89,7 +109,7 @@
 															</h5>
 															
 															<!--此处放评论时间-->
-															<p class="text-muted">
+															<p class="text-muted pull-right">
 															${comments.date}
 															<!-- 回复按钮 -->
 															<span><a href="" class="answer">回复</a></span>
@@ -118,10 +138,10 @@
 															</h5>
 															
 															<!--此处放评论时间-->
-															<p class="text-muted">
-															${comments.date}
-															<!-- 回复按钮 -->
-															<span><a href="" class="answer">回复</a></span>
+															<p class="text-muted pull-right">
+																${comments.date}
+																<!-- 回复按钮 -->
+																<span><a class="answer">回复</a></span>
 															</p>
 														</div>
 													</li>
@@ -135,7 +155,7 @@
 						                      <textarea name="comment" rows="6" class="form-control" placeholder="精彩评论不断……"></textarea>
 						                      <br>
 						                      <input name="knowid" value="" type="hidden">
-						                      <button type="submit" class="btn btn-success pull-right">我来点评</button>
+						                      <button type="submit" class="btn btn-primary pull-right">我来点评</button>
 						                    </div>
                   						</div>
 									</form>

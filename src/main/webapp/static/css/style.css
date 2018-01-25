@@ -46,6 +46,7 @@ body {
 
 .bg-common {
 	background-color: #424f63;
+	overflow: hidden;
 }
 
 /* index start */
@@ -828,4 +829,15 @@ ul.p-info .title, ul.p-info .desk {
 }
 .answer{
 	color:#999 !important;
+	cursor: pointer;
+}
+.blog .auth-row {
+    color: #c8c8c8;
+    font-weight: 300;
+    padding-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.activity-order{
+	color:#999;
 }
