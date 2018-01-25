@@ -52,4 +52,12 @@ public class KnowledgeSharingController {
 		return "knowledgeSharing/add";
 	}
 
+	// 添加知识
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addKnowledge(@RequestParam(value = "text") String text) {
+		System.out.println("+++++++++++++++++++++++++++" + text);
+
+		return "knowledgeSharing/add";
+	}
+
 }

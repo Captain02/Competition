@@ -14,8 +14,11 @@
 <script src="${APP_PATH}/static/js/kindeditor-all-min.js"></script>
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
+
+var html;
+
 $(function(){
-	var html;
+	
 	var editor = KindEditor.create('textarea[name="content"]', {
 		allowFileManager : true,
 		afterBlur:function(){
@@ -24,10 +27,20 @@ $(function(){
 			console.log(html);
 		}
 	});
-	
-	//在这里发送ajax请求，保存添加的知识
-	
 })
+
+
+//在这里发送ajax请求，保存添加的知识
+function save() {
+	$.ajax({
+		url:"${APP_PATH}/admin/KnowledgeSharing/add",
+		type:"POST",
+		data:{"text":html},
+		success:function(result){
+			alert("添加成功");
+		}
+	})
+}
 </script>
 </head>
 
@@ -113,7 +126,7 @@ $(function(){
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
 							<div class="col-sm-10">
-								<input type="submit"  class="btn btn-success" value="提交"/>
+								<button type="button" onclick="save()"  class="btn btn-success">提交</button>
 							</div>
 						</div>
 						</form>
