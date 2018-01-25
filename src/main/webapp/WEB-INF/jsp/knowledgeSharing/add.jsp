@@ -14,7 +14,6 @@
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
-var html = "";
 
 $(function(){
 	
@@ -22,8 +21,7 @@ $(function(){
 		allowFileManager : true,
 		afterBlur:function(){
 			this.sync();
-			html = $('#editor_id').val();
-			console.log(html);
+			$('#content_value').html($('#editor_id').val());
 		}
 	});
 })
@@ -31,6 +29,7 @@ $(function(){
 
 //在这里发送ajax请求，保存添加的知识
 function save() {
+	var html = $('#content_value').html();
 	var topicText = $("#topicText").serialize();
 	console.log(topicText);
 	
@@ -126,6 +125,11 @@ function save() {
 								<div class="col-sm-10">
 									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
 								</div>
+								
+								<!--存放文本编辑器中的内容 -->
+								<textarea  id="content_value" name="content_value"  style="height:90px; display: none;" class="form-control"></textarea>
+								
+								
 							</div>
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
