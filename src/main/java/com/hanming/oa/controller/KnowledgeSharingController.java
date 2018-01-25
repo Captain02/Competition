@@ -23,8 +23,7 @@ public class KnowledgeSharingController {
 	@Autowired
 	BBSTopicService bbsTopicService;
 
-	
-	//遍历贴
+	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 
@@ -36,14 +35,21 @@ public class KnowledgeSharingController {
 
 		return "knowledgeSharing/knowledge";
 	}
-	
-	//查看某个贴
-	@RequestMapping(value="/detailedTopic/{topicId}",method=RequestMethod.GET)
-	public String detailedTopicPage(@PathVariable("topicId")Integer topicId,Model model) {
+
+	// 查看某个贴
+	@RequestMapping(value = "/detailedTopic/{topicId}", method = RequestMethod.GET)
+	public String detailedTopicPage(@PathVariable("topicId") Integer topicId, Model model) {
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
-		
+
 		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);
 		return "knowledgeSharing/detailedTopic";
 	}
-	
+
+	// 跳转添加知识页面
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addKnowledgePage() {
+
+		return "knowledgeSharing/add";
+	}
+
 }

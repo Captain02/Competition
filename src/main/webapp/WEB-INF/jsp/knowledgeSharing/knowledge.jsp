@@ -38,7 +38,7 @@
 					<div class="om-header-right">
 						<a href="" class="btn btn-warning btn-sm">我的知识</a>
 						<a href="" class="btn btn-success btn-sm">全部知识</a> 
-						<a href="" class="btn btn-success btn-sm">+分享知识</a>
+						<a href="${APP_PATH}/admin/KnowledgeSharing/add" class="btn btn-success btn-sm">+分享知识</a>
 					</div>
 
 
