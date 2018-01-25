@@ -12,6 +12,23 @@
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <link rel="stylesheet" href="${APP_PATH}/static/css/default.css">
 <script src="${APP_PATH}/static/js/kindeditor-all-min.js"></script>
+<!--初始化kindEditor配置 -->
+<script type="text/javascript">
+$(function(){
+	var html;
+	var editor = KindEditor.create('textarea[name="content"]', {
+		allowFileManager : true,
+		afterBlur:function(){
+			this.sync();
+			html = $('#editor_id').val();
+			console.log(html);
+		}
+	});
+	
+	//在这里发送ajax请求，保存添加的知识
+	
+})
+</script>
 </head>
 
 <body class="bg-common">
@@ -90,7 +107,7 @@
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>内容</label>
 								<div class="col-sm-10">
-									<textarea name="content" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -109,14 +126,5 @@
 			</div>
 		</div>
 	</section>
-	
-<!--初始化kindEditor配置 -->
-<script type="text/javascript">
-$(function(){
-	var editor = KindEditor.create('textarea[name="content"]', {
-		allowFileManager : true,
-	});
-})
-</script>
 </body>
 </html>
