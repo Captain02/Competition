@@ -56,11 +56,11 @@ public class KnowledgeSharingController {
 
 	// 添加知识
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addKnowledge(@RequestParam(value = "text") String text,
-			@RequestParam(value = "bbsTopic") String strBBSTopic, BBSTopic bbsTopic) {
-
-		System.out.println("+++++++++++++++++++++++++++" + strBBSTopic);
-		System.out.println("+++++++++++++++++++++++++++" + bbsTopic.getSketch());
+	public String addKnowledge(@RequestParam(value = "text",defaultValue="") String text,
+			 BBSTopic bbsTopic) {
+		//@RequestParam(value = "bbsTopic") String strBBSTopic,
+		//System.out.println("+++++++++++++++++++++++++++" + strBBSTopic);
+		System.out.println("+++++++++++++++++++++++++++" + bbsTopic.getTitle());
 
 		// BBSTopic bbsTopic = new BBSTopic();
 		// Integer userId = (Integer)

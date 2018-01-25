@@ -36,9 +36,7 @@ function save() {
 	$.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
 		type:"POST",
-		data:{'text':html,
-			  'bbsTopic':topicText
-		},
+		data:$("#topicText").serialize(),
 		success:function(result){
 			alert("添加成功");
 		}
