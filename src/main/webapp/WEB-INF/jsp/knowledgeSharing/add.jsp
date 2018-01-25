@@ -10,11 +10,10 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-<link rel="stylesheet" href="${APP_PATH}/static/css/default.css">
-<script src="${APP_PATH}/static/js/kindeditor-all-min.js"></script>
+<link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
+<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
-
 var html;
 
 $(function(){
