@@ -56,15 +56,19 @@ public class KnowledgeSharingController {
 
 	// 添加知识
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addKnowledge(@RequestParam(value = "text") String text) {
-		System.out.println("+++++++++++++++++++++++++++" + text);
-		
-		BBSTopic bbsTopic = new BBSTopic();
-		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		bbsTopic.setText(text);
-		bbsTopic.setUserId(userId);
-		bbsTopicService.insertTopic(bbsTopic);
-		
+	public String addKnowledge(@RequestParam(value = "text") String text,
+			@RequestParam(value = "bbsTopic") String strBBSTopic, BBSTopic bbsTopic) {
+
+		System.out.println("+++++++++++++++++++++++++++" + strBBSTopic);
+		System.out.println("+++++++++++++++++++++++++++" + bbsTopic.getSketch());
+
+		// BBSTopic bbsTopic = new BBSTopic();
+		// Integer userId = (Integer)
+		// SecurityUtils.getSubject().getSession().getAttribute("id");
+		// bbsTopic.setText(text);
+		// bbsTopic.setUserId(userId);
+		// bbsTopicService.insertTopic(bbsTopic);
+
 		return "knowledgeSharing/add";
 	}
 

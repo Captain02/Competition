@@ -14,7 +14,7 @@
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
-var html;
+var html = "";
 
 $(function(){
 	
@@ -31,10 +31,15 @@ $(function(){
 
 //在这里发送ajax请求，保存添加的知识
 function save() {
+	var topicText = $("#topicText").serialize();
+	console.log(topicText);
+	
 	$.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
 		type:"POST",
-		data:{"text":html},
+		data:{'text':html,
+			  'bbsTopic':topicText
+		},
 		success:function(result){
 			alert("添加成功");
 		}
@@ -72,7 +77,7 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading"></header>
 						<div class="panel-body">
-						<form action="" method="post">
+						<form id="topicText" action="" method="post">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>类别</label>
 								<div class="col-sm-10">
@@ -113,7 +118,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">简介</label>
 								<div class="col-sm-10">
-									<textarea name="summary" placeholder="请填写简介" style="height:90px;" class="form-control"></textarea>
+									<textarea name="sketch" placeholder="请填写简介" style="height:90px;" class="form-control"></textarea>
 								</div>
 							</div>
 							<div class="form-group">

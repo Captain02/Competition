@@ -38,26 +38,14 @@
 
 		<!-- 指定每个表的生成策略 -->
 		
-		<!-- <table tableName="user_things" domainObjectName="UserThings"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table> -->
-		<!-- <table tableName="BBSTopic" domainObjectName="BBSTopic"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table> -->
-		<table tableName="BBSReplies" domainObjectName="BBSReplies"
+		<table tableName="BBSCollection" domainObjectName="BBSCollection"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		<!-- <table tableName="BBSLabelTopic" domainObjectName="BBSLabelTopic"
+		<table tableName="BBSLike" domainObjectName="BBSLike"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		<table tableName="BBSLabel" domainObjectName="BBSLabel"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table> -->
 
 	</context>
 </generatorConfiguration>
