@@ -67,15 +67,22 @@
 															<!--此处放用户名 -->
 															<a href="" class="user-name">${bbsDisplayTopic.userName}</a>
 															<span class="activity-title">
-																<!--此处放动态标题 -->
+																<!--此处放知识标题 -->
 																<a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic/${bbsDisplayTopic.id}">${bbsDisplayTopic.title}</a>
 															</span>
+															<!--此处是知识所属标签-->
+															<p class="pull-right activity-order">
+																标签：
+															    <span>计算机、服务器、心得和经验</span>
+															</p>
 														</h5>
 														
-														<!--此处放动态描述-->
+														<!--此处放知识描述-->
 														<p class="text-muted">${bbsDisplayTopic.sketch}</p>
 														
-														<!--此处放动态操作-->
+														
+														
+														<!--此处放知识操作-->
 														<p class="pull-right text-muted">
 															<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
 															<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>

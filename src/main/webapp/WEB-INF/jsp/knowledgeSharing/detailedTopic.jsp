@@ -69,7 +69,7 @@
 										
 										<!--这里是动态的分类-->
 										<p class="pull-right activity-order">
-											分类：
+											标签：
 										    <span>
 										    	<c:forEach items="${bbsDetailedTopic.labelName}" var="labelName">
 										    		${labelName}、
