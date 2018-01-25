@@ -43,7 +43,6 @@ import com.hanming.oa.service.UserService;
 @Controller
 @RequestMapping("/admin/holiday")
 public class HolidayController {
-	private static final Logger logger = LoggerFactory.getLogger(HolidayController.class);
 
 	@Autowired
 	UserService userService;
@@ -82,7 +81,6 @@ public class HolidayController {
 		model.addAttribute("approved", approved);
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行请假列表");
 		return "holiday/holiday";
 	}
 
@@ -104,7 +102,6 @@ public class HolidayController {
 			HttpServletRequest request) {
 		int i = holidayService.addholiday(persons, file, holiday, request, processDefinitionKey);
 
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加请假条");
 		if (i == 1) {
 			return Msg.success();
 		} else {
@@ -149,7 +146,6 @@ public class HolidayController {
 		mav.addObject("width", activityImpl.getWidth()); // 宽度
 		mav.addObject("height", activityImpl.getHeight()); // 高度
 		mav.setViewName("holiday/currentView");
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行显示当前流程图");
 		return mav;
 	}
 
@@ -166,7 +162,6 @@ public class HolidayController {
 			model.addAttribute("approver", task.getAssignee());
 		}
 		model.addAttribute("userHolidayByHolidayId", userHolidayByHolidayId);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看假条");
 		return "holiday/holidayNote";
 	}
 

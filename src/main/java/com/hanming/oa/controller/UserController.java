@@ -35,7 +35,6 @@ import com.hanming.oa.service.UserService;
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	UserService userService;
@@ -68,18 +67,15 @@ public class UserController {
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("name", name);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====查询用户列表");
 		return "user/user";
 	}
 
 	// 用户添加跳转页面
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String userAddPage(Model model) {
-		logger.info("跳转用户添加页面");
 		model.addAttribute("user", new User());
 		model.addAttribute("role", roleService.list());
 		model.addAttribute("department", departmentService.list());
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====用户添加跳转页面");
 		return "user/add";
 	}
 
@@ -109,7 +105,6 @@ public class UserController {
 			}
 			return Msg.fail().add("errorFields", map);
 		} else if (userService.add(departmentId, roleId, user) == 1) {
-			logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====保存用户功能");
 			return Msg.success();
 		} else {
 			return Msg.fail();
@@ -130,7 +125,6 @@ public class UserController {
 		model.addAttribute("pn", pn);
 		model.addAttribute("role", roleService.list());
 		model.addAttribute("department", departmentService.list());
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====跳转用户修改跳转页面");
 		return "user/add";
 	}
 
@@ -149,7 +143,6 @@ public class UserController {
 			return Msg.fail().add("errorFields", map);
 		}
 		if (userService.Update(departmentId, roleId, user) == 1) {
-			logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行用户修改");
 			return Msg.success();
 		}
 		return Msg.fail();
@@ -160,7 +153,6 @@ public class UserController {
 	@RequestMapping(value = "/dele/{id}", method = RequestMethod.DELETE)
 	public Msg dele(@PathVariable("id") String userId) {
 		if (userService.dele(userId) == 1) {
-			logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行人员删除");
 			return Msg.success();
 		}
 		return Msg.fail();
@@ -171,7 +163,6 @@ public class UserController {
 	@RequestMapping(value = "/changePassword/{id}", method = RequestMethod.GET)
 	public String changePasswordPage(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("id", id);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====跳转修改密码页面");
 		return "user/changePassword";
 	}
 
@@ -202,7 +193,6 @@ public class UserController {
 				userService.updateByPrimaryKeySelective(user);
 			}
 		}
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行修改密码");
 		return Msg.success();
 	}
 

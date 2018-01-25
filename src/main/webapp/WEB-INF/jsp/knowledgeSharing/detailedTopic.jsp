@@ -51,26 +51,30 @@
 										<div class="single-blog">
 											<!--这里是知识的标题-->
 											<h1 class="text-center">
-												<a href="">OPMS 1.2 版本更新发布</a>
+												<a href="">${bbsDetailedTopic.title}</a>
 											</h1>
 											
 											<!--这里是知识的作者姓名和发布时间-->
-											<p class="text-center auth-row"> By <a href="">李白</a> |   2017-03-28 </p>
+											<p class="text-center auth-row"> By <a href="">${bbsDetailedTopic.userName}</a> |   ${bbsDetailedTopic.date} </p>
 											
 											<!--这里是知识正文，使用文本编辑器格式化好的-->
 											<div>
-												
+												${bbsDetailedTopic.text}
 											</div>
 											
 											
-										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-thumbs-up" title="点赞"></i></a>
-										<a href="" class="btn p-follow-btn"><i class=" glyphicon glyphicon-heart" title="收藏"></i></a>
-										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-comment" title="评论"></i></a>
+										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-thumbs-up" title="点赞"></i>${bbsDetailedTopic.like}</a>
+										<a href="" class="btn p-follow-btn"><i class=" glyphicon glyphicon-heart" title="收藏"></i>${bbsDetailedTopic.collection}</a>
+										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-comment" title="评论"></i>${bbsDetailedTopic.comment}</a>
 										
 										<!--这里是动态的分类-->
 										<p class="pull-right activity-order">
 											分类：
-										    <span>计算机、服务器、心得和经验</span>
+										    <span>
+										    	<c:forEach items="${bbsDetailedTopic.labelName}" var="labelName">
+										    		${labelName}、
+										    	</c:forEach>
+											</span>
 										</p>
 										
 										</div>

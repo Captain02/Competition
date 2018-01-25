@@ -2,6 +2,7 @@ package com.hanming.oa.controller;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
+import com.hanming.oa.model.BBSTopic;
 import com.hanming.oa.service.BBSTopicService;
 
 @Controller
@@ -56,7 +58,13 @@ public class KnowledgeSharingController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addKnowledge(@RequestParam(value = "text") String text) {
 		System.out.println("+++++++++++++++++++++++++++" + text);
-
+		
+		BBSTopic bbsTopic = new BBSTopic();
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		bbsTopic.setText(text);
+		bbsTopic.setUserId(userId);
+		bbsTopicService.insertTopic(bbsTopic);
+		
 		return "knowledgeSharing/add";
 	}
 

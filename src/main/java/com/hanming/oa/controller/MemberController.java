@@ -2,9 +2,6 @@ package com.hanming.oa.controller;
 
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,13 +18,12 @@ import com.hanming.oa.model.RoleIdAndName;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserRole;
 import com.hanming.oa.service.RoleService;
-import com.hanming.oa.service.UserService;
 import com.hanming.oa.service.UserRoleService;
+import com.hanming.oa.service.UserService;
 
 @Controller
 @RequestMapping("/admin/member")
 public class MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	RoleService roleService;
 	@Autowired
@@ -51,7 +47,6 @@ public class MemberController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("roleId", id);
 		model.addAttribute("name", name);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查询组员的列表");
 		return "member/member";
 	}
 
@@ -61,7 +56,6 @@ public class MemberController {
 		model.addAttribute("user", userService.selectByPrimaryKeyWithDeptAndRole(id));
 		model.addAttribute("pn", pn);
 		model.addAttribute("role", roleService.list());
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行组员修改跳转页");
 		return "member/editor";
 	}
 
@@ -71,7 +65,6 @@ public class MemberController {
 	public Msg update(@RequestParam("userId") String userId, @RequestParam("roleId") String roleId) {
 		UserRole userRole = new UserRole(Integer.parseInt(userId), Integer.parseInt(roleId));
 		userRoleService.updateByUserId(userRole);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行组员修改");
 		return Msg.success();
 	}
 }

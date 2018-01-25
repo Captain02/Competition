@@ -10,8 +10,6 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +33,6 @@ import com.hanming.oa.service.UserService;
 @Controller
 @RequestMapping("/admin/myHolidayTask")
 public class MyHolidayTaskController {
-	private static final Logger logger = LoggerFactory.getLogger(MyHolidayTaskController.class);
 
 	@Autowired
 	TaskService taskService;
@@ -76,7 +73,6 @@ public class MyHolidayTaskController {
 
 				model.addAttribute("pageInfo", pageInfo);
 			}
-			logger.info(username + "=====查询指派给我的假期任务");
 		}
 
 		// 查询由我创建的假期任务
@@ -87,7 +83,6 @@ public class MyHolidayTaskController {
 			list = holidayService.selectCreatByMeLikeStateType(userId, state, type);
 			pageInfo = new PageInfo<Holiday>(list, 5);
 			model.addAttribute("pageInfo", pageInfo);
-			logger.info(username + "=====查询由我创建的假期任务");
 		}
 
 		// 查询由我解决的假期任务
@@ -99,7 +94,6 @@ public class MyHolidayTaskController {
 			pageInfo2 = new PageInfo<HolidayAndExaminationTime>(holidayAndExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
-			logger.info(username + "=====查询由我解决的假期任务");
 		}
 
 		// 查询由我完成的假期任务
@@ -112,7 +106,6 @@ public class MyHolidayTaskController {
 			pageInfo2 = new PageInfo<HolidayAndExaminationTime>(holidayAndExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
-			logger.info(username + "=====查询由我完成的假期任务");
 		}
 
 		List<User> userlist = userService.list();
@@ -153,7 +146,6 @@ public class MyHolidayTaskController {
 		model.addAttribute("userHolidayByHolidayId", userHolidayByHolidayId);
 
 		model.addAttribute("pn", pn);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====跳转审批假条页面");
 
 		return "myHolidayTask/holidayExamination";
 	}
@@ -170,13 +162,10 @@ public class MyHolidayTaskController {
 
 		if (i == 1) {
 			if (Integer.parseInt(state) == 1) {
-				logger.info(username + "=====跳转不同意假条审批");
 				return Msg.success().add("state", state);
 			} else if (Integer.parseInt(state) == 0) {
-				logger.info(username + "=====跳转同意假条审批");
 				return Msg.success().add("state", state);
 			} else {
-				logger.info(username + "=====向下一个人递送假条审批");
 				return Msg.success().add("state", state);
 			}
 		}else {
@@ -197,7 +186,6 @@ public class MyHolidayTaskController {
 		task.setAssignee(assignUsername);
 		taskService.saveTask(task);
 
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====指派请假任务");
 		return Msg.success();
 	}
 }

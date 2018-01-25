@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +22,6 @@ import com.github.pagehelper.PageInfo;
 @Controller
 @RequestMapping("/admin/processDefinition")
 public class ProcessDefinitionController {
-	private static final Logger logger = LoggerFactory.getLogger(ProcessDefinitionController.class);
 
 	@Autowired
 	private RepositoryService repositoryService;
@@ -52,7 +48,6 @@ public class ProcessDefinitionController {
 
 		model.addAttribute("name", name);
 		model.addAttribute("pageInfo", pageInfo);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行流程定义列表");
 
 		return "processDefinition/deployDefition";
 	}
@@ -69,7 +64,6 @@ public class ProcessDefinitionController {
 		}
 		out.close();
 		inputStream.close();
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行显示流程定义图片");
 		return null;
 	}
 }

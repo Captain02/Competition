@@ -10,8 +10,6 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +33,6 @@ import com.hanming.oa.service.UserService;
 @Controller
 @RequestMapping("/admin/myReimbursementTask")
 public class MyReimbursementTaskController {
-	private static final Logger logger = LoggerFactory.getLogger(MyReimbursementTaskController.class);
 
 	@Autowired
 	TaskService taskService;
@@ -76,7 +73,6 @@ public class MyReimbursementTaskController {
 
 				model.addAttribute("pageInfo", pageInfo);
 			}
-			logger.info(username + "=====查询指派给我的报销");
 		}
 
 		// 查询由我创建的报销
@@ -88,7 +84,6 @@ public class MyReimbursementTaskController {
 			pageInfo = new PageInfo<Reimbursement>(list, 5);
 
 			model.addAttribute("pageInfo", pageInfo);
-			logger.info(username + "=====查询由我创建的报销");
 		}
 
 		// 查询由我解决的报销
@@ -100,7 +95,6 @@ public class MyReimbursementTaskController {
 			pageInfo2 = new PageInfo<ReimbursementAndExaminationTime>(reimbursementAndExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
-			logger.info(username + "=====查询由我解决的报销");
 		}
 
 		// 查询由我完成的报销
@@ -112,7 +106,6 @@ public class MyReimbursementTaskController {
 			pageInfo2 = new PageInfo<ReimbursementAndExaminationTime>(reimbursementExaminationTimelist, 5);
 
 			model.addAttribute("pageInfo", pageInfo2);
-			logger.info(username + "=====查询由我完成的报销");
 		}
 
 		List<User> userlist = userService.list();
@@ -155,7 +148,6 @@ public class MyReimbursementTaskController {
 		model.addAttribute("userReimbursementByReimbursementId", userReimbursementByReimbursementId);
 
 		model.addAttribute("pn", pn);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====跳转审批假条页面");
 
 		return "myReimbursement/reimbursementExamination";
 	}
@@ -171,13 +163,10 @@ public class MyReimbursementTaskController {
 				reimbursementId, Integer.parseInt(state));
 		if (i == 1) {
 			if (Integer.parseInt(state) == 1) {
-				logger.info(username + "=====跳转不同意报销审批");
 				return Msg.success().add("state", state);
 			} else if (Integer.parseInt(state) == 0) {
-				logger.info(username + "=====跳转同意报销审批");
 				return Msg.success().add("state", state);
 			} else {
-				logger.info(username + "=====向下一个人递送报销审批");
 				return Msg.success().add("state", state);
 			}
 		} else {
@@ -197,7 +186,6 @@ public class MyReimbursementTaskController {
 		task.setAssignee(assignUsername);
 		taskService.saveTask(task);
 
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====指派请假任务");
 		return Msg.success();
 	}
 

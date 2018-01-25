@@ -1,13 +1,7 @@
 package com.hanming.oa.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +15,6 @@ import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +40,6 @@ import com.hanming.oa.service.UserService;
 @Controller
 @RequestMapping(value = "/admin/reimbursement")
 public class ReimbursementController {
-	private static final Logger logger = LoggerFactory.getLogger(ReimbursementController.class);
 
 	@Autowired
 	UserService userService;
@@ -91,7 +81,6 @@ public class ReimbursementController {
 		model.addAttribute("approved", approved);
 		model.addAttribute("state", state);
 		model.addAttribute("type", type);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行报销列表");
 
 		return "reimbursement/reimbursement";
 	}
@@ -113,7 +102,6 @@ public class ReimbursementController {
 			HttpServletRequest request, String processDefinitionKey) {
 		int i = reimbursementService.addReimbursement(persons, file, reimbursement, request, processDefinitionKey);
 
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加报销");
 
 		if (i == 1) {
 			return Msg.success();
@@ -155,7 +143,6 @@ public class ReimbursementController {
 		mav.addObject("width", activityImpl.getWidth()); // 宽度
 		mav.addObject("height", activityImpl.getHeight()); // 高度
 		mav.setViewName("holiday/currentView");
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行显示当前流程图");
 		return mav;
 	}
 
@@ -188,7 +175,6 @@ public class ReimbursementController {
 			model.addAttribute("approver", task.getAssignee());
 		}
 		model.addAttribute("userReimbursementByReimbursementId", userReimbursementByReimbursementId);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看报销单");
 		return "reimbursement/reimbursementNote";
 	}
 

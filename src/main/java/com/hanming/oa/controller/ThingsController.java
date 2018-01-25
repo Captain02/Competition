@@ -43,7 +43,6 @@ import com.hanming.oa.service.UserService;
 @Controller
 @RequestMapping("/admin/things")
 public class ThingsController {
-	private static final Logger logger = LoggerFactory.getLogger(ThingsController.class);
 
 	@Autowired
 	ThingsService thingsService;
@@ -87,7 +86,6 @@ public class ThingsController {
 		model.addAttribute("approved", approved);
 		model.addAttribute("state", state);
 		model.addAttribute("name", name);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====查询物品申请");
 
 		return "things/things";
 	}
@@ -110,7 +108,6 @@ public class ThingsController {
 
 		int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行添加我要申请物品");
 		if (i == 1) {
 			return Msg.success();
 		} else {
@@ -155,7 +152,6 @@ public class ThingsController {
 		mav.addObject("width", activityImpl.getWidth()); // 宽度
 		mav.addObject("height", activityImpl.getHeight()); // 高度
 		mav.setViewName("holiday/currentView");
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行显示当前流程图");
 		return mav;
 	}
 
@@ -172,7 +168,6 @@ public class ThingsController {
 			model.addAttribute("approver", task.getAssignee());
 		}
 		model.addAttribute("userThingsByThingsId", userThingsByThingsId);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查看报销单");
 		return "things/thingsNote";
 	}
 

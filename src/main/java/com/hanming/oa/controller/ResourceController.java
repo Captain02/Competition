@@ -29,7 +29,6 @@ import com.hanming.oa.service.ResourceService;
 @Controller
 @RequestMapping(value = "/admin/resource")
 public class ResourceController {
-	private static final Logger logger = LoggerFactory.getLogger(ResourceController.class);
 	@Autowired
 	ResourceService resourceService;
 
@@ -48,7 +47,6 @@ public class ResourceController {
 		pageInfo = new PageInfo<>(list);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("name", name);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行权限的查询");
 		return "resource/resource";
 	}
 
@@ -58,7 +56,6 @@ public class ResourceController {
 			Model model) {
 		model.addAttribute("pn", pn);
 		model.addAttribute("resource", resourceService.selectByPrimaryKey(id));
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行权限的修改页面跳转");
 		return "resource/editor";
 	}
 
@@ -75,7 +72,6 @@ public class ResourceController {
 			return Msg.fail().add("errorFields", map);
 		}
 		resourceService.updateByPrimaryKey(resource);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行权限的修改");
 		return Msg.success();
 	}
 
@@ -88,7 +84,6 @@ public class ResourceController {
 			return Msg.fail();
 		}
 		resourceService.deleteByPrimaryKey(id);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行权限的删除");
 		return Msg.success();
 	}
 }

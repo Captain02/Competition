@@ -32,7 +32,6 @@ import com.hanming.oa.service.RoleResourceService;
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController {
-	private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 	@Autowired
 	RoleService roleService;
 	@Autowired
@@ -55,7 +54,6 @@ public class RoleController {
 		pageInfo = new PageInfo<>(list, 5);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("name", name);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行职称查询");
 		return "role/role";
 	}
 
@@ -63,7 +61,6 @@ public class RoleController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
 		model.addAttribute("role", new Role());
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行跳转添加职称页面");
 		return "role/add";
 	}
 
@@ -80,7 +77,6 @@ public class RoleController {
 			return Msg.fail().add("errorFields", map);
 		}
 		roleService.insertSelective(role);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行职称添加功能");
 		return Msg.success();
 	}
 
@@ -89,7 +85,6 @@ public class RoleController {
 	public String update(Model model, @PathVariable("id") Integer id, @PathVariable("pn") Integer pn, Role role) {
 		model.addAttribute("pn", pn);
 		model.addAttribute("role", roleService.selectByPrimaryKey(id));
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行跳转职称编辑页面");
 		return "role/add";
 	}
 
@@ -106,7 +101,6 @@ public class RoleController {
 			return Msg.fail().add("errorFields", map);
 		}
 		roleService.updateByPrimaryKeySelective(role);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行职称编辑功能");
 		return Msg.success();
 	}
 
@@ -115,7 +109,6 @@ public class RoleController {
 	@RequestMapping(value = "/dele/{id}", method = RequestMethod.DELETE)
 	public Msg dele(@PathVariable("id") Integer id) {
 		if (roleService.dele(id) == 1) {
-			logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行职称的删除");
 			return Msg.success();
 		} else {
 			return Msg.fail();
@@ -130,7 +123,6 @@ public class RoleController {
 		model.addAttribute("roleHasResourceList", list);
 		model.addAttribute("resources", resourceService.list());
 		model.addAttribute("roleId", id);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行查询职称所拥有的权限");
 		return "role/roleHasResource";
 	}
 
@@ -146,7 +138,6 @@ public class RoleController {
 			if (Integer.parseInt(check) == 1) {
 				roleResourceService.addRoleResource(Integer.parseInt(roleId), Integer.parseInt(resourceId));
 			}
-			logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行修改职称权限");
 			return Msg.success();
 		}
 		return Msg.fail();

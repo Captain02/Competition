@@ -29,7 +29,6 @@ import com.hanming.oa.service.DepartmentService;
 @Controller
 @RequestMapping("/admin/department")
 public class DepartmentController {
-	private static final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 	@Autowired
 	DepartmentService departmentService;
 
@@ -49,7 +48,6 @@ public class DepartmentController {
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("name", name);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行部门遍历");
 		return "department/department";
 	}
 
@@ -57,7 +55,6 @@ public class DepartmentController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
 		model.addAttribute("department", new Department());
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行跳转部门添加页");
 		return "department/add";
 	}
 
@@ -75,7 +72,6 @@ public class DepartmentController {
 			return Msg.fail().add("errorFields", map);
 		}
 		departmentService.insertSelective(department);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行部门添加");
 		return Msg.success();
 	}
 
@@ -85,7 +81,6 @@ public class DepartmentController {
 			Model model) {
 		model.addAttribute("pn", pn);
 		model.addAttribute("department", departmentService.selectByPrimaryKey(id));
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行部门修改跳转页面");
 		return "department/add";
 	}
 
@@ -103,7 +98,6 @@ public class DepartmentController {
 			return Msg.fail().add("errorFields", map);
 		}
 		departmentService.updateByPrimaryKeySelective(department);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行部门的修改");
 		return Msg.success();
 	}
 
@@ -116,7 +110,6 @@ public class DepartmentController {
 			return Msg.fail();
 		} else {
 			departmentService.deleteByPrimaryKey(id);
-			logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行部门删除");
 			return Msg.success();
 		}
 	}

@@ -29,7 +29,6 @@ import com.hanming.oa.service.DeployService;
 @Controller
 @RequestMapping(value = "/admin/deploy")
 public class DeployController {
-	private static final Logger logger = LoggerFactory.getLogger(DeployController.class);
 
 	@Autowired
 	RepositoryService repositoryService;
@@ -60,7 +59,6 @@ public class DeployController {
 
 		model.addAttribute("name", name);
 		model.addAttribute("pageInfo", pageInfo);
-		logger.info(SecurityUtils.getSubject().getSession().getAttribute("username") + "=====执行部署管理");
 
 		return "deploy/deployProcess";
 	}
