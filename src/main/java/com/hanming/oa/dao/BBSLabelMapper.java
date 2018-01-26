@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import com.hanming.oa.model.BBSLabel;
 
 public interface BBSLabelMapper {
@@ -14,4 +16,6 @@ public interface BBSLabelMapper {
     int updateByPrimaryKeySelective(BBSLabel record);
 
     int updateByPrimaryKey(BBSLabel record);
+
+	List<BBSLabel> list();
 }

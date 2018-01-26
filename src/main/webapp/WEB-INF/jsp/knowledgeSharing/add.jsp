@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,17 +31,16 @@ $(function(){
 //在这里发送ajax请求，保存添加的知识
 function save() {
 	var html = $('#content_value').html();
-	var topicText = $("#topicText").serialize();
 	console.log(topicText);
 	
-	$.ajax({
+	/* $.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
 		type:"POST",
-		data:$("#topicText").serialize(),
+		data:,
 		success:function(result){
 			alert("添加成功");
 		}
-	})
+	}) */
 }
 </script>
 </head>
@@ -79,33 +79,12 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>类别</label>
 								<div class="col-sm-10">
 									<div class="checkbox" style="margin-top: 5px;">
-									<label class="checkbox-inline">
-										<input value="企业文化" checked="checked" type="checkbox">知识列表
-									</label>
+									
+									<c:forEach items="${bbsLabel}" var="labels">
 										<label class="checkbox-inline">
-										<input value="管理知识" type="checkbox">管理知识
-									</label>
-									<label class="checkbox-inline">
-										<input value="财务知识" type="checkbox">财务知识
-									</label>
-									<label class="checkbox-inline">
-										<input value="技术分享" type="checkbox">技术分享
-									</label>
-									<label class="checkbox-inline">
-										<input value="服务器" type="checkbox">服务器
-									</label>
-									<label class="checkbox-inline">
-										<input value="市场营销" type="checkbox">市场营销
-									</label>
-									<label class="checkbox-inline">
-										<input value="运营" type="checkbox">运营
-									</label>
-									<label class="checkbox-inline">
-										<input value="随笔" type="checkbox">随笔
-									</label>
-									
-									
-									
+											<input value="${labels.id}" checked="checked" type="checkbox">${labels.name}
+										</label>
+									</c:forEach>
 									
       							
       								</div>

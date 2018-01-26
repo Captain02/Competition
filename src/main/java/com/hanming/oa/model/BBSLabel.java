@@ -19,19 +19,19 @@ public class BBSLabel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
     public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setUserid(Integer userid) {
         this.userid = userid;
     }
 

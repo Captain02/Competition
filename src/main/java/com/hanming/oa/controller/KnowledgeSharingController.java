@@ -2,7 +2,6 @@ package com.hanming.oa.controller;
 
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
+import com.hanming.oa.model.BBSLabel;
 import com.hanming.oa.model.BBSTopic;
+import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSTopicService;
 
 @Controller
@@ -24,6 +25,8 @@ public class KnowledgeSharingController {
 
 	@Autowired
 	BBSTopicService bbsTopicService;
+	@Autowired
+	BBSLabelService bbsLabelService;
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -49,8 +52,11 @@ public class KnowledgeSharingController {
 
 	// 跳转添加知识页面
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addKnowledgePage() {
-
+	public String addKnowledgePage(Model model) {
+		
+		List<BBSLabel> list = bbsLabelService.list();
+		
+		model.addAttribute("bbsLabel", list);
 		return "knowledgeSharing/add";
 	}
 

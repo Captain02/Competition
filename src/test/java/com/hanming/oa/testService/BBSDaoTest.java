@@ -42,5 +42,14 @@ public class BBSDaoTest {
 		List<String> list = comments.stream().map(Comments::getRepliesUserName).collect(Collectors.toList());
 		list.forEach(System.out::println);
 	}
+	
+	@Test
+	public void getCommentsByTopicId() {
+		List<Comments> list = bbsTopicMapper.getCommentsByTopicId(1);
+		for (Comments comments : list) {
+			System.out.println(comments.getDate());
+		}
+		
+	}
 
 }

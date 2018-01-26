@@ -79,4 +79,13 @@
       date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- List<BBSLabel> list(); -->
+  <select id="list" resultType="BBSLabel">
+  	select
+	bl.id,bl.`name`,bl.date,bl.userId
+	FROM bbslabel bl
+  </select>
+  
+  
 </mapper>
