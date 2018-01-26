@@ -21,6 +21,7 @@ $(function(){
 	var editor = KindEditor.create('textarea[name="content"]', {
 		allowFileManager : true,
 		filterMode:false,
+		
 		afterBlur:function(){
 			this.sync();
 		}
