@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
@@ -25,6 +26,7 @@ import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
 import com.hanming.oa.model.BBSLabelTopic;
 import com.hanming.oa.model.BBSTopic;
+import com.hanming.oa.model.Comments;
 import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSLabelTopicService;
 import com.hanming.oa.service.BBSTopicService;
@@ -49,6 +51,7 @@ public class KnowledgeSharingController {
 		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic();
 		Collections.reverse(list);
 		pageInfo = new PageInfo<BBSDisplayTopic>(list, 5);
+		
 		model.addAttribute("pageInfo", pageInfo);
 
 		return "knowledgeSharing/knowledge";
@@ -56,10 +59,20 @@ public class KnowledgeSharingController {
 
 	// 查看某个贴
 	@RequestMapping(value = "/detailedTopic/{topicId}", method = RequestMethod.GET)
-	public String detailedTopicPage(@PathVariable("topicId") Integer topicId, Model model) {
+	public String detailedTopicPage(@PathVariable("topicId") Integer topicId,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
 
+		PageInfo<Comments> pageInfo = null;
+		PageHelper.startPage(pn, 15);
+		List<Comments> list = bbsTopicService.getCommentsByTopicId(topicId);
+		Collections.reverse(list);
+		pageInfo = new PageInfo<Comments>(list,5);
+		
+		model.addAttribute("PageInfo", pageInfo);
 		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);
+		
 		return "knowledgeSharing/detailedTopic";
 	}
 
@@ -79,15 +92,14 @@ public class KnowledgeSharingController {
 	public Msg addKnowledge(@RequestParam(value = "text", defaultValue = "") String text,
 			@RequestParam(value = "title") String title, @RequestParam(value = "sketch") String sketch,
 			@RequestParam(value = "order") String ids) {
-		
+
 		int i = bbsLabelTopicService.addKonwledge(text, title, sketch, ids);
-		if (i==1) {
+		if (i == 1) {
 			return Msg.success();
-		}else {
+		} else {
 			return Msg.fail();
 		}
 
 	}
 
-	
 }

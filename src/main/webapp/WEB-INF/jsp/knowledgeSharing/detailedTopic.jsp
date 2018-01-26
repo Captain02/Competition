@@ -91,7 +91,7 @@
 								<header class="panel-heading">精彩点评</header>
 								<div class="panel-body">
 									<ul class="activity-list">
-										<c:forEach items="${bbsDetailedTopic.comments}" var="comments">
+										<c:forEach items="${PageInfo.list}" var="comments">
 										
 											<c:if test="${comments.repliesId == 0}">
 												<li>

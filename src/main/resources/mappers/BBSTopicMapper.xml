@@ -44,7 +44,7 @@
     
     <collection property="labelName" javaType="ArrayList" column="id" ofType="String" select="getLabelNameByTopicId" />
     
-    <collection property="comments" javaType="ArrayList" column="id" ofType="Comments" select="getCommentsByTopicId" />
+    <!-- <collection property="comments" javaType="ArrayList" column="id" ofType="Comments" select="getCommentsByTopicId" /> -->
   </resultMap>
   
   <sql id="Base_Column_List">

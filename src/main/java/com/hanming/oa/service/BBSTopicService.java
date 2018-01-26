@@ -9,6 +9,7 @@ import com.hanming.oa.dao.BBSTopicMapper;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSTopic;
+import com.hanming.oa.model.Comments;
 
 @Service
 public class BBSTopicService {
@@ -31,6 +32,12 @@ public class BBSTopicService {
 
 	public void insertTopic(BBSTopic bbsTopic) {
 		bbsTopicMapper.insertSelective(bbsTopic);
+	}
+
+
+	public List<Comments> getCommentsByTopicId(Integer topicId) {
+		List<Comments> comments = bbsTopicMapper.getCommentsByTopicId(topicId);
+		return comments;
 	}
 
 }
