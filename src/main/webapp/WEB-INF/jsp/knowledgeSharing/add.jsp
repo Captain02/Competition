@@ -103,7 +103,7 @@ function save() {
 							
 							
 							<div class="form-group">
-								<label for="" class="col-sm-2 control-label">主题</label>
+								<label for="" class="col-sm-2 control-label">标题</label>
 								<div class="col-sm-10">
 									<input name="title" value="" class="form-control" placeholder="填写标签" type="text">
 								</div>
@@ -132,7 +132,7 @@ function save() {
 									
 									<c:forEach items="${bbsLabel}" var="labels">
 										<label class="checkbox-inline">
-											<input value="${labels.id}" checked="checked" type="checkbox">${labels.name}
+											<input value="${labels.id}"  type="checkbox">${labels.name}
 										</label>
 									</c:forEach>
 									
