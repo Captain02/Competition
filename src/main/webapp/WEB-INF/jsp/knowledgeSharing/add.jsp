@@ -30,8 +30,28 @@ $(function(){
 
 //在这里发送ajax请求，保存添加的知识
 function save() {
+	//获取标题内容
+	var title = $("input[name='title']").val();
+	console.log(title);
+	//获取简介内容
+	var sketch = $("textarea[name='sketch']").val();
+	console.log(sketch);
+	//获取文本编辑器中的内容
 	var html = $('#content_value').html();
-	console.log(topicText);
+	console.log(html);
+	//获取勾选的复选框的值
+	var order = '';
+	var ifHavechecked = $('.checkbox label input[type="checkbox"]:checked');
+	for(var i = 0;i<ifHavechecked.length; i++){
+		if(i == ifHavechecked.length-1){
+			order+=$(ifHavechecked[i]).val();
+		}
+		else{
+			order+=$(ifHavechecked[i]).val() + '-';
+		}
+		
+	}
+	console.log(order);
 	
 	/* $.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
@@ -75,28 +95,8 @@ function save() {
 						<header class="panel-heading"></header>
 						<div class="panel-body">
 						<form id="topicText" action="" method="post">
-							<div class="form-group">
-								<label for="" class="col-sm-2 control-label"><span>*</span>类别</label>
-								<div class="col-sm-10">
-									<div class="checkbox" style="margin-top: 5px;">
-									
-									<c:forEach items="${bbsLabel}" var="labels">
-										<label class="checkbox-inline">
-											<input value="${labels.id}" checked="checked" type="checkbox">${labels.name}
-										</label>
-									</c:forEach>
-									
-      							
-      								</div>
-    								
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="" class="col-sm-2 control-label"><span>*</span>标题</label>
-								<div class="col-sm-10">
-									<input name="title" value="" class="form-control" placeholder="请填写标题" type="text">
-								</div>
-							</div>
+							
+							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">标签</label>
 								<div class="col-sm-10">
@@ -119,6 +119,22 @@ function save() {
 								<textarea  id="content_value" name="content_value"  style="height:90px; display: none;" class="form-control"></textarea>
 								
 								
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-2 control-label"><span>*</span>类别</label>
+								<div class="col-sm-10">
+									<div class="checkbox" style="margin-top: 5px;">
+									
+									<c:forEach items="${bbsLabel}" var="labels">
+										<label class="checkbox-inline">
+											<input value="${labels.id}" checked="checked" type="checkbox">${labels.name}
+										</label>
+									</c:forEach>
+									
+      							
+      								</div>
+    								
+								</div>
 							</div>
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
