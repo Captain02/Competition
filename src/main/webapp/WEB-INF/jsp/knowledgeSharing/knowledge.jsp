@@ -20,9 +20,7 @@
 		<div class="main-content">
 			<!-- 页面模版，每页主体部分头部按需更改 -->
 			<div class="content-head content-head-section">
-				<a href="" class="toggle-btn"> <span
-					class="glyphicon Sglyphicon-th-list"></span>
-				</a>
+				<a href="" class="toggle-btn"> <span class="glyphicon glyphicon-th-list"></span></a>
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 				<div class="clearfix"></div>
 
@@ -86,9 +84,9 @@
 														<p class="pull-right text-muted">
 															<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
 															<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
-															<i class="glyphicon glyphicon-thumbs-up"></i>${bbsDisplayTopic.like}
-															<i class=" glyphicon glyphicon-heart"></i>${bbsDisplayTopic.collection}
-															<i class="glyphicon glyphicon-comment"></i>${bbsDisplayTopic.comment}
+															<i class="fa fa-thumbs-o-up"></i>${bbsDisplayTopic.like}
+															<i class="fa fa-heart-o"></i>${bbsDisplayTopic.collection}
+															<i class="fa fa-comment-o"></i>${bbsDisplayTopic.comment}
 															<span class="activity-time">${bbsDisplayTopic.date}</span>
 														</p>
 													</div>
