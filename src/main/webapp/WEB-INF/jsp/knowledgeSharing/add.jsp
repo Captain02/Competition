@@ -78,26 +78,38 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>类别</label>
 								<div class="col-sm-10">
-									<select name="" class="form-control">
-					                      <option value="">请选择分类</option>                      
-															
-					                      <option value="1">企业文化</option> 
-															
-					                      <option value="2">管理知识</option> 
-															
-					                      <option value="3">财务知识</option> 
-															
-					                      <option value="4">技术分享</option> 
-															
-					                      <option value="5">服务器</option> 
-															
-					                      <option value="6">市场营销</option> 
-															
-					                      <option value="7">运营</option> 
-															
-					                      <option value="8">随笔</option> 
-										
-                    				</select>
+									<div class="checkbox" style="margin-top: 5px;">
+									<label class="checkbox-inline">
+										<input value="企业文化" checked="checked" type="checkbox">知识列表
+									</label>
+										<label class="checkbox-inline">
+										<input value="管理知识" type="checkbox">管理知识
+									</label>
+									<label class="checkbox-inline">
+										<input value="财务知识" type="checkbox">财务知识
+									</label>
+									<label class="checkbox-inline">
+										<input value="技术分享" type="checkbox">技术分享
+									</label>
+									<label class="checkbox-inline">
+										<input value="服务器" type="checkbox">服务器
+									</label>
+									<label class="checkbox-inline">
+										<input value="市场营销" type="checkbox">市场营销
+									</label>
+									<label class="checkbox-inline">
+										<input value="运营" type="checkbox">运营
+									</label>
+									<label class="checkbox-inline">
+										<input value="随笔" type="checkbox">随笔
+									</label>
+									
+									
+									
+									
+      							
+      								</div>
+    								
 								</div>
 							</div>
 							<div class="form-group">
