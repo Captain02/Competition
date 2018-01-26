@@ -24,7 +24,7 @@ public class BBSDaoTest {
 	
 	@Test
 	public void displayTopic() {
-		List<BBSDisplayTopic> list = bbsTopicMapper.selectDisplayTopic();
+		List<BBSDisplayTopic> list = bbsTopicMapper.selectDisplayTopic(1,1);
 
 		for (BBSDisplayTopic bbsDisplayTopic : list) {
 			List<String> list2 = bbsDisplayTopic.getLabelName();

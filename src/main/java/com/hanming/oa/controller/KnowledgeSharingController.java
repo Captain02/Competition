@@ -44,15 +44,28 @@ public class KnowledgeSharingController {
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+			@RequestParam(value = "labelId", defaultValue = "0") Integer labelId,
+			@RequestParam(value = "isByMyId", defaultValue = "0") Integer isByMyId, Model model) {
 
+		Integer id = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+
+		if (isByMyId != 0) {
+			isByMyId = id;
+		}
+		
 		PageInfo<BBSDisplayTopic> pageInfo = null;
 		PageHelper.startPage(pn, 10);
-		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic();
+		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic(labelId, isByMyId);
 		Collections.reverse(list);
 		pageInfo = new PageInfo<BBSDisplayTopic>(list, 5);
 
+		List<BBSLabel> list2 = bbsLabelService.list();
+
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("BBSLabel", list2);
+		model.addAttribute("labelId", labelId);
+		model.addAttribute("isByMyId", isByMyId);
 
 		return "knowledgeSharing/knowledge";
 	}
@@ -73,7 +86,7 @@ public class KnowledgeSharingController {
 		int[] nums = pageInfo.getNavigatepageNums();
 		for (int i : nums) {
 			System.out.println(i);
-			
+
 		}
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);

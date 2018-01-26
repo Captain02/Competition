@@ -24,6 +24,7 @@ $(function(){
 		filterMode:false,
 		allowImageUpload : true,
 		uploadJson:'${APP_PATH}/static/kindeditor/jsp/upload_json.jsp',
+		fileManagerJson : '${APP_PATH}/static/kindeditor/jsp/file_manager_json.jsp',
 		afterBlur:function(){
 			this.sync();
 		}

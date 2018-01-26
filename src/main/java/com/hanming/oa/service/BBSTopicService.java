@@ -18,8 +18,8 @@ public class BBSTopicService {
 	BBSTopicMapper bbsTopicMapper;
 	
 
-	public List<BBSDisplayTopic> selectDisplayTopic() {
-		List<BBSDisplayTopic> list = bbsTopicMapper.selectDisplayTopic();
+	public List<BBSDisplayTopic> selectDisplayTopic(Integer labelId, Integer isByMyId) {
+		List<BBSDisplayTopic> list = bbsTopicMapper.selectDisplayTopic(labelId,isByMyId);
 		return list;
 	}
 

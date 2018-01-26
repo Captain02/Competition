@@ -35,8 +35,8 @@
 					</div>
 
 					<div class="om-header-right">
-						<a href="" class="btn btn-warning btn-sm">我的知识</a>
-						<a href="" class="btn btn-success btn-sm">全部知识</a> 
+						<a href="${APP_PATH}/admin/KnowledgeSharing/list?isByMyId=1" class="btn btn-warning btn-sm">我的知识</a>
+						<a href="${APP_PATH}/admin/KnowledgeSharing/list" class="btn btn-success btn-sm">全部知识</a> 
 						<a href="${APP_PATH}/admin/KnowledgeSharing/add" class="btn btn-success btn-sm">+分享知识</a>
 					</div>
 
@@ -72,7 +72,11 @@
 															<!--此处是知识所属标签-->
 															<p class="pull-right activity-order">
 																标签：
-															    <span>计算机、服务器、心得和经验</span>
+															    <span>
+															    	<c:forEach items="${bbsDisplayTopic.labelName}" var="labelName">
+															    		${labelName}、
+															    	</c:forEach>
+																</span>
 															</p>
 														</h5>
 														
@@ -83,8 +87,10 @@
 														
 														<!--此处放知识操作-->
 														<p class="pull-right text-muted">
-															<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
-															<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
+															<c:if test="${isByMyId!=0}">
+																<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
+																<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
+															</c:if>
 															<i class="fa fa-thumbs-o-up"></i>${bbsDisplayTopic.like}
 															<i class="fa fa-heart-o"></i>${bbsDisplayTopic.collection}
 															<i class="fa fa-comment-o"></i>${bbsDisplayTopic.comment}
@@ -99,11 +105,11 @@
 											<nav aria-label="Page navigation">
 											  <ul class="pagination">
 											    <li>
-													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=1">首页</a>
+													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=1&isByMyId=${isByMyId}&labelId=${labelId}">首页</a>
 												</li>
 											<c:if test="${pageInfo.hasPreviousPage}">
 												<li>
-													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum-1}"
+													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum-1}&isByMyId=${isByMyId}&labelId=${labelId}"
 													    aria-label="Previous">
 														<span aria-hidden="true">&laquo;</span>
 													</a>
@@ -117,14 +123,14 @@
 												</c:if>
 												<c:if test="${pageNum!=pageInfo.pageNum}">
 													<li>
-														<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageNum}">${pageNum}</a>
+														<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageNum}&isByMyId=${isByMyId}&labelId=${labelId}">${pageNum}</a>
 													</li>
 												</c:if>
 											</c:forEach>
 		
 											<c:if test="${pageInfo.hasNextPage }">
 												<li>
-													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum+1}"
+													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum+1}&isByMyId=${isByMyId}&labelId=${labelId}"
 													    aria-label="Next">
 														<span aria-hidden="true">&raquo;</span>
 													</a>
@@ -132,7 +138,7 @@
 											</c:if>
 		
 											<li>
-												<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pages}" aria-label="Next">
+												<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pages}&isByMyId=${isByMyId}&labelId=${labelId}" aria-label="Next">
 													<span aria-hidden="true">末页</span>
 												</a>
 											</li>
@@ -150,23 +156,9 @@
 								<div class="blog-post">
 									<h3>分类</h3>
 								<ul>
-                  
-				                  <li> <a href="">企业文化</a> </li>
-				                  
-				                  <li> <a href="">管理知识</a> </li>
-				                  
-				                  <li> <a href="">财务知识</a> </li>
-				                  
-				                  <li> <a href="">技术分享</a> </li>
-				                  
-				                  <li> <a href="">服务器</a> </li>
-				                  
-				                  <li> <a href="">市场营销</a> </li>
-				                  
-				                  <li> <a href="">运营</a> </li>
-				                  
-				                  <li> <a href="">随笔</a> </li>
-                  
+                  					<c:forEach items="${BBSLabel}" var="bbsLabel">
+					                	<li> <a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a></li>
+                  					</c:forEach>
                 				</ul>
 								</div>
 							</div>

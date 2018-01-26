@@ -2,6 +2,8 @@ package com.hanming.oa.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSTopic;
@@ -20,7 +22,7 @@ public interface BBSTopicMapper {
 
     int updateByPrimaryKey(BBSTopic record);
 
-	List<BBSDisplayTopic> selectDisplayTopic();
+	List<BBSDisplayTopic> selectDisplayTopic(@Param("labelId") Integer labelId,@Param("isByMyId") Integer isByMyId);
 
 	BBSDetailedTopic selectBBSDetailedTopic(Integer i);
 	
