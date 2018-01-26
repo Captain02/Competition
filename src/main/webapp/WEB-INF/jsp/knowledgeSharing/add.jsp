@@ -20,9 +20,9 @@ $(function(){
 	
 	var editor = KindEditor.create('textarea[name="content"]', {
 		allowFileManager : true,
+		filterMode:false,
 		afterBlur:function(){
 			this.sync();
-			$('#content_value').html($('#editor_id').val());
 		}
 	});
 })
@@ -32,13 +32,10 @@ $(function(){
 function save() {
 	//获取标题内容
 	var title = $("input[name='title']").val();
-	console.log(title);
 	//获取简介内容
 	var sketch = $("textarea[name='sketch']").val();
-	console.log(sketch);
 	//获取文本编辑器中的内容
-	var html = $('#content_value').html();
-	console.log(html);
+	var html = $('#editor_id').val();
 	//获取勾选的复选框的值
 	var order = '';
 	var ifHavechecked = $('.checkbox label input[type="checkbox"]:checked');
@@ -51,7 +48,6 @@ function save() {
 		}
 		
 	}
-	console.log(order);
 	
 	 $.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
@@ -123,12 +119,8 @@ function save() {
 								<div class="col-sm-10">
 									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
 								</div>
-								
-								<!--存放文本编辑器中的内容 -->
-								<textarea  id="content_value" name="content_value"  style="height:90px; display: none;" class="form-control"></textarea>
-								
-								
 							</div>
+							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>类别</label>
 								<div class="col-sm-10">
