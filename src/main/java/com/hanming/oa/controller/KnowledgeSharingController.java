@@ -47,7 +47,7 @@ public class KnowledgeSharingController {
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 
 		PageInfo<BBSDisplayTopic> pageInfo = null;
-		PageHelper.startPage(pn, 15);
+		PageHelper.startPage(pn, 10);
 		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic();
 		Collections.reverse(list);
 		pageInfo = new PageInfo<BBSDisplayTopic>(list, 5);
