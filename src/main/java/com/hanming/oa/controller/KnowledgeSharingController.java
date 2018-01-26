@@ -1,5 +1,6 @@
 package com.hanming.oa.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class KnowledgeSharingController {
 		PageInfo<BBSDisplayTopic> pageInfo = null;
 		PageHelper.startPage(pn, 15);
 		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic();
+		Collections.reverse(list);
 		pageInfo = new PageInfo<BBSDisplayTopic>(list, 5);
 		model.addAttribute("pageInfo", pageInfo);
 
@@ -53,21 +55,23 @@ public class KnowledgeSharingController {
 	// 跳转添加知识页面
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addKnowledgePage(Model model) {
-		
+
 		List<BBSLabel> list = bbsLabelService.list();
-		
+
 		model.addAttribute("bbsLabel", list);
 		return "knowledgeSharing/add";
 	}
 
 	// 添加知识
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addKnowledge(@RequestParam(value = "text",defaultValue="") String text,
-			 BBSTopic bbsTopic) {
-		//@RequestParam(value = "bbsTopic") String strBBSTopic,
-		//System.out.println("+++++++++++++++++++++++++++" + strBBSTopic);
-		System.out.println("+++++++++++++++++++++++++++" + bbsTopic.getTitle());
-
+	public String addKnowledge(@RequestParam(value = "text", defaultValue = "") String text,
+			@RequestParam(value = "title") String title, @RequestParam(value = "sketch") String sketch,
+			BBSTopic bbsTopic) {
+		System.out.println(title);
+		System.out.println(sketch);
+		System.out.println(text);
+		
+		
 		// BBSTopic bbsTopic = new BBSTopic();
 		// Integer userId = (Integer)
 		// SecurityUtils.getSubject().getSession().getAttribute("id");

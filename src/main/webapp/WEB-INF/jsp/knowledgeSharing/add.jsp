@@ -53,14 +53,19 @@ function save() {
 	}
 	console.log(order);
 	
-	/* $.ajax({
+	 $.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
 		type:"POST",
-		data:,
+		data:{
+			'title':title,
+			'sketch':sketch,
+			'text':html,
+			'order':order
+		},
 		success:function(result){
 			alert("添加成功");
 		}
-	}) */
+	}) 
 }
 </script>
 </head>
@@ -98,9 +103,9 @@ function save() {
 							
 							
 							<div class="form-group">
-								<label for="" class="col-sm-2 control-label">标签</label>
+								<label for="" class="col-sm-2 control-label">主题</label>
 								<div class="col-sm-10">
-									<input name="tag" value="" class="form-control" placeholder="填写标签" type="text">
+									<input name="title" value="" class="form-control" placeholder="填写标签" type="text">
 								</div>
 							</div>
 							<div class="form-group">
