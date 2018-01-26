@@ -1,23 +1,32 @@
 package com.hanming.oa.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
+import com.hanming.oa.model.BBSLabelTopic;
 import com.hanming.oa.model.BBSTopic;
 import com.hanming.oa.service.BBSLabelService;
+import com.hanming.oa.service.BBSLabelTopicService;
 import com.hanming.oa.service.BBSTopicService;
 
 @Controller
@@ -28,6 +37,8 @@ public class KnowledgeSharingController {
 	BBSTopicService bbsTopicService;
 	@Autowired
 	BBSLabelService bbsLabelService;
+	@Autowired
+	BBSLabelTopicService bbsLabelTopicService;
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -63,23 +74,20 @@ public class KnowledgeSharingController {
 	}
 
 	// 添加知识
+	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addKnowledge(@RequestParam(value = "text", defaultValue = "") String text,
+	public Msg addKnowledge(@RequestParam(value = "text", defaultValue = "") String text,
 			@RequestParam(value = "title") String title, @RequestParam(value = "sketch") String sketch,
-			BBSTopic bbsTopic) {
-		System.out.println(title);
-		System.out.println(sketch);
-		System.out.println(text);
+			@RequestParam(value = "order") String ids) {
 		
-		
-		// BBSTopic bbsTopic = new BBSTopic();
-		// Integer userId = (Integer)
-		// SecurityUtils.getSubject().getSession().getAttribute("id");
-		// bbsTopic.setText(text);
-		// bbsTopic.setUserId(userId);
-		// bbsTopicService.insertTopic(bbsTopic);
+		int i = bbsLabelTopicService.addKonwledge(text, title, sketch, ids);
+		if (i==1) {
+			return Msg.success();
+		}else {
+			return Msg.fail();
+		}
 
-		return "knowledgeSharing/add";
 	}
 
+	
 }

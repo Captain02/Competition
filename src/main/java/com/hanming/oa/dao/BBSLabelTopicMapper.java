@@ -1,5 +1,9 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.BBSLabelTopic;
 
 public interface BBSLabelTopicMapper {
@@ -14,4 +18,8 @@ public interface BBSLabelTopicMapper {
     int updateByPrimaryKeySelective(BBSLabelTopic record);
 
     int updateByPrimaryKey(BBSLabelTopic record);
+
+	void insertLabelTopics(@Param("list")List<BBSLabelTopic> bbsLabelTopics);
+
+
 }

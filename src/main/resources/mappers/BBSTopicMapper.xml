@@ -60,7 +60,7 @@
     delete from bbstopic
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hanming.oa.model.BBSTopic">
+  <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
     insert into bbstopic (id, title, sketch, 
       text, userId, date, 
       like, collection, comment
@@ -70,7 +70,7 @@
       #{like,jdbcType=INTEGER}, #{collection,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.BBSTopic">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
     insert into bbstopic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

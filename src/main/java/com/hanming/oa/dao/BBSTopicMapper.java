@@ -25,5 +25,5 @@ public interface BBSTopicMapper {
 	BBSDetailedTopic selectBBSDetailedTopic(Integer i);
 	
 	List<Comments> getCommentsByTopicId(Integer i);
-	
+
 }

@@ -63,7 +63,11 @@ function save() {
 			'order':order
 		},
 		success:function(result){
-			alert("添加成功");
+			if (result.code==100) {
+				alert("添加成功");
+			}else{
+				alert("添加失败");
+			}
 		}
 	}) 
 }

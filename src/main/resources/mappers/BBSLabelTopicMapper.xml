@@ -68,4 +68,13 @@
       labelId = #{labelid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- void insertLabelTopics(List<BBSLabelTopic> bbsLabelTopics); -->
+  <insert id="insertLabelTopics" parameterType="java.util.List">
+  	insert into bbslabeltopic (topicId,labelId) values
+  	<foreach collection="list" item="item" index="index" separator=",">
+  	(#{item.topicid},#{item.labelid})
+  	</foreach>
+  </insert>
+  
 </mapper>
