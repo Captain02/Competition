@@ -51,28 +51,33 @@ public class KnowledgeSharingController {
 		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic();
 		Collections.reverse(list);
 		pageInfo = new PageInfo<BBSDisplayTopic>(list, 5);
-		
+
 		model.addAttribute("pageInfo", pageInfo);
 
 		return "knowledgeSharing/knowledge";
 	}
 
 	// 查看某个贴
-	@RequestMapping(value = "/detailedTopic/{topicId}", method = RequestMethod.GET)
-	public String detailedTopicPage(@PathVariable("topicId") Integer topicId,
+	@RequestMapping(value = "/detailedTopic", method = RequestMethod.GET)
+	public String detailedTopicPage(@RequestParam(value = "topicId") Integer topicId,
 			@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
 
 		PageInfo<Comments> pageInfo = null;
-		PageHelper.startPage(pn, 15);
+		PageHelper.startPage(pn, 12);
 		List<Comments> list = bbsTopicService.getCommentsByTopicId(topicId);
 		Collections.reverse(list);
-		pageInfo = new PageInfo<Comments>(list,5);
-		
-		model.addAttribute("PageInfo", pageInfo);
+		pageInfo = new PageInfo<Comments>(list, 5);
+
+		int[] nums = pageInfo.getNavigatepageNums();
+		for (int i : nums) {
+			System.out.println(i);
+			
+		}
+		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);
-		
+
 		return "knowledgeSharing/detailedTopic";
 	}
 

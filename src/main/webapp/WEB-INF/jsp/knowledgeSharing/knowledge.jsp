@@ -68,7 +68,7 @@
 															<a href="" class="user-name">${bbsDisplayTopic.userName}</a>
 															<span class="activity-title">
 																<!--此处放知识标题 -->
-																<a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic/${bbsDisplayTopic.id}">${bbsDisplayTopic.title}</a>
+																<a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${bbsDisplayTopic.id}">${bbsDisplayTopic.title}</a>
 															</span>
 															<!--此处是知识所属标签-->
 															<p class="pull-right activity-order">
