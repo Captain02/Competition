@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonFormat.Value;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
-import com.hanming.oa.model.BBSCollection;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
-import com.hanming.oa.model.BBSLike;
 import com.hanming.oa.model.Comments;
 import com.hanming.oa.service.BBSCollectionService;
 import com.hanming.oa.service.BBSLabelService;
@@ -82,7 +79,6 @@ public class KnowledgeSharingController {
 		PageInfo<Comments> pageInfo = null;
 		PageHelper.startPage(pn, 12);
 		List<Comments> list = bbsTopicService.getCommentsByTopicId(topicId);
-		Collections.reverse(list);
 		pageInfo = new PageInfo<Comments>(list, 5);
 
 		int[] nums = pageInfo.getNavigatepageNums();

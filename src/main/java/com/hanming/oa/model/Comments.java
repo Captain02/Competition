@@ -1,5 +1,7 @@
 package com.hanming.oa.model;
 
+import java.util.List;
+
 public class Comments {
 
 	private Integer id;
@@ -19,8 +21,18 @@ public class Comments {
 	private Integer repliesUserId;
 
 	private String repliesUserName;
-	
+
 	private String repliesUserHeadFile;
+
+	private List<Comments> comments;
+
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
 
 	public Integer getId() {
 		return id;
