@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.BBSLike;
 
 public interface BBSLikeMapper {
@@ -14,4 +16,6 @@ public interface BBSLikeMapper {
     int updateByPrimaryKeySelective(BBSLike record);
 
     int updateByPrimaryKey(BBSLike record);
+
+	Integer selectCountLikeByUserIdAndTopicId(@Param("id") Integer id, @Param("topicId") Integer topicId);
 }

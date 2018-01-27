@@ -1,34 +1,28 @@
 package com.hanming.oa.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
-import com.hanming.oa.model.BBSLabelTopic;
-import com.hanming.oa.model.BBSTopic;
+import com.hanming.oa.model.BBSLike;
 import com.hanming.oa.model.Comments;
 import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSLabelTopicService;
+import com.hanming.oa.service.BBSLikeService;
 import com.hanming.oa.service.BBSTopicService;
 
 @Controller
@@ -41,6 +35,8 @@ public class KnowledgeSharingController {
 	BBSLabelService bbsLabelService;
 	@Autowired
 	BBSLabelTopicService bbsLabelTopicService;
+	@Autowired
+	BBSLikeService bbsLikeService;
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -119,5 +115,17 @@ public class KnowledgeSharingController {
 		}
 
 	}
-
+	
+	// 点赞
+	@ResponseBody
+	@RequestMapping(value="/like",method=RequestMethod.POST)
+	public Msg like(@RequestParam("topicId")Integer topicId) {
+		Integer id = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		Integer i = bbsLikeService.selectCountLikeByUserIdAndTopicId(id,topicId);
+		System.out.println(i);
+		if (i != 0) {
+			return Msg.fail();
+		}
+		return Msg.success();
+	}
 }

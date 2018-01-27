@@ -83,14 +83,13 @@
 														<!--此处放知识描述-->
 														<p class="text-muted">${bbsDisplayTopic.sketch}</p>
 														
-														
-														
 														<!--此处放知识操作-->
 														<p class="pull-right text-muted">
 															<c:if test="${isByMyId!=0}">
 																<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
 																<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
 															</c:if>
+															<input type="hidden" value="${bbsDisplayTopic.id}">
 															<i class="fa fa-thumbs-o-up"></i>${bbsDisplayTopic.like}
 															<i class="fa fa-heart-o"></i>${bbsDisplayTopic.collection}
 															<i class="fa fa-comment-o"></i>${bbsDisplayTopic.comment}
