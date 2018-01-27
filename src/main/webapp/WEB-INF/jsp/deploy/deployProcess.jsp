@@ -16,7 +16,6 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 <script type="text/javascript">
 <!-- 初始状态下，关闭按钮是隐藏的 -->

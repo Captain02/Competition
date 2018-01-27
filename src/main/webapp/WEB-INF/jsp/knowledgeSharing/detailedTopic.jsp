@@ -11,14 +11,10 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script src="${APP_PATH}/static/js/activity-opreate.js"></script>
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 
 <script type="text/javascript">
-$(function(){
-	if($("#isLike").val() == 1){
-		$('.fa-thumbs-o-up').addClass('controled');
-	}
-})
-
 function likeTopic() {
 	var topicId = $("#topicId").val();
 	var isLike = $("#isLike").val();
@@ -30,35 +26,26 @@ function likeTopic() {
 		},
 		type:"POST",
 		success:function(result){
-			$("#isLike").val(result.extend.isLike);
-			if($("#isLike").val() == 1){
-				$('.fa-thumbs-o-up').addClass('controled');
-			}
-			else if($("#isLike").val() == 0){
-				$('.fa-thumbs-o-up').removeClass('controled');
-			}
-			$('.thumbsNum').html(result.extend.likeNum);
+			addClassToThumbs(result,'#isLike','.fa-thumbs-up','.thumbsNum');
 		}
 	})
 }
 
 function collectionTopic() {
 	var topicId = $("#topicId").val();
-	var collectionNum = $("#collectionNum").val();
+	var isCollection = $("#isCollection").val();
 	$.ajax({
 		url:'${APP_PATH}/admin/KnowledgeSharing/collection',
 		data:{
 			'topicId':topicId,
-			'isCollection':collectionNum
+			'isCollection':isCollection
 		},
 		type:"POST",
 		success:function(result){
-			console.log(result.extend.collectionNum);
-			console.log(result.extend.isCollection);
+			addClassToCollection(result,'#isCollection','.fa-heart','.collectionNum');
 		}
 	})
 }
-
 </script>
 </head>
 
@@ -101,7 +88,7 @@ function collectionTopic() {
 											
 											
 											<input id="topicId" type="hidden" value="${bbsDetailedTopic.id}">
-											<input id="collectionNum" type="hidden" value="${collectionNum}">
+											<input id="isCollection" type="hidden" value="${collectionNum}">
 											<input id="isLike" type="hidden" value="${likeNum}">
 											
 											
@@ -114,20 +101,23 @@ function collectionTopic() {
 											<p class="text-center auth-row"> By <a href="">${bbsDetailedTopic.userName}</a> |   ${bbsDetailedTopic.date} </p>
 											
 											<!--这里是知识正文，使用文本编辑器格式化好的-->
-											<div>
+											<div style="margin-bottom:50px;">
 												${bbsDetailedTopic.text}
 											</div>
 											
 											
 										<a class="btn p-follow-btn" onclick="likeTopic()" title="点赞">
-											<i class="fa fa-thumbs-o-up" ></i>
+											<i class="fa fa-thumbs-up" ></i>
 											<span class="thumbsNum">
 												${bbsDetailedTopic.like}
 											</span>
 										</a>
 										<a class="btn p-follow-btn" onclick="collectionTopic()" title="收藏">
-											<i class="fa fa-heart-o" ></i>
-											${bbsDetailedTopic.collection}
+											<i class="fa fa-heart" ></i>
+											<span class="collectionNum">
+												${bbsDetailedTopic.collection}
+											</span>
+											
 										</a>
 										<a href="" class="btn p-follow-btn"  title="评论">
 											<i class="fa fa-comment-o"></i>
