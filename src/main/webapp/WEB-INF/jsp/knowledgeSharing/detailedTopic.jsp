@@ -63,9 +63,9 @@
 											</div>
 											
 											
-										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-thumbs-up" title="点赞"></i>${bbsDetailedTopic.like}</a>
-										<a href="" class="btn p-follow-btn"><i class=" glyphicon glyphicon-heart" title="收藏"></i>${bbsDetailedTopic.collection}</a>
-										<a href="" class="btn p-follow-btn"><i class="glyphicon glyphicon-comment" title="评论"></i>${bbsDetailedTopic.comment}</a>
+										<a href="" class="btn p-follow-btn"><i class="fa fa-thumbs-o-up" title="点赞"></i>${bbsDetailedTopic.like}</a>
+										<a href="" class="btn p-follow-btn"><i class="fa fa-heart-o" title="收藏"></i>${bbsDetailedTopic.collection}</a>
+										<a href="" class="btn p-follow-btn"><i class="fa fa-comment-o" title="评论"></i>${bbsDetailedTopic.comment}</a>
 										
 										<!--这里是动态的分类-->
 										<p class="pull-right activity-order">

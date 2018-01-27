@@ -152,14 +152,15 @@
 					</div>
 					<div class="col-md-4">
 						<div class="panel">
+						<div class="panel-heading">分类</div>
 							<div class="panel-body">
 								<div class="blog-post">
-									<h3>分类</h3>
 								<ul>
                   					<c:forEach items="${BBSLabel}" var="bbsLabel">
 					                	<li> <a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a></li>
                   					</c:forEach>
                 				</ul>
+                				
 								</div>
 							</div>
 						</div>
