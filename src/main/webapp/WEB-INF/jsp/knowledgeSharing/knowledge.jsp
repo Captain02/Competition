@@ -151,7 +151,13 @@
 					</div>
 					<div class="col-md-4">
 						<div class="panel">
-						<div class="panel-heading">分类</div>
+						<div class="panel-heading">
+							分类
+							<span class="pull-right label-control">
+								<a class="addLabel">新建</a>
+								<a href="">管理</a>
+							</span>
+						</div>
 							<div class="panel-body">
 								<div class="blog-post">
 								<ul>
@@ -159,6 +165,21 @@
 					                	<li> <a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a></li>
                   					</c:forEach>
                 				</ul>
+                				
+								<!--新建标签的输入框 -->
+                				<div class="addNewLabel">
+                					<div class="form-group">
+                					<div class="col-md-12">
+                						<input type="text"  class="form-control"/>
+                					</div>
+                					
+                				</div>
+                				
+                				<div class="form-group pull-right">
+                					<input type="submit" class="btn btn-success btn-sm" value="确定">
+                					<input type="button" class="btn btn-warning btn-sm" value="取消">
+                				</div>
+                				</div>
                 				
 								</div>
 							</div>
@@ -169,5 +190,11 @@
 			</div>
 		</div>
 	</section>
+<!--点击新建标签弹出输入框 -->
+<script type="text/javascript">
+	$('.addLabel').click(function(){
+		$('.addNewLabel').removeClass('addNewLabel');
+	});
+</script>
 </body>
 </html>

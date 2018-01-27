@@ -11,18 +11,17 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+
 <script type="text/javascript">
 $(function(){
-	//根据隐藏域的值来为点赞按钮赋予不同的样式
-	if($("#likeNum").val() == 1){
-		$('.fa-thumbs-o-up').addClass('zaned');
+	if($("#isLike").val() == 1){
+		$('.fa-thumbs-o-up').addClass('controled');
 	}
 })
 
-
 function likeTopic() {
 	var topicId = $("#topicId").val();
-	var isLike = $("#likeNum").val();
+	var isLike = $("#isLike").val();
 	$.ajax({
 		url:'${APP_PATH}/admin/KnowledgeSharing/like',
 		data:{
@@ -31,12 +30,12 @@ function likeTopic() {
 		},
 		type:"POST",
 		success:function(result){
-			$("#likeNum").val(result.extend.isLike);
-			if($("#likeNum").val() == 1){
-				$('.fa-thumbs-o-up').addClass('zaned');
+			$("#isLike").val(result.extend.isLike);
+			if($("#isLike").val() == 1){
+				$('.fa-thumbs-o-up').addClass('controled');
 			}
-			else if($("#likeNum").val() == 0){
-				$('.fa-thumbs-o-up').removeClass('zaned');
+			else if($("#isLike").val() == 0){
+				$('.fa-thumbs-o-up').removeClass('controled');
 			}
 			$('.thumbsNum').html(result.extend.likeNum);
 		}
@@ -103,7 +102,7 @@ function collectionTopic() {
 											
 											<input id="topicId" type="hidden" value="${bbsDetailedTopic.id}">
 											<input id="collectionNum" type="hidden" value="${collectionNum}">
-											<input id="likeNum" type="hidden" value="${likeNum}">
+											<input id="isLike" type="hidden" value="${likeNum}">
 											
 											
 											<!--这里是知识的标题-->

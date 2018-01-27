@@ -63,4 +63,18 @@ $(function () {
         });
     }
     
+    //No.3 点赞效果
+	
+  
 });
+//No.3 点赞效果
+function ActivityControl(result,hiddenValue,icon,cntrolNum){
+	hiddenValue.val(result.extend.isLike);
+	if(hiddenValue.val() == 1){
+		icon.addClass('controled');
+	}
+	else if(hiddenValue == 0){
+		icon.removeClass('controled');
+	}
+	cntrolNum.html(result.extend.likeNum);
+}

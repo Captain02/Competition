@@ -826,24 +826,42 @@ ul.p-info .title, ul.p-info .desk {
 	background: #eff0f4;
 	color: #a4a4a4;
 }
-.single-blog a.p-follow-btn:hover{
+
+.single-blog a.p-follow-btn:hover {
 	color: white;
 	background-color: #65CEA7;
 }
-.answer{
-	color:#999 !important;
+
+.answer {
+	color: #999 !important;
 	cursor: pointer;
 }
+
 .blog .auth-row {
-    color: #c8c8c8;
-    font-weight: 300;
-    padding-bottom: 20px;
-    font-size: 14px;
-    margin-bottom: 10px;
+	color: #c8c8c8;
+	font-weight: 300;
+	padding-bottom: 20px;
+	font-size: 14px;
+	margin-bottom: 10px;
 }
-.activity-order{
-	color:#999;
+
+.activity-order {
+	color: #999;
 }
-.zaned{
-	color:#c9302c;
+
+.controled {
+	color: #c9302c;
+}
+.label-control a{
+	color: #535351;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.label-control a:hover{
+	text-decoration: underline;
+	color: #65CEA7;
+}
+.addNewLabel{
+	display: none;
 }
