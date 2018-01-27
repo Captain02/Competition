@@ -68,4 +68,17 @@
       topicId = #{topicid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+	
+  <!-- Integer selectCountCollectionByUserAndTopic(@Param("userId") Integer userId, @Param("topicId") Integer topicId); -->
+  <select id="selectCountCollectionByUserAndTopic" resultType="Integer">
+   select count(*) 
+  	from bbscollection
+  	WHERE userId=#{userId} AND topicId=#{topicId}
+  </select>
+  
+  <!-- void deleCollectionByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId); -->
+  <delete id="deleCollectionByUserIdAndTopicId">
+  	delete from bbscollection
+    where userId=#{userId} AND topicId=#{topicId}
+  </delete>
 </mapper>

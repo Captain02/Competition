@@ -69,11 +69,17 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <!-- Integer selectCountLikeByUserIdAndTopicId(@Param("id") Integer id, @Param("topicId") Integer topicId); -->
+  <!-- Integer selectCountLikeByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId); -->
   <select id="selectCountLikeByUserIdAndTopicId" resultType="Integer">
   	select count(*) 
   	from bbslike
-  	WHERE userId=#{id} AND topicId=#{topicId}
+  	WHERE userId=#{userId} AND topicId=#{topicId}
   </select>
+  
+  <!-- Integer deletByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId); -->  
+  <delete id="deletByUserIdAndTopicId">
+  	delete from bbslike
+    where userId=#{userId} AND topicId=#{topicId}
+  </delete>
 
 </mapper>

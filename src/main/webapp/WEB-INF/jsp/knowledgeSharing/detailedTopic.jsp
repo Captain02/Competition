@@ -21,7 +21,19 @@ function likeTopic() {
 		},
 		type:"POST",
 		success:function(result){
-			alert(result.code);
+		}
+	})
+}
+
+function collectionTopic() {
+	var topicId = $("#topicId").val();
+	$.ajax({
+		url:'${APP_PATH}/admin/KnowledgeSharing/collection',
+		data:{
+			'topicId':topicId
+		},
+		type:"POST",
+		success:function(result){
 		}
 	})
 }
@@ -68,6 +80,8 @@ function likeTopic() {
 											
 											
 											<input id="topicId" type="hidden" value="${bbsDetailedTopic.id}">
+											<input id="collectionNum" type="hidden" value="${collectionNum}">
+											<input id="likeNum" type="hidden" value="${likeNum}">
 											
 											
 											<!--这里是知识的标题-->
@@ -84,11 +98,11 @@ function likeTopic() {
 											</div>
 											
 											
-										<a href="" class="btn p-follow-btn" onclick="likeTopic()" title="点赞">
+										<a class="btn p-follow-btn" onclick="likeTopic()" title="点赞">
 											<i class="fa fa-thumbs-o-up" ></i>
 											${bbsDetailedTopic.like}
 										</a>
-										<a href="" class="btn p-follow-btn" title="收藏">
+										<a class="btn p-follow-btn" title="收藏">
 											<i class="fa fa-heart-o" ></i>
 											${bbsDetailedTopic.collection}
 										</a>

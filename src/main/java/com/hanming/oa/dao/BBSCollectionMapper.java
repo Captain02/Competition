@@ -1,17 +1,23 @@
 package com.hanming.oa.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.BBSCollection;
 
 public interface BBSCollectionMapper {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(BBSCollection record);
+	int insert(BBSCollection record);
 
-    int insertSelective(BBSCollection record);
+	int insertSelective(BBSCollection record);
 
-    BBSCollection selectByPrimaryKey(Integer id);
+	BBSCollection selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(BBSCollection record);
+	int updateByPrimaryKeySelective(BBSCollection record);
 
-    int updateByPrimaryKey(BBSCollection record);
+	int updateByPrimaryKey(BBSCollection record);
+
+	Integer selectCountCollectionByUserAndTopic(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
+
+	void deleCollectionByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
 }

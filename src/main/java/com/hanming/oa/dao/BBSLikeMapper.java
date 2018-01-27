@@ -17,5 +17,7 @@ public interface BBSLikeMapper {
 
     int updateByPrimaryKey(BBSLike record);
 
-	Integer selectCountLikeByUserIdAndTopicId(@Param("id") Integer id, @Param("topicId") Integer topicId);
+	Integer selectCountLikeByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
+
+	Integer deletByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
 }

@@ -40,4 +40,9 @@ public class BBSTopicService {
 		return comments;
 	}
 
+
+	public void update(BBSTopic bbsTopic) {
+		bbsTopicMapper.updateByPrimaryKeySelective(bbsTopic);
+	}
+
 }

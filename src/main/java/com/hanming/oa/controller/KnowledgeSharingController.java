@@ -12,14 +12,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonFormat.Value;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.BBSCollection;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
 import com.hanming.oa.model.BBSLike;
 import com.hanming.oa.model.Comments;
+import com.hanming.oa.service.BBSCollectionService;
 import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSLabelTopicService;
 import com.hanming.oa.service.BBSLikeService;
@@ -37,6 +40,8 @@ public class KnowledgeSharingController {
 	BBSLabelTopicService bbsLabelTopicService;
 	@Autowired
 	BBSLikeService bbsLikeService;
+	@Autowired
+	BBSCollectionService bbsCollectionService;
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -49,7 +54,7 @@ public class KnowledgeSharingController {
 		if (isByMyId != 0) {
 			isByMyId = id;
 		}
-		
+
 		PageInfo<BBSDisplayTopic> pageInfo = null;
 		PageHelper.startPage(pn, 10);
 		List<BBSDisplayTopic> list = bbsTopicService.selectDisplayTopic(labelId, isByMyId);
@@ -70,6 +75,7 @@ public class KnowledgeSharingController {
 	@RequestMapping(value = "/detailedTopic", method = RequestMethod.GET)
 	public String detailedTopicPage(@RequestParam(value = "topicId") Integer topicId,
 			@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
 
@@ -84,6 +90,12 @@ public class KnowledgeSharingController {
 			System.out.println(i);
 
 		}
+		
+		Integer likeNum = bbsLikeService.selectCountLikeByUserIdAndTopicId(userId, topicId);
+		Integer collectionNum = bbsCollectionService.selectCountCollectionByUserAndTopic(userId, topicId);
+				
+		model.addAttribute("likeNum", likeNum);
+		model.addAttribute("collectionNum", collectionNum);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);
 
@@ -115,17 +127,34 @@ public class KnowledgeSharingController {
 		}
 
 	}
-	
+
 	// 点赞
 	@ResponseBody
-	@RequestMapping(value="/like",method=RequestMethod.POST)
-	public Msg like(@RequestParam("topicId")Integer topicId) {
-		Integer id = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		Integer i = bbsLikeService.selectCountLikeByUserIdAndTopicId(id,topicId);
-		System.out.println(i);
-		if (i != 0) {
-			return Msg.fail();
+	@RequestMapping(value = "/like", method = RequestMethod.POST)
+	public Msg like(@RequestParam("isLike") Integer isLike,@RequestParam("topicId") Integer topicId) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		if (isLike != 0) {
+			Integer likeNum = bbsLikeService.deleLikeTopic(userId,topicId);
+			return Msg.success().add("likeNum", likeNum);
+		} else {
+			Integer likeNum = bbsLikeService.likeTopic(userId,topicId);
+			return Msg.success().add("likeNum", likeNum);
 		}
-		return Msg.success();
 	}
+
+	// 收藏
+	@ResponseBody
+	@RequestMapping(value = "/collection", method = RequestMethod.POST)
+	public Msg collection(@RequestParam("topicId") Integer topicId,
+			@RequestParam("isCollection") Integer isCollection) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		if (isCollection != 0) {
+			Integer collectionNum = bbsCollectionService.deleCollectionTopic(userId, topicId);
+			return Msg.success().add("collectionNum", collectionNum);
+		} else {
+			Integer collectionNum = bbsCollectionService.collectionTopce(userId, topicId);
+			return Msg.success().add("collectionNum", collectionNum);
+		}
+	}
+
 }
