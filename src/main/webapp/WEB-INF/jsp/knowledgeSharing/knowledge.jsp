@@ -155,7 +155,7 @@
 							分类
 							<span class="pull-right label-control">
 								<a class="addLabel">新建</a>
-								<a href="">管理</a>
+								<a href="${APP_PATH}/admin/KnowledgeSharing/labelList">管理</a>
 							</span>
 						</div>
 							<div class="panel-body">

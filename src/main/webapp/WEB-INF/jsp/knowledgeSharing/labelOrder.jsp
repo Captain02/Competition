@@ -56,7 +56,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
 
-                                    <header class="om-wrapper-header">标签管理 / 总数：</header>
+                                    <header class="om-wrapper-header">标签管理 / 总数：${pageInfo.total}</header>
 
                                     <div class="om-wrpper-body">
                                         <form action="" id="user-list" class="user-list">
@@ -65,14 +65,18 @@
                                                 <thead>
                                                     <tr>
                                                         <th>标签名</th>
+                                                        <th>创建时间</th>
+                                                        <th>创建人</th>
                                                         <th>操作</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                   
+                                                   <c:forEach items="${pageInfo.list}" var="labels">
                                                         <tr>
-                                                            <td>服务器</td>
+                                                            <td>${labels.name}</td>
+                                                            <td>${labels.date}</td>
+                                                            <td>${labels.userName}</td>
                                                            
                                                             <td>
                                                                 <div class="btn-group">
@@ -89,6 +93,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                   </c:forEach>
                                                  
 
                                                 </tbody>

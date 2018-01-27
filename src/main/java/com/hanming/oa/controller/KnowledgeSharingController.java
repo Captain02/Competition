@@ -86,10 +86,10 @@ public class KnowledgeSharingController {
 			System.out.println(i);
 
 		}
-		
+
 		Integer likeNum = bbsLikeService.selectCountLikeByUserIdAndTopicId(userId, topicId);
 		Integer collectionNum = bbsCollectionService.selectCountCollectionByUserAndTopic(userId, topicId);
-				
+
 		model.addAttribute("likeNum", likeNum);
 		model.addAttribute("collectionNum", collectionNum);
 		model.addAttribute("pageInfo", pageInfo);
@@ -127,19 +127,19 @@ public class KnowledgeSharingController {
 	// 点赞
 	@ResponseBody
 	@RequestMapping(value = "/like", method = RequestMethod.POST)
-	public Msg like(@RequestParam("isLike") Integer isLike,@RequestParam("topicId") Integer topicId) {
+	public Msg like(@RequestParam("isLike") Integer isLike, @RequestParam("topicId") Integer topicId) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		if (isLike != 0) {
-			
-			isLike = bbsLikeService.deleLikeTopic(userId,topicId);
+
+			isLike = bbsLikeService.deleLikeTopic(userId, topicId);
 			Integer likeNum = bbsLikeService.countByTopicId(topicId);
-			
+
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		} else {
-			
-			isLike = bbsLikeService.likeTopic(userId,topicId);
+
+			isLike = bbsLikeService.likeTopic(userId, topicId);
 			Integer likeNum = bbsLikeService.countByTopicId(topicId);
-			
+
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		}
 	}
@@ -151,28 +151,45 @@ public class KnowledgeSharingController {
 			@RequestParam("isCollection") Integer isCollection) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		if (isCollection != 0) {
-			
+
 			isCollection = bbsCollectionService.deleCollectionTopic(userId, topicId);
 			Integer collectionNum = bbsCollectionService.countNumByTopic(topicId);
-			
+
 			return Msg.success().add("isCollection", isCollection).add("collectionNum", collectionNum);
 		} else {
-			
+
 			isCollection = bbsCollectionService.collectionTopce(userId, topicId);
 			Integer collectionNum = bbsCollectionService.countNumByTopic(topicId);
-			
+
 			return Msg.success().add("isCollection", isCollection).add("collectionNum", collectionNum);
 		}
 	}
-	
+
 	// 删除帖子
 	@ResponseBody
-	@RequestMapping(value="/dele",method=RequestMethod.DELETE)
-	public Msg deleTopic(@RequestParam("topicId")Integer topicId) {
-		
+	@RequestMapping(value = "/dele", method = RequestMethod.DELETE)
+	public Msg deleTopic(@RequestParam("topicId") Integer topicId) {
+
 		bbsTopicService.deleTopicById(topicId);
-		
+
 		return Msg.success();
+	}
+
+	// 跳转标签列表
+	@RequestMapping(value = "/labelList", method = RequestMethod.GET)
+	public String labelList(@RequestParam(value = "/labelList", defaultValue = "1") Integer pn, Model model) {
+
+		Integer id = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+
+		PageInfo<BBSLabel> pageInfo = null;
+		PageHelper.startPage(pn, 10);
+		List<BBSLabel> list = bbsLabelService.list();
+		Collections.reverse(list);
+		pageInfo = new PageInfo<BBSLabel>(list, 5);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "knowledgeSharing/labelOrder";
 	}
 
 }

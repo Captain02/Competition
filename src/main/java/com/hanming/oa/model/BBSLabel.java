@@ -3,27 +3,37 @@ package com.hanming.oa.model;
 import java.util.Date;
 
 public class BBSLabel {
-    private Integer id;
+	private Integer id;
 
-    private String name;
+	private String name;
 
-    private Integer userid;
+	private Integer userid;
 
-    private Date date;
+	private String userName;
 
-    public Integer getId() {
-        return id;
-    }
+	private String date;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public Integer getUserid() {
-        return userid;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getName() {
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getUserid() {
+		return userid;
+	}
+
+	public String getName() {
 		return name;
 	}
 
@@ -32,14 +42,15 @@ public class BBSLabel {
 	}
 
 	public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+		this.userid = userid;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public String getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 }

@@ -83,8 +83,9 @@
   <!-- List<BBSLabel> list(); -->
   <select id="list" resultType="BBSLabel">
   	select
-	bl.id,bl.`name`,bl.date,bl.userId
+	bl.id,bl.`name`,bl.date,bl.userId,tu.name AS userName
 	FROM bbslabel bl
+	LEFT JOIN t_user tu ON tu.id = bl.userId
   </select>
   
   
