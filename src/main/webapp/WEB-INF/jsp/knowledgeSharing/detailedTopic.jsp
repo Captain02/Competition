@@ -23,6 +23,8 @@ function likeTopic() {
 		},
 		type:"POST",
 		success:function(result){
+			
+			console.log(result.extend.isLike);
 			console.log(result.extend.likeNum);
 		}
 	})
@@ -40,6 +42,7 @@ function collectionTopic() {
 		type:"POST",
 		success:function(result){
 			console.log(result.extend.collectionNum);
+			console.log(result.extend.isCollection);
 		}
 	})
 }

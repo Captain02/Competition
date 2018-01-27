@@ -46,6 +46,11 @@ public class BBSCollectionService {
 		
 		return collectionNum;
 	}
+
+	public Integer countNumByTopic(Integer topicId) {
+		Integer collenctionNum = bbsCollectionMapper.countNumByTopic(topicId);
+		return collenctionNum;
+	}
 	
 	
 }

@@ -47,4 +47,11 @@ public class BBSLikeService {
 		return likeNum;
 	}
 
+	public Integer countByTopicId(Integer topicId) {
+		
+		Integer likeNum = bbsLikeMapper.countByToicpId(topicId);
+		
+		return likeNum;
+	}
+
 }

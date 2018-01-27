@@ -88,4 +88,11 @@
     where topicId = #{topicId}
   </delete>
   
+  <!-- Integer countByToicpId(@Param("topicId") Integer topicId); -->
+  <select id="countByToicpId" resultType="Integer">
+  	select count(*) 
+  	from bbslike
+  	WHERE topicId=#{topicId}
+  </select>
+  
 </mapper>

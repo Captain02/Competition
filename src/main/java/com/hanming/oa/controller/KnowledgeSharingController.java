@@ -134,11 +134,17 @@ public class KnowledgeSharingController {
 	public Msg like(@RequestParam("isLike") Integer isLike,@RequestParam("topicId") Integer topicId) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		if (isLike != 0) {
-			Integer likeNum = bbsLikeService.deleLikeTopic(userId,topicId);
-			return Msg.success().add("likeNum", likeNum);
+			
+			isLike = bbsLikeService.deleLikeTopic(userId,topicId);
+			Integer likeNum = bbsLikeService.countByTopicId(topicId);
+			
+			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		} else {
-			Integer likeNum = bbsLikeService.likeTopic(userId,topicId);
-			return Msg.success().add("likeNum", likeNum);
+			
+			isLike = bbsLikeService.likeTopic(userId,topicId);
+			Integer likeNum = bbsLikeService.countByTopicId(topicId);
+			
+			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		}
 	}
 
@@ -149,11 +155,17 @@ public class KnowledgeSharingController {
 			@RequestParam("isCollection") Integer isCollection) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		if (isCollection != 0) {
-			Integer collectionNum = bbsCollectionService.deleCollectionTopic(userId, topicId);
-			return Msg.success().add("collectionNum", collectionNum);
+			
+			isCollection = bbsCollectionService.deleCollectionTopic(userId, topicId);
+			Integer collectionNum = bbsCollectionService.countNumByTopic(topicId);
+			
+			return Msg.success().add("isCollection", isCollection).add("collectionNum", collectionNum);
 		} else {
-			Integer collectionNum = bbsCollectionService.collectionTopce(userId, topicId);
-			return Msg.success().add("collectionNum", collectionNum);
+			
+			isCollection = bbsCollectionService.collectionTopce(userId, topicId);
+			Integer collectionNum = bbsCollectionService.countNumByTopic(topicId);
+			
+			return Msg.success().add("isCollection", isCollection).add("collectionNum", collectionNum);
 		}
 	}
 	
