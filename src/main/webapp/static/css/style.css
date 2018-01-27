@@ -822,9 +822,13 @@ ul.p-info .title, ul.p-info .desk {
 	margin-top: 0;
 }
 
-.p-follow-btn {
+.single-blog a.p-follow-btn {
 	background: #eff0f4;
-	color: #a4a4a4 !important;
+	color: #a4a4a4;
+}
+.single-blog a.p-follow-btn:hover{
+	color: white;
+	background-color: #65CEA7;
 }
 .answer{
 	color:#999 !important;

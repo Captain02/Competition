@@ -14,7 +14,6 @@
 <script type="text/javascript">
 function likeTopic() {
 	var topicId = $("#topicId").val();
-	
 	$.ajax({
 		url:'${APP_PATH}/admin/KnowledgeSharing/like',
 		data:{
@@ -23,7 +22,6 @@ function likeTopic() {
 		type:"POST",
 		success:function(result){
 			alert(result.code);
-			console.log(result);
 		}
 	})
 }
@@ -86,9 +84,18 @@ function likeTopic() {
 											</div>
 											
 											
-										<a href="" class="btn p-follow-btn"><i class="fa fa-thumbs-o-up" title="点赞"></i>${bbsDetailedTopic.like}</a>
-										<a href="" class="btn p-follow-btn"><i class="fa fa-heart-o" title="收藏"></i>${bbsDetailedTopic.collection}</a>
-										<a href="" class="btn p-follow-btn"><i class="fa fa-comment-o" title="评论"></i>${bbsDetailedTopic.comment}</a>
+										<a href="" class="btn p-follow-btn" onclick="likeTopic()" title="点赞">
+											<i class="fa fa-thumbs-o-up" ></i>
+											${bbsDetailedTopic.like}
+										</a>
+										<a href="" class="btn p-follow-btn" title="收藏">
+											<i class="fa fa-heart-o" ></i>
+											${bbsDetailedTopic.collection}
+										</a>
+										<a href="" class="btn p-follow-btn"  title="评论">
+											<i class="fa fa-comment-o"></i>
+											${bbsDetailedTopic.comment}
+										</a>
 										
 										<!--这里是动态的分类-->
 										<p class="pull-right activity-order">
