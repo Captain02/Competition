@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hanming.oa.dao.BBSLikeMapper;
 import com.hanming.oa.model.BBSLike;
-import com.hanming.oa.model.BBSTopic;
 
 @Service
 public class BBSLikeService {

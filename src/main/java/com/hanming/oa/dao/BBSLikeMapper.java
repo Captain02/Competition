@@ -20,4 +20,6 @@ public interface BBSLikeMapper {
 	Integer selectCountLikeByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
 
 	Integer deletByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
+
+	void deleteByTopicId(@Param("topicId")Integer topicId);
 }

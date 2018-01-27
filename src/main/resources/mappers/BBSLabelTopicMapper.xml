@@ -77,4 +77,10 @@
   	</foreach>
   </insert>
   
+  <!-- void deleteByTopicId(@Param("topicId") Integer topicId); -->
+  <delete id="deleteByTopicId">
+  	delete from bbslabeltopic
+    where topicId = #{topicId}
+  </delete>
+  
 </mapper>

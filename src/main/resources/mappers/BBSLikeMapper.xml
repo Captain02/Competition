@@ -82,4 +82,10 @@
     where userId=#{userId} AND topicId=#{topicId}
   </delete>
 
+  <!-- void deleteByTopicId(@Param("topicId")Integer topicId); -->
+  <delete id="deleteByTopicId">
+  	delete from bbslike
+    where topicId = #{topicId}
+  </delete>
+  
 </mapper>

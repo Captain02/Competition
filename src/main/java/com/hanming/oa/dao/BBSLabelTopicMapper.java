@@ -21,5 +21,6 @@ public interface BBSLabelTopicMapper {
 
 	void insertLabelTopics(@Param("list")List<BBSLabelTopic> bbsLabelTopics);
 
+	void deleteByTopicId(@Param("topicId") Integer topicId);
 
 }

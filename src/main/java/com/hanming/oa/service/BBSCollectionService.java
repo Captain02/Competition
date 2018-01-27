@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hanming.oa.dao.BBSCollectionMapper;
 import com.hanming.oa.model.BBSCollection;
-import com.hanming.oa.model.BBSTopic;
 
 @Service
 public class BBSCollectionService {

@@ -81,4 +81,11 @@
   	delete from bbscollection
     where userId=#{userId} AND topicId=#{topicId}
   </delete>
+  
+  <!-- void deleteByTopicId(@Param("topicId") Integer topicId); -->
+  <delete id="deleteByTopicId">
+  	delete from bbscollection
+    where topicId = #{topicId}
+  </delete>
+
 </mapper>

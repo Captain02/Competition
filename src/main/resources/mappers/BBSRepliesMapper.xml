@@ -114,4 +114,10 @@
       text = #{text,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- void deleteByTopicId(@Param("topicId")Integer topicId); -->
+  <delete id="deleteByTopicId">
+  	delete from bbsreplies
+    where topicId = #{topicId}
+  </delete>
 </mapper>

@@ -156,5 +156,15 @@ public class KnowledgeSharingController {
 			return Msg.success().add("collectionNum", collectionNum);
 		}
 	}
+	
+	// 删除帖子
+	@ResponseBody
+	@RequestMapping(value="/dele",method=RequestMethod.DELETE)
+	public Msg deleTopic(@RequestParam("topicId")Integer topicId) {
+		
+		bbsTopicService.deleTopicById(topicId);
+		
+		return Msg.success();
+	}
 
 }

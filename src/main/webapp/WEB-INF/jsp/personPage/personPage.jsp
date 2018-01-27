@@ -85,6 +85,10 @@
 											<div class="title">职称</div>
 											<div class="desk">${user.role.name}</div>
 											</li>
+											<li>
+											<div class="title">QQ</div>
+											<div class="desk">${user.qq}</div>
+											</li>
 										</ul>
 									</div>
 								</div>

@@ -4,7 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.hanming.oa.dao.BBSCollectionMapper;
+import com.hanming.oa.dao.BBSLabelTopicMapper;
+import com.hanming.oa.dao.BBSLikeMapper;
+import com.hanming.oa.dao.BBSRepliesMapper;
 import com.hanming.oa.dao.BBSTopicMapper;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
@@ -16,6 +21,14 @@ public class BBSTopicService {
 	
 	@Autowired
 	BBSTopicMapper bbsTopicMapper;
+	@Autowired
+	BBSCollectionMapper bbsCollectionMapper;
+	@Autowired
+	BBSLikeMapper bbsLikeMapper;
+	@Autowired
+	BBSLabelTopicMapper bbsLabelTopicMapper;
+	@Autowired
+	BBSRepliesMapper bbsRepliesMapper;
 	
 
 	public List<BBSDisplayTopic> selectDisplayTopic(Integer labelId, Integer isByMyId) {
@@ -63,6 +76,15 @@ public class BBSTopicService {
 
 	public void updateCollectionAddOne(Integer userId, Integer topicId) {
 		bbsTopicMapper.updateCollectionAddOne(userId,topicId);
+	}
+
+	@Transactional
+	public void deleTopicById(Integer topicId) {
+		bbsTopicMapper.deleteByPrimaryKey(topicId);
+		bbsLabelTopicMapper.deleteByTopicId(topicId);
+		bbsCollectionMapper.deleteByTopicId(topicId);
+		bbsLikeMapper.deleteByTopicId(topicId);
+		bbsRepliesMapper.deleteByTopicId(topicId);
 	}
 
 }

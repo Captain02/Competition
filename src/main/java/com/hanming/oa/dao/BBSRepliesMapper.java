@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.BBSReplies;
 
 public interface BBSRepliesMapper {
@@ -14,4 +16,6 @@ public interface BBSRepliesMapper {
     int updateByPrimaryKeySelective(BBSReplies record);
 
     int updateByPrimaryKey(BBSReplies record);
+
+	void deleteByTopicId(@Param("topicId")Integer topicId);
 }

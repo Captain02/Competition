@@ -20,4 +20,6 @@ public interface BBSCollectionMapper {
 	Integer selectCountCollectionByUserAndTopic(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
 
 	void deleCollectionByUserIdAndTopicId(@Param("userId") Integer userId, @Param("topicId") Integer topicId);
+
+	void deleteByTopicId(@Param("topicId") Integer topicId);
 }
