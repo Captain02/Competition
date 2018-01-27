@@ -68,4 +68,12 @@
       topicId = #{topicid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- Integer selectCountLikeByUserIdAndTopicId(@Param("id") Integer id, @Param("topicId") Integer topicId); -->
+  <select id="selectCountLikeByUserIdAndTopicId" resultType="Integer">
+  	select count(*) 
+  	from bbslike
+  	WHERE userId=#{id} AND topicId=#{topicId}
+  </select>
+
 </mapper>

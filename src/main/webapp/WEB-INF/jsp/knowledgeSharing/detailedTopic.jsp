@@ -11,6 +11,24 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script type="text/javascript">
+function likeTopic() {
+	var topicId = $("#topicId").val();
+	
+	$.ajax({
+		url:'${APP_PATH}/admin/KnowledgeSharing/like',
+		data:{
+			'topicId':topicId
+		},
+		type:"POST",
+		success:function(result){
+			alert(result.code);
+			console.log(result);
+		}
+	})
+}
+
+</script>
 </head>
 
 <body class="bg-common">
@@ -49,6 +67,11 @@
 									<div class="panel-body">
 										<!--显示知识详细内容 -->
 										<div class="single-blog">
+											
+											
+											<input id="topicId" type="hidden" value="${bbsDetailedTopic.id}">
+											
+											
 											<!--这里是知识的标题-->
 											<h1 class="text-center">
 												<a href="">${bbsDetailedTopic.title}</a>

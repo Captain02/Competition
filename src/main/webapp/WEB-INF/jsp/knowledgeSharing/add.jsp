@@ -104,8 +104,7 @@ function save() {
 						<header class="panel-heading"></header>
 						<div class="panel-body">
 						<form id="topicText" action="" method="post">
-							
-							
+						
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">标题</label>
 								<div class="col-sm-10">
