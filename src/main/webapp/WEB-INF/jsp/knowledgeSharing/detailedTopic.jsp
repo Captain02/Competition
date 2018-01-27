@@ -38,6 +38,7 @@ function likeTopic() {
 			else if($("#likeNum").val() == 0){
 				$('.fa-thumbs-o-up').removeClass('zaned');
 			}
+			$('.thumbsNum').html(result.extend.likeNum);
 		}
 	})
 }
@@ -121,7 +122,9 @@ function collectionTopic() {
 											
 										<a class="btn p-follow-btn" onclick="likeTopic()" title="点赞">
 											<i class="fa fa-thumbs-o-up" ></i>
-											${bbsDetailedTopic.like}
+											<span class="thumbsNum">
+												${bbsDetailedTopic.like}
+											</span>
 										</a>
 										<a class="btn p-follow-btn" onclick="collectionTopic()" title="收藏">
 											<i class="fa fa-heart-o" ></i>
