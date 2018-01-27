@@ -23,6 +23,7 @@ public class BBSCollectionService {
 
 	@Transactional
 	public Integer collectionTopce(Integer userId, Integer topicId) {
+		
 		BBSCollection bbsCollection = new BBSCollection();
 		bbsCollection.setTopicid(topicId);
 		bbsCollection.setUserid(userId);
@@ -30,26 +31,20 @@ public class BBSCollectionService {
 		
 		Integer collectionNum = bbsCollectionMapper.selectCountCollectionByUserAndTopic(userId,topicId);
 		
-		BBSTopic bbsTopic = new BBSTopic();
-		bbsTopic.setId(topicId);
-		bbsTopic.setUserId(userId);
-		bbsTopic.setCollection(collectionNum);
-		bbsTopicService.update(bbsTopic);
+		bbsTopicService.updateCollectionAddOne(userId,topicId);
 		
 		return collectionNum;
 	}
 
 	@Transactional
 	public Integer deleCollectionTopic(Integer userId, Integer topicId) {
+		
 		bbsCollectionMapper.deleCollectionByUserIdAndTopicId(userId,topicId);
+		
+		bbsTopicService.updateCollectionSubstractOne(userId,topicId);
 		
 		Integer collectionNum = bbsCollectionMapper.selectCountCollectionByUserAndTopic(userId,topicId);
 		
-		BBSTopic bbsTopic = new BBSTopic();
-		bbsTopic.setId(topicId);
-		bbsTopic.setUserId(userId);
-		bbsTopic.setCollection(collectionNum);
-		bbsTopicService.update(bbsTopic);
 		return collectionNum;
 	}
 	

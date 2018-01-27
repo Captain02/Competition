@@ -45,4 +45,24 @@ public class BBSTopicService {
 		bbsTopicMapper.updateByPrimaryKeySelective(bbsTopic);
 	}
 
+
+	public void updateLikeSubtractOne(Integer userId, Integer topicId) {
+		bbsTopicMapper.updateLikeSubtractOne(userId,topicId);
+	}
+
+
+	public void updateLikeAddOne(Integer userId, Integer topicId) {
+		bbsTopicMapper.updateLikeAddOne(userId,topicId);
+	}
+
+
+	public void updateCollectionSubstractOne(Integer userId, Integer topicId) {
+		bbsTopicMapper.updateCollectionSubstractOne(userId,topicId);
+	}
+
+
+	public void updateCollectionAddOne(Integer userId, Integer topicId) {
+		bbsTopicMapper.updateCollectionAddOne(userId,topicId);
+	}
+
 }

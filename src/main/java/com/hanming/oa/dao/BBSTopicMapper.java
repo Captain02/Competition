@@ -28,4 +28,12 @@ public interface BBSTopicMapper {
 	
 	List<Comments> getCommentsByTopicId(Integer i);
 
+	void updateLikeSubtractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId);
+
+	void updateLikeAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId);
+
+	void updateCollectionSubstractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId);
+
+	void updateCollectionAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId);
+
 }

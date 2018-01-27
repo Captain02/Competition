@@ -48,7 +48,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, title, sketch, text, userId, date, like, collection, comment
+    id, title, sketch, text, userId, date, `like`, collection, comment
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -63,7 +63,7 @@
   <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
     insert into bbstopic (id, title, sketch, 
       text, userId, date, 
-      like, collection, comment
+      `like`, collection, comment
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sketch,jdbcType=VARCHAR}, 
       #{text,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
@@ -92,7 +92,7 @@
         date,
       </if>
       <if test="like != null">
-        like,
+        `like`,
       </if>
       <if test="collection != null">
         collection,
@@ -150,7 +150,7 @@
         date = #{date,jdbcType=TIMESTAMP},
       </if>
       <if test="like != null">
-        like = #{like,jdbcType=INTEGER},
+        `like` = #{like,jdbcType=INTEGER},
       </if>
       <if test="collection != null">
         collection = #{collection,jdbcType=INTEGER},
@@ -168,7 +168,7 @@
       text = #{text,jdbcType=VARCHAR},
       userId = #{userId,jdbcType=INTEGER},
       date = #{date,jdbcType=TIMESTAMP},
-      like = #{like,jdbcType=INTEGER},
+      `like` = #{like,jdbcType=INTEGER},
       collection = #{collection,jdbcType=INTEGER},
       comment = #{comment,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
@@ -222,5 +222,25 @@
 	
 	WHERE br.TopicId = #{topicId}
   </select>
+  
+  <!-- void updateLikeSubtractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <update id="updateLikeSubtractOne">
+  	update bbstopic set `like` = `like`-1 WHERE userId = #{userId} AND id = #{topicId}
+  </update>
+  
+  <!-- void updateLikeAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <update id="updateLikeAddOne">
+  	update bbstopic set `like` = `like`+1 WHERE userId = #{userId} AND id = #{topicId}
+  </update>
+  
+  <!-- void updateCollectionSubstractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <update id="updateCollectionSubstractOne">
+  	update bbstopic set `collection` = `collection`-1 WHERE userId = #{userId} AND id = #{topicId}
+  </update>
+  
+  <!-- void updateCollectionAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <update id="updateCollectionAddOne">
+  	update bbstopic set `collection` = `collection`+1 WHERE userId = #{userId} AND id = #{topicId}
+  </update>
   
 </mapper>

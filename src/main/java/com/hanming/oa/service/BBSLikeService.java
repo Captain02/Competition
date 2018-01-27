@@ -29,26 +29,22 @@ public class BBSLikeService {
 		bbsLike.setTopicid(topicId);
 		bbsLikeMapper.insertSelective(bbsLike);
 		
-		Integer likeNum = bbsLikeMapper.selectCountLikeByUserIdAndTopicId(userId, topicId);
+		bbsTopicService.updateLikeAddOne(userId, topicId);
 		
-		BBSTopic bbsTopic = new BBSTopic();
-		bbsTopic.setId(topicId);
-		bbsTopic.setUserId(userId);
-		bbsTopic.setLike(likeNum);
-		bbsTopicService.update(bbsTopic);
+		Integer likeNum = bbsLikeMapper.selectCountLikeByUserIdAndTopicId(userId, topicId);
 		
 		return likeNum;
 	}
 
+	@Transactional
 	public Integer deleLikeTopic(Integer userId, Integer topicId) {
+		
 		bbsLikeMapper.deletByUserIdAndTopicId(userId,topicId);
 		
+		bbsTopicService.updateLikeSubtractOne(userId,topicId);
+		
 		Integer likeNum = bbsLikeMapper.selectCountLikeByUserIdAndTopicId(userId, topicId);
-		BBSTopic bbsTopic = new BBSTopic();
-		bbsTopic.setId(topicId);
-		bbsTopic.setUserId(userId);
-		bbsTopic.setLike(likeNum);
-		bbsTopicService.update(bbsTopic);
+		
 		return likeNum;
 	}
 

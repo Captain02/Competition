@@ -14,26 +14,32 @@
 <script type="text/javascript">
 function likeTopic() {
 	var topicId = $("#topicId").val();
+	var likeNum = $("#likeNum").val();
 	$.ajax({
 		url:'${APP_PATH}/admin/KnowledgeSharing/like',
 		data:{
-			'topicId':topicId
+			'topicId':topicId,
+			'isLike':likeNum
 		},
 		type:"POST",
 		success:function(result){
+			console.log(result.extend.likeNum);
 		}
 	})
 }
 
 function collectionTopic() {
 	var topicId = $("#topicId").val();
+	var collectionNum = $("#collectionNum").val();
 	$.ajax({
 		url:'${APP_PATH}/admin/KnowledgeSharing/collection',
 		data:{
-			'topicId':topicId
+			'topicId':topicId,
+			'isCollection':collectionNum
 		},
 		type:"POST",
 		success:function(result){
+			console.log(result.extend.collectionNum);
 		}
 	})
 }
@@ -102,7 +108,7 @@ function collectionTopic() {
 											<i class="fa fa-thumbs-o-up" ></i>
 											${bbsDetailedTopic.like}
 										</a>
-										<a class="btn p-follow-btn" title="收藏">
+										<a class="btn p-follow-btn" onclick="collectionTopic()" title="收藏">
 											<i class="fa fa-heart-o" ></i>
 											${bbsDetailedTopic.collection}
 										</a>
