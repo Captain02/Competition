@@ -12,20 +12,32 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <script type="text/javascript">
+$(function(){
+	//根据隐藏域的值来为点赞按钮赋予不同的样式
+	if($("#likeNum").val() == 1){
+		$('.fa-thumbs-o-up').addClass('zaned');
+	}
+})
+
+
 function likeTopic() {
 	var topicId = $("#topicId").val();
-	var likeNum = $("#likeNum").val();
+	var isLike = $("#likeNum").val();
 	$.ajax({
 		url:'${APP_PATH}/admin/KnowledgeSharing/like',
 		data:{
 			'topicId':topicId,
-			'isLike':likeNum
+			'isLike':isLike
 		},
 		type:"POST",
 		success:function(result){
-			
-			console.log(result.extend.isLike);
-			console.log(result.extend.likeNum);
+			$("#likeNum").val(result.extend.isLike);
+			if($("#likeNum").val() == 1){
+				$('.fa-thumbs-o-up').addClass('zaned');
+			}
+			else if($("#likeNum").val() == 0){
+				$('.fa-thumbs-o-up').removeClass('zaned');
+			}
 		}
 	})
 }
