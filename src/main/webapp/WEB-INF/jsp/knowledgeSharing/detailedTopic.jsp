@@ -11,8 +11,15 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+
 <script src="${APP_PATH}/static/js/activity-opreate.js"></script>
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+
+
+<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
+<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+<script src="${APP_PATH}/static/js/comment-kindeditor-option.js"></script>
+
 
 <script type="text/javascript">
 function likeTopic() {
@@ -141,75 +148,39 @@ function collectionTopic() {
 						</div>
 					</div>
 					
-					<!--显示评论和回复操作 -->
+					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel">
 								<header class="panel-heading">精彩点评</header>
 								<div class="panel-body">
-									<ul class="activity-list">
-										<c:forEach items="${pageInfo.list}" var="comments">
+								
+									<!--显示评论和回复操作 -->
+									<div class="l-post">
+										<!--评论者的头像和用户名 -->
+										<div class="d-author">
+											
+										</div>
+										<!--评论的内容、回复者的头像和用户名以及回复内容-->
+										<div class="d-author-post-content-main"></div>
 										
-											<c:if test="${comments.repliesId == 0}">
-												<li>
-													<div class="person-img">
-														<a href="">	
-															<!--此处放头像 -->
-															<img src="${APP_PATH}/personHeadFile/${comments.repliesUserHeadFile}" alt="" />
-														</a>
-													</div>
-													
-													<div class="activity-desk">
-															<h5 class="">
-																<!--此处放评论者用户名 -->
-																<a href="" class="user-name">${comments.repliesUserName}</a>
-																<span class="activity-title">
-																	<!--此处放评论内容 -->
-																	<span>${comments.text}</span>
-																</span>
-															</h5>
-															
-															<!--此处放评论时间-->
-															<p class="text-muted pull-right">
-															${comments.date}
-															<!-- 回复按钮 -->
-															<span><a href="" class="answer">回复</a></span>
-															</p>
-														</div>
-													</li>
-											</c:if>
-											
-											<c:if test="${comments.repliesId != 0}">
-												<li>
-													<div class="person-img">
-														<a href="">	
-															<!--此处放头像 -->
-															<img src="${APP_PATH}/personHeadFile/${comments.repliesUserHeadFile}" alt="" />
-														</a>
-													</div>
-													
-													<div class="activity-desk">
-															<h5 class="">
-																<!--此处放评论者用户名 -->
-																<a href="" class="user-name">${comments.repliesUserName}</a>
-																<span class="activity-title">
-																	<!--此处放评论内容 -->
-																	<span>${comments.text}</span>
-																</span>
-															</h5>
-															
-															<!--此处放评论时间-->
-															<p class="text-muted pull-right">
-																${comments.date}
-																<!-- 回复按钮 -->
-																<span><a class="answer">回复</a></span>
-															</p>
-														</div>
-													</li>
-											</c:if>
-											
-										</c:forEach>
-									</ul>
+										<div class="clearfix"></div>
+									</div>
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
 									
 									<!--分页-->
 								    <div class="page-nav pull-right">
@@ -262,7 +233,7 @@ function collectionTopic() {
 						                    <div class="col-sm-12">
 						                      <textarea name="comment" rows="6" class="form-control" placeholder="精彩评论不断……"></textarea>
 						                      <br>
-						                      <input name="knowid" value="" type="hidden">
+						                      
 						                      <button type="submit" class="btn btn-primary pull-right">我来点评</button>
 						                    </div>
                   						</div>
