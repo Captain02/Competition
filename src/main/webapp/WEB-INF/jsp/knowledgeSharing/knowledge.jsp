@@ -14,26 +14,28 @@
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 
 <script type="text/javascript">
-$('.yes').click(function(){
-	//在此发送删除的ajax请求
-	var labelId = null;
-	
-	$.ajax({
-		url : "${APP_PATH}/admin/KnowledgeSharing/deleLabel",
-		data : {
-			'labelId':labelId
-		},
-		type : "DELETE",
-		success : function(result) {
-			console.log(result);
-		}
-	})
-});
+$(function(){
+	$('.yes').click(function(){
+		//在此发送删除的ajax请求
+		var labelId = $(this).parent().find('input.bbsLabel-id').val();
+		console.log(labelId);
+		$.ajax({
+			url : "${APP_PATH}/admin/KnowledgeSharing/deleLabel",
+			data : {
+				'labelId':labelId
+			},
+			type : "DELETE",
+			success : function(result) {
+				console.log(result);
+			}
+		}) 
+	});
+})
+
 
 function updateLabel(ele) {
 	var labelId = $(ele).parent().find('input.bbsLabel-id').val();
 	var labelName = $(ele).parent().find('input.bbsLabel-name').val();
-	console.log(labelId + labelName);
 	$.ajax({
 		url : "${APP_PATH}/admin/KnowledgeSharing/updateLabel",
 		data : {
@@ -42,8 +44,9 @@ function updateLabel(ele) {
 		},
 		type : "POST",
 		success : function(result) {
-			console.log(result.extend.label.name);
-			console.log(result.extend.label.id);
+			$(ele).parent().parent().children().eq(0).html(result.extend.label.name);
+			$(ele).parent().addClass('hidden');
+			$(ele).parent().parent().children().eq(0).removeClass('hidden');
 		}
 	})
 }
@@ -264,9 +267,9 @@ function updateLabel(ele) {
         
       </div>
       <div class="modal-footer">
-      
+        <input type="hidden" value="" class="bbsLabel-id"/>
         <button type="button" class="btn btn-warning yes">确认</button>
-        <button type="button" class="btn btn-success no">取消</button>
+        <button type="button" class="btn btn-success no" data-dismiss="modal">取消</button>
         
         
       </div>

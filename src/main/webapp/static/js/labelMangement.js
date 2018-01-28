@@ -15,7 +15,7 @@
 		}
 		
 	});
-	//辑按钮的操作 
+	//编辑按钮的操作 
 	var editorBtn = $('.order-list-editor');
 	for(var i = 0; i<editorBtn.length; i++){
 		$(editorBtn[i]).click(function(){
@@ -34,6 +34,7 @@
 	
 	//删除按钮的操作
 	$('.order-list-del').click(function(){
+		$('.modal-footer input.bbsLabel-id').val($(this).parent().parent().find('input.bbsLabel-id').val());
 		$('#myModal').modal('show');
 		 ShowTips('.modal-title','警告！','.modal-body','<b style = "color:#c9302c;">删除分类之后，该分类下面的所有帖子都会被删除</b>' + '，确定要执行删除操作吗？');
 	})
