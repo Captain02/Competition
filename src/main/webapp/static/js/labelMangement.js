@@ -21,6 +21,8 @@
 		$(editorBtn[i]).click(function(){
 			$(this).parent().parent().children().eq(0).addClass('hidden');
 			$(this).parent().parent().find('div.editorArea').removeClass('hidden');
+			$(this).parent().parent().siblings().find('div.editorArea').addClass('hidden');
+			$(this).parent().parent().siblings().find('a.hidden').removeClass('hidden');
 		})
 	}
 	//取消按钮的操作 
