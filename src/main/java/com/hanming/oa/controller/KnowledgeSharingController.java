@@ -221,7 +221,7 @@ public class KnowledgeSharingController {
 		
 		bbsLabelService.insert(bbsLabel);
 		
-		return "admin/KnowledgeSharing/list";
+		return "redirect:list";
 	}
 
 }
