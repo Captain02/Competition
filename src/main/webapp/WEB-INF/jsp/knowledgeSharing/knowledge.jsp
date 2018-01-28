@@ -11,6 +11,13 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+
+<script type="text/javascript">
+$('.yes').click(function(){
+	//在此发送删除的ajax请求
+});
+</script>
 </head>
 
 <body class="bg-common">
@@ -154,15 +161,35 @@
 						<div class="panel-heading">
 							分类
 							<span class="pull-right label-control">
-								<a class="addLabel">新建</a>
-								<a href="${APP_PATH}/admin/KnowledgeSharing/labelList">管理</a>
+								<a class="addLabel glyphicon glyphicon-plus" title="新建分类"></a>
+								<a  class="mangeLabel glyphicon glyphicon-cog" title="分类管理"></a>
 							</span>
 						</div>
 							<div class="panel-body">
 								<div class="blog-post">
 								<ul>
                   					<c:forEach items="${BBSLabel}" var="bbsLabel">
-					                	<li> <a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a></li>
+					                	<li class="order-list"> 
+					                		<a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a>
+					                		
+					                		<div class="editorArea hidden" style="display: inline-block;">
+					                			<input type="text" class="form-control" value="${bbsLabel.name}" style="width: 50%; display: inline-block;" />
+					                			<input type="submit"  class="btn btn-success btn-sm" value="确定"/>
+					                			<input type="button"  class="btn btn-danger btn-sm btn-no" value="取消"/>
+					                		</div>
+					                		
+					                		
+					                		
+					                		<div class="order-list-control pull-right">
+					                			<span class="order-list-editor " title="编辑">
+					                				<a class="glyphicon glyphicon-edit"></a>
+					                			</span>
+					                			
+					                			<span class="order-list-del" title="删除">
+					                				<a class="glyphicon glyphicon-remove"></a>
+					                			</span>
+					                		</div>
+					                	</li>
                   					</c:forEach>
                 				</ul>
                 				
@@ -190,11 +217,30 @@
 			</div>
 		</div>
 	</section>
-<!--点击新建标签弹出输入框 -->
-<script type="text/javascript">
-	$('.addLabel').click(function(){
-		$('.addNewLabel').removeClass('addNewLabel');
-	});
-</script>
+<script src="${APP_PATH}/static/js/labelMangement.js"></script>
+
+
+<!--模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-warning yes">确认</button>
+        <button type="button" class="btn btn-success no">取消</button>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
