@@ -43,6 +43,7 @@ function updateLabel(ele) {
 		type : "POST",
 		success : function(result) {
 			console.log(result.extend.label.name);
+			console.log(result.extend.label.id);
 		}
 	})
 }

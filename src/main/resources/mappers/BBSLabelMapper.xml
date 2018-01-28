@@ -15,7 +15,7 @@
 	bl.id,bl.`name`,bl.date,bl.userId,tu.name AS userName
 	FROM bbslabel bl
 	LEFT JOIN t_user tu ON tu.id = bl.userId
-    where id = #{id,jdbcType=INTEGER}
+    where bl.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bbslabel
