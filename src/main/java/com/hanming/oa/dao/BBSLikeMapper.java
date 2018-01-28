@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.BBSLike;
@@ -24,4 +26,6 @@ public interface BBSLikeMapper {
 	void deleteByTopicId(@Param("topicId") Integer topicId);
 
 	Integer countByToicpId(@Param("topicId") Integer topicId);
+
+	void deleByTopicIdList(List<Integer> bbsLabelIds);
 }

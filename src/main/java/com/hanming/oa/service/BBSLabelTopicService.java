@@ -58,4 +58,8 @@ public class BBSLabelTopicService {
 		return 1;
 	}
 
+	public void deleByTopicIdList(List<Integer> bbsLabelIds) {
+		bbsLabelTopicMapper.deleByTopicIdList(bbsLabelIds);
+	}
+
 }

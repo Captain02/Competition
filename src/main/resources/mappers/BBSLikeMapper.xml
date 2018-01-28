@@ -95,4 +95,13 @@
   	WHERE topicId=#{topicId}
   </select>
   
+  <!-- void deleByTopicIdList(List<Integer> topicIds); -->
+  <delete id="deleByTopicIdList">
+  	delete from bbslike 
+	where topicId IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
 </mapper>

@@ -36,4 +36,6 @@ public interface BBSTopicMapper {
 
 	void updateCollectionAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId);
 
+	void deleByTopicIdList(List<Integer> bbsTopicIds);
+
 }

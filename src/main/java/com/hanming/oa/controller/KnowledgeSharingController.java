@@ -1,6 +1,8 @@
 package com.hanming.oa.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -175,21 +177,51 @@ public class KnowledgeSharingController {
 		return Msg.success();
 	}
 
-	// 跳转标签列表
-	@RequestMapping(value = "/labelList", method = RequestMethod.GET)
-	public String labelList(@RequestParam(value = "/labelList", defaultValue = "1") Integer pn, Model model) {
-
-		Integer id = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-
-		PageInfo<BBSLabel> pageInfo = null;
-		PageHelper.startPage(pn, 10);
-		List<BBSLabel> list = bbsLabelService.list();
-		Collections.reverse(list);
-		pageInfo = new PageInfo<BBSLabel>(list, 5);
+	// 修改标签
+	@ResponseBody
+	@RequestMapping(value = "/updateLabel", method = RequestMethod.POST)
+	public Msg updateLabel(@RequestParam("labelId") Integer labelId, @RequestParam("labelName") String labelName) {
 		
-		model.addAttribute("pageInfo", pageInfo);
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		
-		return "knowledgeSharing/labelOrder";
+		Date currentTime = new Date();  
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+	    String dateString = formatter.format(currentTime); 
+		
+		BBSLabel bbsLabel = new BBSLabel();
+		bbsLabel.setId(labelId);
+		bbsLabel.setName(labelName);
+		bbsLabel.setUserid(userId);
+		bbsLabel.setDate(dateString);
+		
+		bbsLabelService.update(bbsLabel);
+		
+		BBSLabel bbsLabel2 = bbsLabelService.select(labelId);
+
+		return Msg.success().add("label", bbsLabel2);
+	}
+	
+	// 删除标签
+	@ResponseBody
+	@RequestMapping(value = "/deleLabel", method = RequestMethod.DELETE)
+	public Msg deleLabel(@RequestParam("labelId") Integer labelId) {
+		
+		bbsLabelService.deleLabel(labelId);
+		
+		return Msg.success();
+	}
+	
+	// 新建标签
+	@RequestMapping(value = "/addLabel", method = RequestMethod.POST)
+	public String addLabel(@RequestParam("labelName") String labelName) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		BBSLabel bbsLabel = new BBSLabel();
+		bbsLabel.setName(labelName);
+		bbsLabel.setUserid(userId);
+		
+		bbsLabelService.insert(bbsLabel);
+		
+		return "admin/KnowledgeSharing/list";
 	}
 
 }

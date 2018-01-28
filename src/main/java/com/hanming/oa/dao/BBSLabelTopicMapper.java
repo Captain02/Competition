@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.BBSLabelTopic;
+import com.hanming.oa.model.BBSTopic;
 
 public interface BBSLabelTopicMapper {
     int deleteByPrimaryKey(Integer id);
@@ -22,5 +23,10 @@ public interface BBSLabelTopicMapper {
 	void insertLabelTopics(@Param("list")List<BBSLabelTopic> bbsLabelTopics);
 
 	void deleteByTopicId(@Param("topicId") Integer topicId);
+
+	void deleByTopicIdList(List<Integer> topicIds);
+
+	List<BBSLabelTopic> getTopicListByLabelIds(List<Integer> bbsLabelIds);
+
 
 }

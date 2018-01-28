@@ -87,4 +87,9 @@ public class BBSTopicService {
 		bbsRepliesMapper.deleteByTopicId(topicId);
 	}
 
+
+	public void deleByTopicIdList(List<Integer> bbsLabelIds) {
+		bbsTopicMapper.deleByTopicIdList(bbsLabelIds);
+	}
+
 }

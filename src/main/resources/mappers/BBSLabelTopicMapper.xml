@@ -83,4 +83,23 @@
     where topicId = #{topicId}
   </delete>
   
+  <!-- void deleByTopicIdList(List<Integer> topicIds); -->
+  <delete id="deleByTopicIdList">
+  	delete from bbslabeltopic 
+	where topicId IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
+  <!-- List<BBSLabelTopic> getTopicListByLabelIds(List<Integer> bbsLabelIds); -->
+  <select id="getTopicListByLabelIds" resultType="BBSTopic">
+  	select id, topicId, labelId
+  	from bbslabeltopic
+  	where topicId IN
+  	<foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </select>
+  
 </mapper>

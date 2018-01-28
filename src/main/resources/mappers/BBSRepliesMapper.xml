@@ -120,4 +120,14 @@
   	delete from bbsreplies
     where topicId = #{topicId}
   </delete>
+  
+  <!-- void deleteByTopicIdList(List<Integer> topicIds); -->
+  <delete id="deleteByTopicIdList">
+  	delete from bbsreplies 
+	where topicId IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
 </mapper>

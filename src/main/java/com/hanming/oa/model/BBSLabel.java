@@ -1,7 +1,5 @@
 package com.hanming.oa.model;
 
-import java.util.Date;
-
 public class BBSLabel {
 	private Integer id;
 

@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.BBSReplies;
@@ -18,4 +20,6 @@ public interface BBSRepliesMapper {
     int updateByPrimaryKey(BBSReplies record);
 
 	void deleteByTopicId(@Param("topicId")Integer topicId);
+
+	void deleteByTopicIdList(List<Integer> topicIds);
 }

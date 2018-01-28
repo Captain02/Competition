@@ -16,7 +16,36 @@
 <script type="text/javascript">
 $('.yes').click(function(){
 	//在此发送删除的ajax请求
+	var labelId = null;
+	
+	$.ajax({
+		url : "${APP_PATH}/admin/KnowledgeSharing/deleLabel",
+		data : {
+			'labelId':labelId
+		},
+		type : "DELETE",
+		success : function(result) {
+			console.log(result);
+		}
+	})
 });
+
+function updateLabel() {
+	var labelId = null;
+	var labelName = null;
+	
+	$.ajax({
+		url : "${APP_PATH}/admin/KnowledgeSharing/updateLabel",
+		data : {
+			'labelId':labelId,
+			'labelName':labelName
+		},
+		type : "POST",
+		success : function(result) {
+			console.log(result.extend.label.name);
+		}
+	})
+}
 </script>
 </head>
 
@@ -172,11 +201,12 @@ $('.yes').click(function(){
 					                	<li class="order-list"> 
 					                		<a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a>
 					                		
-					                		<div class="editorArea hidden" style="display: inline-block;">
-					                			<input type="text" class="form-control" value="${bbsLabel.name}" style="width: 50%; display: inline-block;" />
-					                			<input type="submit"  class="btn btn-success btn-sm" value="确定"/>
-					                			<input type="button"  class="btn btn-danger btn-sm btn-no" value="取消"/>
-					                		</div>
+						                		<div class="editorArea hidden" style="display: inline-block;">
+						                			<input type="hidden" value="${bbsLabel.id}" />
+						                			<input type="text" class="form-control" value="${bbsLabel.name}" style="width: 50%; display: inline-block;" />
+						                			<input type="button"  class="btn btn-success btn-sm" value="确定"/>
+						                			<input type="button"  class="btn btn-danger btn-sm btn-no" value="取消"/>
+						                		</div>
 					                		
 					                		
 					                		
@@ -194,19 +224,20 @@ $('.yes').click(function(){
                 				</ul>
                 				
 								<!--新建标签的输入框 -->
-                				<div class="addNewLabel">
-                					<div class="form-group">
-                					<div class="col-md-12">
-                						<input type="text"  class="form-control"/>
-                					</div>
-                					
-                				</div>
-                				
-                				<div class="form-group pull-right">
-                					<input type="submit" class="btn btn-success btn-sm" value="确定">
-                					<input type="button" class="btn btn-warning btn-sm" value="取消">
-                				</div>
-                				</div>
+								<form action="${APP_PATH}/admin/KnowledgeSharing/addLabel" method="post">
+	                				<div class="addNewLabel">
+	                					<div class="form-group">
+		                					<div class="col-md-12">
+		                						<input type="text" name="labelName" class="form-control"/>
+		                					</div>
+	                					</div>
+	                				
+		                				<div class="form-group pull-right">
+		                					<input type="submit" class="btn btn-success btn-sm" value="确定">
+		                					<input type="button" class="btn btn-warning btn-sm" value="取消">
+		                				</div>
+		                			</div>
+								</form>
                 				
 								</div>
 							</div>

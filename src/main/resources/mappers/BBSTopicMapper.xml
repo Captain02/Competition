@@ -243,4 +243,13 @@
   	update bbstopic set `collection` = `collection`+1 WHERE userId = #{userId} AND id = #{topicId}
   </update>
   
+  <!-- void deleByTopicIdList(List<Integer> topicIds); -->
+  <delete id="deleByTopicIdList">
+  	delete from bbstopic 
+	where id IN
+    <foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
+  
 </mapper>
