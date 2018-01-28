@@ -30,10 +30,10 @@ $('.yes').click(function(){
 	})
 });
 
-function updateLabel() {
-	var labelId = null;
-	var labelName = null;
-	
+function updateLabel(ele) {
+	var labelId = $(ele).parent().find('input.bbsLabel-id').val();
+	var labelName = $(ele).parent().find('input.bbsLabel-name').val();
+	console.log(labelId + labelName);
 	$.ajax({
 		url : "${APP_PATH}/admin/KnowledgeSharing/updateLabel",
 		data : {
@@ -202,9 +202,9 @@ function updateLabel() {
 					                		<a href="${APP_PATH}/admin/KnowledgeSharing/list?labelId=${bbsLabel.id}&isByMyId=${isByMyId}">${bbsLabel.name}</a>
 					                		
 						                		<div class="editorArea hidden" style="display: inline-block;">
-						                			<input type="hidden" value="${bbsLabel.id}" />
-						                			<input type="text" class="form-control" value="${bbsLabel.name}" style="width: 50%; display: inline-block;" />
-						                			<input type="button"  class="btn btn-success btn-sm" value="确定"/>
+						                			<input type="hidden" value="${bbsLabel.id}" class="bbsLabel-id"/>
+						                			<input type="text" class="form-control bbsLabel-name" value="${bbsLabel.name}" style="width: 50%; display: inline-block;"/>
+						                			<input type="button"  class="btn btn-success btn-sm" value="确定" onclick="updateLabel(this);"/>
 						                			<input type="button"  class="btn btn-danger btn-sm btn-no" value="取消"/>
 						                		</div>
 					                		
