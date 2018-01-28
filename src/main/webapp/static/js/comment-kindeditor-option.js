@@ -5,9 +5,11 @@
 //初始化kindEditor配置
 $(function(){
 	var editor = KindEditor.create('textarea[name="comment"]', {
-		minHeight:'100',
+		height:'100',
+		width:'100%',
 		themeType : 'simple',
 		items : [
 			'bold','italic','underline','fontname','fontsize','forecolor','image','emoticons','baidumap']
 	});
+	$('.ke-container').css('width','100%');
 })

@@ -156,13 +156,37 @@ function collectionTopic() {
 								<div class="panel-body">
 								
 									<!--显示评论和回复操作 -->
-									<div class="l-post">
+									<div class="l-post col-md-12">
 										<!--评论者的头像和用户名 -->
-										<div class="d-author">
-											
+										<div class="d-author col-md-2">
+											<ul class="p-author">
+												<li class="author-icon">
+													<div class="author-icon-img clearfix">
+														<a href="">
+															<img src="${APP_PATH}/static/em.jpg" alt="" />
+														</a>
+													</div>
+												</li>
+												<li class="author-name">
+													<a href="p-author-name">
+														admin
+													</a>
+												</li>
+											</ul>
 										</div>
 										<!--评论的内容、回复者的头像和用户名以及回复内容-->
-										<div class="d-author-post-content-main"></div>
+										<div class="d-author-post-content-main col-md-10">
+											<div class="d-content">
+												大神求带！
+											</div>
+											
+											<!--当前楼数 评论时间以及回复数量-->
+											<div class="core-reply">
+												<div class="core-reply-tail"></div>
+											</div>
+											
+											
+										</div>
 										
 										<div class="clearfix"></div>
 									</div>

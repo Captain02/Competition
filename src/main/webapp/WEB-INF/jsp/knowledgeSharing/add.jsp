@@ -29,6 +29,7 @@ $(function(){
 			this.sync();
 		}
 	});
+	$('.ke-container').css('width','100%');
 })
 
 
