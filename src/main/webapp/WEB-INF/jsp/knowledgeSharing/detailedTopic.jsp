@@ -66,6 +66,8 @@ var repliescontent;
 function replies (ele) {
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
+	
+	alert(repliesId);
 	repliescontent = $(ele).siblings("textarea[name='editor-container-area']").val();
 	
 	$.ajax({
@@ -226,7 +228,7 @@ function replies (ele) {
 													<div class="p_reply pull-right">
 													
 													
-													<input id="repliesId" type="hidden" value="${comments.repliesId}" >
+													<input id="repliesId" type="hidden" value="${comments.id}" >
 													<input id="ByRepliesUserId" type="hidden" value="${comments.repliesUserId}" >
 													
 													
