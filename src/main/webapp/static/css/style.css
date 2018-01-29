@@ -936,10 +936,77 @@ ul.p-info .title, ul.p-info .desk {
 
 .d-author-post-content-main {
 	float: left;
-	padding: 0 0 7px 20px;
-	min-height: 170px;
+	padding: 0 0 20px 20px;
 }
 
 .d-content {
 	padding: 24px 20px 0 0;
+	min-height: 170px;
+}
+
+.p-tail li {
+	display: inline;
+	margin-left: 6px;
+	color: #999;
+	font-size: 12px;
+}
+
+.p_reply {
+	cursor: pointer;
+	margin-left: 6px;
+}
+
+.p_reply a, .p_reply span {
+	color: #2d64b3;
+	outline: 0;
+	display: inline;
+	font-size: 12px;
+}
+
+.core-reply-info-img {
+	float: left;
+	width: 32px;
+	height: 32px;
+	padding: 1px;
+	border: 5px solid #F1F2F7;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+.core-reply-info-img img {
+	width: 32px;
+	height: 32px;
+}
+
+.core-reply-content li {
+	padding-top: 10px;
+}
+
+.lzl-cnt {
+	margin-left: 50px;
+	padding-top: 8px;
+}
+
+.lzl-cnt .lzl-username {
+	color: #2d64b3;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.lzl-content_reply {
+	text-align: right;
+	font-size: 12px;
+}
+
+.lzl-content_reply .lzl-s-r {
+	font-size: 12px;
+	color: #666;
+	padding-left: 5px;
+}
+.lzl-editor-container{
+	padding-top: 35px;
+}
+.btn-editor-reply{
+	padding: 2px 20px;
+	margin-top: 15px;
 }

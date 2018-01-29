@@ -5,7 +5,7 @@
 //初始化kindEditor配置
 $(function(){
 	var editor = KindEditor.create('textarea[name="comment"]', {
-		height:'100',
+		minHeight:'300',
 		width:'100%',
 		themeType : 'simple',
 		items : [
