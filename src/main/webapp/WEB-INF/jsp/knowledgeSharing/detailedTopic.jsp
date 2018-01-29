@@ -55,8 +55,17 @@ function collectionTopic() {
 	})
 }
 
-function replies () {
+
+//帖子id
+var repliesId;
+//要回复的那个人的id
+var byRepliesUserId;
+//回复内容
+var repliescontent;
+
+function replies (ele) {
 	var topicId = $("#topicId").val();
+	repliescontent = $(ele).siblings("textarea[name='editor-container-area']").val();
 	
 }
 </script>
@@ -228,27 +237,7 @@ function replies () {
 													
 											<!--这里是帖子的回复 -->													
 													<c:if test="${comments.repliesId != 0}">
-														<li class="clearfix">
-															<!--回复者的头像 -->
-															<a href="" class="core-reply-info-img">
-																<img src="${APP_PATH}/static/reply.jpg" alt="" />
-															</a>
-															
-															<!--回复者的用户名和回复内容-->
-															<div class="lzl-cnt">
-																<!--回复者的用户名-->
-																<a href="" class="lzl-username"></a>:
-																
-																<!--回复内容-->
-																<span></span>
-																<!--回复时间以及再回复按钮-->
-																<div class="lzl-content_reply">
-																	<span class="lzl-time"></span>
-																	<a href="" class="btn-reply-lz-reply"></a>
-																</div>
-															</div>
-															
-														</li>
+														
 													</c:if>
 											<!--这里是帖子的回复-->													
 														
@@ -260,7 +249,7 @@ function replies () {
 											<div class="lzl-editor-container form-group">
 												<div class="editor-container">
 													<textarea name="editor-container-area" class="form-control"></textarea>
-													<input type="submit"  class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表"/>
+													<input type="submit"  class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表" onclick="replies (this);"/>
 												</div>
 												
 											</div>
@@ -342,5 +331,19 @@ function replies () {
 		</div>
 	</section>
 <script src="${APP_PATH}/static/js/activity-opreate.js"></script>
+
+<script type="text/javascript">
+//点击回复按钮获得帖子id和要回复的那个人的id
+var btnReplyLz = $('.btn-reply-lz');
+for(var i = 0; i<btnReplyLz.length; i++){
+	$(btnReplyLz[i]).click(function(){
+		repliesId = $(this).siblings('#repliesId').val();
+		byRepliesUserId = $(this).siblings('#ByRepliesUserId').val();
+		$(this).parent().parent().parent().siblings("div.lzl-editor-container").find("textarea[name='editor-container-area']").focus();
+	})
+}
+
+</script>
+
 </body>
 </html>
