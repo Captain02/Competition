@@ -175,7 +175,7 @@ function collectionTopic() {
 												<li class="author-icon">
 													<div class="author-icon-img clearfix">
 														<a href="">
-															<img src="${APP_PATH}/personHeadFile/${repliesUserHeadFile}" alt="" />
+															<img src="${APP_PATH}/personHeadFile/${comments.repliesUserHeadFile}" alt="" />
 														</a>
 													</div>
 												</li>
