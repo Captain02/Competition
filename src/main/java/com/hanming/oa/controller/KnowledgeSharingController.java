@@ -20,11 +20,13 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
+import com.hanming.oa.model.BBSReplies;
 import com.hanming.oa.model.Comments;
 import com.hanming.oa.service.BBSCollectionService;
 import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSLabelTopicService;
 import com.hanming.oa.service.BBSLikeService;
+import com.hanming.oa.service.BBSRepliesService;
 import com.hanming.oa.service.BBSTopicService;
 
 @Controller
@@ -41,6 +43,8 @@ public class KnowledgeSharingController {
 	BBSLikeService bbsLikeService;
 	@Autowired
 	BBSCollectionService bbsCollectionService;
+	@Autowired
+	BBSRepliesService bbsRepliesService;
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -181,36 +185,36 @@ public class KnowledgeSharingController {
 	@ResponseBody
 	@RequestMapping(value = "/updateLabel", method = RequestMethod.POST)
 	public Msg updateLabel(@RequestParam("labelId") Integer labelId, @RequestParam("labelName") String labelName) {
-		
+
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
-		Date currentTime = new Date();  
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-	    String dateString = formatter.format(currentTime); 
-		
+
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(currentTime);
+
 		BBSLabel bbsLabel = new BBSLabel();
 		bbsLabel.setId(labelId);
 		bbsLabel.setName(labelName);
 		bbsLabel.setUserid(userId);
 		bbsLabel.setDate(dateString);
-		
+
 		bbsLabelService.update(bbsLabel);
-		
+
 		BBSLabel bbsLabel2 = bbsLabelService.select(labelId);
 
 		return Msg.success().add("label", bbsLabel2);
 	}
-	
+
 	// 删除标签
 	@ResponseBody
 	@RequestMapping(value = "/deleLabel", method = RequestMethod.POST)
 	public Msg deleLabel(@RequestParam("labelId") Integer labelId) {
-		
+
 		bbsLabelService.deleLabel(labelId);
-		
+
 		return Msg.success();
 	}
-	
+
 	// 新建标签
 	@RequestMapping(value = "/addLabel", method = RequestMethod.POST)
 	public String addLabel(@RequestParam("labelName") String labelName) {
@@ -218,10 +222,27 @@ public class KnowledgeSharingController {
 		BBSLabel bbsLabel = new BBSLabel();
 		bbsLabel.setName(labelName);
 		bbsLabel.setUserid(userId);
-		
+
 		bbsLabelService.insert(bbsLabel);
-		
+
 		return "redirect:list";
+	}
+
+	// 回帖
+	@RequestMapping(value = "/addReplies", method = RequestMethod.POST)
+	public String addReplies(@RequestParam("comment") String text, @RequestParam("pn") Integer pn,
+			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		BBSReplies bbsReplies = new BBSReplies();
+		bbsReplies.setUserid(byUserId);
+		bbsReplies.setRepliseuserid(userId);
+		bbsReplies.setRepliesid(0);
+		bbsReplies.setTopicid(topicid);
+		bbsReplies.setText(text);
+		
+		bbsRepliesService.insert(bbsReplies);
+		
+		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
 
 }

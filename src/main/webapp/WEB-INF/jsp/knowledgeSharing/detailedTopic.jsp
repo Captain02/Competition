@@ -155,6 +155,19 @@ function collectionTopic() {
 								<div class="panel-body">
 								
 									<!--显示评论和回复操作 -->
+								 <c:forEach items="${pageInfo.list}" var="comments">
+								 
+								 	<!-- 回帖内容 -->
+								 	<c:if test="${comments.repliesId == 0}">
+								 	
+								 	</c:if>
+								 	
+								 	<!-- 回复回帖内容 -->
+								 	<c:if test="${comments.repliesId != 0}">
+
+									</c:if>
+									
+									
 									<div class="l-post col-md-12">
 										<!--评论者的头像和用户名 -->
 										<div class="d-author col-md-2">
@@ -162,104 +175,98 @@ function collectionTopic() {
 												<li class="author-icon">
 													<div class="author-icon-img clearfix">
 														<a href="">
-															<img src="${APP_PATH}/static/em.jpg" alt="" />
+															<img src="${APP_PATH}/personHeadFile/${repliesUserHeadFile}" alt="" />
 														</a>
 													</div>
 												</li>
 												<li class="author-name">
 													<a href="p-author-name">
-														admin
+														${comments.repliesUserName}
 													</a>
 												</li>
 											</ul>
 										</div>
+								 
 										<!--评论的内容、回复者的头像和用户名以及回复内容-->
-										<div class="d-author-post-content-main col-md-10">
-										    <!--评论的内容-->
-											<div class="d-content text-justify">
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-												顶一下 楼主，我也是一步一步自学来的，讲真刚开始是比较痛苦的，每次自己独立解决完问题那种很小的成就感是我继续坚持的动力
-											</div>
-											
-												
-										<!--当前楼数 评论时间以及回复数量-->
-											<div class="core-reply clearfix">
-												<div class="core-reply-tail">
-												<div class="p_reply pull-right">
-													<a href="">回复
-													
-													<!--这里是回复数量-->
-														<span>(99+)</span>
-													</a>
+											<div class="d-author-post-content-main col-md-10">
+											    <!--评论的内容-->
+												<div class="d-content text-justify">
+													${comments.text}
 												</div>
-												<!--当前楼数 评论时间-->
-													<ul class="p-tail pull-right">
-														<li>
-															<span>1楼</span>
-														</li>
-														<li>
-															<span>2017-01-1</span>
+												
+													
+											<!--当前楼数 评论时间以及回复数量-->
+												<div class="core-reply clearfix">
+													<div class="core-reply-tail">
+													<div class="p_reply pull-right">
+														<a href="">回复
+														
+														<!--这里是回复数量-->
+															<span>(99+)</span>
+														</a>
+													</div>
+													<!--当前楼数 评论时间-->
+														<ul class="p-tail pull-right">
+															<li>
+																<span>1楼</span>
+															</li>
+															<li>
+																<span>${comments.date}</span>
+															</li>
+														</ul>
+													</div>
+												</div>
+											
+											<!--回复内容以及回复框 -->
+											<div class="core-reply-wrapper">
+												<div class="core-reply-content">
+													<ul class="core-reply-info clearfix">
+														<!--回复者的相关信息以及回复内容 -->
+														<li class="clearfix">
+															<!--回复者的头像 -->
+															<a href="" class="core-reply-info-img">
+																<img src="${APP_PATH}/static/reply.jpg" alt="" />
+															</a>
+															
+															<!--回复者的用户名和回复内容-->
+															<div class="lzl-cnt">
+																<!--回复者的用户名-->
+																<a href="" class="lzl-username">张三</a>:
+																
+																<!--回复内容-->
+																<span>
+																	借楼出售瓜子饮料爆米花马扎
+																</span>
+																<!--回复时间以及再回复按钮-->
+																<div class="lzl-content_reply">
+																	<span class="lzl-time">2017-1-1</span>
+																	<a href="" class="lzl-s-r">回复</a>
+																</div>
+															</div>
+															
 														</li>
 													</ul>
-												</div>
-											</div>
-										
-										<!--回复内容以及回复框 -->
-										<div class="core-reply-wrapper">
-											<div class="core-reply-content">
-												<ul class="core-reply-info clearfix">
-													<!--回复者的相关信息以及回复内容 -->
-													<li class="clearfix">
-														<!--回复者的头像 -->
-														<a href="" class="core-reply-info-img">
-															<img src="${APP_PATH}/static/reply.jpg" alt="" />
-														</a>
-														
-														<!--回复者的用户名和回复内容-->
-														<div class="lzl-cnt">
-															<!--回复者的用户名-->
-															<a href="" class="lzl-username">张三</a>:
-															
-															<!--回复内容-->
-															<span>
-																借楼出售瓜子饮料爆米花马扎
-															</span>
-															<!--回复时间以及再回复按钮-->
-															<div class="lzl-content_reply">
-																<span class="lzl-time">2017-1-1</span>
-																<a href="" class="lzl-s-r">回复</a>
-															</div>
+													
+													<!--回复框 -->
+													<div class="lzl-editor-container form-group">
+														<div class="editor-container">
+															<textarea name="editor-container-area" class="form-control"></textarea>
+															<input type="submit"  class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表"/>
 														</div>
 														
-													</li>
-												</ul>
-												
-												<!--回复框 -->
-												<div class="lzl-editor-container form-group">
-													<div class="editor-container">
-														<textarea name="editor-container-area" class="form-control"></textarea>
-														<input type="submit"  class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表"/>
 													</div>
 													
+													
 												</div>
-												
-												
 											</div>
-										</div>
-										
-										</div>
-										
+											
+											</div>
 										
 									
 										
 										<div class="clearfix"></div>
 									</div>
+								 </c:forEach>
 									
 									
 									<!--分页-->
@@ -308,12 +315,14 @@ function collectionTopic() {
   										</nav>
 								    </div>
 									
-									<form action="" method="post" class="form-horizontal">
+									<form action="${APP_PATH}/admin/KnowledgeSharing/addReplies " method="post" class="form-horizontal">
 										<div class="form-group">
 						                    <div class="col-sm-12">
 						                      <textarea name="comment" rows="6" class="form-control" placeholder="精彩评论不断……"></textarea>
 						                      <br>
-						                      
+						                      <input type="hidden" name="pn" value="${pageInfo.pageNum}" />
+						                      <input type="hidden" name="topicId" value="${bbsDetailedTopic.id}" />
+						                      <input type="hidden" name="byUserId" value="${bbsDetailedTopic.userId}" />
 						                      <button type="submit" class="btn btn-primary pull-right">我来点评</button>
 						                    </div>
                   						</div>

@@ -32,7 +32,7 @@
 			<result column="tdName" property="name"/>
 		</association>
 		
-		<association property="role" javaType="Role">
+		<association property="role" javaType="Role" >
 			<id column="trId" property="id"/>
 			<result column="trName" property="name"/>
 		</association>
