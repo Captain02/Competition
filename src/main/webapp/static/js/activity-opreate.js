@@ -3,12 +3,12 @@
  */
 $(function(){
 	if($("#isLike").val() == 1){
-		$('.fa-thumbs-o-up').addClass('controled');
+		$('.fa-thumbs-up').addClass('controled');
 	}
 	if($("#isCollection").val() == 1){
-		$('.fa-heart-o').addClass('controled');
+		$('.fa-heart').addClass('controled');
 	}
-})
+});
 
 function addClassToThumbs(result,isLike,icon,num){
 	$(isLike).val(result.extend.isLike);

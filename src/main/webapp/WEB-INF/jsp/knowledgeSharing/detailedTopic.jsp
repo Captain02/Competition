@@ -12,7 +12,6 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 
-<script src="${APP_PATH}/static/js/activity-opreate.js"></script>
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 
 
@@ -192,20 +191,6 @@ function collectionTopic() {
 									</div>
 									
 									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 									<!--分页-->
 								    <div class="page-nav pull-right">
 								    	<nav aria-label="Page navigation">
@@ -271,5 +256,6 @@ function collectionTopic() {
 			</div>
 		</div>
 	</section>
+<script src="${APP_PATH}/static/js/activity-opreate.js"></script>
 </body>
 </html>
