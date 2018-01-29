@@ -54,6 +54,11 @@ function collectionTopic() {
 		}
 	})
 }
+
+function replies () {
+	var topicId = $("#topicId").val();
+	
+}
 </script>
 </head>
 
@@ -158,9 +163,10 @@ function collectionTopic() {
 								
 									<!--显示评论和回复操作 -->
 								 <c:forEach items="${pageInfo.list}" var="comments">
-								 
+								 	
 									<div class="l-post col-md-12">
 										<!--评论者的头像和用户名 -->
+									<c:if test="${comments.repliesId == 0}">
 										<div class="d-author col-md-2">
 											<ul class="p-author">
 												<li class="author-icon">
@@ -177,24 +183,29 @@ function collectionTopic() {
 												</li>
 											</ul>
 										</div>
-								 
+								 </c:if>
 										<!--评论的内容、回复者的头像和用户名以及回复内容-->
-											<div class="d-author-post-content-main col-md-10">
+										<div class="d-author-post-content-main col-md-10">
 											
-<!--这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论  这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论-->
-										    	<c:if test="${comments.repliesId == 0}">
+											<c:if test="${comments.repliesId == 0}">
+										<!--这里是帖子的评论-->
 							 						<div class="d-content text-justify">
 														${comments.text}
 													</div>
-							 					</c:if>
-<!--这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论  这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论这里是帖子的评论-->												
-												
+							 				
+										<!--这里是帖子的评论-->												
 													
 											<!--当前楼数 评论时间以及回复数量-->
 												<div class="core-reply clearfix">
 													<div class="core-reply-tail">
 													<div class="p_reply pull-right">
-														<a class="btn-reply-lz">回复</a>
+													
+													
+													<input id="repliesId" type="hidden" value="${comments.repliesId}" >
+													<input id="ByRepliesUserId" type="hidden" value="${comments.repliesUserId}" >
+													
+													
+														<a onclick="replies()" class="btn-reply-lz">回复</a>
 													</div>
 													<!--当前楼数 评论时间-->
 														<ul class="p-tail pull-right">
@@ -207,6 +218,7 @@ function collectionTopic() {
 														</ul>
 													</div>
 												</div>
+											</c:if>
 											
 											<!--回复内容-->
 											<div class="core-reply-wrapper">
@@ -214,7 +226,7 @@ function collectionTopic() {
 												<div class="core-reply-content">
 													<ul class="core-reply-info clearfix">
 													
-<!--这里是帖子的回复 这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复-->													
+											<!--这里是帖子的回复 -->													
 													<c:if test="${comments.repliesId != 0}">
 														<li class="clearfix">
 															<!--回复者的头像 -->
@@ -238,7 +250,7 @@ function collectionTopic() {
 															
 														</li>
 													</c:if>
-<!--这里是帖子的回复 这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复这里是帖子的回复-->													
+											<!--这里是帖子的回复-->													
 														
 													</ul>
 												</div>
