@@ -65,7 +65,23 @@ var repliescontent;
 
 function replies (ele) {
 	var topicId = $("#topicId").val();
+	var pn = $("#pn").val();
 	repliescontent = $(ele).siblings("textarea[name='editor-container-area']").val();
+	
+	$.ajax({
+		url:"${APP_PATH}/admin/KnowledgeSharing/addReplies",
+		data:{
+			'comment':repliescontent,
+			'topicId':topicId,
+			'repliesId':repliesId,
+			'byUserId':byRepliesUserId,
+			'pn':pn
+		},
+		type:"POST",
+		success:function(result){
+			//直接刷新页面
+		}
+	})
 	
 }
 </script>
@@ -314,7 +330,7 @@ function replies (ele) {
 						                    <div class="col-sm-12">
 						                      <textarea name="comment" rows="6" class="form-control" placeholder="精彩评论不断……"></textarea>
 						                      <br>
-						                      <input type="hidden" name="pn" value="${pageInfo.pageNum}" />
+						                      <input id="pn" type="hidden" name="pn" value="${pageInfo.pageNum}" />
 						                      <input type="hidden" name="topicId" value="${bbsDetailedTopic.id}" />
 						                      <input type="hidden" name="byUserId" value="${bbsDetailedTopic.userId}" />
 						                      <button type="submit" class="btn btn-primary pull-right">我来点评</button>

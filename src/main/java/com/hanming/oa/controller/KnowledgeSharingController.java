@@ -231,17 +231,20 @@ public class KnowledgeSharingController {
 	// 回帖
 	@RequestMapping(value = "/addReplies", method = RequestMethod.POST)
 	public String addReplies(@RequestParam("comment") String text, @RequestParam("pn") Integer pn,
-			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId) {
+			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId,
+			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
+		
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		BBSReplies bbsReplies = new BBSReplies();
+		
+		bbsReplies.setRepliesid(repliesId);
 		bbsReplies.setUserid(byUserId);
 		bbsReplies.setRepliseuserid(userId);
-		bbsReplies.setRepliesid(0);
 		bbsReplies.setTopicid(topicid);
 		bbsReplies.setText(text);
-		
 		bbsRepliesService.insert(bbsReplies);
 		
+
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
 
