@@ -255,7 +255,27 @@ function replies (ele) {
 													
 											<!--这里是帖子的回复 -->													
 													<c:if test="${comments.repliesId != 0}">
-														
+														<li class="clearfix">
+															<!--回复者的头像 -->
+															<a href="" class="core-reply-info-img">
+																<img src="${APP_PsATH}/static/reply.jpg" alt="" />
+															</a>
+															
+															<!--回复者的用户名和回复内容-->
+															<div class="lzl-cnt">
+																<!--回复者的用户名-->
+																<a href="" class="lzl-username"></a>:
+																
+																<!--回复内容-->
+																<span></span>
+																<!--回复时间以及再回复按钮-->
+																<div class="lzl-content_reply">
+																	<span class="lzl-time"></span>
+																	<a href="" class="btn-reply-lz-reply"></a>
+																</div>
+															</div>
+															
+														</li>
 													</c:if>
 											<!--这里是帖子的回复-->													
 														
