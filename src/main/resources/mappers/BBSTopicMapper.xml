@@ -47,6 +47,22 @@
     <!-- <collection property="comments" javaType="ArrayList" column="id" ofType="Comments" select="getCommentsByTopicId" /> -->
   </resultMap>
   
+  <resultMap type="com.hanming.oa.model.Comments" id="CommentsMap">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="userHeadFile" jdbcType="VARCHAR" property="userHeadFile" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="repliesId" jdbcType="INTEGER" property="repliesId" />
+    <result column="repliesUserId" jdbcType="INTEGER" property="repliesUserId" />
+    <result column="repliesUserName" jdbcType="VARCHAR" property="repliesUserName" />
+    <result column="repliesUserHeadFile" jdbcType="VARCHAR" property="repliesUserHeadFile" />
+    
+    <collection property="comments" javaType="ArrayList" column="id" ofType="Comments" select="getCommentsByRepliceId" />
+    
+  </resultMap>
+  
   <sql id="Base_Column_List">
     id, title, sketch, text, userId, date, `like`, collection, comment
   </sql>
@@ -210,8 +226,8 @@
 	WHERE bt.id = #{topicId}
   </select>
   
-  <!-- getCommentsByTopicId -->
-  <select id="getCommentsByTopicId" resultType="Comments">
+  <!-- getCommentsByRepliceId -->
+  <select id="getCommentsByRepliceId" resultType="Comments">
   	SELECT
 	br.id,tu.id AS userId,tu.`name` AS userName,tu.headFile AS userHeadFile,br.date,br.text,br.repliesId,tus.id AS repliesUserId,tus.`name` AS repliesUserName,tus.headFile AS repliesUserHeadFile
 	FROM bbsreplies br
@@ -220,7 +236,21 @@
 	LEFT JOIN t_user tus ON tus.id=br.repliseUserId
 	LEFT JOIN t_user tu ON tu.id=br.userId
 	
-	WHERE br.TopicId = #{topicId}
+	WHERE br.repliesId = #{id}
+  </select>
+  
+  
+  <!-- getCommentsByTopicId -->
+  <select id="getCommentsByTopicId" resultMap="CommentsMap">
+  	SELECT DISTINCT
+	br.id,tu.id AS userId,tu.`name` AS userName,tu.headFile AS userHeadFile,br.date,br.text,br.repliesId,tus.id AS repliesUserId,tus.`name` AS repliesUserName,tus.headFile AS repliesUserHeadFile
+	FROM bbsreplies br
+	LEFT JOIN bbsreplies brs ON brs.repliesId=br.id
+	LEFT JOIN bbstopic bt ON bt.id=br.TopicId
+	LEFT JOIN t_user tus ON tus.id=br.repliseUserId
+	LEFT JOIN t_user tu ON tu.id=br.userId
+	
+	WHERE br.TopicId = #{topicId} AND br.repliesId = 0
   </select>
   
   <!-- void updateLikeSubtractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
