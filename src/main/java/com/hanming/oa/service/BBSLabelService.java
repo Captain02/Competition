@@ -49,21 +49,20 @@ public class BBSLabelService {
 
 	@Transactional
 	public void deleLabel(Integer labelId) {
-		List<BBSLabel> bbsLabellist = bbsLabelMapper.list();
-		List<Integer> bbsLabelIds = bbsLabellist.stream()
-												.map(BBSLabel::getId)
-												.collect(Collectors.toList());
 		
-		List<BBSLabelTopic> bbsLabelTopic = bbsLabelTopicMapper.getTopicListByLabelIds(bbsLabelIds);
+		List<BBSLabelTopic> bbsLabelTopic = bbsLabelTopicMapper.getBBSLabelTopicLabelId(labelId);
 		
 		List<Integer> topicIds = bbsLabelTopic.stream()
 					.map(BBSLabelTopic::getTopicid)
 					.collect(Collectors.toList());
-		bbsTopicMapper.deleByTopicIdList(topicIds);
-		bbsCollectionMapper.deleByTopicIdList(topicIds);
-		bbsLikeMapper.deleByTopicIdList(topicIds);
-		bbsLabelTopicMapper.deleByTopicIdList(topicIds);
-		bbsRepliesMapper.deleteByTopicIdList(topicIds);
+		
+		if (topicIds.size()>0) {
+			bbsTopicMapper.deleByTopicIdList(topicIds);
+			bbsCollectionMapper.deleByTopicIdList(topicIds);
+			bbsLikeMapper.deleByTopicIdList(topicIds);
+			bbsLabelTopicMapper.deleByTopicIdList(topicIds);
+			bbsRepliesMapper.deleteByTopicIdList(topicIds);
+		}
 		bbsLabelMapper.deleteByPrimaryKey(labelId);
 	}
 

@@ -93,13 +93,20 @@
   </delete>
   
   <!-- List<BBSLabelTopic> getTopicListByLabelIds(List<Integer> bbsLabelIds); -->
-  <select id="getTopicListByLabelIds" resultType="BBSTopic">
+  <select id="getTopicListByLabelIds" resultType="BBSLabelTopic">
   	select id, topicId, labelId
   	from bbslabeltopic
-  	where topicId IN
+  	where labelId IN
   	<foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
     #{item} 
     </foreach>
+  </select>
+  
+  <!-- List<BBSLabelTopic> getBBSLabelTopicLabelId(Integer labelId); -->
+  <select id="getBBSLabelTopicLabelId" resultType="BBSLabelTopic">
+  	select id, topicId, labelId
+  	from bbslabeltopic
+  	where labelId = #{labelId}
   </select>
   
 </mapper>

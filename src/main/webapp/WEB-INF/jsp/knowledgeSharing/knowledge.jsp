@@ -24,7 +24,7 @@ $(function(){
 			data : {
 				'labelId':labelId
 			},
-			type : "DELETE",
+			type : "POST",
 			success : function(result) {
 				console.log(result);
 			}

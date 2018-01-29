@@ -28,5 +28,7 @@ public interface BBSLabelTopicMapper {
 
 	List<BBSLabelTopic> getTopicListByLabelIds(List<Integer> bbsLabelIds);
 
+	List<BBSLabelTopic> getBBSLabelTopicLabelId(Integer labelId);
+
 
 }

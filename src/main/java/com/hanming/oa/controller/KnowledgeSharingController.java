@@ -203,7 +203,7 @@ public class KnowledgeSharingController {
 	
 	// 删除标签
 	@ResponseBody
-	@RequestMapping(value = "/deleLabel", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleLabel", method = RequestMethod.POST)
 	public Msg deleLabel(@RequestParam("labelId") Integer labelId) {
 		
 		bbsLabelService.deleLabel(labelId);
