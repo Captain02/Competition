@@ -205,7 +205,7 @@ function replies () {
 													<input id="ByRepliesUserId" type="hidden" value="${comments.repliesUserId}" >
 													
 													
-														<a onclick="replies()" class="btn-reply-lz">回复</a>
+														<a class="btn-reply-lz">回复</a>
 													</div>
 													<!--当前楼数 评论时间-->
 														<ul class="p-tail pull-right">
