@@ -240,5 +240,16 @@ public class KnowledgeSharingController {
 
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
+	
+	//跳转修改页
+	public String updateTopicPage(@RequestParam("topicId") Integer topicId, @RequestParam("pn") Integer pn,
+			@RequestParam("labelId") Integer labelId,Model model) {
+		
+		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
+		
+		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);
+		
+		return "knowledgeSharing/";
+	}
 
 }
