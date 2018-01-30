@@ -2,6 +2,7 @@ package com.hanming.oa.service;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import com.hanming.oa.dao.BBSRepliesMapper;
 import com.hanming.oa.dao.BBSTopicMapper;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
+import com.hanming.oa.model.BBSReplies;
 import com.hanming.oa.model.BBSTopic;
 import com.hanming.oa.model.Comments;
 
@@ -92,6 +94,26 @@ public class BBSTopicService {
 
 	public void deleByTopicIdList(List<Integer> bbsLabelIds) {
 		bbsTopicMapper.deleByTopicIdList(bbsLabelIds);
+	}
+
+
+	public void updateCommentsAddOne(Integer topicid) {
+		bbsTopicMapper.updateCommentsAddOne(topicid);
+	}
+	
+	@Transactional
+	public void addReplies(String text, Integer topicid, Integer byUserId, Integer repliesId) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		BBSReplies bbsReplies = new BBSReplies();
+		
+		bbsReplies.setRepliesid(repliesId);
+		bbsReplies.setUserid(byUserId);
+		bbsReplies.setRepliseuserid(userId);
+		bbsReplies.setTopicid(topicid);
+		bbsReplies.setText(text);
+		bbsRepliesMapper.insert(bbsReplies);
+		
+		updateCommentsAddOne(topicid);
 	}
 
 }

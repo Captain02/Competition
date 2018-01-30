@@ -38,4 +38,6 @@ public interface BBSTopicMapper {
 
 	void deleByTopicIdList(List<Integer> bbsTopicIds);
 
+	void updateCommentsAddOne(Integer topicid);
+
 }

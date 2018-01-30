@@ -193,7 +193,7 @@
   <!-- List<BBSDisplayTopic> selectDisplayTopic(); -->
   <select id="selectDisplayTopic" resultMap="DisplayTopicMap">
   	SELECT DISTINCT
-	bt.id,bt.title,bt.sketch,bt.text,bt.date,bt.`like`,bt.collection,tu.id as userId,tu.`name` as userName,tu.headFile as userHeadFile
+	bt.id,bt.title,bt.sketch,bt.text,bt.date,bt.`like`,bt.collection,bt.`comment`,tu.id as userId,tu.`name` as userName,tu.headFile as userHeadFile
 	FROM BBSTopic bt
 	LEFT JOIN t_user tu ON tu.id=bt.userId
 	LEFT JOIN bbslabeltopic blt ON blt.topicId=bt.id
@@ -281,5 +281,10 @@
     #{item} 
     </foreach>
   </delete>
+  
+  <!-- void updateCommentsAddOne(Integer topicid); -->
+  <update id="updateCommentsAddOne">
+  	update bbstopic set `comment` = `comment`+1 where id = #{topicId}
+  </update>
   
 </mapper>

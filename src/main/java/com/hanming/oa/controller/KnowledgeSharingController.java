@@ -235,18 +235,12 @@ public class KnowledgeSharingController {
 			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId,
 			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
 		
-		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		BBSReplies bbsReplies = new BBSReplies();
-		
-		bbsReplies.setRepliesid(repliesId);
-		bbsReplies.setUserid(byUserId);
-		bbsReplies.setRepliseuserid(userId);
-		bbsReplies.setTopicid(topicid);
-		bbsReplies.setText(text);
-		bbsRepliesService.insert(bbsReplies);
+		bbsTopicService.addReplies(text, topicid, byUserId, repliesId);
 		
 
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
+
+	
 
 }
