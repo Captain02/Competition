@@ -52,10 +52,10 @@ function updateLabel(ele) {
 }
 
 
-function deleteTopic() {
-	var topicId;
-	var labelId;
-	var pn;
+function deleteTopic(ele) {
+	var topicId = $(ele).parent().find("input[name='topicId']").val();
+	var labelId = $(ele).parent().find("input[name='labelId']").val();
+	var pn = $(ele).parent().find("input[name='pn']").val();
 	$.ajax({
 		url:"${APP_PATH}/admin/KnowledgeSharing/dele",
 			data:{
@@ -65,6 +65,13 @@ function deleteTopic() {
 			},
 		type:"POST",
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','删除结果','.modal-body','知识删除成功!');
+			ShowEle('.yes','hide','.no','hide');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.reload();
+			},1000);
 			
 		}
 	})
@@ -155,7 +162,7 @@ function deleteTopic() {
 																<input type="hidden" name="topicId" value="${bbsDisplayTopic.id}">
 																
 																
-																<a onclick="deleteTopic()" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
+																<a onclick="deleteTopic(this)" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
 															</c:if>
 															<input type="hidden" value="${bbsDisplayTopic.id}">
 															<i class="fa fa-thumbs-o-up"></i>${bbsDisplayTopic.like}
