@@ -132,8 +132,8 @@ function save() {
 								<div class="col-sm-10">
 									<div class="checkbox" style="margin-top: 5px;">
 									
-									<c:forEach items="${bbsDetailedTopic.labelName}" var="labelName">
-										<input type="hidden" value="${labelName}">
+									<c:forEach items="${bbsDetailedTopic.labelIds}" var="labelIds">
+										<input type="hidden" value="${labelIds}">
 									</c:forEach>
 									
 									<c:forEach items="${bbsLabel}" var="labels">

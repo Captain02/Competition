@@ -44,7 +44,7 @@
     
     <collection property="labelName" javaType="ArrayList" column="id" ofType="String" select="getLabelNameByTopicId" />
     
-    <!-- <collection property="comments" javaType="ArrayList" column="id" ofType="Comments" select="getCommentsByTopicId" /> -->
+     <collection property="labelIds" javaType="ArrayList" column="id" ofType="Integer" select="getlabelIdsByTopicId" />
   </resultMap>
   
   <resultMap type="com.hanming.oa.model.Comments" id="CommentsMap">
@@ -239,6 +239,15 @@
 	WHERE br.repliesId = #{id}
   </select>
   
+  <!-- getlabelIdsByTopicId -->
+  <select id="getlabelIdsByTopicId" resultType="Integer">
+  	SELECT
+	blt.labelId
+	FROM
+	bbstopic bt
+	LEFT JOIN bbslabeltopic blt ON blt.topicId=bt.id 
+	WHERE bt.id = #{id}
+  </select>
   
   <!-- getCommentsByTopicId -->
   <select id="getCommentsByTopicId" resultMap="CommentsMap">
