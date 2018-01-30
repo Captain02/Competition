@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,28 +104,19 @@
 										<h4>公告</h4>
 										 <ul class="dropdown-list">
 										 <!-- li标签从数据库中遍历生成 -->
+										<c:forEach items="${Notices}" var="Notice">
 										 	<li class="new">
 										 		<a href="">
 										 			<span class="label label-danger">
 										 				<i class="fa fa-bolt"></i>
 										 			</span>
 										 			<!-- 公告名称 -->
-										 			<span class="name">2017清明放假通知 </span>
+										 			<span class="name">${Notice.title} </span>
 										 			<!-- 发布时间 -->
-										 			<em class="small">2017-03-28 15:44</em>
+										 			<em class="small">${Notice.date}</em>
 										 		</a>
 										 	</li>
-										 	<li class="new">
-										 		<a href="">
-										 			<span class="label label-danger">
-										 				<i class="fa fa-bolt"></i>
-										 			</span>
-										 			<!-- 公告名称 -->
-										 			<span class="name">2017清明放假通知 </span>
-										 			<!-- 发布时间 -->
-										 			<em class="small">2017-03-28 15:44</em>
-										 		</a>
-										 	</li>
+										</c:forEach>
 										 </ul>
 									</div>
 								</div>

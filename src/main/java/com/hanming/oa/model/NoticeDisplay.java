@@ -4,8 +4,6 @@ package com.hanming.oa.model;
 public class NoticeDisplay {
 	private Integer id;
 
-    private Integer userid;
-
     private String title;
 
     private String text;
@@ -28,14 +26,6 @@ public class NoticeDisplay {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getUserid() {
-		return userid;
-	}
-
-	public void setUserid(Integer userid) {
-		this.userid = userid;
 	}
 
 	public String getTitle() {

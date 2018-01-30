@@ -1,6 +1,9 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import com.hanming.oa.model.Notice;
+import com.hanming.oa.model.NoticeDisplay;
 
 public interface NoticeMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface NoticeMapper {
     int updateByPrimaryKeySelective(Notice record);
 
     int updateByPrimaryKey(Notice record);
+
+	List<NoticeDisplay> list();
 }

@@ -90,4 +90,19 @@
       date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- List<NoticeDisplay> list(); -->
+  <select id="list" resultType="NoticeDisplay">
+  SELECT DISTINCT
+	nt.id AS id, nt.userId AS userId,nt.title AS title,nt.date AS date,tu.`name` AS userName,
+	tu.headFile AS headFile, tr.`name` AS role,td.`name` AS department
+	
+	FROM notice nt
+	LEFT JOIN t_user tu ON tu.id=nt.userId
+	LEFT JOIN t_department_user tdu ON tdu.userId=tu.id
+	LEFT JOIN t_department td ON td.id=tdu.departmentId
+	LEFT JOIN t_user_role tur ON tur.userId=tu.id
+	LEFT JOIN t_role tr ON tr.id=tur.roleId
+  </select>
+ 
 </mapper>
