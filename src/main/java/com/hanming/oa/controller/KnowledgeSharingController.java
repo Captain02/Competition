@@ -121,13 +121,23 @@ public class KnowledgeSharingController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg addKnowledge(@RequestParam(value = "text", defaultValue = "") String text,
 			@RequestParam(value = "title") String title, @RequestParam(value = "sketch") String sketch,
-			@RequestParam(value = "order") String ids) {
+			@RequestParam(value = "order") String ids, @RequestParam(value = "isUpdate") Integer isUpdate) {
+		if (isUpdate == 0) {
 
-		int i = bbsLabelTopicService.addKonwledge(text, title, sketch, ids);
-		if (i == 1) {
-			return Msg.success();
+			int i = bbsLabelTopicService.addKonwledge(text, title, sketch, ids);
+			if (i == 1) {
+				return Msg.success();
+			} else {
+				return Msg.fail();
+			}
 		} else {
-			return Msg.fail();
+			System.out.println(text);
+			System.out.println(title);
+			System.out.println(sketch);
+			System.out.println(ids);
+			System.out.println(isUpdate);
+			
+			return Msg.success();
 		}
 
 	}
@@ -236,20 +246,34 @@ public class KnowledgeSharingController {
 			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId,
 			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
 
-		bbsTopicService.addReplies(text, topicid, byUserId, repliesId);
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		BBSReplies bbsReplies = new BBSReplies();
+
+		bbsReplies.setRepliesid(repliesId);
+		bbsReplies.setUserid(byUserId);
+		bbsReplies.setRepliseuserid(userId);
+		bbsReplies.setTopicid(topicid);
+		bbsReplies.setText(text);
+		bbsRepliesService.insert(bbsReplies);
+
+		bbsTopicService.updateCommentsAddOne(topicid);
 
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
-	
-	//跳转修改页
+
+	// 跳转修改页
+	@RequestMapping(value = "/updateTopicPage", method = RequestMethod.GET)
 	public String updateTopicPage(@RequestParam("topicId") Integer topicId, @RequestParam("pn") Integer pn,
-			@RequestParam("labelId") Integer labelId,Model model) {
-		
+			@RequestParam("labelId") Integer labelId, Model model) {
+
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
-		
+
+		List<BBSLabel> list = bbsLabelService.list();
+
+		model.addAttribute("bbsLabel", list);
 		model.addAttribute("bbsDetailedTopic", bbsDetailedTopic);
-		
-		return "knowledgeSharing/";
+
+		return "knowledgeSharing/editorTopic";
 	}
 
 }

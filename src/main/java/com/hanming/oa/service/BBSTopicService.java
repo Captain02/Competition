@@ -101,19 +101,5 @@ public class BBSTopicService {
 		bbsTopicMapper.updateCommentsAddOne(topicid);
 	}
 	
-	@Transactional
-	public void addReplies(String text, Integer topicid, Integer byUserId, Integer repliesId) {
-		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		BBSReplies bbsReplies = new BBSReplies();
-		
-		bbsReplies.setRepliesid(repliesId);
-		bbsReplies.setUserid(byUserId);
-		bbsReplies.setRepliseuserid(userId);
-		bbsReplies.setTopicid(topicid);
-		bbsReplies.setText(text);
-		bbsRepliesMapper.insert(bbsReplies);
-		
-		updateCommentsAddOne(topicid);
-	}
 
 }
