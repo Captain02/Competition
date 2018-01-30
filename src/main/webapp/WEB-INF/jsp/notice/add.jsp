@@ -13,7 +13,19 @@
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
-
+<script type="text/javascript">
+function save() {
+	$.ajax({
+		url:"${APP_PATH}/admin/notice/add",
+		type:"POST",
+		data:$("#noticeForm").serialize(),
+		success:function(){
+			//类似删除贴吧，弹出模态款直接跳转一下连接
+			//${APP_PATH}/admin/notice/list
+		}
+	})
+}
+</script>
 
 </head>
 
@@ -60,7 +72,7 @@
 									<div class="col-lg-12">
 										<section class="panel">
 											<div class="panel-body">
-												<form class="form-horizontal" method="post" action="">
+												<form id="noticeForm" class="form-horizontal" method="post" action="">
 													<div class="form-group">
 														<label class="col-sm-2 col-sm-2 control-label"><span>*</span>标题</label>
 														<div class="col-sm-10">
@@ -70,7 +82,7 @@
 													<div class="form-group">
 														<label class="col-sm-2 col-sm-2 control-label"><span>*</span>内容</label>
 														<div class="col-sm-10">
-															<textarea name="content" placeholder="请填写公告内容" style="height: 90px;" class="form-control"></textarea>
+															<textarea name="text" placeholder="请填写公告内容" style="height: 90px;" class="form-control"></textarea>
 														</div>
 													</div>
 													<div class="form-group">

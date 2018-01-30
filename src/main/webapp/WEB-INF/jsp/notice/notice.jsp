@@ -51,7 +51,7 @@
                         <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/department/add'">
+                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/add'">
                                 <i>+</i>发布新公告</button>
                         </div>
 
