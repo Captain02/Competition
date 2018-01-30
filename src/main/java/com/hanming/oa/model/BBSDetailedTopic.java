@@ -10,6 +10,8 @@ public class BBSDetailedTopic {
 	private String sketch;
 
 	private List<String> labelName;
+	
+	private List<Integer> labelIds;
 
 	private String date;
 
@@ -28,6 +30,15 @@ public class BBSDetailedTopic {
 	private String text;
 
 	private List<Comments> comments;
+	
+
+	public List<Integer> getLabelIds() {
+		return labelIds;
+	}
+
+	public void setLabelIds(List<Integer> labelIds) {
+		this.labelIds = labelIds;
+	}
 
 	public String getSketch() {
 		return sketch;

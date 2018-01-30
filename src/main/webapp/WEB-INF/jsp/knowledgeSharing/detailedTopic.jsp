@@ -246,12 +246,12 @@ function replies(ele) {
 															<div class="lzl-cnt">
 																<a href="" class="lzl-username">${childComments.repliesUserName}</a>
 																<span style="margin: 0 5px;">回复</span>	
-																<a href="" class="lzl-reply-username">哈士奇</a>:
+																<a href="" class="lzl-reply-username">${childComments.userName}</a>:
 																<span>${childComments.text}</span>
 																<div class="lzl-content_reply">
 																	<span class="lzl-time">${childComments.date}</span>
 																	
-																	<input id="repliesId" type="hidden" value="${childComments.id}">
+																	<input id="repliesId" type="hidden" value="${comments.id}">
 																	<input id="ByRepliesUserId" type="hidden" value="${childComments.repliesUserId}">
 																	
 																	<a class="btn-reply-lz-reply">回复</a>
