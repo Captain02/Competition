@@ -189,7 +189,59 @@
 							<div class="col-md-12">BUG</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12">知识</div>
+							<div class="col-md-12">
+								<div class="panel">
+				                <header class="panel-heading"> 知识 <span class="pull-right"> <a href="/knowledge/manage?filter=me">更多</a></span> </header>
+				                <div class="panel-body">
+				                	<ul class="activity-list">
+											<!--此处li标签应遍历生成 -->
+												<li>
+													<div class="person-img">
+														<a href="">	
+															<!--此处放头像 -->
+															<img src="/OA02/personHeadFile/140.png" alt="">
+														</a>
+													</div>
+													<div class="activity-desk">
+														<h5 class="">
+															<!--此处放用户名 -->
+															<a href="" class="user-name">超级管理员</a>
+															<span class="activity-title">
+																<!--此处放知识标题 -->
+																<a href="/OA02/admin/KnowledgeSharing/detailedTopic?topicId=24">更新版</a>
+															</span>
+															<!--此处是知识所属标签-->
+															<p class="pull-right activity-order">
+																标签：
+															    <span></span>
+															</p>
+														</h5>
+														
+														<!--此处放知识描述-->
+														<p class="text-muted">aaaa</p>
+														
+														<!--此处放知识操作-->
+														<p class="pull-right text-muted">
+															
+															<input value="24" type="hidden">
+															<i class="fa fa-thumbs-o-up"></i>
+															<!-- 点赞数量 -->
+															<span>1</span>
+															<i class="fa fa-heart-o"></i>
+															<!-- 收藏数量 -->
+															<span>1</span>
+															<i class="fa fa-comment-o"></i>
+															<!-- 评论数量 -->
+															<span>1</span>
+															<span class="activity-time">2018-01-29 22:57:38.0</span>
+														</p>
+													</div>
+												</li>
+											
+										</ul>
+				                </div>
+				              </div>
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">相册</div>

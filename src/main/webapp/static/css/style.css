@@ -21,6 +21,12 @@ body a, .toggle-btn span {
 	-moz-transition: 0.2s all;
 	-ms-transition: 0.2s all;
 }
+body a{
+	cursor: pointer;
+}
+body a:hover{
+	text-decoration: underline;
+}
 
 /* clearfix */
 .clearfix::before, .clearfix::after {
@@ -657,6 +663,9 @@ ul.p-info .title, ul.p-info .desk {
 	margin-right: 10px;
 	padding: 5px;
 	width: 20px;
+}
+.panel-heading a{
+	color: #65CEA7;
 }
 
 /* 请假条页 */
