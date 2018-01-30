@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.hanming.oa.model.Notice">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="userId" jdbcType="INTEGER" property="userid" />
-    <result column="sketch" jdbcType="VARCHAR" property="sketch" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="text" jdbcType="VARCHAR" property="text" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, userId, sketch, text, date
+    id, userId, title, text, date
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,9 +22,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hanming.oa.model.Notice">
-    insert into notice (id, userId, sketch, 
+    insert into notice (id, userId, title, 
       text, date)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{sketch,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
       #{text,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hanming.oa.model.Notice">
@@ -36,8 +36,8 @@
       <if test="userid != null">
         userId,
       </if>
-      <if test="sketch != null">
-        sketch,
+      <if test="title != null">
+        title,
       </if>
       <if test="text != null">
         text,
@@ -53,8 +53,8 @@
       <if test="userid != null">
         #{userid,jdbcType=INTEGER},
       </if>
-      <if test="sketch != null">
-        #{sketch,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="text != null">
         #{text,jdbcType=VARCHAR},
@@ -70,8 +70,8 @@
       <if test="userid != null">
         userId = #{userid,jdbcType=INTEGER},
       </if>
-      <if test="sketch != null">
-        sketch = #{sketch,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="text != null">
         text = #{text,jdbcType=VARCHAR},
@@ -85,7 +85,7 @@
   <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Notice">
     update notice
     set userId = #{userid,jdbcType=INTEGER},
-      sketch = #{sketch,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       text = #{text,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
