@@ -67,9 +67,6 @@ function replies(ele) {
 	var pn = $("#pn").val();
 
 	repliescontent = $(ele).siblings("textarea[name='editor-container-area']").val();
-	
-	alert( repliesId + byRepliesUserId + repliescontent);
-
 	$.ajax({
 		url: "${APP_PATH}/admin/KnowledgeSharing/addReplies",
 		data: {
@@ -216,7 +213,8 @@ function replies(ele) {
 											<div class="p_reply pull-right">
 												<input id="repliesId" type="hidden" value="${comments.id}">
 												<input id="ByRepliesUserId" type="hidden" value="${comments.repliesUserId}">
-												<a class="btn-reply-lz">回复</a>
+												<a class="btn-reply-lz">回复</a><span class="reply-num"></span>
+												<span class="shou-reply" style="display: none;">收起回复</span>
 											</div>
 											
 											<ul class="p-tail pull-right">
@@ -231,7 +229,8 @@ function replies(ele) {
 									</div>
 									<!-- 记录帖主的每一条回复的相关信息 end -->
 									
-									<c:forEach items="${comments.comments}" var="childComments">
+									<div class="core-reply-container">
+										<c:forEach items="${comments.comments}" var="childComments">
 										<!-- 对帖主的回复的回复 strat -->
 										<div class="core-reply-wrapper">
 											<div class="core-reply-content">
@@ -266,6 +265,8 @@ function replies(ele) {
 										</div>
 										<!-- 对帖主的回复的回复 end -->
 									</c:forEach>
+									</div>
+									
 									<!--回复框 -->
 									<div class="lzl-editor-container form-group clearfix">
 										<div class="editor-container">
