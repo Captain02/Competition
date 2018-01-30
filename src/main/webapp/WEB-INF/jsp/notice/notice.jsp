@@ -67,12 +67,16 @@ function dele(id) {
                         <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
 
                         <div class="om-header-right">
+                        <c:if test="${isByMyId !=0 }">
                         	<button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/list'">
                                	全部</button>
+                        </c:if>
                             <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/add'">
                                 <i>+</i>发布新公告</button>
+                         <c:if test="${isByMyId ==0 }">
                             <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/list?isByMyId=${userId}'">
                                	由我发布</button>
+                          </c:if>
                         </div>
 
 
@@ -114,6 +118,7 @@ function dele(id) {
 	                                                             <li>
 	                                                                    <a href="">查看</a>
 	                                                                </li>
+	                                                                <c:if test="${isByMyId !=0 }">
 	                                                                <li role="separator" class="divider"></li>
 	                                                                <li>
 	                                                                    <a href="${APP_PATH}/admin/notice/update/${Notice.id}">编辑</a>
@@ -122,7 +127,7 @@ function dele(id) {
 	                                                                 <li>
 	                                                                    <a onclick="dele(${Notice.id})">删除</a>
 	                                                                </li>
-	                                                               
+	                                                               </c:if>
 	                                                            </ul>
 	                                                        </div>
 	                                                    </td>
