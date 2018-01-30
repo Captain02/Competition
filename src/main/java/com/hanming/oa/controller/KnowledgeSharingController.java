@@ -184,13 +184,16 @@ public class KnowledgeSharingController {
 	}
 
 	// 删除帖子
-	@RequestMapping(value = "/dele", method = RequestMethod.GET)
-	public String deleTopic(@RequestParam("topicId") Integer topicId, @RequestParam("pn") Integer pn,
+	@ResponseBody
+	@RequestMapping(value = "/dele", method = RequestMethod.POST)
+	public Msg deleTopic(@RequestParam("topicId") Integer topicId, @RequestParam("pn") Integer pn,
 			@RequestParam("labelId") Integer labelId) {
-
+System.out.println(pn);
+System.out.println(labelId);
+System.out.println(topicId);
 		bbsTopicService.deleTopicById(topicId);
 
-		return "redirect:list?pn=" + pn + "&labelId=" + labelId + "&isByMyId=1";
+		return Msg.success();
 	}
 
 	// 修改标签

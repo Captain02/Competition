@@ -42,10 +42,12 @@ public class PersonPageController {
 		User user = userService.selectByUsername(username);
 		
 		//公告信息
-		List<NoticeDisplay> list = noticeService.list().subList(0, 2);
-		Collections.reverse(list);
+		List<NoticeDisplay> Notices = noticeService.list();
+		Collections.reverse(Notices);
+		List<NoticeDisplay> reverseNotices = Notices.subList(0, 2);
 		
-		model.addAttribute("Notices", list);
+		
+		model.addAttribute("Notices", reverseNotices);
 		model.addAttribute("user", user);
 		return "personPage/personPage";
 	}

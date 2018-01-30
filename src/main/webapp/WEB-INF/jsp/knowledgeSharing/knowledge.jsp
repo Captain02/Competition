@@ -56,6 +56,18 @@ function deleteTopic() {
 	var topicId;
 	var labelId;
 	var pn;
+	$.ajax({
+		url:"${APP_PATH}/admin/KnowledgeSharing/dele",
+			data:{
+				'topicId':topicId,
+				'labelId':labelId,
+				'pn':pn
+			},
+		type:"POST",
+		success:function(result){
+			
+		}
+	})
 	
 	
 }
