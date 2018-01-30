@@ -121,23 +121,23 @@ public class KnowledgeSharingController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg addKnowledge(@RequestParam(value = "text", defaultValue = "") String text,
 			@RequestParam(value = "title") String title, @RequestParam(value = "sketch") String sketch,
-			@RequestParam(value = "order") String ids, @RequestParam(value = "isUpdate") Integer isUpdate) {
+			@RequestParam(value = "order") String ids, @RequestParam(value = "isUpdate") Integer isUpdate,
+			@RequestParam(value = "topicId", defaultValue = "0") Integer topicId) {
 		if (isUpdate == 0) {
 
-			int i = bbsLabelTopicService.addKonwledge(text, title, sketch, ids);
+			int i = bbsTopicService.addKonwledge(text, title, sketch, ids);
 			if (i == 1) {
 				return Msg.success();
 			} else {
 				return Msg.fail();
 			}
 		} else {
-			System.out.println(text);
-			System.out.println(title);
-			System.out.println(sketch);
-			System.out.println(ids);
-			System.out.println(isUpdate);
-			
-			return Msg.success();
+			int i = bbsTopicService.update(text, title, sketch, ids,topicId);
+			if (i == 1) {
+				return Msg.success();
+			} else {
+				return Msg.fail();
+			}
 		}
 
 	}

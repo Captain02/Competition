@@ -26,40 +26,10 @@ public class BBSLabelTopicService {
 		bbsLabelTopicMapper.insertSelective(bbsLabelTopic);
 	}
 
-	@Transactional
-	public int addKonwledge(String text, String title, String sketch, String ids) {
-		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		String[] idsStr = ids.split("-");
-		List<String> strIdList = Arrays.asList(idsStr);
-		if ("".equals(strIdList.get(0))||strIdList.get(0) == null) {
-			return 0;
-		}
-		List<Integer> intIdsList = new ArrayList<>();
-		List<BBSLabelTopic> bbsLabelTopics = new ArrayList<>();
-
-		intIdsList.addAll(strIdList.stream()
-								   .map(Integer::valueOf)
-								   .collect(Collectors.toList()));
-
-		BBSTopic bbsTopic = new BBSTopic();
-		bbsTopic.setSketch(sketch);
-		bbsTopic.setText(text);
-		bbsTopic.setUserId(userId);
-		bbsTopic.setTitle(title);
-		bbsTopicService.insertTopic(bbsTopic);
-
-		for (Integer labelId : intIdsList) {
-			BBSLabelTopic bbsLabelTopic = new BBSLabelTopic();
-			bbsLabelTopic.setTopicid(bbsTopic.getId());
-			bbsLabelTopic.setLabelid(labelId);
-			bbsLabelTopics.add(bbsLabelTopic);
-		}
-		bbsLabelTopicMapper.insertLabelTopics(bbsLabelTopics);
-		return 1;
-	}
 
 	public void deleByTopicIdList(List<Integer> bbsLabelIds) {
 		bbsLabelTopicMapper.deleByTopicIdList(bbsLabelIds);
 	}
+
 
 }

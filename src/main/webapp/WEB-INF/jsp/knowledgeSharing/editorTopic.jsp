@@ -36,6 +36,8 @@ $(function(){
 
 //在这里发送ajax请求，保存添加的知识
 function save() {
+	//标题Id
+	var topicId = $('#topicId').val();
 	//获取标题内容
 	var title = $("input[name='title']").val();
 	//获取简介内容
@@ -59,6 +61,7 @@ function save() {
 		url:"${APP_PATH}/admin/KnowledgeSharing/add",
 		type:"POST",
 		data:{
+			'topicId':topicId,
 			'title':title,
 			'sketch':sketch,
 			'text':html,
@@ -107,7 +110,7 @@ function save() {
 						<header class="panel-heading"></header>
 						<div class="panel-body">
 						<sf:form id="topicText" action="" method="post" modelAttribute="bbsDetailedTopic">
-						
+							<sf:input type="hidden" path="id" id="topicId" />
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">标题</label>
 								<div class="col-sm-10">

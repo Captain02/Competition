@@ -1,6 +1,9 @@
 package com.hanming.oa.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import com.hanming.oa.dao.BBSRepliesMapper;
 import com.hanming.oa.dao.BBSTopicMapper;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
+import com.hanming.oa.model.BBSLabelTopic;
 import com.hanming.oa.model.BBSReplies;
 import com.hanming.oa.model.BBSTopic;
 import com.hanming.oa.model.Comments;
@@ -100,6 +104,76 @@ public class BBSTopicService {
 	public void updateCommentsAddOne(Integer topicid) {
 		bbsTopicMapper.updateCommentsAddOne(topicid);
 	}
-	
+
+
+	@Transactional
+	public int addKonwledge(String text, String title, String sketch, String ids) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		String[] idsStr = ids.split("-");
+		List<String> strIdList = Arrays.asList(idsStr);
+		if ("".equals(strIdList.get(0))||strIdList.get(0) == null) {
+			return 0;
+		}
+		List<Integer> intIdsList = new ArrayList<>();
+		List<BBSLabelTopic> bbsLabelTopics = new ArrayList<>();
+
+		intIdsList.addAll(strIdList.stream()
+								   .map(Integer::valueOf)
+								   .collect(Collectors.toList()));
+
+		BBSTopic bbsTopic = new BBSTopic();
+		bbsTopic.setSketch(sketch);
+		bbsTopic.setText(text);
+		bbsTopic.setUserId(userId);
+		bbsTopic.setTitle(title);
+		bbsTopicMapper.insertSelective(bbsTopic);
+
+		for (Integer labelId : intIdsList) {
+			BBSLabelTopic bbsLabelTopic = new BBSLabelTopic();
+			bbsLabelTopic.setTopicid(bbsTopic.getId());
+			bbsLabelTopic.setLabelid(labelId);
+			bbsLabelTopics.add(bbsLabelTopic);
+		}
+		bbsLabelTopicMapper.insertLabelTopics(bbsLabelTopics);
+		return 1;
+	}
+
+	@Transactional
+	public int update(String text, String title, String sketch, String ids, Integer topicId) {
+		String[] idsStr = ids.split("-");
+		List<String> strIdList = Arrays.asList(idsStr);
+		if ("".equals(strIdList.get(0))||strIdList.get(0) == null) {
+			return 0;
+		}
+		
+		
+		List<Integer> intIdsList = new ArrayList<>();
+		List<BBSLabelTopic> bbsLabelTopics = new ArrayList<>();
+
+		intIdsList.addAll(strIdList.stream()
+								   .map(Integer::valueOf)
+								   .collect(Collectors.toList()));
+
+		BBSTopic bbsTopic = new BBSTopic();
+		bbsTopic.setId(topicId);
+		bbsTopic.setSketch(sketch);
+		bbsTopic.setText(text);
+		bbsTopic.setTitle(title);
+		
+		bbsTopicMapper.updateByPrimaryKeySelective(bbsTopic);
+		
+		for (Integer labelId : intIdsList) {
+			BBSLabelTopic bbsLabelTopic = new BBSLabelTopic();
+			bbsLabelTopic.setTopicid(bbsTopic.getId());
+			bbsLabelTopic.setLabelid(labelId);
+			bbsLabelTopics.add(bbsLabelTopic);
+		}
+		
+		bbsLabelTopicMapper.deleteByTopicId(topicId);
+		
+		bbsLabelTopicMapper.insertLabelTopics(bbsLabelTopics);
+		
+		return 1;
+	}
 
 }
