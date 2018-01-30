@@ -138,6 +138,7 @@ function save() {
 									
 									<c:forEach items="${bbsLabel}" var="labels">
 										<label class="checkbox-inline">
+										
 											<input value="${labels.id}"  type="checkbox">${labels.name}
 										</label>
 									</c:forEach>
