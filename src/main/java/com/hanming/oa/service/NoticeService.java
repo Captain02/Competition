@@ -15,13 +15,26 @@ public class NoticeService {
 	@Autowired
 	NoticeMapper noticeMapper;
 
-	public List<NoticeDisplay> list() {
-		List<NoticeDisplay> list = noticeMapper.list();
+	public List<NoticeDisplay> list(Integer isByMyId) {
+		List<NoticeDisplay> list = noticeMapper.list(isByMyId);
 		return list;
 	}
 
 	public void insert(Notice notice) {
 		noticeMapper.insertSelective(notice);
+	}
+
+	public Notice selectByPrimaryKey(Integer id) {
+		Notice notice = noticeMapper.selectByPrimaryKey(id);
+		return notice;
+	}
+
+	public void update(Notice notice) {
+		noticeMapper.updateByPrimaryKeySelective(notice);
+	}
+
+	public void dele(Integer noticeId) {
+		noticeMapper.deleteByPrimaryKey(noticeId);
 	}
 
 }

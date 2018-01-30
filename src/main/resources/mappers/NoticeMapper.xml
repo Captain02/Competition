@@ -92,7 +92,7 @@
   </update>
   
   <!-- List<NoticeDisplay> list(); -->
-  <select id="list" resultType="NoticeDisplay">
+  <select id="list" resultType="NoticeDisplay" parameterType="Integer">
   SELECT DISTINCT
 	nt.id AS id, nt.userId AS userId,nt.title AS title,nt.date AS date,nt.`text` AS `text`,tu.`name` AS userName,
 	tu.headFile AS headFile, tr.`name` AS role,td.`name` AS department
@@ -103,6 +103,13 @@
 	LEFT JOIN t_department td ON td.id=tdu.departmentId
 	LEFT JOIN t_user_role tur ON tur.userId=tu.id
 	LEFT JOIN t_role tr ON tr.id=tur.roleId
+	<where>
+		
+		<if test="isByMyId != 0">
+			tu.id = #{isByMyId}
+		</if>
+	</where>
+		order by `date` desc
   </select>
  
 </mapper>

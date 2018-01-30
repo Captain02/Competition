@@ -2,6 +2,8 @@ package com.hanming.oa.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.Notice;
 import com.hanming.oa.model.NoticeDisplay;
 
@@ -18,5 +20,5 @@ public interface NoticeMapper {
 
     int updateByPrimaryKey(Notice record);
 
-	List<NoticeDisplay> list();
+	List<NoticeDisplay> list(@Param("isByMyId")Integer isByMyId);
 }

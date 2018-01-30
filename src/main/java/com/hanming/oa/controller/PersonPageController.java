@@ -45,7 +45,7 @@ public class PersonPageController {
 		User user = userService.selectByUsername(username);
 
 		// 公告信息
-		List<NoticeDisplay> Notices = noticeService.list();
+		List<NoticeDisplay> Notices = noticeService.list(0);
 		Collections.reverse(Notices);
 		if (Notices.size() > 2) {
 			List<NoticeDisplay> reverseNotices = Notices.subList(0, 2);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,9 +15,9 @@
     %>
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
 <script type="text/javascript">
-function save() {
+function update() {
 	$.ajax({
-		url:"${APP_PATH}/admin/notice/add",
+		url:"${APP_PATH}/admin/notice/update",
 		type:"POST",
 		data:$("#noticeForm").serialize(),
 		success:function(){
@@ -72,27 +73,27 @@ function save() {
 									<div class="col-lg-12">
 										<section class="panel">
 											<div class="panel-body">
-												<form id="noticeForm" class="form-horizontal" method="post" action="">
+												<sf:form modelAttribute="notice" id="noticeForm" class="form-horizontal" method="post" action="">
+													<sf:hidden path="id" name="id"/>
 													<div class="form-group">
 														<label class="col-sm-2 col-sm-2 control-label"><span>*</span>标题</label>
 														<div class="col-sm-10">
-															<input name="title" value="" class="form-control" placeholder="请填写公告标题" type="text">
+															<sf:input path="title" name="title" value="" class="form-control" placeholder="请填写公告标题" type="text" />
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-sm-2 col-sm-2 control-label"><span>*</span>内容</label>
 														<div class="col-sm-10">
-															<textarea name="text" placeholder="请填写公告内容" style="height: 90px;" class="form-control"></textarea>
+															<sf:textarea path="text" name="text" placeholder="请填写公告内容" style="height: 90px;" class="form-control"></sf:textarea>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-lg-2 col-sm-2 control-label"></label>
 														<div class="col-lg-10">
-															<input name="id" value="" type="hidden">
-															<button type="button" onclick="save()" class="btn btn-primary btn-success">提交</button>
+															<button type="button" onclick="update()" class="btn btn-primary btn-success">提交</button>
 														</div>
 													</div>
-												</form>
+												</sf:form>
 											</div>
 										</section>
 									</div>

@@ -13,7 +13,23 @@
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<script type="text/javascript">
+function dele(id) {
+	var noticeId = id;
+	
+	$.ajax({
+		url:"${APP_PATH}/admin/notice/dele",
+		data:{
+			'noticeId':noticeId
+		},
+		type:"POST",
+		success:function(result){
+			//弹模态框直接刷新
+		}
+	})
+}
 
+</script>
 
 </head>
 
@@ -51,8 +67,12 @@
                         <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
 
                         <div class="om-header-right">
+                        	<button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/list'">
+                               	全部</button>
                             <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/add'">
                                 <i>+</i>发布新公告</button>
+                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/list?isByMyId=${userId}'">
+                               	由我发布</button>
                         </div>
 
 
@@ -63,7 +83,7 @@
                         <div class="row">
                             <div class="col-sm-12">
 
-                                <header class="om-wrapper-header">公告管理 / 总数：</header>
+                                <header class="om-wrapper-header">公告管理 / 总数：${pageInfo.total}</header>
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
@@ -79,7 +99,7 @@
                                             </thead>
 
                                             <tbody>
-												<c:forEach items="${Notices}" var="Notice">
+												<c:forEach items="${pageInfo.list}" var="Notice">
 	                                                <tr>
 	                                                    <td>${Notice.title}</td>
 	                                                    <td>${Notice.text}</td>
@@ -96,11 +116,11 @@
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                <li>
-	                                                                    <a href="">编辑</a>
+	                                                                    <a href="${APP_PATH}/admin/notice/update/${Notice.id}">编辑</a>
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>
-	                                                                    <a href="">删除</a>
+	                                                                    <a onclick="dele(${Notice.id})">删除</a>
 	                                                                </li>
 	                                                               
 	                                                            </ul>
@@ -118,7 +138,51 @@
                             </div>
 
                         </div>
+								<!-- 分页 -->
+                            <div class="page-area">
+                                <div class="container page-possiton">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-control">
+                                            <li>
+                                                <a href="${APP_PATH}/admin/notice/list?pn=1&isByMyId=${isByMyId}">首页</a>
+                                            </li>
+                                            <c:if test="${pageInfo.hasPreviousPage}">
+                                                <li>
+                                                    <a href="${APP_PATH}/admin/notice/list?pn=${pageInfo.pageNum-1}&isByMyId=${isByMyId}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
+                                                <c:if test="${pageNum==pageInfo.pageNum}">
+                                                    <li class="active">
+                                                        <a href="#">${pageNum}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${pageNum!=pageInfo.pageNum}">
+                                                    <li>
+                                                        <a href="${APP_PATH}/admin/notice/list?pn=${pageNum}&isByMyId=${isByMyId}">${pageNum}</a>
+                                                    </li>
+                                                </c:if>
+                                            </c:forEach>
 
+                                            <c:if test="${pageInfo.hasNextPage }">
+                                                <li>
+                                                    <a href="${APP_PATH}/admin/notice/list?pn=${pageInfo.pageNum+1}&isByMyId=${isByMyId}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+
+                                            <li>
+                                                <a href="${APP_PATH}/admin/notice/list?pn=${pageInfo.pages}&isByMyId=${isByMyId}" aria-label="Next">
+                                                    <span aria-hidden="true">末页</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
                       
                        
 
