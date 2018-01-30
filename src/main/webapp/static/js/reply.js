@@ -31,6 +31,8 @@ $(function(){
 	var btnReplyLzReply = $('.btn-reply-lz-reply');
 	for(var i = 0; i<btnReplyLzReply.length; i++){
 		$(btnReplyLzReply[i]).click(function(){
+			repliesId = $(this).siblings('#repliesId').val();
+			byRepliesUserId = $(this).siblings('#ByRepliesUserId').val();
 			var replyUsername = $(this).parent().parent().find('a.lzl-username').html();
 		    var inputReplyUsername = $(this).parents('div.d-author-post-content-main').find("textarea[name='editor-container-area']");
 		    inputReplyUsername.attr('placeholder','回复　' + replyUsername + ':');

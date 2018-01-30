@@ -66,8 +66,9 @@ function replies(ele) {
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
 
-	repliescontent = $(ele).siblings(
-		"textarea[name='editor-container-area']").val();
+	repliescontent = $(ele).siblings("textarea[name='editor-container-area']").val();
+	
+	alert( repliesId + byRepliesUserId + repliescontent);
 
 	$.ajax({
 		url: "${APP_PATH}/admin/KnowledgeSharing/addReplies",
@@ -243,7 +244,9 @@ function replies(ele) {
 																<img src="${APP_PATH}/personHeadFile/${childComments.repliesUserHeadFile}" alt="" />
 															</a>
 															<div class="lzl-cnt">
-																<a href="" class="lzl-username">${childComments.repliesUserName}</a>:
+																<a href="" class="lzl-username">${childComments.repliesUserName}</a>
+																<span style="margin: 0 5px;">回复</span>	
+																<a href="" class="lzl-reply-username">哈士奇</a>:
 																<span>${childComments.text}</span>
 																<div class="lzl-content_reply">
 																	<span class="lzl-time">${childComments.date}</span>
