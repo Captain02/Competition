@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
-import com.hanming.oa.model.Notice;
+import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.NoticeDisplay;
 import com.hanming.oa.model.User;
+import com.hanming.oa.service.BBSTopicService;
 import com.hanming.oa.service.NoticeService;
 import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
@@ -32,6 +33,8 @@ public class PersonPageController {
 	UpDownFileService upDownFileService;
 	@Autowired
 	NoticeService noticeService;
+	@Autowired
+	BBSTopicService bbsTopicService;
 
 	// 跳转个人主页
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -50,6 +53,17 @@ public class PersonPageController {
 		}else {
 			model.addAttribute("Notices", Notices);
 		}
+		
+		// 知识
+		List<BBSDisplayTopic> topics = bbsTopicService.selectDisplayTopic(0,0);
+		Collections.reverse(topics);
+		if (topics.size() > 2) {
+			List<NoticeDisplay> reverseTopics = Notices.subList(0, 2);
+			model.addAttribute("topics", reverseTopics);
+		}else {
+			model.addAttribute("topics", topics);
+		}
+		
 
 		model.addAttribute("user", user);
 		return "personPage/personPage";
