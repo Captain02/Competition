@@ -19,7 +19,7 @@
 				<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 				<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
 				<script src="${APP_PATH}/static/js/comment-kindeditor-option.js"></script>
-				<script src="${APP_PATH}/static/js/reply.js"></script>
+		
 
 
 
@@ -66,7 +66,6 @@
 						var topicId = $("#topicId").val();
 						var pn = $("#pn").val();
 
-						alert(repliesId);
 						repliescontent = $(ele).siblings(
 							"textarea[name='editor-container-area']").val();
 
@@ -262,7 +261,7 @@
 														<!--回复框 -->
 														<div class="lzl-editor-container form-group clearfix">
 															<div class="editor-container">
-																<textarea name="editor-container-area" class="form-control"></textarea>
+																<textarea name="editor-container-area" class="form-control" placeholder="回复框"></textarea>
 																<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表" onclick="replies (this);" />
 															</div>
 
@@ -341,34 +340,7 @@
 				</div>
 			</section>
 			<script src="${APP_PATH}/static/js/activity-opreate.js"></script>
-
-			<script type="text/javascript">
-				//点击回复按钮获得帖子id和要回复的那个人的id
-				var btnReplyLz = $('.btn-reply-lz');
-				for (var i = 0; i < btnReplyLz.length; i++) {
-					$(btnReplyLz[i]).click(
-						function () {
-							repliesId = $(this).siblings('#repliesId').val();
-							byRepliesUserId = $(this).siblings('#ByRepliesUserId')
-								.val();
-							$(this).parent().parent().parent().siblings(
-									"div.lzl-editor-container").find(
-									"textarea[name='editor-container-area']")
-								.focus();
-						})
-				}
-				//点击回复按钮，将回复者的用户名填写到回复框中，并加上回复二字
-				var btnReplyLzReply = $('.btn-reply-lz-reply');
-				for(var i = 0; i<btnReplyLzReply.length; i++){
-					$(btnReplyLzReply[i]).click(function(){
-						var replyUsername = $(this).parent().parent().find('a.lzl-username').html();
-					    var inputReplyUsername = $(this).parents('div.d-author-post-content-main').find("textarea[name='editor-container-area']");
-					    inputReplyUsername.val('回复　' + replyUsername + '：');
-					    inputReplyUsername.focus();
-					})
-				}
-			</script>
-
+			<script src="${APP_PATH}/static/js/reply.js"></script>
 		</body>
 
 		</html>
