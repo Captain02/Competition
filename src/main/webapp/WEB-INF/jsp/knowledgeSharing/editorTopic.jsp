@@ -133,15 +133,17 @@ function save() {
 									<div class="checkbox" style="margin-top: 5px;">
 									
 									<c:forEach items="${bbsDetailedTopic.labelIds}" var="labelIds">
-										<input type="hidden" value="${labelIds}">
+										<input type="hidden" value="${labelIds}" class="hasResourceId">
 									</c:forEach>
 									
 									<c:forEach items="${bbsLabel}" var="labels">
 										<label class="checkbox-inline">
 										
-											<input value="${labels.id}"  type="checkbox">${labels.name}
+											<input value="${labels.id}"  type="checkbox" class="resourceId">${labels.name}
 										</label>
 									</c:forEach>
+									
+									
 									
       							
       								</div>
@@ -164,5 +166,24 @@ function save() {
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+	
+	var resourceArray = new Array();
+	
+	$('.hasResourceId').each(function(){
+		var hashasResourceId = $(this);
+		resourceArray.push(hashasResourceId.val());
+	})
+	$('.resourceId').each(function(){
+		var resourceId = $(this);
+		var orderSplitId = '';
+		if( $.inArray(resourceId.val(),resourceArray) >= 0 ){
+			resourceId.attr('checked','checked');
+		}
+	});
+	
+	
+	
+	</script>
 </body>
 </html>
