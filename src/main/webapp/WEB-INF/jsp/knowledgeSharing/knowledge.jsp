@@ -26,7 +26,7 @@ $(function(){
 			},
 			type : "POST",
 			success : function(result) {
-				console.log(result);
+				
 			}
 		}) 
 	});
@@ -225,23 +225,26 @@ function updateLabel(ele) {
 					                		</div>
 					                	</li>
                   					</c:forEach>
+                  					
+                  					<li class="order-list">
+                  						<!--新建标签的输入框 -->
+										<form action="${APP_PATH}/admin/KnowledgeSharing/addLabel" method="post">
+			                				<div class="addNewLabel clearfix">
+			                					<div class="pull-left">
+			                						<input type="text" name="labelName" class="form-control"/>
+			                					</div>
+			               						
+			               						<div class="pull-right">
+			               							<input type="submit" class="btn btn-success btn-sm" value="确定">
+			               							<input type="button" class="btn btn-warning btn-sm" value="取消">
+			               						</div>
+			               						
+				                			</div>
+										</form>
+                  					</li>
                 				</ul>
                 				
-								<!--新建标签的输入框 -->
-								<form action="${APP_PATH}/admin/KnowledgeSharing/addLabel" method="post">
-	                				<div class="addNewLabel">
-	                					<div class="form-group">
-		                					<div class="col-md-12">
-		                						<input type="text" name="labelName" class="form-control"/>
-		                					</div>
-	                					</div>
-	                				
-		                				<div class="form-group pull-right">
-		                					<input type="submit" class="btn btn-success btn-sm" value="确定">
-		                					<input type="button" class="btn btn-warning btn-sm" value="取消">
-		                				</div>
-		                			</div>
-								</form>
+								
                 				
 								</div>
 							</div>

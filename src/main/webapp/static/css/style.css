@@ -855,7 +855,6 @@ ul.p-info .title, ul.p-info .desk {
 }
 
 .order-list {
-	margin-bottom: 15px;
 	padding-bottom: 5px;
 }
 
@@ -895,6 +894,9 @@ ul.p-info .title, ul.p-info .desk {
 
 .addNewLabel {
 	display: none;
+}
+.addNewLabel input{
+	display: inline;
 }
 
 .l-post {
