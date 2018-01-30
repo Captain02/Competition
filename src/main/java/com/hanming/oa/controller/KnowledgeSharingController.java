@@ -95,7 +95,8 @@ public class KnowledgeSharingController {
 
 		Integer likeNum = bbsLikeService.selectCountLikeByUserIdAndTopicId(userId, topicId);
 		Integer collectionNum = bbsCollectionService.selectCountCollectionByUserAndTopic(userId, topicId);
-		//Integer commenstNum = bbsRepliesService.selectCountCommentByUserAndTopic(topicId);
+		// Integer commenstNum =
+		// bbsRepliesService.selectCountCommentByUserAndTopic(topicId);
 
 		model.addAttribute("likeNum", likeNum);
 		model.addAttribute("collectionNum", collectionNum);
@@ -173,13 +174,13 @@ public class KnowledgeSharingController {
 	}
 
 	// 删除帖子
-	@ResponseBody
-	@RequestMapping(value = "/dele", method = RequestMethod.DELETE)
-	public Msg deleTopic(@RequestParam("topicId") Integer topicId) {
+	@RequestMapping(value = "/dele", method = RequestMethod.GET)
+	public String deleTopic(@RequestParam("topicId") Integer topicId, @RequestParam("pn") Integer pn,
+			@RequestParam("labelId") Integer labelId) {
 
 		bbsTopicService.deleTopicById(topicId);
 
-		return Msg.success();
+		return "redirect:list?pn=" + pn + "&labelId=" + labelId + "&isByMyId=1";
 	}
 
 	// 修改标签
@@ -234,13 +235,10 @@ public class KnowledgeSharingController {
 	public String addReplies(@RequestParam("comment") String text, @RequestParam("pn") Integer pn,
 			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId,
 			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
-		
+
 		bbsTopicService.addReplies(text, topicid, byUserId, repliesId);
-		
 
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
-
-	
 
 }

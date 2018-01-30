@@ -127,7 +127,7 @@ function updateLabel(ele) {
 														<p class="pull-right text-muted">
 															<c:if test="${isByMyId!=0}">
 																<a href="" title="修改" class="my-control"><i class="glyphicon glyphicon-edit"></i></a>
-																<a href="" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
+																<a href="${APP_PATH}/admin/KnowledgeSharing/dele?pn=${pageInfo.pages}&labelId=${labelId}&topicId=${bbsDisplayTopic.id}" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
 															</c:if>
 															<input type="hidden" value="${bbsDisplayTopic.id}">
 															<i class="fa fa-thumbs-o-up"></i>${bbsDisplayTopic.like}
