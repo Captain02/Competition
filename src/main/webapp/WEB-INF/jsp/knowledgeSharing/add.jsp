@@ -61,7 +61,8 @@ function save() {
 			'title':title,
 			'sketch':sketch,
 			'text':html,
-			'order':order
+			'order':order,
+			'isUpdate':0
 		},
 		success:function(result){
 			if (result.code==100) {
