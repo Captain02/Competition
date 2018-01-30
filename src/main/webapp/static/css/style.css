@@ -1002,6 +1002,7 @@ ul.p-info .title, ul.p-info .desk {
 	font-size: 12px;
 	color: #666;
 	padding-left: 5px;
+	cursor: pointer;
 }
 .lzl-editor-container{
 	padding-top: 35px;

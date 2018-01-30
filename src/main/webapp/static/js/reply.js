@@ -14,10 +14,7 @@ $(function(){
 	
 	
 	//回复按钮的操作
-	var btnReply = $('.btn-reply-lz');
-	btnReply.click(function(){
-		
-	});
+	
 	
 });
 
