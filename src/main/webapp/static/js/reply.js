@@ -15,6 +15,28 @@ $(function(){
 	
 	//回复按钮的操作
 	
+	//点击回复按钮获得帖子id和要回复的那个人的id
+	var btnReplyLz = $('.btn-reply-lz');
+	for (var i = 0; i < btnReplyLz.length; i++) {
+		$(btnReplyLz[i]).click(
+			function () {
+				repliesId = $(this).siblings('#repliesId').val();
+				byRepliesUserId = $(this).siblings('#ByRepliesUserId').val();
+				var inputReplyArea = $(this).parent().parent().parent().siblings("div.lzl-editor-container").find("textarea[name='editor-container-area']");
+				inputReplyArea.focus();
+				inputReplyArea.val('');
+			})
+	}
+	//点击回复按钮，将回复者的用户名填写到回复框中，并加上回复二字
+	var btnReplyLzReply = $('.btn-reply-lz-reply');
+	for(var i = 0; i<btnReplyLzReply.length; i++){
+		$(btnReplyLzReply[i]).click(function(){
+			var replyUsername = $(this).parent().parent().find('a.lzl-username').html();
+		    var inputReplyUsername = $(this).parents('div.d-author-post-content-main').find("textarea[name='editor-container-area']");
+		    inputReplyUsername.attr('placeholder','回复　' + replyUsername + ':');
+		    inputReplyUsername.focus();
+		})
+	}
 	
 });
 
