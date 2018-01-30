@@ -188,9 +188,6 @@ public class KnowledgeSharingController {
 	@RequestMapping(value = "/dele", method = RequestMethod.POST)
 	public Msg deleTopic(@RequestParam("topicId") Integer topicId, @RequestParam("pn") Integer pn,
 			@RequestParam("labelId") Integer labelId) {
-System.out.println(pn);
-System.out.println(labelId);
-System.out.println(topicId);
 		bbsTopicService.deleTopicById(topicId);
 
 		return Msg.success();

@@ -33,44 +33,47 @@ public class PersonPageController {
 	@Autowired
 	NoticeService noticeService;
 
-	//跳转个人主页
+	// 跳转个人主页
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
-		
-		//个人信息
+
+		// 个人信息
 		String username = (String) SecurityUtils.getSubject().getSession().getAttribute("username");
 		User user = userService.selectByUsername(username);
-		
-		//公告信息
+
+		// 公告信息
 		List<NoticeDisplay> Notices = noticeService.list();
 		Collections.reverse(Notices);
-		List<NoticeDisplay> reverseNotices = Notices.subList(0, 2);
-		
-		
-		model.addAttribute("Notices", reverseNotices);
+		if (Notices.size() > 2) {
+			List<NoticeDisplay> reverseNotices = Notices.subList(0, 2);
+			model.addAttribute("Notices", reverseNotices);
+		}else {
+			model.addAttribute("Notices", Notices);
+		}
+
 		model.addAttribute("user", user);
 		return "personPage/personPage";
 	}
 
-	//上传头像页面
+	// 上传头像页面
 	@RequestMapping(value = "/personHeadPage", method = RequestMethod.GET)
 	public String personHeadPage() {
 
 		return "personPage/personHead";
 	}
 
-	//上传头像
+	// 上传头像
 	@ResponseBody
 	@RequestMapping(value = "/upPersonHeadFile", method = RequestMethod.POST)
 	public Msg upPersonHeadFile(@RequestParam(value = "imgData") String dataURL,
 			@RequestParam(value = "oldImg", defaultValue = "") String oldImg, HttpServletRequest request) {
-		//Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		// Integer userId = (Integer)
+		// SecurityUtils.getSubject().getSession().getAttribute("id");
 
 		upDownFileService.upPersonHead(dataURL, request, "");
 		if (!("".equals(oldImg))) {
 			upDownFileService.upPersonHead(oldImg, request, "old");
 		}
-
 
 		return Msg.success();
 	}
