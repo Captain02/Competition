@@ -639,6 +639,26 @@ ul.p-info .title, ul.p-info .desk {
 	overflow: hidden;
 }
 
+.dropdown-list li {
+	padding: 15px;
+	overflow: hidden;
+	border-bottom: 1px solid #eee;
+}
+.dropdown-list li a{
+	color: #65CEA7;
+}
+.dropdown-list li a:hover{
+	cursor: pointer;
+	color: #000;
+	text-decoration: underline;
+}
+.dropdown-list li a span.label {
+	float: left;
+	margin-right: 10px;
+	padding: 5px;
+	width: 20px;
+}
+
 /* 请假条页 */
 .blog h1 {
 	font-size: 18px;
@@ -895,13 +915,13 @@ ul.p-info .title, ul.p-info .desk {
 .addNewLabel {
 	display: none;
 }
-.addNewLabel input{
+
+.addNewLabel input {
 	display: inline;
 }
 
 .l-post {
 	border-bottom: 1px solid #E1E4E6;
-	background: #fafbfc;
 }
 
 .d-author {
@@ -909,10 +929,6 @@ ul.p-info .title, ul.p-info .desk {
 	float: left;
 	text-align: center;
 	padding: 15px 0;
-}
-
-.author-icon-img {
-	
 }
 
 .author-icon img {
@@ -980,6 +996,10 @@ ul.p-info .title, ul.p-info .desk {
 	height: 32px;
 }
 
+.core-reply-content {
+	padding: 4px 15px 14px;
+}
+
 .core-reply-content li {
 	padding-top: 10px;
 }
@@ -1006,13 +1026,28 @@ ul.p-info .title, ul.p-info .desk {
 	padding-left: 5px;
 	cursor: pointer;
 }
-.lzl-editor-container{
+
+.lzl-editor-container {
 	padding-top: 35px;
 }
-.btn-editor-reply{
+
+.btn-editor-reply {
 	padding: 2px 20px;
 	margin-top: 15px;
 }
-.lzl-cnt .lzl-reply-username{
+
+.lzl-cnt .lzl-reply-username {
 	color: #2d64b3;
+}
+
+.core-reply-container {
+	background-color: #f7f8fa;
+	border: 1px solid #f0f1f2;
+	margin-top: -1px;
+}
+
+.shou-reply {
+	color: #2d64b3;
+	background-color: #f7f8fa;
+	padding: 10px;
 }

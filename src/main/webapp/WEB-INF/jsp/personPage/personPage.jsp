@@ -14,6 +14,8 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 
 </head>
 
@@ -95,7 +97,38 @@
 							</div>
 
 
-							<div class="col-md-12">公告区域</div>
+							<div class="col-md-12">
+								<div class="panel">
+									<div class="panel-body">
+										<h4>公告</h4>
+										 <ul class="dropdown-list">
+										 <!-- li标签从数据库中遍历生成 -->
+										 	<li class="new">
+										 		<a href="">
+										 			<span class="label label-danger">
+										 				<i class="fa fa-bolt"></i>
+										 			</span>
+										 			<!-- 公告名称 -->
+										 			<span class="name">2017清明放假通知 </span>
+										 			<!-- 发布时间 -->
+										 			<em class="small">2017-03-28 15:44</em>
+										 		</a>
+										 	</li>
+										 	<li class="new">
+										 		<a href="">
+										 			<span class="label label-danger">
+										 				<i class="fa fa-bolt"></i>
+										 			</span>
+										 			<!-- 公告名称 -->
+										 			<span class="name">2017清明放假通知 </span>
+										 			<!-- 发布时间 -->
+										 			<em class="small">2017-03-28 15:44</em>
+										 		</a>
+										 	</li>
+										 </ul>
+									</div>
+								</div>
+							</div>
 							<div class="col-md-12">日历区域</div>
 						</div>
 					</div>
