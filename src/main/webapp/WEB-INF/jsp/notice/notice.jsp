@@ -79,11 +79,11 @@
                                             </thead>
 
                                             <tbody>
-												
+												<c:forEach items="${Notices}" var="Notice">
 	                                                <tr>
-	                                                    <td>放假通知</td>
-	                                                    <td>放假通知</td>
-	                                                    <td>放假通知</td>
+	                                                    <td>${Notice.title}</td>
+	                                                    <td>${Notice.text}</td>
+	                                                    <td>${Notice.date}</td>
 	                                                    <td>
 	                                                        <div class="btn-group">
 	                                                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -107,6 +107,7 @@
 	                                                        </div>
 	                                                    </td>
 	                                                </tr>
+												</c:forEach>
 												
                                             </tbody>
 

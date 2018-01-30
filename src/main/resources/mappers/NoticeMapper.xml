@@ -94,7 +94,7 @@
   <!-- List<NoticeDisplay> list(); -->
   <select id="list" resultType="NoticeDisplay">
   SELECT DISTINCT
-	nt.id AS id, nt.userId AS userId,nt.title AS title,nt.date AS date,tu.`name` AS userName,
+	nt.id AS id, nt.userId AS userId,nt.title AS title,nt.date AS date,nt.`text` AS `text`,tu.`name` AS userName,
 	tu.headFile AS headFile, tr.`name` AS role,td.`name` AS department
 	
 	FROM notice nt
