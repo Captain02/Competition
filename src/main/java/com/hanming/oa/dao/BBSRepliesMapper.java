@@ -22,4 +22,6 @@ public interface BBSRepliesMapper {
 	void deleteByTopicId(@Param("topicId")Integer topicId);
 
 	void deleteByTopicIdList(List<Integer> topicIds);
+
+	Integer selectCountCommentByUserAndTopic(@Param("topicId")Integer topicId);
 }

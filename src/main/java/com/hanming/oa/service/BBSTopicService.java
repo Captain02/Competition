@@ -39,6 +39,8 @@ public class BBSTopicService {
 
 	public BBSDetailedTopic bbsDetailedTopic(Integer topicId) {
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicMapper.selectBBSDetailedTopic(topicId);
+		Integer commentsNum = bbsRepliesMapper.selectCountCommentByUserAndTopic(topicId);
+		bbsDetailedTopic.setComment(commentsNum);
 		return bbsDetailedTopic;
 	}
 

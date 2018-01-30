@@ -95,6 +95,7 @@ public class KnowledgeSharingController {
 
 		Integer likeNum = bbsLikeService.selectCountLikeByUserIdAndTopicId(userId, topicId);
 		Integer collectionNum = bbsCollectionService.selectCountCollectionByUserAndTopic(userId, topicId);
+		//Integer commenstNum = bbsRepliesService.selectCountCommentByUserAndTopic(topicId);
 
 		model.addAttribute("likeNum", likeNum);
 		model.addAttribute("collectionNum", collectionNum);

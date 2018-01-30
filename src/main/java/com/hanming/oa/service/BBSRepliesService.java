@@ -15,4 +15,9 @@ public class BBSRepliesService {
 	public void insert(BBSReplies bbsReplies) {
 		bbsRepliesMapper.insertSelective(bbsReplies);
 	}
+
+	public Integer selectCountCommentByUserAndTopic(Integer topicId) {
+		Integer commentsNum = bbsRepliesMapper.selectCountCommentByUserAndTopic(topicId);
+		return commentsNum;
+	}
 }

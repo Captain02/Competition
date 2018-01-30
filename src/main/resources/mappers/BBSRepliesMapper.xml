@@ -130,4 +130,11 @@
     </foreach>
   </delete>
   
+  <!-- Integer selectCountCommentByUserAndTopic(@Param("topicId")Integer topicId); -->
+  <select id="selectCountCommentByUserAndTopic" resultType="Integer">
+  	select count(*)
+  	from bbsreplies
+  	WHERE TopicId=#{topicId}
+  </select>
+  
 </mapper>
