@@ -1,6 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
@@ -200,9 +200,7 @@ public class KnowledgeSharingController {
 
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
-		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateString = formatter.format(currentTime);
+		String dateString = DateTool.dateToString(new Date());
 
 		BBSLabel bbsLabel = new BBSLabel();
 		bbsLabel.setId(labelId);
