@@ -27,7 +27,9 @@ body a{
 body a:hover{
 	text-decoration: underline;
 }
-
+body{
+	overflow-x: hidden;
+}
 /* clearfix */
 .clearfix::before, .clearfix::after {
 	content: "";
@@ -1065,7 +1067,7 @@ ul.p-info .title, ul.p-info .desk {
 	
 }
 .notice-text a{
-	color: #333;
+	color: #7a7676;
 	display: inline-block;
 	width: 300px;
 	text-align: left;

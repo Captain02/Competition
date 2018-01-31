@@ -15,8 +15,8 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
-function dele(id) {
-	var noticeId = id;
+function dele(ele) {
+	var noticeId = $(ele).attr('data-notice-id');
 	
 	$.ajax({
 		url:"${APP_PATH}/admin/notice/dele",
@@ -25,9 +25,16 @@ function dele(id) {
 		},
 		type:"POST",
 		success:function(result){
-			//弹模态框直接刷新
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','删除结果','.modal-body','公告删除成功!');
+			ShowEle('.yes','hide','.no','hide');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.reload();
+			},1000);
 		}
 	})
+	
 }
 
 </script>
@@ -93,7 +100,7 @@ function dele(id) {
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
-                                        <table class="table table-striped table-bordered table-notice">
+                                        <table class="table table-striped table-bordered table-notice" style="color: #7a7676; font-size: 14px; font-weight: 0;">
 
                                             <thead>
                                                 <tr>
@@ -136,7 +143,7 @@ function dele(id) {
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>
-																		<a>删除</a>
+																		<a data-notice-id="${Notice.id}" onclick="dele(this);">删除</a>
 	                                                                </li>
 	                                                               </c:if>
 	                                                            </ul>
@@ -228,7 +235,7 @@ function dele(id) {
       			<div class="panel">
 				<div class="panel-body">
 					<div class="profile-pic text-center">
-					<img src="/OA02/personHeadFile/140.png" alt="">
+					<img src="" alt="">
 					</div>
 				</div>
 			</div>
@@ -273,48 +280,7 @@ function dele(id) {
  </div>
 </div>
 
-<script type="text/javascript">
-	$(function(){
-		$('.notice-text a').each(function(){
-			var maxwidth = 30
-			if($(this).text().length>maxwidth){
-				$(this).text($(this).text().substring(0,maxwidth));
-				$(this).html($(this).html() + '...');
-			}
-			
-			$(this).click(function(){
-				$('#myModal').modal('show');
-				$('.btn-more-info').addClass('hidden');
-				$('div.notice-info').addClass('hidden');
-				ShowTips('.modal-title','公告详情','.modal-body',$(this).attr('data-notice-text'));
-			})
-			
-		})
-		
-		$('.view-notice').each(function(){
-			$(this).click(function(){
-				$('#myModal').modal('show');
-				ShowTips('.modal-title','公告详情','.modal-body',$(this).attr('data-notice-text'));
-				$('div.notice-info').addClass('hidden');
-				$('.btn-more-info').removeClass('hidden');
-				$('.notice-author').html($(this).attr('data-notice-username'));
-				$('.notice-author-deparment').html($(this).attr('data-notice-department'));
-				$('.notice-author-role').html($(this).attr('data-notice-role'));
-				$('.notice-date').html($(this).attr('data-notice-date'));
-			})
-		})
-		
-		$('.btn-more-info').click(function(){
-			if($('div.notice-info').hasClass('hidden')){
-				$('div.notice-info').removeClass('hidden');
-			}
-			else{
-				$('div.notice-info').addClass('hidden');
-			}
-		});
-		
-	})
-</script>
+<script src="${APP_PATH}/static/js/show-notice.js"></script>
 
  </body>
 

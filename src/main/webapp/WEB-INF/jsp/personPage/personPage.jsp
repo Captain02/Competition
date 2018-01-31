@@ -101,7 +101,9 @@
 							<div class="col-md-12">
 								<div class="panel">
 									<div class="panel-body">
-										<h4>公告</h4>
+										<h4>公告
+											<a href="" style="font-size: 16px; color: #65CEA7;" class="pull-right">更多</a>
+										</h4>
 										 <ul class="dropdown-list">
 										 <!-- li标签从数据库中遍历生成 -->
 										<c:forEach items="${Notices}" var="Notice">
