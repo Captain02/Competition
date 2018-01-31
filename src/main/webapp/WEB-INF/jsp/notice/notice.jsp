@@ -105,6 +105,7 @@ function dele(id) {
 
                                             <tbody>
 												<c:forEach items="${pageInfo.list}" var="Notice">
+												
 	                                                <tr>
 	                                                    <td>${Notice.title}</td>
 	                                                    <td class="notice-text text-center" title="查看详情"><a>${Notice.text}</a></td>
@@ -117,9 +118,17 @@ function dele(id) {
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                             <li>
+	                                                             		<!-- 标题、正文、时间、发布人姓名、发布人职称、发布人部门、发布人头像 -->
+	                                                             		<input type="hidden" value="${Notice.title}" />
+																		<input type="hidden" value="${Notice.text}" />
+																		<input type="hidden" value="${Notice.date}" />
+																		<input type="hidden" value="${Notice.userName}" />
+																		<input type="hidden" value="${Notice.role}" />
+																		<input type="hidden" value="${Notice.department}" />
+																		<input type="hidden" value="${Notice.headFile}" />
 	                                                                    <a href="">查看</a>
 	                                                                </li>
-	                                                                <c:if test="${isByMyId !=0 }">
+	          				                                       <c:if test="${isByMyId !=0 }">
 	                                                                <li role="separator" class="divider"></li>
 	                                                                <li>
 	                                                                    <a href="${APP_PATH}/admin/notice/update/${Notice.id}">编辑</a>
