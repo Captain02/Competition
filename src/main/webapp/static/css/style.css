@@ -1075,3 +1075,6 @@ ul.p-info .title, ul.p-info .desk {
 	text-decoration: underline;
 	color: #65CEA7;
 }
+.notice-info ul li div{
+	text-align: left;
+}

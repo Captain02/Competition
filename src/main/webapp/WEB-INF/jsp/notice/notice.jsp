@@ -13,6 +13,7 @@
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
 function dele(id) {
 	var noticeId = id;
@@ -108,7 +109,7 @@ function dele(id) {
 												
 	                                                <tr>
 	                                                    <td>${Notice.title}</td>
-	                                                    <td class="notice-text text-center" title="查看详情"><a>${Notice.text}</a></td>
+	                                                    <td class="notice-text text-center" title="查看详情"><a data-notice-text="${Notice.text}">${Notice.text}</a></td>
 	                                                    <td>${Notice.date}</td>
 	                                                    <td>
 	                                                        <div class="btn-group">
@@ -118,15 +119,15 @@ function dele(id) {
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                             <li>
-	                                                             		<!-- 标题、正文、时间、发布人姓名、发布人职称、发布人部门、发布人头像 -->
-	                                                             		<input type="hidden" value="${Notice.title}" />
-																		<input type="hidden" value="${Notice.text}" />
-																		<input type="hidden" value="${Notice.date}" />
-																		<input type="hidden" value="${Notice.userName}" />
-																		<input type="hidden" value="${Notice.role}" />
-																		<input type="hidden" value="${Notice.department}" />
-																		<input type="hidden" value="${Notice.headFile}" />
-	                                                                    <a href="">查看</a>
+	                                                             		
+	                                                                    <a
+	                                                                    data-notice-title="${Notice.title}" 
+	                                                                    data-notice-text="${Notice.text}"
+	                                                                    data-notice-date="${Notice.date}"
+	                                                                    data-notice-username="${Notice.userName}"
+	                                                                    data-notice-role="${Notice.role}"
+	                                                                    data-notice-department="${Notice.department}"
+	                                                                    data-notice-headFile="${Notice.headFile}" class="view-notice">查看</a>
 	                                                                </li>
 	          				                                       <c:if test="${isByMyId !=0 }">
 	                                                                <li role="separator" class="divider"></li>
@@ -219,9 +220,54 @@ function dele(id) {
       
     </div>
     <div class="modal-footer">
-    
-      <button type="button" class="btn btn-warning yes">确认</button>
-      <button type="button" class="btn btn-success no">取消</button>
+      <button class="btn btn-warning pull-left btn-more-info">更多<span class="caret"></span></button>
+      <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+      <div class="notice-info clearfix" style="margin-top: 15px; border-bottom: 1px solid #e5e5e5;">
+      	<div class="col-md-12">
+      		<div class="col-md-4">
+      			<div class="panel">
+				<div class="panel-body">
+					<div class="profile-pic text-center">
+					<img src="/OA02/personHeadFile/140.png" alt="">
+					</div>
+				</div>
+			</div>
+      	</div>
+      	
+      	<div class="col-md-8">
+      		<div class="panel">
+			<div class="panel-body">
+				<ul class="p-info" style="margin-top: 20px;">
+					<li>
+						<div class="title">发布人</div>
+						<div class="desk notice-author"></div>
+					</li>
+					
+					
+					<li>
+						<div class="title">部门</div>
+						<div class="desk notice-author-deparment"></div>
+					</li>
+					
+					<li>
+						<div class="title">角色</div>
+						<div class="desk notice-author-role"></div>
+					</li>
+					
+					
+					
+					<li>
+						<div class="title">发布日期</div>
+						<div class="desk notice-date"></div>
+					</li>
+				
+				</ul>
+			</div>
+		</div>
+      	</div>
+      	</div>
+      
+      </div>
      </div>
    </div>
  </div>
@@ -230,19 +276,42 @@ function dele(id) {
 <script type="text/javascript">
 	$(function(){
 		$('.notice-text a').each(function(){
-			var maxwidth = 20
-			if($(this).text().length>20){
+			var maxwidth = 30
+			if($(this).text().length>maxwidth){
 				$(this).text($(this).text().substring(0,maxwidth));
 				$(this).html($(this).html() + '...');
 			}
 			
-		})
-		
-		$('.notice-text').each(function(){
 			$(this).click(function(){
 				$('#myModal').modal('show');
+				$('.btn-more-info').addClass('hidden');
+				$('div.notice-info').addClass('hidden');
+				ShowTips('.modal-title','公告详情','.modal-body',$(this).attr('data-notice-text'));
+			})
+			
+		})
+		
+		$('.view-notice').each(function(){
+			$(this).click(function(){
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','公告详情','.modal-body',$(this).attr('data-notice-text'));
+				$('div.notice-info').addClass('hidden');
+				$('.btn-more-info').removeClass('hidden');
+				$('.notice-author').html($(this).attr('data-notice-username'));
+				$('.notice-author-deparment').html($(this).attr('data-notice-department'));
+				$('.notice-author-role').html($(this).attr('data-notice-role'));
+				$('.notice-date').html($(this).attr('data-notice-date'));
 			})
 		})
+		
+		$('.btn-more-info').click(function(){
+			if($('div.notice-info').hasClass('hidden')){
+				$('div.notice-info').removeClass('hidden');
+			}
+			else{
+				$('div.notice-info').addClass('hidden');
+			}
+		});
 		
 	})
 </script>
