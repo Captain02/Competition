@@ -112,6 +112,7 @@
 										 			</span>
 										 			<!-- 公告名称 -->
 										 			<span class="name">${Notice.title} </span>
+										 			<input type="hidden" value="${Notice.text }">
 										 			<!-- 发布时间 -->
 										 			<em class="small">${Notice.date}</em>
 										 		</a>
