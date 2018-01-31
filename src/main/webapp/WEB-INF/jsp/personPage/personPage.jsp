@@ -106,13 +106,13 @@
 										 <!-- li标签从数据库中遍历生成 -->
 										<c:forEach items="${Notices}" var="Notice">
 										 	<li class="new">
-										 		<a href="">
+										 		<a>
 										 			<span class="label label-danger">
 										 				<i class="fa fa-bolt"></i>
 										 			</span>
 										 			<!-- 公告名称 -->
 										 			<span class="name">${Notice.title} </span>
-										 			<input type="hidden" value="${Notice.text }">
+										 			<input type="hidden" value="${Notice.text }" class="notice-text">
 										 			<!-- 发布时间 -->
 										 			<em class="small">${Notice.date}</em>
 										 		</a>
@@ -259,6 +259,36 @@
 			</div>
 		</div>
 	</section>
+	
+<!-- 模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel"></h4>
+    </div>
+    <div class="modal-body">
+      
+    </div>
+    <div class="modal-footer">
+    
+      <button type="button" class="btn btn-success" data-dismiss="modal" >关闭</button>
+     </div>
+   </div>
+ </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("li.new").each(function(){
+		$(this).click(function(){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','公告详情','.modal-body',$(this).find('input.notice-text').val());
+		})
+	})
+
+})
+</script>
 </body>
 
 </html>
