@@ -17,7 +17,7 @@
 <script type="text/javascript">
 function dele(ele) {
 	var noticeId = $(ele).attr('data-notice-id');
-	
+	alert(noticeId);
 	$.ajax({
 		url:"${APP_PATH}/admin/notice/dele",
 		data:{

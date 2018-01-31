@@ -90,6 +90,7 @@ public class NoticeController {
 	}
 
 	// 删除公告
+	@RequestMapping(value="/dele",method=RequestMethod.POST)
 	public Msg dele(@RequestParam("noticeId") Integer noticeId) {
 
 		noticeService.dele(noticeId);
