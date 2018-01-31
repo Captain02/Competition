@@ -1059,3 +1059,19 @@ ul.p-info .title, ul.p-info .desk {
 	background-color: #f7f8fa;
 	padding: 10px;
 }
+.table-notice .notice-text{
+	text-align:center;
+	width: 500px;
+	
+}
+.notice-text a{
+	color: #333;
+	display: inline-block;
+	width: 300px;
+	text-align: left;
+}
+.notice-text a:hover{
+	cursor: pointer;
+	text-decoration: underline;
+	color: #65CEA7;
+}

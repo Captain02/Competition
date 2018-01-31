@@ -71,12 +71,13 @@ function dele(id) {
                         	<button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/list'">
                                	全部</button>
                         </c:if>
-                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/add'">
-                                <i>+</i>发布新公告</button>
                          <c:if test="${isByMyId ==0 }">
-                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/list?isByMyId=${userId}'">
+                            <button id="addButton" type="button" class="btn btn-warning" onclick="window.location.href='${APP_PATH}/admin/notice/list?isByMyId=${userId}'">
                                	由我发布</button>
                           </c:if>
+                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/notice/add'">
+                                <i>+</i>发布新公告</button>
+                        
                         </div>
 
 
@@ -91,7 +92,7 @@ function dele(id) {
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
-                                        <table class="table table-bordered table-striped">
+                                        <table class="table table-striped table-bordered table-notice">
 
                                             <thead>
                                                 <tr>
@@ -106,7 +107,7 @@ function dele(id) {
 												<c:forEach items="${pageInfo.list}" var="Notice">
 	                                                <tr>
 	                                                    <td>${Notice.title}</td>
-	                                                    <td>${Notice.text}</td>
+	                                                    <td class="notice-text text-center" title="查看详情"><a>${Notice.text}</a></td>
 	                                                    <td>${Notice.date}</td>
 	                                                    <td>
 	                                                        <div class="btn-group">
@@ -125,7 +126,7 @@ function dele(id) {
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>
-	                                                                    <a onclick="dele(${Notice.id})">删除</a>
+																		<a>删除</a>
 	                                                                </li>
 	                                                               </c:if>
 	                                                            </ul>
@@ -197,7 +198,7 @@ function dele(id) {
 
         </section>
         
-        <!-- 模态框 -->
+<!-- 模态框 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -216,6 +217,26 @@ function dele(id) {
    </div>
  </div>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$('.notice-text a').each(function(){
+			var maxwidth = 20
+			if($(this).text().length>20){
+				$(this).text($(this).text().substring(0,maxwidth));
+				$(this).html($(this).html() + '...');
+			}
+			
+		})
+		
+		$('.notice-text').each(function(){
+			$(this).click(function(){
+				$('#myModal').modal('show');
+			})
+		})
+		
+	})
+</script>
 
  </body>
 
