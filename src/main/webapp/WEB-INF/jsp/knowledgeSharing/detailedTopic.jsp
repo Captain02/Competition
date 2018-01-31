@@ -8,20 +8,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>详细内容</title>
 	<%
-pageContext.setAttribute("APP_PATH", request.getContextPath());
-%>
-<jsp:include page="iniCssHref.jsp"></jsp:include>
-<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
-
-
-<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
-<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
-<script src="${APP_PATH}/static/js/comment-kindeditor-option.js"></script>
-
-
-
+		pageContext.setAttribute("APP_PATH", request.getContextPath());
+	%>
+	<jsp:include page="iniCssHref.jsp"></jsp:include>
+	
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+	<!-- 模态框控制 -->
+	<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+	<!-- 富文本编辑器 -->
+	<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
+	<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+	<!-- emoji表情插件 -->
+	<link rel="stylesheet" href="${APP_PATH}/static/emoji/src/css/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" href="${APP_PATH}/static/emoji/src/css/jquery.emoji.css">
+	<script src="${APP_PATH}/static/emoji/src/js/jquery.mCustomScrollbar.js"></script>
+	<script src="${APP_PATH}/static/emoji/src/js/jquery.emoji.js"></script>
+	
+	
 
 <script type="text/javascript">
 function likeTopic() {
@@ -58,15 +62,16 @@ function collectionTopic() {
 	})
 }
 
-var repliesId;
-var byRepliesUserId;
-var repliescontent;
 
+var repliesId,
+    byRepliesUserId,
+    repliescontent;
+    
 function replies(ele) {
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
 
-	repliescontent = $(ele).siblings("textarea[name='editor-container-area']").val();
+	repliescontent = $(ele).siblings('div.editor-container-area').html();
 	$.ajax({
 		url: "${APP_PATH}/admin/KnowledgeSharing/addReplies",
 		data: {
@@ -78,7 +83,7 @@ function replies(ele) {
 		},
 		type: "POST",
 		success: function (result) {
-			//直接刷新页面
+			 window.location.reload();
 		}
 	})
 
@@ -134,8 +139,6 @@ function replies(ele) {
 
 								<!--这里是知识正文，使用文本编辑器格式化好的-->
 								<div style="margin-bottom: 50px;">${bbsDetailedTopic.text}</div>
-
-
 								<a class="btn p-follow-btn" onclick="likeTopic()" title="点赞">
 									<i class="fa fa-thumbs-up"></i>
 									<span class="thumbsNum">${bbsDetailedTopic.like}
@@ -214,7 +217,7 @@ function replies(ele) {
 												<input id="repliesId" type="hidden" value="${comments.id}">
 												<input id="ByRepliesUserId" type="hidden" value="${comments.repliesUserId}">
 												<a class="btn-reply-lz">回复</a><span class="reply-num"></span>
-												<span class="shou-reply" style="display: none;">收起回复</span>
+												<span class="shou-reply hidden">收起回复</span>
 											</div>
 											
 											<ul class="p-tail pull-right">
@@ -269,8 +272,8 @@ function replies(ele) {
 									
 									<!--回复框 -->
 									<div class="lzl-editor-container form-group clearfix">
-										<div class="editor-container">
-											<textarea name="editor-container-area" class="form-control" placeholder="回复框"></textarea>
+										<div class="editor-container" >
+											<div class="editor-container-area" class="form-control" contenteditable="true" id="editor" data-comments-id="${comments.id}" data-repliesUserId="${childComments.repliesUserId}"></div>
 											<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表" onclick="replies (this);" />
 										</div>
 
@@ -350,6 +353,47 @@ function replies(ele) {
 </section>
 <script src="${APP_PATH}/static/js/activity-opreate.js"></script>
 <script src="${APP_PATH}/static/js/reply.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	var options1 = {
+		minHeight:'300',
+		width:'100%',
+		themeType : 'simple',
+		uploadJson:'${APP_PATH}/static/kindeditor/jsp/upload_json.jsp',
+		fileManagerJson : '${APP_PATH}/static/kindeditor/jsp/file_manager_json.jsp',
+		resizeType:1,
+		items : ['bold','italic','underline','fontname','fontsize','forecolor','image','emoticons','baidumap']
+	};
+	var editor = new Array();
+	//初始化kindEditor配置
+	KindEditor.ready(function(K){
+		 editor[0] = K.create($('textarea[name="comment"]'),options1);
+	});
+	//初始化emoji配置
+	$('div#editor').emoji({
+		animation:'none',
+		icons: [{
+	        name: "qq表情",
+	        path: "${APP_PATH}/static/emoji/src/img/qq/",
+	        maxNum: 91,
+	        excludeNums: [41, 45, 54],
+	        file: ".gif",
+	        placeholder: "#qq_{alias}#"
+	    },
+	    {
+    	 	name: "贴吧表情",
+	        path: "${APP_PATH}/static/emoji/src/img/tieba/",
+	        maxNum: 50,
+	        file: ".jpg",
+	        placeholder: "#qq_{alias}#"	
+	    }]
+	});
+	
+	$('.ke-container').css('width','100%');
+})
+</script>
 </body>
 
 </html>
