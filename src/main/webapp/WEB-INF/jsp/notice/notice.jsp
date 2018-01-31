@@ -17,7 +17,6 @@
 <script type="text/javascript">
 function dele(ele) {
 	var noticeId = $(ele).attr('data-notice-id');
-	alert(noticeId);
 	$.ajax({
 		url:"${APP_PATH}/admin/notice/dele",
 		data:{
@@ -227,9 +226,9 @@ function dele(ele) {
       
     </div>
     <div class="modal-footer">
-      <button class="btn btn-warning pull-left btn-more-info">更多<span class="caret"></span></button>
+      <button class="btn btn-warning pull-left btn-more-info hidden">更多<span class="caret"></span></button>
       <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
-      <div class="notice-info clearfix" style="margin-top: 15px; border-bottom: 1px solid #e5e5e5;">
+      <div class="notice-info clearfix hidden" style="margin-top: 15px; border-bottom: 1px solid #e5e5e5;">
       	<div class="col-md-12">
       		<div class="col-md-4">
       			<div class="panel">

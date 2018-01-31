@@ -13,19 +13,24 @@
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
-<script type="text/javascript">
-function save() {
-	$.ajax({
-		url:"${APP_PATH}/admin/notice/add",
-		type:"POST",
-		data:$("#noticeForm").serialize(),
-		success:function(){
-			//类似删除贴吧，弹出模态款直接跳转一下连接
-			//${APP_PATH}/admin/notice/list
-		}
-	})
-}
-</script>
+	<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+	<script type="text/javascript">
+	function save() {
+		$.ajax({
+			url:"${APP_PATH}/admin/notice/add",
+			type:"POST",
+			data:$("#noticeForm").serialize(),
+			success:function(){
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','操作结果','.modal-body','公告发布成功！');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href='${APP_PATH}/admin/notice/list';
+				},1000);
+			}
+		})
+	}
+	</script>
 
 </head>
 
@@ -123,11 +128,6 @@ function save() {
     <div class="modal-body">
       
     </div>
-    <div class="modal-footer">
-    
-      <button type="button" class="btn btn-warning yes">确认</button>
-      <button type="button" class="btn btn-success no">取消</button>
-     </div>
    </div>
  </div>
 </div>
