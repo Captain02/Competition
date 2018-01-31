@@ -127,7 +127,7 @@ function dele(id) {
 	                                                                    data-notice-username="${Notice.userName}"
 	                                                                    data-notice-role="${Notice.role}"
 	                                                                    data-notice-department="${Notice.department}"
-	                                                                    data-notice-headFile="${Notice.headFile}" class="view-notice">查看</a>
+	                                                                    data-notice-headFile="${APP_PATH}/personHeadFile/${Notice.headFile}" class="view-notice">查看</a>
 	                                                                </li>
 	          				                                       <c:if test="${isByMyId !=0 }">
 	                                                                <li role="separator" class="divider"></li>
