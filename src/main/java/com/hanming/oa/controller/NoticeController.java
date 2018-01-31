@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Notice;
 import com.hanming.oa.model.NoticeDisplay;
@@ -78,10 +79,8 @@ public class NoticeController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Msg update(Notice notice) {
 
-		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateString = formatter.format(currentTime);
-
+		String dateString = DateTool.dateToString(new Date());
+		
 		notice.setDate(dateString);
 
 		noticeService.update(notice);
