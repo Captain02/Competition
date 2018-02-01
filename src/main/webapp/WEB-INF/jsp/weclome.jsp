@@ -45,6 +45,12 @@
                         <span class="menu-text">项目管理</span>
                     </a>
                 </li>
+                   <li>
+                    <a href="http://">
+                        <span class="glyphicon glyphicon-calendar left-list-icon"></span>
+                        <span class="menu-text">考勤管理</span>
+                    </a>
+                </li>
                 <li>
                     <a href="${APP_PATH}/admin/holiday/list">
                         <span class="glyphicon glyphicon-edit left-list-icon"></span>

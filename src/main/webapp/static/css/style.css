@@ -1098,4 +1098,27 @@ ul.p-info .title, ul.p-info .desk {
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     width: 100%;
 }
-
+#js-clock {
+    font-size: 26px;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    line-height: 32px;
+    padding: 46px 0 0 0;
+    text-decoration: none;
+}
+.blog-post h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #424242;
+    font-weight: bold;
+    padding-top: 0px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.blog-post ul li {
+    line-height: 35px;
+    color: #837f7e;
+}
