@@ -19,12 +19,8 @@
 	<!-- 富文本编辑器 -->
 	<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 	<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
-	<!-- emoji表情插件 -->
-	<link rel="stylesheet" href="${APP_PATH}/static/emoji/src/css/jquery.mCustomScrollbar.css">
-	<link rel="stylesheet" href="${APP_PATH}/static/emoji/src/css/jquery.emoji.css">
-	<script src="${APP_PATH}/static/emoji/src/js/jquery.mCustomScrollbar.js"></script>
-	<script src="${APP_PATH}/static/emoji/src/js/jquery.emoji.js"></script>
-	
+	<!-- 刷新页面后回到上次浏览的位置 -->
+	<script src="${APP_PATH}/static/js/scrollLast.js"></script>
 	
 
 <script type="text/javascript">
@@ -66,7 +62,6 @@ function collectionTopic() {
 var repliesId,
     byRepliesUserId,
     repliescontent;
-    
 function replies(ele) {
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
@@ -86,7 +81,6 @@ function replies(ele) {
 			 window.location.reload();
 		}
 	})
-
 }
 </script>
 </head>
@@ -212,11 +206,11 @@ function replies(ele) {
 									
 									<!-- 记录帖主的每一条回复的相关信息 start -->
 									<div class="core-reply clearfix">
-										<div class="core-reply-tail">
+										<div class="core-reply-tail clearfix">
 											<div class="p_reply pull-right">
 												<input id="repliesId" type="hidden" value="${comments.id}">
 												<input id="ByRepliesUserId" type="hidden" value="${comments.repliesUserId}">
-												<a class="btn-reply-lz">回复</a><span class="reply-num"></span>
+												<a class="btn-reply-lz">回复</a>
 												<span class="shou-reply hidden">收起回复</span>
 											</div>
 											
@@ -272,8 +266,14 @@ function replies(ele) {
 									
 									<!--回复框 -->
 									<div class="lzl-editor-container form-group clearfix">
+									   
 										<div class="editor-container" >
-											<div class="editor-container-area" class="form-control" contenteditable="true" id="editor" data-comments-id="${comments.id}" data-repliesUserId="${childComments.repliesUserId}"></div>
+										 <span class="reply-reply-username"></span>
+											<div class="editor-container-area" class="form-control" contenteditable="true" id="editor" 
+											data-comments-id="${comments.id}" 
+											data-repliesUserId="${childComments.repliesUserId}" 
+											data-reply-status="">
+											</div>
 											<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表" onclick="replies (this);" />
 										</div>
 
@@ -371,25 +371,7 @@ $(function(){
 	KindEditor.ready(function(K){
 		 editor[0] = K.create($('textarea[name="comment"]'),options1);
 	});
-	//初始化emoji配置
-	$('div#editor').emoji({
-		animation:'none',
-		icons: [{
-	        name: "qq表情",
-	        path: "${APP_PATH}/static/emoji/src/img/qq/",
-	        maxNum: 91,
-	        excludeNums: [41, 45, 54],
-	        file: ".gif",
-	        placeholder: "#qq_{alias}#"
-	    },
-	    {
-    	 	name: "贴吧表情",
-	        path: "${APP_PATH}/static/emoji/src/img/tieba/",
-	        maxNum: 50,
-	        file: ".jpg",
-	        placeholder: "#qq_{alias}#"	
-	    }]
-	});
+	
 	
 	$('.ke-container').css('width','100%');
 })

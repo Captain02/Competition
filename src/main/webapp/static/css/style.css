@@ -1080,10 +1080,7 @@ ul.p-info .title, ul.p-info .desk {
 .notice-info ul li div{
 	text-align: left;
 }
-.editor-container{
-	height: 91px;
-	width: 100%;
-}
+
 #editor {
     height: 91px;
     background-color: #fff;
@@ -1095,7 +1092,6 @@ ul.p-info .title, ul.p-info .desk {
     font-size: 14px;
     line-height: 1.42857;
     padding: 6px 12px;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     width: 100%;
 }
 #js-clock {
