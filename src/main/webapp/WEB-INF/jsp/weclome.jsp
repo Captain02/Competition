@@ -46,7 +46,7 @@
                     </a>
                 </li>
                    <li>
-                    <a href="http://">
+                    <a href="${APP_PATH}/admin/wordAttendence/list">
                         <span class="glyphicon glyphicon-calendar left-list-icon"></span>
                         <span class="menu-text">考勤管理</span>
                     </a>

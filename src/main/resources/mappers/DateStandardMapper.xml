@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.DateStandardMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.DateStandard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="lateTime" jdbcType="VARCHAR" property="latetime" />
+    <result column="leaveTime" jdbcType="VARCHAR" property="leavetime" />
+    <result column="overTime" jdbcType="VARCHAR" property="overtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, lateTime, leaveTime, overTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from datestandard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from datestandard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.DateStandard">
+    insert into datestandard (id, lateTime, leaveTime, 
+      overTime)
+    values (#{id,jdbcType=INTEGER}, #{latetime,jdbcType=VARCHAR}, #{leavetime,jdbcType=VARCHAR}, 
+      #{overtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.DateStandard">
+    insert into datestandard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="latetime != null">
+        lateTime,
+      </if>
+      <if test="leavetime != null">
+        leaveTime,
+      </if>
+      <if test="overtime != null">
+        overTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="latetime != null">
+        #{latetime,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetime != null">
+        #{leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="overtime != null">
+        #{overtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.DateStandard">
+    update datestandard
+    <set>
+      <if test="latetime != null">
+        lateTime = #{latetime,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetime != null">
+        leaveTime = #{leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="overtime != null">
+        overTime = #{overtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.DateStandard">
+    update datestandard
+    set lateTime = #{latetime,jdbcType=VARCHAR},
+      leaveTime = #{leavetime,jdbcType=VARCHAR},
+      overTime = #{overtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

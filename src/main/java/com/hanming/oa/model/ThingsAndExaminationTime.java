@@ -1,7 +1,5 @@
 package com.hanming.oa.model;
 
-import java.sql.Date;
-
 public class ThingsAndExaminationTime {
 	private Integer id;
 
