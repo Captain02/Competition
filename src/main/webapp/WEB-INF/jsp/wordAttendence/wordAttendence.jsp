@@ -18,6 +18,12 @@
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 </head>
+<script type="text/javascript">
+	var date;
+	function add(){
+		
+	}
+</script>
 
 <body class="bg-common">
 	<section>
@@ -33,21 +39,13 @@
 				<a href="" class="toggle-btn"> <span
 					class="glyphicon glyphicon-th-list"></span>
 				</a>
-				<form action="" class="serach-form" method="get">
-						  <select name="type" class="form-control">
-					          <option value="">打卡状态</option>
-					          <option value="1">正常</option>
-					          <option value="2">迟到</option>
-					          <option value="3">早退</option>
-					          <option value="4">加班</option>
-					      </select>
-                        <input placeholder="请输入姓名" value="" class="form-control" name="name" type="text">
+				<form action="${APP_PATH}/admin/wordAttendence/list" class="serach-form" method="get">
+					    <input name="date" value="${date}">
+                        <input placeholder="请输入姓名" value="" class="form-control" name="userName" type="text">
                         <button type="submit" class="btn btn-primary">搜索</button>
                         <div class="clearfix"></div>
                </form>
       		
-
-
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 
 				<div class="clearfix"></div>
@@ -108,15 +106,20 @@
 											</thead>
 											<tbody>
 
-
+												<c:forEach items="${pageInfo.list}" var="WorkAttendenceDisplay">
 												<tr>
-													<td>张三</td>
-													<td>2018-2-1</td>
-													<td>2018-2-1</td>
-													<td>2018-2-1</td>
-													<td>正常</td>
-													<td>111.111.111.111</td>
+													<td>${WorkAttendenceDisplay.userName }</td>
+													<td>${WorkAttendenceDisplay.startdate }</td>
+													<td>${WorkAttendenceDisplay.enddate }</td>
+													<td>${WorkAttendenceDisplay.date }</td>
+													<td>
+														<c:forEach items="${WorkAttendenceDisplay.state}" var="state">
+															${state}
+														</c:forEach>
+													</td>
+													<td>${WorkAttendenceDisplay.userIp }</td>
 												</tr>
+												</c:forEach>
 
 											</tbody>
 
@@ -143,17 +146,17 @@
               <div class="blog-post">
                 <h3>当月小计</h3>
                 <ul>
-                  <li>出勤天数: 25 天</li>
+                  <li>出勤天数: ${workAttendenceByMonthStatistics.countNum} 次</li>
                   
-                  <li>正常：4次 </li>
+                  <li>正常：${workAttendenceByMonthStatistics.normal}次 </li>
                   
-                  <li>迟到：22次 </li>
+                  <li>迟到：${workAttendenceByMonthStatistics.late}次 </li>
                   
-                  <li>早退：23次 </li>
+                  <li>早退：${workAttendenceByMonthStatistics.leave}次 </li>
                   
-                  <li>加班：1次 </li>
+                  <li>加班：${workAttendenceByMonthStatistics.overTime}次 </li>
                   
-                  <li>旷工：</li>
+                  <li>旷工：${workAttendenceByMonthStatistics.absenteeism}</li>
                 
                 </ul>
               </div>

@@ -65,6 +65,9 @@ public class WorkAttendenceController {
 
 		model.addAttribute("workAttendenceByMonthStatistics", workAttendenceByMonthStatistics);
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("isByMyId", isByMyId);
+		model.addAttribute("userName", userName);
+		model.addAttribute("date", date);
 		return "wordAttendence/wordAttendence";
 	}
 

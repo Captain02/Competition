@@ -226,4 +226,10 @@
     </foreach>
   </delete>
   
+  <!-- Integer selectCountNumByMonthStatistics(String date); -->
+  <select id="selectCountNumByMonthStatistics" resultType="Integer">
+  select count(*)
+  from workattendance wa
+  WHERE wa.date like '%' #{date} '%'
+  </select>
 </mapper>

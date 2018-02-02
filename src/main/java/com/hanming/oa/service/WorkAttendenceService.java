@@ -35,6 +35,7 @@ public class WorkAttendenceService {
 		Integer lateByMonthStatistics = workAttendanceMapper.selectLateByMonthStatistics(date);
 		Integer leaveByMonthStatistics = workAttendanceMapper.selectLeaveByMonthStatistics(date);
 		Integer overTimeByMonthStatistics = workAttendanceMapper.selectOverTimeByMonthStatistics(date);
+		Integer CountNumByMonthStatistics = workAttendanceMapper.selectCountNumByMonthStatistics(date);
 		Long punishmentTime = (workAttendanceMapper.selectpunishmentTime(date) / 60000);
 
 		WorkAttendenceByMonthStatistics workAttendenceByMonthStatistics = new WorkAttendenceByMonthStatistics();

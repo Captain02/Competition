@@ -40,4 +40,6 @@ public interface WorkAttendanceMapper {
 
 	void deleByIds(List<Integer> idsInt);
 
+	Integer selectCountNumByMonthStatistics(String date);
+
 }
