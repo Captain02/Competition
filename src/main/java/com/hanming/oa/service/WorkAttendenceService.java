@@ -34,7 +34,8 @@ public class WorkAttendenceService {
 		Integer leaveByMonthStatistics = workAttendanceMapper.selectLeaveByMonthStatistics(date);
 		Integer overTimeByMonthStatistics = workAttendanceMapper.selectOverTimeByMonthStatistics(date);
 		Integer CountNumByMonthStatistics = workAttendencePunishmentMapper.selectCountNumByMonthStatistics(date);
-		Long punishmentTime = (workAttendanceMapper.selectpunishmentTime(date) / 60000);
+		Integer CountDaysByMonthStatistics = workAttendanceMapper.selectCountNumByMonthStatistics(date);
+		Long punishmentTime = workAttendanceMapper.selectpunishmentTime(date);
 
 		WorkAttendenceByMonthStatistics workAttendenceByMonthStatistics = new WorkAttendenceByMonthStatistics();
 		workAttendenceByMonthStatistics.setNormal(normalByMonthStatistics);
@@ -42,6 +43,10 @@ public class WorkAttendenceService {
 		workAttendenceByMonthStatistics.setLeave(leaveByMonthStatistics);
 		workAttendenceByMonthStatistics.setOverTime(overTimeByMonthStatistics);
 		workAttendenceByMonthStatistics.setCountNum(CountNumByMonthStatistics);
+		workAttendenceByMonthStatistics.setCountDays(CountDaysByMonthStatistics);
+		if (punishmentTime==null) {
+			punishmentTime = 0l;
+		}
 		Long hours = punishmentTime / 60;
 		Long minutes = punishmentTime - hours * 60;
 		String absenteeism = hours + " 小时 " + minutes + " 分钟";

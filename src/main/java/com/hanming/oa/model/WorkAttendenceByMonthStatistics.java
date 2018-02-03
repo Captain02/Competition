@@ -3,6 +3,8 @@ package com.hanming.oa.model;
 public class WorkAttendenceByMonthStatistics {
 	private Integer countNum;
 	
+	private Integer countDays;
+	
 	private Integer normal;
 	
 	private Integer late;
@@ -12,6 +14,14 @@ public class WorkAttendenceByMonthStatistics {
 	private Integer overTime;
 	
 	private String absenteeism;
+	
+	public Integer getCountDays() {
+		return countDays;
+	}
+
+	public void setCountDays(Integer countDays) {
+		this.countDays = countDays;
+	}
 
 	public Integer getCountNum() {
 		return countNum;
