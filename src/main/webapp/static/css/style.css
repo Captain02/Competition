@@ -639,11 +639,6 @@ ul.p-info .title, ul.p-info .desk {
 	width: 150px;
 }
 
-.wrapper div.row {
-	margin-left: -15px;
-	margin-right: -15px;
-}
-
 .dropdown-list li {
 	padding: 15px;
 	overflow: hidden;
@@ -691,7 +686,20 @@ ul.p-info .title, ul.p-info .desk {
 .blog .auth-row a {
 	color: #c8c8c8;
 }
-
+.page-nav-area{
+	margin-bottom: 15px;
+}
+.reply-reply-username{
+	color: #999;
+	font-size: 12px;
+}
+.fabiao-reply{
+	text-transform: uppercase;
+	color: #535351;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
 /* approve pagae */
 .approve .control-label {
 	text-align: left;
@@ -1011,6 +1019,9 @@ ul.p-info .title, ul.p-info .desk {
 .core-reply-content li {
 	padding-top: 10px;
 }
+.editor-container{
+	position: relative;
+}
 
 .lzl-cnt {
 	margin-left: 50px;
@@ -1080,7 +1091,7 @@ ul.p-info .title, ul.p-info .desk {
 }
 
 #editor {
-    height: 91px;
+    height: 35px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -1121,9 +1132,12 @@ ul.p-info .title, ul.p-info .desk {
 }
 .time-editor li div{
 	padding-left: 0;
+	padding-right: 0;
 }
 .editor-time a.editor-time-btn{
 	font-size: 12px;
 	color: #286090;
-	margin-left: 15px;
+}
+.editor-time{
+	float: right;
 }

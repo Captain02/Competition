@@ -10,11 +10,12 @@ $(function () {
 		lPost,
 		lNum;
 
-	$('.editor-container-area').each(function () {
+	$('input.editor-container-area').each(function () {
+		var input = $(this);
 		$(this).attr('data-repliesuserid', $(this).parent().parent().siblings('div.core-reply').find('input#ByRepliesUserId').val());
-		$(this).focus(function () {
-			repliesId = $(this).attr('data-comments-id');
-			byRepliesUserId = $(this).attr('data-repliesuserid');
+		$(this).next().focus(function () {
+			repliesId = input.attr('data-comments-id');
+			byRepliesUserId = input.attr('data-repliesuserid');
 		})
 	})
 
@@ -49,15 +50,13 @@ $(function () {
 			byRepliesUserId = $(this).siblings('#ByRepliesUserId').val();
 			var inputReplyUsername = $(this).parents('div.d-author-post-content-main').find('div.editor-container-area');
 			inputReplyUsername.attr('data-repliesuserid', byRepliesUserId);
-			inputReplyUsername.prev().removeClass('hidden');
-			inputReplyUsername.prev().html('回复：　' +  $(this).parent().parent().find('a.lzl-username').html());
+			inputReplyUsername.prevAll('span.reply-reply-username').removeClass('hidden');
+			inputReplyUsername.prevAll('span.reply-reply-username').html('回复: ' +  $(this).parent().parent().find('a.lzl-username').html());
 			inputReplyUsername.focus();
 		})
 	})
 	
-	$('.core-reply-container').each(function(){
-		$(this).addClass('hidden');
-	})
+	
 
 	lPost = $('.l-post');
 	lNum = $('.l-num');

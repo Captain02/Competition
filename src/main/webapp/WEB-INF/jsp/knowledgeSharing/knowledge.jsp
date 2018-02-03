@@ -95,7 +95,8 @@ function deleteTopic(ele) {
 
 			</div>
 			<div class="wrapper">
-				<div class="om-header">
+					<div class="row">
+						<div class="om-header" style="padding-left:30px;">
 					<div class="om-header-left">
 						<h3>
 							<span class="om-title">知识分享</span> <span class="om-list"></span>
@@ -112,7 +113,6 @@ function deleteTopic(ele) {
 					<div class="clearfix"></div>
 				</div>
 				
-				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-12">
@@ -287,8 +287,8 @@ function deleteTopic(ele) {
 					</div>
 				</div>
 				
+				</div>
 			</div>
-		</div>
 	</section>
 <script src="${APP_PATH}/static/js/labelMangement.js"></script>
 
