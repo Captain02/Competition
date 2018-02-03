@@ -168,18 +168,24 @@
 					</div>
 
 					<div class="om-header-right">
+					 <c:if test="${isByMyId==0}">
 					  <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
                                <i>-</i>批量删除
                       </button>
+					 </c:if>
                       <input type="hidden" value=""  class="ids"/>
+						<c:if test="${isByMyId==0}">
 						<button id="addButton" type="button" class="btn btn-warning brn-sm"
 							onclick="window.location.href='${APP_PATH}/admin/wordAttendence/list?isByMyId=1'">
 							我的考勤
 						</button>
-						<button id="addButton" type="button" class="btn btn-success"
-							onclick="window.location.href='${APP_PATH}/admin/wordAttendence/list'">
-							全部员工考勤
-						</button>
+						</c:if>
+						<c:if test="${isByMyId!=0}">
+							<button id="addButton" type="button" class="btn btn-success"
+								onclick="window.location.href='${APP_PATH}/admin/wordAttendence/list'">
+								全部员工考勤
+							</button>
+						</c:if>
 					
 					</div>
 
@@ -245,7 +251,7 @@
 										<nav aria-label="..." class="pull-right">
 										  <ul class="pagination pagination-sm">
 										    <li>
-                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&date=${date}&isByMyId=${isByMyId}&date=${date}">首页</a>
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&isByMyId=${isByMyId}&date=${date}">首页</a>
                                             </li>
                                             <c:if test="${pageInfo.hasPreviousPage}">
                                                 <li>
@@ -289,6 +295,7 @@
 						</div>
 					</div>
 					<div class="col-md-4">
+		<c:if test="${isByMyId!=0}">
           <div class="panel">
             <div class="panel-body">
               <div class="blog-post">
@@ -298,6 +305,8 @@
               </div>
             </div>
           </div>
+          </c:if>
+          
         </div>
         <div class="col-md-4 ">
           <div class="panel">
@@ -328,6 +337,7 @@
         </div>
         
          <div class="col-md-4 pull-right">
+          <c:if test="${isByMyId==0}">
           <div class="panel">
             <div class="panel-body">
               <div class="blog-post">
@@ -401,7 +411,9 @@
                 </ul>
               </div>
             </div>
+            
           </div>
+            </c:if>
         </div>
       </div>
 			</div>
