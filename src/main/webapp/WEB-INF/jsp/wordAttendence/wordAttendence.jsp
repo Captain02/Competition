@@ -62,7 +62,7 @@
 				}
 				else{
 					var changeTime = '';
-					var whichStandardTime;
+					var whichStandardTime = $(this).attr("data-status");
 					var prevaNodeSelect = $(this).parent().prev().find('select');
 					prevaNodeSelect.each(function(){
 						changeTime += $(this).val();
@@ -79,7 +79,6 @@
 							
 						}
 					}) */
-					alert(changeTime);
 					$(this).html('编辑');
 				}
 			});
@@ -350,7 +349,7 @@
 							</div>
 							
                 			<span class="editor-time">
-                				<a class="editor-time-btn">编辑</a>
+                				<a class="editor-time-btn" data-status="1">编辑</a>
                 			</span>
 	                	</div>
 	                	
@@ -371,7 +370,7 @@
 							</div>
 							
                 			<span class="editor-time">
-                				<a class="editor-time-btn">编辑</a>
+                				<a class="editor-time-btn" data-status="2">编辑</a>
                 			</span>
 	                	</div>
 	                	
@@ -392,7 +391,7 @@
 							</div>
 							
                 			<span class="editor-time">
-                				<a class="editor-time-btn">编辑</a>
+                				<a class="editor-time-btn" data-status="3">编辑</a>
                 			</span>
 	                	</div>
 	                	
