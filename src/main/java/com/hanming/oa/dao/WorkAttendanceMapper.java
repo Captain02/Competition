@@ -44,4 +44,6 @@ public interface WorkAttendanceMapper {
 
 	WorkAttendance selectByUserIdAndDate(@Param("userId")Integer userId, @Param("nowDate")String date);
 
+	List<String> selectDateList(@Param("isByMyId")Integer isByMyId, @Param("userName")String userName);
+
 }

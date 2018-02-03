@@ -9,7 +9,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,11 +62,18 @@ public class WorkAttendenceController {
 		WorkAttendenceByMonthStatistics workAttendenceByMonthStatistics = WorkAttendenceService
 				.getWorkAttendenceByMonthStatistics(date);
 
-		model.addAttribute("workAttendenceByMonthStatistics", workAttendenceByMonthStatistics);
+		List<String> dateList = WorkAttendenceService.selectDateList(isByMyId, userName);
+		
+		for (String string : dateList) {
+			System.out.println(string);
+		}
+		
+		model.addAttribute("dateList", dateList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("isByMyId", isByMyId);
 		model.addAttribute("userName", userName);
 		model.addAttribute("date", date);
+		model.addAttribute("workAttendenceByMonthStatistics", workAttendenceByMonthStatistics);
 		return "wordAttendence/wordAttendence";
 	}
 

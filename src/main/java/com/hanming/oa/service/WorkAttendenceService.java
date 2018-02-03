@@ -83,10 +83,12 @@ public class WorkAttendenceService {
 
 	@Transactional
 	public void deleByids(String ids) {
+		System.out.println("+++++++++++++++++++++++++++++++++++++"+ids);
 		List<Integer> idsInt = null;
 		if (ids.contains("-")) {
 			String[] split = ids.split("-");
 			List<String> idsStr = Arrays.asList(split);
+			
 
 			idsInt = idsStr.stream()
 							.map((x) -> Integer.parseInt(x))
@@ -99,6 +101,11 @@ public class WorkAttendenceService {
 	public WorkAttendance selectByUserIdAndDate(Integer userId, String date) {
 		WorkAttendance selectByUserIdAndDate = workAttendanceMapper.selectByUserIdAndDate(userId, date);
 		return selectByUserIdAndDate;
+	}
+
+	public List<String> selectDateList(Integer isByMyId, String userName) {
+		List<String> dateList = workAttendanceMapper.selectDateList(isByMyId,userName);
+		return dateList;
 	}
 
 }

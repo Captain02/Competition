@@ -85,10 +85,21 @@
 		var ids = $('.ids').val();
 		$('.yes').click(function(){
 			 $.ajax({
-					
+					url:'${APP_PATH}/admin/wordAttendence/dele',
+					type:'POST',
+					data:{
+						'ids':ids
+					},
+					success:function(result){
+						if (result.code==100) {
+							alert("删除成功");
+						}
+					}
 				})  
 		});
 	}
+	
+	
 </script>
 
 <body class="bg-common">
@@ -136,11 +147,11 @@
                       </button>
                       <input type="hidden" value=""  class="ids"/>
 						<button id="addButton" type="button" class="btn btn-warning brn-sm"
-							onclick="">
+							onclick="window.location.href='${APP_PATH}/admin/wordAttendence/list?isByMyId=1'">
 							我的考勤
 						</button>
 						<button id="addButton" type="button" class="btn btn-success"
-							onclick="window.location.href='/OA02/admin/user/add'">
+							onclick="window.location.href='${APP_PATH}/admin/wordAttendence/list'">
 							全部员工考勤
 						</button>
 					
@@ -157,7 +168,11 @@
 									<header class="panel-heading">
 										考勤
 										 <span class="tools pull-right">
-											 <select class="form-control" id="ym" style="width: 124px; display: inline;"></select>
+											 <select class="form-control" id="ym" style="width: 124px; display: inline;">
+											 <c:forEach items="${dateList}" var="dates">
+											 	<option>${dates }</option>
+											 </c:forEach>
+											 </select>
 										</span>
 									</header>
 									<div class="panel-body" style="min-height: 186px;" id="print">
@@ -203,20 +218,41 @@
 										<nav aria-label="..." class="pull-right">
 										  <ul class="pagination pagination-sm">
 										    <li>
-										      <a href="#" aria-label="Previous">
-										        <span aria-hidden="true">&laquo;</span>
-										      </a>
-										    </li>
-										    <li class="active"><a href="#" >1</a></li>
-										    <li><a href="#">2</a></li>
-										    <li><a href="#">3</a></li>
-										    <li><a href="#">4</a></li>
-										    <li><a href="#">5</a></li>
-										    <li>
-										      <a href="#" aria-label="Next">
-										        <span aria-hidden="true">&raquo;</span>
-										      </a>
-										    </li>
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&date=${date}">首页</a>
+                                            </li>
+                                            <c:if test="${pageInfo.hasPreviousPage}">
+                                                <li>
+                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum-1}&userName=${userName}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
+                                                <c:if test="${pageNum==pageInfo.pageNum}">
+                                                    <li class="active">
+                                                        <a href="#">${pageNum}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${pageNum!=pageInfo.pageNum}">
+                                                    <li>
+                                                        <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageNum}&userName=${userName}">${pageNum}</a>
+                                                    </li>
+                                                </c:if>
+                                            </c:forEach>
+
+                                            <c:if test="${pageInfo.hasNextPage }">
+                                                <li>
+                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum+1}&userName=${userName}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+
+                                            <li>
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pages}&userName=${userName}" aria-label="Next">
+                                                    <span aria-hidden="true">末页</span>
+                                                </a>
+                                            </li>
 										    
 										  </ul>
 									</nav>

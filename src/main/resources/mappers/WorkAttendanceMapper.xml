@@ -241,4 +241,20 @@
   	AND wa.userId = #{userId}
   </select>
   
+  <!-- List<String> selectDateList(@Param("userId")Integer isByMyId, @Param("userName")String userName); -->
+  <select id="selectDateList" resultType="String">
+  	SELECT
+	 wa.date
+	FROM workattendance wa 
+	LEFT JOIN t_user tu ON tu.id=wa.userId
+  	<where>
+  		<if test="isByMyId != 0">
+  			tu.id = #{isByMyId}
+  		</if>
+  		<if test="userName != '姓名'">
+  			AND tu.`name` = #{userName}
+  		</if>
+  	</where>
+  </select>
+  
 </mapper>
