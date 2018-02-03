@@ -81,7 +81,18 @@
 			window.location.href="${APP_PATH}/admin/wordAttendence/list?date="+date+"&isByMyId="+isByMyId+"&userName="+userName;
 		});
 		
-	})
+		var defaultDate = window.location.href;
+		var x = defaultDate.indexOf('date');
+		var y = defaultDate.substring (x+5,x+15);
+		$('#ym option').each(function(){
+			if($(this).val() === y){
+				$(this).attr('selected', true);
+			}
+		})
+			
+		
+		
+})
 	
 	function deleAll(){
 		//执行此方法，得到所选择的id
@@ -174,7 +185,7 @@
 										 <span class="tools pull-right">
 											 <select class="form-control" id="ym" style="width: 124px; display: inline;" data-isByMyId="${isByMyId}" data-userName="${userName}">
 											 <c:forEach items="${dateList}" var="dates">
-											 	<option>${dates }</option>
+											 	<option>${dates}</option>
 											 </c:forEach>
 											 </select>
 										</span>
@@ -414,27 +425,15 @@
 
 <script type="text/javascript">
 	$(function(){
-		function getYm(date){
-			var html = '';
-			date = new Date();
-			$('#js-clock').attr('data-now-year',date.getFullYear());
-			$('#js-clock').attr('data-now-month',date.getMonth()+1);
 		
-			$('#ym option').each(function(){
-				if($(this).attr('data-month') ==$('#js-clock').attr('data-now-month')){
-					$(this).attr('selected', true);
-				}
-			})
-		}
 		//获取服务器响应头的时间
 		$.ajax({
 			success:function(result,status,xhr){
 				var originalDate = new Date(xhr.getResponseHeader('Date'));
 				var date = originalDate;
 				callbackTime(date);
-				getYm(date);
 			}
-		})
+		});
 		
 		var srv_nowtime;
 		function callbackTime(req){
