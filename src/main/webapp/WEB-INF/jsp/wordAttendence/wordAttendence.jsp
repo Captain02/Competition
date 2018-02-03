@@ -80,7 +80,14 @@
 	})
 	
 	function deleAll(){
-		var ids
+		//执行此方法，得到所选择的id
+		selectAllTips();
+		var ids = $('.ids').val();
+		$('.yes').click(function(){
+			 $.ajax({
+					
+				})  
+		});
 	}
 </script>
 
@@ -126,7 +133,8 @@
 					<div class="om-header-right">
 					  <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
                                 <i>-</i>批量删除
-                            </button>
+                      </button>
+                      <input type="hidden" value=""  class="ids"/>
 						<button id="addButton" type="button" class="btn btn-warning brn-sm"
 							onclick="">
 							我的考勤
@@ -176,7 +184,7 @@
 												 <td>
 	                                                   <input type="checkbox" name="selectItem" class="selectItem">
 	                                                </td>
-													<td>${WorkAttendenceDisplay.userName }</td>
+													<td>${WorkAttendenceDisplay.userName }<input type="hidden" value="${WorkAttendenceDisplay.id}"></td>
 													<td>${WorkAttendenceDisplay.startdate }</td>
 													<td>${WorkAttendenceDisplay.enddate }</td>
 													<td>${WorkAttendenceDisplay.date }</td>
@@ -357,8 +365,8 @@
       
     </div>
     <div class="modal-footer">
-    
-      <button type="button" class="btn btn-success" data-dismiss="modal" >关闭</button>
+     	<button type="button" class="btn btn-warning yes">确认</button>
+        <button type="button" class="btn btn-success no" data-dismiss="modal">取消</button>
      </div>
    </div>
  </div>
