@@ -16,4 +16,8 @@ public class DateStandardService {
 		DateStandard dateStandard = dateStandardMapper.selectByPrimaryKey(id);
 		return dateStandard;
 	}
+
+	public void update(DateStandard dateStandard) {
+		dateStandardMapper.updateByPrimaryKeySelective(dateStandard);
+	}
 }

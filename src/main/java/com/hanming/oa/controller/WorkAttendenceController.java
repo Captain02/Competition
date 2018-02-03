@@ -162,8 +162,21 @@ public class WorkAttendenceController {
 	@RequestMapping(value = "/updateStanderTime", method = RequestMethod.POST)
 	public Msg updateStandarTime(@RequestParam("changeTime") String changeTime,
 			@RequestParam("whichStandardTime") Integer whichStandardTime) {
-
-		return Msg.success();
+		DateStandard dateStandard = new DateStandard();
+		dateStandard.setId(1);
+		if (whichStandardTime==1) {
+			dateStandard.setLatetime(changeTime);
+			dateStandardService.update(dateStandard);
+			return Msg.success().add("whichStandardTime", 1).add("changeTime", changeTime);
+		}else if (whichStandardTime == 2) {
+			dateStandard.setLeavetime(changeTime);
+			dateStandardService.update(dateStandard);
+			return Msg.success().add("whichStandardTime", 2).add("changeTime", changeTime);
+		}else {
+			dateStandard.setOvertime(changeTime);
+			dateStandardService.update(dateStandard);
+			return Msg.success().add("whichStandardTime", 3).add("changeTime", changeTime);
+		}
 	}
 
 }

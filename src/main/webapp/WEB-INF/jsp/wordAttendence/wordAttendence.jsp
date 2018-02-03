@@ -68,17 +68,18 @@
 						changeTime += $(this).val();
 					})
 					//在这里发送ajax请求
-					/* $.ajax({
-						url:'${APP_PATH}/admin/wordAttendence',
+					 $.ajax({
+						url:'${APP_PATH}/admin/wordAttendence/updateStanderTime',
 						data:{
 							'changeTime':changeTime,
 							'whichStandardTime':whichStandardTime
 						},
 						type:'POST',
 						success:function(result){
-							
+							console.log(result.extend.whichStandardTime);
+							console.log(result.extend.changeTime);
 						}
-					}) */
+					}) 
 					$(this).html('编辑');
 				}
 			});
