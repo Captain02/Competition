@@ -64,11 +64,21 @@ public class DateTool {
 		}
 		return false;
 	}
+	
+	public static String calculation(Long punishmentTime) {
+		if (punishmentTime==null) {
+			punishmentTime = 0l;
+		}
+		Long hours = punishmentTime / 60;
+		Long minutes = punishmentTime - hours * 60;
+		String absenteeism = hours + " 小时 " + minutes + " 分钟";
+		return absenteeism;
+	}
 
 	public static void main(String[] args) {
 		Boolean date = compareDate("13:00:00","18:00:00");
 		
-		Long substractTime = substractTime("11:30:13","11:41:13");
+		Long substractTime = substractTime("12:42:13","11:41:13");
 		System.out.println(date);
 		System.out.println(substractTime);
 	}

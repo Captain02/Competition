@@ -15,6 +15,16 @@ public class WorkAttendenceByMonthStatistics {
 	
 	private String absenteeism;
 	
+	private String sumOverTime;
+	
+	public String getSumOverTime() {
+		return sumOverTime;
+	}
+
+	public void setSumOverTime(String sumOverTime) {
+		this.sumOverTime = sumOverTime;
+	}
+
 	public Integer getCountDays() {
 		return countDays;
 	}

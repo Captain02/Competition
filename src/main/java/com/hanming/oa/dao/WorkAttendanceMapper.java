@@ -46,4 +46,6 @@ public interface WorkAttendanceMapper {
 
 	List<String> selectDateList(@Param("isByMyId")Integer isByMyId, @Param("userName")String userName);
 
+	Long selectsumOverTime(String date);
+
 }

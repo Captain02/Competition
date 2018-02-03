@@ -63,11 +63,10 @@ public class WorkAttendenceController {
 				.getWorkAttendenceByMonthStatistics(date);
 
 		List<String> dateList = WorkAttendenceService.selectDateList(isByMyId, userName);
-		
-		for (String string : dateList) {
-			System.out.println(string);
-		}
-		
+
+		DateStandard dateStandard = dateStandardService.selectByprimaryKey(1);
+
+		model.addAttribute("dateStandard", dateStandard);
 		model.addAttribute("dateList", dateList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("isByMyId", isByMyId);
@@ -105,7 +104,7 @@ public class WorkAttendenceController {
 				WorkAttendencePunishment.setState("正常");
 				WorkAttendencePunishment.setPunishmenttime("0");
 				WorkAttendenceService.addAttendence(workAttendance, WorkAttendencePunishment);
-				
+
 				return Msg.success();
 			} else {
 				WorkAttendencePunishment.setState("迟到");
@@ -124,13 +123,13 @@ public class WorkAttendenceController {
 
 			WorkAttendencePunishment WorkAttendencePunishment = new WorkAttendencePunishment();
 			WorkAttendencePunishment.setWorkattendenceid(workAttendanceOld.getId());
-			int isSuccess=1;
+			int isSuccess = 1;
 			if (DateTool.compareDate(dateStandard.getLeavetime(), date)) {
 				if (DateTool.compareDate(dateStandard.getOvertime(), date)) {
 					WorkAttendencePunishment.setState("加班");
 					WorkAttendencePunishment
 							.setPunishmenttime(DateTool.substractTime(date, dateStandard.getOvertime()).toString());
-					 isSuccess = WorkAttendenceService.addAttendence(workAttendanceOld, WorkAttendencePunishment);
+					isSuccess = WorkAttendenceService.addAttendence(workAttendanceOld, WorkAttendencePunishment);
 				} else {
 					WorkAttendencePunishment.setState("正常");
 					WorkAttendencePunishment.setPunishmenttime("0");
@@ -142,18 +141,28 @@ public class WorkAttendenceController {
 						DateTool.substractTime(dateStandard.getOvertime().toString(), date).toString());
 				isSuccess = WorkAttendenceService.addAttendence(workAttendanceOld, WorkAttendencePunishment);
 			}
-			if (isSuccess==1) {
+			if (isSuccess == 1) {
 				return Msg.success();
-			}else {
+			} else {
 				return Msg.fail();
 			}
 		}
 	}
 
+	// 删除签到
 	@ResponseBody
 	@RequestMapping(value = "/dele", method = RequestMethod.POST)
 	public Msg dele(@RequestParam("ids") String ids) {
 		WorkAttendenceService.deleByids(ids);
+		return Msg.success();
+	}
+
+	// 修改标准时间
+	@ResponseBody
+	@RequestMapping(value = "/updateStanderTime", method = RequestMethod.POST)
+	public Msg updateStandarTime(@RequestParam("changeTime") String changeTime,
+			@RequestParam("whichStandardTime") Integer whichStandardTime) {
+
 		return Msg.success();
 	}
 

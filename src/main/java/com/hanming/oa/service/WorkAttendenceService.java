@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.dao.WorkAttendanceMapper;
 import com.hanming.oa.dao.WorkAttendencePunishmentMapper;
 import com.hanming.oa.model.WorkAttendance;
@@ -36,6 +37,7 @@ public class WorkAttendenceService {
 		Integer CountNumByMonthStatistics = workAttendencePunishmentMapper.selectCountNumByMonthStatistics(date);
 		Integer CountDaysByMonthStatistics = workAttendanceMapper.selectCountNumByMonthStatistics(date);
 		Long punishmentTime = workAttendanceMapper.selectpunishmentTime(date);
+		Long sumOverTime = workAttendanceMapper.selectsumOverTime(date);
 
 		WorkAttendenceByMonthStatistics workAttendenceByMonthStatistics = new WorkAttendenceByMonthStatistics();
 		workAttendenceByMonthStatistics.setNormal(normalByMonthStatistics);
@@ -44,13 +46,8 @@ public class WorkAttendenceService {
 		workAttendenceByMonthStatistics.setOverTime(overTimeByMonthStatistics);
 		workAttendenceByMonthStatistics.setCountNum(CountNumByMonthStatistics);
 		workAttendenceByMonthStatistics.setCountDays(CountDaysByMonthStatistics);
-		if (punishmentTime==null) {
-			punishmentTime = 0l;
-		}
-		Long hours = punishmentTime / 60;
-		Long minutes = punishmentTime - hours * 60;
-		String absenteeism = hours + " 小时 " + minutes + " 分钟";
-		workAttendenceByMonthStatistics.setAbsenteeism(absenteeism);
+		workAttendenceByMonthStatistics.setAbsenteeism(DateTool.calculation(punishmentTime));
+		workAttendenceByMonthStatistics.setSumOverTime(DateTool.calculation(sumOverTime));
 		return workAttendenceByMonthStatistics;
 	}
 
@@ -88,9 +85,7 @@ public class WorkAttendenceService {
 
 	@Transactional
 	public void deleByids(String ids) {
-		System.out.println("+++++++++++++++++++++++++++++++++++++"+ids);
 		List<Integer> idsInt = null;
-		if (ids.contains("-")) {
 			String[] split = ids.split("-");
 			List<String> idsStr = Arrays.asList(split);
 			
@@ -98,7 +93,6 @@ public class WorkAttendenceService {
 			idsInt = idsStr.stream()
 							.map((x) -> Integer.parseInt(x))
 							.collect(Collectors.toList());
-		}
 		workAttendanceMapper.deleByIds(idsInt);
 		workAttendencePunishmentMapper.deleteByWorkAttendanceIds(idsInt);
 	}

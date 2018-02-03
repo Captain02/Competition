@@ -195,7 +195,16 @@
 	SUM(wap.punishmentTime)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
-	WHERE wap.state != '正常' AND wa.date like '%' #{date} '%'
+	WHERE wap.state != '加班' AND wa.date like '%' #{date} '%'
+  </select>
+  
+  <!-- Long selectsumOverTime(String date); -->
+  <select id="selectsumOverTime" resultType="Long">
+  	SELECT 
+	SUM(wap.punishmentTime)
+	FROM workAttendencePunishment wap
+	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
+	WHERE wap.state = '加班' AND wa.date like '%' #{date} '%'
   </select>
   
   <!-- Integer selectCountByDate(@Param("nowDate") String nowDate, @Param("userId") Integer userId); -->

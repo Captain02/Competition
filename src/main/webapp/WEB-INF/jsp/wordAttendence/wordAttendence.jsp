@@ -62,11 +62,23 @@
 				}
 				else{
 					var changeTime = '';
+					var whichStandardTime;
 					var prevaNodeSelect = $(this).parent().prev().find('select');
 					prevaNodeSelect.each(function(){
 						changeTime += $(this).val();
 					})
 					//在这里发送ajax请求
+					/* $.ajax({
+						url:'${APP_PATH}/admin/wordAttendence',
+						data:{
+							'changeTime':changeTime,
+							'whichStandardTime':whichStandardTime
+						},
+						type:'POST',
+						success:function(result){
+							
+						}
+					}) */
 					alert(changeTime);
 					$(this).html('编辑');
 				}
@@ -233,11 +245,11 @@
 										<nav aria-label="..." class="pull-right">
 										  <ul class="pagination pagination-sm">
 										    <li>
-                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&date=${date}&isByMyId=${isByMyId}">首页</a>
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&date=${date}&isByMyId=${isByMyId}&date=${date}">首页</a>
                                             </li>
                                             <c:if test="${pageInfo.hasPreviousPage}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum-1}&userName=${userName}&isByMyId=${isByMyId}" aria-label="Previous">
+                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum-1}&userName=${userName}&isByMyId=${isByMyId}&date=${date}" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
@@ -250,21 +262,21 @@
                                                 </c:if>
                                                 <c:if test="${pageNum!=pageInfo.pageNum}">
                                                     <li>
-                                                        <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageNum}&userName=${userName}&isByMyId=${isByMyId}">${pageNum}</a>
+                                                        <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageNum}&userName=${userName}&isByMyId=${isByMyId}&date=${date}">${pageNum}</a>
                                                     </li>
                                                 </c:if>
                                             </c:forEach>
 
                                             <c:if test="${pageInfo.hasNextPage }">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum+1}&userName=${userName}&isByMyId=${isByMyId}" aria-label="Next">
+                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum+1}&userName=${userName}&isByMyId=${isByMyId}&date=${date}" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
 
                                             <li>
-                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pages}&userName=${userName}&isByMyId=${isByMyId}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pages}&userName=${userName}&isByMyId=${isByMyId}&date=${date}" aria-label="Next">
                                                     <span aria-hidden="true">末页</span>
                                                 </a>
                                             </li>
@@ -293,7 +305,9 @@
               <div class="blog-post">
                 <h3>当月小计</h3>
                 <ul>
-                  <li>出勤次数数: ${workAttendenceByMonthStatistics.countNum} 次</li>
+				  <li>出勤天数: ${workAttendenceByMonthStatistics.countDays} 天</li>
+					                
+                  <li>出勤次数: ${workAttendenceByMonthStatistics.countNum} 次</li>
                   
                   <li>正常：${workAttendenceByMonthStatistics.normal}次 </li>
                   
@@ -304,6 +318,8 @@
                   <li>加班：${workAttendenceByMonthStatistics.overTime}次 </li>
                   
                   <li>旷工：${workAttendenceByMonthStatistics.absenteeism}</li>
+                  
+                  <li>加班：${workAttendenceByMonthStatistics.sumOverTime}</li>
                 
                 </ul>
               </div>
@@ -323,11 +339,7 @@
 	                	<div class="col-md-8">
 	                		
 	                		<div class="time-work pull-left">
-		                		<span class="work-time ">08</span>
-	                			:
-	                			<span class="work-time">00</span>
-	                			:
-	                			<span class="work-time">00</span>
+		                		<span class="work-time ">${dateStandard.latetime}</span>
 	                		 </div>
 
 							<div class="col-md-12 select-time hidden">
@@ -348,11 +360,7 @@
 	                	<div class="col-md-8">
 	                	
 	                		<div class="time-work pull-left">
-		                		<span class="work-time">08</span>
-	                			:
-	                			<span class="work-time">00</span>
-	                			:
-	                			<span class="work-time">00</span>
+		                		<span class="work-time">${dateStandard.leavetime}</span>
 	                		 </div>
 
 							<div class="col-md-12 select-time hidden">
@@ -373,11 +381,7 @@
 	                	<div class="col-md-8">
 	                	
 	                		<div class="time-work pull-left">
-		                		<span class="work-time">08</span>
-	                			:
-	                			<span class="work-time">00</span>
-	                			:
-	                			<span class="work-time">00</span>
+		                		<span class="work-time">${dateStandard.overtime}</span>
 	                		 </div>
 								
 							<div class="col-md-12 select-time hidden">
