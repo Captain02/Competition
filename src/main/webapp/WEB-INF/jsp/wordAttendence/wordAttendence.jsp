@@ -78,6 +78,10 @@
 		})
 		
 	})
+	
+	function deleAll(){
+		var ids
+	}
 </script>
 
 <body class="bg-common">
