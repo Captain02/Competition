@@ -35,7 +35,7 @@
     delete from workattendance
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hanming.oa.model.WorkAttendance">
+  <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.WorkAttendance">
     insert into workattendance (id, userId, startDate, 
       endDate, date, userIp
       )
@@ -198,12 +198,12 @@
 	WHERE wap.state != '正常' AND wa.date like '%' #{date} '%'
   </select>
   
-  <!-- Integer selectCountByDate(String nowDate); -->
+  <!-- Integer selectCountByDate(@Param("nowDate") String nowDate, @Param("userId") Integer userId); -->
   <select id="selectCountByDate" resultType="Integer">
-  	SELECT count(wap.state)
-  	FROM workAttendencePunishment wap
-	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
+  	SELECT count(*)
+  	FROM workattendance wa
   	WHERE wa.date = #{nowDate}
+  	AND wa.userId = #{userId}
   </select>
   
   <!-- List<WorkAttendance> selectByPrimaryKeys(List<Integer> idsInt); -->
@@ -232,4 +232,13 @@
   from workattendance wa
   WHERE wa.date like '%' #{date} '%'
   </select>
+  
+  <!-- WorkAttendance selectByUserIdAndDate(@Param("userId")Integer userId, @Param("nowDate")String date); -->
+  <select id="selectByUserIdAndDate" resultType="WorkAttendance">
+  	SELECT wa.id,wa.userId,wa.startDate,wa.endDate,wa.date,wa.userIp
+  	FROM workattendance wa
+  	WHERE wa.date = #{nowDate}
+  	AND wa.userId = #{userId}
+  </select>
+  
 </mapper>

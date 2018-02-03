@@ -83,7 +83,7 @@ public class WorkAttendenceController {
 		String nowDate = DateTool.dateToYearMonthDay(new Date());
 
 		// 获取签到次数
-		Integer attendenceNum = WorkAttendenceService.selectCountByDate(nowDate);
+		Integer attendenceNum = WorkAttendenceService.selectCountByDate(nowDate,userId);
 
 		if (attendenceNum == 0) {
 			WorkAttendance workAttendance = new WorkAttendance();
@@ -94,7 +94,7 @@ public class WorkAttendenceController {
 
 			WorkAttendencePunishment WorkAttendencePunishment = new WorkAttendencePunishment();
 			WorkAttendencePunishment.setWorkattendenceid(workAttendance.getId());
-
+			System.out.println(workAttendance.getId());
 			if (DateTool.compareDate(date, dateStandard.getLatetime())) {
 				WorkAttendencePunishment.setState("正常");
 				WorkAttendencePunishment.setPunishmenttime("0");
@@ -108,7 +108,8 @@ public class WorkAttendenceController {
 			}
 
 		} else if (attendenceNum == 1) {
-			WorkAttendance workAttendance = new WorkAttendance();
+			System.out.println(date);
+			WorkAttendance workAttendance =WorkAttendenceService.selectByUserIdAndDate(userId,nowDate);
 			workAttendance.setEnddate(date);
 			workAttendance.setDate(nowDate);
 			workAttendance.setUserid(userId);
@@ -117,7 +118,7 @@ public class WorkAttendenceController {
 			WorkAttendencePunishment WorkAttendencePunishment = new WorkAttendencePunishment();
 			WorkAttendencePunishment.setWorkattendenceid(workAttendance.getId());
 
-			if (DateTool.compareDate(dateStandard.getLatetime(), date)) {
+			if (DateTool.compareDate(dateStandard.getLeavetime(), date)) {
 				if (DateTool.compareDate(dateStandard.getOvertime(), date)) {
 					WorkAttendencePunishment.setState("加班");
 					WorkAttendencePunishment

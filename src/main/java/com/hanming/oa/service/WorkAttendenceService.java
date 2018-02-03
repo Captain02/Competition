@@ -43,6 +43,7 @@ public class WorkAttendenceService {
 		workAttendenceByMonthStatistics.setLate(lateByMonthStatistics);
 		workAttendenceByMonthStatistics.setLeave(leaveByMonthStatistics);
 		workAttendenceByMonthStatistics.setOverTime(overTimeByMonthStatistics);
+		workAttendenceByMonthStatistics.setCountNum(CountNumByMonthStatistics);
 		Long hours = punishmentTime / 60;
 		Long minutes = punishmentTime - hours * 60;
 		String absenteeism = hours + " 小时 " + minutes + " 分钟";
@@ -50,8 +51,8 @@ public class WorkAttendenceService {
 		return workAttendenceByMonthStatistics;
 	}
 
-	public Integer selectCountByDate(String nowDate) {
-		Integer nowDateStr = workAttendanceMapper.selectCountByDate(nowDate);
+	public Integer selectCountByDate(String nowDate, Integer userId) {
+		Integer nowDateStr = workAttendanceMapper.selectCountByDate(nowDate,userId);
 		return nowDateStr;
 	}
 
@@ -61,12 +62,14 @@ public class WorkAttendenceService {
 
 	@Transactional
 	public void addAttendence(WorkAttendance workAttendance, WorkAttendencePunishment WorkAttendencePunishment) {
-		Integer countByDate = workAttendanceMapper.selectCountByDate(workAttendance.getDate());
+		Integer countByDate = workAttendanceMapper.selectCountByDate(workAttendance.getDate(),workAttendance.getUserid());
+		System.out.println(workAttendance.getUserid());
 		if (countByDate > 0) {
 			workAttendanceMapper.updateByPrimaryKeySelective(workAttendance);
 		} else {
 			workAttendanceMapper.insertSelective(workAttendance);
 		}
+		WorkAttendencePunishment.setWorkattendenceid(workAttendance.getId());
 		workAttendencePunishmentMapper.insert(WorkAttendencePunishment);
 	}
 
@@ -83,6 +86,11 @@ public class WorkAttendenceService {
 		}
 		workAttendanceMapper.deleByIds(idsInt);
 		workAttendencePunishmentMapper.deleteByWorkAttendanceIds(idsInt);
+	}
+
+	public WorkAttendance selectByUserIdAndDate(Integer userId, String date) {
+		WorkAttendance selectByUserIdAndDate = workAttendanceMapper.selectByUserIdAndDate(userId,date);
+		return selectByUserIdAndDate;
 	}
 
 }

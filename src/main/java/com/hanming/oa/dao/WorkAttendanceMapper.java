@@ -27,19 +27,21 @@ public interface WorkAttendanceMapper {
 	Integer selectNormalByMonthStatistics(String date);
 
 	Integer selectLateByMonthStatistics(String date);
-	
+
 	Integer selectLeaveByMonthStatistics(String date);
 
 	Integer selectOverTimeByMonthStatistics(String date);
 
 	Long selectpunishmentTime(String date);
 
-	Integer selectCountByDate(String nowDate);
+	Integer selectCountByDate(@Param("nowDate") String nowDate, @Param("userId") Integer userId);
 
 	List<WorkAttendance> selectByPrimaryKeys(List<Integer> idsInt);
 
 	void deleByIds(List<Integer> idsInt);
 
 	Integer selectCountNumByMonthStatistics(String date);
+
+	WorkAttendance selectByUserIdAndDate(@Param("userId")Integer userId, @Param("nowDate")String date);
 
 }

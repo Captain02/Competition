@@ -66,7 +66,7 @@ public class DateTool {
 	}
 
 	public static void main(String[] args) {
-		Boolean date = compareDate("11:11:13","11:11:14");
+		Boolean date = compareDate("13:00:00","18:00:00");
 		
 		Long substractTime = substractTime("11:30:13","11:41:13");
 		System.out.println(date);

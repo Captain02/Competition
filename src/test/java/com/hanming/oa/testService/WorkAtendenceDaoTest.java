@@ -33,9 +33,9 @@ public class WorkAtendenceDaoTest {
 		System.out.println(integer);
 	}
 	
-	@Test
+	/*@Test
 	public void selectCountByDate() {
 		Integer integer = workAttendanceMapper.selectCountByDate("2018-02-02");
 		System.out.println(integer);
-	}
+	}*/
 }

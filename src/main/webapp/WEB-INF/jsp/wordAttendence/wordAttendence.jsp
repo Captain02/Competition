@@ -25,8 +25,21 @@
 		var  date = '';
 		$('#js-clock').click(function(){
 			date = $(this).find('span').html();
-			alert(date);
+			//alert(date);
+			$.ajax({
+				url:'${APP_PATH}/admin/wordAttendence/add',
+				type:'POST',
+				data:{
+					'date':date
+				},
+				success:function(result){
+					if (result.code==200) {
+						alert("今天已经完成签到");
+					}
+				}
+			}) 
 		});
+		
 		
 		//修改时间的ajax
 		
@@ -82,7 +95,7 @@
 					class="glyphicon glyphicon-th-list"></span>
 				</a>
 				<form action="${APP_PATH}/admin/wordAttendence/list" class="serach-form" method="get">
-					    <input name="date" value="${date}">
+					    <input type="hidden" name="date" value="${date}">
                         <input placeholder="请输入姓名" value="" class="form-control" name="userName" type="text">
                         <button type="submit" class="btn btn-primary">搜索</button>
                         <div class="clearfix"></div>
@@ -145,9 +158,9 @@
 												 		<input type="checkbox" name="selectAll" class="selectAll" id="selectAll">
 												 	</th>
 													<th>姓名</th>
-													<th>日期</th>
 													<th>开始时间</th>
 													<th>结束时间</th>
+													<th>日期</th>
 													<th>状态</th>
 													<th>IP</th>
 												</tr>
