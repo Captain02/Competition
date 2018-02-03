@@ -14,4 +14,5 @@ public class WorkAttendencePunishmentService {
 		workAttendencePunishmentMapper.insertSelective(workAttendencePunishment);
 	}
 
+
 }

@@ -40,7 +40,7 @@ public class WorkAttendenceController {
 	@Autowired
 	WorkAttendencePunishmentService workAttendencePunishmentService;
 
-	//遍历
+	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "0") Integer pn,
 			@RequestParam(value = "isByMyId", defaultValue = "0") Integer isByMyId,
@@ -75,7 +75,7 @@ public class WorkAttendenceController {
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg addAttendece(@RequestParam(value = "date") String date, HttpServletRequest request) {
-
+		System.out.println(GetIpTool.getIP(request));
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
 		// 查询标准时间和现在日期
@@ -83,9 +83,9 @@ public class WorkAttendenceController {
 		String nowDate = DateTool.dateToYearMonthDay(new Date());
 
 		// 获取签到次数
-		Integer attendenceNum = WorkAttendenceService.selectCountByDate(nowDate,userId);
+		WorkAttendance workAttendanceOld = WorkAttendenceService.selectByUserIdAndDate(userId, nowDate);
 
-		if (attendenceNum == 0) {
+		if (workAttendanceOld == null) {
 			WorkAttendance workAttendance = new WorkAttendance();
 			workAttendance.setStartdate(date);
 			workAttendance.setDate(nowDate);
@@ -99,52 +99,54 @@ public class WorkAttendenceController {
 				WorkAttendencePunishment.setState("正常");
 				WorkAttendencePunishment.setPunishmenttime("0");
 				WorkAttendenceService.addAttendence(workAttendance, WorkAttendencePunishment);
+				
+				return Msg.success();
 			} else {
 				WorkAttendencePunishment.setState("迟到");
 				WorkAttendencePunishment
 						.setPunishmenttime(DateTool.substractTime(date, dateStandard.getLatetime()).toString());
 				WorkAttendenceService.addAttendence(workAttendance, WorkAttendencePunishment);
-
+				return Msg.success();
 			}
 
-		} else if (attendenceNum == 1) {
-			System.out.println(date);
-			WorkAttendance workAttendance =WorkAttendenceService.selectByUserIdAndDate(userId,nowDate);
-			workAttendance.setEnddate(date);
-			workAttendance.setDate(nowDate);
-			workAttendance.setUserid(userId);
-			workAttendance.setUserip(GetIpTool.getIP(request));
+		} else {
+
+			workAttendanceOld.setEnddate(date);
+			workAttendanceOld.setDate(nowDate);
+			workAttendanceOld.setUserid(userId);
+			workAttendanceOld.setUserip(GetIpTool.getIP(request));
 
 			WorkAttendencePunishment WorkAttendencePunishment = new WorkAttendencePunishment();
-			WorkAttendencePunishment.setWorkattendenceid(workAttendance.getId());
-
+			WorkAttendencePunishment.setWorkattendenceid(workAttendanceOld.getId());
+			int isSuccess=1;
 			if (DateTool.compareDate(dateStandard.getLeavetime(), date)) {
 				if (DateTool.compareDate(dateStandard.getOvertime(), date)) {
 					WorkAttendencePunishment.setState("加班");
 					WorkAttendencePunishment
 							.setPunishmenttime(DateTool.substractTime(date, dateStandard.getOvertime()).toString());
-					WorkAttendenceService.addAttendence(workAttendance, WorkAttendencePunishment);
-
+					 isSuccess = WorkAttendenceService.addAttendence(workAttendanceOld, WorkAttendencePunishment);
 				} else {
 					WorkAttendencePunishment.setState("正常");
 					WorkAttendencePunishment.setPunishmenttime("0");
-					WorkAttendenceService.addAttendence(workAttendance, WorkAttendencePunishment);
+					isSuccess = WorkAttendenceService.addAttendence(workAttendanceOld, WorkAttendencePunishment);
 				}
 			} else {
 				WorkAttendencePunishment.setState("早退");
 				WorkAttendencePunishment.setPunishmenttime(
 						DateTool.substractTime(dateStandard.getOvertime().toString(), date).toString());
-				WorkAttendenceService.addAttendence(workAttendance, WorkAttendencePunishment);
+				isSuccess = WorkAttendenceService.addAttendence(workAttendanceOld, WorkAttendencePunishment);
 			}
-		} else {
-			return Msg.fail();
+			if (isSuccess==1) {
+				return Msg.success();
+			}else {
+				return Msg.fail();
+			}
 		}
-		return Msg.fail();
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/dele",method=RequestMethod.POST)
-	public Msg dele(@RequestParam("ids")String ids) {
+	@RequestMapping(value = "/dele", method = RequestMethod.POST)
+	public Msg dele(@RequestParam("ids") String ids) {
 		WorkAttendenceService.deleByids(ids);
 		return Msg.success();
 	}

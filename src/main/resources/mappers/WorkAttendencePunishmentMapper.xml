@@ -88,4 +88,11 @@
     #{item} 
     </foreach>
   </delete>
+  
+  <!-- Integer selectByWorkAttendanceId(Integer id); -->
+  <select id="selectByWorkAttendanceId" resultType="Integer">
+  	select count(*)
+  	from workattendencepunishment
+  	where workAttendenceId = #{id}
+  </select>
 </mapper>

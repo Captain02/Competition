@@ -1,9 +1,7 @@
 package com.hanming.oa.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +50,7 @@ public class WorkAttendenceService {
 	}
 
 	public Integer selectCountByDate(String nowDate, Integer userId) {
-		Integer nowDateStr = workAttendanceMapper.selectCountByDate(nowDate,userId);
+		Integer nowDateStr = workAttendanceMapper.selectCountByDate(nowDate, userId);
 		return nowDateStr;
 	}
 
@@ -61,16 +59,26 @@ public class WorkAttendenceService {
 	}
 
 	@Transactional
-	public void addAttendence(WorkAttendance workAttendance, WorkAttendencePunishment WorkAttendencePunishment) {
-		Integer countByDate = workAttendanceMapper.selectCountByDate(workAttendance.getDate(),workAttendance.getUserid());
-		System.out.println(workAttendance.getUserid());
+	public int addAttendence(WorkAttendance workAttendance, WorkAttendencePunishment WorkAttendencePunishment) {
+		Integer countByDate = workAttendanceMapper.selectCountByDate(workAttendance.getDate(),
+				workAttendance.getUserid());
+		Integer attendenceNum = -1;
 		if (countByDate > 0) {
+			attendenceNum = workAttendencePunishmentMapper.selectByWorkAttendanceId(workAttendance.getId());
+			if (attendenceNum >= 2) {
+				return 0;
+			}
 			workAttendanceMapper.updateByPrimaryKeySelective(workAttendance);
 		} else {
 			workAttendanceMapper.insertSelective(workAttendance);
 		}
 		WorkAttendencePunishment.setWorkattendenceid(workAttendance.getId());
+
+		if (attendenceNum >= 2) {
+			return 0;
+		}
 		workAttendencePunishmentMapper.insert(WorkAttendencePunishment);
+		return 1;
 	}
 
 	@Transactional
@@ -89,7 +97,7 @@ public class WorkAttendenceService {
 	}
 
 	public WorkAttendance selectByUserIdAndDate(Integer userId, String date) {
-		WorkAttendance selectByUserIdAndDate = workAttendanceMapper.selectByUserIdAndDate(userId,date);
+		WorkAttendance selectByUserIdAndDate = workAttendanceMapper.selectByUserIdAndDate(userId, date);
 		return selectByUserIdAndDate;
 	}
 

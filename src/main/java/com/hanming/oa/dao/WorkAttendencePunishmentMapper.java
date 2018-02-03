@@ -2,6 +2,8 @@ package com.hanming.oa.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.WorkAttendencePunishment;
 
 public interface WorkAttendencePunishmentMapper {
@@ -18,4 +20,6 @@ public interface WorkAttendencePunishmentMapper {
     int updateByPrimaryKey(WorkAttendencePunishment record);
 
 	void deleteByWorkAttendanceIds(List<Integer> idsInt);
+
+	Integer selectByWorkAttendanceId(Integer id);
 }
