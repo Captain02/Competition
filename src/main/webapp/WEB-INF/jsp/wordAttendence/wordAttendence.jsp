@@ -144,11 +144,12 @@
 				</a>
 				<form action="${APP_PATH}/admin/wordAttendence/list" class="serach-form" method="get">
 					    <input type="hidden" name="date" value="${date}">
+				<c:if test="${isByMyId==0}">
                         <input placeholder="请输入姓名" value="" class="form-control" name="userName" type="text">
                         <button type="submit" class="btn btn-primary">搜索</button>
+      			</c:if>
                         <div class="clearfix"></div>
                </form>
-      		
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 
 				<div class="clearfix"></div>
