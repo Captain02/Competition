@@ -70,15 +70,15 @@
 					alert(changeTime);
 					$(this).html('编辑');
 				}
-				
-				
-				
 			});
 		})
 		
 		//当日期改变时发送ajax
 		$('#ym').on('change', function(){
-			
+			$(this).val()
+			$(this).attr("data-isbymyid")
+			$(this).attr("data-username")
+			$(this).attr("data-date")
 		});
 		
 	})
@@ -172,7 +172,7 @@
 									<header class="panel-heading">
 										考勤
 										 <span class="tools pull-right">
-											 <select class="form-control" id="ym" style="width: 124px; display: inline;">
+											 <select class="form-control" id="ym" style="width: 124px; display: inline;" data-isByMyId="${isByMyId}" data-userName="${userName}" data-date="${date}">
 											 <c:forEach items="${dateList}" var="dates">
 											 	<option>${dates }</option>
 											 </c:forEach>
