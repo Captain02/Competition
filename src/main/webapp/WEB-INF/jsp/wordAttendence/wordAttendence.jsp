@@ -43,7 +43,7 @@
 		
 		//修改时间的ajax
 		$('.editor-time-btn').each(function(){
-			
+			var btn = $(this);
 			$(this).click(function(){
 				var prevaNode = $(this).parent().prevAll();
 				prevaNode.each(function(){
@@ -76,8 +76,7 @@
 						},
 						type:'POST',
 						success:function(result){
-							console.log(result.extend.whichStandardTime);
-							console.log(result.extend.changeTime);
+							btn.parent().prevAll('div.time-work').find('span.work-time').html(result.extend.changeTime);
 						}
 					}) 
 					$(this).html('编辑');
@@ -479,6 +478,7 @@
 		}
 		$('.time-select-second').html(time3);
 		
+	
 	})
 </script>
 
