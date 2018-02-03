@@ -20,4 +20,6 @@ public interface WorkAttendencePunishmentMapper {
 	void deleteByWorkAttendanceIds(List<Integer> idsInt);
 
 	Integer selectByWorkAttendanceId(Integer id);
+
+	Integer selectCountNumByMonthStatistics(String date);
 }

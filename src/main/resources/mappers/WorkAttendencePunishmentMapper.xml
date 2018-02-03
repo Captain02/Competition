@@ -95,4 +95,14 @@
   	from workattendencepunishment
   	where workAttendenceId = #{id}
   </select>
+  
+  <!-- Integer selectCountNumByMonthStatistics(String date); -->
+  <select id="selectCountNumByMonthStatistics" resultType="Integer">
+	  SELECT
+		COUNT(*)
+		FROM workAttendencePunishment wap
+		LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
+	  WHERE wa.date like '%' #{date} '%'
+  </select>
+  
 </mapper>

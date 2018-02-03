@@ -75,10 +75,10 @@
 		
 		//当日期改变时发送ajax
 		$('#ym').on('change', function(){
-			$(this).val()
-			$(this).attr("data-isbymyid")
-			$(this).attr("data-username")
-			$(this).attr("data-date")
+			var date = $(this).val()
+			var isByMyId = $(this).attr("data-isbymyid")
+			var userName = $(this).attr("data-username")
+			window.location.href="${APP_PATH}/admin/wordAttendence/list?date="+date+"&isByMyId="+isByMyId+"&userName="+userName;
 		});
 		
 	})
@@ -172,7 +172,7 @@
 									<header class="panel-heading">
 										考勤
 										 <span class="tools pull-right">
-											 <select class="form-control" id="ym" style="width: 124px; display: inline;" data-isByMyId="${isByMyId}" data-userName="${userName}" data-date="${date}">
+											 <select class="form-control" id="ym" style="width: 124px; display: inline;" data-isByMyId="${isByMyId}" data-userName="${userName}">
 											 <c:forEach items="${dateList}" var="dates">
 											 	<option>${dates }</option>
 											 </c:forEach>
@@ -222,11 +222,11 @@
 										<nav aria-label="..." class="pull-right">
 										  <ul class="pagination pagination-sm">
 										    <li>
-                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&date=${date}">首页</a>
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=1&userName=${userName}&date=${date}&isByMyId=${isByMyId}">首页</a>
                                             </li>
                                             <c:if test="${pageInfo.hasPreviousPage}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum-1}&userName=${userName}" aria-label="Previous">
+                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum-1}&userName=${userName}&isByMyId=${isByMyId}" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
@@ -239,21 +239,21 @@
                                                 </c:if>
                                                 <c:if test="${pageNum!=pageInfo.pageNum}">
                                                     <li>
-                                                        <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageNum}&userName=${userName}">${pageNum}</a>
+                                                        <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageNum}&userName=${userName}&isByMyId=${isByMyId}">${pageNum}</a>
                                                     </li>
                                                 </c:if>
                                             </c:forEach>
 
                                             <c:if test="${pageInfo.hasNextPage }">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum+1}&userName=${userName}" aria-label="Next">
+                                                    <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pageNum+1}&userName=${userName}&isByMyId=${isByMyId}" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
 
                                             <li>
-                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pages}&userName=${userName}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/wordAttendence/list?pn=${pageInfo.pages}&userName=${userName}&isByMyId=${isByMyId}" aria-label="Next">
                                                     <span aria-hidden="true">末页</span>
                                                 </a>
                                             </li>
@@ -282,7 +282,7 @@
               <div class="blog-post">
                 <h3>当月小计</h3>
                 <ul>
-                  <li>出勤天数: ${workAttendenceByMonthStatistics.countNum} 次</li>
+                  <li>出勤次数数: ${workAttendenceByMonthStatistics.countNum} 次</li>
                   
                   <li>正常：${workAttendenceByMonthStatistics.normal}次 </li>
                   
