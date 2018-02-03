@@ -42,7 +42,6 @@
 		
 		
 		//修改时间的ajax
-		
 		$('.editor-time-btn').each(function(){
 			
 			$(this).click(function(){
@@ -76,6 +75,11 @@
 				
 			});
 		})
+		
+		//当日期改变时发送ajax
+		$('#ym').on('change', function(){
+			
+		});
 		
 	})
 	
@@ -415,10 +419,7 @@
 			date = new Date();
 			$('#js-clock').attr('data-now-year',date.getFullYear());
 			$('#js-clock').attr('data-now-month',date.getMonth()+1);
-			for(var i = 1; i <= parseInt($('#js-clock').attr('data-now-month')); i++){
-				html += '<option value="'+$('#js-clock').attr('data-now-year')+'-'+i+'" data-month="'+i+'">'+$('#js-clock').attr('data-now-year')+'年'+i+'月</option>'
-			}
-			$('#ym').html(html);
+		
 			$('#ym option').each(function(){
 				if($(this).attr('data-month') ==$('#js-clock').attr('data-now-month')){
 					$(this).attr('selected', true);
