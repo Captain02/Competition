@@ -21,11 +21,9 @@ body a, .toggle-btn span {
 	-moz-transition: 0.2s all;
 	-ms-transition: 0.2s all;
 }
-body a{
-	cursor: pointer;
-}
 body a:hover{
 	text-decoration: underline;
+	cursor: pointer;
 }
 body{
 	overflow-x: hidden;
@@ -1117,4 +1115,15 @@ ul.p-info .title, ul.p-info .desk {
 .blog-post ul li {
     line-height: 35px;
     color: #837f7e;
+}
+.time-editor{
+	padding-left: 0;
+}
+.time-editor li div{
+	padding-left: 0;
+}
+.editor-time a.editor-time-btn{
+	font-size: 12px;
+	color: #286090;
+	margin-left: 15px;
 }

@@ -17,12 +17,54 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+<script src="${APP_PATH}/static/js/selectAll.js"></script>
 </head>
 <script type="text/javascript">
-	var date;
-	function add(){
+	$(function(){
+		//打卡的ajax
+		var  date = '';
+		$('#js-clock').click(function(){
+			date = $(this).find('span').html();
+			alert(date);
+		});
 		
-	}
+		//修改时间的ajax
+		
+		$('.editor-time-btn').each(function(){
+			
+			$(this).click(function(){
+				var prevaNode = $(this).parent().prevAll();
+				prevaNode.each(function(){
+					if($(this).hasClass('hidden')){
+						$(this).removeClass('hidden');
+					}
+					else{
+						$(this).addClass('hidden');
+					}
+				})
+				
+				
+				
+				if($(this).html() === '编辑'){
+					$(this).html('确定');
+				}
+				else{
+					var changeTime = '';
+					var prevaNodeSelect = $(this).parent().prev().find('select');
+					prevaNodeSelect.each(function(){
+						changeTime += $(this).val();
+					})
+					//在这里发送ajax请求
+					alert(changeTime);
+					$(this).html('编辑');
+				}
+				
+				
+				
+			});
+		})
+		
+	})
 </script>
 
 <body class="bg-common">
@@ -65,6 +107,9 @@
 					</div>
 
 					<div class="om-header-right">
+					  <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
+                                <i>-</i>批量删除
+                            </button>
 						<button id="addButton" type="button" class="btn btn-warning brn-sm"
 							onclick="">
 							我的考勤
@@ -96,6 +141,9 @@
 											border="1">
 											<thead>
 												<tr>
+												 	<th>
+												 		<input type="checkbox" name="selectAll" class="selectAll" id="selectAll">
+												 	</th>
 													<th>姓名</th>
 													<th>日期</th>
 													<th>开始时间</th>
@@ -108,6 +156,9 @@
 
 												<c:forEach items="${pageInfo.list}" var="WorkAttendenceDisplay">
 												<tr>
+												 <td>
+	                                                   <input type="checkbox" name="selectItem" class="selectItem">
+	                                                </td>
 													<td>${WorkAttendenceDisplay.userName }</td>
 													<td>${WorkAttendenceDisplay.startdate }</td>
 													<td>${WorkAttendenceDisplay.enddate }</td>
@@ -124,6 +175,26 @@
 											</tbody>
 
 										</table>
+										<nav aria-label="..." class="pull-right">
+										  <ul class="pagination pagination-sm">
+										    <li>
+										      <a href="#" aria-label="Previous">
+										        <span aria-hidden="true">&laquo;</span>
+										      </a>
+										    </li>
+										    <li class="active"><a href="#" >1</a></li>
+										    <li><a href="#">2</a></li>
+										    <li><a href="#">3</a></li>
+										    <li><a href="#">4</a></li>
+										    <li><a href="#">5</a></li>
+										    <li>
+										      <a href="#" aria-label="Next">
+										        <span aria-hidden="true">&raquo;</span>
+										      </a>
+										    </li>
+										    
+										  </ul>
+									</nav>
 									</div>
 								</div>
 							</div>
@@ -133,14 +204,14 @@
           <div class="panel">
             <div class="panel-body">
               <div class="blog-post">
-                <div class="text-center"> <a href="" id="js-clock" class="btn btn-info">打卡<br>
+                <div class="text-center"> <a  id="js-clock" class="btn btn-info">打卡<br>
                   <span></span></a> 
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 ">
           <div class="panel">
             <div class="panel-body">
               <div class="blog-post">
@@ -157,6 +228,95 @@
                   <li>加班：${workAttendenceByMonthStatistics.overTime}次 </li>
                   
                   <li>旷工：${workAttendenceByMonthStatistics.absenteeism}</li>
+                
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+         <div class="col-md-4 pull-right">
+          <div class="panel">
+            <div class="panel-body">
+              <div class="blog-post">
+                <h3 class="clearfix label-control">时间编辑</h3>
+                <ul class="col-md-12 time-editor">
+                
+                	<li>
+	                	<div class="col-md-4">上班时间</div>
+	                	<div class="col-md-8">
+	                		
+	                		<div class="time-work pull-left">
+		                		<span class="work-time ">08</span>
+	                			:
+	                			<span class="work-time">00</span>
+	                			:
+	                			<span class="work-time">00</span>
+	                		 </div>
+
+							<div class="col-md-12 select-time hidden">
+								<select class="time-select-hour  col-md-4"></select>
+								<select class="time-select-minute col-md-4"></select>
+								<select class="time-select-second col-md-4 "></select>
+							</div>
+							
+                			<span class="editor-time">
+                				<a class="editor-time-btn">编辑</a>
+                			</span>
+	                	</div>
+	                	
+	                	<div class="clearfix"></div>
+                	</li>
+                	<li>
+	                	<div class="col-md-4">下班时间</div>
+	                	<div class="col-md-8">
+	                	
+	                		<div class="time-work pull-left">
+		                		<span class="work-time">08</span>
+	                			:
+	                			<span class="work-time">00</span>
+	                			:
+	                			<span class="work-time">00</span>
+	                		 </div>
+
+							<div class="col-md-12 select-time hidden">
+								<select class="time-select-hour col-md-4"></select>
+								<select class="time-select-minute col-md-4"></select>
+								<select class="time-select-second col-md-4"></select>
+							</div>
+							
+                			<span class="editor-time">
+                				<a class="editor-time-btn">编辑</a>
+                			</span>
+	                	</div>
+	                	
+	                	<div class="clearfix"></div>
+                	</li>
+                	<li>
+	                	<div class="col-md-4">加班时间</div>
+	                	<div class="col-md-8">
+	                	
+	                		<div class="time-work pull-left">
+		                		<span class="work-time">08</span>
+	                			:
+	                			<span class="work-time">00</span>
+	                			:
+	                			<span class="work-time">00</span>
+	                		 </div>
+								
+							<div class="col-md-12 select-time hidden">
+								<select class="time-select-hour  col-md-4"></select>
+								<select class="time-select-minute col-md-4"></select>
+								<select class="time-select-second col-md-4"></select>
+							</div>
+							
+                			<span class="editor-time">
+                				<a class="editor-time-btn">编辑</a>
+                			</span>
+	                	</div>
+	                	
+	                	<div class="clearfix"></div>
+                	</li>
                 
                 </ul>
               </div>
@@ -229,6 +389,23 @@
 			return parseInt(v)<10 ? '0'+v : v;
 		}
 		
+		var time1 = '';
+	    for(var i = 0; i<=24;i++){
+	    	time1 +='<option>'+addZero(i)+':</option>'
+	    }
+		$('.time-select-hour').html(time1);
+		
+		var time2 = '';
+		for(var i = 0; i<=59; i++){
+			time2 +='<option>'+addZero(i)+':</option>'
+		}
+		$('.time-select-minute').html(time2);
+		
+		var time3='';
+		for(var i = 0; i<=59; i++){
+			time3 +='<option>'+addZero(i)+'</option>'
+		}
+		$('.time-select-second').html(time3);
 		
 	})
 </script>
