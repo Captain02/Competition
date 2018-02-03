@@ -170,7 +170,7 @@
 
 					<div class="om-header-right">
 					  <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
-                                <i>-</i>批量删除
+                               <i>-</i>批量删除
                       </button>
                       <input type="hidden" value=""  class="ids"/>
 						<button id="addButton" type="button" class="btn btn-warning brn-sm"
@@ -196,6 +196,7 @@
 										考勤
 										 <span class="tools pull-right">
 											 <select class="form-control" id="ym" style="width: 124px; display: inline;" data-isByMyId="${isByMyId}" data-userName="${userName}">
+											 <option style="display: none;">选择日期</option>
 											 <c:forEach items="${dateList}" var="dates">
 											 	<option>${dates}</option>
 											 </c:forEach>
@@ -429,6 +430,11 @@
 
 <script type="text/javascript">
 	$(function(){
+		function getYm(date){
+			var html = '';
+			date = new Date();
+			$('#js-clock').attr('data-now-year-month-date',date.getFullYear()+'-'+addZero(date.getMonth()+1)+'-'+addZero(date.getDate()));
+		}
 		
 		//获取服务器响应头的时间
 		$.ajax({
@@ -436,6 +442,7 @@
 				var originalDate = new Date(xhr.getResponseHeader('Date'));
 				var date = originalDate;
 				callbackTime(date);
+				getYm(date);
 			}
 		});
 		
