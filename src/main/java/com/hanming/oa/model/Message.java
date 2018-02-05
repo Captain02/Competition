@@ -14,13 +14,7 @@ public class Message {
 
 	private String type;
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
+	private User user;
 
 	public Integer getFromId() {
 		return fromId;
@@ -62,7 +56,23 @@ public class Message {
 		this.date = date;
 	}
 
-	public Message(Integer fromId, String fromName, Integer toId, String text, String date, String type) {
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Message(Integer fromId, String fromName, Integer toId, String text, String date, String type, User user) {
 		super();
 		this.fromId = fromId;
 		this.fromName = fromName;
@@ -70,10 +80,12 @@ public class Message {
 		this.text = text;
 		this.date = date;
 		this.type = type;
+		this.user = user;
 	}
 
 	public Message() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 }

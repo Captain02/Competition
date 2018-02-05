@@ -19,6 +19,8 @@ import org.springframework.web.socket.WebSocketSession;
 import com.alibaba.fastjson.JSON;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.model.Message;
+import com.hanming.oa.model.RequestAddFriend;
+import com.hanming.oa.model.User;
 
 /*
  * WebSockect处理器
@@ -43,24 +45,34 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		Integer uid = (Integer) session.getAttributes().get("uid");
 		Integer toUserId = (Integer) session.getAttributes().get("toUserId");
 		String type = (String) session.getAttributes().get("type");
-		String name = (String) session.getAttributes().get("name");
+		User user = (User) session.getAttributes().get("user");
 		/*Integer fuid = (Integer) session.getAttributes().get("fuid");*/
-
 		// 判断是否重复登录
-		if (userSocketSessionMap.get(uid) == null) {
-			userSocketSessionMap.put(uid, session);
+		if (userSocketSessionMap.get(user.getId()) == null) {
+			userSocketSessionMap.put(user.getId(), session);
 			
 			
 			
 			//好友请求
 			if ("addFrends".equals(type)) {
-				Message message = new Message(uid, name, toUserId, name + "请求加您为好友", DateTool.dateToString(new Date()), "addFrends");
+				Message message = new Message(user.getId(), user.getName(), toUserId, user.getName() + "请求加您为好友", DateTool.dateToString(new Date()), "addFrends",user);
 				TextMessage textMessage = new TextMessage(JSON.toJSONString(message));
 				//发送添加好友
-				sendMessageToUser(toUserId,textMessage);
+				if (null!=userSocketSessionMap.get(toUserId)) {
+					sendMessageToUser(toUserId,textMessage);
+				}else {
+					//查询申请人是否还有其他未处理的其他申请
+					BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
+					if (addFriendsQueue!=null) {
+						addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
+					}else {
+						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
+						newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
+						userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
+					}
+				}
 			}
 
 			
@@ -87,32 +99,33 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 * */
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		if (message.getPayloadLength() == 0) {
-			return;
-		}
-		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
-		msg.setDate(DateTool.dateToString(new Date()));
-
-		WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
-		if (socketSession != null) {
-			sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
-			return;
-		} else if (socketSession == null) {
-			
-			//好友请求
-			if ("addFrends".equals(msg.getType())) {
-				//若不在线
-				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(msg.getFromId());
-				// 如果此人有未处理的添加好友请求
-				if (addFriendsQueue != null) {
-					addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
-				} else if (addFriendsQueue == null) {
-					// 如果此人没有有未处理的添加好友请求
-					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
-					newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
-					userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
-				}
-			}
+		System.out.println(message.getPayloadLength()+"++++++++++++++++++++++++++++++++");
+//		if (message.getPayloadLength() == 0) {
+//			return;
+//		}
+//		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
+//		msg.setDate(DateTool.dateToString(new Date()));
+//
+//		WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
+//		if (socketSession != null) {
+//			sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
+//			return;
+//		} else if (socketSession == null) {
+//			
+//			//好友请求
+//			if ("addFrends".equals(msg.getType())) {
+//				//若不在线
+//				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(msg.getFromId());
+//				// 如果此人有未处理的添加好友请求
+//				if (addFriendsQueue != null) {
+//					addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+//				} else if (addFriendsQueue == null) {
+//					// 如果此人没有有未处理的添加好友请求
+//					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
+//					newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+//					userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
+//				}
+//			}
 
 			
 			
@@ -128,7 +141,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				queue.offer(new TextMessage(JSON.toJSONString(msg)));
 				userSocketQueue.put(msg.getToId(), queue);
 			}*/
-		}
+//		}
 	}
 
 	@Override

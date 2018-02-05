@@ -12,12 +12,12 @@
 pageContext.setAttribute("APP_PATH", request.getContextPath());
 
 
-	//String path = request.getContextPath();
-	String basePath = request.getServerName() + ":"
-			+ request.getServerPort() + request.getContextPath() + "/";
-	String basePath2 = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ request.getContextPath() + "/";
+String path = request.getContextPath();
+String basePath = request.getServerName() + ":"
+		+ request.getServerPort() + path + "/";
+String basePath2 = request.getScheme() + "://"
+		+ request.getServerName() + ":" + request.getServerPort()
+		+ path + "/";
 %>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,58 +75,56 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
     
     //添加好友
     function addFriend(ele){
-    	var path = '${APP_PATH}';
-		var uid='${uid}';
-		if(uid==-1){
-			location.href="<%=basePath2%>";
-		}
-		var from=uid;
-		var fromName='${name}';
 		var toId=$(ele).attr("data-userId");
-		alert(toId);
-		var websocket;
-		if ('WebSocket' in window) {
-			// 创建一个Socket实例  ws表示WebSocket协议
-			websocket = new WebSocket("ws://" + '${APP_PATH}' + "/ws?uid="+uid);
-		} else if ('MozWebSocket' in window) {
-			websocket = new MozWebSocket("ws://" + '${APP_PATH}' + "/ws"+uid);
-		} else {
-			websocket = new SockJS("http://" + '${APP_PATH}' + "/ws/sockjs"+uid);
-		}
-		
-				
-				
-		websocket.onopen = function(event) {
-			console.log("WebSocket:已连接");
-			console.log(event);
-		};
-		websocket.onerror = function(event) {
-			console.log("WebSocket:发生错误 ");
-			console.log(event);
-		};
-		 // 监听Socket的关闭
-		websocket.onclose = function(event) {
-			console.log("WebSocket:已关闭");
-			console.log(event);
-		}
-			var data={};
-			data["fromId"]=fromId;
-			data["fromName"]=fromName;
-			data["toId"]=toId;
-			websocket.send(JSON.stringify(data));
-			
-			
-		function send(event){
-			var code;
-			 if(window.event){
-				 code = window.event.keyCode; // IE
-			 }else{
-				 code = e.which; // Firefox
-			 }
-			if(code==13){ 
-				sendMsg();            
-			}
-		}
+    	$.ajax({
+    		url:"${APP_PATH}/admin/friends/addFriends",
+    		data:{
+    			'toUserID':toId
+    		},
+    		type:"POST",
+    		success:function(result){
+    			if (result.code==100) {
+    				var path = '<%=basePath%>';
+    				var uid = result.extend.uid;
+    				if(uid==-1){
+    					location.href="<%=basePath2%>";
+    				}
+    				var fromId=uid;
+    				var fromName=result.extend.name;
+    				var websocket;
+    				if ('WebSocket' in window) {
+    					// 创建一个Socket实例  ws表示WebSocket协议
+    					websocket = new WebSocket("ws://" + path + "/ws?uid="+uid);
+    				} else if ('MozWebSocket' in window) {
+    					websocket = new MozWebSocket("ws://" + path + "/ws"+uid);
+    				} else {
+    					websocket = new SockJS("http://" + path + "/ws/sockjs"+uid);
+    				}
+    				
+    						
+    						
+    				websocket.onopen = function(event) {
+    					console.log("WebSocket:已连接");
+    					console.log(event);
+    				};
+    				websocket.onerror = function(event) {
+    					console.log("WebSocket:发生错误 ");
+    					console.log(event);
+    				};
+    				 // 监听Socket的关闭
+    				websocket.onclose = function(event) {
+    					console.log("WebSocket:已关闭");
+    					console.log(event);
+    				}
+    				
+    				 alert("申请成功");
+				}else{
+					alert("请勿重复申请");
+				}
+    			
+    		}
+    	})
+    	
     }
 </script>
 </head>

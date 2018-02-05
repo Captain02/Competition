@@ -8,25 +8,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.UserService;
 
 @Controller
-@RequestMapping("/admin/webSockect")
+@RequestMapping("/admin/friends")
 public class WebSocketController {
 
 	@Autowired
 	UserService UserService;
 	
+	@ResponseBody
 	@RequestMapping(value="/addFriends",method=RequestMethod.POST)
 	public Msg requestAddFriends(@RequestParam("toUserID")Integer toUserId,HttpServletRequest request){
 		
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKey(fromUserId);
 		request.getSession().setAttribute("uid", fromUserId);
-		request.getSession().setAttribute("name", user.getName());
 		request.getSession().setAttribute("type", "addFrends");
 		request.getSession().setAttribute("toUserId", toUserId);
 		
@@ -41,6 +42,6 @@ public class WebSocketController {
 		request.getSession().setAttribute("message", message);*/
 		
 		
-		return Msg.success();
+		return Msg.success().add("uid", fromUserId).add("name", user.getName());
 	}
 }

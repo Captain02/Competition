@@ -20,10 +20,10 @@ public class HandShake implements HandshakeInterceptor {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
 			// 标记用户
-			Long uid = (Long) session.getAttribute("uid");
+			Integer uid = (Integer) session.getAttribute("uid");
 			String name = (String) session.getAttribute("name");
 			String type = (String) session.getAttribute("type");
-			Long toUserId = (Long) session.getAttribute("toUserId");
+			Integer toUserId = (Integer) session.getAttribute("toUserId");
 			//Long fuid = (Long) session.getAttribute("fuid");
 			//若果用户登录，允许登录
 			if(uid!=null){
