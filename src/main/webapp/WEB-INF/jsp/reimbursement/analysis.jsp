@@ -81,9 +81,9 @@ function callbackFn(myChart,jsonURL){
 			<!-- 页面模版，按需更改 -->
 			<div class="wrapper">
 
-<div class="om-header">
-	<jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
-</div>
+				<div class="om-header">
+					<jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
+				</div>
 				<div class="row">
 					
 					<div class="om-wrapper">

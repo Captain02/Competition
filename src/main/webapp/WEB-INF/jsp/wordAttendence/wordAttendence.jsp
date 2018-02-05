@@ -18,114 +18,123 @@
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
+
+<script src="${APP_PATH}/static/js/echarts.js"></script>
+<script src="${APP_PATH}/static/js/shine.js"></script>
 </head>
 <script type="text/javascript">
-	$(function(){
-		//打卡的ajax
-		var  date = '';
-		$('#js-clock').click(function(){
-			date = $(this).find('span').html();
-			//alert(date);
-			$.ajax({
-				url:'${APP_PATH}/admin/wordAttendence/add',
-				type:'POST',
-				data:{
-					'date':date
-				},
-				success:function(result){
-					if (result.code==200) {
-						alert("今天已经完成签到");
-					}
+$(function(){
+	var date = '';
+	$('#js-clock').click(function(){
+		date = $(this).find('span').html();
+		$.ajax({
+			url:'${APP_PATH}/admin/wordAttendence/add',
+			type:'POST',
+			data:{
+				'date':date
+			},
+			success:function(result){
+				if (result.code==200) {
+					alert("今天已经完成签到");
 				}
-			}) 
-		});
+			}
+		}) 
+	});
 		
-		
-		//修改时间的ajax
-		$('.editor-time-btn').each(function(){
-			var btn = $(this);
-			$(this).click(function(){
-				var prevaNode = $(this).parent().prevAll();
-				prevaNode.each(function(){
-					if($(this).hasClass('hidden')){
-						$(this).removeClass('hidden');
-					}
-					else{
-						$(this).addClass('hidden');
-					}
-				})
-				
-				
-				
-				if($(this).html() === '编辑'){
-					$(this).html('确定');
+	$('.editor-time-btn').each(function(){
+		var btn = $(this);
+		$(this).click(function(){
+			var prevaNode = $(this).parent().prevAll();
+			prevaNode.each(function(){
+				if($(this).hasClass('hidden')){
+					$(this).removeClass('hidden');
 				}
 				else{
-					var changeTime = '';
-					var whichStandardTime = $(this).attr("data-status");
-					var prevaNodeSelect = $(this).parent().prev().find('select');
-					prevaNodeSelect.each(function(){
-						changeTime += $(this).val();
-					})
-					//在这里发送ajax请求
-					 $.ajax({
-						url:'${APP_PATH}/admin/wordAttendence/updateStanderTime',
-						data:{
-							'changeTime':changeTime,
-							'whichStandardTime':whichStandardTime
-						},
-						type:'POST',
-						success:function(result){
-							btn.parent().prevAll('div.time-work').find('span.work-time').html(result.extend.changeTime);
-						}
-					}) 
-					$(this).html('编辑');
+					$(this).addClass('hidden');
 				}
-			});
-		})
-		
-		//当日期改变时发送ajax
-		$('#ym').on('change', function(){
-			var date = $(this).val()
-			var isByMyId = $(this).attr("data-isbymyid")
-			var userName = $(this).attr("data-username")
-			window.location.href="${APP_PATH}/admin/wordAttendence/list?date="+date+"&isByMyId="+isByMyId+"&userName="+userName;
-		});
-		
-		var defaultDate = window.location.href;
-		var x = defaultDate.indexOf('date');
-		var y = defaultDate.substring (x+5,x+15);
-		$('#ym option').each(function(){
-			if($(this).val() === y){
-				$(this).attr('selected', true);
-			}
-		})
+			})
 			
-		
-		
-})
-	
-	function deleAll(){
-		//执行此方法，得到所选择的id
-		selectAllTips();
-		var ids = $('.ids').val();
-		$('.yes').click(function(){
-			 $.ajax({
-					url:'${APP_PATH}/admin/wordAttendence/dele',
-					type:'POST',
+			if($(this).html() === '编辑'){
+				$(this).html('确定');
+			}
+			else{
+				var changeTime = '';
+				var whichStandardTime = $(this).attr("data-status");
+				var prevaNodeSelect = $(this).parent().prev().find('select');
+				prevaNodeSelect.each(function(){
+					changeTime += $(this).val();
+				})
+				//在这里发送ajax请求
+				 $.ajax({
+					url:'${APP_PATH}/admin/wordAttendence/updateStanderTime',
 					data:{
-						'ids':ids
+						'changeTime':changeTime,
+						'whichStandardTime':whichStandardTime
 					},
+					type:'POST',
 					success:function(result){
-						if (result.code==100) {
-							alert("删除成功");
-						}
+						btn.parent().prevAll('div.time-work').find('span.work-time').html(result.extend.changeTime);
 					}
-				})  
+				}) 
+				$(this).html('编辑');
+			}
 		});
-	}
+	})
+			
+	//当日期改变时发送ajax
+	$('#ym').on('change', function(){
+		var date = $(this).val();
+		var isByMyId = $(this).attr("data-isbymyid")
+		var userName = $(this).attr("data-username")
+		window.location.href="${APP_PATH}/admin/wordAttendence/list?date="+date+"&isByMyId="+isByMyId+"&userName="+userName;
+	});
 	
+	//选项卡赋默认值
+	var defaultDate = window.location.href;
+	var x = defaultDate.indexOf('date');
+	var y = defaultDate.substring (x+5,x+15);
+	$('#ym option').each(function(){
+		if($(this).val() === y){
+			$(this).attr('selected', true);
+		}
+	})
 	
+})
+
+//批量删除
+function deleAll(){
+	selectAllTips();
+	var ids = $('.ids').val();
+	$('.yes').click(function(){
+	$.ajax({
+		url:'${APP_PATH}/admin/wordAttendence/dele',
+		type:'POST',
+		data:{
+			'ids':ids
+		},
+		success:function(result){
+			if (result.code==100) {
+				alert("删除成功");
+			}
+		}
+		})  
+	});
+}
+
+//请求图表数据的ajax
+	$.ajax({
+		url:,
+		type:,
+		data:,
+		success:function(result)
+	    myChart.setOption({
+	        series: [{
+	            // 根据名字对应到相应的系列
+	            name: '销量',
+	            data: result.data
+	        }]
+	    });
+	})
 </script>
 
 <body class="bg-common">
@@ -312,7 +321,8 @@
         <div class="col-md-4 ">
           <div class="panel">
             <div class="panel-body">
-              <div class="blog-post">
+              <div class="blog-post clearfix">
+               <div class="col-md-4 month-count">
                 <h3>当月小计</h3>
                 <ul>
 				  <li>出勤天数: ${workAttendenceByMonthStatistics.countDays} 天</li>
@@ -330,8 +340,63 @@
                   <li>旷工：${workAttendenceByMonthStatistics.absenteeism}</li>
                   
                   <li>加班：${workAttendenceByMonthStatistics.sumOverTime}</li>
-                
                 </ul>
+               </div>
+               <div class="col-md-8 count-chart">
+               		<div class="main" id="main" style="width: 100%; height: 200px; margin-top: 15px;"></div>
+               		<script type="text/javascript">
+               	
+                 // 基于准备好的dom，初始化echarts实例
+                 var myChart = echarts.init(document.getElementById('main'));
+
+                 // 指定图表的配置项和数据
+                 var option = {
+                		    tooltip: {
+                		        trigger: 'item',
+                		        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                		    },
+                		    legend: {
+                		        orient: 'vertical',
+                		        x: 'right',
+                		        data:['正常','迟到','早退','加班']
+                		    },
+                		    series: [
+                		        {
+                		            name:'出勤次数',
+                		            type:'pie',
+                		            radius: ['50%', '70%'],
+                		            avoidLabelOverlap: false,
+                		            label: {
+                		                normal: {
+                		                    show: false,
+                		                    position: 'center'
+                		                },
+                		                emphasis: {
+                		                    show: true,
+                		                    textStyle: {
+                		                        fontSize: '14',
+                		                        fontWeight: 'bold'
+                		                    }
+                		                }
+                		            },
+                		            labelLine: {
+                		                normal: {
+                		                    show: false
+                		                }
+                		            },
+                		            data:[
+                		                {value:335, name:'正常'},
+                		                {value:310, name:'迟到'},
+                		                {value:234, name:'早退'},
+                		                {value:135, name:'加班'},
+                		            ]
+                		        }
+                		    ]
+                		};
+                 // 使用刚指定的配置项和数据显示图表。
+                 myChart.setOption(option);
+             </script>				
+               </div>
               </div>
             </div>
           </div>

@@ -1127,6 +1127,9 @@ ul.p-info .title, ul.p-info .desk {
     line-height: 35px;
     color: #837f7e;
 }
+.month-count,.count-chart{
+	padding: 0;
+}
 .time-editor{
 	padding-left: 0;
 }
