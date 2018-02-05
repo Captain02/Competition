@@ -27,11 +27,11 @@ public class WorkAtendenceDaoTest {
 			}
 		}
 	}
-	@Test
+	/*@Test
 	public void selectNormalByMonthStatistics() {
 		Integer integer = workAttendanceMapper.selectNormalByMonthStatistics("2018-02-02");
 		System.out.println(integer);
-	}
+	}*/
 	
 	/*@Test
 	public void selectCountByDate() {
