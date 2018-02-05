@@ -120,21 +120,6 @@ function deleAll(){
 		})  
 	});
 }
-
-/* //请求图表数据的ajax
-	$.ajax({
-		url:,
-		type:,
-		data:,
-		success:function(result)
-	    myChart.setOption({
-	        series: [{
-	            // 根据名字对应到相应的系列
-	            name: '销量',
-	            data: result.data
-	        }]
-	    });
-	}) */
 </script>
 
 <body class="bg-common">
@@ -313,19 +298,19 @@ function deleAll(){
 						</div>
 					</div>
 					<div class="col-md-4">
-		<c:if test="${isByMyId!=0}">
-          <div class="panel">
-            <div class="panel-body">
-              <div class="blog-post">
-                <div class="text-center"> <a  id="js-clock" class="btn btn-info">打卡<br>
-                  <span></span></a> 
-                </div>
-              </div>
-            </div>
-          </div>
-          </c:if>
-          
-        </div>
+						<c:if test="${isByMyId!=0}">
+				          <div class="panel">
+				            <div class="panel-body">
+				              <div class="blog-post">
+				                <div class="text-center"> <a  id="js-clock" class="btn btn-info">打卡<br>
+				                  <span></span></a> 
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				          </c:if>
+
+        			</div>
         <div class="col-md-4 ">
           <div class="panel">
             <div class="panel-body">

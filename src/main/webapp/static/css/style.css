@@ -21,11 +21,13 @@ body a, .toggle-btn span {
 	-moz-transition: 0.2s all;
 	-ms-transition: 0.2s all;
 }
-body a:hover{
+
+body a:hover {
 	text-decoration: underline;
 	cursor: pointer;
 }
-body{
+
+body {
 	overflow-x: hidden;
 }
 /* clearfix */
@@ -52,11 +54,6 @@ body {
 
 .bg-common {
 	background-color: #424f63;
-}
-
-/* index start */
-.row {
-	margin: 0;
 }
 
 .left-side {
@@ -644,21 +641,25 @@ ul.p-info .title, ul.p-info .desk {
 	overflow: hidden;
 	border-bottom: 1px solid #eee;
 }
-.dropdown-list li a{
+
+.dropdown-list li a {
 	color: #65CEA7;
 }
-.dropdown-list li a:hover{
+
+.dropdown-list li a:hover {
 	cursor: pointer;
 	color: #000;
 	text-decoration: underline;
 }
+
 .dropdown-list li a span.label {
 	float: left;
 	margin-right: 10px;
 	padding: 5px;
 	width: 20px;
 }
-.panel-heading a{
+
+.panel-heading a {
 	color: #65CEA7;
 }
 
@@ -686,14 +687,17 @@ ul.p-info .title, ul.p-info .desk {
 .blog .auth-row a {
 	color: #c8c8c8;
 }
-.page-nav-area{
+
+.page-nav-area {
 	margin-bottom: 15px;
 }
-.reply-reply-username{
+
+.reply-reply-username {
 	color: #999;
 	font-size: 12px;
 }
-.fabiao-reply{
+
+.fabiao-reply {
 	text-transform: uppercase;
 	color: #535351;
 	font-size: 14px;
@@ -1019,7 +1023,8 @@ ul.p-info .title, ul.p-info .desk {
 .core-reply-content li {
 	padding-top: 10px;
 }
-.editor-container{
+
+.editor-container {
 	position: relative;
 }
 
@@ -1070,77 +1075,154 @@ ul.p-info .title, ul.p-info .desk {
 	background-color: #f7f8fa;
 	padding: 10px;
 }
-.table-notice .notice-text{
-	text-align:center;
+
+.table-notice .notice-text {
+	text-align: center;
 	width: 500px;
-	
 }
-.notice-text a{
+
+.notice-text a {
 	color: #7a7676;
 	display: inline-block;
 	width: 300px;
 	text-align: left;
 }
-.notice-text a:hover{
+
+.notice-text a:hover {
 	cursor: pointer;
 	text-decoration: underline;
 	color: #65CEA7;
 }
-.notice-info ul li div{
+
+.notice-info ul li div {
 	text-align: left;
 }
 
 #editor {
-    height: 35px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    color: #555;
-    display: block;
-    font-size: 14px;
-    line-height: 1.42857;
-    padding: 6px 12px;
-    width: 100%;
+	height: 35px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	display: block;
+	font-size: 14px;
+	line-height: 1.42857;
+	padding: 6px 12px;
+	width: 100%;
 }
+
 #js-clock {
-    font-size: 26px;
-    text-align: center;
-    border-radius: 50%;
-    display: inline-block;
-    height: 150px;
-    width: 150px;
-    line-height: 32px;
-    padding: 46px 0 0 0;
-    text-decoration: none;
+	font-size: 26px;
+	text-align: center;
+	border-radius: 50%;
+	display: inline-block;
+	height: 150px;
+	width: 150px;
+	line-height: 32px;
+	padding: 46px 0 0 0;
+	text-decoration: none;
 }
+
 .blog-post h3 {
-    font-size: 16px;
-    text-transform: uppercase;
-    color: #424242;
-    font-weight: bold;
-    padding-top: 0px;
-    margin-top: 0;
-    margin-bottom: 10px;
+	font-size: 16px;
+	text-transform: uppercase;
+	color: #424242;
+	font-weight: bold;
+	padding-top: 0px;
+	margin-top: 0;
+	margin-bottom: 10px;
 }
+
 .blog-post ul li {
-    line-height: 35px;
-    color: #837f7e;
+	line-height: 35px;
+	color: #837f7e;
 }
-.month-count,.count-chart{
+
+.month-count, .count-chart {
 	padding: 0;
 }
-.time-editor{
+
+.time-editor {
 	padding-left: 0;
 }
-.time-editor li div{
+
+.time-editor li div {
 	padding-left: 0;
 	padding-right: 0;
 }
-.editor-time a.editor-time-btn{
+
+.editor-time a.editor-time-btn {
 	font-size: 12px;
 	color: #286090;
 }
-.editor-time{
+
+.editor-time {
 	float: right;
+}
+
+.charts-area {
+	position: fixed;
+	right: 0;
+	top: 50px;
+	width: 250px;
+	height: 100%;
+	background-color: #424f63;
+}
+
+.charts-opearte li {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px #333 solid;
+}
+
+.charts-opearte li.active {
+	border-bottom: 1px #ccc solid;
+}
+
+.charts-opearte li span {
+	color: white;
+}
+
+.charts-area h5 {
+	color: white;
+	font-weight: bold;
+	line-height: 45px;
+}
+
+.friend-img img {
+	width: 35px;
+	height: 35px;
+}
+
+.charts-myfriends-text p.charts-text-abbr {
+	line-height: 20px;
+	color: #ccc;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.charts-myfriends-text span.label-new-info-num {
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	width: 25px;
+	height: 15px;
+	background-color: #d9534f;
+	color: white;
+	font-size: 10px;
+	text-align: center;
+}
+.charts-myfriends-list li div.row:hover{
+	background-color: rgb(53, 63, 79);
+	cursor: pointer;
+}
+.charts-myfriends-list li div.row{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.charts-friends-info-abbr {
+	padding-right: 10px;
+	color: #65cea7;
 }

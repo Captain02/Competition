@@ -260,6 +260,47 @@
 
 			</div>
 		</div>
+	
+		<div class="charts-area">
+		    <div class="col-md-12">
+			   <div class="row">
+			   	 <ul class="charts-opearte clearfix">
+					<li class="col-md-4 active"><span class="fa fa-comment-o" title="联系人"></span></li>
+					<li class="col-md-4"><span class="fa fa-comment-o" title="联系人"></span></li>
+					<li class="col-md-4"><span class="fa fa-comment-o" title="联系人"></span></li>
+				</ul>
+			   </div>
+		    </div>
+			<div class="col-md-12 friends-title">
+				<h5>我的好友</h5>
+			</div>
+			<div class="col-md-12" style="padding-right: 0px;">
+			  <ul class="charts-myfriends-list">
+			  	<li>
+			  		<div class="row">
+			  			<div class="col-md-2">
+				  		<div class="person-img friend-img clearfix">
+				  			<img src="/OA02/personHeadFile/140.png" alt="" />
+				  		</div>
+			  		</div>
+			  	   <div class="col-md-10">
+			  	   	<div class="charts-myfriends-text">
+		  			<p class="charts-friends-info-abbr clearfix">
+	  					admin
+	  					<span class="label-new-info-num pull-right">99+</span>
+		  				
+		  			</p>
+		  			<p class="charts-text-abbr">
+		  				有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙
+		  			</p>
+			  		</div>
+			  	   </div>
+			  		</div>
+			  	</li>
+			  </ul>
+			</div>
+		</div>
+	
 	</section>
 	
 <!-- 模态框 -->
