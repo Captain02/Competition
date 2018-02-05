@@ -2,7 +2,9 @@
  * 
  */
 $(function(){
-	<!-- 实现全选/反选 -->
+	if(document.getElementById('selectAll') == null){
+		return false;
+	}
 	var selectAll = document.getElementById('selectAll');
     var selectItems = document.getElementsByName('selectItem');
 
@@ -27,9 +29,7 @@ $(function(){
 function selectAllTips(){
 	var empNames = "";
 	var ids = "";
-	
 	var ifHavechecked = $('tbody tr td input[type="checkbox"]:checked');
-	
 	//一旦进入判断，就说明没有复选框被选中
 	if(ifHavechecked.length == 0){
 		$('#myModal').modal('show');
