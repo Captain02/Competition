@@ -121,7 +121,7 @@ function deleAll(){
 	});
 }
 
-//请求图表数据的ajax
+/* //请求图表数据的ajax
 	$.ajax({
 		url:,
 		type:,
@@ -134,7 +134,7 @@ function deleAll(){
 	            data: result.data
 	        }]
 	    });
-	})
+	}) */
 </script>
 
 <body class="bg-common">
@@ -224,10 +224,14 @@ function deleAll(){
 											border="1">
 											<thead>
 												<tr>
+												<c:if test="${isByMyId==0}">
 												 	<th>
 												 		<input type="checkbox" name="selectAll" class="selectAll" id="selectAll">
 												 	</th>
+												 </c:if>
+												 <c:if test="${isByMyId==0}">
 													<th>姓名</th>
+												</c:if>
 													<th>开始时间</th>
 													<th>结束时间</th>
 													<th>日期</th>
@@ -239,10 +243,14 @@ function deleAll(){
 
 												<c:forEach items="${pageInfo.list}" var="WorkAttendenceDisplay">
 												<tr>
+												<c:if test="${isByMyId==0}">
 												 <td>
 	                                                   <input type="checkbox" name="selectItem" class="selectItem">
 	                                                </td>
+	                                            </c:if>
+	                                            <c:if test="${isByMyId==0}">
 													<td>${WorkAttendenceDisplay.userName }<input type="hidden" value="${WorkAttendenceDisplay.id}"></td>
+												</c:if>
 													<td>${WorkAttendenceDisplay.startdate }</td>
 													<td>${WorkAttendenceDisplay.enddate }</td>
 													<td>${WorkAttendenceDisplay.date }</td>
@@ -385,10 +393,10 @@ function deleAll(){
                 		                }
                 		            },
                 		            data:[
-                		                {value:335, name:'正常'},
-                		                {value:310, name:'迟到'},
-                		                {value:234, name:'早退'},
-                		                {value:135, name:'加班'},
+                		            	{value:'${workAttendenceByMonthStatistics.normal}', name:'正常'},
+                		                {value:'${workAttendenceByMonthStatistics.late}', name:'迟到'},
+                		                {value:'${workAttendenceByMonthStatistics.leave}', name:'早退'},
+                		                {value:'${workAttendenceByMonthStatistics.overTime}', name:'加班'},
                 		            ]
                 		        }
                 		    ]
