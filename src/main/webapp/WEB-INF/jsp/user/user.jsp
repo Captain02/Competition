@@ -74,7 +74,7 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
     });
     
     //添加好友
-    function addFriend(){
+    function addFriend(ele){
     	var path = '${APP_PATH}';
 		var uid='${uid}';
 		if(uid==-1){
@@ -82,7 +82,8 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
 		}
 		var from=uid;
 		var fromName='${name}';
-		var toId=
+		var toId=ele.attr("data-userId");
+		alert(toId);
 		var websocket;
 		if ('WebSocket' in window) {
 			// 创建一个Socket实例  ws表示WebSocket协议
@@ -224,7 +225,7 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
                                                                 </li>
                                                                 <li role="separator" class="divider"></li>
                                                                 <li>
-                                                                    <a onclick="addFriend()" data-userId="${user.id}">添加好友</a>
+                                                                    <a onclick="addFriend(this)" data-userId="${user.id}">添加好友</a>
                                                                 </li>
                                                                 <li role="separator" class="divider"></li>
                                                                 <li>
