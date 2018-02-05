@@ -96,13 +96,13 @@
   	where workAttendenceId = #{id}
   </select>
   
-  <!-- Integer selectCountNumByMonthStatistics(String date); -->
+  <!-- Integer selectCountNumByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectCountNumByMonthStatistics" resultType="Integer">
 	  SELECT
 		COUNT(*)
 		FROM workAttendencePunishment wap
 		LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
-	  WHERE wa.date like '%' #{date} '%'
+	  WHERE wa.userId=#{userId} AND wa.date like '%' #{date} '%'
   </select>
   
 </mapper>

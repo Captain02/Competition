@@ -2,6 +2,8 @@ package com.hanming.oa.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.WorkAttendencePunishment;
 
 public interface WorkAttendencePunishmentMapper {
@@ -21,5 +23,5 @@ public interface WorkAttendencePunishmentMapper {
 
 	Integer selectByWorkAttendanceId(Integer id);
 
-	Integer selectCountNumByMonthStatistics(String date);
+	Integer selectCountNumByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId);
 }

@@ -145,66 +145,66 @@
   	</where>
   </select>
   
-  <!-- Integer selectNormalByMonthStatistics(String date); -->
+  <!-- Integer selectNormalByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectNormalByMonthStatistics" resultType="Integer">
   	SELECT
 	COUNT(*)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
 	<where>
-		wap.state='正常' AND wa.date like '%' #{date} '%'
+		wa.userId = #{userId} AND wap.state='正常' AND wa.date like '%' #{date} '%'
 	</where>
   </select>
   
-  <!-- Integer Integer selectLateByMonthStatistics(String date); -->
+  <!-- Integer selectLateByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectLateByMonthStatistics" resultType="Integer">
   	SELECT
 	COUNT(*)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
 	<where>
-		wap.state='迟到' AND wa.date like '%' #{date} '%'
+		wa.userId = #{userId} AND wap.state='迟到' AND wa.date like '%' #{date} '%'
 	</where>
   </select>
   
-  <!-- Integer Integer selectLeaveByMonthStatistics(String date); -->
+  <!-- Integer selectLeaveByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectLeaveByMonthStatistics" resultType="Integer">
   	SELECT
 	COUNT(*)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
 	<where>
-		wap.state='早退' AND wa.date like '%' #{date} '%'
+		wa.userId = #{userId} AND wap.state='早退' AND wa.date like '%' #{date} '%'
 	</where>
   </select>
   
-  <!-- Integer Integer Integer selectOverTimeByMonthStatistics(String date); -->
+  <!-- Integer selectOverTimeByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectOverTimeByMonthStatistics" resultType="Integer">
   	SELECT
 	COUNT(*)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
 	<where>
-		wap.state='加班' AND wa.date like '%' #{date} '%'
+		wa.userId = #{userId} AND wap.state='加班' AND wa.date like '%' #{date} '%'
 	</where>
   </select>
   
-  <!-- Long selectpunishmentTime(String date); -->
+  <!-- Long selectpunishmentTime(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectpunishmentTime" resultType="Long">
   	SELECT 
 	SUM(wap.punishmentTime)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
-	WHERE wap.state != '加班' AND wa.date like '%' #{date} '%'
+	WHERE wa.userId=#{userId} AND wap.state != '加班' AND wa.date like '%' #{date} '%'
   </select>
   
-  <!-- Long selectsumOverTime(String date); -->
+  <!--Long selectsumOverTime(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectsumOverTime" resultType="Long">
   	SELECT 
 	SUM(wap.punishmentTime)
 	FROM workAttendencePunishment wap
 	LEFT JOIN workattendance wa ON wap.workAttendenceId=wa.id
-	WHERE wap.state = '加班' AND wa.date like '%' #{date} '%'
+	WHERE wa.userId=#{userId} AND wap.state = '加班' AND wa.date like '%' #{date} '%'
   </select>
   
   <!-- Integer selectCountByDate(@Param("nowDate") String nowDate, @Param("userId") Integer userId); -->
@@ -235,11 +235,11 @@
     </foreach>
   </delete>
   
-  <!-- Integer selectCountNumByMonthStatistics(String date); -->
+  <!-- Integer selectCountNumByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId); -->
   <select id="selectCountNumByMonthStatistics" resultType="Integer">
   select count(*)
   from workattendance wa
-  WHERE wa.date like '%' #{date} '%'
+  WHERE wa.userId = #{userId} AND wa.date like '%' #{date} '%'
   </select>
   
   <!-- WorkAttendance selectByUserIdAndDate(@Param("userId")Integer userId, @Param("nowDate")String date); -->

@@ -29,15 +29,15 @@ public class WorkAttendenceService {
 		return list;
 	}
 
-	public WorkAttendenceByMonthStatistics getWorkAttendenceByMonthStatistics(String date) {
-		Integer normalByMonthStatistics = workAttendanceMapper.selectNormalByMonthStatistics(date);
-		Integer lateByMonthStatistics = workAttendanceMapper.selectLateByMonthStatistics(date);
-		Integer leaveByMonthStatistics = workAttendanceMapper.selectLeaveByMonthStatistics(date);
-		Integer overTimeByMonthStatistics = workAttendanceMapper.selectOverTimeByMonthStatistics(date);
-		Integer CountNumByMonthStatistics = workAttendencePunishmentMapper.selectCountNumByMonthStatistics(date);
-		Integer CountDaysByMonthStatistics = workAttendanceMapper.selectCountNumByMonthStatistics(date);
-		Long punishmentTime = workAttendanceMapper.selectpunishmentTime(date);
-		Long sumOverTime = workAttendanceMapper.selectsumOverTime(date);
+	public WorkAttendenceByMonthStatistics getWorkAttendenceByMonthStatistics(String date, Integer userId) {
+		Integer normalByMonthStatistics = workAttendanceMapper.selectNormalByMonthStatistics(date,userId);
+		Integer lateByMonthStatistics = workAttendanceMapper.selectLateByMonthStatistics(date,userId);
+		Integer leaveByMonthStatistics = workAttendanceMapper.selectLeaveByMonthStatistics(date,userId);
+		Integer overTimeByMonthStatistics = workAttendanceMapper.selectOverTimeByMonthStatistics(date,userId);
+		Integer CountNumByMonthStatistics = workAttendencePunishmentMapper.selectCountNumByMonthStatistics(date,userId);
+		Integer CountDaysByMonthStatistics = workAttendanceMapper.selectCountNumByMonthStatistics(date,userId);
+		Long punishmentTime = workAttendanceMapper.selectpunishmentTime(date,userId);
+		Long sumOverTime = workAttendanceMapper.selectsumOverTime(date,userId);
 
 		WorkAttendenceByMonthStatistics workAttendenceByMonthStatistics = new WorkAttendenceByMonthStatistics();
 		workAttendenceByMonthStatistics.setNormal(normalByMonthStatistics);

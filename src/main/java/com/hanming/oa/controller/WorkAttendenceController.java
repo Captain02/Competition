@@ -45,10 +45,10 @@ public class WorkAttendenceController {
 			@RequestParam(value = "isByMyId", defaultValue = "0") Integer isByMyId,
 			@RequestParam(value = "date", defaultValue = "") String date,
 			@RequestParam(value = "userName", defaultValue = "姓名") String userName, Model model) {
-		Integer id = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
 		if (isByMyId != 0) {
-			isByMyId = id;
+			isByMyId = userId;
 		}
 		if ("".equals(date)) {
 			date = DateTool.dateToYearMonthDay(new Date()).substring(0, 7);
@@ -60,7 +60,7 @@ public class WorkAttendenceController {
 		pageInfo = new PageInfo<WorkAttendenceDisplay>(list, 5);
 
 		WorkAttendenceByMonthStatistics workAttendenceByMonthStatistics = WorkAttendenceService
-				.getWorkAttendenceByMonthStatistics(date);
+				.getWorkAttendenceByMonthStatistics(date,userId);
 
 		List<String> dateList = WorkAttendenceService.selectDateList(isByMyId, userName);
 

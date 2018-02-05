@@ -24,15 +24,15 @@ public interface WorkAttendanceMapper {
 	List<WorkAttendenceDisplay> list(@Param("date") String date, @Param("isByMyId") Integer isByMyId,
 			@Param("userName") String userName);
 
-	Integer selectNormalByMonthStatistics(String date);
+	Integer selectNormalByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId);
 
-	Integer selectLateByMonthStatistics(String date);
+	Integer selectLateByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId);
 
-	Integer selectLeaveByMonthStatistics(String date);
+	Integer selectLeaveByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId);
 
-	Integer selectOverTimeByMonthStatistics(String date);
+	Integer selectOverTimeByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId);
 
-	Long selectpunishmentTime(String date);
+	Long selectpunishmentTime(@Param("date")String date, @Param("userId")Integer userId);
 
 	Integer selectCountByDate(@Param("nowDate") String nowDate, @Param("userId") Integer userId);
 
@@ -40,12 +40,12 @@ public interface WorkAttendanceMapper {
 
 	void deleByIds(List<Integer> idsInt);
 
-	Integer selectCountNumByMonthStatistics(String date);
+	Integer selectCountNumByMonthStatistics(@Param("date")String date, @Param("userId")Integer userId);
 
 	WorkAttendance selectByUserIdAndDate(@Param("userId")Integer userId, @Param("nowDate")String date);
 
 	List<String> selectDateList(@Param("isByMyId")Integer isByMyId, @Param("userName")String userName);
 
-	Long selectsumOverTime(String date);
+	Long selectsumOverTime(@Param("date")String date, @Param("userId")Integer userId);
 
 }
