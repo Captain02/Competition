@@ -331,7 +331,7 @@ function deleAll(){
             <div class="panel-body">
               <div class="blog-post clearfix">
                <div class="col-md-4 month-count">
-                <h3>当月小计</h3>
+                <h3>我的当月小计</h3>
                 <ul>
 				  <li>出勤天数: ${workAttendenceByMonthStatistics.countDays} 天</li>
 					                
