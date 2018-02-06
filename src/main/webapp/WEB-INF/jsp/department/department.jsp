@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>汉明OA部门管理</title>
+    <title>部门管理</title>
 	<%
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
@@ -243,8 +243,6 @@ $(function(){
 </div>
 
 
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
  </body>
 
 </html>

@@ -16,7 +16,6 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 
 </head>
 
@@ -261,7 +260,7 @@
 			</div>
 		</div>
 	
-		<div class="charts-area">
+		<div class="charts-area" id="chat">
 		    <div class="col-md-12">
 			   <div class="row">
 			   	 <ul class="charts-opearte clearfix">

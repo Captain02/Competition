@@ -20,8 +20,7 @@
 
 <!-- 用于前端正则校验和后端Ajax校验的脚本 -->
 <script src="${APP_PATH}/static/js/regAjax.js"></script>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+
 <script>
 $(function(){
 	ShowEle('.result','hide','.result2','hide');

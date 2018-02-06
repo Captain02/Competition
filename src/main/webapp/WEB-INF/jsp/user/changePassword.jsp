@@ -18,8 +18,7 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 用于前端正则校验和后端Ajax校验的脚本 -->
 <script src="${APP_PATH}/static/js/regAjax.js"></script>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
+
 <script type="text/javascript">
 function changePassword() {
 	//判定页面上是否有错误信息

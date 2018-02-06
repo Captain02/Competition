@@ -205,7 +205,7 @@ body {
 	color: #000;
 	display: inline-block;
 	line-height: 54px;
-	padding: 0 10px;
+	padding: 0 15px;
 }
 
 .login-info>li>a:hover {
@@ -625,6 +625,87 @@ ul.p-info .title, ul.p-info .desk {
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
+}
+
+.login-info .dropdown-menu {
+	border: 0;
+	margin-top: 0px;
+	-moz-border-radius: 2px 0 2px 2px;
+	-webkit-border-radius: 2px 0 2px 2px;
+	border-radius: 2px 0 2px 2px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	padding: 5px;
+}
+
+
+.login-info .dropdown-menu li.new{
+	padding: 10px 15px;
+}
+.login-info .dropdown-menu li.new a{
+	color: #7a7676;
+}
+
+.dropdown-menu.pull-right {
+	right: 0;
+	left: auto;
+}
+
+.login-info .dropdown-menu:after {
+	border-bottom: 6px solid #65cea7;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	content: "";
+	display: inline-block;
+	right: 10px;
+	position: absolute;
+	top: -6px;
+}
+
+.login-info .dropdown-menu-head {
+	padding: 0;
+	min-width: 300px;
+}
+
+.dropdown-menu-head .title {
+	background: #65cea7;
+	color: #fff;
+	padding: 15px;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 0;
+}
+
+.dropdown-list span.myinfo-type {
+	width: 36px;
+	float: left;
+}
+
+.dropdown-list span.myinfo-type img {
+	width: 100%;
+	display: block;
+	vertical-align: middle;
+}
+
+.dropdown-list span.myinfo-desc {
+	margin-left: 45px;
+	display: block;
+}
+
+.dropdown-list span.myinfo-desc span {
+	display: block;
+}
+
+.dropdown-list span.myinfo-desc span.myinfo-name {
+	font-size: 13px;
+	line-height: 21px;
+}
+
+.dropdown-list span.myinfo-desc span.myinfo-msg {
+	font-size: 12px;
+	line-height: normal;
+	color: #999;
 }
 
 .profile-pic img {
@@ -1168,6 +1249,7 @@ ul.p-info .title, ul.p-info .desk {
 	width: 250px;
 	height: 100%;
 	background-color: #424f63;
+	display: none;
 }
 
 .charts-opearte li {
@@ -1214,14 +1296,17 @@ ul.p-info .title, ul.p-info .desk {
 	font-size: 10px;
 	text-align: center;
 }
-.charts-myfriends-list li div.row:hover{
+
+.charts-myfriends-list li div.row:hover {
 	background-color: rgb(53, 63, 79);
 	cursor: pointer;
 }
-.charts-myfriends-list li div.row{
+
+.charts-myfriends-list li div.row {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
 .charts-friends-info-abbr {
 	padding-right: 10px;
 	color: #65cea7;

@@ -16,7 +16,6 @@
    <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 用于前端正则校验和后端Ajax校验的脚本 -->
 <script src="${APP_PATH}/static/js/regAjax.js"></script>
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
 
 		//部门添加

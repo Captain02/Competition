@@ -17,8 +17,6 @@ pageContext.setAttribute("APP_PATH", request.getContextPath());
 <link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <!-- 动态显示流程审批人数量 -->
 <script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
 <script type="text/javascript">

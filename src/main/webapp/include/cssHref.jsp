@@ -8,4 +8,5 @@
     
     <script src="${APP_PATH}/static/js/jquery.min.js"></script>
     <script src="${APP_PATH}/static/js/bootstrap.min.js"></script>
-     <script src="${APP_PATH}/static/js/change.js"></script>
+    <script src="${APP_PATH}/static/js/change.js"></script>
+    <script src="${APP_PATH}/static/js/ctrolButton.js"></script>

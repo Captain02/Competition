@@ -14,8 +14,6 @@
 	
 	<!-- 字体图标 -->
 	<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-	<!-- 模态框控制 -->
-	<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 	<!-- 富文本编辑器 -->
 	<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 	<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>

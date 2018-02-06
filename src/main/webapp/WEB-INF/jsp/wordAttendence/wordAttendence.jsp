@@ -16,7 +16,6 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 
 <script src="${APP_PATH}/static/js/echarts.js"></script>

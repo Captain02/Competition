@@ -20,8 +20,6 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 添加审批人 -->
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <!-- 动态显示流程审批人数量 -->
 <script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
 <script type="text/javascript">

@@ -63,8 +63,32 @@ $(function () {
         });
     }
     
-    //No.3 点赞效果
+    //No.4 显示会话栏效果
+    $('.btn-mycomment').click(function(){
+    	switch ($(this).attr('data-chat-status')) {
+		case 'true':
+			$('#chat').show(500);
+			$(this).attr('data-chat-status','flase');
+			break;
+		case 'flase':
+			$('#chat').hide(500);
+			$(this).attr('data-chat-status','true');
+			break;
+		default:
+			break;
+		}
+    })
+    
+    //No.5 获取通知消息
+    $('.normal-list .myinfo').each(function(){
+    	$(this).click(function(){
+    		$('#myModal').modal('show');
+    		ShowTips('.modal-title',$(this).find('span.myinfo-name').html(),'.modal-body',$(this).find('span.myinfo-msg').html());
+    		ShowEle('.yes','hide','.no','hide','.down','hide');
+    	})
+    })
 	
+    
   
 });
 //No.3 点赞效果

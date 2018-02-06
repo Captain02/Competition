@@ -18,9 +18,6 @@
                 <title>标签管理</title>
 
                 <jsp:include page="iniCssHref.jsp"></jsp:include>
-                <!-- 控制按钮的状态以及模态框展示的信息 -->
-                <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
-              
         </head>
 
         <body class="bg-common">

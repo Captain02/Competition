@@ -8,12 +8,38 @@
             <div class="content-head-right">
                 <ul class="login-info">
                     <li>
-                        <a href="">
-                            <i class="glyphicon glyphicon-envelope"></i>
-                        </a>
+                        <a class="fa fa-envelope-o btn-myinfo dropdown-toggle" title="消息" data-toggle="dropdown"></a>
+                        <div class="dropdown-menu dropdown-menu-head pull-right">
+                        	<h5 class="title">您有0最新消息</h5>
+                        	<ul class="dropdown-list normal-list" >
+                        		<li class="myinfo">
+                        			<a>
+                        				<span class="myinfo-type">
+                        					<img src="${APP_PATH}/personHeadFile/140.png" alt="" />
+                        				</span>
+                        				
+                        				<span class="myinfo-desc">
+                        					<span class="myinfo-name">李白</span>
+                        					<span class="myinfo-msg">请求添加我为好友</span>
+                        				</span>
+                        				
+                        			</a>
+                        		</li>
+                        		<li class="new">
+                        			<a href="">查看更多</a>
+                        		</li>
+                        	</ul>
+                        </div>
                     </li>
+                    
+                    
+                    
+                     <li>
+                        <a class="fa fa-comment-o btn-mycomment" title="会话" data-chat-status='true'></a>
+                    </li>
+                    
+                    
                     <li>
-                        <span>欢迎！</span>
                         <a href="#" data-toggle="dropdown">
                         <img alt="" src="${APP_PATH}/personHeadFile/<sh:principal property="headFile" />" class="person-img">
                             <sh:principal property="name"></sh:principal>
@@ -39,3 +65,7 @@
                     </li>
                 </ul>
             </div>
+            
+
+
+            

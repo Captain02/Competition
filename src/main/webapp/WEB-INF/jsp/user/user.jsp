@@ -25,8 +25,6 @@ String basePath2 = request.getScheme() + "://"
 <title>员工管理</title>
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script>
     <!-- 初始状态下，关闭按钮是隐藏的 -->
     $(function () {

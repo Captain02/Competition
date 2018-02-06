@@ -15,7 +15,6 @@
         %>
 
         <jsp:include page="iniCssHref.jsp"></jsp:include>
-        <script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script type="text/javascript">
 $(function(){
 	ShowEle('.down','hide');

@@ -13,7 +13,6 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<script src="${APP_PATH}/static/js/ctrolButton.js"></script>
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 
 <script type="text/javascript">
