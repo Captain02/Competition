@@ -3,7 +3,14 @@
 <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
         <%
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
-		%>
+        
+	String path = request.getContextPath();
+	String basePath = request.getServerName() + ":"
+			+ request.getServerPort() + path + "/";
+	String basePath2 = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
             <!-- 此处显示登录所用的用户名以及职位，用include标签包含进来 -->
             <div class="content-head-right">
                 <ul class="login-info">
@@ -68,8 +75,84 @@
             
             <script type="text/javascript">
             	function open(){
-            		console.log('打开')
+            		alert("a");
+            		<%-- $.ajax({
+            			url:"${APP_PATH}/admin/responseAddFridens",
+            			data:"",
+            			type:"GET",
+            			success:function(result){
+            				if (result.code==100) {
+            					var path = '<%=basePath%>';
+                        		//var uid=result.extend.uid;
+                        		//var fromId=result.extend.uid;
+                        		//var fromName=result.extend.name;
+                        		 --%>
+                        		/* var websocket;
+                        		if ('WebSocket' in window) {
+                        			// 创建一个Socket实例  ws表示WebSocket协议
+                        			websocket = new WebSocket("ws://" + path + "/ws?uid="+uid);
+                        		} else if ('MozWebSocket' in window) {
+                        			websocket = new MozWebSocket("ws://" + path + "/ws"+uid);
+                        		} else {
+                        			websocket = new SockJS("http://" + path + "/ws/sockjs"+uid);
+                        		}
+                        		websocket.onopen = function(event) {
+                        			console.log("WebSocket:已连接");
+                        			console.log(event);
+                        		};
+                        		 // 监听消息
+                        		websocket.onmessage = function(event) {
+                        			var data=JSON.parse(event.data);
+                        			console.log("WebSocket:收到一条消息",data);
+                        		};
+                        		websocket.onerror = function(event) {
+                        			console.log("WebSocket:发生错误 ");
+                        			console.log(event);
+                        		};
+                        		 // 监听Socket的关闭
+                        		websocket.onclose = function(event) {
+                        			console.log("WebSocket:已关闭");
+                        			console.log(event);
+                        		} */
+                        			/* function sendMsg(){
+                        				var v=$("#msg").val();
+                        				if(v==""){
+                        					return;
+                        				}else{
+                        					var data={};
+                        					data["from"]=from;
+                        					data["fromName"]=fromName;
+                        					data["to"]=to;
+                        					data["text"]=v;
+                        					 // 发送一个初始化消息
+                        					websocket.send(JSON.stringify(data));
+                        					$("#content").append("<div class='tmsg'><label class='name'>我&nbsp;"+new Date().Format("yyyy-MM-dd hh:mm:ss")+"</label><div class='tmsg_text'>"+data.text+"</div></div>");
+                        					scrollToBottom();
+                        					$("#msg").val("");
+                        				}
+                        			} */
+                        			
+                        			/* function send(event){
+                        				var code;
+                        				 if(window.event){
+                        					 code = window.event.keyCode; // IE
+                        				 }else{
+                        					 code = e.which; // Firefox
+                        				 }
+                        				if(code==13){ 
+                        					sendMsg();            
+                        				}
+                        			} */
+                        			
+					/* 		}
+            			}
+            		}) */
+            		
             	}
+            	
+            	
+            	
+            	
             	function close(){
             		console.log('关闭')
             	}
