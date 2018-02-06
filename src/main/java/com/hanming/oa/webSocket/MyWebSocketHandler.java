@@ -45,11 +45,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		//信息去向
 		Integer toUserId = (Integer) session.getAttributes().get("toUserId");
-		Integer fromUserId = (Integer) session.getAttributes().get("fromUserId");
+		//信息类型
 		String type = (String) session.getAttributes().get("type");
+		//信息发送人信息
 		User user = (User) session.getAttributes().get("user");
-		/* Integer fuid = (Integer) session.getAttributes().get("fuid"); */
 		// 判断是否重复登录
 		if (userSocketSessionMap.get(user.getId()) == null) {
 			userSocketSessionMap.put(user.getId(), session);
@@ -82,30 +83,26 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				if (addFriendsQueue != null) {
 
 					for (TextMessage textMessage : addFriendsQueue) {
-						Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
-						//if (msg.getFromId() == toUserId) {
-							sendMessageToUser(toUserId, addFriendsQueue.poll());
-							// blockingQueue.p
-						//}
+							sendMessageToUser(toUserId, textMessage);
 					}
 				}
 			}
 
-			// 某人离线消息
-			if ("talk".equals(type)) {
-				BlockingQueue<TextMessage> addFriendsQueue = userSocketQueue.get(toUserId);
-				if (addFriendsQueue != null) {
-					for (TextMessage textMessage : addFriendsQueue) {
-						Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
-						if (msg.getToId() == toUserId) {
-							if (msg.getFromId() == fromUserId) {
-								sendMessageToUser(toUserId, addFriendsQueue.poll());
-							}
-							// blockingQueue.p
-						}
-					}
-				}
-			}
+//			// 某人离线消息
+//			if ("talk".equals(type)) {
+//				BlockingQueue<TextMessage> addFriendsQueue = userSocketQueue.get(toUserId);
+//				if (addFriendsQueue != null) {
+//					for (TextMessage textMessage : addFriendsQueue) {
+//						Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
+//						if (msg.getToId() == toUserId) {
+//							if (msg.getFromId() == fromUserId) {
+//								sendMessageToUser(toUserId, addFriendsQueue.poll());
+//							}
+//							// blockingQueue.p
+//						}
+//					}
+//				}
+//			}
 
 			/*
 			 * BlockingQueue<TextMessage> blockingQueue = userSocketQueue.get(uid); if

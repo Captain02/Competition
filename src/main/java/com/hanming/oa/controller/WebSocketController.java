@@ -28,21 +28,15 @@ public class WebSocketController {
 		
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKey(fromUserId);
+		//信息类型
 		request.getSession().setAttribute("type", "addFrends");
+		//信息去向
 		request.getSession().setAttribute("toUserId", toUserId);
-		request.getSession().setAttribute("uid", fromUserId);
+		//发送人信息
 		request.getSession().setAttribute("user", user);
 		
-		/*Message message = new Message();
-		message.setFromId(fromUserId);
-		message.setFromName(user.getName());
-		message.setDate(DateTool.dateToString(new Date()));
-		message.setText(user.getName()+"请求加您为好友");
-		message.setToId(toUserId);
-		message.setType("添加好友");
-		
-		request.getSession().setAttribute("message", message);*/
-		
+		//用于前台添加连接和后台确认连接
+		request.getSession().setAttribute("uid", fromUserId);
 		
 		return Msg.success().add("uid", fromUserId).add("name", user.getName());
 	}
@@ -53,22 +47,11 @@ public class WebSocketController {
 	public Msg responseAddFridens(HttpServletRequest request) {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKey(fromUserId);
-		//User user = UserService.selectByPrimaryKey(fromUserId);
 		request.getSession().setAttribute("type", "responseAddFridens");
 		request.getSession().setAttribute("toUserId",fromUserId);
-		request.getSession().setAttribute("uid",fromUserId);
 		request.getSession().setAttribute("user", user);
+		//用于前台添加连接和后台确认连接
+		request.getSession().setAttribute("uid",fromUserId);
 		return Msg.success().add("uid", fromUserId);
 	}
-	
-//	//上线
-//	@ResponseBody
-//	@RequestMapping(value="/responseAddFridens",method=RequestMethod.GET)
-//	public Msg openContacts(HttpServletRequest request) {
-//		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-//		User user = UserService.selectByPrimaryKey(fromUserId);
-//		request.getSession().setAttribute("type", "responseAddFridens");
-//		//request.getSession().setAttribute("toUserId", toUserId);
-//		return Msg.success().add("uid", fromUserId).add("name", user.getName());
-//	}
 }

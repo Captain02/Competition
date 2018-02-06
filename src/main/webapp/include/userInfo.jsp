@@ -112,35 +112,6 @@
                         			console.log("WebSocket:已关闭");
                         			console.log(event);
                         		} 
-                        			/* function sendMsg(){
-                        				var v=$("#msg").val();
-                        				if(v==""){
-                        					return;
-                        				}else{
-                        					var data={};
-                        					data["from"]=from;
-                        					data["fromName"]=fromName;
-                        					data["to"]=to;
-                        					data["text"]=v;
-                        					 // 发送一个初始化消息
-                        					websocket.send(JSON.stringify(data));
-                        					$("#content").append("<div class='tmsg'><label class='name'>我&nbsp;"+new Date().Format("yyyy-MM-dd hh:mm:ss")+"</label><div class='tmsg_text'>"+data.text+"</div></div>");
-                        					scrollToBottom();
-                        					$("#msg").val("");
-                        				}
-                        			} */
-                        			
-                        			/* function send(event){
-                        				var code;
-                        				 if(window.event){
-                        					 code = window.event.keyCode; // IE
-                        				 }else{
-                        					 code = e.which; // Firefox
-                        				 }
-                        				if(code==13){ 
-                        					sendMsg();            
-                        				}
-                        			} */
                         			
 					 		}
             			}

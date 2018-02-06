@@ -23,25 +23,12 @@ public class HandShake implements HandshakeInterceptor {
 		if (request instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
-			// 标记用户
-			Integer uid = (Integer) session.getAttribute("uid");
-			String name = (String) session.getAttribute("name");
+			//信息类型
 			String type = (String) session.getAttribute("type");
+			//信息去向
 			Integer toUserId = (Integer) session.getAttribute("toUserId");
+			//信息发送人信息
 			User user = (User) session.getAttribute("user");
-			// Long fuid = (Long) session.getAttribute("fuid");
-			// 若果用户登录，允许登录
-			if (uid != null) {
-				// 将用户放入sockect处理器的回话（WebSocketSession）中
-				attributes.put("uid", uid);
-			} else {
-				// 用户没有登录，拒绝聊天，握手失败
-				return false;
-			}
-			if (name != null) {
-
-				attributes.put("name", name);
-			}
 			if (type != null) {
 
 				attributes.put("type", type);
@@ -53,6 +40,9 @@ public class HandShake implements HandshakeInterceptor {
 			if (user != null) {
 
 				attributes.put("user", user);
+			}else {
+				// 用户没有登录，拒绝聊天，握手失败
+				return false;
 			}
 		}
 		return true;
