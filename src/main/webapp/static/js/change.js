@@ -69,10 +69,12 @@ $(function () {
 		case 'true':
 			$('#chat').show(500);
 			$(this).attr('data-chat-status','flase');
+			open();
 			break;
 		case 'flase':
 			$('#chat').hide(500);
 			$(this).attr('data-chat-status','true');
+			close();
 			break;
 		default:
 			break;

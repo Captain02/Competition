@@ -66,6 +66,13 @@
                 </ul>
             </div>
             
-
+            <script type="text/javascript">
+            	function open(){
+            		console.log('打开')
+            	}
+            	function close(){
+            		console.log('关闭')
+            	}
+            </script>
 
             

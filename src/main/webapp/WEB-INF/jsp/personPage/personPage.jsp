@@ -16,7 +16,6 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-
 </head>
 
 <body class="bg-common">
