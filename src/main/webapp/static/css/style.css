@@ -1262,6 +1262,10 @@ ul.p-info .title, ul.p-info .desk {
 .charts-opearte li.active {
 	border-bottom: 1px #ccc solid;
 }
+.charts-opearte li:hover{
+	background-color: rgb(53,63,79);
+	cursor: pointer;
+}
 
 .charts-opearte li span {
 	color: white;

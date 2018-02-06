@@ -80,14 +80,28 @@ $(function () {
     })
     
     //No.5 获取通知消息
-    $('.normal-list .myinfo').each(function(){
+    $('.comment div li').each(function(){
     	$(this).click(function(){
     		$('#myModal').modal('show');
-    		ShowTips('.modal-title',$(this).find('span.myinfo-name').html(),'.modal-body',$(this).find('span.myinfo-msg').html());
+    		ShowTips('.modal-title',$(this).find('p.charts-friends-info-abbr').html(),'.modal-body',$(this).find('p.charts-text-abbr').html());
     		ShowEle('.yes','hide','.no','hide','.down','hide');
     	})
     })
 	
+    //No.6 会话列表的切换
+    $('.charts-opearte li').each(function(){
+    	$(this).click(function(){
+    		var btn = $(this);
+    		$('div.chat-info').each(function(){
+    			if($(this).attr('data-index') === btn.attr('data-index')){
+    				$(this).removeClass('hidden');
+    				$(this).siblings('div.chat-info').addClass('hidden');
+    				btn.addClass('active');
+    				btn.siblings().removeClass('active');
+    			}
+    		})
+    	})
+    })
     
   
 });

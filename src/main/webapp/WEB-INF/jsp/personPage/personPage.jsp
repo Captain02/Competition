@@ -261,43 +261,86 @@
 		</div>
 	
 		<div class="charts-area" id="chat">
+		
+		<!-- 操作start -->
 		    <div class="col-md-12">
 			   <div class="row">
 			   	 <ul class="charts-opearte clearfix">
-					<li class="col-md-4 active"><span class="fa fa-comment-o" title="联系人"></span></li>
-					<li class="col-md-4"><span class="fa fa-comment-o" title="联系人"></span></li>
-					<li class="col-md-4"><span class="fa fa-comment-o" title="联系人"></span></li>
+			   	 	<li class="col-md-4 active" title="消息" data-index="0"><span class="fa fa-comment-o" ></span></li>
+					<li class="col-md-4" title="联系人" data-index="1"><span class="fa fa-user-o"></span></li>
 				</ul>
 			   </div>
 		    </div>
-			<div class="col-md-12 friends-title">
-				<h5>我的好友</h5>
-			</div>
-			<div class="col-md-12" style="padding-right: 0px;">
-			  <ul class="charts-myfriends-list">
-			  	<li>
-			  		<div class="row">
-			  			<div class="col-md-2">
-				  		<div class="person-img friend-img clearfix">
-				  			<img src="/OA02/personHeadFile/140.png" alt="" />
+		 <!-- 操作end -->
+		 
+		 <!-- comment start -->
+				<div class="chat-info comment clearfix" data-index="0">
+				<div class="col-md-12 friends-title">
+					<h5>消息</h5>
+				</div>
+				<div class="col-md-12" style="padding-right: 0px;">
+				  <ul class="charts-myfriends-list">
+				  	<li>
+				  		<div class="row">
+				  			<div class="col-md-2">
+					  		<div class="person-img friend-img clearfix">
+					  			<img src="/OA02/personHeadFile/140.png" alt="" />
+					  		</div>
 				  		</div>
-			  		</div>
-			  	   <div class="col-md-10">
-			  	   	<div class="charts-myfriends-text">
-		  			<p class="charts-friends-info-abbr clearfix">
-	  					admin
-	  					<span class="label-new-info-num pull-right">99+</span>
-		  				
-		  			</p>
-		  			<p class="charts-text-abbr">
-		  				有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙
-		  			</p>
-			  		</div>
-			  	   </div>
-			  		</div>
-			  	</li>
-			  </ul>
+				  	   <div class="col-md-10">
+				  	   	<div class="charts-myfriends-text">
+			  			<p class="charts-friends-info-abbr clearfix">
+		  					admin
+		  					<span class="label-new-info-num pull-right">99+</span>
+			  			</p>
+			  			<p class="charts-text-abbr">
+			  				请求添加我为好友
+			  			</p>
+				  		</div>
+				  	   </div>
+				  		</div>
+				  	</li>
+				  </ul>
+				</div>
 			</div>
+			<!-- comment end -->
+		 
+			<!-- 好友start -->
+			<div class="chat-info friend clearfix hidden" data-index="1">
+				<div class="col-md-12 friends-title">
+					<h5>我的好友</h5>
+				</div>
+				<div class="col-md-12" style="padding-right: 0px;">
+				  <ul class="charts-myfriends-list">
+				  	<li>
+				  		<div class="row">
+				  			<div class="col-md-2">
+					  		<div class="person-img friend-img clearfix">
+					  			<img src="/OA02/personHeadFile/140.png" alt="" />
+					  		</div>
+				  		</div>
+				  	   <div class="col-md-10">
+				  	   	<div class="charts-myfriends-text">
+			  			<p class="charts-friends-info-abbr clearfix">
+		  					admin
+		  					<span class="label-new-info-num pull-right">99+</span>
+			  			</p>
+			  			<p class="charts-text-abbr">
+			  				有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙有事联系我,我现在比较忙忙
+			  			</p>
+				  		</div>
+				  	   </div>
+				  		</div>
+				  	</li>
+				  </ul>
+				</div>
+			</div>
+			<!-- 好友end -->
+			
+			
+			
+			
+			
 		</div>
 	
 	</section>
@@ -315,7 +358,7 @@
     </div>
     <div class="modal-footer">
     
-      <button type="button" class="btn btn-success" data-dismiss="modal" >关闭</button>
+      <button type="button" class="btn btn-success">同意</button>
      </div>
    </div>
  </div>
