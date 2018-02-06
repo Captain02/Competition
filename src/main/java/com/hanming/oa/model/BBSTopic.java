@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class BBSTopic implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -24,6 +24,16 @@ public class BBSTopic implements Serializable {
 	private Integer collection;
 
 	private Integer comment;
+
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public Integer getId() {
 		return id;

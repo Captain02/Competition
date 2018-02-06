@@ -46,108 +46,134 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Integer toUserId = (Integer) session.getAttributes().get("toUserId");
+		Integer fromUserId = (Integer) session.getAttributes().get("fromUserId");
 		String type = (String) session.getAttributes().get("type");
 		User user = (User) session.getAttributes().get("user");
-		/*Integer fuid = (Integer) session.getAttributes().get("fuid");*/
+		/* Integer fuid = (Integer) session.getAttributes().get("fuid"); */
 		// 判断是否重复登录
 		if (userSocketSessionMap.get(user.getId()) == null) {
 			userSocketSessionMap.put(user.getId(), session);
-			
-			
-			
-			//好友请求
+
+			// 好友请求
 			if ("addFrends".equals(type)) {
-				Message message = new Message(user.getId(), user.getName(), toUserId, user.getName() + "请求加您为好友", DateTool.dateToString(new Date()), "addFrends",user);
+				Message message = new Message(user.getId(), user.getName(), toUserId, user.getName() + "请求加您为好友",
+						DateTool.dateToString(new Date()), "addFrends", user);
 				TextMessage textMessage = new TextMessage(JSON.toJSONString(message));
-				//发送添加好友
-				if (null!=userSocketSessionMap.get(toUserId)) {
-					sendMessageToUser(toUserId,textMessage);
-				}else {
-					//查询申请人是否还有其他未处理的其他申请
+				// 发送添加好友
+				if (null != userSocketSessionMap.get(toUserId)) {
+					sendMessageToUser(toUserId, textMessage);
+				} else {
+					// 查询申请人是否还有其他未处理的其他申请
 					BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
-					if (addFriendsQueue!=null) {
+					if (addFriendsQueue != null) {
 						addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
-					}else {
+					} else {
 						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
 						newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 						userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
 					}
 				}
 			}
+			
+			// 接受好友请求
+			if ("responseAddFridens".equals(type)) {
+				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
+				System.out.println("aa");
+				if (addFriendsQueue != null) {
 
-			
-			
-			
-			/*BlockingQueue<TextMessage> blockingQueue = userSocketQueue.get(uid);
-			if (blockingQueue != null) {
-				for (TextMessage textMessage : blockingQueue) {
-					Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
-					if (msg.getFromId() == fuid) {
-						sendMessageToUser(uid, textMessage);
-						blockingQueue.remove(textMessage);
+					for (TextMessage textMessage : addFriendsQueue) {
+						Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
+						//if (msg.getFromId() == toUserId) {
+							sendMessageToUser(toUserId, addFriendsQueue.poll());
+							// blockingQueue.p
+						//}
 					}
 				}
-				return;
 			}
-			BlockingQueue<TextMessage> queue = new LinkedBlockingQueue<TextMessage>(100);
-			userSocketQueue.put(uid, queue);*/
+
+			// 某人离线消息
+			if ("talk".equals(type)) {
+				BlockingQueue<TextMessage> addFriendsQueue = userSocketQueue.get(toUserId);
+				if (addFriendsQueue != null) {
+					for (TextMessage textMessage : addFriendsQueue) {
+						Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
+						if (msg.getToId() == toUserId) {
+							if (msg.getFromId() == fromUserId) {
+								sendMessageToUser(toUserId, addFriendsQueue.poll());
+							}
+							// blockingQueue.p
+						}
+					}
+				}
+			}
+
+			/*
+			 * BlockingQueue<TextMessage> blockingQueue = userSocketQueue.get(uid); if
+			 * (blockingQueue != null) { for (TextMessage textMessage : blockingQueue) {
+			 * Message msg = JSON.parseObject(textMessage.getPayload().toString(),
+			 * Message.class); if (msg.getFromId() == fuid) { sendMessageToUser(uid,
+			 * textMessage); blockingQueue.remove(textMessage); } } return; }
+			 * BlockingQueue<TextMessage> queue = new LinkedBlockingQueue<TextMessage>(100);
+			 * userSocketQueue.put(uid, queue);
+			 */
 		}
 	}
 
 	/*
-	 *处理消息
-	 * */
+	 * 处理消息
+	 */
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		System.out.println(message.getPayloadLength()+"++++++++++++++++++++++++++++++++");
-//		if (message.getPayloadLength() == 0) {
-//			return;
-//		}
-//		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
-//		msg.setDate(DateTool.dateToString(new Date()));
-//
-//		WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
-//		if (socketSession != null) {
-//			sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
-//			return;
-//		} else if (socketSession == null) {
-//			
-//			//好友请求
-//			if ("addFrends".equals(msg.getType())) {
-//				//若不在线
-//				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(msg.getFromId());
-//				// 如果此人有未处理的添加好友请求
-//				if (addFriendsQueue != null) {
-//					addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
-//				} else if (addFriendsQueue == null) {
-//					// 如果此人没有有未处理的添加好友请求
-//					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
-//					newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
-//					userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
-//				}
-//			}
+		System.out.println(message.getPayloadLength() + "++++++++++++++++++++++++++++++++");
+		// if (message.getPayloadLength() == 0) {
+		// return;
+		// }
+		// Message msg = JSON.parseObject(message.getPayload().toString(),
+		// Message.class);
+		// msg.setDate(DateTool.dateToString(new Date()));
+		//
+		// WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
+		// if (socketSession != null) {
+		// sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
+		// return;
+		// } else if (socketSession == null) {
+		//
+		// //好友请求
+		// if ("addFrends".equals(msg.getType())) {
+		// //若不在线
+		// BlockingQueue<TextMessage> addFriendsQueue =
+		// userSocketAddFriendsQueue.get(msg.getFromId());
+		// // 如果此人有未处理的添加好友请求
+		// if (addFriendsQueue != null) {
+		// addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+		// } else if (addFriendsQueue == null) {
+		// // 如果此人没有有未处理的添加好友请求
+		// BlockingQueue<TextMessage> newAddFriendsQueue = new
+		// LinkedBlockingQueue<TextMessage>(100);
+		// newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+		// userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
+		// }
+		// }
 
-			
-			
-			/*BlockingQueue<TextMessage> blockingQueue = userSocketQueue.get(msg.getToId());
-
-			if (blockingQueue == null) {
-				BlockingQueue<TextMessage> queue = new LinkedBlockingQueue<TextMessage>(100);
-				queue.offer(new TextMessage(JSON.toJSONString(msg)));
-				userSocketQueue.put(msg.getToId(), queue);
-			}
-			if (blockingQueue != null) {
-				BlockingQueue<TextMessage> queue = userSocketQueue.get(msg.getToId());
-				queue.offer(new TextMessage(JSON.toJSONString(msg)));
-				userSocketQueue.put(msg.getToId(), queue);
-			}*/
-//		}
+		/*
+		 * BlockingQueue<TextMessage> blockingQueue =
+		 * userSocketQueue.get(msg.getToId());
+		 * 
+		 * if (blockingQueue == null) { BlockingQueue<TextMessage> queue = new
+		 * LinkedBlockingQueue<TextMessage>(100); queue.offer(new
+		 * TextMessage(JSON.toJSONString(msg))); userSocketQueue.put(msg.getToId(),
+		 * queue); } if (blockingQueue != null) { BlockingQueue<TextMessage> queue =
+		 * userSocketQueue.get(msg.getToId()); queue.offer(new
+		 * TextMessage(JSON.toJSONString(msg))); userSocketQueue.put(msg.getToId(),
+		 * queue); }
+		 */
+		// }
 	}
 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		Integer uid = (Integer) session.getAttributes().get("uid");
-		//Integer fuid = (Integer) session.getAttributes().get("fuid");
+		// Integer fuid = (Integer) session.getAttributes().get("fuid");
 		if (session.isOpen()) {
 			session.close();
 		}
@@ -162,14 +188,13 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				break;
 			}
 		}
-		
-		/*BlockingQueue<TextMessage> queue = userSocketQueue.get(uid);
-		for (TextMessage textMessage : queue) {
-			Message msg = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
-			if (msg.getFromId() == fuid) {
-				queue.remove(textMessage);
-			}
-		}*/
+
+		/*
+		 * BlockingQueue<TextMessage> queue = userSocketQueue.get(uid); for (TextMessage
+		 * textMessage : queue) { Message msg =
+		 * JSON.parseObject(textMessage.getPayload().toString(), Message.class); if
+		 * (msg.getFromId() == fuid) { queue.remove(textMessage); } }
+		 */
 	}
 
 	@Override

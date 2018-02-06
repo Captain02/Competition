@@ -75,19 +75,17 @@
             
             <script type="text/javascript">
             	function open(){
-            		alert("a");
-            		<%-- $.ajax({
-            			url:"${APP_PATH}/admin/responseAddFridens",
+            		 $.ajax({
+            			url:"${APP_PATH}/admin/friends/responseAddFridens",
             			data:"",
             			type:"GET",
             			success:function(result){
             				if (result.code==100) {
             					var path = '<%=basePath%>';
-                        		//var uid=result.extend.uid;
+                        		var uid=result.extend.uid;
                         		//var fromId=result.extend.uid;
                         		//var fromName=result.extend.name;
-                        		 --%>
-                        		/* var websocket;
+                        		 var websocket;
                         		if ('WebSocket' in window) {
                         			// 创建一个Socket实例  ws表示WebSocket协议
                         			websocket = new WebSocket("ws://" + path + "/ws?uid="+uid);
@@ -113,7 +111,7 @@
                         		websocket.onclose = function(event) {
                         			console.log("WebSocket:已关闭");
                         			console.log(event);
-                        		} */
+                        		} 
                         			/* function sendMsg(){
                         				var v=$("#msg").val();
                         				if(v==""){
@@ -144,9 +142,9 @@
                         				}
                         			} */
                         			
-					/* 		}
+					 		}
             			}
-            		}) */
+            		}) 
             		
             	}
             	

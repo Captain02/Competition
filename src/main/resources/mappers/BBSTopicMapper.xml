@@ -79,11 +79,11 @@
   <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
     insert into bbstopic (id, title, sketch, 
       text, userId, date, 
-      `like`, collection, comment
+      `like`, collection, comment,knowledge
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sketch,jdbcType=VARCHAR}, 
       #{text,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
-      #{like,jdbcType=INTEGER}, #{collection,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER}
+      #{like,jdbcType=INTEGER}, #{collection,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER},#{knowledge,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
@@ -116,6 +116,9 @@
       <if test="comment != null">
         comment,
       </if>
+      <if test="knowledge != null">
+        knowledge,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -144,6 +147,9 @@
       </if>
       <if test="comment != null">
         #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="knowledge != null">
+        #{knowledge,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -199,8 +205,9 @@
 	LEFT JOIN bbslabeltopic blt ON blt.topicId=bt.id
 	LEFT JOIN bbslabel bl ON bl.id=blt.labelId
 	<where>
+	type = 'knowledge'
 	 <if test="labelId != 0">
-	      bl.id = #{labelId}
+	    AND  bl.id = #{labelId}
 	 </if>
      <if test="isByMyId != 0">
          AND tu.id = #{isByMyId}

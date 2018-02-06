@@ -20,9 +20,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hanming.oa.model.BBSLabelTopic">
-    insert into bbslabeltopic (id, topicId, labelId
+    insert into bbslabeltopic (id, topicId, labelId,knowledge
       )
-    values (#{id,jdbcType=INTEGER}, #{topicid,jdbcType=INTEGER}, #{labelid,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{topicid,jdbcType=INTEGER}, #{labelid,jdbcType=INTEGER}, #{knowledge,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.hanming.oa.model.BBSLabelTopic">
