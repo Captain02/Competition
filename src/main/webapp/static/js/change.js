@@ -123,7 +123,7 @@ function addNewsToList(data){
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	var listNode = $(
-			"<li data-info-type="+data.type+">"+
+			"<li data-info-type="+data.type+" data-info-username="+data.fromName+">"+
 			"<div class='row'>"+
 			"<div class='col-md-2'>"+
 			"<div class='person-img friend-img clearfix'>"+
@@ -145,6 +145,9 @@ function addNewsToList(data){
 			"</li>"
 					);
 	$('.char-comment').append(listNode);
+	listNode.siblings("[data-info-username="+listNode.attr('data-info-username')+"]").remove();
+		
+	
 }
 
 
