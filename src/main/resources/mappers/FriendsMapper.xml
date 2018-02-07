@@ -68,4 +68,51 @@
       friendId = #{friendid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 带有部门和角色的返回值 -->
+  <resultMap id="WithDeptAndRole" type="com.hanming.oa.model.User">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="sex" jdbcType="VARCHAR" property="sex" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="qq" jdbcType="VARCHAR" property="qq" />
+		<result column="edu" jdbcType="VARCHAR" property="edu" />
+		<result column="headFile" jdbcType="VARCHAR" property="headFile" />
+		<result column="oldHeadFile" jdbcType="VARCHAR" property="oldHeadFile" />
+		<!-- 联合查询出部门的字段 -->
+		<association property="department" javaType="Department">
+			<id column="tdId" property="id" />
+			<result column="tdName" property="name"/>
+		</association>
+		
+		<association property="role" javaType="Role" >
+			<id column="trId" property="id"/>
+			<result column="trName" property="name"/>
+		</association>
+  </resultMap>
+  
+  <!-- 带有部门和角色的查询sql -->
+	<sql id="WithDepAndRole">
+		tu.oldHeadFile,tu.headFile,tu.id,tu.username,tu.`password`,tu.`name`,tu.sex,tu.phone,tu.qq,tu.edu,td.id as tdId,tr.id as trId, td.`name` as tdName,tr.`name` as trName
+	</sql>
+	
+	<!-- 连表语句 -->
+	<sql id="linkSql">
+		FROM t_user tu
+		LEFT JOIN t_department_user tdu ON tdu.userId = tu.id
+		LEFT JOIN t_department td ON td.id = tdu.departmentId
+		LEFT JOIN t_user_role tur ON tu.id = tur.userId
+		LEFT JOIN t_role tr ON tur.roleId = tr.id
+		LEFT JOIN friends fr ON fr.friendId = tu.id
+	</sql>
+	
+  <!-- List<User> listByUserId(Integer userId); -->
+  <select id="listByUserId" resultMap="WithDeptAndRole">
+		select
+		<include refid="WithDepAndRole" />
+		<include refid="linkSql" />
+		WHERE fr.myId = #{userId}
+  </select>
+  
 </mapper>

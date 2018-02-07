@@ -19,7 +19,6 @@ import org.springframework.web.socket.WebSocketSession;
 import com.alibaba.fastjson.JSON;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.model.Message;
-import com.hanming.oa.model.RequestAddFriend;
 import com.hanming.oa.model.User;
 
 /*

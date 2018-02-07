@@ -1,5 +1,7 @@
 package com.hanming.oa.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.Friends;
 import com.hanming.oa.model.User;
+import com.hanming.oa.service.FriendsService;
 import com.hanming.oa.service.UserService;
 
 @Controller
@@ -20,6 +24,8 @@ public class WebSocketController {
 
 	@Autowired
 	UserService UserService;
+	@Autowired
+	FriendsService friendsService;
 	
 	//发送申请好友
 	@ResponseBody
@@ -53,5 +59,15 @@ public class WebSocketController {
 		//用于前台添加连接和后台确认连接
 		request.getSession().setAttribute("uid",fromUserId);
 		return Msg.success().add("uid", fromUserId);
+	}
+	
+	//遍历我的好友列表
+	@ResponseBody
+	@RequestMapping(value="/friends",method=RequestMethod.GET)
+	public Msg myFriends() {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		List<User> friends = friendsService.listByUserId(userId);
+		
+		return Msg.success().add("friends", friends);
 	}
 }
