@@ -82,7 +82,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				if (addFriendsQueue != null) {
 
 					for (TextMessage textMessage : addFriendsQueue) {
-						addFriendsQueue.remove(textMessage);
 							sendMessageToUser(toUserId, textMessage);
 					}
 				}
