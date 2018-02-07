@@ -128,7 +128,8 @@
             	
             	
             	function sure(ele){
-            		var toId = 
+            		var toId = $(ele).attr('data-sure-id');
+            		alert(toId);
             		$.ajax({
             			url:"${APP_PATH}/admin/friends/agreeAddFriend",
             			data:"",
@@ -140,13 +141,13 @@
     					data["toId"]==toId;
     					data["text"]=result.extend.fromName+"同意添加您为好友。";
     					websocket.send(JSON.stringify(data));
-            				
             			}
             		})
             	}
             	
             	function notSure(ele){
-            		alert('拒绝好友请求');
+            		var toId = $(ele).attr('data-not-sure-id');
+            		alert(toId);
             	}
             	
             </script>
