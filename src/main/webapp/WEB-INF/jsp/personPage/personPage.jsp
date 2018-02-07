@@ -278,28 +278,7 @@
 					<h5>消息</h5>
 				</div>
 				<div class="col-md-12" style="padding-right: 0px;">
-				  <ul class="charts-myfriends-list">
-				  	<li>
-				  		<div class="row">
-				  			<div class="col-md-2">
-					  		<div class="person-img friend-img clearfix">
-					  			<img src="/OA02/personHeadFile/140.png" alt="" />
-					  		</div>
-				  		</div>
-				  	   <div class="col-md-10">
-				  	   	<div class="charts-myfriends-text">
-			  			<p class="charts-friends-info-abbr clearfix">
-		  					admin
-		  					<span class="label-new-info-num pull-right">99+</span>
-			  			</p>
-			  			<p class="charts-text-abbr">
-			  				请求添加我为好友
-			  			</p>
-				  		</div>
-				  	   </div>
-				  		</div>
-				  	</li>
-				  </ul>
+				  <ul class="charts-myfriends-list char-comment"></ul>
 				</div>
 			</div>
 			<!-- comment end -->
@@ -310,7 +289,7 @@
 					<h5>我的好友</h5>
 				</div>
 				<div class="col-md-12" style="padding-right: 0px;">
-				  <ul class="charts-myfriends-list">
+				  <ul class="charts-myfriends-list chart-friends">
 				  	<li>
 				  		<div class="row">
 				  			<div class="col-md-2">

@@ -118,3 +118,54 @@ function ActivityControl(result,hiddenValue,icon,cntrolNum){
 	}
 	cntrolNum.html(result.extend.likeNum);
 }
+//No.7 动态插入消息节点
+function addNewsToList(data){
+	var pathName = window.document.location.pathname;
+	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+	var listNode = $(
+			"<li data-info-type="+data.type+">"+
+			"<div class='row'>"+
+			"<div class='col-md-2'>"+
+			"<div class='person-img friend-img clearfix'>"+
+			"<img src="+projectName+"/personHeadFile/"+data.user.headFile+">"+
+			"</div>"+
+			"</div>"+
+			"<div class='col-md-10'>"+
+			"<div class='charts-myfriends-text'>"+
+			"<p class='charts-friends-info-abbr clearfix'>"+
+			data.fromName+
+			"<span class='label-new-info-num pull-right'>1</span>"+
+			"</p>"+
+			"<p class='charts-text-abbr'>"+
+			data.text+
+			"</p>"+
+			"</div>"+
+			"</div>"+
+			"</div>"+
+			"</li>"
+					);
+	$('.char-comment').append(listNode);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

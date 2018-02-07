@@ -100,6 +100,7 @@
                         		websocket.onmessage = function(event) {
                         			var data=JSON.parse(event.data);
                         			console.log("WebSocket:收到一条消息",data);
+                        			addNewsToList(data);
                         		};
                         		websocket.onerror = function(event) {
                         			console.log("WebSocket:发生错误 ");
