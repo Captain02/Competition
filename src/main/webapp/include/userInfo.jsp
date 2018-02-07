@@ -74,6 +74,7 @@
             </div>
             
             <script type="text/javascript">
+                var websocket;
             	function open(){
             		 $.ajax({
             			url:"${APP_PATH}/admin/friends/responseAddFridens",
@@ -83,9 +84,6 @@
             				if (result.code==100) {
             					var path = '<%=basePath%>';
                         		var uid=result.extend.uid;
-                        		//var fromId=result.extend.uid;
-                        		//var fromName=result.extend.name;
-                        		 var websocket;
                         		if ('WebSocket' in window) {
                         			// 创建一个Socket实例  ws表示WebSocket协议
                         			websocket = new WebSocket("ws://" + path + "/ws?uid="+uid);
@@ -123,6 +121,7 @@
             	
             	
             	function close(){
+            		websocket.close();
             		console.log('关闭')
             	}
             </script>

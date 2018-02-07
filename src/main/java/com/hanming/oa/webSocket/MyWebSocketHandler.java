@@ -79,7 +79,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 			// 接受好友请求
 			if ("responseAddFridens".equals(type)) {
 				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
-				System.out.println("aa");
 				if (addFriendsQueue != null) {
 
 					for (TextMessage textMessage : addFriendsQueue) {
