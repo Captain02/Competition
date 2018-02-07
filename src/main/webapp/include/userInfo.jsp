@@ -129,18 +129,24 @@
             	
             	function sure(ele){
             		var toId = $(ele).attr('data-sure-id');
-            		alert(toId);
             		$.ajax({
             			url:"${APP_PATH}/admin/friends/agreeAddFriend",
-            			data:"",
+            			data:{
+            				'friendId':toId,
+            				'isAgree':1
+            			},
             			type:"POST",
             			success:function(result){
-    					var data={};
-    					data["fromId"]=result.extend.fromId;
-    					data["fromName"]=result.extend.fromName;
-    					data["toId"]==toId;
-    					data["text"]=result.extend.fromName+"同意添加您为好友。";
-    					websocket.send(JSON.stringify(data));
+	    					var data={};
+	    					data["fromId"]=result.extend.fromId;
+	    					data["fromName"]=result.extend.fromName;
+	    					data["toId"]=toId;
+	    					data["text"]=result.extend.fromName+"同意添加您为好友。";
+	    					data["type"]="agreeAddFriend";
+	    					data["user"]=result.extend.friend;
+	    					websocket.send(JSON.stringify(data));
+	    					
+	    					//在此消息列表清除对应的消息
             			}
             		})
             	}
@@ -148,6 +154,28 @@
             	function notSure(ele){
             		var toId = $(ele).attr('data-not-sure-id');
             		alert(toId);
+            		$.ajax({
+            			url:"${APP_PATH}/admin/friends/agreeAddFriend",
+            			data:{
+            				'friendId':toId,
+			            	'isAgree':0
+            			},
+            			type:"POST",
+            			success:function(result){
+		            		var data={};
+							data["fromId"]=result.extend.fromId;
+							data["fromName"]=result.extend.fromName;
+							data["toId"]=toId;
+							data["text"]=result.extend.fromName+"不同意添加您为好友。";
+							data["type"]="agreeAddFriend";
+							data["user"]=result.extend.friend;
+							websocket.send(JSON.stringify(data));
+							
+							//在此消息列表清除对应的消息
+							
+							
+            			}
+            		})
             	}
             	
             </script>

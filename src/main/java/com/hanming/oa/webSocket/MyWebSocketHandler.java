@@ -68,7 +68,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					if (addFriendsQueue != null) {
 						addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 					} else {
-						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
+						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>();
 						newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 						userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
 					}
@@ -129,12 +129,17 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		msg.setDate(DateTool.dateToString(new Date()));
 
 		if ("agreeAddFriend".equals(msg.getType())) {
-			//释放被申请人的添加好友请求
+			// 释放被申请人的添加好友请求
 			BlockingQueue<TextMessage> byRequestAddFriend = userSocketAddFriendsQueue.get(msg.getFromId());
 			for (TextMessage textMessage : byRequestAddFriend) {
-				Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
-				//找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
-				if (byRequestAddFriendMessage.getFromId()==msg.getToId()) {
+				Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
+						Message.class);
+				System.out.println(byRequestAddFriendMessage.getFromId());
+				System.out.println(msg.getToId());
+				// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
+				Integer fromId = byRequestAddFriendMessage.getFromId();
+				Integer toId = msg.getToId();
+				if (toId.equals(fromId)) {
 					byRequestAddFriend.remove(textMessage);
 				}
 			}
@@ -150,7 +155,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
 				} else if (addFriendsQueue == null) {
 					// 如果此人没有有未处理的添加好友请求
-					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(100);
+					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(20);
 					newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
 					userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
 				}
