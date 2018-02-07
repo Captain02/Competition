@@ -27,7 +27,7 @@ public class WebSocketController {
 	@Autowired
 	FriendsService friendsService;
 	
-	//发送申请好友
+	// 发送申请好友
 	@ResponseBody
 	@RequestMapping(value="/addFriends",method=RequestMethod.POST)
 	public Msg requestAddFriends(@RequestParam("toUserID")Integer toUserId,HttpServletRequest request){
@@ -47,7 +47,7 @@ public class WebSocketController {
 		return Msg.success().add("uid", fromUserId).add("name", user.getName());
 	}
 	
-	//接受申请好友
+	// 接受申请好友
 	@ResponseBody
 	@RequestMapping(value="/responseAddFridens",method=RequestMethod.GET)
 	public Msg responseAddFridens(HttpServletRequest request) {
@@ -61,7 +61,7 @@ public class WebSocketController {
 		return Msg.success().add("uid", fromUserId);
 	}
 	
-	//遍历我的好友列表
+	// 遍历我的好友列表
 	@ResponseBody
 	@RequestMapping(value="/friends",method=RequestMethod.GET)
 	public Msg myFriends() {
@@ -69,5 +69,26 @@ public class WebSocketController {
 		List<User> friends = friendsService.listByUserId(userId);
 		
 		return Msg.success().add("friends", friends);
+	}
+	
+	//同意添加好友
+	@ResponseBody
+	@RequestMapping(value="/agreeAddFriend",method=RequestMethod.POST)
+	public Msg agreeAddFriend(@RequestParam(value="friendId")Integer friendId) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		
+		//将他添加为我的好友
+		Friends friends = new Friends();
+		friends.setMyid(userId);
+		friends.setFriendid(friendId);
+		
+		//将我添加为他的好友
+		Friends byFriends = new Friends();
+		byFriends.setFriendid(userId);
+		byFriends.setMyid(friendId);
+		
+		friendsService.insert(friends,byFriends);
+		
+		return Msg.success();
 	}
 }

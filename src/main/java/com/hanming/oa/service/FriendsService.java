@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hanming.oa.dao.FriendsMapper;
 import com.hanming.oa.model.Friends;
@@ -19,5 +20,12 @@ public class FriendsService {
 		List<User> friends = friendsMapper.listByUserId(userId);
 		return friends;
 	}
+	
+	@Transactional
+	public void insert(Friends friends, Friends byFriends) {
+		friendsMapper.insertSelective(byFriends);
+		friendsMapper.insertSelective(friends);
+	}
+
 
 }

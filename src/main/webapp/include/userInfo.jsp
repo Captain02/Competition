@@ -128,7 +128,21 @@
             	
             	
             	function sure(ele){
-            		alert('同意好友请求');
+            		var toId = 
+            		$.ajax({
+            			url:"${APP_PATH}/admin/friends/agreeAddFriend",
+            			data:"",
+            			type:"POST",
+            			success:function(result){
+    					var data={};
+    					data["fromId"]=result.extend.fromId;
+    					data["fromName"]=result.extend.fromName;
+    					data["toId"]==toId;
+    					data["text"]=result.extend.fromName+"同意添加您为好友。";
+    					websocket.send(JSON.stringify(data));
+            				
+            			}
+            		})
             	}
             	
             	function notSure(ele){
