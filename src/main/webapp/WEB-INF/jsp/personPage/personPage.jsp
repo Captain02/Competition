@@ -273,7 +273,7 @@
 		 <!-- 操作end -->
 		 
 		 <!-- comment start -->
-				<div class="chat-info comment clearfix" data-index="0">
+				<div class="chat-info comment pull-left" data-index="0">
 				<div class="col-md-12 friends-title">
 					<h5>消息</h5>
 				</div>
@@ -335,12 +335,11 @@
       
     </div>
     <div class="modal-footer">
-    
-      <button type="button" class="btn btn-success">同意</button>
      </div>
    </div>
  </div>
 </div>
+
 <script type="text/javascript">
 $(function(){
 	$("li.new").each(function(){
@@ -352,6 +351,7 @@ $(function(){
 
 })
 </script>
+
 </body>
 
 </html>

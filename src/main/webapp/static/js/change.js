@@ -82,13 +82,22 @@ $(function () {
     })
     
     //No.5 获取通知消息
-    $('.comment div li').each(function(){
-    	$(this).click(function(){
-    		$('#myModal').modal('show');
-    		ShowTips('.modal-title',$(this).find('p.charts-friends-info-abbr').html(),'.modal-body',$(this).find('p.charts-text-abbr').html());
-    		ShowEle('.yes','hide','.no','hide','.down','hide');
-    	})
-    })
+   $('.char-comment').on('click','li',function(){
+	   $('#myModal').modal('show');
+	   switch ($(this).attr("data-info-type")) {
+		case 'addFrends':
+			ShowTips('.modal-title','好友验证','.modal-body',
+					$(this).find('p.charts-text-abbr').html()+
+					'<a class="not-sure-require-friend pull-right btn btn-success btn-sm" onclick="notSure(this)" >拒绝</a>'+
+					'<a class="sure-require-friend pull-right btn btn-warning btn-sm" onclick="sure(this)">同意</a>'
+					);
+			break;
+	
+		default:
+			break;
+	   }
+   })
+   
 	
     //No.6 会话列表的切换
     $('.charts-opearte li').each(function(){
@@ -146,8 +155,6 @@ function addNewsToList(data){
 					);
 	$('.char-comment').append(listNode);
 	listNode.siblings("[data-info-username="+listNode.attr('data-info-username')+"]").remove();
-		
-	
 }
 
 

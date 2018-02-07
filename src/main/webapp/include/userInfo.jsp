@@ -125,6 +125,16 @@
             		websocket.close();
             		console.log('关闭')
             	}
+            	
+            	
+            	function sure(ele){
+            		alert('同意好友请求');
+            	}
+            	
+            	function notSure(ele){
+            		alert('拒绝好友请求');
+            	}
+            	
             </script>
 
             

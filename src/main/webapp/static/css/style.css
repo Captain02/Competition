@@ -1250,6 +1250,7 @@ ul.p-info .title, ul.p-info .desk {
 	height: 100%;
 	background-color: #424f63;
 	display: none;
+	overflow: hidden;
 }
 
 .charts-opearte li {
@@ -1314,4 +1315,7 @@ ul.p-info .title, ul.p-info .desk {
 .charts-friends-info-abbr {
 	padding-right: 10px;
 	color: #65cea7;
+}
+.modal-body a{
+	margin-left: 15px;
 }
