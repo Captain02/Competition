@@ -115,4 +115,11 @@
 		WHERE fr.myId = #{userId}
   </select>
   
+  <!-- Integer countByFreindIdAndMyId(@Param("friendId")Integer friendId, @Param("userId")Integer userId); -->
+  <select id="countByFreindIdAndMyId" resultType="Integer">
+  	select count(*)
+  	from friends
+  	WHERE myId = #{userId} AND friendId=#{friendId}
+  </select>
+  
 </mapper>

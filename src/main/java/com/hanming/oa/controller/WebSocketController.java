@@ -80,17 +80,21 @@ public class WebSocketController {
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(userId);
 		User friend = UserService.selectByPrimaryKeyWithDeptAndRole(friendId);
 		if (isAgree == 1) {
-			// 将他添加为我的好友
-			Friends friends = new Friends();
-			friends.setMyid(userId);
-			friends.setFriendid(friendId);
+			Integer count = friendsService.countByFreindIdAndMyId(friendId, userId);
+			if (count == 0) {
 
-			// 将我添加为他的好友
-			Friends byFriends = new Friends();
-			byFriends.setFriendid(userId);
-			byFriends.setMyid(friendId);
+				// 将他添加为我的好友
+				Friends friends = new Friends();
+				friends.setMyid(userId);
+				friends.setFriendid(friendId);
 
-			friendsService.insert(friends, byFriends);
+				// 将我添加为他的好友
+				Friends byFriends = new Friends();
+				byFriends.setFriendid(userId);
+				byFriends.setMyid(friendId);
+
+				friendsService.insert(friends, byFriends);
+			}
 		}
 
 		return Msg.success().add("fromId", userId).add("fromName", user.getName()).add("friend", friend);

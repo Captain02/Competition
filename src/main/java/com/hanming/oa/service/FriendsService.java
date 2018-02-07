@@ -27,5 +27,10 @@ public class FriendsService {
 		friendsMapper.insertSelective(friends);
 	}
 
+	public Integer countByFreindIdAndMyId(Integer friendId, Integer userId) {
+		Integer count = friendsMapper.countByFreindIdAndMyId(friendId,userId);
+		return count;
+	}
+
 
 }

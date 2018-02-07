@@ -2,6 +2,8 @@ package com.hanming.oa.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hanming.oa.model.Friends;
 import com.hanming.oa.model.User;
 
@@ -19,4 +21,6 @@ public interface FriendsMapper {
     int updateByPrimaryKey(Friends record);
 
 	List<User> listByUserId(Integer userId);
+
+	Integer countByFreindIdAndMyId(@Param("friendId")Integer friendId, @Param("userId")Integer userId);
 }
