@@ -68,7 +68,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					if (addFriendsQueue != null) {
 						addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 					} else {
-						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>();
+						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(20);
 						newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 						userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
 					}
