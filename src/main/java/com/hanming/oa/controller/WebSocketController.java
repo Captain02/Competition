@@ -103,7 +103,7 @@ public class WebSocketController {
 	//删除消息队列确认添加好友消息
 	@ResponseBody
 	@RequestMapping(value = "/unAgreeAddFriend", method = RequestMethod.POST)
-	public Msg unAgreeAddFriend(@RequestParam(value = "friendId") Integer friendId) {
+	public Msg unAgreeAddFriend() {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
 		

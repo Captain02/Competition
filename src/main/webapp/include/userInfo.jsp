@@ -204,24 +204,21 @@
             	}
             	
             	function unAgreeAddFriend(toId) {
-            	alert(toId);
-           		$.ajax({
-           			url:"${APP_PATH}/admin/friends/unAgreeAddFriend",
-           			data:{
-           				'friendId':toId,
-		            	'isAgree':0
-           			},
-           			type:"POST",
-           			success:function(result){
-		            		var data={};
-							data["fromId"]=result.extend.fromId;
-							data["fromName"]=result.extend.fromName;
-							data["toId"]=toId;
-							data["text"]="";
-							data["type"]="unAgreeAddFriend";
-							websocket.send(JSON.stringify(data));
-           				}
-           			})
+					alert(toId);
+	           		$.ajax({
+	           			url:"${APP_PATH}/admin/friends/unAgreeAddFriend",
+	           			data:"",
+	           			type:"POST",
+	           			success:function(result){
+			            		var data={};
+								data["fromId"]=result.extend.fromId;
+								data["fromName"]=result.extend.fromName;
+								data["toId"]=toId;
+								data["text"]="";
+								data["type"]="unAgreeAddFriend";
+								websocket.send(JSON.stringify(data));
+	           				}
+	           			})
 				}
             	
             </script>

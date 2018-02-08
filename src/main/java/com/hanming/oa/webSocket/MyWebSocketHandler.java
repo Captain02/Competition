@@ -85,6 +85,8 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					}
 				}
 			}
+			
+			
 
 			// // 某人离线消息
 			// if ("talk".equals(type)) {
@@ -127,6 +129,20 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		// 设置时间
 		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
 		msg.setDate(DateTool.dateToString(new Date()));
+		
+		if ("unAgreeAddFriend".equals(msg.getType())) {
+			BlockingQueue<TextMessage> byRequestAddFriend = userSocketAddFriendsQueue.get(msg.getFromId());
+			for (TextMessage textMessage : byRequestAddFriend) {
+				Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
+						Message.class);
+				// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
+				Integer fromId = byRequestAddFriendMessage.getFromId();
+				Integer toId = msg.getToId();
+				if (toId.equals(fromId)) {
+					byRequestAddFriend.remove(textMessage);
+				}
+			}
+		}
 
 		if ("agreeAddFriend".equals(msg.getType())) {
 			// 释放被申请人的添加好友请求
@@ -134,8 +150,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 			for (TextMessage textMessage : byRequestAddFriend) {
 				Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
 						Message.class);
-				System.out.println(byRequestAddFriendMessage.getFromId());
-				System.out.println(msg.getToId());
 				// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
 				Integer fromId = byRequestAddFriendMessage.getFromId();
 				Integer toId = msg.getToId();
@@ -161,6 +175,8 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				}
 			}
 		}
+		
+		
 
 		/*
 		 * BlockingQueue<TextMessage> blockingQueue =
