@@ -38,6 +38,7 @@ public class ImageController {
 		}
 		List<MyImageDispaly> list = imageService.selectList(isByMy);
 		model.addAttribute("MyImageDispaly", list);
+		model.addAttribute("isByMy", isByMy);
 		return "myimg/img";
 	}
 	

@@ -46,7 +46,7 @@
 								上传相片
 								<div class="pull-right">
 									
-									<a href="" class="btn btn-success btn-sm">欣赏相片</a>
+									<a href="${APP_PATH}/admin/image/list" class="btn btn-success btn-sm">欣赏相片</a>
 								</div>
 							</header>
 							<form id="uploadForm" action="" >

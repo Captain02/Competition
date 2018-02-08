@@ -44,8 +44,12 @@
 								<header class="om-wrapper-header" style="padding-left:15px;">
 								精彩相片
 								<div class="pull-right">
-									<a href="" class="btn btn-warning btn-sm">我的相片</a>
-									<a href="" class="btn btn-success btn-sm">全部相片</a>
+								<c:if test="${isByMy==0}">
+									<a href="${APP_PATH}/admin/image/list?isByMy=1" class="btn btn-warning btn-sm">我的相片</a>
+								</c:if>
+								<c:if test="${isByMy!=0}">
+									<a href="${APP_PATH}/admin/image/list" class="btn btn-success btn-sm">全部相片</a>
+								</c:if>
 									<a href="${APP_PATH}/admin/image/add" class="btn btn-success btn-sm">+上传相片</a>
 								</div>
 							</header>
