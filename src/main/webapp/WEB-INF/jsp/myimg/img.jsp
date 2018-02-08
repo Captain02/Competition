@@ -35,11 +35,12 @@
 
 			<!-- 页面模版，按需更改 -->
 			<div class="wrapper">
-				<div class="om-wrapper">
+				
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-lg-12">
 
-							<header class="om-wrapper-header">
+							<section class="panel">
+								<header class="om-wrapper-header" style="padding-left:15px;">
 								精彩相片
 								<div class="pull-right">
 									<a href="" class="btn btn-warning btn-sm">我的相片</a>
@@ -47,16 +48,31 @@
 									<a href="${APP_PATH}/admin/image/add" class="btn btn-success btn-sm">+上传相片</a>
 								</div>
 							</header>
-
-							<div class="om-wrpper-body"></div>
-
+								<div class="panel-body">
+									<div id="gallery" class="media-gal">
+										<div class="images item ">
+											<a href="">
+												<img src="${APP_PATH}/static/em.jpg" alt="" />
+											</a>
+											<p><a href="/album/180470197990199296">4-H1-50</a> </p>
+											<p>我想知道相片背后的故事</p>
+											<p>李白2018-02-05上传</p>
+											<p>
+												<a href=""><i class="glyphicon glyphicon-edit"></i></a>
+												<a href=""><i class="glyphicon glyphicon-trash"></i></a>
+											</p>
+										</div>
+									
+									</div>
+								</div>
+							</section>
 						</div>
 
 					</div>
 
 
 
-				</div>
+				
 
 			</div>
 

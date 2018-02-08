@@ -1319,3 +1319,47 @@ ul.p-info .title, ul.p-info .desk {
 .modal-body a{
 	margin-left: 15px;
 }
+.media-gal {
+    float: left;
+    width: 100%;
+}
+.media-gal .item {
+    margin-bottom: 1%;
+    margin-right: 1%;
+    width: 233px;
+    background: #EFF0F4;
+    color: #7A7676;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.media-gal .item {
+    float: left;
+}
+.media-gal .item img {
+    height: 200px;
+    width: 100%;
+}
+.media-gal .item p {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+.media-gal .item p a{
+	color: #65CEA7;
+}
+.media-gal .item:hover {
+    background: #65CEA7;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: #fff;
+}
+.media-gal .item:hover a{
+	color: #fff;
+	text-decoration: underline;
+}
+
+.media-gal .item:hover img {
+    opacity: .3;
+}
