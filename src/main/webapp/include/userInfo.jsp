@@ -178,7 +178,6 @@
 							data["user"]=result.extend.friend;
 							websocket.send(JSON.stringify(data));
 							
-							//在此消息列表清除对应的消息
 							$('.char-comment li').each(function(){
 	    						if( $(this).attr('data-info-userid')===$(ele).attr('data-not-sure-id') && $(this).attr('data-info-status')===$(ele).attr('data-info-status') ){
 	    							$(this).remove();

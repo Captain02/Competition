@@ -93,6 +93,20 @@ $(function () {
 					"<a class='sure-require-friend pull-right btn btn-success btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">同意</a>"
 					);
 			break;
+		case 'agreeAddFriend':
+			ShowTips('.modal-title','验证消息','.modal-body',
+					$(this).find('p.charts-text-abbr').html()+
+					"<a style='display:none;' data-info-status="+$(this).attr('data-info-status')+" data-not-sure-id="+$(this).attr('data-info-userid')+"></a>"
+					);
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+			},1000)
+			$('.char-comment li').each(function(){
+				if( $(this).attr('data-info-userid')===$('.modal-body a').attr('data-not-sure-id') && $(this).attr('data-info-status')===$('.modal-body a').attr('data-info-status')){
+					$(this).remove();
+				}
+			})
+			break;
 	
 		default:
 			break;
