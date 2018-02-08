@@ -197,7 +197,8 @@
             			type:"GET",
             			data:"",
             			success:function(result){
-            				console.log(result);
+            				addFriendsToList(result);
+							console.log(result.extend.friends);
             			}
             			
             		})
