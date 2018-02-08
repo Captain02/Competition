@@ -47,11 +47,22 @@ $(function(){
 	//在这里发送编辑的ajax
 	$('.yes').click(function(){
 		var topicId = $(this).attr('data-topicId');
-		alert(topicId);
 		var title = $(this).attr('data-editor-title');
 		var summary = $(this).attr('data-editor-summary');
 		$.ajax({
-			
+			url:"${APP_PATH}/admin/image/update",
+			data:{
+				'topicId':topicId,
+				'title':title,
+				'summary':summary
+			},
+			type:"POST",
+			success:function(result){
+				console.log(result);
+				console.log(result.extend.title);
+				console.log(result.extend.topicId);
+				console.log(result.extend.summary);
+			}
 		});
 	})
 })

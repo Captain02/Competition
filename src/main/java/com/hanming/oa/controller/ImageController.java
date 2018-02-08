@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.BBSTopic;
 import com.hanming.oa.model.MyImageDispaly;
 import com.hanming.oa.service.BBSTopicService;
 import com.hanming.oa.service.ImageService;
@@ -30,10 +31,11 @@ public class ImageController {
 	BBSTopicService bbsTopicService;
 	@Autowired
 	ImageService imageService;
-	//遍历集合
-	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public String list(@RequestParam(value="isByMy",defaultValue="0")Integer isByMy,Model model) {
-		if (isByMy!=0) {
+
+	// 遍历集合
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(@RequestParam(value = "isByMy", defaultValue = "0") Integer isByMy, Model model) {
+		if (isByMy != 0) {
 			isByMy = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		}
 		List<MyImageDispaly> list = imageService.selectList(isByMy);
@@ -41,28 +43,39 @@ public class ImageController {
 		model.addAttribute("isByMy", isByMy);
 		return "myimg/img";
 	}
-	
-	//跳转页面
-	@RequestMapping(value="/add",method=RequestMethod.GET)
+
+	// 跳转页面
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add() {
 		return "myimg/add";
 	}
-	
-	//上传
+
+	// 上传
 	@ResponseBody
-	@RequestMapping(value="/upImage",method=RequestMethod.POST)
-	public Msg UpImage(@RequestParam("uploadFiles")MultipartFile files[],HttpServletRequest request) {
+	@RequestMapping(value = "/upImage", method = RequestMethod.POST)
+	public Msg UpImage(@RequestParam("uploadFiles") MultipartFile files[], HttpServletRequest request) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		String path = request.getSession().getServletContext().getRealPath("myImage");
-		imageService.addMyImage(files, userId, path,request);
+		imageService.addMyImage(files, userId, path, request);
 		return Msg.success();
 	}
-	
+
+	// 删除照片
 	@ResponseBody
-	@RequestMapping(value="/dele",method=RequestMethod.POST)
-	public Msg dele(@RequestParam("topicId")Integer topicId) {
+	@RequestMapping(value = "/dele", method = RequestMethod.POST)
+	public Msg dele(@RequestParam("topicId") Integer topicId) {
 		imageService.deleByTopicId(topicId);
 		return Msg.success();
 	}
-	
+
+	// 修改图片
+	@ResponseBody
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public Msg update(@RequestParam("topicId") Integer topicId, @RequestParam("title") String title,
+			@RequestParam("summary") String sketch) {
+		BBSTopic bbsTopic = new BBSTopic(topicId, title, sketch, null, null, null, null);
+		bbsTopicService.update(bbsTopic);
+		
+		return Msg.success().add("topicId", topicId).add("title", title).add("summary", sketch);
+	}
 }
