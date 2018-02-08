@@ -1376,3 +1376,6 @@ ul.p-info .title, ul.p-info .desk {
 .editor-imgdesc label{
 	text-align: left;
 }
+a.fileinput-upload{
+	color: #333;
+}
