@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://">
+                    <a href="${APP_PATH}/admin/image/list">
                         <span class="glyphicon glyphicon-camera left-list-icon"></span>
                         <span class="menu-text">员工相册</span>
                     </a>

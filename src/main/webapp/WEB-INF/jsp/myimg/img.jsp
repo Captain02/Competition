@@ -44,7 +44,7 @@
 								<div class="pull-right">
 									<a href="" class="btn btn-warning btn-sm">我的相片</a>
 									<a href="" class="btn btn-success btn-sm">全部相片</a>
-									<a href="" class="btn btn-success btn-sm">+上传相片</a>
+									<a href="${APP_PATH}/admin/image/add" class="btn btn-success btn-sm">+上传相片</a>
 								</div>
 							</header>
 

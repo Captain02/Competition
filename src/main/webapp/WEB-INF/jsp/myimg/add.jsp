@@ -15,6 +15,21 @@
 <link href="${APP_PATH}/static/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 
 </head>
+<script type="text/javascript">
+$("#uploadForm").fileinput{
+var formData = new FormData($("#uploadForm")[0]);
+//发送ajax请求
+$.ajax({
+	url:"${APP_PATH}/admin/image/add",
+	type:"POST",
+	data:formData,
+  	contentType: false,  
+  	processData: false, 
+	success:function(result){
+	}
+})  
+}
+</script>
 <body class="bg-common">
 	<section>
 		<!-- 页面模版，每页左侧区域固定不变 -->
@@ -49,21 +64,22 @@
 									<a href="" class="btn btn-success btn-sm">欣赏相片</a>
 								</div>
 							</header>
-
-							<div class="om-wrpper-body">
-							
-						    	<div class="col-lg-12">
-						    		<div class="panel">
-						    			<div class="panel-body">
-						    				<div class="text-center">
-						    					<h2>请选择图片</h2>
-						    					<input id="albumUpload" name="uploadFiles" multiple="" class="" accept="image/*" data-allowed-file-extensions="[&quot;jpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;]" type="file">
-						    				</div>
-						    			</div>
-						    		</div>
-						    	</div>
-							
-							</div>
+							<form id="uploadForm" action="" >
+								<div class="om-wrpper-body">
+								
+							    	<div class="col-lg-12">
+							    		<div class="panel">
+							    			<div class="panel-body">
+							    				<div class="text-center">
+							    					<h2>请选择图片</h2>
+							    					<input id="albumUpload" name="uploadFiles" multiple="" class="" accept="image/*" data-allowed-file-extensions="[&quot;jpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;]" type="file">
+							    				</div>
+							    			</div>
+							    		</div>
+							    	</div>
+								
+								</div>
+							</form>
 
 						</div>
 
