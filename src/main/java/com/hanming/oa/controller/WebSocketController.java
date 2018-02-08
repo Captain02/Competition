@@ -99,4 +99,14 @@ public class WebSocketController {
 
 		return Msg.success().add("fromId", userId).add("fromName", user.getName()).add("friend", friend);
 	}
+	
+	//删除消息队列确认添加好友消息
+	@ResponseBody
+	@RequestMapping(value = "/unAgreeAddFriend", method = RequestMethod.POST)
+	public Msg unAgreeAddFriend(@RequestParam(value = "friendId") Integer friendId) {
+		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
+		
+		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
+	}
 }
