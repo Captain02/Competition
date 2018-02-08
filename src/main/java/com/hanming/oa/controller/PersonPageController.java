@@ -58,7 +58,7 @@ public class PersonPageController {
 		List<BBSDisplayTopic> topics = bbsTopicService.selectDisplayTopic(0,0);
 		Collections.reverse(topics);
 		if (topics.size() > 2) {
-			List<NoticeDisplay> reverseTopics = Notices.subList(0, 2);
+			List<BBSDisplayTopic> reverseTopics = topics.subList(0, 2);
 			model.addAttribute("topics", reverseTopics);
 		}else {
 			model.addAttribute("topics", topics);

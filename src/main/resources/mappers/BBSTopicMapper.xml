@@ -79,11 +79,11 @@
   <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
     insert into bbstopic (id, title, sketch, 
       text, userId, date, 
-      `like`, collection, comment,knowledge
+      `like`, collection, comment,type
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sketch,jdbcType=VARCHAR}, 
       #{text,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
-      #{like,jdbcType=INTEGER}, #{collection,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER},#{knowledge,jdbcType=VARCHAR}
+      #{like,jdbcType=INTEGER}, #{collection,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER},#{type,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.BBSTopic">
@@ -116,8 +116,8 @@
       <if test="comment != null">
         comment,
       </if>
-      <if test="knowledge != null">
-        knowledge,
+      <if test="type != null">
+        type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -148,8 +148,8 @@
       <if test="comment != null">
         #{comment,jdbcType=INTEGER},
       </if>
-      <if test="knowledge != null">
-        #{knowledge,jdbcType=INTEGER},
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

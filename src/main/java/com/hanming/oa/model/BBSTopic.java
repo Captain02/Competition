@@ -17,7 +17,7 @@ public class BBSTopic implements Serializable {
 
 	private Integer userId;
 
-	private Date date;
+	private String date;
 
 	private Integer like;
 
@@ -26,14 +26,6 @@ public class BBSTopic implements Serializable {
 	private Integer comment;
 
 	private String type;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public Integer getId() {
 		return id;
@@ -48,7 +40,7 @@ public class BBSTopic implements Serializable {
 	}
 
 	public void setTitle(String title) {
-		this.title = title == null ? null : title.trim();
+		this.title = title;
 	}
 
 	public String getSketch() {
@@ -56,7 +48,7 @@ public class BBSTopic implements Serializable {
 	}
 
 	public void setSketch(String sketch) {
-		this.sketch = sketch == null ? null : sketch.trim();
+		this.sketch = sketch;
 	}
 
 	public String getText() {
@@ -64,7 +56,7 @@ public class BBSTopic implements Serializable {
 	}
 
 	public void setText(String text) {
-		this.text = text == null ? null : text.trim();
+		this.text = text;
 	}
 
 	public Integer getUserId() {
@@ -75,11 +67,12 @@ public class BBSTopic implements Serializable {
 		this.userId = userId;
 	}
 
-	public Date getDate() {
+
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -106,4 +99,28 @@ public class BBSTopic implements Serializable {
 	public void setComment(Integer comment) {
 		this.comment = comment;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public BBSTopic(Integer id, String title, String sketch, String text, Integer userId, String date, String type) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.sketch = sketch;
+		this.text = text;
+		this.userId = userId;
+		this.date = date;
+		this.type = type;
+	}
+
+	public BBSTopic() {
+		super();
+	}
+	
 }
