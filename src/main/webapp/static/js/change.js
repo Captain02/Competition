@@ -100,12 +100,13 @@ $(function () {
 					);
 			setTimeout(function(){
 				$('#myModal').modal('hide');
-			},1000)
+			},3000)
 			$('.char-comment li').each(function(){
 				if( $(this).attr('data-info-userid')===$('.modal-body a').attr('data-not-sure-id') && $(this).attr('data-info-status')===$('.modal-body a').attr('data-info-status')){
 					$(this).remove();
 				}
 			})
+			unAgreeAddFriend($(this).attr('data-info-userid'));
 			break;
 	
 		default:

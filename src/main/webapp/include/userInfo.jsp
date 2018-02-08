@@ -203,8 +203,8 @@
             		})
             	}
             	
-            	function unAgreeAddFriend() {
-           		var toId = 
+            	function unAgreeAddFriend(toId) {
+            	alert(toId);
            		$.ajax({
            			url:"${APP_PATH}/admin/friends/unAgreeAddFriend",
            			data:{
@@ -220,9 +220,6 @@
 							data["text"]="";
 							data["type"]="unAgreeAddFriend";
 							websocket.send(JSON.stringify(data));
-							
-							
-							
            				}
            			})
 				}
