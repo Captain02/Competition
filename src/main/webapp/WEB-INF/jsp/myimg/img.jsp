@@ -13,6 +13,11 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 </head>
+<script type="text/javascript">
+function dele(ele) {
+	var topicId;
+}
+</script>
 <body class="bg-common">
 	<section>
 		<!-- 页面模版，每页左侧区域固定不变 -->
@@ -64,8 +69,10 @@
 											<p>${MyImageDispaly.sketch}</p>
 											<p>${MyImageDispaly.userName}${fn:substring(MyImageDispaly.date, 0, 10)}上传</p>
 											<p>
-												<a href=""><i class="glyphicon glyphicon-edit"></i></a>
+												<c:if test="${isByMy!=0}">
+												<a href="" data-topicId="${MyImageDispaly.topicId}"><i class="glyphicon glyphicon-edit"></i></a>
 												<a href=""><i class="glyphicon glyphicon-trash"></i></a>
+												</c:if>
 											</p>
 										</div>
 									</c:forEach>
