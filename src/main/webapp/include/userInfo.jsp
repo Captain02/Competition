@@ -191,6 +191,18 @@
             		})
             	}
             	
+            	function myFriends(){
+            		$.ajax({
+            			url:"${APP_PATH}/admin/friends/friends",
+            			type:"GET",
+            			data:"",
+            			success:function(result){
+            				console.log(result);
+            			}
+            			
+            		})
+            	}
+            	
             </script>
 
             

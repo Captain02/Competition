@@ -266,7 +266,7 @@
 			   <div class="row">
 			   	 <ul class="charts-opearte clearfix">
 			   	 	<li class="col-md-4 active" title="消息" data-index="0"><span class="fa fa-comment-o" ></span></li>
-					<li class="col-md-4" title="联系人" data-index="1"><span class="fa fa-user-o"></span></li>
+					<li onclick="myFriends(this);" class="col-md-4" title="联系人" data-index="1"><span class="fa fa-user-o"></span></li>
 				</ul>
 			   </div>
 		    </div>
