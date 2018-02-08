@@ -169,7 +169,7 @@ function addFriendsToList(result){
 				"<div class='row'>"+
 				"<div class='col-md-2'>"+
 				"<div class='person-img friend-img clearfix'>"+
-				"<img src="+projectName+"/personHeadFile/"+$(this).attr('oldHeadFile')+"/>"+
+				"<img src="+ projectName +"/personHeadFile/"+$(this).attr('headFile')+">"+
 				"</div>"+
 				"</div>"+
 				"<div class='col-md-10'>"+
