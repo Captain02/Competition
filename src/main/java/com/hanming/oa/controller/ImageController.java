@@ -58,4 +58,11 @@ public class ImageController {
 		return Msg.success();
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/dele",method=RequestMethod.POST)
+	public Msg dele(@RequestParam("topicId")Integer topicId) {
+		imageService.deleByTopicId(topicId);
+		return Msg.success();
+	}
+	
 }

@@ -61,4 +61,10 @@ public class ImageService {
 		return list;
 	}
 
+	@Transactional
+	public void deleByTopicId(Integer topicId) {
+		bbsTopicService.deleTopicById(topicId);
+		myImageMapper.deleByTopicId(topicId);
+	}
+
 }

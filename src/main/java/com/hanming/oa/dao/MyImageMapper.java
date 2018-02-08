@@ -21,4 +21,6 @@ public interface MyImageMapper {
     int updateByPrimaryKey(MyImage record);
 
 	List<MyImageDispaly> selectList(@Param("isByMy")Integer isByMy);
+
+	void deleByTopicId(@Param("topicId")Integer topicId);
 }

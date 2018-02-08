@@ -16,6 +16,16 @@
 <script type="text/javascript">
 function dele(ele) {
 	var topicId = $(ele).attr('data-topicId');
+	$.ajax({
+		url:"${APP_PATH}/admin/image/dele",
+		data:{
+			'topicId':topicId
+		},
+		type:"POST",
+		success:function(result){
+			//弹出模态框，一秒后刷新
+		}
+	})
 	
 }
 function editor(ele){
@@ -35,6 +45,7 @@ $(function(){
 	})
 	//在这里发送编辑的ajax
 	$('.yes').click(function(){
+		var topicId = $(ele).attr('data-topicId');
 		var title = $(this).attr('data-editor-title');
 		var summary = $(this).attr('data-editor-summary');
 		$.ajax({

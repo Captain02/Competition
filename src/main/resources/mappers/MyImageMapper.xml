@@ -95,4 +95,10 @@
 	</where>
   </select>
 
+  <!-- void deleByTopicId(@Param("topicId")Integer topicId); -->
+  <delete id="deleByTopicId">
+  	delete from myimage
+    where topicId = #{topicId}
+  </delete>
+
 </mapper>
