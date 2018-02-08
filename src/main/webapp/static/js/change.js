@@ -67,12 +67,12 @@ $(function () {
     $('.btn-mycomment').click(function(){
     	switch ($(this).attr('data-chat-status')) {
 		case 'true':
-			$('#chat').show(500);
+			$('#chat').slideDown(200);
 			$(this).attr('data-chat-status','flase');
 			open();
 			break;
 		case 'flase':
-			$('#chat').hide(500);
+			$('#chat').slideUp(200);
 			$(this).attr('data-chat-status','true');
 			close();
 			break;
@@ -148,7 +148,7 @@ function addNewsToList(data){
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	var listNode = $(
-			"<li data-info-type="+data.type+" data-info-username="+data.fromName+" data-info-userId="+data.fromId+" data-info-status='0'>"+
+			"<li data-info-type="+data.type+" data-info-username="+data.fromName+" data-info-userId="+data.fromId+" data-info-status='0' onselectstart='return false;'>"+
 			"<div class='row'>"+
 			"<div class='col-md-2'>"+
 			"<div class='person-img friend-img clearfix'>"+
@@ -180,7 +180,7 @@ function addFriendsToList(result){
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	$(result.extend.friends).each(function(){
 		var listNode = $(		
-				"<li>"+
+				"<li onselectstart='return false;'>"+
 				"<div class='row'>"+
 				"<div class='col-md-2'>"+
 				"<div class='person-img friend-img clearfix'>"+

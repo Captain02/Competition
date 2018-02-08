@@ -1251,6 +1251,10 @@ ul.p-info .title, ul.p-info .desk {
 	background-color: #424f63;
 	display: none;
 	overflow: hidden;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);
+   	-moz-box-shadow: -1px 2px 23px #000;
+   	-webkit-box-shadow: -1px 2px 23px #000;
+   	box-shadow:-1px 2px 23px #000;
 }
 
 .charts-opearte li {
@@ -1305,6 +1309,12 @@ ul.p-info .title, ul.p-info .desk {
 .charts-myfriends-list li div.row:hover {
 	background-color: rgb(53, 63, 79);
 	cursor: pointer;
+}
+.charts-myfriends-list li{
+	user-select：none;
+ 	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .charts-myfriends-list li div.row {
@@ -1362,4 +1372,7 @@ ul.p-info .title, ul.p-info .desk {
 
 .media-gal .item:hover img {
     opacity: .3;
+}
+.editor-imgdesc label{
+	text-align: left;
 }
