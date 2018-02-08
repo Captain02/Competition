@@ -15,21 +15,6 @@
 <link href="${APP_PATH}/static/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 
 </head>
-<script type="text/javascript">
-$("#uploadForm").fileinput{
-var formData = new FormData($("#uploadForm")[0]);
-//发送ajax请求
-$.ajax({
-	url:"${APP_PATH}/admin/image/add",
-	type:"POST",
-	data:formData,
-  	contentType: false,  
-  	processData: false, 
-	success:function(result){
-	}
-})  
-}
-</script>
 <body class="bg-common">
 	<section>
 		<!-- 页面模版，每页左侧区域固定不变 -->
@@ -72,7 +57,7 @@ $.ajax({
 							    			<div class="panel-body">
 							    				<div class="text-center">
 							    					<h2>请选择图片</h2>
-							    					<input id="albumUpload" name="uploadFiles" multiple="" class="" accept="image/*" data-allowed-file-extensions="[&quot;jpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;]" type="file">
+							    					<input id="albumUpload" name="uploadFiles" multiple="" class="" accept="image/*" data-allowed-file-extensions="[&quot;jpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;]" type="file" />
 							    				</div>
 							    			</div>
 							    		</div>
@@ -100,8 +85,20 @@ $.ajax({
 	<script src="${APP_PATH}/static/bootstrap-fileinput/themes/fa/theme.min.js"></script>
 	<script src="${APP_PATH}/static/bootstrap-fileinput/js/locales/zh.js"></script>
 	<script type="text/javascript">
-		$(function(){	
-			$("#albumUpload").fileinput({ language: 'zh', showCaption: false});	
+		$(function(){
+			$("#albumUpload").fileinput({ 
+				language: 'zh', 
+				showCaption: true,
+				allowedFileExtensions: ['jpg', 'gif', 'png'],
+				uploadUrl:"${APP_PATH}/admin/image/upImage",
+				maxFileCount:10,
+				msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+			    showUpload:true,
+			    showRemove :true,
+			    showPreview :true,
+			    showCancel :true
+			}).on("fileuploaded", function (event, data, previewId, index){
+		});
 		});
 	</script>
 	
