@@ -34,6 +34,7 @@ function editor(ele){
 	ShowTips('.modal-title','编辑'+$(ele).parent().siblings('p.img-title').find('a').html(),null);
 	$('.modal-body').find('input[name="title"]').val($(ele).parent().siblings('p.img-title').find('a').html());
 	$('.modal-body').find('textarea[name="summary"]').val($(ele).parent().siblings('p.img-desc').html());
+	$('.modal-footer').find('button.yes').attr('data-topicId',$(ele).attr('data-topicId'));
 }
 
 $(function(){
@@ -45,7 +46,8 @@ $(function(){
 	})
 	//在这里发送编辑的ajax
 	$('.yes').click(function(){
-		var topicId = $(ele).attr('data-topicId');
+		var topicId = $(this).attr('data-topicId');
+		alert(topicId);
 		var title = $(this).attr('data-editor-title');
 		var summary = $(this).attr('data-editor-summary');
 		$.ajax({
