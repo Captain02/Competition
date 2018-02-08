@@ -83,13 +83,14 @@ $(function () {
     
     //No.5 获取通知消息
    $('.char-comment').on('click','li',function(){
+	   $(this).attr('data-info-status','1');
 	   $('#myModal').modal('show');
 	   switch ($(this).attr("data-info-type")) {
 		case 'addFrends':
 			ShowTips('.modal-title','好友验证','.modal-body',
 					$(this).find('p.charts-text-abbr').html()+
-					"<a class='not-sure-require-friend pull-right btn btn-success btn-sm' onclick='notSure(this)' data-not-sure-id="+$(this).attr('data-info-userid')+">拒绝</a>"+
-					"<a class='sure-require-friend pull-right btn btn-warning btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" >同意</a>"
+					"<a class='not-sure-require-friend pull-right btn btn-warning btn-sm' onclick='notSure(this)' data-not-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">拒绝</a>"+
+					"<a class='sure-require-friend pull-right btn btn-success btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">同意</a>"
 					);
 			break;
 	
@@ -132,7 +133,7 @@ function addNewsToList(data){
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	var listNode = $(
-			"<li data-info-type="+data.type+" data-info-username="+data.fromName+" data-info-userId="+data.fromId+">"+
+			"<li data-info-type="+data.type+" data-info-username="+data.fromName+" data-info-userId="+data.fromId+" data-info-status='0'>"+
 			"<div class='row'>"+
 			"<div class='col-md-2'>"+
 			"<div class='person-img friend-img clearfix'>"+
