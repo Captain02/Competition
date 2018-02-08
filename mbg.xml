@@ -37,7 +37,7 @@
 		</javaClientGenerator>
 
 		<!-- 指定每个表的生成策略 -->
-		<table tableName="requestAddFriend" domainObjectName="RequestAddFriend"
+		<table tableName="myImage" domainObjectName="MyImage"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,19 +51,20 @@
 							</header>
 								<div class="panel-body">
 									<div id="gallery" class="media-gal">
+									<c:forEach items="${MyImageDispaly}" var="MyImageDispaly">
 										<div class="images item ">
 											<a href="">
-												<img src="${APP_PATH}/static/em.jpg" alt="" />
+												<img src="${APP_PATH}/myImage/${MyImageDispaly.imageName}" alt="" />
 											</a>
-											<p><a href="/album/180470197990199296">4-H1-50</a> </p>
-											<p>我想知道相片背后的故事</p>
-											<p>李白2018-02-05上传</p>
+											<p><a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${MyImageDispaly.topicId}">${fn:substring(MyImageDispaly.title,0, 10)}</a> </p>
+											<p>${MyImageDispaly.sketch}</p>
+											<p>${MyImageDispaly.userName}${fn:substring(MyImageDispaly.date, 0, 10)}上传</p>
 											<p>
 												<a href=""><i class="glyphicon glyphicon-edit"></i></a>
 												<a href=""><i class="glyphicon glyphicon-trash"></i></a>
 											</p>
 										</div>
-									
+									</c:forEach>
 									</div>
 								</div>
 							</section>
