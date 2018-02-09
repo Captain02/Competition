@@ -32,5 +32,26 @@ public class FriendsService {
 		return count;
 	}
 
+	@Transactional
+	public void addFriends(Integer friendId, Integer isAgree, Integer userId) {
+		if (isAgree == 1) {
+			Integer count = countByFreindIdAndMyId(friendId, userId);
+			if (count == 0) {
+
+				// 将他添加为我的好友
+				Friends friends = new Friends();
+				friends.setMyid(userId);
+				friends.setFriendid(friendId);
+
+				// 将我添加为他的好友
+				Friends byFriends = new Friends();
+				byFriends.setFriendid(userId);
+				byFriends.setMyid(friendId);
+
+				insert(friends, byFriends);
+			}
+		}
+	}
+
 
 }

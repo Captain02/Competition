@@ -29,13 +29,14 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	// 在线用户的SockectSession(存储了所有通信的通道)
 	public static final Map<Integer, WebSocketSession> userSocketSessionMap;
 	// 存放用户的离线信息 使用队列实现
-	public static final Map<Integer, BlockingQueue<TextMessage>> userSocketQueue;
+	public static final Map<Integer, BlockingQueue<TextMessage>> userSocketTalkQueue;
 	// 请求添加好友消息队列
 	public static final Map<Integer, BlockingQueue<TextMessage>> userSocketAddFriendsQueue;
+	// 消息条目
 
 	static {
 		userSocketSessionMap = new HashMap<>();
-		userSocketQueue = new HashMap<>();
+		userSocketTalkQueue = new HashMap<>();
 		userSocketAddFriendsQueue = new HashMap<>();
 	}
 
@@ -68,7 +69,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					if (addFriendsQueue != null) {
 						addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 					} else {
-						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(20);
+						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(10);
 						newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
 						userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
 					}
@@ -79,41 +80,18 @@ public class MyWebSocketHandler implements WebSocketHandler {
 			if ("responseAddFridens".equals(type)) {
 				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
 				if (addFriendsQueue != null) {
-
 					for (TextMessage textMessage : addFriendsQueue) {
 						sendMessageToUser(toUserId, textMessage);
 					}
 				}
+				BlockingQueue<TextMessage> talkQueue = userSocketTalkQueue.get(toUserId);
+				if (talkQueue != null) {
+					for (TextMessage textMessage : talkQueue) {
+						sendMessageToUser(toUserId, textMessage);
+					}
+				}
 			}
-			
-			
 
-			// // 某人离线消息
-			// if ("talk".equals(type)) {
-			// BlockingQueue<TextMessage> addFriendsQueue = userSocketQueue.get(toUserId);
-			// if (addFriendsQueue != null) {
-			// for (TextMessage textMessage : addFriendsQueue) {
-			// Message msg = JSON.parseObject(textMessage.getPayload().toString(),
-			// Message.class);
-			// if (msg.getToId() == toUserId) {
-			// if (msg.getFromId() == fromUserId) {
-			// sendMessageToUser(toUserId, addFriendsQueue.poll());
-			// }
-			// // blockingQueue.p
-			// }
-			// }
-			// }
-			// }
-
-			/*
-			 * BlockingQueue<TextMessage> blockingQueue = userSocketQueue.get(uid); if
-			 * (blockingQueue != null) { for (TextMessage textMessage : blockingQueue) {
-			 * Message msg = JSON.parseObject(textMessage.getPayload().toString(),
-			 * Message.class); if (msg.getFromId() == fuid) { sendMessageToUser(uid,
-			 * textMessage); blockingQueue.remove(textMessage); } } return; }
-			 * BlockingQueue<TextMessage> queue = new LinkedBlockingQueue<TextMessage>(100);
-			 * userSocketQueue.put(uid, queue);
-			 */
 		}
 	}
 
@@ -129,7 +107,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		// 设置时间
 		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
 		msg.setDate(DateTool.dateToString(new Date()));
-		
+
 		if ("unAgreeAddFriend".equals(msg.getType())) {
 			BlockingQueue<TextMessage> byRequestAddFriend = userSocketAddFriendsQueue.get(msg.getFromId());
 			for (TextMessage textMessage : byRequestAddFriend) {
@@ -157,46 +135,61 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					byRequestAddFriend.remove(textMessage);
 				}
 			}
-			// 判断用户是否在线
 			WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
+			BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(msg.getToId());
+			// 如果此人有未处理的添加好友请求
+			if (addFriendsQueue != null) {
+				addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+			} else if (addFriendsQueue == null) {
+				// 如果此人没有有未处理的添加好友请求
+				BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(10);
+				newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+				userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
+			}
+			// 判断用户是否在线
 			if (socketSession != null) {
-				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
-			} else if (socketSession == null) {
 				// 发送同意好友请求
-				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(msg.getToId());
-				// 如果此人有未处理的添加好友请求
-				if (addFriendsQueue != null) {
-					addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
-				} else if (addFriendsQueue == null) {
-					// 如果此人没有有未处理的添加好友请求
-					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(20);
-					newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
-					userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
+				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
+			}
+		}
+
+		if ("sendTalk".equals(msg.getType())) {
+			WebSocketSession webSocketSession = userSocketSessionMap.get(msg.getToId());
+			BlockingQueue<TextMessage> talkQueue = userSocketTalkQueue.get(msg.getToId());
+			// 判断是否有未处理的回话会话
+			if (talkQueue != null) {
+				talkQueue.offer((new TextMessage(JSON.toJSONString(msg))));
+				userSocketTalkQueue.put(msg.getToId(), talkQueue);
+			} else if (talkQueue == null) {
+				BlockingQueue<TextMessage> acceptTalk = new LinkedBlockingQueue<>(100);
+				acceptTalk.offer(new TextMessage(JSON.toJSONString(msg)));
+				userSocketTalkQueue.put(msg.getToId(), acceptTalk);
+			}
+			if (webSocketSession != null) {
+				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
+			}
+		}
+		if ("acceptTalk".equals(msg.getType())) {
+			BlockingQueue<TextMessage> acceptTalk = userSocketTalkQueue.get(msg.getFromId());
+			if (acceptTalk == null) {
+				return;
+			} else if (acceptTalk != null) {
+				for (TextMessage textMessage : acceptTalk) {
+					Message parseObject = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
+					Integer fromId = parseObject.getFromId();
+					Integer toId = msg.getToId();
+					if (fromId.equals(toId)) {
+						sendMessageToUser(msg.getFromId(), new TextMessage(JSON.toJSONString(textMessage)));
+						acceptTalk.remove(textMessage);
+					}
 				}
 			}
 		}
-		
-		
 
-		/*
-		 * BlockingQueue<TextMessage> blockingQueue =
-		 * userSocketQueue.get(msg.getToId());
-		 * 
-		 * if (blockingQueue == null) { BlockingQueue<TextMessage> queue = new
-		 * LinkedBlockingQueue<TextMessage>(100); queue.offer(new
-		 * TextMessage(JSON.toJSONString(msg))); userSocketQueue.put(msg.getToId(),
-		 * queue); } if (blockingQueue != null) { BlockingQueue<TextMessage> queue =
-		 * userSocketQueue.get(msg.getToId()); queue.offer(new
-		 * TextMessage(JSON.toJSONString(msg))); userSocketQueue.put(msg.getToId(),
-		 * queue); }
-		 */
-		// }
 	}
 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		// Integer uid = (Integer) session.getAttributes().get("uid");
-		// Integer fuid = (Integer) session.getAttributes().get("fuid");
 		if (session.isOpen()) {
 			session.close();
 		}
@@ -211,12 +204,6 @@ public class MyWebSocketHandler implements WebSocketHandler {
 			}
 		}
 
-		/*
-		 * BlockingQueue<TextMessage> queue = userSocketQueue.get(uid); for (TextMessage
-		 * textMessage : queue) { Message msg =
-		 * JSON.parseObject(textMessage.getPayload().toString(), Message.class); if
-		 * (msg.getFromId() == fuid) { queue.remove(textMessage); } }
-		 */
 	}
 
 	@Override

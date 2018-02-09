@@ -1,5 +1,7 @@
 package com.hanming.oa.model;
 
+import org.apache.ibatis.type.IntegerTypeHandler;
+
 public class Message {
 	// 发送者
 	private Integer fromId;

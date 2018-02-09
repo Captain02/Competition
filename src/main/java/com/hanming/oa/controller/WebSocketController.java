@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
-import com.hanming.oa.model.Friends;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.FriendsService;
 import com.hanming.oa.service.UserService;
@@ -79,26 +78,12 @@ public class WebSocketController {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(userId);
 		User friend = UserService.selectByPrimaryKeyWithDeptAndRole(friendId);
-		if (isAgree == 1) {
-			Integer count = friendsService.countByFreindIdAndMyId(friendId, userId);
-			if (count == 0) {
-
-				// 将他添加为我的好友
-				Friends friends = new Friends();
-				friends.setMyid(userId);
-				friends.setFriendid(friendId);
-
-				// 将我添加为他的好友
-				Friends byFriends = new Friends();
-				byFriends.setFriendid(userId);
-				byFriends.setMyid(friendId);
-
-				friendsService.insert(friends, byFriends);
-			}
-		}
+		friendsService.addFriends(friendId, isAgree, userId);
 
 		return Msg.success().add("fromId", userId).add("fromName", user.getName()).add("friend", friend);
 	}
+
+	
 	
 	//删除消息队列确认添加好友消息
 	@ResponseBody
@@ -108,5 +93,16 @@ public class WebSocketController {
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
 		
 		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
+	}
+	
+	//聊天消息
+	@ResponseBody
+	@RequestMapping(value="/talk",method=RequestMethod.POST)
+	public Msg talk(HttpServletRequest request) {
+		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
+		// 发送人信息
+		request.getSession().setAttribute("user", user);
+		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName()).add("user", user);
 	}
 }

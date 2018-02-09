@@ -225,7 +225,27 @@
             		var toId = $(ele).attr('data-userid');
             		//获取消息内容
             		var messageText = $(ele).siblings('div.input-chat-text').html();
-            		alert(messageText);
+            		alert(toId);
+            		$.ajax({
+	           			url:"${APP_PATH}/admin/friends/talk",
+	           			data:"",
+	           			type:"POST",
+	           			success:function(result){
+	           				var type = "sendTalk";
+		            		sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,result.extend.user);
+	           			}
+	           		})
+            	}
+            	
+            	function sendFunction(fromId,fromName,toId,text,type,user){
+            		var data={};
+            		data["fromId"]=fromId;
+					data["fromName"]=fromName;
+					data["toId"]=toId;
+					data["text"]=text;
+					data["type"]=type;
+					data["user"]=user;
+					websocket.send(JSON.stringify(data));
             	}
             	
             </script>
