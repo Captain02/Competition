@@ -114,7 +114,7 @@ String basePath2 = request.getScheme() + "://"
     					console.log("WebSocket:已关闭");
     					console.log(event);
     				}
-    				if(websocket.readyState!=1){
+    				if(websocket.readyState==1){
     					websocket.close();
     				}
     				
