@@ -318,7 +318,7 @@
 </div>
 
 <!-- 聊天框 -->
-<div class="chat-info-show hidden" id="chat-window">
+<div class="chat-info-show" id="chat-window">
 	<div class="chat-dialog">
 		<div class="chat-content">
 			<div class="chat-content-header">
@@ -329,8 +329,8 @@
 				
 			</div>
 			<div class="chat-content-footer">
-				<div class="input-chat-text" contenteditable="true" data-emojiable="true"></div>
-				<button class="btn btn-primary btn-sm pull-right" style="padding: 2px 20px; margin: 5px 10px 10px 0;">发送</button>
+				<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
+				<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px; margin: 5px 10px 10px 0;" onclick="sendMessage(this);">发送</button>
 				<script type="text/javascript">
 				//初始化emojiPicker配置
 				window.emojiPicker = new EmojiPicker({
@@ -372,7 +372,6 @@ $(function(){
             	});
             $('body').addClass('no-select');
         });
-		
 		 $(document).mouseup(function(){  
 	            $(this).unbind("mousemove");
 	            $('body').removeClass('no-select');

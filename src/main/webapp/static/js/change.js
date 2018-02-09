@@ -135,6 +135,7 @@ $(function () {
     $('.chart-friends').on('dblclick','li',function(){
     	$('#chat-window').removeClass('hidden');
     	$('#chat-window').find('h4').html($(this).find('p.charts-friends-info-abbr').html());
+    	$('#chat-window').find('button.btn-send').attr('data-userid',$(this).attr('data-userid'));
     })
     
 });
@@ -186,7 +187,7 @@ function addFriendsToList(result){
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	$(result.extend.friends).each(function(){
 		var listNode = $(		
-				"<li onselectstart='return false;'>"+
+				"<li onselectstart='return false;' data-userid="+$(this).attr('id')+">"+
 				"<div class='row'>"+
 				"<div class='col-md-2'>"+
 				"<div class='person-img friend-img clearfix'>"+

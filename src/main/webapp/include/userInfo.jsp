@@ -204,7 +204,6 @@
             	}
             	
             	function unAgreeAddFriend(toId) {
-					alert(toId);
 	           		$.ajax({
 	           			url:"${APP_PATH}/admin/friends/unAgreeAddFriend",
 	           			data:"",
@@ -220,6 +219,14 @@
 	           				}
 	           			})
 				}
+            	
+            	function sendMessage(ele){
+            		//获取id
+            		var toId = $(ele).attr('data-userid');
+            		//获取消息内容
+            		var messageText = $(ele).siblings('div.input-chat-text').html();
+            		alert(messageText);
+            	}
             	
             </script>
 

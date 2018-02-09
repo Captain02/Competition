@@ -1356,6 +1356,7 @@ ul.p-info .title, ul.p-info .desk {
 	-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
 	box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
 	background-color: #fff;
+	z-index: 9999;
 }
 
 .chat-content {
@@ -1383,7 +1384,7 @@ ul.p-info .title, ul.p-info .desk {
 	border-radius: 0;
 }
 
-.chat-content-footer div.input-chat-text {
+.chat-content-footer p.input-chat-text {
 	position: relative;
 	height: 50px;
 	padding: 5px;
