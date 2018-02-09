@@ -19,12 +19,6 @@
 	<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
 	<!-- 刷新页面后回到上次浏览的位置 -->
 	<script src="${APP_PATH}/static/js/scrollLast.js"></script>
-	<!-- emoji表情插件 -->
-	<link rel="stylesheet" href="${APP_PATH}/static/emoji-picker/lib/css/emoji.css">
-	<script src="${APP_PATH}/static/emoji-picker/lib/js/config.js"></script>
-	<script src="${APP_PATH}/static/emoji-picker/lib/js/util.js"></script>
-	<script src="${APP_PATH}/static/emoji-picker/lib/js/jquery.emojiarea.js"></script>
-	<script src="${APP_PATH}/static/emoji-picker/lib/js/emoji-picker.js"></script>
 	
 
 <script type="text/javascript">

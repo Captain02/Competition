@@ -131,6 +131,12 @@ $(function () {
     })
     
   
+    //No.9 弹出会话窗口
+    $('.chart-friends').on('dblclick','li',function(){
+    	$('#chat-window').removeClass('hidden');
+    	$('#chat-window').find('h4').html($(this).find('p.charts-friends-info-abbr').html());
+    })
+    
 });
 //No.3 点赞效果
 function ActivityControl(result,hiddenValue,icon,cntrolNum){

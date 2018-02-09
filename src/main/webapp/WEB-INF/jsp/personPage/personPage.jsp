@@ -295,12 +295,8 @@
 				</div>
 			</div>
 			<!-- 好友end -->
-			
-			
-			
-			
-			
 		</div>
+		
 	
 	</section>
 	
@@ -321,6 +317,34 @@
  </div>
 </div>
 
+<!-- 聊天框 -->
+<div class="chat-info-show hidden" id="chat-window">
+	<div class="chat-dialog">
+		<div class="chat-content">
+			<div class="chat-content-header">
+				<button type="button" class="close btn-close" data-dismiss="chat-info-show" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="chat-content-title" id="myChatLabel">admin</h4>
+			</div>
+			<div class="chat-content-body">
+				
+			</div>
+			<div class="chat-content-footer">
+				<div class="input-chat-text" contenteditable="true" data-emojiable="true"></div>
+				<button class="btn btn-primary btn-sm pull-right" style="padding: 2px 20px; margin: 5px 10px 10px 0;">发送</button>
+				<script type="text/javascript">
+				//初始化emojiPicker配置
+				window.emojiPicker = new EmojiPicker({
+					  emojiable_selector: '[data-emojiable=true]',
+					  assetsPath: '${APP_PATH}/static/emoji-picker/lib/img/',
+					  popupButtonClasses: 'fa fa-smile-o'
+					}).discover();
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script type="text/javascript">
 $(function(){
 	$("li.new").each(function(){
@@ -328,6 +352,35 @@ $(function(){
 			$('#myModal').modal('show');
 			ShowTips('.modal-title','公告详情','.modal-body',$(this).find('input.notice-text').val());
 		})
+	})
+	
+	$('.chat-content-header').mousedown(function(e){
+		e = window.event || e;
+		var offset = $('#chat-window').offset();
+		var x = e.pageX - offset.left;
+		var y = e.pageY - offset.top;
+		
+		$(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件  
+            $("#chat-window").stop();//加上这个之后  
+
+            var _x = ev.pageX - x;//获得X轴方向移动的值  
+            var _y = ev.pageY - y;//获得Y轴方向移动的值  sss
+
+            	$("#chat-window").css({
+            		"left":_x+"px",
+            		"top":_y+"px"
+            	});
+            $('body').addClass('no-select');
+        });
+		
+		 $(document).mouseup(function(){  
+	            $(this).unbind("mousemove");
+	            $('body').removeClass('no-select');
+	     });  
+	});
+	
+	$('.btn-close').click(function(){
+		 $("#chat-window").addClass('hidden');
 	})
 
 })
