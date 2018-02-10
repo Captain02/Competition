@@ -65,6 +65,10 @@ $(function () {
     
     //No.4 显示会话栏效果
     $('.btn-mycomment').click(function(){
+    	//初始化会话列表
+    	$('.char-comment li').remove();
+    	//初始化好友列表
+    	$('.chart-friends li').remove();
     	switch ($(this).attr('data-chat-status')) {
 		case 'true':
 			$('#chat').slideDown(200);
@@ -83,7 +87,12 @@ $(function () {
     
     //No.5 获取通知消息
    $('.char-comment').on('click','li',function(){
+	   if($(this).attr('data-info-status') === '1'){
+		   return false;
+	   }
 	   $(this).attr('data-info-status','1');
+	   //初始化会话列表
+	   $('.cool-chat li').remove();
 	   switch ($(this).attr("data-info-type")) {
 	   
 		case 'addFrends':
@@ -126,7 +135,6 @@ $(function () {
 	    			addMessage(data,$(this));
 	    		}
 	    	});
-	    	
 	    	addMessage(data,$(this));
 	    	break;
 	    	
@@ -200,14 +208,12 @@ function addNewsToList(data){
 	$('.char-comment').append(listNode);
 	var massageNum = $("li[data-info-userid="+listNode.attr('data-info-userid')+"][data-info-type='sendTalk']");
 	$('span.label-new-info-num').html(massageNum.length);
-	
 	listNode.siblings("[data-info-username="+listNode.attr('data-info-username')+"][data-info-type='addFrends']").remove();
 	listNode.siblings("[data-info-userid="+listNode.attr('data-info-userid')+"][data-info-type='sendTalk']").hide();
 }
 
 //No.8 动态生成好友列表
 function addFriendsToList(result){
-	$('.chart-friends li').remove();
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	$(result.extend.friends).each(function(){
@@ -268,7 +274,7 @@ function addMessage(data,ele){
 		headFile:ele.attr('data-info-headfile')
 	};
 	var json = JSON.stringify(data);
-	addMessageToMessageList(data,null);
+	addMessageToMessageList(data,'');
 	$('.chat-content-body').scrollTop($('.chat-content-body')[0].scrollHeight );
 }
 

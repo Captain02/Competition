@@ -392,6 +392,11 @@ $(function(){
 	
 	$('.btn-close').click(function(){
 		 $("#chat-window").addClass('hidden');
+		 $('.char-comment li[data-info-type="sendTalk"]').each(function(){
+			 if($(this).attr('data-info-status')=== '1'){
+				 $(this).attr('data-info-status',0);
+			 }
+		 })
 	})
 
 })
