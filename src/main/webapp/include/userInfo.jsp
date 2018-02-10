@@ -190,7 +190,10 @@
             		})
             	}
             	
-            	function myFriends(){
+            	function myFriends(ele){
+            		if($(ele).attr('data-status')==='1'){
+            			return false;
+            		}
             		$.ajax({
             			url:"${APP_PATH}/admin/friends/friends",
             			type:"GET",

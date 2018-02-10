@@ -147,6 +147,7 @@ $(function () {
     //No.6 会话列表的切换
     $('.charts-opearte li').each(function(){
     	$(this).click(function(){
+    		$(this).attr('data-status',1);
     		var btn = $(this);
     		$('div.chat-info').each(function(){
     			if($(this).attr('data-index') === btn.attr('data-index')){
