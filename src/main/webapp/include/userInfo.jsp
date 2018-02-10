@@ -120,13 +120,13 @@
             	
             	
             	
-            	
+            	//关闭会话
             	function close(){
             		websocket.close();
             		console.log('关闭')
             	}
             	
-            	
+            	//同意
             	function sure(ele){
             		var toId = $(ele).attr('data-sure-id');
             		$.ajax({
@@ -159,6 +159,7 @@
             		})
             	}
             	
+            	//拒绝
             	function notSure(ele){
             		var toId = $(ele).attr('data-not-sure-id');
             		$.ajax({
@@ -190,6 +191,7 @@
             		})
             	}
             	
+            	//遍历好友列表
             	function myFriends(ele){
             		if($(ele).attr('data-status')==='1'){
             			return false;
@@ -206,6 +208,7 @@
             		})
             	}
             	
+            	//释放请求消息队列
             	function unAgreeAddFriend(toId) {
 	           		$.ajax({
 	           			url:"${APP_PATH}/admin/friends/unAgreeAddFriend",
@@ -223,6 +226,8 @@
 	           			})
 				}
             	
+            	
+            	//谈话
             	function sendMessage(ele){
             		//获取id
             		var toId = $(ele).attr('data-userid');
@@ -247,9 +252,11 @@
 					data["toId"]=toId;
 					data["text"]=text;
 					data["type"]=type;
-					data["user"]=user;
+            		if (type == "sendTalk") {
+						data["user"]=user;
+						addMessageToMessageList(data,'in-my clearfix');
+					}
 					websocket.send(JSON.stringify(data));
-					addMessageToMessageList(data,'in-my clearfix');
 					
             	}
             	
