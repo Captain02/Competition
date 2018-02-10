@@ -225,7 +225,6 @@
             		var toId = $(ele).attr('data-userid');
             		//获取消息内容
             		var messageText = $(ele).siblings('div.input-chat-text').html();
-            		alert(toId);
             		$.ajax({
 	           			url:"${APP_PATH}/admin/friends/talk",
 	           			data:"",
@@ -233,6 +232,7 @@
 	           			success:function(result){
 	           				var type = "sendTalk";
 		            		sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,result.extend.user);
+		            		$('.chat-content-body').scrollTop($('.chat-content-body')[0].scrollHeight );
 	           			}
 	           		})
             	}
@@ -246,6 +246,8 @@
 					data["type"]=type;
 					data["user"]=user;
 					websocket.send(JSON.stringify(data));
+					addMessageToMessageList(data,'in-my clearfix');
+					
             	}
             	
             </script>

@@ -262,18 +262,20 @@
 		<div class="charts-area" id="chat">
 		
 		<!-- 操作start -->
-		    <div class="col-md-12">
-			   <div class="row">
-			   	 <ul class="charts-opearte clearfix">
-			   	 	<li class="col-md-4 active" title="消息" data-index="0"><span class="fa fa-comment-o" ></span></li>
-					<li onclick="myFriends(this);" class="col-md-4" title="联系人" data-index="1"><span class="fa fa-user-o"></span></li>
-				</ul>
-			   </div>
-		    </div>
+	    <div class="col-md-12">
+		   <div class="row">
+		   	 <ul class="charts-opearte clearfix">
+		   	 	<li class="col-md-4 active" title="消息" data-index="0"><span class="fa fa-comment-o" ></span></li>
+				<li onclick="myFriends(this);" class="col-md-4" title="联系人" data-index="1"><span class="fa fa-user-o"></span></li>
+			</ul>
+		   </div>
+	    </div>
 		 <!-- 操作end -->
 		 
-		 <!-- comment start -->
-				<div class="chat-info comment pull-left" data-index="0">
+		 <!--消息 start -->
+		<div class="col-md-12">
+			<div class="row">
+				<div class="chat-info comment" data-index="0">
 				<div class="col-md-12 friends-title">
 					<h5>消息</h5>
 				</div>
@@ -281,10 +283,14 @@
 				  <ul class="charts-myfriends-list char-comment"></ul>
 				</div>
 			</div>
-			<!-- comment end -->
+			</div>
+		</div>
+		 <!-- 消息 end -->
 		 
-			<!-- 好友start -->
-			<div class="chat-info friend clearfix hidden" data-index="1">
+		<!-- 好友start -->
+		<div class="col-md-12">
+			<div class="row">
+				<div class="chat-info friend hidden" data-index="1">
 				<div class="col-md-12 friends-title">
 					<h5>我的好友</h5>
 				</div>
@@ -294,7 +300,10 @@
 				  </ul>
 				</div>
 			</div>
-			<!-- 好友end -->
+			</div>
+		</div>
+		<!-- 好友end -->
+		
 		</div>
 		
 	
@@ -318,7 +327,7 @@
 </div>
 
 <!-- 聊天框 -->
-<div class="chat-info-show" id="chat-window">
+<div class="chat-info-show hidden" id="chat-window">
 	<div class="chat-dialog">
 		<div class="chat-content">
 			<div class="chat-content-header">
@@ -326,7 +335,10 @@
 				<h4 class="chat-content-title" id="myChatLabel">admin</h4>
 			</div>
 			<div class="chat-content-body">
-				
+				<div class="panel-body">
+					<ul class="chats cool-chat" style="max-height: 500px;"></ul>
+				</div>
+			
 			</div>
 			<div class="chat-content-footer">
 				<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
@@ -364,7 +376,7 @@ $(function(){
             $("#chat-window").stop();//加上这个之后  
 
             var _x = ev.pageX - x;//获得X轴方向移动的值  
-            var _y = ev.pageY - y;//获得Y轴方向移动的值  sss
+            var _y = ev.pageY - y;//获得Y轴方向移动的值 
 
             	$("#chat-window").css({
             		"left":_x+"px",
