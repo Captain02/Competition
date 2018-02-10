@@ -1,5 +1,6 @@
 package com.hanming.oa.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.FriendsService;
@@ -103,6 +105,6 @@ public class WebSocketController {
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
 		// 发送人信息
 		request.getSession().setAttribute("user", user);
-		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName()).add("user", user);
+		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName()).add("user", user).add("sendTime", DateTool.dateToString(new Date()));
 	}
 }
