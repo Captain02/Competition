@@ -60,23 +60,23 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				Message message = new Message(user.getId(), user.getName(), toUserId, user.getName() + "请求加您为好友",
 						DateTool.dateToString(new Date()), "addFrends", user);
 				TextMessage textMessage = new TextMessage(JSON.toJSONString(message));
+				// 查询申请人是否还有其他未处理的其他申请
+				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
+				if (addFriendsQueue != null) {
+					addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
+				} else {
+					BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(10);
+					newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
+					userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
+				}
 				// 发送添加好友
 				if (null != userSocketSessionMap.get(toUserId)) {
 					sendMessageToUser(toUserId, textMessage);
-				} else {
-					// 查询申请人是否还有其他未处理的其他申请
-					BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
-					if (addFriendsQueue != null) {
-						addFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
-					} else {
-						BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(10);
-						newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(message)));
-						userSocketAddFriendsQueue.put(toUserId, newAddFriendsQueue);
-					}
 				}
 			}
 
-			// 接受好友请求
+			//打开连接
+			// 接受好友请求，显示未处理的消息
 			if ("responseAddFridens".equals(type)) {
 				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
 				if (addFriendsQueue != null) {
@@ -108,33 +108,17 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
 		msg.setDate(DateTool.dateToString(new Date()));
 
+		//取消回执
 		if ("unAgreeAddFriend".equals(msg.getType())) {
 			BlockingQueue<TextMessage> byRequestAddFriend = userSocketAddFriendsQueue.get(msg.getFromId());
-			for (TextMessage textMessage : byRequestAddFriend) {
-				Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
-						Message.class);
-				// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
-				Integer fromId = byRequestAddFriendMessage.getFromId();
-				Integer toId = msg.getToId();
-				if (toId.equals(fromId)) {
-					byRequestAddFriend.remove(textMessage);
-				}
-			}
+			freeQueue(msg, byRequestAddFriend);
 		}
 
+		// 同意或拒绝添加好友
 		if ("agreeAddFriend".equals(msg.getType())) {
 			// 释放被申请人的添加好友请求
 			BlockingQueue<TextMessage> byRequestAddFriend = userSocketAddFriendsQueue.get(msg.getFromId());
-			for (TextMessage textMessage : byRequestAddFriend) {
-				Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
-						Message.class);
-				// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
-				Integer fromId = byRequestAddFriendMessage.getFromId();
-				Integer toId = msg.getToId();
-				if (toId.equals(fromId)) {
-					byRequestAddFriend.remove(textMessage);
-				}
-			}
+			freeQueue(msg, byRequestAddFriend);
 			WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
 			BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(msg.getToId());
 			// 如果此人有未处理的添加好友请求
@@ -153,6 +137,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 			}
 		}
 
+		// 发送消息
 		if ("sendTalk".equals(msg.getType())) {
 			WebSocketSession webSocketSession = userSocketSessionMap.get(msg.getToId());
 			BlockingQueue<TextMessage> talkQueue = userSocketTalkQueue.get(msg.getToId());
@@ -169,23 +154,29 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
 			}
 		}
-		if ("acceptTalk".equals(msg.getType())) {
+		
+		// 释放离线信息
+		if ("acceptTalks".equals(msg.getType())) {
 			BlockingQueue<TextMessage> acceptTalk = userSocketTalkQueue.get(msg.getFromId());
-			if (acceptTalk == null) {
-				return;
-			} else if (acceptTalk != null) {
-				for (TextMessage textMessage : acceptTalk) {
-					Message parseObject = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
-					Integer fromId = parseObject.getFromId();
-					Integer toId = msg.getToId();
-					if (fromId.equals(toId)) {
-						sendMessageToUser(msg.getFromId(), new TextMessage(JSON.toJSONString(textMessage)));
-						acceptTalk.remove(textMessage);
-					}
-				}
+				freeQueue(msg, acceptTalk);
+		}
+	}
+
+	//释放资源
+	private void freeQueue(Message msg, BlockingQueue<TextMessage> byRequestAddFriend) {
+		if (byRequestAddFriend == null) {
+			return;
+		}
+		for (TextMessage textMessage : byRequestAddFriend) {
+			Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
+					Message.class);
+			// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
+			Integer fromId = byRequestAddFriendMessage.getFromId();
+			Integer toId = msg.getToId();
+			if (toId.equals(fromId)) {
+				byRequestAddFriend.remove(textMessage);
 			}
 		}
-
 	}
 
 	@Override
