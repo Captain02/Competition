@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hanming.oa.dao.FriendHistoryTalkMapper;
 import com.hanming.oa.dao.FriendsMapper;
+import com.hanming.oa.model.FriendHistoryTalk;
 import com.hanming.oa.model.Friends;
 import com.hanming.oa.model.User;
 
@@ -15,6 +17,8 @@ public class FriendsService {
 
 	@Autowired
 	FriendsMapper friendsMapper;
+	@Autowired
+	FriendHistoryTalkMapper friendHistoryTalkMapper;
 	
 	public List<User> listByUserId(Integer userId) {
 		List<User> friends = friendsMapper.listByUserId(userId);
@@ -52,6 +56,13 @@ public class FriendsService {
 			}
 		}
 	}
+
+	@Transactional
+	public void insertTalkRecord(FriendHistoryTalk friendHistoryTalk, FriendHistoryTalk friendHistoryTalk2) {
+		friendHistoryTalkMapper.insertSelective(friendHistoryTalk2);
+		friendHistoryTalkMapper.insertSelective(friendHistoryTalk);
+	}
+
 
 
 }

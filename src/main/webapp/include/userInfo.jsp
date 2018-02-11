@@ -249,7 +249,10 @@
             		var messageText = $(ele).siblings('div.input-chat-text').html();
             		$.ajax({
 	           			url:"${APP_PATH}/admin/friends/talk",
-	           			data:"",
+	           			data:{
+	           				'toId':toId,
+	           				'text':messageText
+	           			},
 	           			type:"POST",
 	           			success:function(result){
 	           				var type = "sendTalk";

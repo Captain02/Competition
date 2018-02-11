@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.FriendHistoryTalk;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.FriendsService;
 import com.hanming.oa.service.UserService;
@@ -27,6 +28,7 @@ public class WebSocketController {
 	UserService UserService;
 	@Autowired
 	FriendsService friendsService;
+	
 
 	// 发送申请好友
 	@ResponseBody
@@ -85,36 +87,42 @@ public class WebSocketController {
 		return Msg.success().add("fromId", userId).add("fromName", user.getName()).add("friend", friend);
 	}
 
-	
-	
-	//删除消息队列确认添加好友消息
+	// 删除消息队列确认添加好友消息
 	@ResponseBody
 	@RequestMapping(value = "/unAgreeAddFriend", method = RequestMethod.POST)
 	public Msg unAgreeAddFriend() {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
-		
+
 		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
 	}
-	
-	//聊天消息
+
+	// 聊天消息
 	@ResponseBody
-	@RequestMapping(value="/talk",method=RequestMethod.POST)
-	public Msg talk(HttpServletRequest request) {
+	@RequestMapping(value = "/talk", method = RequestMethod.POST)
+	public Msg talk(HttpServletRequest request, @RequestParam("toId") Integer toId,
+			@RequestParam("text") String text) {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		FriendHistoryTalk friendHistoryTalk = new FriendHistoryTalk(null, fromUserId, fromUserId, toId, DateTool.dateToString(new Date()), text);
+		FriendHistoryTalk friendHistoryTalk2 = new FriendHistoryTalk(null, toId, fromUserId, toId, DateTool.dateToString(new Date()), text);
+		friendsService.insertTalkRecord(friendHistoryTalk,friendHistoryTalk2);
+		
+		
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
 		// 发送人信息
 		request.getSession().setAttribute("user", user);
-		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName()).add("user", user).add("sendTime", DateTool.dateToString(new Date()));
+
+		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName()).add("user", user).add("sendTime",
+				DateTool.dateToString(new Date()));
 	}
-	
-	//释放离线消息
+
+	// 释放离线消息
 	@ResponseBody
-	@RequestMapping(value="/acceptTalk",method=RequestMethod.POST)
+	@RequestMapping(value = "/acceptTalk", method = RequestMethod.POST)
 	public Msg acceptTalk() {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
-		
+
 		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
 	}
 }

@@ -37,7 +37,7 @@
 		</javaClientGenerator>
 
 		<!-- 指定每个表的生成策略 -->
-		<table tableName="myImage" domainObjectName="MyImage"
+		<table tableName="friendHistoryTalk" domainObjectName="FriendHistoryTalk"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
