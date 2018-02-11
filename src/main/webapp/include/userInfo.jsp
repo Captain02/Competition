@@ -147,15 +147,11 @@
             			},
             			type:"POST",
             			success:function(result){
-	    					var data={};
-	    					data["fromId"]=result.extend.fromId;
-	    					data["fromName"]=result.extend.fromName;
-	    					data["toId"]=toId;
-	    					data["text"]=result.extend.fromName+"同意添加您为好友。";
-	    					data["type"]="agreeAddFriend";
-	    					data["user"]=result.extend.friend;
+	    					messageText=result.extend.fromName+"同意添加您为好友。";
+	    					type="agreeAddFriend";
+	    					user=result.extend.friend;
 	    					websocket.send(JSON.stringify(data));
-	    					
+	    					sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,user,sendTime);
 	    					$('.char-comment li').each(function(){
 	    						if( $(this).attr('data-info-userid')===$(ele).attr('data-sure-id') && $(this).attr('data-info-status')===$(ele).attr('data-info-status') ){
 	    							$(this).remove();
@@ -180,15 +176,11 @@
             			},
             			type:"POST",
             			success:function(result){
-		            		var data={};
-							data["fromId"]=result.extend.fromId;
-							data["fromName"]=result.extend.fromName;
-							data["toId"]=toId;
-							data["text"]=result.extend.fromName+"不同意添加您为好友。";
-							data["type"]="agreeAddFriend";
-							data["user"]=result.extend.friend;
-							websocket.send(JSON.stringify(data));
-							
+							messageText=result.extend.fromName+"不同意添加您为好友。";
+							type="agreeAddFriend";
+							user=result.extend.friend;
+							sendTime="";
+							sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,user,sendTime);
 							$('.char-comment li').each(function(){
 	    						if( $(this).attr('data-info-userid')===$(ele).attr('data-not-sure-id') && $(this).attr('data-info-status')===$(ele).attr('data-info-status') ){
 	    							$(this).remove();
@@ -225,13 +217,11 @@
 	           			data:"",
 	           			type:"POST",
 	           			success:function(result){
-			            		var data={};
-								data["fromId"]=result.extend.fromId;
-								data["fromName"]=result.extend.fromName;
-								data["toId"]=toId;
-								data["text"]="";
-								data["type"]="unAgreeAddFriend";
-								websocket.send(JSON.stringify(data));
+								messageText="";
+								type="unAgreeAddFriend";
+								user="";
+								sendTime="";
+								sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,user,sendTime);
 	           				}
 	           			})
 				}
@@ -255,6 +245,7 @@
 	           		})
             	}
             	
+            	//发送任何消息
             	function sendFunction(fromId,fromName,toId,text,type,user,sendTime){
             		var data={};
             		data["fromId"]=fromId;
@@ -262,8 +253,8 @@
 					data["toId"]=toId;
 					data["text"]=text;
 					data["type"]=type;
+					data["user"]=user;
             		if (type == "sendTalk") {
-						data["user"]=user;
 						data["date"] = sendTime;
 						addMessageToMessageList(data,'in-my clearfix');
 					}
