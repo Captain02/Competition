@@ -338,7 +338,6 @@
 				<div class="panel-body">
 					<ul class="chats cool-chat" style="max-height: 500px;"></ul>
 				</div>
-			
 			</div>
 			<div class="chat-content-footer">
 				<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
@@ -356,51 +355,6 @@
 	</div>
 </div>
 
-
-<script type="text/javascript">
-$(function(){
-	$("li.new").each(function(){
-		$(this).click(function(){
-			$('#myModal').modal('show');
-			ShowTips('.modal-title','公告详情','.modal-body',$(this).find('input.notice-text').val());
-		})
-	})
-	
-	$('.chat-content-header').mousedown(function(e){
-		e = window.event || e;
-		var offset = $('#chat-window').offset();
-		var x = e.pageX - offset.left;
-		var y = e.pageY - offset.top;
-		
-		$(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件  
-            $("#chat-window").stop();//加上这个之后  
-
-            var _x = ev.pageX - x;//获得X轴方向移动的值  
-            var _y = ev.pageY - y;//获得Y轴方向移动的值 
-
-            	$("#chat-window").css({
-            		"left":_x+"px",
-            		"top":_y+"px"
-            	});
-            $('body').addClass('no-select');
-        });
-		 $(document).mouseup(function(){  
-	            $(this).unbind("mousemove");
-	            $('body').removeClass('no-select');
-	     });  
-	});
-	
-	$('.btn-close').click(function(){
-		 $("#chat-window").addClass('hidden');
-		 $('.char-comment li[data-info-type="sendTalk"]').each(function(){
-			 if($(this).attr('data-info-status')=== '1'){
-				 $(this).attr('data-info-status',0);
-			 }
-		 })
-	})
-
-})
-</script>
 
 </body>
 

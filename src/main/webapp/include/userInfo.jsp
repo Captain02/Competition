@@ -99,8 +99,18 @@
                         		 // 监听消息
                         		websocket.onmessage = function(event) {
                         			var data=JSON.parse(event.data);
-                        			console.log("WebSocket:收到一条消息",data);
                         			addNewsToList(data);
+                        			if($('#chat-window').attr('data-status')==='1' && data.fromId===parseInt($('#chat-window').find('button.btn-send').attr('data-info-userid')) && data.type==='sendTalk'){
+                        				addMessageToMessageList(data,'');
+                        				$('.char-comment li').each(function(){
+                        					if($(this).attr('data-info-userid')=== $('#chat-window').find('button.btn-send').attr('data-info-userid')){
+                        						$(this).find('span.label-new-info-num').remove();
+                        					}
+                        				})
+                        				$('.chat-content-body').scrollTop($('.chat-content-body')[0].scrollHeight );
+                        			}                                                   
+                        			console.log("WebSocket:收到一条消息",data);
+                        			
                         		};
                         		websocket.onerror = function(event) {
                         			console.log("WebSocket:发生错误 ");
@@ -126,7 +136,7 @@
             		console.log('关闭')
             	}
             	
-            	//同意
+            	//同意好友请求
             	function sure(ele){
             		var toId = $(ele).attr('data-sure-id');
             		$.ajax({
@@ -159,7 +169,7 @@
             		})
             	}
             	
-            	//拒绝
+            	//拒绝好友请求
             	function notSure(ele){
             		var toId = $(ele).attr('data-not-sure-id');
             		$.ajax({
@@ -230,7 +240,7 @@
             	//谈话
             	function sendMessage(ele){
             		//获取id
-            		var toId = $(ele).attr('data-userid');
+            		var toId = $(ele).attr('data-info-userid');
             		//获取消息内容
             		var messageText = $(ele).siblings('div.input-chat-text').html();
             		$.ajax({
@@ -239,13 +249,13 @@
 	           			type:"POST",
 	           			success:function(result){
 	           				var type = "sendTalk";
-		            		sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,result.extend.user);
+		            		sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,result.extend.user,result.extend.sendTime);
 		            		$('.chat-content-body').scrollTop($('.chat-content-body')[0].scrollHeight );
 	           			}
 	           		})
             	}
             	
-            	function sendFunction(fromId,fromName,toId,text,type,user){
+            	function sendFunction(fromId,fromName,toId,text,type,user,sendTime){
             		var data={};
             		data["fromId"]=fromId;
 					data["fromName"]=fromName;
@@ -254,9 +264,11 @@
 					data["type"]=type;
             		if (type == "sendTalk") {
 						data["user"]=user;
+						data["date"] = sendTime;
 						addMessageToMessageList(data,'in-my clearfix');
 					}
 					websocket.send(JSON.stringify(data));
+					console.log("WebSocket发送一条消息",data);
 					
             	}
             	
