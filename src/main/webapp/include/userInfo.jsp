@@ -150,7 +150,7 @@
 	    					messageText=result.extend.fromName+"同意添加您为好友。";
 	    					type="agreeAddFriend";
 	    					user=result.extend.friend;
-	    					websocket.send(JSON.stringify(data));
+	    					sendTime="";
 	    					sendFunction(result.extend.fromId,result.extend.fromName,toId,messageText,type,user,sendTime);
 	    					$('.char-comment li').each(function(){
 	    						if( $(this).attr('data-info-userid')===$(ele).attr('data-sure-id') && $(this).attr('data-info-status')===$(ele).attr('data-info-status') ){
