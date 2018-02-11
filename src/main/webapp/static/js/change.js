@@ -79,11 +79,8 @@ $(function () {
     
    //根据消息类型的不同，点击之后进行不同的操作
    $('.char-comment').on('click','li',function(){
-	   $(this).siblings('li[data-info-type="sendTalk"]').attr('data-info-status',0);
-	   if($(this).attr('data-info-status') === '1'){
-		   return false;
-	   }
 	   $(this).attr('data-info-status','1');
+	   $(this).siblings('li[data-info-type="sendTalk"]').attr('data-info-status',0);
 	   $('.cool-chat li').remove();
 	   switch ($(this).attr("data-info-type")) {
 		case 'addFrends':
@@ -185,6 +182,7 @@ $(function () {
 	
     //关闭会话框按钮
 	$('.btn-close').click(function(){
+		chatWindowClose($('.btn-send').attr('data-info-userid'));
 		 (function(ele){
 			 $(ele).addClass('hidden');
 			 $(ele).attr('data-status',0);

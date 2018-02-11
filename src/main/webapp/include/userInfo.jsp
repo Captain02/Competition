@@ -195,14 +195,12 @@
             	
             	//遍历好友列表
             	function myFriends(ele){
-            		if($(ele).attr('data-status')==='1'){
-            			return false;
-            		}
             		$.ajax({
             			url:"${APP_PATH}/admin/friends/friends",
             			type:"GET",
             			data:"",
             			success:function(result){
+            				$('.chart-friends li').remove();
             				addFriendsToList(result);
 							console.log(result.extend.friends);
             			}
@@ -261,6 +259,11 @@
 					websocket.send(JSON.stringify(data));
 					console.log("WebSocket发送一条消息",data);
 					
+            	}
+            	
+            	//关闭会话框
+            	function chatWindowClose(toId){
+            		alert(toId);
             	}
             	
             </script>
