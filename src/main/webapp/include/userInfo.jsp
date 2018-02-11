@@ -223,7 +223,23 @@
 	           				}
 	           			})
 				}
-            	
+            	//关闭会话框
+            	function chatWindowClose(toId){
+            		$.ajax({
+            			url:"${APP_PATH}/admin/friends/acceptTalk",
+            			data:"",
+            			type:"POST",
+            			success:function(result){
+            				var data={};
+	           				data["fromId"]=result.extend.fromId;
+	    					data["fromName"]=result.extend.fromName;
+	    					data["toId"]=toId;
+	    					data["text"]="";
+	    					data["type"]="acceptTalks";
+	    					websocket.send(JSON.stringify(data));
+            			}
+            		})
+            	}
             	
             	//谈话
             	function sendMessage(ele){
@@ -261,10 +277,7 @@
 					
             	}
             	
-            	//关闭会话框
-            	function chatWindowClose(toId){
-            		alert(toId);
-            	}
+            	
             	
             </script>
 

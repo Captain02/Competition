@@ -107,4 +107,14 @@ public class WebSocketController {
 		request.getSession().setAttribute("user", user);
 		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName()).add("user", user).add("sendTime", DateTool.dateToString(new Date()));
 	}
+	
+	//释放离线消息
+	@ResponseBody
+	@RequestMapping(value="/acceptTalk",method=RequestMethod.POST)
+	public Msg acceptTalk() {
+		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
+		
+		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
+	}
 }
