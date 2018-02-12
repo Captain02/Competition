@@ -15,6 +15,10 @@
 	<ul>
 		<c:forEach items="${listMessage}" var="message">
 		<li class="message-history-list">
+			<!-- 我的id -->
+			<input type="hidden" value="${myId}">
+			<!-- 消息的发送人id -->
+			<input type="hidden" value="${message.user.id}">
 			<div class="user-info-username">${message.user.name}</div>
 			<div class="user-info-datetime">${message.date}</div>
 			<div>${message.text}</div>
