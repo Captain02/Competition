@@ -327,7 +327,7 @@
 </div>
 
 <!-- 聊天框 -->
-<div class="chat-info-show hidden" id="chat-window">
+<div class="chat-info-show" id="chat-window">
 	<div class="chat-dialog">
 		<div class="chat-content">
 			<div class="chat-content-header">
@@ -340,16 +340,14 @@
 				</div>
 			</div>
 			<div class="chat-content-footer">
-				<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
-				<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px; margin: 5px 10px 10px 0;" onclick="sendMessage(this);">发送</button>
-				<script type="text/javascript">
-				//初始化emojiPicker配置
-				window.emojiPicker = new EmojiPicker({
-					  emojiable_selector: '[data-emojiable=true]',
-					  assetsPath: '${APP_PATH}/static/emoji-picker/lib/img/',
-					  popupButtonClasses: 'fa fa-smile-o'
-					}).discover();
-				</script>
+				<div class="footer-content clearfix">
+					<div class="tool-bar clearfix">
+						<a href="" class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
+					</div>
+					<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
+					<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>
+					
+				</div>
 			</div>
 		</div>
 	</div>

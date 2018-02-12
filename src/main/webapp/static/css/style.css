@@ -29,7 +29,6 @@ body a, .toggle-btn span {
 }
 
 body a:hover {
-	text-decoration: underline;
 	cursor: pointer;
 }
 
@@ -1415,7 +1414,28 @@ ul.p-info .title, ul.p-info .desk {
 	border-radius: 0;
 	border-top: 1px #ccc solid;
 }
-
+.tool-bar{
+	width: 100%;
+	padding: 5px;
+}
+.footer-content{
+	height: 100%;
+	position: relative;
+}
+.footer-content .message-history{
+	color: #999;
+	display: inline-block;
+	font-size: 12px;
+	padding:5px;
+}
+.footer-content .message-history:hover{
+	background-color: rgb(242,242,242);
+}
+.btn-send{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+}
 .cool-chat li.in .message {
 	background: #65cea7;
 	color: #fff;
@@ -1434,7 +1454,6 @@ ul.p-info .title, ul.p-info .desk {
 }
 
 .chat-content-footer p.input-chat-text {
-	position: relative;
 	height: 50px;
 	padding: 5px;
 	text-align: justify;
