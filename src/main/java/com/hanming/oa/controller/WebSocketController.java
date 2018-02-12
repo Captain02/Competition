@@ -125,4 +125,11 @@ public class WebSocketController {
 
 		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
 	}
+	
+	// 查看历史记录
+	@RequestMapping(value="/historyTalk",method=RequestMethod.GET)
+	public String historyTalk() {
+		
+		return "personPage/message";
+	}
 }

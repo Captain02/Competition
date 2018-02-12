@@ -342,7 +342,7 @@
 			<div class="chat-content-footer">
 				<div class="footer-content clearfix">
 					<div class="tool-bar clearfix">
-						<a href="" class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
+						<a href="${APP_PATH}/admin/friends/historyTalk" class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
 					</div>
 					<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
 					<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>
