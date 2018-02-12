@@ -246,7 +246,7 @@
             		//获取id
             		var toId = $(ele).attr('data-info-userid');
             		//获取消息内容
-            		var messageText = $(ele).siblings('div.input-chat-text').html();
+            		var messageText = $(ele).siblings('p.input-chat-text').html();
             		$.ajax({
 	           			url:"${APP_PATH}/admin/friends/talk",
 	           			data:{

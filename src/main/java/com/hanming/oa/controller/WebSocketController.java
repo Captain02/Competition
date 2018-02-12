@@ -1,7 +1,5 @@
 package com.hanming.oa.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.FriendHistoryTalk;
@@ -143,6 +139,7 @@ public class WebSocketController {
 		PageHelper.startPage(pn,8);*/
 		List<Message> listMessage = friendHistoryTalkService.list(fromUserId, friendId);
 		model.addAttribute("listMessage",listMessage);
+		model.addAttribute("myId",fromUserId);
 		return "personPage/message";
 	}
 }
