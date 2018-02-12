@@ -73,7 +73,6 @@ public class FriendHistoryTalk {
 
 	public FriendHistoryTalk() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
     
 }

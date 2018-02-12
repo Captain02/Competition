@@ -1,5 +1,7 @@
 package com.hanming.oa.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,15 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.FriendHistoryTalk;
+import com.hanming.oa.model.Message;
 import com.hanming.oa.model.User;
+import com.hanming.oa.service.FriendHistoryTalkService;
 import com.hanming.oa.service.FriendsService;
 import com.hanming.oa.service.UserService;
 
@@ -28,7 +35,8 @@ public class WebSocketController {
 	UserService UserService;
 	@Autowired
 	FriendsService friendsService;
-	
+	@Autowired
+	FriendHistoryTalkService friendHistoryTalkService;
 
 	// 发送申请好友
 	@ResponseBody
@@ -100,14 +108,14 @@ public class WebSocketController {
 	// 聊天消息
 	@ResponseBody
 	@RequestMapping(value = "/talk", method = RequestMethod.POST)
-	public Msg talk(HttpServletRequest request, @RequestParam("toId") Integer toId,
-			@RequestParam("text") String text) {
+	public Msg talk(HttpServletRequest request, @RequestParam("toId") Integer toId, @RequestParam("text") String text) {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		FriendHistoryTalk friendHistoryTalk = new FriendHistoryTalk(null, fromUserId, fromUserId, toId, DateTool.dateToString(new Date()), text);
-		FriendHistoryTalk friendHistoryTalk2 = new FriendHistoryTalk(null, toId, fromUserId, toId, DateTool.dateToString(new Date()), text);
-		friendsService.insertTalkRecord(friendHistoryTalk,friendHistoryTalk2);
-		
-		
+		FriendHistoryTalk friendHistoryTalk = new FriendHistoryTalk(null, fromUserId, fromUserId, toId,
+				DateTool.dateToString(new Date()), text);
+		FriendHistoryTalk friendHistoryTalk2 = new FriendHistoryTalk(null, toId, fromUserId, toId,
+				DateTool.dateToString(new Date()), text);
+		friendsService.insertTalkRecord(friendHistoryTalk, friendHistoryTalk2);
+
 		User user = UserService.selectByPrimaryKeyWithDeptAndRole(fromUserId);
 		// 发送人信息
 		request.getSession().setAttribute("user", user);
@@ -125,11 +133,16 @@ public class WebSocketController {
 
 		return Msg.success().add("fromId", fromUserId).add("fromName", user.getName());
 	}
-	
+
 	// 查看历史记录
-	@RequestMapping(value="/historyTalk",method=RequestMethod.GET)
-	public String historyTalk() {
-		
+	@RequestMapping(value = "/historyTalk", method = RequestMethod.GET)
+	public String historyTalk(@RequestParam("friendId") Integer friendId, Model model) {
+		System.out.println(friendId);
+		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		/*PageInfo<Message> pageInfo = null;
+		PageHelper.startPage(pn,8);*/
+		List<Message> listMessage = friendHistoryTalkService.list(fromUserId, friendId);
+		model.addAttribute("listMessage",listMessage);
 		return "personPage/message";
 	}
 }

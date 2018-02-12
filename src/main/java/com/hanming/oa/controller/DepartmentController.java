@@ -6,9 +6,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +41,7 @@ public class DepartmentController {
 		} else {
 			list = departmentService.listLikeName(name);
 		}
+		
 		pageInfo = new PageInfo<Department>(list, 5);
 
 		model.addAttribute("pageInfo", pageInfo);

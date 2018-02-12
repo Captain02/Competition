@@ -8,6 +8,22 @@
     <result column="toId" jdbcType="INTEGER" property="toid" />
     <result column="date" jdbcType="VARCHAR" property="date" />
   </resultMap>
+  <resultMap id="MessageWithUser" type="com.hanming.oa.model.Message"> 
+  	 <id column="id" jdbcType="INTEGER" property="id" />
+     <result column="text" jdbcType="VARCHAR" property="text" />
+     <result column="date" jdbcType="VARCHAR" property="date" />
+  
+     <association property="user" javaType="User">
+     	<id column="userId" property="id"></id>
+     	<result column="username" property="username"></result>
+     	<result column="name" property="name"></result>
+     	<result column="sex" property="sex"></result>
+     	<result column="phone" property="phone"></result>
+     	<result column="qq" property="qq"></result>
+     	<result column="edu" property="edu"></result>
+     	<result column="headFile" property="headFile"></result>
+     </association>
+  </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hanming.oa.model.FriendHistoryTalk">
     <result column="text" jdbcType="LONGVARCHAR" property="text" />
   </resultMap>
@@ -118,4 +134,14 @@
       date = #{date,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- List<Message> list(@Param("fromUserId")Integer fromUserId, @Param("friendId")Integer friendId); -->
+  <select id="list" resultMap="MessageWithUser">
+   SELECT
+	fht.id,fht.text,fht.date,tu.id AS userId,tu.username,tu.`name`,tu.sex,tu.phone,tu.qq,tu.edu,tu.headFile
+	FROM friendhistorytalk fht
+	LEFT JOIN t_user tu ON fht.fromId=tu.id
+	WHERE (fht.fromId=#{fromUserId} OR fht.fromId=#{friendId}) AND (fht.toId = #{fromUserId} OR fht.toId=#{friendId})  AND fht.userId=#{fromUserId}
+  </select>
+
 </mapper>

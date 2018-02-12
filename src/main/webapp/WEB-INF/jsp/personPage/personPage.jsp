@@ -360,7 +360,7 @@
 
 <script type="text/javascript">
 $('.message-history').click(function(){
-	$('.message-histroty-content').find('iframe').attr('src','${APP_PATH}/admin/friends/historyTalk');
+	$('.message-histroty-content').find('iframe').attr('src','${APP_PATH}/admin/friends/historyTalk?friendId='+$('.btn-send').attr('data-info-userid')+'');
 })
 </script>
 </body>

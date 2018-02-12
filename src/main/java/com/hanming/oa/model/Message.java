@@ -1,8 +1,8 @@
 package com.hanming.oa.model;
 
-import org.apache.ibatis.type.IntegerTypeHandler;
-
 public class Message {
+	//消息id
+	private Integer id;
 	// 发送者
 	private Integer fromId;
 	// 发送者名称
@@ -17,6 +17,14 @@ public class Message {
 	private String type;
 
 	private User user;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getFromId() {
 		return fromId;
@@ -74,6 +82,11 @@ public class Message {
 		this.user = user;
 	}
 
+	public Message() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Message(Integer fromId, String fromName, Integer toId, String text, String date, String type, User user) {
 		super();
 		this.fromId = fromId;
@@ -83,11 +96,6 @@ public class Message {
 		this.date = date;
 		this.type = type;
 		this.user = user;
-	}
-
-	public Message() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 }
