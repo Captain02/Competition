@@ -1343,12 +1343,12 @@ ul.p-info .title, ul.p-info .desk {
 }
 
 .chat-dialog {
-	height: 100%;
+	height: 90%;
 }
 
 .chat-info-show {
 	position: fixed;
-	width: 500px;
+	width: 1000px;
 	height: 500px;
 	top: 10%;
 	left: 10%;
@@ -1369,6 +1369,7 @@ ul.p-info .title, ul.p-info .desk {
 .chat-content {
 	position: relative;
 	height: 100%;
+	float: left;
 }
 
 .chat-content-header {
@@ -1408,15 +1409,23 @@ ul.p-info .title, ul.p-info .desk {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 100%;
+	width:100%;
 	height: 20%;
-	border-top: 1px #ccc solid;
+	border-top: 1px rgb(234,234,234) solid;
 	border-radius: 0;
-	border-top: 1px #ccc solid;
 }
 .tool-bar{
 	width: 100%;
 	padding: 5px;
+}
+.message-histroty-content{
+	float: right;
+	height: 100%;
+	border-left: rgb(234,234,234) 1px solid;
+}
+.message-histroty-content iframe{
+	width: 100%;
+	height: 100%;
 }
 .footer-content{
 	height: 100%;

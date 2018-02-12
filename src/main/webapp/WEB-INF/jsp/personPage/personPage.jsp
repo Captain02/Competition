@@ -328,32 +328,41 @@
 
 <!-- 聊天框 -->
 <div class="chat-info-show" id="chat-window">
-	<div class="chat-dialog">
-		<div class="chat-content">
-			<div class="chat-content-header">
-				<button type="button" class="close btn-close" data-dismiss="chat-info-show" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<h4 class="chat-content-title" id="myChatLabel">admin</h4>
-			</div>
-			<div class="chat-content-body">
-				<div class="panel-body">
-					<ul class="chats cool-chat" style="max-height: 500px;"></ul>
-				</div>
-			</div>
-			<div class="chat-content-footer">
-				<div class="footer-content clearfix">
-					<div class="tool-bar clearfix">
-						<a href="${APP_PATH}/admin/friends/historyTalk" class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
+	<div class="chat-content-header">
+		<button type="button" class="close btn-close" data-dismiss="chat-info-show" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<h4 class="chat-content-title" id="myChatLabel">admin</h4>
+	</div>
+	<div class="chat-dialog col-md-12">
+		<div class="row" style="height: 100%; display: block;">
+			<div class="chat-content col-md-6">
+				<div class="chat-content-body">
+					<div class="panel-body">
+						<ul class="chats cool-chat" style="max-height: 500px;"></ul>
 					</div>
-					<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
-					<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>
-					
 				</div>
+				<div class="chat-content-footer clearfix">
+					<div class="footer-content clearfix">
+						<div class="tool-bar clearfix">
+							<a class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
+						</div>
+						<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
+						<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>
+						
+					</div>
+				</div>
+		</div>
+			<div class="message-histroty-content col-md-6">
+				<iframe frameborder="0" scrolling="auto"></iframe> 
 			</div>
 		</div>
 	</div>
 </div>
 
-
+<script type="text/javascript">
+$('.message-history').click(function(){
+	$('.message-histroty-content').find('iframe').attr('src','${APP_PATH}/admin/friends/historyTalk');
+})
+</script>
 </body>
 
 </html>
