@@ -193,6 +193,14 @@ $(function () {
 			 }
 		 })
 	})//end
+	
+		
+	//区分我的消息和他人消息
+	$('.message-history-area li').each(function(){
+		if($(this).attr('data-myid') === $(this).attr('data-userid')){
+			$(this).addClass('my-message');
+		}
+	})
     
 })
 
@@ -248,8 +256,8 @@ function addMessageToMessageList(data,thisClass){
 			"</li>"
 					);
 	$('.cool-chat').append(listNode);
-	$('div.input-chat-text').html('');
-	$('div.input-chat-text').focus();
+	$('p.input-chat-text').html('');
+	$('p.input-chat-text').focus();
 }//end
 
 

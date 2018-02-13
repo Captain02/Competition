@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>历史消息页</title>
@@ -12,18 +12,24 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <body>
-	<ul>
+	
+	<ul class="message-history-area">
 		<c:forEach items="${listMessage}" var="message">
-		<li class="message-history-list">
-			<!-- 我的id -->
-			<input type="hidden" value="${myId}">
-			<!-- 消息的发送人id -->
-			<input type="hidden" value="${message.user.id}">
-			<div class="user-info-username">${message.user.name}</div>
-			<div class="user-info-datetime">${message.date}</div>
-			<div>${message.text}</div>
+		<li class="message-history-list clearfix" data-myid="${myId}" data-userid="${message.user.id}">
+			<div class="user-info-nametime clearfix">
+				<span class="user-info-username">${message.user.name}</span>
+				<span class="user-info-datetime">${message.date}</span>
+			</div>
+			<div class="user-info-mestext">
+				<span class="user-info-text">${message.text}</span>
+			</div>
 		</li>
 		</c:forEach>
 	</ul>
+	
+	
 </body>
+<script type="text/javascript">
+$('body').scrollTop($('.body')[0].scrollHeight );
+</script>
 </html>

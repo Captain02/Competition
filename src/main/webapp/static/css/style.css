@@ -1345,7 +1345,22 @@ ul.p-info .title, ul.p-info .desk {
 .chat-dialog {
 	height: 90%;
 }
-
+.page-nav{
+	padding:0 5px;
+}
+.page-nav nav{
+	height: 100%;
+} 
+.page-nav ul{
+	margin: 0;
+}
+.page-nav ul li a{
+	border: none;
+	padding: 0 10px;
+}
+.page-nav .pagination{
+	display: block;
+}
 .chat-info-show {
 	position: fixed;
 	width: 1000px;
@@ -1385,7 +1400,7 @@ ul.p-info .title, ul.p-info .desk {
 }
 
 .chat-content-body {
-	height: 70%;
+	height: 80%;
 	overflow: auto;
 }
 
@@ -1409,42 +1424,86 @@ ul.p-info .title, ul.p-info .desk {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width:100%;
+	width: 100%;
 	height: 20%;
-	border-top: 1px rgb(234,234,234) solid;
+	border-top: 1px rgb(234, 234, 234) solid;
 	border-radius: 0;
 }
-.tool-bar{
+
+.tool-bar {
 	width: 100%;
 	padding: 5px;
 }
-.message-histroty-content{
+
+.message-histroty-content {
 	float: right;
 	height: 100%;
-	border-left: rgb(234,234,234) 1px solid;
+	border-left: rgb(234, 234, 234) 1px solid;
+	position: relative;
 }
-.message-histroty-content iframe{
+.page-nav{
+	height:5%;
+	width:100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.message-histroty-content iframe {
 	width: 100%;
-	height: 100%;
+	height: 95%;
 }
-.footer-content{
+
+.message-history-list {
+	margin: 10px 0;
+	padding: 0 10px;
+}
+.message-history-area li.my-message{
+	background-color: rgb(255 237 196);
+}
+.user-info-nametime span {
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.user-info-nametime .user-info-username {
+	color: #65CEA7;
+	margin-right: 10px;
+}
+
+.user-info-nametime .user-info-datetime {
+	color: rgb(0, 110, 254);
+	font-size: 12px;
+	padding: 1px;
+}
+.user-info-nametime span img{
+	width: 25px;
+	height: 25px;
+	vertical-align: middle;
+}
+.footer-content {
 	height: 100%;
 	position: relative;
 }
-.footer-content .message-history{
+
+.footer-content .message-history {
 	color: #999;
 	display: inline-block;
 	font-size: 12px;
-	padding:5px;
+	padding: 5px;
 }
-.footer-content .message-history:hover{
-	background-color: rgb(242,242,242);
+
+.footer-content .message-history:hover {
+	background-color: rgb(242, 242, 242);
 }
-.btn-send{
+
+.btn-send {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
 }
+
 .cool-chat li.in .message {
 	background: #65cea7;
 	color: #fff;
@@ -1620,7 +1679,7 @@ a.fileinput-upload {
 }
 
 .chats li.in-my .message {
-	margin-left:0;
+	margin-left: 0;
 	text-align: right;
 	float: right;
 }
@@ -1629,7 +1688,7 @@ a.fileinput-upload {
 	position: absolute;
 	top: 15px;
 	left: auto;
-	right:-8px;
-	border-right:none;
+	right: -8px;
+	border-right: none;
 	border-left: 8px solid #65cea7;
 }
