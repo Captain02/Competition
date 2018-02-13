@@ -400,16 +400,16 @@ $('.page-nav .pagination li').each(function(){
 	$(this).click(function(){
 		switch ($(this).attr('data-info-control')) {
 		case 'start':
-			iframe.attr('src','${APP_PATwH}/admin/friends/historyTalk?pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'prev':
 			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum-1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'next':
-			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'end':
-			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		default:
 			break;

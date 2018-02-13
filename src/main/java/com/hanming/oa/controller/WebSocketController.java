@@ -135,13 +135,12 @@ public class WebSocketController {
 	// 查看历史记录
 	@RequestMapping(value = "/historyTalk", method = RequestMethod.GET)
 	public String historyTalk(@RequestParam(value="pn",defaultValue="1")Integer pn,@RequestParam("friendId") Integer friendId, Model model) {
-		System.out.println(friendId);
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
+		System.out.println(pn);
 		PageInfo<Message> pageInfo = null;
-		PageHelper.startPage(pn,6);
-		List<Message> listMessage = friendHistoryTalkService.list(fromUserId, friendId);
-		pageInfo = new PageInfo<>(listMessage);
+		PageHelper.startPage(pn,8);
+		List<Message> list = friendHistoryTalkService.list(fromUserId, friendId);
+		pageInfo = new PageInfo<Message>(list,5);
 		
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("myId",fromUserId);
@@ -150,7 +149,7 @@ public class WebSocketController {
 	
 	// 删除好友
 	@ResponseBody
-	@RequestMapping(value="deleFrend",method=RequestMethod.POST)
+	@RequestMapping(value="/deleFrend",method=RequestMethod.POST)
 	public Msg deleFriend(@RequestParam("friendId")Integer friendId) {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		friendsService.deleFriend(fromUserId,friendId);
