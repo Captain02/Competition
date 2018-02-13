@@ -390,26 +390,27 @@
 	</div>
 
 <script>
+var iframe = $('.message-histroty-content').find('iframe');
 //消息记录按钮
 $('.message-history').click(function(){
-	$('.message-histroty-content').find('iframe').attr('src','${APP_PATH}/admin/friends/historyTalk?friendId='+$('.btn-send').attr('data-info-userid')+'');
+	iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?friendId='+$('.btn-send').attr('data-info-userid')+'');
 })//end
+
 $('.page-nav .pagination li').each(function(){
 	$(this).click(function(){
 		switch ($(this).attr('data-info-control')) {
 		case 'start':
-			alert('${APP_PATH}/admin/friends/historyTalk?pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			iframe.attr('src','${APP_PATwH}/admin/friends/historyTalk?pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'prev':
-			alert('${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum-1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
-				break;
+			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum-1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			break;
 		case 'next':
-			alert('${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'end':
-			alert('${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
+			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
-
 		default:
 			break;
 		}

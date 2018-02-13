@@ -1459,6 +1459,7 @@ ul.p-info .title, ul.p-info .desk {
 }
 .message-history-area li.my-message{
 	background-color: rgb(255 237 196);
+	background-color: #ffedc4;
 }
 .user-info-nametime span {
 	height: 20px;

@@ -29,7 +29,5 @@
 	
 	
 </body>
-<script type="text/javascript">
-$('body').scrollTop($('.body')[0].scrollHeight );
-</script>
+
 </html>
