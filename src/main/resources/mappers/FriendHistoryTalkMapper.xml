@@ -144,4 +144,11 @@
 	WHERE (fht.fromId=#{fromUserId} OR fht.fromId=#{friendId}) AND (fht.toId = #{fromUserId} OR fht.toId=#{friendId})  AND fht.userId=#{fromUserId}
   </select>
 
+  <!-- void deleByMyIdAndFriendId(@Param("fromUserId")Integer fromUserId, @Param("friendId")Integer friendId); -->
+  <delete id="deleByMyIdAndFriendId">
+   delete from friendhistorytalk fht
+   WHERE (fht.fromId=#{fromUserId} OR fht.fromId=#{friendId}) AND (fht.toId = #{fromUserId} OR fht.toId=#{friendId})
+  </delete>
+  
+	
 </mapper>

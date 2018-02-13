@@ -63,6 +63,12 @@ public class FriendsService {
 		friendHistoryTalkMapper.insertSelective(friendHistoryTalk);
 	}
 
+	@Transactional
+	public void deleFriend(Integer fromUserId, Integer friendId) {
+		friendsMapper.deleByMyIdAndFriendId(fromUserId,friendId);
+		friendHistoryTalkMapper.deleByMyIdAndFriendId(fromUserId,friendId);
+	}
+
 
 
 }

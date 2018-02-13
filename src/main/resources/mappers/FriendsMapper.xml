@@ -122,4 +122,10 @@
   	WHERE myId = #{userId} AND friendId=#{friendId}
   </select>
   
+  <!-- void deleByMyIdAndFriendId(@Param("fromUserId")Integer fromUserId, @Param("friendId")Integer friendId); -->
+  <delete id="deleByMyIdAndFriendId">
+  	delete from friends
+  	where (friends.myId=#{fromUserId} OR friends.myId=#{friendId}) AND (friends.friendId = #{friendId} OR friends.friendId=#{fromUserId})
+  </delete>
+  
 </mapper>

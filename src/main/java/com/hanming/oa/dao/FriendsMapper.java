@@ -23,4 +23,6 @@ public interface FriendsMapper {
 	List<User> listByUserId(Integer userId);
 
 	Integer countByFreindIdAndMyId(@Param("friendId")Integer friendId, @Param("userId")Integer userId);
+
+	void deleByMyIdAndFriendId(@Param("fromUserId")Integer fromUserId, @Param("friendId")Integer friendId);
 }

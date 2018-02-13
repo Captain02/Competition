@@ -23,4 +23,7 @@ public interface FriendHistoryTalkMapper {
     int updateByPrimaryKey(FriendHistoryTalk record);
 
 	List<Message> list(@Param("fromUserId")Integer fromUserId, @Param("friendId")Integer friendId);
+
+	void deleByMyIdAndFriendId(@Param("fromUserId")Integer fromUserId, @Param("friendId")Integer friendId);
+	
 }

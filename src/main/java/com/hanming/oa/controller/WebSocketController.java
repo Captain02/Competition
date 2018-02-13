@@ -147,4 +147,13 @@ public class WebSocketController {
 		model.addAttribute("myId",fromUserId);
 		return "personPage/message";
 	}
+	
+	// 删除好友
+	@ResponseBody
+	@RequestMapping(value="deleFrend",method=RequestMethod.POST)
+	public Msg deleFriend(@RequestParam("friendId")Integer friendId) {
+		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		friendsService.deleFriend(fromUserId,friendId);
+		return Msg.success();
+	}
 }
