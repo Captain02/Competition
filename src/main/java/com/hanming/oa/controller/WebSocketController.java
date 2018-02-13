@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.FriendHistoryTalk;
@@ -132,13 +134,16 @@ public class WebSocketController {
 
 	// 查看历史记录
 	@RequestMapping(value = "/historyTalk", method = RequestMethod.GET)
-	public String historyTalk(@RequestParam("friendId") Integer friendId, Model model) {
+	public String historyTalk(@RequestParam(value="pn",defaultValue="1")Integer pn,@RequestParam("friendId") Integer friendId, Model model) {
 		System.out.println(friendId);
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		/*PageInfo<Message> pageInfo = null;
-		PageHelper.startPage(pn,8);*/
+		
+		PageInfo<Message> pageInfo = null;
+		PageHelper.startPage(pn,6);
 		List<Message> listMessage = friendHistoryTalkService.list(fromUserId, friendId);
-		model.addAttribute("listMessage",listMessage);
+		pageInfo = new PageInfo<>(listMessage);
+		
+		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("myId",fromUserId);
 		return "personPage/message";
 	}

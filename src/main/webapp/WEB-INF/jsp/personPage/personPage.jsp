@@ -398,16 +398,16 @@ $('.page-nav .pagination li').each(function(){
 	$(this).click(function(){
 		switch ($(this).attr('data-info-control')) {
 		case 'start':
-			alert('首页')
+			alert('${APP_PATH}/admin/friends/historyTalk?pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'prev':
-			alert('上一页')
+			alert('${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum-1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
 				break;
 		case 'next':
-			alert('下一页')
+			alert('${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 		case 'end':
-			alert('末页')
+			alert('${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
 			break;
 
 		default:

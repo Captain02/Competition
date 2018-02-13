@@ -14,7 +14,7 @@
 <body>
 	
 	<ul class="message-history-area">
-		<c:forEach items="${listMessage}" var="message">
+		<c:forEach items="${pageInfo.list}" var="message">
 		<li class="message-history-list clearfix" data-myid="${myId}" data-userid="${message.user.id}">
 			<div class="user-info-nametime clearfix">
 				<span class="user-info-username">${message.user.name}</span>
