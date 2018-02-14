@@ -310,6 +310,7 @@ function chatWindowValue(ele,val){
 	$(ele).attr('data-status',1);
 	$(ele).find('h4.chat-content-title').html(val.find('p.charts-friends-info-abbr').html());
 	$(ele).find('button.btn-send').attr('data-info-userid',val.attr('data-info-userid'));
+	$(ele).find('a.message-video').attr('data-info-userid',val.attr('data-info-userid'));
 }
 
 //知识的点赞效果
