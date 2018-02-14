@@ -17,7 +17,12 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 </head>
+<script type="text/javascript">
+	function videoTalk() {
+		var friendId
+	}
 
+</script>
 <body class="bg-common">
 	<section>
 
@@ -345,7 +350,7 @@
 						<div class="footer-content clearfix">
 							<div class="tool-bar clearfix">
 								<a class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
-								<a class="message-video pull-left " title="视频通话"><span class="glyphicon glyphicon-facetime-video"></span></a>
+								<a onclick="videoTalk()" class="message-video pull-left " title="视频通话"><span class="glyphicon glyphicon-facetime-video"></span></a>
 							</div>
 							<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
 							<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>
