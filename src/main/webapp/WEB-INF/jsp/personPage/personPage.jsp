@@ -13,16 +13,75 @@
 
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
+pageContext.setAttribute("APP_PATH", request.getContextPath());
+ 
+String path = request.getContextPath();
+String basePath = request.getServerName() + ":"
+	+ request.getServerPort() + path + "/";
+String basePath2 = request.getScheme() + "://"
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 </head>
 <script type="text/javascript">
 	function videoTalk(ele) {
+		var path = '<%=basePath%>';
 		var friendId = $(ele).attr('data-info-userid');
-		alert(friendId);
+		var userId = $("#userId").val();
+		var websocket;
+				var data={};
+		$.ajax({
+			url:"${APP_PATH}/admin/friends/talk",
+			data:{
+   				'toId':friendId,
+   				'text':"http://"+path+"admin/friends/videoTalk/?oid="+userId+""
+   			},
+			type:"POST",
+			success:function(result){
+				var fromId=result.extend.fromId;
+				var fromName=result.extend.fromName;
+   				data["fromId"]=result.extend.fromId;
+				data["fromName"]=result.extend.fromName;
+				data["toId"]=friendId;
+				data["text"]="http://"+path+"admin/friends/videoTalk/?oid="+userId+"";
+				data["type"]="videoTalk";
+				data["user"]=result.extend.user;
+					
+				if ('WebSocket' in window) {
+					// 创建一个Socket实例  ws表示WebSocket协议
+					websocket = new WebSocket("ws://" + path + "/ws?uid="+userId);
+				} else if ('MozWebSocket' in window) {
+					websocket = new MozWebSocket("ws://" + path + "/ws"+userId);
+				} else {
+					websocket = new SockJS("http://" + path + "/ws/sockjs"+userId);
+				}
+				websocket.onopen = function(event) {
+					console.log("WebSocket:已连接");
+					console.log(event);
+					send();
+				};
+				
+				websocket.onerror = function(event) {
+					console.log("WebSocket:发生错误 ");
+					console.log(event);
+				};
+				 // 监听Socket的关闭
+				websocket.onclose = function(event) {
+					console.log("WebSocket:已关闭");
+					console.log(event);
+				}
+			}
+		})
+		function send() {
+			console.log("aa");
+			websocket.send(JSON.stringify(data));
+			websocket.close();
+		}
+		window.location.href="${APP_PATH}/admin/friends/videoTalk";
 	}
-
+		
 </script>
 <body class="bg-common">
 	<section>
@@ -351,7 +410,8 @@
 						<div class="footer-content clearfix">
 							<div class="tool-bar clearfix">
 								<a class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
-								<a onclick="videoTalk(this)" class="message-video pull-left " title="视频通话"><span class="glyphicon glyphicon-facetime-video"></span></a>
+								<input id="userId" type="hidden" value="<sh:principal property="id" />">
+								<a onclick="videoTalk(this);" class="message-video pull-left " title="视频通话"><span class="glyphicon glyphicon-facetime-video"></span></a>
 							</div>
 							<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
 							<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>

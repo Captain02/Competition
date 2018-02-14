@@ -1,10 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%><%@ page isELIgnored="false" %><!DOCTYPE HTML>
 <html>
 	<head>
-		<title>WEBRTC视频通话</title>
+		<title>视频通话</title>
 		<meta charset="utf-8" />
-		<meta name="keywords" content="ACGIST的视频应用,webrtc" />
-		<meta name="description" content="使用webrtc实现的网页视频通话。" />
 <%
       pageContext.setAttribute("APP_PATH", request.getContextPath());
        
@@ -16,21 +14,9 @@ String basePath2 = request.getScheme() + "://"
 		+ path + "/";
 %>
    
-		<!-- 
-			注意：1.本功能暂时只支持google chrome浏览器；
-				 2.本功能暂时只支持两人视频聊天；
-				 3.由于本功能可以让游客使用，使用session的ID区分不同用户，所以请不要使用同一个浏览器两个窗口之间通话；
-				 4.由于宽带有限所以对同事在线通话人数有限制，每天晚上0点将会销毁所有通话，所以该时刻可能出现异常情况。
-				 5.注意如果2分钟对方未进入聊天室，将会关闭；
-				 5.手机可以使用chrome移动版也可以视频聊天；
-				 6.如果你不能访问google，也不能使用本功能；
-			以上。
-			
-			参考文章：http://blog.csdn.net/leecho571/article/details/8146525
-		 -->
 		
 		<!-- <script src="https://talkgadget.google.com/talkgadget/channel.js"></script> -->
-		<script src="channel.js"></script>
+		<script src="${APP_PATH}/static/js/channel.js"></script>
 		<style type="text/css">
 			*{margin: 0; padding: 0; overflow-y: hidden;}
 			body {background-color: rgb(34, 34, 34);}
@@ -99,7 +85,7 @@ String basePath2 = request.getScheme() + "://"
 				navigator.webkitGetUserMedia({
 					"audio" : true,
 					"video" : true
-				}, onUserMediaSuccess, onUserMediaError);
+				}, onUserMediaSuccess, onUserMediaError)
 			}
 			
 			// 获取用户媒体成功
@@ -168,7 +154,9 @@ String basePath2 = request.getScheme() + "://"
 			// 设置状态
 			function noticeMsg() {
 				if (!initiator) {
-					setNotice("让别人加入（注意事项查看源码）: http://"+path+"msg?oid=${requestScope.uid }");
+					//sendMessage();
+					//setNotice("http://"+path+"admin/friends/videoTalk/?oid=${requestScope.uid }");
+					setNotice("等待对方连接");
 				} else {
 					setNotice("初始化...");
 				}
@@ -399,13 +387,16 @@ String basePath2 = request.getScheme() + "://"
 			}
 			
 			if(!WebSocket) {
-				errorNotice("你的浏览器不支持WebSocket！建议使用<a href=\"https://www.google.com/intl/zh-CN/chrome/browser/\" target=\"_blank\">google chrome浏览器！</a>");
+			//	errorNotice("你的浏览器不支持WebSocket！建议使用<a href=\"https://www.google.com/intl/zh-CN/chrome/browser/\" target=\"_blank\">google chrome浏览器！</a>");
 			} else if(!PeerConnection) {
-				errorNotice("你的浏览器不支持RTCPeerConnection！建议使用<a href=\"https://www.google.com/intl/zh-CN/chrome/browser/\" target=\"_blank\">google chrome浏览器！</a>");
+				//errorNotice("你的浏览器不支持RTCPeerConnection！建议使用<a href=\"https://www.google.com/intl/zh-CN/chrome/browser/\" target=\"_blank\">google chrome浏览器！</a>");
 			} else {
-				if(window.navigator.userAgent.indexOf("Chrome") !== -1)
+				//if(window.navigator.userAgent.indexOf("Chrome") !== -1)
 					setTimeout(initialize, 1); // 加载完成调用初始化方法
 			}
+			
+			//发送消息
+			
 		</script>
 	</body>
 </html>

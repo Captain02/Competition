@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
-        <%
-	      pageContext.setAttribute("APP_PATH", request.getContextPath());
-        
-	String path = request.getContextPath();
-	String basePath = request.getServerName() + ":"
-			+ request.getServerPort() + path + "/";
-	String basePath2 = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+<%
+      pageContext.setAttribute("APP_PATH", request.getContextPath());
+       
+String path = request.getContextPath();
+String basePath = request.getServerName() + ":"
+		+ request.getServerPort() + path + "/";
+String basePath2 = request.getScheme() + "://"
+		+ request.getServerName() + ":" + request.getServerPort()
+		+ path + "/";
 %>
             <!-- 此处显示登录所用的用户名以及职位，用include标签包含进来 -->
             <div class="content-head-right">
@@ -99,6 +99,7 @@
                         		 // 监听消息
                         		websocket.onmessage = function(event) {
                         			var data=JSON.parse(event.data);
+                        			console.log(event.data);
                         			addNewsToList(data);
                         			if($('#chat-window').attr('data-status')==='1' && data.fromId===parseInt($('#chat-window').find('button.btn-send').attr('data-info-userid')) && data.type==='sendTalk'){
                         				addMessageToMessageList(data,'');

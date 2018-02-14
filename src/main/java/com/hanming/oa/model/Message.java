@@ -13,7 +13,7 @@ public class Message {
 	private String text;
 	// 发送日期
 	private String date;
-
+	
 	private String type;
 
 	private User user;

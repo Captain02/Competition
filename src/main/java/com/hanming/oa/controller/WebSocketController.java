@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.service.FriendHistoryTalkService;
 import com.hanming.oa.service.FriendsService;
 import com.hanming.oa.service.UserService;
+import com.hanming.oa.webSocket.AcgistVideo;
 
 @Controller
 @RequestMapping("/admin/friends")
@@ -134,26 +137,57 @@ public class WebSocketController {
 
 	// 查看历史记录
 	@RequestMapping(value = "/historyTalk", method = RequestMethod.GET)
-	public String historyTalk(@RequestParam(value="pn",defaultValue="1")Integer pn,@RequestParam("friendId") Integer friendId, Model model) {
+	public String historyTalk(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+			@RequestParam("friendId") Integer friendId, Model model) {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		System.out.println(pn);
 		PageInfo<Message> pageInfo = null;
-		PageHelper.startPage(pn,8);
+		PageHelper.startPage(pn, 8);
 		List<Message> list = friendHistoryTalkService.list(fromUserId, friendId);
-		pageInfo = new PageInfo<Message>(list,5);
-		
-		model.addAttribute("pageInfo",pageInfo);
-		model.addAttribute("myId",fromUserId);
-		model.addAttribute("friendId",friendId);
+		pageInfo = new PageInfo<Message>(list, 5);
+
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("myId", fromUserId);
+		model.addAttribute("friendId", friendId);
 		return "personPage/message";
 	}
-	
+
 	// 删除好友
 	@ResponseBody
-	@RequestMapping(value="/deleFrend",method=RequestMethod.POST)
-	public Msg deleFriend(@RequestParam("friendId")Integer friendId) {
+	@RequestMapping(value = "/deleFrend", method = RequestMethod.POST)
+	public Msg deleFriend(@RequestParam("friendId") Integer friendId) {
 		Integer fromUserId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		friendsService.deleFriend(fromUserId,friendId);
+		friendsService.deleFriend(fromUserId, friendId);
 		return Msg.success();
+	}
+
+	@RequestMapping(value = "/videoTalk", method = RequestMethod.GET)
+	public String videoTalk(@RequestParam(value = "oid", defaultValue = "0") String oid, Model model) {
+		String uid = ((Integer) SecurityUtils.getSubject().getSession().getAttribute("id")).toString();
+		if ("0".equals(oid)) {
+			oid = null;
+		}
+
+		model.addAttribute("initiator", "false");
+
+		if (!AcgistVideo.canCreate()) {
+			// response.getWriter().write("不能创建通话房间，超过最大创建数量！");
+			return "personPage/videoPage";
+		}
+
+		if (!AcgistVideo.canJoin(oid)) {
+			// response.getWriter().write("对不起对方正在通话中，你不能加入！");
+			return "personPage/videoPage";
+		}
+
+		if (AcgistVideo.addUser(uid, oid)) {
+			model.addAttribute("uid", uid);
+		} else {
+
+			model.addAttribute("initiator", "true");
+			model.addAttribute("uid", uid);
+			model.addAttribute("oid", oid);
+		}
+		return "personPage/videoPage";
 	}
 }

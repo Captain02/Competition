@@ -154,6 +154,23 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
 			}
 		}
+		// 发送消息
+		if ("videoTalk".equals(msg.getType())) {
+			WebSocketSession webSocketSession = userSocketSessionMap.get(msg.getToId());
+			BlockingQueue<TextMessage> talkQueue = userSocketTalkQueue.get(msg.getToId());
+			// 判断是否有未处理的回话会话
+			if (talkQueue != null) {
+				talkQueue.offer((new TextMessage(JSON.toJSONString(msg))));
+				userSocketTalkQueue.put(msg.getToId(), talkQueue);
+			} else if (talkQueue == null) {
+				BlockingQueue<TextMessage> acceptTalk = new LinkedBlockingQueue<>(100);
+				acceptTalk.offer(new TextMessage(JSON.toJSONString(msg)));
+				userSocketTalkQueue.put(msg.getToId(), acceptTalk);
+			}
+			if (webSocketSession != null) {
+				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
+			}
+		}
 		
 		// 释放离线信息
 		if ("acceptTalks".equals(msg.getType())) {
