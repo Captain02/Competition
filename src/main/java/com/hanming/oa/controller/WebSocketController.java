@@ -144,6 +144,7 @@ public class WebSocketController {
 		
 		model.addAttribute("pageInfo",pageInfo);
 		model.addAttribute("myId",fromUserId);
+		model.addAttribute("friendId",friendId);
 		return "personPage/message";
 	}
 	

@@ -67,14 +67,14 @@
 		<nav aria-label="..." class="pull-right">
 		  <ul class="pagination pagination-sm clearfix">
 		   <li data-info-control="start">
-			     <a href="#" aria-label="Previous">
+			     <a href="${APP_PATH}/admin/friends/historyTalk?pn=1&friendId=${friendId}" aria-label="Previous">
 			       <span aria-hidden="true">首页</span>
 			     </a>
 			   </li>
-			    <li data-info-control="prev"><a href="#">上一页</a></li>
-			   <li data-info-control="next"><a href="#">下一页</a></li>
+			    <li data-info-control="prev"><a href="${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum-1}&friendId=${friendId}">上一页</a></li>
+			   <li data-info-control="next"><a href="${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&friendId=${friendId}">下一页</a></li>
 			   <li data-info-control="end">
-			     <a href="#" aria-label="Next">
+			     <a href="${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&friendId=${friendId}" aria-label="Next">
 			       <span aria-hidden="true">末页</span>
 			     </a>
 			   </li>
