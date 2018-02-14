@@ -40,7 +40,6 @@ String basePath2 = request.getScheme() + "://"
    			},
 			type:"POST",
 			success:function(result){
-				var fromId=result.extend.fromId;
 				var fromName=result.extend.fromName;
    				data["fromId"]=result.extend.fromId;
 				data["fromName"]=result.extend.fromName;
@@ -71,15 +70,17 @@ String basePath2 = request.getScheme() + "://"
 				websocket.onclose = function(event) {
 					console.log("WebSocket:已关闭");
 					console.log(event);
+					linkURL();
 				}
 			}
 		})
 		function send() {
-			console.log("aa");
 			websocket.send(JSON.stringify(data));
 			websocket.close();
 		}
-		window.location.href="${APP_PATH}/admin/friends/videoTalk";
+		function linkURL(){
+			window.location.href="${APP_PATH}/admin/friends/videoTalk";
+		}
 	}
 		
 </script>

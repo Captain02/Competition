@@ -32,12 +32,14 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	public static final Map<Integer, BlockingQueue<TextMessage>> userSocketTalkQueue;
 	// 请求添加好友消息队列
 	public static final Map<Integer, BlockingQueue<TextMessage>> userSocketAddFriendsQueue;
-	// 消息条目
+	// 请求视频通话消息队列
+	public static final Map<Integer, BlockingQueue<TextMessage>> userSocketVideoTalkQueue;
 
 	static {
 		userSocketSessionMap = new HashMap<>();
 		userSocketTalkQueue = new HashMap<>();
 		userSocketAddFriendsQueue = new HashMap<>();
+		userSocketVideoTalkQueue = new HashMap<>();
 	}
 
 	/*
@@ -87,6 +89,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				BlockingQueue<TextMessage> talkQueue = userSocketTalkQueue.get(toUserId);
 				if (talkQueue != null) {
 					for (TextMessage textMessage : talkQueue) {
+						sendMessageToUser(toUserId, textMessage);
+					}
+				}
+				BlockingQueue<TextMessage> videoTalkQueue = userSocketVideoTalkQueue.get(toUserId);
+				if (videoTalkQueue != null) {
+					for (TextMessage textMessage : videoTalkQueue) {
 						sendMessageToUser(toUserId, textMessage);
 					}
 				}
@@ -157,15 +165,15 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		// 发送消息
 		if ("videoTalk".equals(msg.getType())) {
 			WebSocketSession webSocketSession = userSocketSessionMap.get(msg.getToId());
-			BlockingQueue<TextMessage> talkQueue = userSocketTalkQueue.get(msg.getToId());
+			BlockingQueue<TextMessage> talkQueue = userSocketVideoTalkQueue.get(msg.getToId());
 			// 判断是否有未处理的回话会话
 			if (talkQueue != null) {
 				talkQueue.offer((new TextMessage(JSON.toJSONString(msg))));
-				userSocketTalkQueue.put(msg.getToId(), talkQueue);
+				userSocketVideoTalkQueue.put(msg.getToId(), talkQueue);
 			} else if (talkQueue == null) {
 				BlockingQueue<TextMessage> acceptTalk = new LinkedBlockingQueue<>(100);
 				acceptTalk.offer(new TextMessage(JSON.toJSONString(msg)));
-				userSocketTalkQueue.put(msg.getToId(), acceptTalk);
+				userSocketVideoTalkQueue.put(msg.getToId(), acceptTalk);
 			}
 			if (webSocketSession != null) {
 				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
