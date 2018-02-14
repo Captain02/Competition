@@ -1416,6 +1416,11 @@ ul.p-info .title, ul.p-info .desk {
 	padding: 5px;
 }
 
+.tool-bar a.message-video {
+	color: #999;
+	font-size: 20px;
+}
+
 .message-histroty-content {
 	float: right;
 	height: 100%;
