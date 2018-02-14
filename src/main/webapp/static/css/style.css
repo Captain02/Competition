@@ -782,10 +782,6 @@ ul.p-info .title, ul.p-info .desk {
 	color: #c8c8c8;
 }
 
-.page-nav-area {
-	margin-bottom: 15px;
-}
-
 .reply-reply-username {
 	color: #999;
 	font-size: 12px;
@@ -1345,22 +1341,7 @@ ul.p-info .title, ul.p-info .desk {
 .chat-dialog {
 	height: 90%;
 }
-.page-nav{
-	padding:0 5px;
-}
-.page-nav nav{
-	height: 100%;
-} 
-.page-nav ul{
-	margin: 0;
-}
-.page-nav ul li a{
-	border: none;
-	padding: 0 10px;
-}
-.page-nav .pagination{
-	display: block;
-}
+
 .chat-info-show {
 	position: fixed;
 	width: 1000px;
@@ -1441,26 +1422,22 @@ ul.p-info .title, ul.p-info .desk {
 	border-left: rgb(234, 234, 234) 1px solid;
 	position: relative;
 }
-.page-nav{
-	height:5%;
-	width:100%;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-}
+
 .message-histroty-content iframe {
 	width: 100%;
-	height: 95%;
+	height: 100%;
 }
 
 .message-history-list {
 	margin: 10px 0;
 	padding: 0 10px;
 }
-.message-history-area li.my-message{
-	background-color: rgb(255 237 196);
+
+.message-history-area li.my-message {
+	background-color: rgb(255, 237, 196);
 	background-color: #ffedc4;
 }
+
 .user-info-nametime span {
 	height: 20px;
 	line-height: 20px;
@@ -1478,11 +1455,13 @@ ul.p-info .title, ul.p-info .desk {
 	font-size: 12px;
 	padding: 1px;
 }
-.user-info-nametime span img{
+
+.user-info-nametime span img {
 	width: 25px;
 	height: 25px;
 	vertical-align: middle;
 }
+
 .footer-content {
 	height: 100%;
 	position: relative;

@@ -352,37 +352,13 @@
 						</div>
 					</div>
 				</div>
-			
-		
-			
-		
-			
-				<div class="message-histroty-content col-md-6">
 				
+				<div class="message-histroty-content col-md-6">
 					<div class="row" style="height: 100%;">
-						<iframe frameborder="0" scrolling="auto"></iframe>
-						<div class="page-nav clearfix">
-							<nav aria-label="..." class="pull-right">
-							  <ul class="pagination pagination-sm clearfix">
-							   <li data-info-control="start">
-								     <a href="#" aria-label="Previous">
-								       <span aria-hidden="true">&laquo;</span>
-								     </a>
-								   </li>
-								    <li data-info-control="prev"><a href="#">上一页</a></li>
-								   <li data-info-control="next"><a href="#">下一页</a></li>
-								   <li data-info-control="end">
-								     <a href="#" aria-label="Next">
-								       <span aria-hidden="true">&raquo;</span>
-								     </a>
-								   </li>
-							  </ul>
-							</nav>
-						</div>
-					
+						<iframe frameborder="0"></iframe>
+					</div>
 				</div>
 			</div>
-				</div>
 			
 		
 		
@@ -396,26 +372,6 @@ $('.message-history').click(function(){
 	iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?friendId='+$('.btn-send').attr('data-info-userid')+'');
 })//end
 
-$('.page-nav .pagination li').each(function(){
-	$(this).click(function(){
-		switch ($(this).attr('data-info-control')) {
-		case 'start':
-			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=1&friendId='+$('.btn-send').attr('data-info-userid')+'');
-			break;
-		case 'prev':
-			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum-1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
-			break;
-		case 'next':
-			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pageNum+1}&friendId='+$('.btn-send').attr('data-info-userid')+'');
-			break;
-		case 'end':
-			iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?pn=${pageInfo.pages}&friendId='+$('.btn-send').attr('data-info-userid')+'');
-			break;
-		default:
-			break;
-		}
-	})
-});
 </script>
 
 </body>
