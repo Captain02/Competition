@@ -429,9 +429,9 @@ String basePath2 = request.getScheme() + "://"
 							<div style="display:inline-block; position: relative; top: 20%;">
 								<a class="user-img"><img src="" alt="" /></a>
 								<p style="margin:15px 0;">发起了视频通话</p>
-								<p>
-								<button class="btn btn-success btn-sm pull-left" onclick="answer(this);"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</button>
-								<button class="btn btn-danger btn-sm pull-right" onclick="hangUp(this);"><span class="glyphicon glyphicon-remove-sign" style="margin-right: 10px;"></span>挂断</button>
+								<p class="clearfix">
+									<a class="btn btn-success btn-sm pull-left answer-video"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</a>
+									<a class="btn btn-danger btn-sm pull-right hungup-video"><span class="glyphicon glyphicon-remove-sign" style="margin-right: 10px;"></span>挂断</a>
 								</p>
 							</div>
 						</div>

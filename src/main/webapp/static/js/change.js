@@ -84,54 +84,60 @@ $(function () {
 	   $(this).siblings('li[data-info-type="sendTalk"]').attr('data-info-status',0);
 	   $('.cool-chat li').remove();
 	   switch ($(this).attr("data-info-type")) {
-		   case 'addFrends':
-				$('#myModal').modal('show');
-				ShowTips('.modal-title','好友验证','.modal-body',
-						$(this).find('p.charts-text-abbr').html()+
-						"<a class='not-sure-require-friend pull-right btn btn-warning btn-sm' onclick='notSure(this)' data-not-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">拒绝</a>"+
-						"<a class='sure-require-friend pull-right btn btn-success btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">同意</a>"
-						);
-				break;
-			case 'agreeAddFriend':
-				$('#myModal').modal('show');
-				ShowTips('.modal-title','验证消息','.modal-body',
-						$(this).find('p.charts-text-abbr').html()+
-						"<a style='display:none;' data-info-status="+$(this).attr('data-info-status')+" data-not-sure-id="+$(this).attr('data-info-userid')+"></a>"
-						);
-				setTimeout(function(){
-					$('#myModal').modal('hide');
-				},3000)
-				$('.char-comment li').each(function(){
-					if( $(this).attr('data-info-userid')===$('.modal-body a').attr('data-not-sure-id') && $(this).attr('data-info-status')===$('.modal-body a').attr('data-info-status')){
-						$(this).remove();
-					}
-				})
-				unAgreeAddFriend($(this).attr('data-info-userid'));
-				break;
-			case 'sendTalk':
-				var li = $(this);
-				chatWindowValue('#chat-window',$(this));
-		    	var data = {};
-		    	$(this).siblings().each(function(){
-		    		if($(this).attr('data-info-userid')===li.attr('data-info-userid') && $(this).attr('data-info-type')==='sendTalk'){
-		    			addMessage(data,$(this));
-		    		}
-		    	});
-		    	addMessage(data,$(this));
-		    	break;
-			case 'videoTalk':
-				chatWindowValue('#chat-window',$(this));
-				$('.message-histroty-content').removeClass('hidden');
-		    	$('#chat-window').removeClass('message-hide');
-		    	$('.chat-content').addClass('col-md-6');
-		    	$('a.message-history').addClass('hidden');
-		    	$('.message-histroty-content').find('iframe').addClass('hidden');
-		    	$('.message-histroty-content').find('div.video-talk').removeClass('hidden');
-		    	var videoTalk = $('.message-histroty-content').find('div.video-talk');
-		    	videoTalk.find('a.user-img').find('img').attr('src',""+$(this).find('div.person-img').find('img').attr('src')+"");
-		    	break;
-			default:
-				break;
+		case 'addFrends':
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','好友验证','.modal-body',
+			$(this).find('p.charts-text-abbr').html()+
+			"<a class='not-sure-require-friend pull-right btn btn-warning btn-sm' onclick='notSure(this)' data-not-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">拒绝</a>"+
+			"<a class='sure-require-friend pull-right btn btn-success btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">同意</a>"
+					);
+		break;
+
+		case 'agreeAddFriend':
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','验证消息','.modal-body',
+			$(this).find('p.charts-text-abbr').html()+
+			"<a style='display:none;' data-info-status="+$(this).attr('data-info-status')+" data-not-sure-id="+$(this).attr('data-info-userid')+"></a>"
+					);
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+			},3000)
+			$('.char-comment li').each(function(){
+			if( $(this).attr('data-info-userid')===$('.modal-body a').attr('data-not-sure-id') && $(this).attr('data-info-status')===$('.modal-body a').attr('data-info-status')){
+					$(this).remove();
+				}
+			})
+			unAgreeAddFriend($(this).attr('data-info-userid'));
+		break;
+
+		case 'sendTalk':
+			var li = $(this);
+			chatWindowValue('#chat-window',$(this));
+			var data = {};
+			$(this).siblings().each(function(){
+				if($(this).attr('data-info-userid')===li.attr('data-info-userid') && $(this).attr('data-info-type')==='sendTalk'){
+					addMessage(data,$(this));
+				}
+			});
+			addMessage(data,$(this));
+		break;
+		
+		case 'videoTalk':
+			var li = $(this);
+			chatWindowValue('#chat-window',$(this));
+			$('.message-histroty-content').removeClass('hidden');
+			$('#chat-window').removeClass('message-hide');
+			$('.chat-content').addClass('col-md-6');
+			$('a.message-history').addClass('hidden');
+			$('.message-histroty-content').find('iframe').addClass('hidden');
+			$('.message-histroty-content').find('div.video-talk').removeClass('hidden');
+			var videoTalk = $('.message-histroty-content').find('div.video-talk');
+			videoTalk.find('a.user-img').find('img').attr('src',""+$(this).find('div.person-img').find('img').attr('src')+"");
+			videoTalk.find('a.answer-video').attr('href',""+$(this).find('span.answerAddress').html()+"");
+		break;
+		
+		default:
+		break;
 	   }
    })//end
    
