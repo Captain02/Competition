@@ -79,48 +79,59 @@ $(function () {
     
    //根据消息类型的不同，点击之后进行不同的操作
    $('.char-comment').on('click','li',function(){
+	   $(this).find('span.label-new-info-num').remove();
 	   $(this).attr('data-info-status','1');
 	   $(this).siblings('li[data-info-type="sendTalk"]').attr('data-info-status',0);
 	   $('.cool-chat li').remove();
 	   switch ($(this).attr("data-info-type")) {
-		case 'addFrends':
-			$('#myModal').modal('show');
-			ShowTips('.modal-title','好友验证','.modal-body',
-					$(this).find('p.charts-text-abbr').html()+
-					"<a class='not-sure-require-friend pull-right btn btn-warning btn-sm' onclick='notSure(this)' data-not-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">拒绝</a>"+
-					"<a class='sure-require-friend pull-right btn btn-success btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">同意</a>"
-					);
-			break;
-		case 'agreeAddFriend':
-			$('#myModal').modal('show');
-			ShowTips('.modal-title','验证消息','.modal-body',
-					$(this).find('p.charts-text-abbr').html()+
-					"<a style='display:none;' data-info-status="+$(this).attr('data-info-status')+" data-not-sure-id="+$(this).attr('data-info-userid')+"></a>"
-					);
-			setTimeout(function(){
-				$('#myModal').modal('hide');
-			},3000)
-			$('.char-comment li').each(function(){
-				if( $(this).attr('data-info-userid')===$('.modal-body a').attr('data-not-sure-id') && $(this).attr('data-info-status')===$('.modal-body a').attr('data-info-status')){
-					$(this).remove();
-				}
-			})
-			unAgreeAddFriend($(this).attr('data-info-userid'));
-			break;
-		case 'sendTalk':
-			var li = $(this);
-			$(this).find('span.label-new-info-num').remove();
-			chatWindowValue('#chat-window',$(this));
-	    	var data = {};
-	    	$(this).siblings().each(function(){
-	    		if($(this).attr('data-info-userid')===li.attr('data-info-userid') && $(this).attr('data-info-type')==='sendTalk'){
-	    			addMessage(data,$(this));
-	    		}
-	    	});
-	    	addMessage(data,$(this));
-	    	break;
-		default:
-			break;
+		   case 'addFrends':
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','好友验证','.modal-body',
+						$(this).find('p.charts-text-abbr').html()+
+						"<a class='not-sure-require-friend pull-right btn btn-warning btn-sm' onclick='notSure(this)' data-not-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">拒绝</a>"+
+						"<a class='sure-require-friend pull-right btn btn-success btn-sm' onclick='sure(this)' data-sure-id="+$(this).attr('data-info-userid')+" data-info-status="+$(this).attr('data-info-status')+">同意</a>"
+						);
+				break;
+			case 'agreeAddFriend':
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','验证消息','.modal-body',
+						$(this).find('p.charts-text-abbr').html()+
+						"<a style='display:none;' data-info-status="+$(this).attr('data-info-status')+" data-not-sure-id="+$(this).attr('data-info-userid')+"></a>"
+						);
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+				},3000)
+				$('.char-comment li').each(function(){
+					if( $(this).attr('data-info-userid')===$('.modal-body a').attr('data-not-sure-id') && $(this).attr('data-info-status')===$('.modal-body a').attr('data-info-status')){
+						$(this).remove();
+					}
+				})
+				unAgreeAddFriend($(this).attr('data-info-userid'));
+				break;
+			case 'sendTalk':
+				var li = $(this);
+				chatWindowValue('#chat-window',$(this));
+		    	var data = {};
+		    	$(this).siblings().each(function(){
+		    		if($(this).attr('data-info-userid')===li.attr('data-info-userid') && $(this).attr('data-info-type')==='sendTalk'){
+		    			addMessage(data,$(this));
+		    		}
+		    	});
+		    	addMessage(data,$(this));
+		    	break;
+			case 'videoTalk':
+				chatWindowValue('#chat-window',$(this));
+				$('.message-histroty-content').removeClass('hidden');
+		    	$('#chat-window').removeClass('message-hide');
+		    	$('.chat-content').addClass('col-md-6');
+		    	$('a.message-history').addClass('hidden');
+		    	$('.message-histroty-content').find('iframe').addClass('hidden');
+		    	$('.message-histroty-content').find('div.video-talk').removeClass('hidden');
+		    	var videoTalk = $('.message-histroty-content').find('div.video-talk');
+		    	videoTalk.find('a.user-img').find('img').attr('src',""+$(this).find('div.person-img').find('img').attr('src')+"");
+		    	break;
+			default:
+				break;
 	   }
    })//end
    
@@ -145,6 +156,9 @@ $(function () {
     //弹出聊天窗口
     $('.chart-friends').on('dblclick','li',function(){
     	chatWindowValue('#chat-window',$(this));
+    	$('.message-histroty-content').addClass('hidden');
+    	$('#chat-window').addClass('message-hide');
+    	$('.chat-content').removeClass('col-md-6');
     })//end
     
     //查看公告
@@ -183,6 +197,8 @@ $(function () {
     //关闭会话框按钮
 	$('.btn-close').click(function(){
 		chatWindowClose($('.btn-send').attr('data-info-userid'));
+		$('.message-histroty-content').find('iframe').removeClass('hidden');
+		$('.message-histroty-content').find('div.videoTalk').removeClass('hidden');
 		 (function(ele){
 			 $(ele).addClass('hidden');
 			 $(ele).attr('data-status',0);
@@ -194,14 +210,18 @@ $(function () {
 		 })
 	})//end
 	
+	//弹出消息历史窗口
+	$('.message-history').click(function(){
+		showMessageHistoryArea();
+	})//end
 		
 	//区分我的消息和他人消息
 	$('.message-history-area li').each(function(){
 		if($(this).attr('data-myid') === $(this).attr('data-userid')){
 			$(this).addClass('my-message');
 		}
-	})
-    
+	})//end
+	
 })
 
 //动态插入消息节点到消息列表中
@@ -229,6 +249,7 @@ function addNewsToList(data){
 			"</div>"+
 			"</div>"+
 			"<span class='date hidden'>"+data.date+"</span>"+
+			"<span class='answerAddress hidden'>"+data.answerAddress+"</span>"+
 			"</li>"
 					);
 	$('.char-comment').append(listNode);
@@ -311,7 +332,7 @@ function chatWindowValue(ele,val){
 	$(ele).find('h4.chat-content-title').html(val.find('p.charts-friends-info-abbr').html());
 	$(ele).find('button.btn-send').attr('data-info-userid',val.attr('data-info-userid'));
 	$(ele).find('a.message-video').attr('data-info-userid',val.attr('data-info-userid'));
-}
+}//end
 
 //知识的点赞效果
 function ActivityControl(result,hiddenValue,icon,cntrolNum){
@@ -323,7 +344,17 @@ function ActivityControl(result,hiddenValue,icon,cntrolNum){
 		icon.removeClass('controled');
 	}
 	cntrolNum.html(result.extend.likeNum);
-}
+}//end
+
+//根据弹出内容来改变聊天框的样式
+function showMessageHistoryArea(){
+	var chatArea = $('#chat-window');
+	var chatContent = $('.chat-content');
+	var messageHistory = $('.message-histroty-content');
+	(chatArea.hasClass('message-hide'))?chatArea.removeClass('message-hide'):chatArea.addClass('message-hide');
+	(chatContent.hasClass('col-md-6'))?chatContent.removeClass('col-md-6'):chatContent.addClass('col-md-6');
+	(messageHistory.hasClass('hidden'))?messageHistory.removeClass('hidden'):messageHistory.addClass('hidden');
+}//end
 
 
 

@@ -31,7 +31,7 @@ String basePath2 = request.getScheme() + "://"
 		var friendId = $(ele).attr('data-info-userid');
 		var userId = $("#userId").val();
 		var websocket;
-				var data={};
+		var data={};
 		$.ajax({
 			url:"${APP_PATH}/admin/friends/talk",
 			data:{
@@ -44,7 +44,8 @@ String basePath2 = request.getScheme() + "://"
    				data["fromId"]=result.extend.fromId;
 				data["fromName"]=result.extend.fromName;
 				data["toId"]=friendId;
-				data["text"]="http://"+path+"admin/friends/videoTalk/?oid="+userId+"";
+				data["text"]="视频通话";
+				data["answerAddress"]="http://"+path+"admin/friends/videoTalk/?oid="+userId+"";
 				data["type"]="videoTalk";
 				data["user"]=result.extend.user;
 					
@@ -387,13 +388,13 @@ String basePath2 = request.getScheme() + "://"
       
     </div>
     <div class="modal-footer">
-     </div>
+    </div>
    </div>
  </div>
 </div>
 
 <!-- 聊天框 -->
-<div class="chat-info-show" id="chat-window">
+<div class="chat-info-show message-hide hidden" id="chat-window">
 	<div class="chat-content-header">
 		<button type="button" class="close btn-close" data-dismiss="chat-info-show" aria-label="Close"><span aria-hidden="true">×</span></button>
 		<h4 class="chat-content-title" id="myChatLabel">admin</h4>
@@ -401,7 +402,7 @@ String basePath2 = request.getScheme() + "://"
 		
 			<div class="chat-dialog col-md-12">
 				<div class="row" style="height: 100%;">
-					<div class="chat-content col-md-6">
+					<div class="chat-content col-md-12">
 					<div class="chat-content-body">
 						<div class="panel-body">
 							<ul class="chats cool-chat" style="max-height: 500px;"></ul>
@@ -410,7 +411,7 @@ String basePath2 = request.getScheme() + "://"
 					<div class="chat-content-footer clearfix">
 						<div class="footer-content clearfix">
 							<div class="tool-bar clearfix">
-								<a class="message-history pull-right">消息记录<span class="caret" style="vertical-align: super;"></span></a>
+								<a class="message-history pull-right" onselectstart="return false">消息记录<span class="caret" style="vertical-align: super;"></span></a>
 								<input id="userId" type="hidden" value="<sh:principal property="id" />">
 								<a onclick="videoTalk(this);" class="message-video pull-left " title="视频通话"><span class="glyphicon glyphicon-facetime-video"></span></a>
 							</div>
@@ -421,9 +422,19 @@ String basePath2 = request.getScheme() + "://"
 					</div>
 				</div>
 				
-				<div class="message-histroty-content col-md-6">
+				<div class="message-histroty-content col-md-6 hidden">
 					<div class="row" style="height: 100%;">
 						<iframe frameborder="0"></iframe>
+						<div class="video-talk hidden">
+							<div style="display:inline-block; position: relative; top: 20%;">
+								<a class="user-img"><img src="" alt="" /></a>
+								<p style="margin:15px 0;">发起了视频通话</p>
+								<p>
+								<button class="btn btn-success btn-sm pull-left" onclick="answer(this);"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</button>
+								<button class="btn btn-danger btn-sm pull-right" onclick="hangUp(this);"><span class="glyphicon glyphicon-remove-sign" style="margin-right: 10px;"></span>挂断</button>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
