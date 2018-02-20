@@ -1,5 +1,5 @@
 /**
- * 
+ * 文件说明：实现多个复选框的全选
  */
 $(function(){
 	if(document.getElementById('selectAll') == null){

@@ -1706,3 +1706,16 @@ a.fileinput-upload {
 	border-right: none;
 	border-left: 8px solid #65cea7;
 }
+.table-info a.text-muted{
+	color: #999;
+}
+.info-desc a{
+	color: #535351;
+}
+.info-desc a.info-img img{
+	width: 22px;
+	height: auto;
+	max-width: 100%;
+	margin: 0 15px;
+	vertical-align: baseline;
+} 
