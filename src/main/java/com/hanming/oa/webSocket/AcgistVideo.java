@@ -64,7 +64,7 @@ public class AcgistVideo {
 			if (uid != null && user_user.get(uid) != null && AcgistVideo.sessions.get(user_user.get(uid)) != null) {
 				Session osession = sessions.get(user_user.get(uid)); // 被呼叫的session
 				if (osession.isOpen())
-					osession.getAsyncRemote().sendText(new String(message.getBytes("utf-8")));
+					osession.getBasicRemote().sendText(new String(message.getBytes("utf-8")));
 				else
 					this.nowaiting(osession);
 			} else {
