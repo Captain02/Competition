@@ -17,6 +17,16 @@ public class Message {
 	private String type;
 
 	private User user;
+	
+	private String answerAddress;
+
+	public String getAnswerAddress() {
+		return answerAddress;
+	}
+
+	public void setAnswerAddress(String answerAddress) {
+		this.answerAddress = answerAddress;
+	}
 
 	public Integer getId() {
 		return id;
