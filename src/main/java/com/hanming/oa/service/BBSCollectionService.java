@@ -53,7 +53,7 @@ public class BBSCollectionService {
 
 		Integer collectionNum = bbsCollectionMapper.selectCountCollectionByUserAndTopic(userId, topicId);
 
-		bbsTopicService.updateCollectionAddOne(userId, topicId);
+		bbsTopicService.updateCollectionAddOne(topicId);
 
 		return collectionNum;
 	}
@@ -63,7 +63,7 @@ public class BBSCollectionService {
 
 		bbsCollectionMapper.deleCollectionByUserIdAndTopicId(userId, topicId);
 
-		bbsTopicService.updateCollectionSubstractOne(userId, topicId);
+		bbsTopicService.updateCollectionSubstractOne(topicId);
 
 		Integer collectionNum = bbsCollectionMapper.selectCountCollectionByUserAndTopic(userId, topicId);
 

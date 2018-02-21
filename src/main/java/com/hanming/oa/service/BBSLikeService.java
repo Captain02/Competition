@@ -48,7 +48,7 @@ public class BBSLikeService {
 		bbsLike.setTopicid(topicId);
 		bbsLikeMapper.insertSelective(bbsLike);
 
-		bbsTopicService.updateLikeAddOne(userId, topicId);
+		bbsTopicService.updateLikeAddOne(topicId);
 
 		Integer likeNum = bbsLikeMapper.selectCountLikeByUserIdAndTopicId(userId, topicId);
 
@@ -60,7 +60,7 @@ public class BBSLikeService {
 
 		bbsLikeMapper.deletByUserIdAndTopicId(userId, topicId);
 
-		bbsTopicService.updateLikeSubtractOne(userId, topicId);
+		bbsTopicService.updateLikeSubtractOne(topicId);
 
 		Integer likeNum = bbsLikeMapper.selectCountLikeByUserIdAndTopicId(userId, topicId);
 

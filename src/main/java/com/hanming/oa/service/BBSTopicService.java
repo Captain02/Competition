@@ -67,23 +67,23 @@ public class BBSTopicService {
 	}
 
 
-	public void updateLikeSubtractOne(Integer userId, Integer topicId) {
-		bbsTopicMapper.updateLikeSubtractOne(userId,topicId);
+	public void updateLikeSubtractOne(Integer topicId) {
+		bbsTopicMapper.updateLikeSubtractOne(topicId);
 	}
 
 
-	public void updateLikeAddOne(Integer userId, Integer topicId) {
-		bbsTopicMapper.updateLikeAddOne(userId,topicId);
+	public void updateLikeAddOne(Integer topicId) {
+		bbsTopicMapper.updateLikeAddOne(topicId);
 	}
 
 
-	public void updateCollectionSubstractOne(Integer userId, Integer topicId) {
-		bbsTopicMapper.updateCollectionSubstractOne(userId,topicId);
+	public void updateCollectionSubstractOne(Integer topicId) {
+		bbsTopicMapper.updateCollectionSubstractOne(topicId);
 	}
 
 
-	public void updateCollectionAddOne(Integer userId, Integer topicId) {
-		bbsTopicMapper.updateCollectionAddOne(userId,topicId);
+	public void updateCollectionAddOne(Integer topicId) {
+		bbsTopicMapper.updateCollectionAddOne(topicId);
 	}
 
 	@Transactional
@@ -182,6 +182,8 @@ public class BBSTopicService {
 		BBSTopic bbsTopic = bbsTopicMapper.selectByPrimaryKey(topicId);
 		return bbsTopic;
 	}
+
+
 
 
 

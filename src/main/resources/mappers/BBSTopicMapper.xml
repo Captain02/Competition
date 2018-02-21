@@ -270,24 +270,24 @@
 	WHERE br.TopicId = #{topicId} AND br.repliesId = 0
   </select>
   
-  <!-- void updateLikeSubtractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <!-- void updateLikeSubtractOne(@Param("topicId") Integer topicId); -->
   <update id="updateLikeSubtractOne">
-  	update bbstopic set `like` = `like`-1 WHERE userId = #{userId} AND id = #{topicId}
+  	update bbstopic set `like` = `like`-1 WHERE id = #{topicId}
   </update>
   
-  <!-- void updateLikeAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <!-- void updateLikeAddOne(@Param("topicId") Integer topicId); -->
   <update id="updateLikeAddOne">
-  	update bbstopic set `like` = `like`+1 WHERE userId = #{userId} AND id = #{topicId}
+  	update bbstopic set `like` = `like`+1 WHERE id = #{topicId}
   </update>
   
-  <!-- void updateCollectionSubstractOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <!-- void updateCollectionSubstractOne(@Param("topicId") Integer topicId); -->
   <update id="updateCollectionSubstractOne">
-  	update bbstopic set `collection` = `collection`-1 WHERE userId = #{userId} AND id = #{topicId}
+  	update bbstopic set `collection` = `collection`-1 WHERE id = #{topicId}
   </update>
   
-  <!-- void updateCollectionAddOne(@Param("userId") Integer userId,@Param("topicId") Integer topicId); -->
+  <!-- void updateCollectionAddOne(@Param("topicId") Integer topicId); -->
   <update id="updateCollectionAddOne">
-  	update bbstopic set `collection` = `collection`+1 WHERE userId = #{userId} AND id = #{topicId}
+  	update bbstopic set `collection` = `collection`+1 WHERE id = #{topicId}
   </update>
   
   <!-- void deleByTopicIdList(List<Integer> topicIds); -->
