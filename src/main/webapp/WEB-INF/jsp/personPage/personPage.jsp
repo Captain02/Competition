@@ -24,10 +24,6 @@ String basePath2 = request.getScheme() + "://"
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-<style type="text/css">
-	
-}
-</style>
 </head>
 <script type="text/javascript">
 	function videoTalk(ele) {
@@ -448,8 +444,8 @@ String basePath2 = request.getScheme() + "://"
 								<a class="user-img"><img src="" alt="" /></a>
 								<p style="margin:15px 0;">发起了视频通话</p>
 								<p class="clearfix">
-									<a class="btn btn-success btn-sm pull-left answer-video" data-info-type="wait-answer-vtalk"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</a>
-									<a class="btn btn-danger btn-sm pull-right hungup-video"><span class="glyphicon glyphicon-remove-sign" style="margin-right: 10px;"></span>挂断</a>
+									<a class="btn btn-success btn-sm pull-left answer-video" data-info-type="wait-answer-vtalk" data-answer-status="1" onclick="answerVideo(this);"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</a>
+									<a class="btn btn-danger btn-sm pull-right answer-video" data-answer-status="0" onclick="answerVideo(this);"><span class="glyphicon glyphicon-remove-sign" style="margin-right: 10px;"></span>挂断</a>
 								</p>
 							</div>
 						</div>
