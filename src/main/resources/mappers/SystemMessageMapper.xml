@@ -120,10 +120,10 @@
   	SELECT
 	 sm.id, tu.`name` AS userName, tu.headFile,sm.action,sm.text,sm.date,sm.state,bt.title,bt.id AS topicId
 	FROM bbstopic bt
-	LEFT JOIN systemmessage sm ON sm.topicId=bt.id
-	LEFT JOIN t_user tu ON sm.userId = tu.id
+	JOIN systemmessage sm ON sm.topicId=bt.id
+	JOIN t_user tu ON sm.userId = tu.id
 	<where>
-		sm.userId=#{myId}
+		bt.userId=#{myId}
 		<if test="state != '状态'">
 			AND sm.state=#{state}
 		</if>

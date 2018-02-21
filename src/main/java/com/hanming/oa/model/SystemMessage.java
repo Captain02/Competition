@@ -15,59 +15,77 @@ public class SystemMessage {
 
     private String date;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getUserid() {
-        return userid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+	public Integer getUserid() {
+		return userid;
+	}
 
-    public String getAction() {
-        return action;
-    }
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
 
-    public void setAction(String action) {
-        this.action = action == null ? null : action.trim();
-    }
+	public String getAction() {
+		return action;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setAction(String action) {
+		this.action = action;
+	}
 
-    public void setText(String text) {
-        this.text = text == null ? null : text.trim();
-    }
+	public String getText() {
+		return text;
+	}
 
-    public Integer getTopicid() {
-        return topicid;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public void setTopicid(Integer topicid) {
-        this.topicid = topicid;
-    }
+	public Integer getTopicid() {
+		return topicid;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public void setTopicid(Integer topicid) {
+		this.topicid = topicid;
+	}
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
-    }
+	public String getState() {
+		return state;
+	}
 
-    public String getDate() {
-        return date;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public void setDate(String date) {
-        this.date = date == null ? null : date.trim();
-    }
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public SystemMessage(Integer id, Integer userid, String action, String text, Integer topicid, String state,
+			String date) {
+		super();
+		this.id = id;
+		this.userid = userid;
+		this.action = action;
+		this.text = text;
+		this.topicid = topicid;
+		this.state = state;
+		this.date = date;
+	}
+
+	public SystemMessage() {
+		super();
+	}
+    
 }

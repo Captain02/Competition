@@ -159,25 +159,15 @@ public class KnowledgeSharingController {
 
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		} else {
-			BBSTopic bbsTopic = bbsTopicService.selectByPrimaryKey(topicId);
-			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setUserid(userId);
-			systemMessage.setState("未读");
-			systemMessage.setDate(DateTool.dateToString(new Date()));
-			systemMessage.setTopicid(topicId);
-			systemMessage.setText(bbsTopic.getTitle());
-			if ("knowledge".equals(bbsTopic.getType())) {
-				systemMessage.setAction("赞了知识");
-			}else {
-				systemMessage.setAction("赞了相册");
-			}
-			systemMessageService.insert(systemMessage);
+			
 			isLike = bbsLikeService.likeTopic(userId, topicId);
 			Integer likeNum = bbsLikeService.countByTopicId(topicId);
 
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		}
 	}
+
+	
 
 	// 收藏
 	@ResponseBody
@@ -262,19 +252,15 @@ public class KnowledgeSharingController {
 			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
 
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		BBSReplies bbsReplies = new BBSReplies();
+		
+		bbsCollectionService.addCollection(text, topicid, byUserId, repliesId, userId);
 
-		bbsReplies.setRepliesid(repliesId);
-		bbsReplies.setUserid(byUserId);
-		bbsReplies.setRepliseuserid(userId);
-		bbsReplies.setTopicid(topicid);
-		bbsReplies.setText(text);
-		bbsRepliesService.insert(bbsReplies);
-
+		
 		bbsTopicService.updateCommentsAddOne(topicid);
 
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
+
 
 	// 跳转修改页
 	@RequestMapping(value = "/updateTopicPage", method = RequestMethod.GET)
