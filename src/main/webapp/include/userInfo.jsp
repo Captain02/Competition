@@ -281,6 +281,15 @@ String basePath2 = request.getScheme() + "://"
 					
             	}
             	
+            	//接听/挂断视频电话
+            	function answerVideo(ele){
+            		//用户的选择：0表示拒绝，1表示同意
+            		var answerStatus = $(ele).attr('data-answer-status');
+            		//获得发送者的id
+            		var answerFromId = $(ele).attr('data-info-fromid');
+            		//获得接受者的id
+            		var answerToId = $(ele).attr('data-info-toid');
+            	}
             	
             	
             </script>

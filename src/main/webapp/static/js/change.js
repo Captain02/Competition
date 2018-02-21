@@ -128,8 +128,11 @@ $(function () {
 			showMessageHistoryArea();
 			var videoTalk = $('.message-histroty-content').find('div.video-talk');
 			videoTalk.find('a.user-img').find('img').attr('src',""+$(this).find('div.person-img').find('img').attr('src')+"");
-//			videoTalk.find('a.answer-video').attr('href',""+$(this).find('span.answerAddress').html()+"");
-			$('.wait-answer-vtalk').find('iframe.my-vtalk').attr('src',""+$(this).find('span.answerAddress').html()+"");
+//			$('.wait-answer-vtalk').find('iframe.my-vtalk').attr('src',""+$(this).find('span.answerAddress').html()+"");
+			videoTalk.find('a.answer-video').attr({
+				'data-info-fromid':""+$(this).attr('data-info-userid')+"",
+				'data-info-toid':""+$(this).attr('data-info-touserid')+""
+			});
 			showOrHide($(this));
 		break;
 		
@@ -238,7 +241,7 @@ function addNewsToList(data){
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	var listNode = $(
-			"<li data-info-type="+data.type+" data-info-username="+data.fromName+" data-info-userId="+data.fromId+" data-info-status='0' onselectstart='return false;'  data-info-headfile="+data.user.headFile+">"+
+			"<li data-info-type="+data.type+" data-info-username="+data.fromName+" data-info-userId="+data.fromId+" data-info-touserId="+data.toId+" data-info-status='0' onselectstart='return false;'  data-info-headfile="+data.user.headFile+">"+
 			"<div class='row'>"+
 			"<div class='col-md-2'>"+
 			"<div class='person-img friend-img clearfix'>"+
