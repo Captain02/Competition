@@ -42,7 +42,12 @@
 
                         
 
-                        <input type="text" placeholder="输入流程部署名称" value="${name}" class="form-control" name="name">
+                       <select class="form-control" name="type" value="类型">
+                            <option>状态</option>
+                        </select>
+                        <select class="form-control" name="type" value="类型">
+                            <option>类型</option>
+                        </select>
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -117,30 +122,32 @@
 	                                                </tr>
 												</c:forEach>
 	                                                
-	                                               <%--  <tr>
-	                                                <td colspan="1">
-	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
-	                                                   <div class="info-desc" style="margin-left: 20px;">
-		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
-		                                                   	<img src="${APP_PATH}/static/em.jpg" alt="" />
-		                                                   </a>
-		                                                   <a href="这里加知识链接" class="pull-left info-user">
-		                                                   	<strong>李白</strong>
-		                                                   	<span>　赞了知识　服务器</span>
-		                                                   </a>
-		                                                   <a href="" class="pull-right text-muted info-time">
-		                                                   	<small>2017-01-01 12:00</small>
-		                                                   </a>
-	                                                   </div>
-	                                                </td>
-	                                                   
-	                                                </tr> --%>
 													
                                             </tbody>
 
                                         </table>
                                     </form>
                                 </div>
+                                
+                                <nav aria-label="Page navigation" class="pull-right">
+									  <ul class="pagination pagination-sm">
+									    <li>
+									      <a href="#" aria-label="Previous">
+									        <span aria-hidden="true">&laquo;</span>
+									      </a>
+									    </li>
+									    <li class="active"><a href="#">1</a></li>
+									    <li><a href="#">2</a></li>
+									    <li><a href="#">3</a></li>
+									    <li><a href="#">4</a></li>
+									    <li><a href="#">5</a></li>
+									    <li>
+									      <a href="#" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+									  </ul>
+								</nav>
 
                             </div>
 

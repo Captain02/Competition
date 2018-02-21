@@ -6,6 +6,7 @@
 
 //隐藏侧边栏效果
 $(function () {
+	//隐藏侧边栏的效果
     var flag = 1;
     var toggleBtn = $('.toggle-btn');
     var bodyClass = $('body');
@@ -65,7 +66,7 @@ $(function () {
 		case 'true':
 			$('#chat').slideDown(200);
 			$(this).attr('data-chat-status','flase');
-			open();
+			openSocket();
 			break;
 		case 'flase':
 			$('#chat').slideUp(200);
@@ -123,17 +124,13 @@ $(function () {
 		break;
 		
 		case 'videoTalk':
-			var li = $(this);
 			chatWindowValue('#chat-window',$(this));
-			$('.message-histroty-content').removeClass('hidden');
-			$('#chat-window').removeClass('message-hide');
-			$('.chat-content').addClass('col-md-6');
-			$('a.message-history').addClass('hidden');
-			$('.message-histroty-content').find('iframe').addClass('hidden');
-			$('.message-histroty-content').find('div.video-talk').removeClass('hidden');
+			showMessageHistoryArea();
 			var videoTalk = $('.message-histroty-content').find('div.video-talk');
 			videoTalk.find('a.user-img').find('img').attr('src',""+$(this).find('div.person-img').find('img').attr('src')+"");
-			videoTalk.find('a.answer-video').attr('href',""+$(this).find('span.answerAddress').html()+"");
+//			videoTalk.find('a.answer-video').attr('href',""+$(this).find('span.answerAddress').html()+"");
+			$('.wait-answer-vtalk').find('iframe.my-vtalk').attr('src',""+$(this).find('span.answerAddress').html()+"");
+			showOrHide($(this));
 		break;
 		
 		default:
@@ -203,8 +200,6 @@ $(function () {
     //关闭会话框按钮
 	$('.btn-close').click(function(){
 		chatWindowClose($('.btn-send').attr('data-info-userid'));
-		$('.message-histroty-content').find('iframe').removeClass('hidden');
-		$('.message-histroty-content').find('div.videoTalk').removeClass('hidden');
 		 (function(ele){
 			 $(ele).addClass('hidden');
 			 $(ele).attr('data-status',0);
@@ -219,13 +214,19 @@ $(function () {
 	//弹出消息历史窗口
 	$('.message-history').click(function(){
 		showMessageHistoryArea();
+		showOrHide($(this));
 	})//end
 		
-	//区分我的消息和他人消息
+	//在历史消息中区分我的消息和他人消息
 	$('.message-history-area li').each(function(){
 		if($(this).attr('data-myid') === $(this).attr('data-userid')){
 			$(this).addClass('my-message');
 		}
+	})//end
+	
+	//接听视频电话
+	$('.answer-video').click(function(){
+		showOrHide($(this));
 	})//end
 	
 })
@@ -265,7 +266,7 @@ function addNewsToList(data){
 	listNode.siblings("[data-info-userid="+listNode.attr('data-info-userid')+"][data-info-type='sendTalk']").hide();
 }//end
 
-//生成聊天框中的消息节点
+//将收到的消息插入到会话框中
 function addMessageToMessageList(data,thisClass){
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
@@ -300,7 +301,7 @@ function addMessage(data,ele){
 	$('.chat-content-body').scrollTop($('.chat-content-body')[0].scrollHeight );
 }//end
 
-//动态生成好友列表插入到联系人列表中
+//生成好友列表插入到联系人列表中
 function addFriendsToList(result){
 	var pathName = window.document.location.pathname;
 	var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
@@ -328,7 +329,7 @@ function addFriendsToList(result){
 						);
 		$('.chart-friends').append(listNode);
 		
-	})
+	});
 }//end
 
 //会话窗口的赋值
@@ -339,6 +340,29 @@ function chatWindowValue(ele,val){
 	$(ele).find('button.btn-send').attr('data-info-userid',val.attr('data-info-userid'));
 	$(ele).find('a.message-video').attr('data-info-userid',val.attr('data-info-userid'));
 }//end
+
+//聊天框的展开形态
+function showMessageHistoryArea(){
+	var chatArea = $('#chat-window');
+	var chatContent = $('.chat-content');
+	var messageHistory = $('.message-histroty-content');
+	(chatArea.hasClass('message-hide'))?chatArea.removeClass('message-hide'):chatArea.addClass('message-hide');
+	(chatContent.hasClass('col-md-6'))?chatContent.removeClass('col-md-6'):chatContent.addClass('col-md-6');
+	(messageHistory.hasClass('hidden'))?messageHistory.removeClass('hidden'):messageHistory.addClass('hidden');
+}//end
+
+//根据进行操作的不同来显示或隐藏聊天框侧边栏的某些元素
+function showOrHide(ele){
+	$('.message-histroty-content div.row > div').each(function(){
+		var div = $(this);
+		var dataInfoType = $(this).attr('data-info-type');
+		if($(ele).attr('data-info-type')=== dataInfoType){
+			div.removeClass('hidden');
+			div.siblings().addClass('hidden');
+			return false;
+		}
+	});
+}
 
 //知识的点赞效果
 function ActivityControl(result,hiddenValue,icon,cntrolNum){
@@ -351,17 +375,6 @@ function ActivityControl(result,hiddenValue,icon,cntrolNum){
 	}
 	cntrolNum.html(result.extend.likeNum);
 }//end
-
-//根据弹出内容来改变聊天框的样式
-function showMessageHistoryArea(){
-	var chatArea = $('#chat-window');
-	var chatContent = $('.chat-content');
-	var messageHistory = $('.message-histroty-content');
-	(chatArea.hasClass('message-hide'))?chatArea.removeClass('message-hide'):chatArea.addClass('message-hide');
-	(chatContent.hasClass('col-md-6'))?chatContent.removeClass('col-md-6'):chatContent.addClass('col-md-6');
-	(messageHistory.hasClass('hidden'))?messageHistory.removeClass('hidden'):messageHistory.addClass('hidden');
-}//end
-
 
 
 

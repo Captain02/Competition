@@ -32,7 +32,7 @@ String basePath2 = request.getScheme() + "://"
                         				
                         			</a>
                         		</li>
-                        		<li class="new">
+                        		<li>
                         			<a href="${APP_PATH}/admin/systemMessage/list">查看更多</a>
                         		</li>
                         	</ul>
@@ -75,7 +75,7 @@ String basePath2 = request.getScheme() + "://"
             
             <script type="text/javascript">
                 var websocket;
-            	function open(){
+            	function openSocket(){
             		 $.ajax({
             			url:"${APP_PATH}/admin/friends/responseAddFridens",
             			data:"",

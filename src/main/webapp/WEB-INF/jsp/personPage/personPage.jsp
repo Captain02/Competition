@@ -24,6 +24,10 @@ String basePath2 = request.getScheme() + "://"
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<style type="text/css">
+	
+}
+</style>
 </head>
 <script type="text/javascript">
 	function videoTalk(ele) {
@@ -40,6 +44,7 @@ String basePath2 = request.getScheme() + "://"
    			},
 			type:"POST",
 			success:function(result){
+				
 				var fromName=result.extend.fromName;
    				data["fromId"]=result.extend.fromId;
 				data["fromName"]=result.extend.fromName;
@@ -60,6 +65,12 @@ String basePath2 = request.getScheme() + "://"
 				websocket.onopen = function(event) {
 					console.log("WebSocket:已连接");
 					console.log(event);
+					showMessageHistoryArea();
+					showOrHide($(ele));
+					var pathName = window.document.location.pathname;
+					var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+					$('.wait-answer-vtalk').find('iframe.my-vtalk').attr('src',""+projectName+"/admin/friends/videoTalk");
+					$('div.wait-desc').html('<p class="glyphicon glyphicon-facetime-video" style="display: block; font-size: 60px;"></p>正在等待对方接受邀请<span class="ani_dot">...</span>')
 					send();
 				};
 				
@@ -71,7 +82,8 @@ String basePath2 = request.getScheme() + "://"
 				websocket.onclose = function(event) {
 					console.log("WebSocket:已关闭");
 					console.log(event);
-					linkURL();
+					
+// 					linkURL();
 				}
 			}
 		})
@@ -411,9 +423,9 @@ String basePath2 = request.getScheme() + "://"
 					<div class="chat-content-footer clearfix">
 						<div class="footer-content clearfix">
 							<div class="tool-bar clearfix">
-								<a class="message-history pull-right" onselectstart="return false">消息记录<span class="caret" style="vertical-align: super;"></span></a>
+								<a class="message-history pull-right" onselectstart="return false" data-info-type="message-history">消息记录<span class="caret" style="vertical-align: super;"></span></a>
 								<input id="userId" type="hidden" value="<sh:principal property="id" />">
-								<a onclick="videoTalk(this);" class="message-video pull-left " title="视频通话"><span class="glyphicon glyphicon-facetime-video"></span></a>
+								<a onclick="videoTalk(this);" class="message-video pull-left " title="视频通话" data-info-type="wait-answer-vtalk"><span class="glyphicon glyphicon-facetime-video"></span></a>
 							</div>
 							<p class="input-chat-text" contenteditable="true" data-emojiable="true"></p>
 							<button class="btn btn-primary btn-sm pull-right btn-send" style="padding: 2px 20px;" onclick="sendMessage(this);">发送</button>
@@ -424,17 +436,40 @@ String basePath2 = request.getScheme() + "://"
 				
 				<div class="message-histroty-content col-md-6 hidden">
 					<div class="row" style="height: 100%;">
-						<iframe frameborder="0"></iframe>
-						<div class="video-talk hidden">
+					
+						<!--消息历史 -->
+						<div class="message-history-show" data-info-type="message-history" style="width: 100%; height: 100%;">
+							<iframe frameborder="0" class="message-history-href"></iframe>
+						</div>
+						
+						<!-- 有视频通话邀请 -->
+						<div class="video-talk" data-info-type="videoTalk">
 							<div style="display:inline-block; position: relative; top: 20%;">
 								<a class="user-img"><img src="" alt="" /></a>
 								<p style="margin:15px 0;">发起了视频通话</p>
 								<p class="clearfix">
-									<a class="btn btn-success btn-sm pull-left answer-video"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</a>
+									<a class="btn btn-success btn-sm pull-left answer-video" data-info-type="wait-answer-vtalk"><span class="glyphicon glyphicon-phone-alt" style="margin-right: 10px;"></span>接听</a>
 									<a class="btn btn-danger btn-sm pull-right hungup-video"><span class="glyphicon glyphicon-remove-sign" style="margin-right: 10px;"></span>挂断</a>
 								</p>
 							</div>
 						</div>
+						
+						<!-- 邀请对方接听视频电话 -->
+						<div class="wait-answer-vtalk" data-info-type="wait-answer-vtalk">
+							<div class="wait-vtalk-lodaing">
+								<iframe frameborder="0" class="other-vtalk hidden" style="width: 100%; height: 100%;"></iframe>
+								<div style="display: inline-block; position: relative; top: 25%">
+									<div class="wait-desc">
+										<p class="glyphicon glyphicon-facetime-video" style="display: block; font-size: 60px;"></p>
+										等待对方接受邀请<span class="ani_dot">...</span>
+									</div>
+								</div>
+							</div>
+							<div class="vtalk-view">
+								<iframe frameborder="0" src="${APP_PATH}/admin/friends/videoTalk" class="my-vtalk"></iframe>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -445,7 +480,7 @@ String basePath2 = request.getScheme() + "://"
 	</div>
 
 <script>
-var iframe = $('.message-histroty-content').find('iframe');
+var iframe = $('.message-histroty-content').find('iframe.message-history-href');
 //消息记录按钮
 $('.message-history').click(function(){
 	iframe.attr('src','${APP_PATH}/admin/friends/historyTalk?friendId='+$('.btn-send').attr('data-info-userid')+'');

@@ -20,7 +20,7 @@ String basePath2 = request.getScheme() + "://"
 		<style type="text/css">
 			*{margin: 0; padding: 0; overflow-y: hidden;}
 			body {background-color: rgb(34, 34, 34);}
-			#main {display: none; -webkit-transition-property: rotation; -webkit-transition-duration: 2s; text-align: center; -webkit-transform-style: preserve-3d; width: 1200px; margin: 0 auto; padding: 60px 0;}
+			#main {display: none; -webkit-transition-property: rotation; -webkit-transition-duration: 2s; -webkit-transform-style: preserve-3d; width: 100%;}
 			#localVideo {box-shadow: 0 0 20px #000; width: 600px; display: inline-block;}
 			#remoteVideo {box-shadow: 0 0 20px #000; width: 600px; display: none;}
 			#miniVideo {box-shadow: 0 0 20px #000; width: 300px; display: none;}
