@@ -11,6 +11,7 @@
     <result column="like" jdbcType="INTEGER" property="like" />
     <result column="collection" jdbcType="INTEGER" property="collection" />
     <result column="comment" jdbcType="INTEGER" property="comment" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
   </resultMap>
   
   <resultMap type="com.hanming.oa.model.BBSDisplayTopic" id="DisplayTopicMap">
@@ -64,7 +65,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, title, sketch, text, userId, date, `like`, collection, comment
+    id, title, sketch, text, userId, date, `like`, collection, comment,type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

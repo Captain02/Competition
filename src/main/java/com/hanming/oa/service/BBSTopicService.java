@@ -177,4 +177,14 @@ public class BBSTopicService {
 		return 1;
 	}
 
+
+	public BBSTopic selectByPrimaryKey(Integer topicId) {
+		BBSTopic bbsTopic = bbsTopicMapper.selectByPrimaryKey(topicId);
+		return bbsTopic;
+	}
+
+
+
+
+
 }

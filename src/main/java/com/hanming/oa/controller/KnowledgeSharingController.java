@@ -21,13 +21,16 @@ import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
 import com.hanming.oa.model.BBSReplies;
+import com.hanming.oa.model.BBSTopic;
 import com.hanming.oa.model.Comments;
+import com.hanming.oa.model.SystemMessage;
 import com.hanming.oa.service.BBSCollectionService;
 import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSLabelTopicService;
 import com.hanming.oa.service.BBSLikeService;
 import com.hanming.oa.service.BBSRepliesService;
 import com.hanming.oa.service.BBSTopicService;
+import com.hanming.oa.service.SystemMessageService;
 
 @Controller
 @RequestMapping("/admin/KnowledgeSharing")
@@ -45,6 +48,8 @@ public class KnowledgeSharingController {
 	BBSCollectionService bbsCollectionService;
 	@Autowired
 	BBSRepliesService bbsRepliesService;
+	@Autowired
+	SystemMessageService systemMessageService;
 
 	// 遍历贴
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -154,7 +159,19 @@ public class KnowledgeSharingController {
 
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		} else {
-
+			BBSTopic bbsTopic = bbsTopicService.selectByPrimaryKey(topicId);
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setUserid(userId);
+			systemMessage.setState("未读");
+			systemMessage.setDate(DateTool.dateToString(new Date()));
+			systemMessage.setTopicid(topicId);
+			systemMessage.setText(bbsTopic.getTitle());
+			if ("knowledge".equals(bbsTopic.getType())) {
+				systemMessage.setAction("赞了知识");
+			}else {
+				systemMessage.setAction("赞了相册");
+			}
+			systemMessageService.insert(systemMessage);
 			isLike = bbsLikeService.likeTopic(userId, topicId);
 			Integer likeNum = bbsLikeService.countByTopicId(topicId);
 

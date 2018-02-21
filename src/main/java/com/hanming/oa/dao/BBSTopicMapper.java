@@ -40,4 +40,5 @@ public interface BBSTopicMapper {
 
 	void updateCommentsAddOne(Integer topicid);
 
+
 }

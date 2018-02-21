@@ -33,7 +33,7 @@ String basePath2 = request.getScheme() + "://"
                         			</a>
                         		</li>
                         		<li class="new">
-                        			<a href="">查看更多</a>
+                        			<a href="${APP_PATH}/admin/systemMessage/list">查看更多</a>
                         		</li>
                         	</ul>
                         </div>

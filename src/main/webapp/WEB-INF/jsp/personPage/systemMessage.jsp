@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-sm-12">
 
-                                <header class="om-wrapper-header">消息管理 / 总数：</header>
+                                <header class="om-wrapper-header">消息管理 / 总数：${pageInfo.total}</header>
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
@@ -96,8 +96,28 @@
                                             </thead>
 
                                             <tbody>
-												
+												<c:forEach items="${pageInfo.list}" var="systemMessage">
 	                                                <tr>
+	                                                <td colspan="1">
+	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
+	                                                   <div class="info-desc" style="margin-left: 20px;">
+		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
+		                                                   	<img src="${APP_PATH}/personHeadFile/${systemMessage.headFile}" alt="" />
+		                                                   </a>
+		                                                   <a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${systemMessage.topicId}" class="pull-left info-user">
+		                                                   	<strong>${systemMessage.userName}</strong>
+		                                                   	<span>${systemMessage.action}  ${systemMessage.text}  ${systemMessage.title}</span>
+		                                                   </a>
+		                                                   <a href="" class="pull-right text-muted info-time">
+		                                                   	<small>${systemMessage.date}</small>
+		                                                   </a>
+	                                                   </div>
+	                                                </td>
+	                                                   
+	                                                </tr>
+												</c:forEach>
+	                                                
+	                                               <%--  <tr>
 	                                                <td colspan="1">
 	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
 	                                                   <div class="info-desc" style="margin-left: 20px;">
@@ -114,26 +134,7 @@
 	                                                   </div>
 	                                                </td>
 	                                                   
-	                                                </tr>
-	                                                
-	                                                <tr>
-	                                                <td colspan="1">
-	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
-	                                                   <div class="info-desc" style="margin-left: 20px;">
-		                                                   <a href=""这里加个人主页链接 class="pull-left info-img">
-		                                                   	<img src="${APP_PATH}/static/em.jpg" alt="" />
-		                                                   </a>
-		                                                   <a href="这里加知识链接" class="pull-left info-user">
-		                                                   	<strong>李白</strong>
-		                                                   	<span>　赞了知识　服务器</span>
-		                                                   </a>
-		                                                   <a href="" class="pull-right text-muted info-time">
-		                                                   	<small>2017-01-01 12:00</small>
-		                                                   </a>
-	                                                   </div>
-	                                                </td>
-	                                                   
-	                                                </tr>
+	                                                </tr> --%>
 													
                                             </tbody>
 
