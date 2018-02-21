@@ -199,6 +199,7 @@ $(function () {
 	
     //关闭会话框按钮
 	$('.btn-close').click(function(){
+		$('div.vtalk-view iframe').remove();
 		chatWindowClose($('.btn-send').attr('data-info-userid'));
 		 (function(ele){
 			 $(ele).addClass('hidden');
@@ -209,6 +210,7 @@ $(function () {
 				 $(this).attr('data-info-status',0);
 			 }
 		 })
+		 
 	})//end
 	
 	//弹出消息历史窗口
@@ -353,14 +355,24 @@ function showMessageHistoryArea(){
 
 //根据进行操作的不同来显示或隐藏聊天框侧边栏的某些元素
 function showOrHide(ele){
+	$('div.vtalk-view iframe').remove();
 	$('.message-histroty-content div.row > div').each(function(){
 		var div = $(this);
 		var dataInfoType = $(this).attr('data-info-type');
 		if($(ele).attr('data-info-type')=== dataInfoType){
 			div.removeClass('hidden');
 			div.siblings().addClass('hidden');
+			if($(ele).attr('data-info-type')=== 'wait-answer-vtalk'){
+				var pathName = window.document.location.pathname;
+				var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+				var iframeMy = $("<iframe frameborder='0' class='my-vtalk' src="+projectName+"/admin/friends/videoTalk>"+
+								"</iframe>"
+							   );
+				$('div.vtalk-view').append(iframeMy);
+			}
 			return false;
 		}
+		
 	});
 }
 

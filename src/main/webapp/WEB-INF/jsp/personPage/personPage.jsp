@@ -457,16 +457,18 @@ String basePath2 = request.getScheme() + "://"
 						<!-- 邀请对方接听视频电话 -->
 						<div class="wait-answer-vtalk" data-info-type="wait-answer-vtalk">
 							<div class="wait-vtalk-lodaing">
-								<iframe frameborder="0" class="other-vtalk hidden" style="width: 100%; height: 100%;"></iframe>
 								<div style="display: inline-block; position: relative; top: 25%">
 									<div class="wait-desc">
 										<p class="glyphicon glyphicon-facetime-video" style="display: block; font-size: 60px;"></p>
 										等待对方接受邀请<span class="ani_dot">...</span>
 									</div>
 								</div>
+								
+								<iframe frameborder="0" class="other-vtalk hidden" style="width: 100%; height: 100%;"></iframe>
+								
 							</div>
 							<div class="vtalk-view">
-								<iframe frameborder="0" src="${APP_PATH}/admin/friends/videoTalk" class="my-vtalk"></iframe>
+								
 							</div>
 						</div>
 						
