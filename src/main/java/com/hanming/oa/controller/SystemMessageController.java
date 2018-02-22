@@ -36,7 +36,7 @@ public class SystemMessageController {
 		
 		Integer myId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		PageInfo<SystemMessageDisplay> pageInfo = null;
-		PageHelper.startPage(pn, 20);
+		PageHelper.startPage(pn, 15);
 		List<SystemMessageDisplay> list = systemMessageService.list(type,state,myId);
 		pageInfo = new PageInfo<>(list, 5);
 		
