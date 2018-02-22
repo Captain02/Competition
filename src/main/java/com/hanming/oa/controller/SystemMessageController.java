@@ -28,12 +28,6 @@ public class SystemMessageController {
 			@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			Model modle) {
 		
-		if ("知识".equals(state)) {
-			state = "knowledge";
-		}else if ("相册".equals(state)) {
-			state = "myImage";
-		}
-		
 		Integer myId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		PageInfo<SystemMessageDisplay> pageInfo = null;
 		PageHelper.startPage(pn, 15);

@@ -26,16 +26,16 @@ String basePath2 = request.getScheme() + "://"
 			#miniVideo {box-shadow: 0 0 20px #000; width: 300px; display: none;}
 			#footer {position: absolute; bottom: 0; width: 100%; height: 28px; background-color: #404040; color: #fff; font-size: 13px; font-weight: bold; line-height: 28px; text-align: center;}
 			/* .browser{box-shadow: 0 0 20px #000 inset; width: 400px; margin: 200px auto; padding: 20px; text-align: center; color: #fff; font-weight: bold;} */
-			@media screen and (-webkit-min-device-pixel-ratio:0) {#main{display: block;} .browser{display: none;}}
+			/* @media screen and (-webkit-min-device-pixel-ratio:0) {#main{display: block;} .browser{display: none;}} */
 		</style>
 	</head>
 	<body ondblclick="fullScreen()">
-		<!-- <div class="browser">对不起暂时只支持google chrome浏览器！</div> -->
+		  <!-- <div class="browser">对不起暂时只支持google chrome浏览器！</div>   -->
 		<div id="main">
+		</div>
 			<video id="localVideo" autoplay="autoplay"></video>
 			<video id="remoteVideo" autoplay="autoplay"></video>
 			<video id="miniVideo" autoplay="autoplay"></video>
-		</div>
 		<div id="footer"></div>
 		<script type="text/javascript">
 			var pc;
@@ -82,7 +82,12 @@ String basePath2 = request.getScheme() + "://"
 			function getUserMedia() {
 				console.log("获取用户媒体");
 				
-				navigator.webkitGetUserMedia({
+				navigator.aa = navigator.getUserMedia ||  
+							                navigator.webkitGetUserMedia ||  
+							                navigator.mozGetUserMedia ||  
+							                navigator.msGetUserMedia;
+				
+				navigator.aa({
 					"audio" : true,
 					"video" : true
 				}, onUserMediaSuccess, onUserMediaError)
@@ -386,14 +391,14 @@ String basePath2 = request.getScheme() + "://"
 				errorNotice.innerHTML = msg;
 			}
 			
-			if(!WebSocket) {
+			 if(!WebSocket) {
 			//	errorNotice("你的浏览器不支持WebSocket！建议使用<a href=\"https://www.google.com/intl/zh-CN/chrome/browser/\" target=\"_blank\">google chrome浏览器！</a>");
 			} else if(!PeerConnection) {
 				//errorNotice("你的浏览器不支持RTCPeerConnection！建议使用<a href=\"https://www.google.com/intl/zh-CN/chrome/browser/\" target=\"_blank\">google chrome浏览器！</a>");
 			} else {
 				//if(window.navigator.userAgent.indexOf("Chrome") !== -1)
+			} 
 					setTimeout(initialize, 1); // 加载完成调用初始化方法
-			}
 			
 			//发送消息
 			
