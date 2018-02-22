@@ -128,7 +128,7 @@
 			AND sm.state = #{state}
 		</if>
 		<if test="type != '类型'">
-			sm.action = #{type}
+			AND sm.action = #{type}
 		</if>
 	</where>
   </select>
