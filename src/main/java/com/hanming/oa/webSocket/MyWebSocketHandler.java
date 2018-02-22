@@ -77,7 +77,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				}
 			}
 
-			//打开连接
+			// 打开连接
 			// 接受好友请求，显示未处理的消息
 			if ("responseAddFridens".equals(type)) {
 				BlockingQueue<TextMessage> addFriendsQueue = userSocketAddFriendsQueue.get(toUserId);
@@ -116,7 +116,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		Message msg = JSON.parseObject(message.getPayload().toString(), Message.class);
 		msg.setDate(DateTool.dateToString(new Date()));
 
-		//取消回执
+		// 取消回执
 		if ("unAgreeAddFriend".equals(msg.getType())) {
 			BlockingQueue<TextMessage> byRequestAddFriend = userSocketAddFriendsQueue.get(msg.getFromId());
 			freeQueue(msg, byRequestAddFriend);
@@ -179,22 +179,43 @@ public class MyWebSocketHandler implements WebSocketHandler {
 				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
 			}
 		}
-		
+		// 发送消息
+		if ("unVideoTalk".equals(msg.getType())) {
+			// 释放被申请人的添加好友请求
+			BlockingQueue<TextMessage> byRequestAddFriend = userSocketVideoTalkQueue.get(msg.getFromId());
+			freeQueue(msg, byRequestAddFriend);
+			WebSocketSession socketSession = userSocketSessionMap.get(msg.getToId());
+			/*BlockingQueue<TextMessage> addFriendsQueue = userSocketVideoTalkQueue.get(msg.getToId());
+			// 如果此人有未处理的添加好友请求
+			if (addFriendsQueue != null) {
+				addFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+			} else if (addFriendsQueue == null) {
+				// 如果此人没有有未处理的添加好友请求
+				BlockingQueue<TextMessage> newAddFriendsQueue = new LinkedBlockingQueue<TextMessage>(10);
+				newAddFriendsQueue.offer(new TextMessage(JSON.toJSONString(msg)));
+				userSocketAddFriendsQueue.put(msg.getToId(), newAddFriendsQueue);
+			}*/
+			// 判断用户是否在线
+			if (socketSession != null) {
+				// 发送同意好友请求
+				sendMessageToUser(msg.getToId(), new TextMessage(JSON.toJSONString(msg)));
+			}
+		}
+
 		// 释放离线信息
 		if ("acceptTalks".equals(msg.getType())) {
 			BlockingQueue<TextMessage> acceptTalk = userSocketTalkQueue.get(msg.getFromId());
-				freeQueue(msg, acceptTalk);
+			freeQueue(msg, acceptTalk);
 		}
 	}
 
-	//释放资源
+	// 释放资源
 	private void freeQueue(Message msg, BlockingQueue<TextMessage> byRequestAddFriend) {
 		if (byRequestAddFriend == null) {
 			return;
 		}
 		for (TextMessage textMessage : byRequestAddFriend) {
-			Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(),
-					Message.class);
+			Message byRequestAddFriendMessage = JSON.parseObject(textMessage.getPayload().toString(), Message.class);
 			// 找到我要释放的信息是，我发送同意信息接收人和发送给我的信息的发送人一致时，此信息被释放
 			Integer fromId = byRequestAddFriendMessage.getFromId();
 			Integer toId = msg.getToId();

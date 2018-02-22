@@ -41,6 +41,8 @@ public class SystemMessageController {
 		pageInfo = new PageInfo<>(list, 5);
 		
 		modle.addAttribute("pageInfo", pageInfo);
+		modle.addAttribute("type", type);
+		modle.addAttribute("state", state);
 
 		return "personPage/systemMessage";
 	}

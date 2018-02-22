@@ -285,10 +285,29 @@ String basePath2 = request.getScheme() + "://"
             	function answerVideo(ele){
             		//用户的选择：0表示拒绝，1表示同意
             		var answerStatus = $(ele).attr('data-answer-status');
+            		var messageText = "";
+            		if (answerStatus == 0) {
+            			messageText = "拒绝通话";
+					}
+            		if (answerStatus == 1) {
+            			messageText = "同意通话";
+					}
             		//获得发送者的id
             		var answerFromId = $(ele).attr('data-info-fromid');
             		//获得接受者的id
             		var answerToId = $(ele).attr('data-info-toid');
+            		 $.ajax({
+	           			url:"${APP_PATH}/admin/friends/talk",
+	           			data:{
+	           				'toId':answerFromId,
+	           				'text':messageText
+	           			},
+	           			type:"POST",
+	           			success:function(result){
+	           				var type = "unVideoTalk";
+		            		sendFunction(result.extend.fromId,result.extend.fromName,answerFromId,messageText,type,result.extend.user,result.extend.sendTime);
+	           			}
+	           		}) 
             	}
             	
             	

@@ -38,15 +38,20 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="${APP_PATH}/admin/deploy/list" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/systemMessage/list" class="serach-form" method="get">
 
                         
 
                        <select class="form-control" name="type" value="类型">
-                            <option>状态</option>
-                        </select>
-                        <select class="form-control" name="type" value="类型">
                             <option>类型</option>
+                            <option>点赞</option>
+                            <option>评论</option>
+                            <option>收藏</option>
+                        </select>
+                        <select class="form-control" name="state" value="状态">
+                            <option>类型</option>
+                            <option>已读</option>
+                            <option>未读</option>
                         </select>
 
                         <button type="submit" class="btn btn-primary">搜索</button>
@@ -132,20 +137,41 @@
                                 <nav aria-label="Page navigation" class="pull-right">
 									  <ul class="pagination pagination-sm">
 									    <li>
-									      <a href="#" aria-label="Previous">
-									        <span aria-hidden="true">&laquo;</span>
-									      </a>
-									    </li>
-									    <li class="active"><a href="#">1</a></li>
-									    <li><a href="#">2</a></li>
-									    <li><a href="#">3</a></li>
-									    <li><a href="#">4</a></li>
-									    <li><a href="#">5</a></li>
-									    <li>
-									      <a href="#" aria-label="Next">
-									        <span aria-hidden="true">&raquo;</span>
-									      </a>
-									    </li>
+                                                <a href="${APP_PATH}/admin/systemMessage/list?pn=1&type=${type}&state=${state}">首页</a>
+                                            </li>
+                                            <c:if test="${pageInfo.hasPreviousPage}">
+                                                <li>
+                                                    <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                            <c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
+                                                <c:if test="${pageNum==pageInfo.pageNum}">
+                                                    <li class="active">
+                                                        <a href="#">${pageNum}</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${pageNum!=pageInfo.pageNum}">
+                                                    <li>
+                                                        <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageNum}&type=${type}&state=${state}">${pageNum}</a>
+                                                    </li>
+                                                </c:if>
+                                            </c:forEach>
+
+                                            <c:if test="${pageInfo.hasNextPage }">
+                                                <li>
+                                                    <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </c:if>
+
+                                            <li>
+                                                <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageInfo.pages}&type=${type}&state=${state}" aria-label="Next">
+                                                    <span aria-hidden="true">末页</span>
+                                                </a>
+                                            </li>
 									  </ul>
 								</nav>
 

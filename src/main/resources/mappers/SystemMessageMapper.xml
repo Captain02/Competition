@@ -125,10 +125,10 @@
 	<where>
 		bt.userId=#{myId}
 		<if test="state != '状态'">
-			AND sm.state=#{state}
+			AND sm.state = #{state}
 		</if>
 		<if test="type != '类型'">
-			AND bt.type=#{type}
+			AND bt.typelike = #{type}
 		</if>
 	</where>
   </select>
