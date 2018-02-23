@@ -29,7 +29,12 @@
 			},
 			type:"POST",
 			success:function(result){
-				alert(result.extend.state);
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','执行结果','.modal-body','项目状态更改成功');
+				 setTimeout(function(){
+					 $('#myModal').modal('hide');
+					 window.location.reload();
+				 },1000);
 			}
 		})
 	}
@@ -124,7 +129,6 @@
                                             <tbody>
                                             <c:forEach items="${pageInfo.list}" var="ProjectDisplay">
 	                                                <tr>
-	                                                    <input type="hidden" value="${ProjectDisplay.id}" />
 	                                                	<td>${ProjectDisplay.projectName}</td>
 	                                                    <td>${ProjectDisplay.projectAliasName}</td>
 	                                                    <td>${ProjectDisplay.createPeople}</td>
@@ -231,18 +235,6 @@
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-      
-        <button type="button" class="btn btn-warning yes">确认</button>
-        <button type="button" class="btn btn-success no">取消</button>
-        
-        <!-- 用于页面跳转的按钮 -->
-        <form action="${APP_PATH}/admin/deploy/list">
-        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
-        	<button type="submit" class="btn btn-danger down">关闭</button>
-        </form>
         
       </div>
     </div>

@@ -98,10 +98,10 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 								<div class="col-sm-10">
-									<div class="input-group input-large custom-date-range" data-date="2016-07-07" data-date-format="yyyy-mm-dd">
-					                      <input class="form-control dpd1" id="mydatepicker2" name="started" placeholder="开始日期" value="2018-02-22" type="text">
+									<div class="input-group input-large custom-date-range">
+					                      <input class="form-control dpd1" id="mydatepicker2" name="started" placeholder="开始日期" type="text">
 					                      <span class="input-group-addon">To</span>
-					                      <input class="form-control dpd2" id="mydatepicker" name="ended" placeholder="结束日期" value="2018-02-22" type="text">
+					                      <input class="form-control dpd2" id="mydatepicker" name="ended" placeholder="结束日期" type="text">
                     				</div>
 								</div>
 							</div>
