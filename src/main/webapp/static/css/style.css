@@ -1765,4 +1765,29 @@ a.fileinput-upload {
 	width: 100%;
 	height: 100%;
 }    
-    
+span.pro-href a{
+	padding: 0 5px;
+	margin: 0 3px;
+	color: #fff;
+	font-size: 12px;
+}
+.profile-desk h1 {
+    color: #49586e;
+    font-size: 20px;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+}
+.profile-desk .designation {
+    color: #49586e;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+.profile-desk div.content {
+    margin-bottom: 40px;
+}
+.profile-desk .p-follow-btn {
+    background: #eff0f4;
+    color: #a4a4a4;
+}
