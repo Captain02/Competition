@@ -79,4 +79,15 @@
       joinTime = #{jointime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- List<User> listByProjectId(Integer projectId); -->
+  <select id="listByProjectId" parameterType="Integer">
+  	SELECT
+	tu.id,tu.`name`
+	FROM
+	projectteam ptt 
+	LEFT JOIN t_user tu ON tu.id=ptt.userId
+	WHERE ptt.id = #{projectId}
+  </select>
+  
 </mapper>

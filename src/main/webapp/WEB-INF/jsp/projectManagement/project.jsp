@@ -129,7 +129,7 @@
                                             <tbody>
                                             <c:forEach items="${pageInfo.list}" var="ProjectDisplay">
 	                                                <tr>
-	                                                	<td>${ProjectDisplay.projectName}</td>
+	                                                	<td><a href="${APP_PATH}/admin/project/projectDetails?projectId=${ProjectDisplay.id}">${ProjectDisplay.projectName}</a></td>
 	                                                    <td>${ProjectDisplay.projectAliasName}</td>
 	                                                    <td>${ProjectDisplay.createPeople}</td>
 	                                                    <td>${ProjectDisplay.projectResponsiblePeople}</td>

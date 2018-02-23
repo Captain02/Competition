@@ -203,8 +203,8 @@
 	pt.id,pt.projectName,pt.projectAliasName,tu.`name` AS createPeople ,tuu.`name` AS projectResponsiblePeople,pt.endDate,pt.startDate,pt.state
 	FROM
 	project pt
-LEFT JOIN t_user tu ON tu.id=pt.createPeople
-LEFT JOIN t_user tuu ON tuu.id=pt.projectResponsiblePeople
+	LEFT JOIN t_user tu ON tu.id=pt.createPeople
+	LEFT JOIN t_user tuu ON tuu.id=pt.projectResponsiblePeople
 	<where>
 		<if test="state != '项目状态'">
 			pt.state = #{state}

@@ -18,6 +18,7 @@ import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Project;
 import com.hanming.oa.model.ProjectDisplay;
+import com.hanming.oa.model.User;
 import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.ProjectTeamService;
 
@@ -82,10 +83,24 @@ public class ProjectController {
 		project.setCreateDate(DateTool.dateToString(new Date()));
 		project.setCreatePeople(userId);
 		project.setState("进行");
-		project.setReleaseControl("公开");
+		project.setReleaseControl("公开（所有人）");
 		
 		projectService.insert(project);
 		
 		return Msg.success();
+	}
+	
+	// 跳转编辑页
+	@RequestMapping(value="/editor",method=RequestMethod.GET)
+	public String update(@RequestParam("projectId")Integer projectId,Model model) {
+		List<User> list = projectTeamService.list(projectId);
+		model.addAttribute("team", list);
+		return "projectManagement/project";
+	}
+	
+	// 跳转详情页
+	@RequestMapping(value="/projectDetails",method=RequestMethod.GET)
+	public String detailed(@RequestParam("projectId")Integer projectId,Model model) {
+		return "projectManagement/projectDetails";
 	}
 }
