@@ -19,6 +19,22 @@
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
+<script type="text/javascript">
+function changeState(ele) {
+	var state = $(ele).attr('data-state');
+	var projectId = $(ele).attr('data-projectId');
+	$.ajax({
+		url:"${APP_PATH}/admin/project/changeState",
+		data:{
+			'state':state,
+			'projectId':projectId
+		},
+		type:"POST",
+		success:function(result){
+		}
+	})
+}
+</script>
 </head>
     <body class="bg-common">
 
@@ -93,10 +109,10 @@
 	                    <div class="content"> ${projectDetailed.descs} </div>
 						<input type="hidden" value="${projectDetailed.state}">
 	                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?prijectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
-	                    <a href="" class="btn p-follow-btn" data-status="1">挂起</a> 
-	                    <a href="" class="btn p-follow-btn" data-status="2">延期</a> 
-	                    <a href="" class="btn p-follow-btn" data-status="3">进行</a> 
-	                    <a href="" class="btn p-follow-btn" data-status="4">结束</a> 
+	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="挂起" data-status="1">挂起</a> 
+	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="延期" data-status="2">延期</a> 
+	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="进行" data-status="3">进行</a> 
+	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="结束" data-status="4">结束</a> 
 	                	
 						</div>
 					</div>
