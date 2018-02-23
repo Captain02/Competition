@@ -7,9 +7,9 @@ public class ProjectDisplay {
 
 	private String projectAliasName;
 
-	private Integer createPeople;
+	private String createPeople;
 
-	private Integer projectResponsiblePeople;
+	private String projectResponsiblePeople;
 
 	private String endDate;
 
@@ -39,19 +39,19 @@ public class ProjectDisplay {
 		this.projectAliasName = projectAliasName;
 	}
 
-	public Integer getCreatePeople() {
+	public String getCreatePeople() {
 		return createPeople;
 	}
 
-	public void setCreatePeople(Integer createPeople) {
+	public void setCreatePeople(String createPeople) {
 		this.createPeople = createPeople;
 	}
 
-	public Integer getProjectResponsiblePeople() {
+	public String getProjectResponsiblePeople() {
 		return projectResponsiblePeople;
 	}
 
-	public void setProjectResponsiblePeople(Integer projectResponsiblePeople) {
+	public void setProjectResponsiblePeople(String projectResponsiblePeople) {
 		this.projectResponsiblePeople = projectResponsiblePeople;
 	}
 
