@@ -17,17 +17,19 @@ String basePath2 = request.getScheme() + "://"
 		
 		<!-- <script src="https://talkgadget.google.com/talkgadget/channel.js"></script> -->
 		<script src="${APP_PATH}/static/js/channel.js"></script>
+		
 		<style type="text/css">
 			*{margin: 0; padding: 0; overflow-y: hidden;}
 			body {background-color: rgb(34, 34, 34);}
-			#main {display: none; -webkit-transition-property: rotation; -webkit-transition-duration: 2s; -webkit-transform-style: preserve-3d; width: 100%;}
+			#main {display: none; -webkit-transition-property: rotation; -webkit-transition-duration: 2s; text-align: center; -webkit-transform-style: preserve-3d; width: 1200px; margin: 0 auto; padding: 60px 0;}
 			#localVideo {box-shadow: 0 0 20px #000; width: 600px; display: inline-block;}
 			#remoteVideo {box-shadow: 0 0 20px #000; width: 600px; display: none;}
 			#miniVideo {box-shadow: 0 0 20px #000; width: 300px; display: none;}
 			#footer {position: absolute; bottom: 0; width: 100%; height: 28px; background-color: #404040; color: #fff; font-size: 13px; font-weight: bold; line-height: 28px; text-align: center;}
-			/* .browser{box-shadow: 0 0 20px #000 inset; width: 400px; margin: 200px auto; padding: 20px; text-align: center; color: #fff; font-weight: bold;} */
-			/* @media screen and (-webkit-min-device-pixel-ratio:0) {#main{display: block;} .browser{display: none;}} */
+			.browser{box-shadow: 0 0 20px #000 inset; width: 400px; margin: 200px auto; padding: 20px; text-align: center; color: #fff; font-weight: bold;}
+			@media screen and (-webkit-min-device-pixel-ratio:0) {#main{display: block;} .browser{display: none;}}
 		</style>
+		
 	</head>
 	<body ondblclick="fullScreen()">
 		  <!-- <div class="browser">对不起暂时只支持google chrome浏览器！</div>   -->

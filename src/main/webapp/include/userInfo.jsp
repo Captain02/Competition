@@ -286,11 +286,18 @@ String basePath2 = request.getScheme() + "://"
             		//用户的选择：0表示拒绝，1表示同意
             		var answerStatus = $(ele).attr('data-answer-status');
             		var messageText = "";
-            		if (answerStatus == 0) {
+            		if (answerStatus == 0) { 
             			messageText = "拒绝通话";
 					}
             		if (answerStatus == 1) {
+            			showOrHide($(ele));
             			messageText = "同意通话";
+//         				var iframeMy = $("<iframe frameborder='0' class='my-vtalk' src='"+$(ele).attr('data-info-answeraddress')+"'>"+
+//         						"</iframe>"
+//         							   );
+//         				$('div.vtalk-view').append(iframeMy);
+        				
+        				window.location.href=$(ele).attr('data-info-answeraddress');
 					}
             		//获得发送者的id
             		var answerFromId = $(ele).attr('data-info-fromid');

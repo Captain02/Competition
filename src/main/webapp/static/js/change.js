@@ -128,10 +128,10 @@ $(function () {
 			showMessageHistoryArea();
 			var videoTalk = $('.message-histroty-content').find('div.video-talk');
 			videoTalk.find('a.user-img').find('img').attr('src',""+$(this).find('div.person-img').find('img').attr('src')+"");
-//			$('.wait-answer-vtalk').find('iframe.my-vtalk').attr('src',""+$(this).find('span.answerAddress').html()+"");
 			videoTalk.find('a.answer-video').attr({
 				'data-info-fromid':""+$(this).attr('data-info-userid')+"",
-				'data-info-toid':""+$(this).attr('data-info-touserid')+""
+				'data-info-toid':""+$(this).attr('data-info-touserid')+"",
+				'data-info-answeraddress':""+$(this).find('span.answerAddress').html()+""
 			});
 			showOrHide($(this));
 		break;
@@ -227,11 +227,6 @@ $(function () {
 		if($(this).attr('data-myid') === $(this).attr('data-userid')){
 			$(this).addClass('my-message');
 		}
-	})//end
-	
-	//接听视频电话
-	$('.answer-video').click(function(){
-		showOrHide($(this));
 	})//end
 	
 })
@@ -365,14 +360,6 @@ function showOrHide(ele){
 		if($(ele).attr('data-info-type')=== dataInfoType){
 			div.removeClass('hidden');
 			div.siblings().addClass('hidden');
-			if($(ele).attr('data-info-type')=== 'wait-answer-vtalk'){
-				var pathName = window.document.location.pathname;
-				var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-				var iframeMy = $("<iframe frameborder='0' class='my-vtalk' src="+projectName+"/admin/friends/videoTalk>"+
-								"</iframe>"
-							   );
-				$('div.vtalk-view').append(iframeMy);
-			}
 			return false;
 		}
 		

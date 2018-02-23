@@ -61,12 +61,17 @@ String basePath2 = request.getScheme() + "://"
 				websocket.onopen = function(event) {
 					console.log("WebSocket:已连接");
 					console.log(event);
-					showMessageHistoryArea();
-					showOrHide($(ele));
-					var pathName = window.document.location.pathname;
-					var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-					$('.wait-answer-vtalk').find('iframe.my-vtalk').attr('src',""+projectName+"/admin/friends/videoTalk");
-					$('div.wait-desc').html('<p class="glyphicon glyphicon-facetime-video" style="display: block; font-size: 60px;"></p>正在等待对方接受邀请<span class="ani_dot">...</span>')
+// 					showMessageHistoryArea();
+// 					showOrHide($(ele));
+// 					var pathName = window.document.location.pathname;
+// 					var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+// 					//创建视频容器
+// 					var iframeMy = $("<iframe frameborder='0' class='my-vtalk' src="+projectName+"/admin/friends/videoTalk>"+
+// 							"</iframe>"
+// 						   );
+// 					$('div.vtalk-view').append(iframeMy);
+					
+// 					$('div.wait-desc').html('<p class="glyphicon glyphicon-facetime-video" style="display: block; font-size: 60px;"></p>正在等待对方接受邀请<span class="ani_dot">...</span>')
 					send();
 				};
 				
@@ -78,8 +83,7 @@ String basePath2 = request.getScheme() + "://"
 				websocket.onclose = function(event) {
 					console.log("WebSocket:已关闭");
 					console.log(event);
-					
-// 					linkURL();
+					linkURL();
 				}
 			}
 		})
