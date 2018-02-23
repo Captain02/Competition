@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://">
+                    <a href="${APP_PATH}/admin/project/list">
                         <span class="glyphicon glyphicon-bookmark left-list-icon"></span>
                         <span class="menu-text">项目管理</span>
                     </a>

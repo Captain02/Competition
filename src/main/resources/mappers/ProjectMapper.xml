@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Project">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="projectName" jdbcType="VARCHAR" property="projectName" />
+    <result column="projectAliasName" jdbcType="VARCHAR" property="projectAliasName" />
+    <result column="createDate" jdbcType="VARCHAR" property="createDate" />
+    <result column="startDate" jdbcType="VARCHAR" property="startDate" />
+    <result column="endDate" jdbcType="VARCHAR" property="endDate" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="createPeople" jdbcType="INTEGER" property="createPeople" />
+    <result column="projectResponsiblePeople" jdbcType="INTEGER" property="projectResponsiblePeople" />
+    <result column="productPeople" jdbcType="INTEGER" property="productPeople" />
+    <result column="testPeople" jdbcType="INTEGER" property="testPeople" />
+    <result column="releasePeople" jdbcType="INTEGER" property="releasePeople" />
+    <result column="releaseControl" jdbcType="VARCHAR" property="releaseControl" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, projectName, projectAliasName, createDate, startDate, endDate, describe, createPeople, 
+    projectResponsiblePeople, productPeople, testPeople, releasePeople, releaseControl, 
+    state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Project">
+    insert into project (id, projectName, projectAliasName, 
+      createDate, startDate, endDate, 
+      describe, createPeople, projectResponsiblePeople, 
+      productPeople, testPeople, releasePeople, 
+      releaseControl, state)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectAliasName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=VARCHAR}, #{startDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, 
+      #{describe,jdbcType=VARCHAR}, #{createPeople,jdbcType=INTEGER}, #{projectResponsiblePeople,jdbcType=INTEGER}, 
+      #{productPeople,jdbcType=INTEGER}, #{testPeople,jdbcType=INTEGER}, #{releasePeople,jdbcType=INTEGER}, 
+      #{releaseControl,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Project">
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectName != null">
+        projectName,
+      </if>
+      <if test="projectAliasName != null">
+        projectAliasName,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="startDate != null">
+        startDate,
+      </if>
+      <if test="endDate != null">
+        endDate,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="createPeople != null">
+        createPeople,
+      </if>
+      <if test="projectResponsiblePeople != null">
+        projectResponsiblePeople,
+      </if>
+      <if test="productPeople != null">
+        productPeople,
+      </if>
+      <if test="testPeople != null">
+        testPeople,
+      </if>
+      <if test="releasePeople != null">
+        releasePeople,
+      </if>
+      <if test="releaseControl != null">
+        releaseControl,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAliasName != null">
+        #{projectAliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=INTEGER},
+      </if>
+      <if test="projectResponsiblePeople != null">
+        #{projectResponsiblePeople,jdbcType=INTEGER},
+      </if>
+      <if test="productPeople != null">
+        #{productPeople,jdbcType=INTEGER},
+      </if>
+      <if test="testPeople != null">
+        #{testPeople,jdbcType=INTEGER},
+      </if>
+      <if test="releasePeople != null">
+        #{releasePeople,jdbcType=INTEGER},
+      </if>
+      <if test="releaseControl != null">
+        #{releaseControl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Project">
+    update project
+    <set>
+      <if test="projectName != null">
+        projectName = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAliasName != null">
+        projectAliasName = #{projectAliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        startDate = #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null">
+        endDate = #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        createPeople = #{createPeople,jdbcType=INTEGER},
+      </if>
+      <if test="projectResponsiblePeople != null">
+        projectResponsiblePeople = #{projectResponsiblePeople,jdbcType=INTEGER},
+      </if>
+      <if test="productPeople != null">
+        productPeople = #{productPeople,jdbcType=INTEGER},
+      </if>
+      <if test="testPeople != null">
+        testPeople = #{testPeople,jdbcType=INTEGER},
+      </if>
+      <if test="releasePeople != null">
+        releasePeople = #{releasePeople,jdbcType=INTEGER},
+      </if>
+      <if test="releaseControl != null">
+        releaseControl = #{releaseControl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Project">
+    update project
+    set projectName = #{projectName,jdbcType=VARCHAR},
+      projectAliasName = #{projectAliasName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=VARCHAR},
+      endDate = #{endDate,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      createPeople = #{createPeople,jdbcType=INTEGER},
+      projectResponsiblePeople = #{projectResponsiblePeople,jdbcType=INTEGER},
+      productPeople = #{productPeople,jdbcType=INTEGER},
+      testPeople = #{testPeople,jdbcType=INTEGER},
+      releasePeople = #{releasePeople,jdbcType=INTEGER},
+      releaseControl = #{releaseControl,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+ 
+  <!-- List<ProjectDisplay> list(@Param("state")String state, @Param("projectName")String projectName); -->
+  <select id="list"></select>
+
+</mapper>
