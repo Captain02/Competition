@@ -214,4 +214,11 @@
 	</where>
   </select>
 
+  <!-- void updateStateByProjectId(@Param("state")String state, @Param("projectId")Integer projectId); -->
+  <update id="updateStateByProjectId">
+    update project
+    set state = #{state}
+    where id=#{projectId}
+  </update>
+  
 </mapper>

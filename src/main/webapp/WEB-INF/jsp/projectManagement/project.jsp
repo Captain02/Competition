@@ -17,6 +17,24 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
+<script type="text/javascript">
+	function changeState(ele) {
+		var state = $(ele).attr('data-state');
+		var projectId = $(ele).attr('data-projectId');
+		$.ajax({
+			url:"${APP_PATH}/admin/project/changeState",
+			data:{
+				'state':state,
+				'projectId':projectId
+			},
+			type:"POST",
+			success:function(result){
+				alert(result.extend.state);
+			}
+		})
+	}
+
+</script>
 </head>
     <body class="bg-common">
 
@@ -106,6 +124,7 @@
                                             <tbody>
                                             <c:forEach items="${pageInfo.list}" var="ProjectDisplay">
 	                                                <tr>
+	                                                    <input type="hidden" value="${ProjectDisplay.id}" />
 	                                                	<td>${ProjectDisplay.projectName}</td>
 	                                                    <td>${ProjectDisplay.projectAliasName}</td>
 	                                                    <td>${ProjectDisplay.createPeople}</td>
@@ -120,21 +139,21 @@
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                                <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">编辑</a>
+	                                                                    <a href="${APP_PATH}/admin/project/updatePage">编辑</a>
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">挂起</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="挂起">挂起</a>
 	                                                                </li>
 	                                                                 <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">延期</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="延期">延期</a>
 	                                                                </li>
 	                                                                 <li role="separator" class="divider"></li>
 	                                                                  <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">进行</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="进行">进行</a>
 	                                                                </li>
 	                                                                 <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">结束</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="结束">结束</a>
 	                                                                </li>
 	                                                            </ul>
 	                                                        </div>

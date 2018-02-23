@@ -10,14 +10,17 @@ import com.hanming.oa.model.ProjectDisplay;
 
 @Service
 public class ProjectService {
-	
+
 	@Autowired
 	ProjectMapper projectMapper;
 
-	
 	public List<ProjectDisplay> list(String state, String projectName) {
-		List<ProjectDisplay> list = projectMapper.list(state,projectName);
+		List<ProjectDisplay> list = projectMapper.list(state, projectName);
 		return list;
+	}
+
+	public void updateStateByProjectId(String state, Integer projectId) {
+		projectMapper.updateStateByProjectId(state, projectId);
 	}
 
 }

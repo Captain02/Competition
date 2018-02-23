@@ -21,4 +21,6 @@ public interface ProjectMapper {
     int updateByPrimaryKey(Project record);
 
 	List<ProjectDisplay> list(@Param("state")String state, @Param("projectName")String projectName);
+
+	void updateStateByProjectId(@Param("state")String state, @Param("projectId")Integer projectId);
 }
