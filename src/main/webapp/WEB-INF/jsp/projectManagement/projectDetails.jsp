@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +44,6 @@
                     <div class="clearfix"></div>
 
                 </div>
-
                 <!-- 页面模版，按需更改 -->
                 <div class="wrapper">
 
@@ -89,10 +89,10 @@
 	                <div class="panel-body">
 	                  <div class="profile-desk">
 	                    <h1>项目介绍</h1>
-	                    <span class="designation">00</span>
-	                    <div class="content"> 0000 </div>
-						
-	                    <a class="btn btn-danger" href=""> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
+	                    <span class="designation">${projectDetailed.projectName}</span>
+	                    <div class="content"> ${projectDetailed.descs} </div>
+						<input type="hidden" value="${projectDetailed.state}">
+	                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?prijectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
 	                    <a href="" class="btn p-follow-btn" data-status="1">挂起</a> 
 	                    <a href="" class="btn p-follow-btn" data-status="2">延期</a> 
 	                    <a href="" class="btn p-follow-btn" data-status="3">进行</a> 
@@ -110,39 +110,43 @@
 	              <ul class="p-info">
 	                <li>
 	                  <div class="title">项目名称</div>
-	                  <div class="desk">dgf </div>
+	                  <div class="desk">${projectDetailed.projectName} </div>
 	                </li>
 	                <li>
 	                  <div class="title">代号</div>
-	                  <div class="desk">00</div>
+	                  <div class="desk">${projectDetailed.projectAliasName}</div>
+	                </li>
+	                <li>
+	                  <div class="title">创建时间</div>
+	                  <div class="desk">${projectDetailed.createDate}</div>
 	                </li>
 	                <li>
 	                  <div class="title">起止时间</div>
-	                  <div class="desk">2018-02-21至2018-02-21</div>
+	                  <div class="desk">${projectDetailed.startDate}至${projectDetailed.endDate}</div>
 	                </li>
 	                <li>
 	                  <div class="title">可用工作日</div>
-	                  <div class="desk js-workday">1天</div>
+	                  <div class="desk js-workday">${subDays}天</div>
 	                </li>
 	                <li>
 	                  <div class="title">项目负责人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${projectDetailed.projectResponsiblePeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">产品负责人</div>
-	                  <div class="desk">李白</div>
+	                  <div class="desk">${projectDetailed.productPeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">测试负责人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${projectDetailed.testPeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">发布负责人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${projectDetailed.releasePeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">项目状态</div>
-	                  <div class="desk">延期</div>
+	                  <div class="desk">${projectDetailed.state}</div>
 	                </li>
 	              </ul>
 	            </div>
@@ -151,7 +155,6 @@
 	      </div>
       
     </div>
-                    
                 </div>
 
         </section>

@@ -222,4 +222,19 @@
     where id=#{projectId}
   </update>
   
+  <!-- ProjectDetailed projectDetailed(Integer projectId); -->
+  <select id="projectDetailed" parameterType="Integer" resultType="ProjectDetailed">
+  	SELECT
+	pt.id,pt.projectName,pt.projectAliasName,pt.createDate,pt.startDate,pt.endDate,pt.descs,tu.`name` AS createPeople ,tuu.`name` AS projectResponsiblePeople,
+  	tuu2.`name` AS productPeople,tuu3.`name` AS testPeople,tuu4.`name` AS releasePeople,pt.state
+	FROM
+	project pt
+	LEFT JOIN t_user tu ON tu.id=pt.createPeople
+	LEFT JOIN t_user tuu ON tuu.id=pt.projectResponsiblePeople
+	LEFT JOIN t_user tuu2 ON tuu2.id=pt.projectResponsiblePeople
+	LEFT JOIN t_user tuu3 ON tuu3.id=pt.projectResponsiblePeople
+	LEFT JOIN t_user tuu4 ON tuu4.id=pt.projectResponsiblePeople
+	where pt.id=#{projectId}
+  </select>
+  
 </mapper>

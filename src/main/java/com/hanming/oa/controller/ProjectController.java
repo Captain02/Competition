@@ -17,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Project;
+import com.hanming.oa.model.ProjectDetailed;
 import com.hanming.oa.model.ProjectDisplay;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.ProjectService;
@@ -101,6 +102,10 @@ public class ProjectController {
 	// 跳转详情页
 	@RequestMapping(value="/projectDetails",method=RequestMethod.GET)
 	public String detailed(@RequestParam("projectId")Integer projectId,Model model) {
+		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
+		model.addAttribute("projectDetailed", projectDetailed);
+		model.addAttribute("subDays", (DateTool.substractTime(projectDetailed.getEndDate(), DateTool.dateToYearMonthDay(new Date())))/60/12);
+		
 		return "projectManagement/projectDetails";
 	}
 }

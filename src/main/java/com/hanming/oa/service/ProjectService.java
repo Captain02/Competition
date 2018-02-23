@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hanming.oa.dao.ProjectMapper;
 import com.hanming.oa.model.Project;
+import com.hanming.oa.model.ProjectDetailed;
 import com.hanming.oa.model.ProjectDisplay;
 
 @Service
@@ -26,6 +27,11 @@ public class ProjectService {
 
 	public void insert(Project project) {
 		projectMapper.insertSelective(project);
+	}
+
+	public ProjectDetailed projectDetailed(Integer projectId) {
+		ProjectDetailed projectDetailed = projectMapper.projectDetailed(projectId);
+		return projectDetailed;
 	}
 
 }
