@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/deploy/addeploy'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/project/addPage'">
                                 <i>+</i>新项目
                             </button>
                         </div>

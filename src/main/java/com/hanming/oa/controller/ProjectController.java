@@ -49,8 +49,8 @@ public class ProjectController {
 		return Msg.success().add("state", state);
 	}
 	
-	// 跳转编辑页
-	@RequestMapping(value="/updatePage",method=RequestMethod.GET)
+	// 跳转添加页
+	@RequestMapping(value="/addPage",method=RequestMethod.GET)
 	public String updatePage() {
 
 		return "projectManagement/add";
