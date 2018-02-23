@@ -23,7 +23,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "0") Integer pn,
-			@RequestParam(value = "state", defaultValue = "状态") String state,
+			@RequestParam(value = "state", defaultValue = "项目状态") String state,
 			@RequestParam(value = "projectName", defaultValue = "项目名称") String projectName,
 			Model model) {
 

@@ -35,17 +35,17 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/project/list" class="serach-form" method="get">
 
                         
-						<select name="status" class="form-control">
+						<select name="state" class="form-control">
 				          <option value="">项目状态</option>
 				          <option value="1">挂起</option>
 				          <option value="2">延期</option>
 				          <option value="3">进行</option>
 				          <option value="4">结束</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${name}" class="form-control" name="name">
+                        <input type="text" placeholder="输入项目名称" value="${projectName == '项目名称'?'':projectName}" class="form-control" name="projectName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -104,15 +104,14 @@
                                             </thead>
 
                                             <tbody>
+                                            <c:forEach items="${pageInfo.list}" var="ProjectDisplay">
 	                                                <tr>
-	                                                <td>
-	                                                   00
-	                                                </td>
-	                                                    <td>00</td>
-	                                                    <td>00</td>
-	                                                    <td>00</td>
-	                                                    <td>00</td>
-	                                                    <td>2018-02-21</td>
+	                                                	<td>${ProjectDisplay.projectName}</td>
+	                                                    <td>${ProjectDisplay.projectAliasName}</td>
+	                                                    <td>${ProjectDisplay.createPeople}</td>
+	                                                    <td>${ProjectDisplay.projectResponsiblePeople}</td>
+	                                                    <td>${ProjectDisplay.endDate}</td>
+	                                                    <td>${ProjectDisplay.state}</td>
 	                                                    <td>
 	                                                        <div class="btn-group">
 	                                                            <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -141,6 +140,7 @@
 	                                                        </div>
 	                                                    </td>
 	                                                </tr>
+                                            </c:forEach>
                                             </tbody>
 
                                         </table>
@@ -157,11 +157,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/deploy/list?pn=1&name=${name}">首页</a>
+                                            <a href="${APP_PATH}/admin/project/list?pn=1&projectName=${projectName}&state=${state}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum-1}&name=${name}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum-1}&projectName=${projectName}&state=${state}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -174,21 +174,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/deploy/list?pn=${pageNum}&name=${name}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/project/list?pn=${pageNum}&projectName=${projectName}&state=${state}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum+1}&name=${name}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum+1}&projectName=${projectName}&state=${state}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pages}&name=${name}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pages}&projectName=${projectName}&state=${state}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>

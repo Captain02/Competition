@@ -199,6 +199,19 @@
   </update>
  
   <!-- List<ProjectDisplay> list(@Param("state")String state, @Param("projectName")String projectName); -->
-  <select id="list"></select>
+  <select id="list" resultType="ProjectDisplay">
+    SELECT
+	pt.id,pt.projectName,pt.projectAliasName,pt.createPeople,pt.projectResponsiblePeople,pt.endDate,pt.startDate,pt.state
+	FROM
+	project pt
+	<where>
+		<if test="state != '项目状态'">
+			pt.state = #{state}
+		</if>
+		<if test="projectName != '项目名称'">
+			AND pt.projectName = #{projectName}
+		</if>
+	</where>
+  </select>
 
 </mapper>
