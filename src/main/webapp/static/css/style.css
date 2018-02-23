@@ -1771,6 +1771,13 @@ span.pro-href a{
 	color: #fff;
 	font-size: 12px;
 }
+table.table-project tbody tr td.project-name a {
+	color: #65cea7;
+}
+table.table-project tbody tr td.project-name a:hover{
+	color: #000;
+	text-decoration: underline;
+}
 .profile-desk h1 {
     color: #49586e;
     font-size: 20px;
