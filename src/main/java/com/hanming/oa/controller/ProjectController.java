@@ -1,7 +1,9 @@
 package com.hanming.oa.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.Project;
 import com.hanming.oa.model.ProjectDisplay;
 import com.hanming.oa.service.ProjectService;
+import com.hanming.oa.service.ProjectTeamService;
 
 @Controller
 @RequestMapping("/admin/project")
@@ -22,6 +27,8 @@ public class ProjectController {
 
 	@Autowired
 	ProjectService projectService;
+	@Autowired
+	ProjectTeamService projectTeamService;
 
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -43,16 +50,42 @@ public class ProjectController {
 
 	// 修改状态
 	@ResponseBody
-	@RequestMapping(value="/changeState",method=RequestMethod.POST)
+	@RequestMapping(value = "/changeState", method = RequestMethod.POST)
 	public Msg changState(@RequestParam("state") String state, @RequestParam("projectId") Integer projectId) {
-		projectService.updateStateByProjectId(state,projectId);
-		return Msg.success().add("state", state);
+		projectService.updateStateByProjectId(state, projectId);
+		return Msg.success();
 	}
-	
+
 	// 跳转添加页
-	@RequestMapping(value="/addPage",method=RequestMethod.GET)
-	public String updatePage() {
+	@RequestMapping(value = "/addPage", method = RequestMethod.GET)
+	public String addPage(Model model) {
 
 		return "projectManagement/add";
+	}
+
+	// 添加项目
+	@ResponseBody
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public Msg add(Model model, @RequestParam("projectName") String projectName,
+			@RequestParam("projectAlias") String projectAliasName,
+			@RequestParam("projectStartDate") String projectStartDate,
+			@RequestParam("projectEndDate") String projectEndDate,
+			@RequestParam("projectDesc") String projectDesc) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		
+		Project project = new Project();
+		project.setProjectName(projectName);
+		project.setProjectAliasName(projectAliasName);
+		project.setStartDate(projectStartDate);
+		project.setEndDate(projectEndDate);
+		project.setDescs(projectDesc);
+		project.setCreateDate(DateTool.dateToString(new Date()));
+		project.setCreatePeople(userId);
+		project.setState("进行");
+		project.setReleaseControl("公开");
+		
+		projectService.insert(project);
+		
+		return Msg.success();
 	}
 }

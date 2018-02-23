@@ -47,7 +47,20 @@ function save() {
 	//获取描述
 	var projectDesc = $('#editor_id').val();
 	
-	
+	$.ajax({
+		url:"${APP_PATH}/admin/project/add",
+		type:"POST",
+		data:{
+			'projectName':projectName,
+			'projectAlias':projectAlias,
+			'projectStartDate':projectStartDate,
+			'projectEndDate':projectEndDate,
+			'projectDesc':projectDesc
+		},
+		success:function(result){
+			alert("添加成功");
+		}
+	})
 }
 </script>
 </head>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hanming.oa.dao.ProjectMapper;
+import com.hanming.oa.model.Project;
 import com.hanming.oa.model.ProjectDisplay;
 
 @Service
@@ -21,6 +22,10 @@ public class ProjectService {
 
 	public void updateStateByProjectId(String state, Integer projectId) {
 		projectMapper.updateStateByProjectId(state, projectId);
+	}
+
+	public void insert(Project project) {
+		projectMapper.insertSelective(project);
 	}
 
 }

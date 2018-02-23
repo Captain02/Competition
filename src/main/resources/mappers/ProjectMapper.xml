@@ -8,7 +8,7 @@
     <result column="createDate" jdbcType="VARCHAR" property="createDate" />
     <result column="startDate" jdbcType="VARCHAR" property="startDate" />
     <result column="endDate" jdbcType="VARCHAR" property="endDate" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="descs" jdbcType="VARCHAR" property="descs" />
     <result column="createPeople" jdbcType="INTEGER" property="createPeople" />
     <result column="projectResponsiblePeople" jdbcType="INTEGER" property="projectResponsiblePeople" />
     <result column="productPeople" jdbcType="INTEGER" property="productPeople" />
@@ -18,7 +18,7 @@
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, projectName, projectAliasName, createDate, startDate, endDate, describe, createPeople, 
+    id, projectName, projectAliasName, createDate, startDate, endDate, descs, createPeople, 
     projectResponsiblePeople, productPeople, testPeople, releasePeople, releaseControl, 
     state
   </sql>
@@ -35,12 +35,12 @@
   <insert id="insert" parameterType="com.hanming.oa.model.Project">
     insert into project (id, projectName, projectAliasName, 
       createDate, startDate, endDate, 
-      describe, createPeople, projectResponsiblePeople, 
+      descs, createPeople, projectResponsiblePeople, 
       productPeople, testPeople, releasePeople, 
       releaseControl, state)
     values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectAliasName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=VARCHAR}, #{startDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, 
-      #{describe,jdbcType=VARCHAR}, #{createPeople,jdbcType=INTEGER}, #{projectResponsiblePeople,jdbcType=INTEGER}, 
+      #{descs,jdbcType=VARCHAR}, #{createPeople,jdbcType=INTEGER}, #{projectResponsiblePeople,jdbcType=INTEGER}, 
       #{productPeople,jdbcType=INTEGER}, #{testPeople,jdbcType=INTEGER}, #{releasePeople,jdbcType=INTEGER}, 
       #{releaseControl,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
   </insert>
@@ -65,8 +65,8 @@
       <if test="endDate != null">
         endDate,
       </if>
-      <if test="describe != null">
-        describe,
+      <if test="descs != null">
+        descs,
       </if>
       <if test="createPeople != null">
         createPeople,
@@ -109,8 +109,8 @@
       <if test="endDate != null">
         #{endDate,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
       </if>
       <if test="createPeople != null">
         #{createPeople,jdbcType=INTEGER},
@@ -153,8 +153,8 @@
       <if test="endDate != null">
         endDate = #{endDate,jdbcType=VARCHAR},
       </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="descs != null">
+        descs = #{descs,jdbcType=VARCHAR},
       </if>
       <if test="createPeople != null">
         createPeople = #{createPeople,jdbcType=INTEGER},
@@ -186,8 +186,7 @@
       projectAliasName = #{projectAliasName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=VARCHAR},
       startDate = #{startDate,jdbcType=VARCHAR},
-      endDate = #{endDate,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      endDate = #{endDate,jdbcType=VARCHAR},descsescribe` = #{descs,jdbcType=VARCHAR},
       createPeople = #{createPeople,jdbcType=INTEGER},
       projectResponsiblePeople = #{projectResponsiblePeople,jdbcType=INTEGER},
       productPeople = #{productPeople,jdbcType=INTEGER},

@@ -37,7 +37,7 @@
 		</javaClientGenerator>
 
 		<!-- 指定每个表的生成策略 -->
-		<table tableName="project" domainObjectName="Project"
+		<table tableName="whiteList" domainObjectName="WhiteList"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

@@ -13,7 +13,7 @@ public class Project {
 
 	private String endDate;
 
-	private String describe;
+	private String descs;
 
 	private Integer createPeople;
 
@@ -77,12 +77,12 @@ public class Project {
 		this.endDate = endDate;
 	}
 
-	public String getDescribe() {
-		return describe;
+	public String getDescs() {
+		return descs;
 	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public void setDescs(String descs) {
+		this.descs = descs;
 	}
 
 	public Integer getCreatePeople() {
