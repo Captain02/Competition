@@ -99,9 +99,18 @@ public class ProjectController {
 	public String update(@RequestParam("projectId")Integer projectId,Model model) {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		List<User> list = userService.list();
-		model.addAttribute("team", list);
+		List<User> team = projectTeamService.list(projectId);
+		model.addAttribute("white", list);
+		model.addAttribute("team", team);
 		model.addAttribute("projectDetailed", projectDetailed);
 		return "projectManagement/editor";
+	}
+	
+	// 修改
+	@RequestMapping(value="/editor",method=RequestMethod.POST)
+	public Msg update() {
+		
+		return Msg.success();
 	}
 	
 	// 跳转详情页
