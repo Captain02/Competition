@@ -23,6 +23,7 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
+import com.hanming.oa.service.WhiteListServer;
 
 @Controller
 @RequestMapping("/admin/project")
@@ -34,6 +35,8 @@ public class ProjectController {
 	ProjectTeamService projectTeamService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	WhiteListServer WhiteListServer;
 
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -99,7 +102,9 @@ public class ProjectController {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		List<User> list = userService.list();
 		List<User> team = projectTeamService.list(projectId);
+		List<User> MyWhite = WhiteListServer.listByProjectId(projectId);
 		model.addAttribute("white", list);
+		model.addAttribute("MyWhite", MyWhite);
 		model.addAttribute("team", team);
 		model.addAttribute("projectDetailed", projectDetailed);
 		return "projectManagement/editor";

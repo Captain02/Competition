@@ -83,4 +83,12 @@
   	delete from whitelist
     where projectId = #{id}
   </delete>
+  
+  <!-- List<User> listByProjectId(Integer projectId); -->
+  <select id="listByProjectId" resultType="User">
+  	select tu.id,tu.name
+  	from whitelist wl
+  	LEFT JOIN t_user tu ON tu.id=wl.userId
+  	where wl.projectId = #{projectId}
+  </select>
 </mapper>

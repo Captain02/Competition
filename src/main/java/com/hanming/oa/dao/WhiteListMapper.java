@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hanming.oa.model.User;
 import com.hanming.oa.model.WhiteList;
 
 public interface WhiteListMapper {
@@ -22,4 +23,6 @@ public interface WhiteListMapper {
 	void insertList(@Param("id")Integer id, @Param("list")List<Integer> intIdList);
 
 	void deleteByProjectId(Integer id);
+
+	List<User> listByProjectId(Integer projectId);
 }

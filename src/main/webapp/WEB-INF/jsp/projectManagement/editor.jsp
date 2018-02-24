@@ -279,6 +279,9 @@ function save() {
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							        <h4 class="modal-title" id="myModalLabel">白名单</h4>
 							      </div>
+							      <c:forEach items="${MyWhite}" var="MyWhitePeople">
+							      <input type="hidden" value="${MyWhitePeople.id}" >
+							      </c:forEach>
 							      <div class="modal-body">
 							      <c:forEach items="${white}" var="people">
 							        <label class="checkbox-inline">
