@@ -158,15 +158,14 @@ function save() {
                				 <div class="form-group">
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
-				                  	<input type="hidden" value="${projectDetailed.releaseControl}">
 									<label class="radio-inline">
-									  <input name="releaseControl" value="0" type="radio">公开（所有人）
+									  <input name="releaseControl" value="0" type="radio" data-releaseControl="${projectDetailed.releaseControl}">公开（所有人）
 									</label>
 									<label class="radio-inline">
-									  <input name="releaseControl" value="1" type="radio">自定义（团队成员和白名单的成员可以访问）
+									  <input name="releaseControl" value="1" type="radio" data-releaseControl="${projectDetailed.releaseControl}">自定义（团队成员和白名单的成员可以访问）
 									</label>
 									<label class="radio-inline">
-									  <input name="releaseControl" value="2" type="radio">私有（只有项目团队成员才能访问）
+									  <input name="releaseControl" value="2" type="radio" data-releaseControl="${projectDetailed.releaseControl}">私有（只有项目团队成员才能访问）
 									</label>
 									</div>
 							</div>
@@ -219,53 +218,9 @@ function save() {
 			 		</script>
                     
                     <script type="text/javascript">
-                	$('#cc-username').click(function(){
-                 		$('#myModal').modal('show');
-                 	})
+                	
                  	
-                    $(function(){
-                    	$('input[name="releaseControl"]:checked').each(function(){
-                    		if($(this).val() == 1){
-                    			$('#whitename').show();
-                    		}
-                    		else{
-                    			$('#whitename').hide();
-                    		}
-                    	});
-                    	
-                    	  $('input[name="releaseControl"]').on('click', function(){
-                      		var obj = $(this);
-                      		if (obj.val() == 1) {
-                      			$('#whitename').show();
-                      		} else {
-                      			$('#whitename').hide();
-                      		}
-                      	});
-                    	
-                    	var idArray = new Array(),
-                    		nameArray = new Array();
-                    	$('.yes').click(function(){
-                    		idArray.length = 0;
-                    		nameArray.length = 0;
-                    		$('.modal-body input[name="whiteListName"]:checked').each(function(){
-                    			idArray.push($(this).attr('data-userid'));
-                    			nameArray.push($(this).val());
-                    		});
-                    		
-                    		var idStr = idArray.join('-');
-                    		var nameStr = nameArray.join(',');
-                    		$('#ccid').val(idStr);
-                    		$('#cc-username').val(nameStr);
-                    		$('#myModal').modal('hide');
-                    		
-                    		var ccidArr = $('#ccid').val().split(',');
-                    		$('.modal-body input[name="whiteListName"]').each(function(){
-                    			if($.inArray($(this).attr('data-userid'),ccidArr) >=0){
-                    				$(this).prop('checked', true);
-                    			}
-                    		})
-                    	})
-                    })
+                   
                     
                     
                     </script>
@@ -280,15 +235,23 @@ function save() {
 							        <h4 class="modal-title" id="myModalLabel">白名单</h4>
 							      </div>
 							      <c:forEach items="${MyWhite}" var="MyWhitePeople">
-							      <input type="hidden" value="${MyWhitePeople.id}" >
+							      <input type="hidden" value="${MyWhitePeople.id}" class="hasResourceId">
 							      </c:forEach>
 							      <div class="modal-body">
-							      <c:forEach items="${white}" var="people">
-							        <label class="checkbox-inline">
-        								<input value="${people.id}" type="checkbox" data-userid="${people.id}" name="whiteListName">
-      									${people.name}
-      								</label>
+							      	<ul class="white-name-list clearfix">
+							      		 <c:forEach items="${white}" var="people">
+							      		 <li>
+							      		 	<div class="form-group">
+							      		 		<label class="checkbox-inline">
+		        								<input class="resourceId" value="${people.id}" type="checkbox" data-userid="${people.id}" name="whiteListName">
+		      									${people.name}
+	      									</label>
+							      		 	</div>
+							      		 </li>
+								       		
 							      </c:forEach>
+							      	</ul>
+							      
 							      </div>
 							      <div class="modal-footer">
 							      
@@ -299,6 +262,28 @@ function save() {
 							    </div>
 							  </div>
 							</div>
+							
+							<script type="text/javascript">
+								$(function(){
+									
+									var resourceArray = new Array();
+									
+									$('.hasResourceId').each(function(){
+										var hashasResourceId = $(this);
+										resourceArray.push(hashasResourceId.val());
+										
+									})
+									
+
+									
+									$('.resourceId').each(function(){
+										var resourceId = $(this);
+										if( $.inArray(resourceId.val(),resourceArray) >= 0 ){
+											resourceId.attr('checked','checked');
+										}
+									});
+								})
+							</script>
                             
 	</section>
 </body>

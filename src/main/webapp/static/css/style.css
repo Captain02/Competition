@@ -1764,6 +1764,15 @@ a.fileinput-upload {
 .vtalk-view iframe {
 	width: 100%;
 	height: 100%;
+}
+.white-name-list li{
+	float: left;
+	width: 110px;
+}
+.white-name-list li label{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }    
 span.pro-href a{
 	padding: 0 5px;
@@ -1797,4 +1806,8 @@ table.table-project tbody tr td.project-name a:hover{
 .profile-desk .p-follow-btn {
     background: #eff0f4;
     color: #a4a4a4;
+}
+.p-follow-btn:hover, .btn-post, .p-follow-btn.active {
+    background: #6bc5a4;
+    color: #fff;
 }

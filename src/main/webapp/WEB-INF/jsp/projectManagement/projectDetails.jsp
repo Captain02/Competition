@@ -31,6 +31,12 @@ function changeState(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','执行结果','.modal-body','项目状态更改成功');
+			 setTimeout(function(){
+				 $('#myModal').modal('hide');
+				 window.location.reload();
+			 },1000);
 		}
 	})
 }
@@ -107,13 +113,12 @@ function changeState(ele) {
 	                    <h1>项目介绍</h1>
 	                    <span class="designation">${projectDetailed.projectName}</span>
 	                    <div class="content"> ${projectDetailed.descs} </div>
-						<input type="hidden" value="${projectDetailed.state}">
-	                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
-	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="挂起" data-status="1">挂起</a> 
-	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="延期" data-status="2">延期</a> 
-	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="进行" data-status="3">进行</a> 
-	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="结束" data-status="4">结束</a> 
-	                	
+						<input type="hidden" value="">
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="挂起" data-project-state="${projectDetailed.state}" data-status="1">挂起</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="延期" data-project-state="${projectDetailed.state}" data-status="2">延期</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="进行" data-project-state="${projectDetailed.state}" data-status="3">进行</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="结束" data-project-state="${projectDetailed.state}" data-status="4">结束</a> 
 						</div>
 					</div>
 	              </div>
@@ -184,18 +189,6 @@ function changeState(ele) {
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-      
-        <button type="button" class="btn btn-warning yes">确认</button>
-        <button type="button" class="btn btn-success no">取消</button>
-        
-        <!-- 用于页面跳转的按钮 -->
-        <form action="${APP_PATH}/admin/deploy/list">
-        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
-        	<button type="submit" class="btn btn-danger down">关闭</button>
-        </form>
         
       </div>
     </div>

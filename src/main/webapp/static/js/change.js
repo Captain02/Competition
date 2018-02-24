@@ -229,6 +229,70 @@ $(function () {
 		}
 	})//end
 	
+	//弹出白名单窗口
+	$('#cc-username').click(function(){
+       $('#myModal').modal('show');
+     })//end
+     
+     //判定当前项目所属的访问控制并在页面上勾选
+     $('input[name="releaseControl"]').each(function(){
+    	 if($(this).val() === $(this).attr('data-releaseControl')){
+    		 $(this).prop('checked', true);
+    	 }
+     })
+     
+     //判定当前项目所属访问控制并添加active样式
+     $('a.p-follow-btn').each(function(){
+    	 if($(this).attr('data-state')===$(this).attr('data-project-state')){
+    		 $(this).addClass('active');
+    	 }
+     })
+     
+     //载入页面的时候如果自定义按钮被勾选了，那么白名单框就显示出来
+     $('input[name="releaseControl"]:checked').each(function(){
+ 		if($(this).val() == 1){
+ 			$('#whitename').show();
+ 		}
+ 		else{
+ 			$('#whitename').hide();
+ 		}
+ 	});//end
+	
+    //自定义访问控制
+	$('input[name="releaseControl"]').on('click', function(){
+  		var obj = $(this);
+  		if (obj.val() == 1) {
+  			$('#whitename').show();
+  		} else {
+  			$('#whitename').hide();
+  		}
+  	});
+	
+	//以逗号分割用户名，以短线分割选中的白名单人员的id
+	var idArray = new Array(),
+		nameArray = new Array();
+	$('.yes').click(function(){
+		idArray.length = 0;
+		nameArray.length = 0;
+		$('.modal-body input[name="whiteListName"]:checked').each(function(){
+		idArray.push($(this).attr('data-userid'));
+			nameArray.push($(this).val());
+		});
+	
+		var idStr = idArray.join('-');
+		var nameStr = nameArray.join(',');
+		$('#ccid').val(idStr);
+		$('#cc-username').val(nameStr);
+		$('#myModal').modal('hide');
+		
+		var ccidArr = $('#ccid').val().split(',');
+		$('.modal-body input[name="whiteListName"]').each(function(){
+			if($.inArray($(this).attr('data-userid'),ccidArr) >=0){
+				$(this).prop('checked', true);
+			}
+		})
+	});//end
+	
 })
 
 //动态插入消息节点到消息列表中
