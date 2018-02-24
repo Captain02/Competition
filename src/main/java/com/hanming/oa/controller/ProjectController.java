@@ -22,6 +22,7 @@ import com.hanming.oa.model.ProjectDisplay;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.ProjectTeamService;
+import com.hanming.oa.service.UserService;
 
 @Controller
 @RequestMapping("/admin/project")
@@ -31,7 +32,9 @@ public class ProjectController {
 	ProjectService projectService;
 	@Autowired
 	ProjectTeamService projectTeamService;
-
+	@Autowired
+	UserService userService;
+	
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "0") Integer pn,
@@ -95,8 +98,7 @@ public class ProjectController {
 	@RequestMapping(value="/editor",method=RequestMethod.GET)
 	public String update(@RequestParam("projectId")Integer projectId,Model model) {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
-		List<User> list = projectTeamService.list(projectId);
-		list.stream().map(User::getName).forEach(System.out::printf);
+		List<User> list = userService.list();
 		model.addAttribute("team", list);
 		model.addAttribute("projectDetailed", projectDetailed);
 		return "projectManagement/editor";
