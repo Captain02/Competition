@@ -81,7 +81,7 @@
   </update>
   
   <!-- List<User> listByProjectId(Integer projectId); -->
-  <select id="listByProjectId" parameterType="Integer">
+  <select id="listByProjectId" parameterType="Integer" resultType="com.hanming.oa.model.User">
   	SELECT
 	tu.id,tu.`name`
 	FROM

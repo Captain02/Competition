@@ -88,36 +88,36 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>项目名称</label>
 								<div class="col-sm-10">
-									<input name="projectName" value="" class="form-control" placeholder="填写名称" type="text">
+									<input name="projectName" value="${projectDetailed.projectName}" class="form-control" placeholder="填写名称" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>项目别名</label>
 								<div class="col-sm-10">
-									<input name="projectAlias" value="" class="form-control" placeholder="取个别名" type="text">
+									<input name="projectAlias" value="${projectDetailed.projectAliasName}" class="form-control" placeholder="取个别名" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 								<div class="col-sm-10">
 									<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-					                      <input class="form-control dpd1" id="mydatepicker2" name="started" placeholder="开始日期"  type="text">
+					                      <input value="${projectDetailed.startDate}" class="form-control dpd1" id="mydatepicker2" name="started" placeholder="开始日期"  type="text">
 					                      <span class="input-group-addon">To</span>
-					                      <input class="form-control dpd2" id="mydatepicker" name="ended" placeholder="结束日期" type="text">
+					                      <input value="${projectDetailed.endDate}" class="form-control dpd2" id="mydatepicker" name="ended" placeholder="结束日期" type="text">
                     				</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容">${projectDetailed.descs}</textarea>
 								</div>
 							</div>
 							<div class="form-group">
 				                  <label class="col-sm-2 control-label">项目负责人</label>
 				                  <div class="col-sm-10">
 				                    <select name="projuserid" class="form-control">
-				                    	<option value="">请选择项目负责人</option>
+				                    	<option value="${projectDetailed.projectResponsiblePeopleId}">${projectDetailed.projectResponsiblePeople}</option>
 				                    </select>
 				                  </div>
                				 </div>
@@ -125,7 +125,7 @@ function save() {
 				                  <label class="col-sm-2 control-label">产品负责人</label>
 				                  <div class="col-sm-10">
 				                    <select name="produserid" class="form-control">
-				                    	<option value="" style="display: none;">请选择产品负责人</option>
+				                    	<option value="${projectDetailed.productPeopleId}" style="display: none;">${projectDetailed.productPeople}</option>
 				                    </select>
 				                  </div>
                				 </div>
@@ -133,7 +133,7 @@ function save() {
 				                  <label class="col-sm-2 control-label">测试负责人</label>
 				                  <div class="col-sm-10">
 				                    <select name="testserid" class="form-control">
-				                    	<option value="" style="display: none;">请选测试负责人</option>
+				                    	<option value="${projectDetailed.testPeople}" style="display: none;">${projectDetailed.testPeople}</option>
 				                    </select>
 				                  </div>
                				 </div>
@@ -141,7 +141,7 @@ function save() {
 				                  <label class="col-sm-2 control-label">发布负责人</label>
 				                  <div class="col-sm-10">
 				                    <select name="testserid" class="form-control">
-				                    	<option value="" style="display: none;">请选择发布负责人</option>
+				                    	<option value="${projectDetailed.releasePeopleId}" style="display: none;">${projectDetailed.releasePeople}</option>
 				                    </select>
 				                  </div>
                				 </div>
@@ -149,13 +149,13 @@ function save() {
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
 									<label class="radio-inline">
-									  <input name="pertype" value="0" type="radio"> 公开（所有人）
+									  <input name="pertype" value="${projectDetailed.releaseControl}" <c:if test="${projectDetailed.releaseControl== '公开（所有人）'}">checked="checked"</c:if> type="radio">公开（所有人）
 									</label>
 									<label class="radio-inline">
-									  <input name="pertype" value="1" type="radio"> 自定义（团队成员和白名单的成员可以访问）
+									  <input name="pertype" value="${projectDetailed.releaseControl}" <c:if test="${projectDetailed.releaseControl== '自定义（团队成员和白名单的成员可以访问）'}">checked="checked"</c:if> type="radio">自定义（团队成员和白名单的成员可以访问）
 									</label>
 									<label class="radio-inline">
-									  <input name="pertype" value="2" type="radio"> 私有（只有项目团队成员才能访问）
+									  <input name="pertype" value="${projectDetailed.releaseControl}" <c:if test="${projectDetailed.releaseControl== '私有（只有项目团队成员才能访问）'}">checked="checked"</c:if> type="radio">私有（只有项目团队成员才能访问）
 									</label>
 									</div>
 							</div>
@@ -254,14 +254,12 @@ function save() {
 							        <h4 class="modal-title" id="myModalLabel">白名单</h4>
 							      </div>
 							      <div class="modal-body">
+							      <c:forEach items="${team}" var="people">
 							        <label class="checkbox-inline">
-        								<input value="李白" type="checkbox" data-userid="1" name="whiteListName">
-      									  李白 
+        								<input value="${people.id}" type="checkbox" data-userid="${people.id}" name="whiteListName">
+      									${people.name}
       								</label>
-      								 <label class="checkbox-inline">
-        								<input value="小明" type="checkbox" data-userid="2" name="whiteListName">
-      									  小明 
-      								</label>
+							      </c:forEach>
 							      </div>
 							      <div class="modal-footer">
 							      

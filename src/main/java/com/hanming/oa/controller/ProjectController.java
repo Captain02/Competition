@@ -94,9 +94,12 @@ public class ProjectController {
 	// 跳转编辑页
 	@RequestMapping(value="/editor",method=RequestMethod.GET)
 	public String update(@RequestParam("projectId")Integer projectId,Model model) {
+		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		List<User> list = projectTeamService.list(projectId);
+		list.stream().map(User::getName).forEach(System.out::printf);
 		model.addAttribute("team", list);
-		return "projectManagement/project";
+		model.addAttribute("projectDetailed", projectDetailed);
+		return "projectManagement/editor";
 	}
 	
 	// 跳转详情页

@@ -226,7 +226,8 @@
   <select id="projectDetailed" parameterType="Integer" resultType="ProjectDetailed">
   	SELECT
 	pt.id,pt.projectName,pt.projectAliasName,pt.createDate,pt.startDate,pt.endDate,pt.descs,tu.`name` AS createPeople ,tuu.`name` AS projectResponsiblePeople,
-  	tuu2.`name` AS productPeople,tuu3.`name` AS testPeople,tuu4.`name` AS releasePeople,pt.state
+  	tuu2.`name` AS productPeople,tuu3.`name` AS testPeople,tuu4.`name` AS releasePeople,pt.state,tu.id AS createPeopleId,tuu.id AS projectResponsiblePeopleId,
+  	tuu2.id AS productPeopleId,tuu3.id AS testPeopleId,tuu3.id AS releasePeopleId,pt.releaseControl
 	FROM
 	project pt
 	LEFT JOIN t_user tu ON tu.id=pt.createPeople

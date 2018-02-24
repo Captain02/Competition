@@ -108,7 +108,7 @@ function changeState(ele) {
 	                    <span class="designation">${projectDetailed.projectName}</span>
 	                    <div class="content"> ${projectDetailed.descs} </div>
 						<input type="hidden" value="${projectDetailed.state}">
-	                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?prijectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
+	                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
 	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="挂起" data-status="1">挂起</a> 
 	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="延期" data-status="2">延期</a> 
 	                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="进行" data-status="3">进行</a> 

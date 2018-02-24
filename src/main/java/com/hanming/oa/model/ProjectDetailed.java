@@ -14,20 +14,70 @@ public class ProjectDetailed {
 	private String endDate;
 
 	private String descs;
-
+	
 	private String createPeople;
 
+	private Integer createPeopleId;
+
 	private String projectResponsiblePeople;
+	
+	private Integer projectResponsiblePeopleId;
 
 	private String productPeople;
+	
+	private Integer productPeopleId;
 
 	private String testPeople;
+	
+	private Integer testPeopleId;
 
 	private String releasePeople;
+	
+	private Integer releasePeopleId;
 
 	private String releaseControl;
 
 	private String state;
+
+	public Integer getCreatePeopleId() {
+		return createPeopleId;
+	}
+
+	public void setCreatePeopleId(Integer createPeopleId) {
+		this.createPeopleId = createPeopleId;
+	}
+
+	public Integer getProjectResponsiblePeopleId() {
+		return projectResponsiblePeopleId;
+	}
+
+	public void setProjectResponsiblePeopleId(Integer projectResponsiblePeopleId) {
+		this.projectResponsiblePeopleId = projectResponsiblePeopleId;
+	}
+
+	public Integer getProductPeopleId() {
+		return productPeopleId;
+	}
+
+	public void setProductPeopleId(Integer productPeopleId) {
+		this.productPeopleId = productPeopleId;
+	}
+
+	public Integer getTestPeopleId() {
+		return testPeopleId;
+	}
+
+	public void setTestPeopleId(Integer testPeopleId) {
+		this.testPeopleId = testPeopleId;
+	}
+
+	public Integer getReleasePeopleId() {
+		return releasePeopleId;
+	}
+
+	public void setReleasePeopleId(Integer releasePeopleId) {
+		this.releasePeopleId = releasePeopleId;
+	}
 
 	public Integer getId() {
 		return id;
