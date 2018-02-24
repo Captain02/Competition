@@ -1,31 +1,35 @@
 package com.hanming.oa.model;
 
 public class Demand {
-	private Integer id;
+    private Integer id;
 
-	private Integer projectId;
+    private Integer projectId;
 
-	private String demandName;
+    private String demandName;
 
-	private Integer createPeopele;
+    private Integer createPeopele;
 
-	private String source;
+    private String source;
 
-	private String grade;
+    private String grade;
 
-	private String stage;
+    private String stage;
 
-	private String state;
+    private String state;
 
-	private Integer assignor;
+    private Integer assignor;
 
-	private String workTime;
+    private String workTime;
 
-	private String enclosure;
+    private String descs;
 
-	private String fileName;
+    private String acceptanceStand;
 
-	private String createTime;
+    private String enclosure;
+
+    private String fileName;
+
+    private String createTime;
 
 	public Integer getId() {
 		return id;
@@ -107,6 +111,22 @@ public class Demand {
 		this.workTime = workTime;
 	}
 
+	public String getDescs() {
+		return descs;
+	}
+
+	public void setDescs(String descs) {
+		this.descs = descs;
+	}
+
+	public String getAcceptanceStand() {
+		return acceptanceStand;
+	}
+
+	public void setAcceptanceStand(String acceptanceStand) {
+		this.acceptanceStand = acceptanceStand;
+	}
+
 	public String getEnclosure() {
 		return enclosure;
 	}
@@ -130,5 +150,5 @@ public class Demand {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-
+    
 }

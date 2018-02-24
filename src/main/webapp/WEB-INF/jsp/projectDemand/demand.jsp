@@ -33,17 +33,18 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="${APP_PATH}/admin/project/list" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/demand/list" class="serach-form" method="get">
 
                         
 						<select name="state" class="form-control">
-				          <option value="">项目状态</option>
-				          <option value="1">挂起</option>
-				          <option value="2">延期</option>
-				          <option value="3">进行</option>
-				          <option value="4">结束</option>
+				          <option value="需求状态">需求状态</option>
+				          <option value="草稿">草稿</option>
+				          <option value="激活">激活</option>
+				          <option value="已变更">已变更</option>
+				          <option value="待关闭">待关闭</option>
+				          <option value="已关闭">已关闭</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${projectName == '项目名称'?'':projectName}" class="form-control" name="projectName">
+                        <input type="text" placeholder="输入项目名称" value=" " class="form-control" name="demandName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -90,7 +91,7 @@
                                                  <th>级别</th>
                                                  <th>名称</th>
                                                  <th>创建人</th>
-                                                 <th>负责人</th>
+                                                 <th>指派人</th>
                                                  <th>预工时</th>
                                                  <th>创建日期</th>
                                                  <th>状态</th>
@@ -100,14 +101,16 @@
                                             </thead>
 
                                             <tbody>
-                                            <c:forEach items="${pageInfo.list}" var="ProjectDisplay">
+                                            <c:forEach items="${pageInfo.list}" var="DemandDisplay">
 	                                                <tr>
-	                                                	<td class="project-name"><a href="${APP_PATH}/admin/project/projectDetails?projectId=${ProjectDisplay.id}">${ProjectDisplay.projectName}</a></td>
-	                                                    <td>${ProjectDisplay.projectAliasName}</td>
-	                                                    <td>${ProjectDisplay.createPeople}</td>
-	                                                    <td>${ProjectDisplay.projectResponsiblePeople}</td>
-	                                                    <td>${ProjectDisplay.endDate}</td>
-	                                                    <td>${ProjectDisplay.state}</td>
+	                                                    <td>${DemandDisplay.grade}</td>
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/demand/detailed?demandId=${DemandDisplay.id}">${DemandDisplay.demandName}</a></td>
+	                                                    <td>${DemandDisplay.createPeopele}</td>
+	                                                    <td>${DemandDisplay.assignor}</td>
+	                                                    <td>${DemandDisplay.workTime}</td>
+	                                                    <td>${DemandDisplay.createTime}</td>
+	                                                    <td>${DemandDisplay.state}</td>
+	                                                    <td>${DemandDisplay.stage}</td>
 	                                                    <td>
 	                                                        <div class="btn-group">
 	                                                            <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -116,21 +119,25 @@
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                                <li>
-	                                                                    <a href="${APP_PATH}/admin/project/updatePage">编辑</a>
+	                                                                    <a href="${APP_PATH}/admin/demand/detailed?demandId=${DemandDisplay.id}">编辑</a>
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="挂起">挂起</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="挂起">草稿</a>
 	                                                                </li>
 	                                                                 <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="延期">延期</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="延期">激活</a>
 	                                                                </li>
 	                                                                 <li role="separator" class="divider"></li>
 	                                                                  <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="进行">进行</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="进行">已变更</a>
 	                                                                </li>
 	                                                                 <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="结束">结束</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="结束">待关闭</a>
+	                                                                </li>
+	                                                                 <li role="separator" class="divider"></li>
+	                                                                  <li>
+	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="进行">已关闭</a>
 	                                                                </li>
 	                                                            </ul>
 	                                                        </div>
@@ -153,11 +160,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/project/list?pn=1&projectName=${projectName}&state=${state}">首页</a>
+                                            <a href="${APP_PATH}/admin/demand/list?pn=1&projectName=${demandName}&state=${state}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum-1}&projectName=${projectName}&state=${state}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum-1}&projectName=${demandName}&state=${state}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -170,21 +177,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/project/list?pn=${pageNum}&projectName=${projectName}&state=${state}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/demand/list?pn=${pageNum}&projectName=${demandName}&state=${state}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum+1}&projectName=${projectName}&state=${state}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum+1}&projectName=${demandName}&state=${state}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pages}&projectName=${projectName}&state=${state}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pages}&projectName=${demandName}&state=${state}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>

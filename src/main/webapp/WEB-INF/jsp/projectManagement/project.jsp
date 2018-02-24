@@ -143,7 +143,7 @@
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                                <li>
-	                                                                    <a href="${APP_PATH}/admin/project/updatePage">编辑</a>
+	                                                                    <a href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}">编辑</a>
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>

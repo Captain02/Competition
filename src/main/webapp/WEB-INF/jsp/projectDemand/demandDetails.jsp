@@ -90,11 +90,11 @@ function changeState(ele) {
 	                <div class="panel-body">
 	                  <div class="profile-desk">
 	                    <h1>需求介绍</h1>
-	                    <div class="content">1</div>
+	                    <div class="content">${demandDetailed.descs}</div>
 	                    <h1>验收标准</h1>
-	                    <div class="content">1</div>
+	                    <div class="content">${demandDetailed.acceptanceStand}</div>
 	                    <h1>关联项目</h1>
-	                    <div class="content">1</div>
+	                    <div class="content">${demandDetailed.projectName}</div>
 						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
 		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${projectDetailed.id}" data-state="草稿" data-project-state="${projectDetailed.state}" data-status="1">草稿</a> 
@@ -114,31 +114,31 @@ function changeState(ele) {
 	              <ul class="p-info">
 	                <li>
 	                  <div class="title">需求名称</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.demandName}</div>
 	                </li>
 	                <li>
 	                  <div class="title">来源</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.source}</div>
 	                </li>
 	                <li>
 	                  <div class="title">优先级</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.grade}</div>
 	                </li>
 	                <li>
 	                  <div class="title">阶段</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.stage}</div>
 	                </li>
 	                <li>
 	                  <div class="title">状态</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.state}</div>
 	                </li>
 	                <li>
 	                  <div class="title">创建人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.createPeopele}</div>
 	                </li>
 	                <li>
 	                  <div class="title">指派人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${demandDetailed.assignor}</div>
 	                </li>
 	              </ul>
 	            </div>

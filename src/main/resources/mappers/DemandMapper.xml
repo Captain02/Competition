@@ -18,7 +18,7 @@
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hanming.oa.model.DemandWithBLOBs">
     <result column="descs" jdbcType="LONGVARCHAR" property="descs" />
-    <result column="AcceptanceStand" jdbcType="LONGVARCHAR" property="acceptancestand" />
+    <result column="AcceptanceStand" jdbcType="LONGVARCHAR" property="acceptanceStand" />
   </resultMap>
   <sql id="Base_Column_List">
     id, projectId, demandName, createPeopele, source, grade, stage, state, assignor, 
@@ -232,4 +232,35 @@
       createTime = #{createTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- List<DemandDisplay> list(@Param("state")String state, @Param("demandName")String demandName, @Param("projectId")Integer projectId); -->
+<select id="list" resultType="DemandDisplay">
+  SELECT
+	dd.id,tu.`name` AS createPeopele,tu2.`name` AS assignor,dd.workTime,dd.createTime,dd.state,dd.stage,dd.grade,dd.demandName
+	FROM demand dd
+	LEFT JOIN t_user tu ON tu.id = dd.createPeopele
+	LEFT JOIN t_user tu2 ON tu2.id = dd.assignor
+	<where>
+		dd.projectId=#{projectId}
+		<if test="state != '需求状态'">
+			AND dd.state = #{state}
+		</if>
+		<if test="demandName != '需求名称'">
+			AND dd.demandName = #{demandName}
+		</if>
+	</where>
+</select>
+  
+  <!-- DemandDetailed detaileById(Integer demandId); -->
+  <select id="detaileById" resultType="DemandDetailed" parameterType="Integer">
+  SELECT
+	dd.id,tu.`name` AS createPeopele,tu2.`name` AS assignor,dd.workTime,dd.createTime,dd.state,dd.stage,dd.grade,dd.demandName,
+	dd.descs,dd.acceptanceStand,dd.enclosure,dd.fileName,dd.projectId,pt.projectName
+	FROM demand dd
+	LEFT JOIN t_user tu ON tu.id = dd.createPeopele
+	LEFT JOIN t_user tu2 ON tu2.id = dd.assignor
+	LEFT JOIN project pt ON pt.id = dd.projectId
+	where dd.id=#{demandId}
+  </select>
+  
 </mapper>
