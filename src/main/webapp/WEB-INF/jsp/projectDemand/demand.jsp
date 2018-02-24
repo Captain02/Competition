@@ -119,7 +119,7 @@
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                                <li>
-	                                                                    <a href="${APP_PATH}/admin/demand/detailed?demandId=${DemandDisplay.id}">编辑</a>
+	                                                                    <a href="${APP_PATH}/admin/demand/editorPage?demandId=${DemandDisplay.id}">编辑</a>
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>

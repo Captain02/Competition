@@ -255,7 +255,7 @@
   <select id="detaileById" resultType="DemandDetailed" parameterType="Integer">
   SELECT
 	dd.id,tu.`name` AS createPeopele,tu2.`name` AS assignor,dd.workTime,dd.createTime,dd.state,dd.stage,dd.grade,dd.demandName,
-	dd.descs,dd.acceptanceStand,dd.enclosure,dd.fileName,dd.projectId,pt.projectName
+	dd.descs,dd.acceptanceStand,dd.enclosure,dd.fileName,dd.projectId,pt.projectName,dd.source
 	FROM demand dd
 	LEFT JOIN t_user tu ON tu.id = dd.createPeopele
 	LEFT JOIN t_user tu2 ON tu2.id = dd.assignor

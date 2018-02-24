@@ -21,13 +21,13 @@ import com.hanming.oa.model.DemandDisplay;
 
 @Service
 public class DemandService {
-	
+
 	@Autowired
 	DemandMapper demandMapper;
 
 	public List<DemandDisplay> list(String state, String demandName, Integer projectId) {
-		
-		List<DemandDisplay> list = demandMapper.list(state,demandName,projectId);
+
+		List<DemandDisplay> list = demandMapper.list(state, demandName, projectId);
 		return list;
 	}
 
@@ -37,32 +37,38 @@ public class DemandService {
 	}
 
 	@Transactional
-	public void insert(Demand demand, MultipartFile file, HttpServletRequest request, Integer projectId) {
+	public void insert(Demand demand, MultipartFile file, HttpServletRequest request, Integer projectId,
+			Integer isInsert) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		String path = request.getSession().getServletContext().getRealPath("Demand");
-		String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
-		
+
 		demand.setCreateTime(DateTool.dateToString(new Date()));
 		demand.setProjectId(projectId);
 		demand.setCreatePeopele(userId);
 		demand.setState("激活");
-		demand.setEnclosure(fileName);
-		demand.setFileName(file.getOriginalFilename());
-		demandMapper.insertSelective(demand);
-		
-		File dir = new File(path, fileName);
-		if (!dir.exists()) {
-			dir.mkdirs();
+		if (file != null) {
+			String path = request.getSession().getServletContext().getRealPath("Demand");
+			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
+			demand.setEnclosure(fileName);
+			demand.setFileName(file.getOriginalFilename());
+
+			File dir = new File(path, fileName);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			// MultipartFile自带的解析方法
+			try {
+				file.transferTo(dir);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (isInsert == 0) {
+			demandMapper.updateByPrimaryKeySelective(demand);
+		} else {
+			demandMapper.insertSelective(demand);
 		}
 
-		// MultipartFile自带的解析方法
-		try {
-			file.transferTo(dir);
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-		
-		
 	}
 
 }

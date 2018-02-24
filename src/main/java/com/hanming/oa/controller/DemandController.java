@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
@@ -57,15 +59,24 @@ public class DemandController {
 		return "projectDemand/demandDetails";
 	}
 
-	// 编辑
-	@RequestMapping(value = "/editor", method = RequestMethod.GET)
-	public String editor(@RequestParam(value = "editor") Integer demandId, Model model, HttpServletRequest request) {
+	// 编辑页
+	@RequestMapping(value = "/editorPage", method = RequestMethod.GET)
+	public String editorPage(@RequestParam(value = "editor") Integer demandId, Model model, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		List<User> team = projectTeamService.list(projectId);
 		DemandDetailed demandDetailed = demandService.detaileById(demandId);
 		model.addAttribute("demandDetailed", demandDetailed);
 		model.addAttribute("team", team);
-		return "projectDemand/demandDetails";
+		return "projectDemand/editor";
+	}
+	
+	//编辑
+	@ResponseBody
+	@RequestMapping(value = "/editor", method = RequestMethod.POST)
+	public Msg editorPage(Demand demand,MultipartFile file,HttpServletRequest request) {
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		demandService.insert(demand,file,request,projectId,0);
+		return Msg.success();
 	}
 
 	// 跳转添加
@@ -78,10 +89,11 @@ public class DemandController {
 	}
 
 	// 添加
+	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Demand demand,MultipartFile file,HttpServletRequest request) {
+	public Msg add(Demand demand,MultipartFile file,HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		demandService.insert(demand,file,request,projectId);
-		return "projectDemand/add";
+		demandService.insert(demand,file,request,projectId,1);
+		return Msg.success();
 	}
 }

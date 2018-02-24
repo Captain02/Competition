@@ -35,8 +35,17 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
-	
-	
+	var formData = new FormData($("#demandForm")[0]);
+	//发送ajax请求
+	  $.ajax({
+		url:"${APP_PATH}/admin/demand/editor",
+		type:"POST",
+		data:formData,
+        contentType: false,  
+        processData: false, 
+		success:function(result){
+		}
+	}) 
 }
 </script>
 </head>
@@ -67,7 +76,7 @@ function save() {
 						<header class="panel-heading">添加需求</header>
 						<div class="panel-body">
 						<form id="topicText" action="" method="post">
-						
+						<input type="hidden" value="${demandDetailed.id}" name="id">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>需求名称</label>
 								<div class="col-sm-10">
@@ -158,13 +167,13 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>验收标准</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="acceptance" class="form-control" style="height: 300px;" placeholder="请填写内容">${demandDetailed.acceptance}</textarea>
+									<textarea id="editor_id" name="acceptanceStand" class="form-control" style="height: 300px;" placeholder="请填写内容">${demandDetailed.acceptanceStand}</textarea>
 								</div>
 							</div>
 							  <div class="form-group">
                                  <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>
                                  <div class="col-sm-10">
-                                     <input id="file" type="file" name="fileName">
+                                     <input id="file" type="file" name="file" value="${demandDetailed.fileName}">
                                  </div>
                               </div>
 							
