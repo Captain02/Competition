@@ -149,13 +149,13 @@ function save() {
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
 									<label class="radio-inline">
-									  <input name="pertype" value="${projectDetailed.releaseControl}" <c:if test="${projectDetailed.releaseControl== '公开（所有人）'}">checked="checked"</c:if> type="radio">公开（所有人）
+									  <input name="pertype" value="公开（所有人）" <c:if test="${projectDetailed.releaseControl== '公开（所有人）'}">checked="checked"</c:if> type="radio">公开（所有人）
 									</label>
 									<label class="radio-inline">
-									  <input name="pertype" value="${projectDetailed.releaseControl}" <c:if test="${projectDetailed.releaseControl== '自定义（团队成员和白名单的成员可以访问）'}">checked="checked"</c:if> type="radio">自定义（团队成员和白名单的成员可以访问）
+									  <input name="pertype" value="自定义（团队成员和白名单的成员可以访问）" <c:if test="${projectDetailed.releaseControl== '自定义（团队成员和白名单的成员可以访问）'}">checked="checked"</c:if> type="radio">自定义（团队成员和白名单的成员可以访问）
 									</label>
 									<label class="radio-inline">
-									  <input name="pertype" value="${projectDetailed.releaseControl}" <c:if test="${projectDetailed.releaseControl== '私有（只有项目团队成员才能访问）'}">checked="checked"</c:if> type="radio">私有（只有项目团队成员才能访问）
+									  <input name="pertype" value="私有（只有项目团队成员才能访问）" <c:if test="${projectDetailed.releaseControl== '私有（只有项目团队成员才能访问）'}">checked="checked"</c:if> type="radio">私有（只有项目团队成员才能访问）
 									</label>
 									</div>
 							</div>
