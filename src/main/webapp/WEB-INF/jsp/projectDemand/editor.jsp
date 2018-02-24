@@ -35,17 +35,8 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
-	 var formData = new FormData($("#demandForm")[0]);
-		//发送ajax请求
-		  $.ajax({
-			url:"${APP_PATH}/admin/demand/add",
-			type:"POST",
-			data:formData,
-	        contentType: false,  
-	        processData: false, 
-			success:function(result){
-			}
-		})  
+	
+	
 }
 </script>
 </head>
@@ -75,7 +66,7 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading">添加需求</header>
 						<div class="panel-body">
-						<form id="demandForm" action="" method="post">
+						<form id="topicText" action="" method="post">
 						
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>需求名称</label>
@@ -87,6 +78,9 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>来源</label>
 								<div class="col-sm-10">
 									<select name="source" class="form-control">
+									<c:if test="${demandDetailed.source!=''}">
+					                      <option value="">${demandDetailed.source}</option>
+									</c:if>
 					                      <option value="">请选择来源</option>
 					                      <option value="客户">客户</option>
 					                      <option value="用户">用户</option>
@@ -105,6 +99,9 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>优先级</label>
 								<div class="col-sm-10">
 									<select name="grade" class="form-control">
+				                      <c:if test="${demandDetailed.grade!=''}">
+					                      <option value="">${demandDetailed.grade}</option>
+									  </c:if>
 				                      <option value="">请选择优先级</option>
 				                      <option value="1级">1级</option>
 				                      <option value="2级">2级</option>
@@ -117,7 +114,10 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>阶段</label>
 								<div class="col-sm-10">
 								<select name="stage" class="form-control">
-			                      <option value="">请选择阶段</option>
+								<c:if test="${demandDetailed.stage!=''}">
+			                      <option value="">${demandDetailed.stage}</option>
+							  	</c:if>
+			                      <option value="请选择阶段">请选择阶段</option>
 			                      <option value="未开始">未开始</option>
 			                      <option value="已计划">已计划</option>
 			                      <option value="已立项">已立项</option>
@@ -134,34 +134,37 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>指派给</label>
 								<div class="col-sm-10">
 								<select name="assignor" class="form-control">
-			                     <c:forEach items="${team}" var="people">
+			                     <c:if test="${demandDetailed.assignor!=''}">
+			                      <option value="">${demandDetailed.assignor}</option>
+							  	</c:if>
+							  	<c:forEach items="${team}" var="people">
 			                      <option value="${people.id}">${people.name}</option>
-			                     </c:forEach>
+							  	</c:forEach>
                     			</select>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">预计工时</label>
 								<div class="col-sm-10">
-									<input name="workTime" value="" class="form-control" placeholder="预计工时" type="text">
+									<input name="wrokTime" value="${demandDetailed.workTime}" class="form-control" placeholder="预计工时" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容">${demandDetailed.descs}</textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>验收标准</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="acceptanceStand" class="form-control" style="height: 300px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="acceptance" class="form-control" style="height: 300px;" placeholder="请填写内容">${demandDetailed.acceptance}</textarea>
 								</div>
 							</div>
 							  <div class="form-group">
                                  <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>
                                  <div class="col-sm-10">
-                                     <input id="file" type="file" name="file">
+                                     <input id="file" type="file" name="fileName">
                                  </div>
                               </div>
 							

@@ -18,14 +18,14 @@
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hanming.oa.model.DemandWithBLOBs">
     <result column="descs" jdbcType="LONGVARCHAR" property="descs" />
-    <result column="AcceptanceStand" jdbcType="LONGVARCHAR" property="acceptanceStand" />
+    <result column="acceptanceStand" jdbcType="LONGVARCHAR" property="acceptanceStand" />
   </resultMap>
   <sql id="Base_Column_List">
     id, projectId, demandName, createPeopele, source, grade, stage, state, assignor, 
     workTime, enclosure, fileName, createTime
   </sql>
   <sql id="Blob_Column_List">
-    descs, AcceptanceStand
+    descs, acceptanceStand
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
@@ -44,13 +44,13 @@
       createPeopele, source, grade, 
       stage, state, assignor, 
       workTime, enclosure, fileName, 
-      createTime, descs, AcceptanceStand
+      createTime, descs, acceptanceStand
       )
     values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{demandName,jdbcType=VARCHAR}, 
       #{createPeopele,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, 
       #{stage,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{assignor,jdbcType=INTEGER}, 
       #{workTime,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{descs,jdbcType=LONGVARCHAR}, #{acceptancestand,jdbcType=LONGVARCHAR}
+      #{createTime,jdbcType=VARCHAR}, #{descs,jdbcType=LONGVARCHAR}, #{acceptanceStand,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.hanming.oa.model.DemandWithBLOBs">
@@ -98,8 +98,8 @@
       <if test="descs != null">
         descs,
       </if>
-      <if test="acceptancestand != null">
-        AcceptanceStand,
+      <if test="acceptanceStand != null">
+        acceptanceStand,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -145,8 +145,8 @@
       <if test="descs != null">
         #{descs,jdbcType=LONGVARCHAR},
       </if>
-      <if test="acceptancestand != null">
-        #{acceptancestand,jdbcType=LONGVARCHAR},
+      <if test="acceptanceStand != null">
+        #{acceptanceStand,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -192,8 +192,8 @@
       <if test="descs != null">
         descs = #{descs,jdbcType=LONGVARCHAR},
       </if>
-      <if test="acceptancestand != null">
-        AcceptanceStand = #{acceptancestand,jdbcType=LONGVARCHAR},
+      <if test="acceptanceStand != null">
+        acceptanceStand = #{acceptanceStand,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -213,7 +213,7 @@
       fileName = #{fileName,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=VARCHAR},
       descs = #{descs,jdbcType=LONGVARCHAR},
-      AcceptanceStand = #{acceptancestand,jdbcType=LONGVARCHAR}
+      acceptanceStand = #{acceptanceStand,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Demand">

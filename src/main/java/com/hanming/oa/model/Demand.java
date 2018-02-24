@@ -1,35 +1,35 @@
 package com.hanming.oa.model;
 
 public class Demand {
-    private Integer id;
+	private Integer id;
 
-    private Integer projectId;
+	private Integer projectId;
 
-    private String demandName;
+	private String demandName;
 
-    private Integer createPeopele;
+	private Integer createPeopele;
 
-    private String source;
+	private String source;
 
-    private String grade;
+	private String grade;
 
-    private String stage;
+	private String stage;
 
-    private String state;
+	private String state;
 
-    private Integer assignor;
+	private Integer assignor;
 
-    private String workTime;
+	private String workTime;
 
-    private String descs;
+	private String descs;
 
-    private String acceptanceStand;
+	private String acceptanceStand;
 
-    private String enclosure;
+	private String enclosure;
 
-    private String fileName;
+	private String fileName;
 
-    private String createTime;
+	private String createTime;
 
 	public Integer getId() {
 		return id;
@@ -150,5 +150,14 @@ public class Demand {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "Demand [id=" + id + ", projectId=" + projectId + ", demandName=" + demandName + ", createPeopele="
+				+ createPeopele + ", source=" + source + ", grade=" + grade + ", stage=" + stage + ", state=" + state
+				+ ", assignor=" + assignor + ", workTime=" + workTime + ", descs=" + descs + ", acceptanceStand="
+				+ acceptanceStand + ", enclosure=" + enclosure + ", fileName=" + fileName + ", createTime=" + createTime
+				+ "]";
+	}
+
 }

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%
+	pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
 <div class="om-header-right">
                            <span>
 	                           <a href="" class="btn btn-info btn-sm">团队</a> 

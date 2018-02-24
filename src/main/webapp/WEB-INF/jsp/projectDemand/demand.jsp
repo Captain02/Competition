@@ -67,7 +67,7 @@
                          <jsp:include page="projectLeftManagement.jsp"></jsp:include>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/project/addPage'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
                                 <i>+</i>新需求
                             </button>
                         </div>
