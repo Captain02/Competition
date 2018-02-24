@@ -108,10 +108,10 @@ public class ProjectController {
 	// 修改
 	@ResponseBody
 	@RequestMapping(value = "/editor", method = RequestMethod.POST)
-	public Msg update(Project project,Model model) {
-		//project.setDescs(descs);
-		//System.out.println(project);
-		//projectService.update(project,whiteNameId);
+	public Msg update(Project project, @RequestParam(value = "whiteNameId", required = false) String whiteNameId,
+			@RequestParam(value = "descs", required = false) String descs) {
+		project.setDescs(descs);
+		projectService.update(project,whiteNameId);
 		return Msg.success();
 	}
 

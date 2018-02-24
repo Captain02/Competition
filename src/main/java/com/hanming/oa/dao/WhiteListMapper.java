@@ -20,4 +20,6 @@ public interface WhiteListMapper {
     int updateByPrimaryKey(WhiteList record);
 
 	void insertList(@Param("id")Integer id, @Param("list")List<Integer> intIdList);
+
+	void deleteByProjectId(Integer id);
 }

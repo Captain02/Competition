@@ -43,6 +43,7 @@ public class ProjectService {
 	@Transactional
 	public void update(Project project, String whiteNameId) {
 		projectMapper.updateByPrimaryKeySelective(project);
+		whiteListMapper.deleteByProjectId(project.getId());
 		String[] strIds = whiteNameId.split("-");
 		List<String> strIdList = Arrays.asList(strIds);
 		if (strIdList.size() > 0 && strIdList != null) {

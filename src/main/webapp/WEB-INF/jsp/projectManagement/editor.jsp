@@ -38,11 +38,9 @@ function save() {
 	var descs = $('#editor_id').val();
 	//获取自定义id
 	var whiteNameId = $('#ccid').val();
-	var project = $("#projectForm").serialize();
-	alert(project);
 	$.ajax({
         url: "${APP_PATH}/admin/project/editor",
-        data: $("#projectForm2").serialize(),
+        data: $("#projectForm2").serialize()+"&whiteNameId="+whiteNameId,
         type: "POST",
         success: function (result) {
         	alert("a");

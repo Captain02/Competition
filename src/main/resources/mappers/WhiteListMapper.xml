@@ -77,4 +77,10 @@
             (#{ids},#{id})  
     </foreach>  
   </insert>
+  
+  <!-- void deleteByProjectId(Integer id); -->
+  <delete id="deleteByProjectId" parameterType="Integer">
+  	delete from whitelist
+    where projectId = #{id}
+  </delete>
 </mapper>
