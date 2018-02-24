@@ -14,6 +14,7 @@
 
 <%
    pageContext.setAttribute("APP_PATH", request.getContextPath());
+	
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
@@ -71,32 +72,10 @@ function changeState(ele) {
 
                     <div class="om-header">
 
-                        <div class="om-header-left">
-                            <h3>
-                                <span class="om-title">项目管理</span>
-                                <span class="om-list pro-href"> 
-									<a class="btn btn-info btn-sm">团队</a> 
-									<a class="btn btn-danger btn-sm">需求</a>
-									<a class="btn btn-primary btn-sm">任务</a> 
-									<a class="btn btn-warning btn-sm">Bug</a> 
-									<a class="btn btn-success btn-sm">文档</a>
-									<a class="btn btn-danger btn-sm">版本</a>
-									<a class="btn btn-warning btn-sm">报表</a>
-								</span>
-                            </h3>
-                        </div>
+                        <jsp:include page="projectLeftManagement.jsp"></jsp:include>
+                        <jsp:include page="projectRightManagement.jsp"></jsp:include>
 
-                        <div class="om-header-right">
-                           <span>
-	                           <a href="" class="btn btn-info btn-sm">团队</a> 
-	                           <a href="" class="btn btn-danger btn-sm">需求</a> 
-	                           <a href="" class="btn btn-primary btn-sm">任务</a> 
-	                           <a href="" class="btn btn-warning btn-sm">Bug</a> 
-	                           <a href="" class="btn btn-success btn-sm">文档</a> 
-	                           <a href="" class="btn btn-danger btn-sm">版本</a> 
-	                           <a href="" class="btn btn-warning btn-sm">报表</a>
-                           </span>
-                        </div>
+                        
 
 
                         <div class="clearfix"></div>

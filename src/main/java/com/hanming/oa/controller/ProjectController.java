@@ -3,6 +3,8 @@ package com.hanming.oa.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -122,7 +124,8 @@ public class ProjectController {
 
 	// 跳转详情页
 	@RequestMapping(value = "/projectDetails", method = RequestMethod.GET)
-	public String detailed(@RequestParam("projectId") Integer projectId, Model model) {
+	public String detailed(@RequestParam("projectId") Integer projectId, Model model,HttpServletRequest request) {
+		request.getSession().setAttribute("projectId", projectId);
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		model.addAttribute("projectDetailed", projectDetailed);
 		model.addAttribute("subDays",
