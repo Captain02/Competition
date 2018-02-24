@@ -79,7 +79,7 @@ function save() {
 				<div class="row">
 				<div class="col-lg-12">
 					<section class="panel">
-						<header class="panel-heading">添加项目</header>
+						<header class="panel-heading">编辑项目</header>
 						<div class="panel-body">
 						<form id="projectForm2" action="" method="post">
 							<input type="hidden" value="${projectDetailed.id}" name="id">
@@ -217,13 +217,7 @@ function save() {
 			 		 })
 			 		</script>
                     
-                    <script type="text/javascript">
-                	
-                 	
-                   
-                    
-                    
-                    </script>
+                  
 		</div>
 		
 							<!-- 模态框 -->
