@@ -10,11 +10,8 @@
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
-
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
-
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link rel="stylesheet" href="${APP_PATH}/static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
@@ -23,7 +20,7 @@
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
-	var editor = KindEditor.create('textarea[name="content"]', {
+	var editor = KindEditor.create('textarea[name="descs"]', {
 		allowFileManager : true,
 		filterMode:false,
 		allowImageUpload : true,
@@ -37,17 +34,11 @@ $(function(){
 })
 
 function save() {
-	//获取项目名称
-	var projectName = $('input[name="projectName"]').val();
-	//获取项目别名
-	var projectAlias = $('input[name="projectAlias"]').val();
-	//开始日期
-	var projectStartDate = $('input[name="started"]').val();
-	//结束日期
-	var projectEndDate = $('input[name="ended"]').val();
 	//获取描述
-	var projectDesc = $('#editor_id').val();
-	
+	var descs = $('#editor_id').val();
+	//获取自定义id
+	var whiteNameId = $('#ccid').val();
+	alert(descs + whiteNameId);
 }
 
 
@@ -94,29 +85,29 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>项目别名</label>
 								<div class="col-sm-10">
-									<input name="projectAlias" value="${projectDetailed.projectAliasName}" class="form-control" placeholder="取个别名" type="text">
+									<input name="projectAliasName" value="${projectDetailed.projectAliasName}" class="form-control" placeholder="取个别名" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 								<div class="col-sm-10">
-									<div class="input-group input-large custom-date-range" data-date-format="yyyy-mm-dd">
-					                      <input value="${projectDetailed.startDate}" class="form-control dpd1" id="mydatepicker2" name="started" placeholder="开始日期"  type="text">
+									<div class="input-group input-large" data-date-format="yyyy-mm-dd">
+					                      <input value="${projectDetailed.startDate}" class="form-control dpd1" name="startDate" placeholder="开始日期"  type="text">
 					                      <span class="input-group-addon">To</span>
-					                      <input value="${projectDetailed.endDate}" class="form-control dpd2" id="mydatepicker" name="ended" placeholder="结束日期" type="text">
+					                      <input value="${projectDetailed.endDate}" class="form-control dpd2" name="endDate" placeholder="结束日期" type="text">
                     				</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容">${projectDetailed.descs}</textarea>
+									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容">${projectDetailed.descs}</textarea>
 								</div>
 							</div>
 							<div class="form-group">
 				                  <label class="col-sm-2 control-label">项目负责人</label>
 				                  <div class="col-sm-10">
-				                    <select name="projuserid" class="form-control">
+				                    <select name="projectResponsiblePeople" class="form-control">
 				                    	<option value="${projectDetailed.projectResponsiblePeopleId}">${projectDetailed.projectResponsiblePeople}</option>
 				                    </select>
 				                  </div>
@@ -124,7 +115,7 @@ function save() {
                				 <div class="form-group">
 				                  <label class="col-sm-2 control-label">产品负责人</label>
 				                  <div class="col-sm-10">
-				                    <select name="produserid" class="form-control">
+				                    <select name="productPeople" class="form-control">
 				                    	<option value="${projectDetailed.productPeopleId}" style="display: none;">${projectDetailed.productPeople}</option>
 				                    </select>
 				                  </div>
@@ -132,7 +123,7 @@ function save() {
 							<div class="form-group">
 				                  <label class="col-sm-2 control-label">测试负责人</label>
 				                  <div class="col-sm-10">
-				                    <select name="testserid" class="form-control">
+				                    <select name="testPeople" class="form-control">
 				                    	<option value="${projectDetailed.testPeople}" style="display: none;">${projectDetailed.testPeople}</option>
 				                    </select>
 				                  </div>
@@ -140,7 +131,7 @@ function save() {
                				 <div class="form-group">
 				                  <label class="col-sm-2 control-label">发布负责人</label>
 				                  <div class="col-sm-10">
-				                    <select name="testserid" class="form-control">
+				                    <select name="releasePeople" class="form-control">
 				                    	<option value="${projectDetailed.releasePeopleId}" style="display: none;">${projectDetailed.releasePeople}</option>
 				                    </select>
 				                  </div>
@@ -149,13 +140,13 @@ function save() {
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
 									<label class="radio-inline">
-									  <input name="pertype" value="公开（所有人）" <c:if test="${projectDetailed.releaseControl== '公开（所有人）'}">checked="checked"</c:if> type="radio">公开（所有人）
+									  <input name="releaseControl" value="0" type="radio">公开（所有人）
 									</label>
 									<label class="radio-inline">
-									  <input name="pertype" value="自定义（团队成员和白名单的成员可以访问）" <c:if test="${projectDetailed.releaseControl== '自定义（团队成员和白名单的成员可以访问）'}">checked="checked"</c:if> type="radio">自定义（团队成员和白名单的成员可以访问）
+									  <input name="releaseControl" value="1" type="radio">自定义（团队成员和白名单的成员可以访问）
 									</label>
 									<label class="radio-inline">
-									  <input name="pertype" value="私有（只有项目团队成员才能访问）" <c:if test="${projectDetailed.releaseControl== '私有（只有项目团队成员才能访问）'}">checked="checked"</c:if> type="radio">私有（只有项目团队成员才能访问）
+									  <input name="releaseControl" value="2" type="radio">私有（只有项目团队成员才能访问）
 									</label>
 									</div>
 							</div>
@@ -181,16 +172,31 @@ function save() {
 				</div>
 				
 			</div>
-			 <script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
-                    <script type="text/javascript">
-                        $('#mydatepicker').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mydatepicker2').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mycalendar').dcalendar();
-                    </script>
+			 		<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+			 		<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+			 		<script type="text/javascript">
+			 		 $(function(){
+			 			 var checkin = $('.dpd1').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 				 language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+			 				$('.dpd1').datetimepicker('hide');
+			 	            $('.dpd2')[0].focus();
+			 			 })
+			 			
+			            
+			 			 var checkout = $('.dpd2').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 			     language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+				 				$('.dpd2').datetimepicker('hide');
+				 			 })
+			 		 })
+			 		</script>
                     
                     <script type="text/javascript">
                 	$('#cc-username').click(function(){
@@ -198,7 +204,7 @@ function save() {
                  	})
                  	
                     $(function(){
-                    	$('input[name="pertype"]:checked').each(function(){
+                    	$('input[name="releaseControl"]:checked').each(function(){
                     		if($(this).val() == 1){
                     			$('#whitename').show();
                     		}
@@ -207,7 +213,7 @@ function save() {
                     		}
                     	});
                     	
-                    	  $('input[name="pertype"]').on('click', function(){
+                    	  $('input[name="releaseControl"]').on('click', function(){
                       		var obj = $(this);
                       		if (obj.val() == 1) {
                       			$('#whitename').show();
@@ -226,7 +232,7 @@ function save() {
                     			nameArray.push($(this).val());
                     		});
                     		
-                    		var idStr = idArray.join(',');
+                    		var idStr = idArray.join('-');
                     		var nameStr = nameArray.join(',');
                     		$('#ccid').val(idStr);
                     		$('#cc-username').val(nameStr);
