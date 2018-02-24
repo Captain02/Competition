@@ -46,7 +46,7 @@ public class ProjectService {
 		whiteListMapper.deleteByProjectId(project.getId());
 		String[] strIds = whiteNameId.split("-");
 		List<String> strIdList = Arrays.asList(strIds);
-		if (strIdList.size() > 0 && strIdList != null) {
+		if (strIdList.size() > 0 && strIdList != null && strIdList.get(0)!="") {
 			List<Integer> intIdList = strIdList.stream().map((x) -> Integer.parseInt(x)).collect(Collectors.toList());
 			whiteListMapper.insertList(project.getId(),intIdList);
 		}

@@ -137,7 +137,7 @@ function save() {
 				                  <label class="col-sm-2 control-label">测试负责人</label>
 				                  <div class="col-sm-10">
 				                    <select name="testPeople" class="form-control">
-				                    	<option value="${projectDetailed.testPeople}" style="display: none;">${projectDetailed.testPeople}</option>
+				                    	<option value="${projectDetailed.testPeopleId}" style="display: none;">${projectDetailed.testPeople}</option>
 				                    	<c:forEach items="${team}" var="people">
 				                    		<option value="${people.id}">${people.name}</option>
 				                    	</c:forEach>
