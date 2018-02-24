@@ -15,8 +15,6 @@
    pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/selectAll.js"></script>
 </head>
     <body class="bg-common">
 
@@ -35,17 +33,17 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/project/list" class="serach-form" method="get">
 
                         
-						<select name="status" class="form-control">
+						<select name="state" class="form-control">
 				          <option value="">项目状态</option>
 				          <option value="1">挂起</option>
 				          <option value="2">延期</option>
 				          <option value="3">进行</option>
 				          <option value="4">结束</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${name}" class="form-control" name="name">
+                        <input type="text" placeholder="输入项目名称" value="${projectName == '项目名称'?'':projectName}" class="form-control" name="projectName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -65,15 +63,24 @@
 
                     <div class="om-header">
 
-                        <div class="om-header-left">
+                         <div class="om-header-left">
                             <h3>
                                 <span class="om-title">项目管理</span>
+                                <span class="om-list pro-href"> 
+									<a class="btn btn-info btn-sm">团队</a> 
+									<a class="btn btn-danger btn-sm">需求</a>
+									<a class="btn btn-primary btn-sm">任务</a> 
+									<a class="btn btn-warning btn-sm">Bug</a> 
+									<a class="btn btn-success btn-sm">文档</a>
+									<a class="btn btn-danger btn-sm">版本</a>
+									<a class="btn btn-warning btn-sm">报表</a>
+								</span>
                             </h3>
                         </div>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/deploy/addeploy'">
-                                <i>+</i>新项目
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/project/addPage'">
+                                <i>+</i>新需求
                             </button>
                         </div>
 
@@ -85,34 +92,35 @@
                         <div class="row">
                             <div class="col-sm-12">
 
-                                <header class="om-wrapper-header">项目管理 / 总数：${pageInfo.total}</header>
+                                <header class="om-wrapper-header">需求 / 总数：${pageInfo.total}</header>
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
-                                        <table class="table table-bordered table-striped">
+                                        <table class="table table-bordered table-striped table-project">
 
                                             <thead>
                                                 <tr>
+                                                 <th>级别</th>
                                                  <th>名称</th>
-                                                 <th>别名</th>
                                                  <th>创建人</th>
                                                  <th>负责人</th>
-                                                 <th>结束时间</th>
+                                                 <th>预工时</th>
+                                                 <th>创建日期</th>
                                                  <th>状态</th>
+                                                 <th>阶段</th>
                                                  <th>操作</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
+                                            <c:forEach items="${pageInfo.list}" var="ProjectDisplay">
 	                                                <tr>
-	                                                <td>
-	                                                   00
-	                                                </td>
-	                                                    <td>00</td>
-	                                                    <td>00</td>
-	                                                    <td>00</td>
-	                                                    <td>00</td>
-	                                                    <td>2018-02-21</td>
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/project/projectDetails?projectId=${ProjectDisplay.id}">${ProjectDisplay.projectName}</a></td>
+	                                                    <td>${ProjectDisplay.projectAliasName}</td>
+	                                                    <td>${ProjectDisplay.createPeople}</td>
+	                                                    <td>${ProjectDisplay.projectResponsiblePeople}</td>
+	                                                    <td>${ProjectDisplay.endDate}</td>
+	                                                    <td>${ProjectDisplay.state}</td>
 	                                                    <td>
 	                                                        <div class="btn-group">
 	                                                            <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -121,26 +129,27 @@
 	                                                            </button>
 	                                                            <ul class="dropdown-menu">
 	                                                                <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">编辑</a>
+	                                                                    <a href="${APP_PATH}/admin/project/updatePage">编辑</a>
 	                                                                </li>
 	                                                                <li role="separator" class="divider"></li>
 	                                                                 <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">挂起</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="挂起">挂起</a>
 	                                                                </li>
 	                                                                 <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">延期</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="延期">延期</a>
 	                                                                </li>
 	                                                                 <li role="separator" class="divider"></li>
 	                                                                  <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">进行</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="进行">进行</a>
 	                                                                </li>
 	                                                                 <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">结束</a>
+	                                                                    <a onclick="changeState(this);" data-projectId="${ProjectDisplay.id}" data-state="结束">结束</a>
 	                                                                </li>
 	                                                            </ul>
 	                                                        </div>
 	                                                    </td>
 	                                                </tr>
+                                            </c:forEach>
                                             </tbody>
 
                                         </table>
@@ -157,11 +166,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/deploy/list?pn=1&name=${name}">首页</a>
+                                            <a href="${APP_PATH}/admin/project/list?pn=1&projectName=${projectName}&state=${state}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum-1}&name=${name}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum-1}&projectName=${projectName}&state=${state}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -174,21 +183,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/deploy/list?pn=${pageNum}&name=${name}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/project/list?pn=${pageNum}&projectName=${projectName}&state=${state}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum+1}&name=${name}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum+1}&projectName=${projectName}&state=${state}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pages}&name=${name}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pages}&projectName=${projectName}&state=${state}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>
@@ -212,18 +221,6 @@
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-      
-        <button type="button" class="btn btn-warning yes">确认</button>
-        <button type="button" class="btn btn-success no">取消</button>
-        
-        <!-- 用于页面跳转的按钮 -->
-        <form action="${APP_PATH}/admin/deploy/list">
-        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
-        	<button type="submit" class="btn btn-danger down">关闭</button>
-        </form>
         
       </div>
     </div>
