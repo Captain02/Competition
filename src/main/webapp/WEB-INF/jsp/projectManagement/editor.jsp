@@ -38,7 +38,16 @@ function save() {
 	var descs = $('#editor_id').val();
 	//获取自定义id
 	var whiteNameId = $('#ccid').val();
-	alert(descs + whiteNameId);
+	var project = $("#projectForm").serialize();
+	alert(project);
+	$.ajax({
+        url: "${APP_PATH}/admin/project/editor",
+        data: $("#projectForm2").serialize(),
+        type: "POST",
+        success: function (result) {
+        	alert("a");
+        }
+    });
 }
 
 
@@ -74,8 +83,8 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading">添加项目</header>
 						<div class="panel-body">
-						<form id="topicText" action="" method="post">
-						
+						<form id="projectForm2" action="" method="post">
+							<input type="hidden" value="${projectDetailed.id}" name="id">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>项目名称</label>
 								<div class="col-sm-10">
@@ -109,6 +118,9 @@ function save() {
 				                  <div class="col-sm-10">
 				                    <select name="projectResponsiblePeople" class="form-control">
 				                    	<option value="${projectDetailed.projectResponsiblePeopleId}">${projectDetailed.projectResponsiblePeople}</option>
+				                    	<c:forEach items="${team}" var="people">
+				                    		<option value="${people.id}">${people.name}</option>
+				                    	</c:forEach>
 				                    </select>
 				                  </div>
                				 </div>
@@ -117,6 +129,9 @@ function save() {
 				                  <div class="col-sm-10">
 				                    <select name="productPeople" class="form-control">
 				                    	<option value="${projectDetailed.productPeopleId}" style="display: none;">${projectDetailed.productPeople}</option>
+				                    	<c:forEach items="${team}" var="people">
+				                    		<option value="${people.id}">${people.name}</option>
+				                    	</c:forEach>
 				                    </select>
 				                  </div>
                				 </div>
@@ -125,6 +140,9 @@ function save() {
 				                  <div class="col-sm-10">
 				                    <select name="testPeople" class="form-control">
 				                    	<option value="${projectDetailed.testPeople}" style="display: none;">${projectDetailed.testPeople}</option>
+				                    	<c:forEach items="${team}" var="people">
+				                    		<option value="${people.id}">${people.name}</option>
+				                    	</c:forEach>
 				                    </select>
 				                  </div>
                				 </div>
@@ -133,12 +151,16 @@ function save() {
 				                  <div class="col-sm-10">
 				                    <select name="releasePeople" class="form-control">
 				                    	<option value="${projectDetailed.releasePeopleId}" style="display: none;">${projectDetailed.releasePeople}</option>
+				                    	<c:forEach items="${team}" var="people">
+				                    		<option value="${people.id}">${people.name}</option>
+				                    	</c:forEach>
 				                    </select>
 				                  </div>
                				 </div>
                				 <div class="form-group">
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
+				                  	<input type="hidden" value="${projectDetailed.releaseControl}">
 									<label class="radio-inline">
 									  <input name="releaseControl" value="0" type="radio">公开（所有人）
 									</label>
@@ -260,7 +282,7 @@ function save() {
 							        <h4 class="modal-title" id="myModalLabel">白名单</h4>
 							      </div>
 							      <div class="modal-body">
-							      <c:forEach items="${team}" var="people">
+							      <c:forEach items="${white}" var="people">
 							        <label class="checkbox-inline">
         								<input value="${people.id}" type="checkbox" data-userid="${people.id}" name="whiteListName">
       									${people.name}

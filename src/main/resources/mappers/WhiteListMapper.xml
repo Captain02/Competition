@@ -68,4 +68,13 @@
       projectId = #{projectid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- void insertList(@Param("id")Integer id, @Param("list")List<Integer> intIdList); -->
+  <insert id="insertList">
+  	insert into whitelist (userId,projectId)
+  	values
+  	<foreach collection="list" item="ids" separator=",">  
+            (#{ids},#{id})  
+    </foreach>  
+  </insert>
 </mapper>

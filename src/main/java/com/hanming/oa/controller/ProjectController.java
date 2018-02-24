@@ -34,7 +34,7 @@ public class ProjectController {
 	ProjectTeamService projectTeamService;
 	@Autowired
 	UserService userService;
-	
+
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "0") Integer pn,
@@ -74,10 +74,9 @@ public class ProjectController {
 	public Msg add(Model model, @RequestParam("projectName") String projectName,
 			@RequestParam("projectAlias") String projectAliasName,
 			@RequestParam("projectStartDate") String projectStartDate,
-			@RequestParam("projectEndDate") String projectEndDate,
-			@RequestParam("projectDesc") String projectDesc) {
+			@RequestParam("projectEndDate") String projectEndDate, @RequestParam("projectDesc") String projectDesc) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
+
 		Project project = new Project();
 		project.setProjectName(projectName);
 		project.setProjectAliasName(projectAliasName);
@@ -88,15 +87,15 @@ public class ProjectController {
 		project.setCreatePeople(userId);
 		project.setState("进行");
 		project.setReleaseControl("公开（所有人）");
-		
+
 		projectService.insert(project);
-		
+
 		return Msg.success();
 	}
-	
+
 	// 跳转编辑页
-	@RequestMapping(value="/editor",method=RequestMethod.GET)
-	public String update(@RequestParam("projectId")Integer projectId,Model model) {
+	@RequestMapping(value = "/editor", method = RequestMethod.GET)
+	public String update(@RequestParam("projectId") Integer projectId, Model model) {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		List<User> list = userService.list();
 		List<User> team = projectTeamService.list(projectId);
@@ -105,21 +104,26 @@ public class ProjectController {
 		model.addAttribute("projectDetailed", projectDetailed);
 		return "projectManagement/editor";
 	}
-	
+
 	// 修改
-	@RequestMapping(value="/editor",method=RequestMethod.POST)
-	public Msg update() {
-		
+	@ResponseBody
+	@RequestMapping(value = "/editor", method = RequestMethod.POST)
+	public Msg update(Project project,Model model) {
+		//project.setDescs(descs);
+		//System.out.println(project);
+		//projectService.update(project,whiteNameId);
 		return Msg.success();
 	}
-	
+
 	// 跳转详情页
-	@RequestMapping(value="/projectDetails",method=RequestMethod.GET)
-	public String detailed(@RequestParam("projectId")Integer projectId,Model model) {
+	@RequestMapping(value = "/projectDetails", method = RequestMethod.GET)
+	public String detailed(@RequestParam("projectId") Integer projectId, Model model) {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		model.addAttribute("projectDetailed", projectDetailed);
-		model.addAttribute("subDays", (DateTool.substractTime(projectDetailed.getEndDate(), DateTool.dateToYearMonthDay(new Date())))/60/12);
-		
+		model.addAttribute("subDays",
+				(DateTool.substractTime(projectDetailed.getEndDate(), DateTool.dateToYearMonthDay(new Date()))) / 60
+						/ 12);
+
 		return "projectManagement/projectDetails";
 	}
 }

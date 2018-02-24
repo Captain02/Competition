@@ -1,6 +1,13 @@
 package com.hanming.oa.model;
 
-public class Project {
+import java.io.Serializable;
+
+public class Project implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 
 	private String projectName;
@@ -28,6 +35,15 @@ public class Project {
 	private String releaseControl;
 
 	private String state;
+
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", projectName=" + projectName + ", projectAliasName=" + projectAliasName
+				+ ", createDate=" + createDate + ", startDate=" + startDate + ", endDate=" + endDate + ", descs="
+				+ descs + ", createPeople=" + createPeople + ", projectResponsiblePeople=" + projectResponsiblePeople
+				+ ", productPeople=" + productPeople + ", testPeople=" + testPeople + ", releasePeople=" + releasePeople
+				+ ", releaseControl=" + releaseControl + ", state=" + state + "]";
+	}
 
 	public Integer getId() {
 		return id;
