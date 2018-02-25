@@ -23,4 +23,8 @@ public class ProjectTeamService {
 		projectTeamMapper.inserList(projectId,idsIntList);
 	}
 
+	public void deleById(Integer id) {
+		projectTeamMapper.deleteByPrimaryKey(id);
+	}
+
 }

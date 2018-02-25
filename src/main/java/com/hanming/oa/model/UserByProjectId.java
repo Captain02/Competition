@@ -3,7 +3,7 @@ package com.hanming.oa.model;
 public class UserByProjectId {
 	private Integer id;
 
-	private Integer projectId;
+	private Integer projectTeamId;
 
 	private String name;
 
@@ -11,12 +11,12 @@ public class UserByProjectId {
 
 	private String joinTime;
 
-	public Integer getProjectId() {
-		return projectId;
+	public Integer getProjectTeamId() {
+		return projectTeamId;
 	}
 
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
+	public void setProjectTeamId(Integer projectTeamId) {
+		this.projectTeamId = projectTeamId;
 	}
 
 	public Integer getId() {

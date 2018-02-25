@@ -16,6 +16,21 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script type="text/javascript">
+function dele(ele) {
+	var id = $(ele).attr('data-id');
+	$.ajax({
+		url:"${APP_PATH}/admin/projectTeam/dele",
+		type:"POST",
+		data:{
+			'id':id
+		},
+		success:function(result){
+			
+		}
+	})
+}
+</script>
 </head>
     <body class="bg-common">
 
@@ -107,7 +122,7 @@
 	                                                    <td>${user.roleName}</td>
 	                                                    <td>${user.joinTime}</td>
 	                                                    <td>
-	                                                       <a href="javascript:;" class="js-team-single btn btn-danger btn-xs" data-id="1513241746363200256" title="删除"><i class="fa fa-trash-o"></i> 删除</a>
+	                                                       <a onclick="dele(this);" class="js-team-single btn btn-danger btn-xs" data-id="${user.projectTeamId}" title="删除"><i class="fa fa-trash-o"></i> 删除</a>
 	                                                    </td>
 	                                                </tr>
                                            			</c:forEach>

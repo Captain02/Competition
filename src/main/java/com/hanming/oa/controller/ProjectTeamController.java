@@ -20,7 +20,6 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 @Controller
 @RequestMapping("/admin/projectTeam")
@@ -77,5 +76,12 @@ public class ProjectTeamController {
 			}
 		}
 		return Msg.fail();
+	}
+	
+	//删除成员
+	@RequestMapping(value="dele",method=RequestMethod.POST)
+	public Msg dele(@RequestParam("id")Integer id) {
+		projectTeamService.deleById(id);
+		return Msg.success();
 	}
 }
