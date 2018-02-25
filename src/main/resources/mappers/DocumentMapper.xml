@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.DocumentMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Document">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="projectId" jdbcType="INTEGER" property="projectid" />
+    <result column="documentName" jdbcType="VARCHAR" property="documentname" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="createPeople" jdbcType="INTEGER" property="createpeople" />
+    <result column="createTime" jdbcType="VARCHAR" property="createtime" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="fileName" jdbcType="VARCHAR" property="filename" />
+    <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, projectId, documentName, type, createPeople, createTime, keyword, fileName, enclosure
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from document
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from document
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Document">
+    insert into document (id, projectId, documentName, 
+      type, createPeople, createTime, 
+      keyword, fileName, enclosure
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, #{documentname,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{createpeople,jdbcType=INTEGER}, #{createtime,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Document">
+    insert into document
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectid != null">
+        projectId,
+      </if>
+      <if test="documentname != null">
+        documentName,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createpeople != null">
+        createPeople,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="filename != null">
+        fileName,
+      </if>
+      <if test="enclosure != null">
+        enclosure,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="documentname != null">
+        #{documentname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null">
+        #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Document">
+    update document
+    <set>
+      <if test="projectid != null">
+        projectId = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="documentname != null">
+        documentName = #{documentname,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createpeople != null">
+        createPeople = #{createpeople,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        fileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Document">
+    update document
+    set projectId = #{projectid,jdbcType=INTEGER},
+      documentName = #{documentname,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      createPeople = #{createpeople,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      fileName = #{filename,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- List<DocumentDisplay> list(@Param("type")String type, @Param("documentName")String documentName); -->
+  <select id="list" resultType="DocumentDisplay">
+  	select 
+  	do.id,do.documentName,do.type,tu.name AS creaePeople,do.createTime
+  	from 
+  	LEFT JOIN t_user tu ON tu.id=do.createPeople
+  </select>
+  
+</mapper>
