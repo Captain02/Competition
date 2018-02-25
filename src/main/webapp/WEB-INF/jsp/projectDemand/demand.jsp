@@ -103,6 +103,7 @@
                                             <tbody>
                                             <c:forEach items="${pageInfo.list}" var="DemandDisplay">
 	                                                <tr>
+	                                                <input type="hidden" value="${DemandDisplay.id}">
 	                                                    <td>${DemandDisplay.grade}</td>
 	                                                	<td class="project-name"><a href="${APP_PATH}/admin/demand/detailed?demandId=${DemandDisplay.id}">${DemandDisplay.demandName}</a></td>
 	                                                    <td>${DemandDisplay.createPeopele}</td>
