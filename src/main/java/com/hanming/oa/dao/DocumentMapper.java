@@ -20,5 +20,5 @@ public interface DocumentMapper {
 
     int updateByPrimaryKey(Document record);
     
-    List<DocumentDisplay> list(@Param("type")String type, @Param("documentName")String documentName);
+    List<DocumentDisplay> list(@Param("type")String type, @Param("documentName")String documentName,@Param("projectId")Integer projectId);
 }

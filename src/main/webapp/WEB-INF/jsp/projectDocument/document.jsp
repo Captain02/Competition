@@ -34,17 +34,17 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="${APP_PATH}/admin/project/list" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/document/list" class="serach-form" method="get">
 
                         
-						<select name="state" class="form-control">
-				          <option value="">项目状态</option>
-				          <option value="1">挂起</option>
-				          <option value="2">延期</option>
-				          <option value="3">进行</option>
-				          <option value="4">结束</option>
+						<select name="type" class="form-control">
+				          <option value="类型">类型</option>
+				          <option value="挂起">挂起</option>
+				          <option value="延期">延期</option>
+				          <option value="进行">进行</option>
+				          <option value="结束">结束</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${projectName == '项目名称'?'':projectName}" class="form-control" name="projectName">
+                        <input type="text" placeholder="输入项目名称" value="${documentName == '文档名'?null:projectName}" class="form-control" name="documentName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -65,13 +65,13 @@
                    <div class="om-header">
 						<div class="om-header-left">
 							<h3>
-								<span class="om-title">项目管理</span>
+								<span class="om-title">文档管理</span>
 								<jsp:include page="projectLeftManagement.jsp"></jsp:include>
 							</h3>
 						</div>
                          
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/doucument/addPage'">
                                 <i>+</i>新文档
                             </button>
                         </div>
@@ -101,17 +101,18 @@
                                             </thead>
 
                                             <tbody>
-                                          
+                                          			<c:forEach items="${pageInfo.list}" var="document">
 	                                                <tr>
-	                                                	<td class="project-name"><a href="">1</a></td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
+	                                                	<td class="project-name"><a href="">${document.documentName}</a></td>
+	                                                    <td>${document.type}</td>
+	                                                    <td>${document.createPeople}</td>
+	                                                    <td>${document.createTime}</td>
 	                                                    <td>
 	                                                    	<a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a> 
 	                                                    	<a href="" title="查看" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 	                                                    </td>
 	                                                </tr>
+                                          			</c:forEach>
                                             
                                             </tbody>
 
@@ -129,11 +130,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/project/list?pn=1&projectName=${projectName}&state=${state}">首页</a>
+                                            <a href="${APP_PATH}/admin/project/list?pn=1&type=${type}&documentName=${documentName}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum-1}&projectName=${projectName}&state=${state}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum-1}&type=${type}&documentName=${documentName}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -146,21 +147,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/project/list?pn=${pageNum}&projectName=${projectName}&state=${state}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/project/list?pn=${pageNum}&type=${type}&documentName=${documentName}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum+1}&projectName=${projectName}&state=${state}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum+1}&type=${type}&documentName=${documentName}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pages}&projectName=${projectName}&state=${state}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pages}&type=${type}&documentName=${documentName}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>

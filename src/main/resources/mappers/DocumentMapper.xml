@@ -142,9 +142,19 @@
   <!-- List<DocumentDisplay> list(@Param("type")String type, @Param("documentName")String documentName); -->
   <select id="list" resultType="DocumentDisplay">
   	select 
-  	do.id,do.documentName,do.type,tu.name AS creaePeople,do.createTime
-  	from 
+  	do.id,do.documentName,do.type,tu.name AS createPeople,do.createTime
+  	from document do
   	LEFT JOIN t_user tu ON tu.id=do.createPeople
+  	LEFT JOIN project pt ON pt.id=do.projectId
+  	<where>
+  		do.projectId = #{projectId}
+  		<if test="type != '类型'">
+  			AND do.type = #{type}
+  		</if>
+  		<if test="documentName != '文档名'">
+  			AND do.documentName = #{documentName}
+  		</if>
+  	</where>
   </select>
   
 </mapper>

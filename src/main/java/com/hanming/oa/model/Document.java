@@ -1,93 +1,94 @@
 package com.hanming.oa.model;
 
 public class Document {
-    private Integer id;
+	private Integer id;
 
-    private Integer projectid;
+	private Integer projectId;
 
-    private String documentname;
+	private String documentName;
 
-    private String type;
+	private String type;
 
-    private Integer createpeople;
+	private Integer createPeople;
 
-    private String createtime;
+	private String createTime;
 
-    private String keyword;
+	private String keyword;
 
-    private String filename;
+	private String fileName;
 
-    private String enclosure;
+	private String enclosure;
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getProjectid() {
-        return projectid;
-    }
+	public Integer getProjectId() {
+		return projectId;
+	}
 
-    public void setProjectid(Integer projectid) {
-        this.projectid = projectid;
-    }
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 
-    public String getDocumentname() {
-        return documentname;
-    }
+	public String getDocumentName() {
+		return documentName;
+	}
 
-    public void setDocumentname(String documentname) {
-        this.documentname = documentname == null ? null : documentname.trim();
-    }
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public Integer getCreatepeople() {
-        return createpeople;
-    }
+	public Integer getCreatePeople() {
+		return createPeople;
+	}
 
-    public void setCreatepeople(Integer createpeople) {
-        this.createpeople = createpeople;
-    }
+	public void setCreatePeople(Integer createPeople) {
+		this.createPeople = createPeople;
+	}
 
-    public String getCreatetime() {
-        return createtime;
-    }
+	public String getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime == null ? null : createtime.trim();
-    }
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
 
-    public String getKeyword() {
-        return keyword;
-    }
+	public String getKeyword() {
+		return keyword;
+	}
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword == null ? null : keyword.trim();
-    }
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
-    public String getFilename() {
-        return filename;
-    }
+	public String getFileName() {
+		return fileName;
+	}
 
-    public void setFilename(String filename) {
-        this.filename = filename == null ? null : filename.trim();
-    }
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
-    public String getEnclosure() {
-        return enclosure;
-    }
+	public String getEnclosure() {
+		return enclosure;
+	}
 
-    public void setEnclosure(String enclosure) {
-        this.enclosure = enclosure == null ? null : enclosure.trim();
-    }
+	public void setEnclosure(String enclosure) {
+		this.enclosure = enclosure;
+	}
+
 }
