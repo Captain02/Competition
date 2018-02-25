@@ -232,7 +232,7 @@ $(function () {
 	//弹出白名单窗口
 	$('#cc-username').click(function(){
        $('#myModal').modal('show');
-     })//end
+    })//end
      
      //判定当前项目所属的访问控制并在页面上勾选
      $('input[name="releaseControl"]').each(function(){
@@ -243,8 +243,10 @@ $(function () {
      
      //判定当前项目所属访问控制并添加active样式
      $('a.p-follow-btn').each(function(){
-    	 if($(this).attr('data-state')===$(this).attr('data-project-state')){
-    		 $(this).addClass('active');
+    	 if( $(this).attr('data-state')!==undefined && $(this).attr('data-project-state')!==undefined){
+    		 if( $(this).attr('data-state') === $(this).attr('data-project-state')){
+        		 $(this).addClass('active');
+        	 }
     	 }
      })
      
@@ -271,7 +273,7 @@ $(function () {
 	//以逗号分割用户名，以短线分割选中的白名单人员的id
 	var idArray = new Array(),
 		nameArray = new Array();
-	$('.yes').click(function(){
+	$('.yes-add').click(function(){
 		idArray.length = 0;
 		nameArray.length = 0;
 		$('.modal-body input[name="whiteListName"]:checked').each(function(){

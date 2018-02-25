@@ -13,7 +13,8 @@
 </head>
 <script type="text/javascript">
 function save() {
-	var ids="";
+	var ids=$('#ccid').val();
+	alert(ids);
 }
 </script>
 
@@ -58,6 +59,7 @@ function save() {
 			                  <label class="col-lg-2 col-sm-2 control-label"></label>
 			                  <div class="col-lg-10">
 			                    <button type="button" onclick="save()" class="btn btn-primary">添加成员</button>
+			                    <input type="hidden" id="ccid"/>
 			                  </div>
 			                </div>
 						</form>
@@ -81,18 +83,16 @@ function save() {
 		      
 		      <div class="modal-body">
 		      	<ul class="white-name-list clearfix">
-		      		
+		      		<c:forEach items="${users}" var="user">
 		      		 <li>
 		      		 	<div class="form-group">
-		      		 		<c:forEach items="${users}" var="user">
 			      		 		<label class="checkbox-inline">
 	     								<input class="resourceId" value="${user.name}" type="checkbox" data-userid="${user.id}" name="whiteListName">
 	   									${user.name}
 	  							</label>
-		      		 		</c:forEach>
 		      		 	</div>
 		      		 </li>
-			       		
+			       	</c:forEach>	
 		    
 		      	</ul>
 		      
@@ -100,7 +100,7 @@ function save() {
 		      <div class="modal-footer">
 		      
 		      	<button type="button" class="btn btn-default no" data-dismiss="modal">取消</button>
-		        <button type="button" class="btn btn-primary yes">确认</button>
+		        <button type="button" class="btn btn-primary yes-add">确认</button>
 		        
 		      </div>
 		    </div>

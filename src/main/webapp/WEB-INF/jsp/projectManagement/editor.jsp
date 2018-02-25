@@ -250,7 +250,7 @@ function save() {
 							      <div class="modal-footer">
 							      
 							      	<button type="button" class="btn btn-default no" data-dismiss="modal">取消</button>
-							        <button type="button" class="btn btn-primary yes">确认</button>
+							        <button type="button" class="btn btn-primary yes-add">确认</button>
 							        
 							      </div>
 							    </div>

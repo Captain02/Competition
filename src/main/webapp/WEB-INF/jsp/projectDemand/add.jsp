@@ -10,8 +10,7 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
+
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
@@ -185,16 +184,7 @@ function save() {
 				</div>
 				
 			</div>
-			 <script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
-                    <script type="text/javascript">
-                        $('#mydatepicker').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mydatepicker2').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mycalendar').dcalendar();
-                    </script>
+			
 		</div>
 	</section>
 </body>
