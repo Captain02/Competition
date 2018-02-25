@@ -50,7 +50,7 @@ public class ProjectController {
 		PageInfo<ProjectDisplay> pageInfo = null;
 		PageHelper.startPage(pn, 8);
 		List<ProjectDisplay> list = projectService.list(state, projectName);
-		pageInfo = new PageInfo<>(list);
+		pageInfo = new PageInfo<>(list,5);
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);

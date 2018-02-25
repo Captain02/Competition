@@ -67,4 +67,8 @@ public class DocumentService {
 		return detailedById;
 	}
 
+	public void delete(Integer id) {
+		documentMapper.deleteByPrimaryKey(id);
+	}
+
 }

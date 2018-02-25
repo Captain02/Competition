@@ -41,6 +41,21 @@ function changeState(ele) {
 		}
 	})
 }
+
+function dele(ele) {
+	var id = $(ele).attr('data-id');
+	
+	$.ajax({
+		url:"${APP_PATH}/admin/document/dele",
+		type:"POST",
+		data:{
+			'id':id,
+		},
+		success:function(result){
+			
+		}
+	})
+}
 </script>
 </head>
     <body class="bg-common">
@@ -90,7 +105,7 @@ function changeState(ele) {
 	                    <div class="content"> ${documentDetailed.descs} </div>
 						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/document/editor?id=${documentDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
-		                    <a onclick="" class="btn p-follow-btn">
+		                    <a onclick="dele(this);" data-id="${documentDetailed.id}" class="btn p-follow-btn">
 		                    	<i class="fa fa-times"></i>
 		                    	删除
 		                    </a> 

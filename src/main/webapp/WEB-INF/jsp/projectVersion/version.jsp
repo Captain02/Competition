@@ -34,18 +34,9 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="${APP_PATH}/admin/demand/list" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/version/list" class="serach-form" method="get">
 
-                        
-						<select name="state" class="form-control">
-				          <option value="需求状态">需求状态</option>
-				          <option value="草稿">草稿</option>
-				          <option value="激活">激活</option>
-				          <option value="已变更">已变更</option>
-				          <option value="待关闭">待关闭</option>
-				          <option value="已关闭">已关闭</option>
-       					</select>
-                        <input type="text" placeholder="输入项目名称" value=" " class="form-control" name="demandName">
+                        <input type="text" placeholder="输入项目名称" value="${versionName == '版本名称'?'':versionName}" class="form-control" name="versionName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -72,7 +63,7 @@
 						</div>
                          
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/version/addPage'">
                                 <i>+</i>新版本
                             </button>
                         </div>
@@ -89,32 +80,33 @@
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
+                                    
                                         <table class="table table-bordered table-striped table-project">
 
                                             <thead>
                                                 <tr>
                                                  <th>名称</th>
                                                  <th>创建人</th>
+                                                 <th>打包名称</th>
                                                  <th>打包日期</th>
-                                                 <th>创建日期</th>
                                                  <th>操作</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                         
+                                         		<c:forEach items="${pageInfo.list}" var="versions">
 	                                                <tr>
-	                                                <input type="hidden" value="${DemandDisplay.id}">
-	                                                	<td class="project-name"><a href="">1</a></td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
+	                                                <input type="hidden" value="${versions.id}">
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/version/detailed?id=${versions.id}">${versions.versionName}</a></td>
+	                                                    <td>${versions.createPeopleName}</td>
+	                                                    <td>${versions.lssuePackageName}</td>
+	                                                    <td>${versions.versionTime}</td>
 	                                                    <td>
-	                                                        <a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a> 
-	                                                        <a href="" title="查看" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+	                                                        <a href="${APP_PATH}/admin/version/editor?id=${versions.id}" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a> 
+	                                                        <a href="${APP_PATH}/admin/version/detailed?id=${versions.id}" title="查看" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 	                                                    </td>
 	                                                </tr>
-                                            
+                                         		</c:forEach>
                                             </tbody>
 
                                         </table>

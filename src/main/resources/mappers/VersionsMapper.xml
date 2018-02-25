@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.VersionsMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Versions">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="projectId" jdbcType="INTEGER" property="projectId" />
+    <result column="versionName" jdbcType="VARCHAR" property="versionName" />
+    <result column="versionTime" jdbcType="VARCHAR" property="versionTime" />
+    <result column="sourceAddress" jdbcType="VARCHAR" property="sourceAddress" />
+    <result column="downLoadAddress" jdbcType="VARCHAR" property="downLoadAddress" />
+    <result column="descs" jdbcType="VARCHAR" property="descs" />
+    <result column="lssuePackageAddress" jdbcType="VARCHAR" property="lssuePackageAddress" />
+    <result column="lssuePackageName" jdbcType="VARCHAR" property="lssuePackageName" />
+    <result column="createPeople" jdbcType="INTEGER" property="createPeople" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, projectId, versionName, versionTime, sourceAddress, downLoadAddress, descs, lssuePackageAddress, 
+    lssuePackageName, createPeople
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from versions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from versions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Versions">
+    insert into versions (id, projectId, versionName, 
+      versionTime, sourceAddress, downLoadAddress, 
+      descs, lssuePackageAddress, lssuePackageName, 
+      createPeople)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{versionName,jdbcType=VARCHAR}, 
+      #{versionTime,jdbcType=VARCHAR}, #{sourceAddress,jdbcType=VARCHAR}, #{downLoadAddress,jdbcType=VARCHAR}, 
+      #{descs,jdbcType=VARCHAR}, #{lssuePackageAddress,jdbcType=VARCHAR}, #{lssuePackageName,jdbcType=VARCHAR}, 
+      #{createPeople,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Versions">
+    insert into versions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        projectId,
+      </if>
+      <if test="versionName != null">
+        versionName,
+      </if>
+      <if test="versionTime != null">
+        versionTime,
+      </if>
+      <if test="sourceAddress != null">
+        sourceAddress,
+      </if>
+      <if test="downLoadAddress != null">
+        downLoadAddress,
+      </if>
+      <if test="descs != null">
+        descs,
+      </if>
+      <if test="lssuePackageAddress != null">
+        lssuePackageAddress,
+      </if>
+      <if test="lssuePackageName != null">
+        lssuePackageName,
+      </if>
+      <if test="createPeople != null">
+        createPeople,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="versionTime != null">
+        #{versionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAddress != null">
+        #{sourceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="downLoadAddress != null">
+        #{downLoadAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="lssuePackageAddress != null">
+        #{lssuePackageAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lssuePackageName != null">
+        #{lssuePackageName,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        #{createPeople,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Versions">
+    update versions
+    <set>
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        versionName = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="versionTime != null">
+        versionTime = #{versionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceAddress != null">
+        sourceAddress = #{sourceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="downLoadAddress != null">
+        downLoadAddress = #{downLoadAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="lssuePackageAddress != null">
+        lssuePackageAddress = #{lssuePackageAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lssuePackageName != null">
+        lssuePackageName = #{lssuePackageName,jdbcType=VARCHAR},
+      </if>
+      <if test="createPeople != null">
+        createPeople = #{createPeople,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Versions">
+    update versions
+    set projectId = #{projectId,jdbcType=INTEGER},
+      versionName = #{versionName,jdbcType=VARCHAR},
+      versionTime = #{versionTime,jdbcType=VARCHAR},
+      sourceAddress = #{sourceAddress,jdbcType=VARCHAR},
+      downLoadAddress = #{downLoadAddress,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      lssuePackageAddress = #{lssuePackageAddress,jdbcType=VARCHAR},
+      lssuePackageName = #{lssuePackageName,jdbcType=VARCHAR},
+      createPeople = #{createPeople,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+	  <!-- List<Versions> list(@Param("versionName")String versionName,@Param("projectId")Integer projectId); -->
+	<select id="list" resultType="Versions">
+		SELECT
+		vr.id,vr.versionName,vr.versionTime,vr.sourceAddress,vr.downLoadAddress,vr.descs,vr.lssuePackageAddress,vr.lssuePackageName,tu.`name` AS createPeopleName
+		FROM versions vr
+		LEFT JOIN t_user tu ON tu.id=vr.createPeople
+		<where>
+			vr.projectId=#{projectId}
+			<if test="versionName != '版本名称'">
+				AND vr.versionName=#{versionName}
+			</if>
+		</where>
+	</select>
+	
+	<!-- Versions detailedById(Integer id); -->
+	<select id="detailedById" resultType="Versions">
+		SELECT
+		vr.id,vr.versionName,vr.versionTime,vr.sourceAddress,vr.downLoadAddress,vr.descs,vr.lssuePackageAddress,vr.lssuePackageName,tu.`name` AS createPeopleName
+		FROM versions vr
+		LEFT JOIN t_user tu ON tu.id=vr.createPeople
+		WHERE vr.id=#{id}
+	</select>
+ 
+</mapper>

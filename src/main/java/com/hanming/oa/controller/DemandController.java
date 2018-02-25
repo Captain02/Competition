@@ -42,7 +42,7 @@ public class DemandController {
 		PageInfo<DemandDisplay> pageInfo = null;
 		PageHelper.startPage(pn, 8);
 		List<DemandDisplay> list = demandService.list(state, demandName, projectId);
-		pageInfo = new PageInfo<>(list);
+		pageInfo = new PageInfo<>(list,5);
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);

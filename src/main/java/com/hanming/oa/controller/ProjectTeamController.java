@@ -40,7 +40,7 @@ public class ProjectTeamController {
 		PageInfo<UserByProjectId> pageInfo = null;
 		PageHelper.startPage(pn, 8);
 		List<UserByProjectId> list = projectTeamService.list(projectId, userName);
-		pageInfo = new PageInfo<>(list);
+		pageInfo = new PageInfo<>(list,5);
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("userName", userName);

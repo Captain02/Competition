@@ -88,4 +88,12 @@ public class DocumentController {
 		documentService.insert(document, file, request, projectId, 0);
 		return Msg.success();
 	}
+
+	// 删除
+	@ResponseBody
+	@RequestMapping(value = "/dele", method = RequestMethod.POST)
+	public Msg dele(@RequestParam("id") Integer id) {
+		documentService.delete(id);
+		return Msg.success();
+	}
 }

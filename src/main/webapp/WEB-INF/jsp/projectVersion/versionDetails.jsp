@@ -41,6 +41,21 @@ function changeState(ele) {
 		}
 	})
 }
+
+function dele(ele) {
+	var id = $(ele).attr('data-id');
+	
+	$.ajax({
+		url:"${APP_PATH}/admin/version/dele",
+		type:"POST",
+		data:{
+			'id':id,
+		},
+		success:function(result){
+			
+		}
+	})
+}
 </script>
 </head>
     <body class="bg-common">
@@ -87,10 +102,10 @@ function changeState(ele) {
 	                <div class="panel-body">
 	                  <div class="profile-desk">
 	                    <h1>版本描述</h1>
-	                    <div class="content"> 213432 </div>
+	                    <div class="content"> ${version.descs} </div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href=""> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
-		                    <a onclick="" class="btn p-follow-btn">
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/version/editor?id=${version.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
+		                    <a onclick="dele(this);" data-id="${version.id}" class="btn p-follow-btn">
 		                    	<i class="fa fa-times"></i>
 		                    	删除
 		                    </a> 
@@ -106,15 +121,15 @@ function changeState(ele) {
 	              <ul class="p-info">
 	                <li>
 	                  <div class="title">版本名称</div>
-	                  <div class="desk"> </div>
+	                  <div class="desk">${version.versionName}</div>
 	                </li>
 	                <li>
-	                  <div class="title">打包日期</div>
-	                  <div class="desk"></div>
+	                  <div class="title">创建日期</div>
+	                  <div class="desk">${version.versionTime}</div>
 	                </li>
 	                <li>
 	                  <div class="title">创建人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${version.createPeopleName}</div>
 	                </li>
 	              
 	              </ul>

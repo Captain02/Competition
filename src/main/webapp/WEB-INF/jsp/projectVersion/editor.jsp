@@ -34,17 +34,17 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
-	var formData = new FormData($("#versionForm")[0]);
+	var formData = new FormData($("#demandForm")[0]);
 	//发送ajax请求
 	  $.ajax({
-		url:"${APP_PATH}/admin/version/add",
+		url:"${APP_PATH}/admin/version/editor",
 		type:"POST",
 		data:formData,
         contentType: false,  
         processData: false, 
 		success:function(result){
 		}
-	}) 
+	})  
 }
 </script>
 </head>
@@ -79,33 +79,33 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading">添加版本</header>
 						<div class="panel-body">
-						<form id="versionForm" action="" method="post">
-						
+						<form id="demandForm" action="" method="post">
+						<input type="hidden" value="${version.id}" name="id">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>版本名称</label>
 								<div class="col-sm-10">
-									<input name="versionName" value="" class="form-control" placeholder="填写版本名称" type="text">
+									<input name="versionName" value="${version.versionName}" class="form-control" placeholder="填写版本名称" type="text">
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">打包日期</label>
 								<div class="col-sm-10">
-									<input name="versionTime" value="" class="form-control" placeholder="打包日期" type="text">
+									<input name="versionTime" value="${version.versionTime}" class="form-control" placeholder="打包日期" type="text">
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">源代码地址</label>
 								<div class="col-sm-10">
-									<input name="sourceAddress" value="" class="form-control" placeholder="http://" type="text">
+									<input name="sourceAddress" value="${version.sourceAddress}" class="form-control" placeholder="http://" type="text">
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">下载地址</label>
 								<div class="col-sm-10">
-									<input name="downLoadAddress" value="" class="form-control" placeholder="http://" type="text">
+									<input name="downLoadAddress" value="${version.downLoadAddress}" class="form-control" placeholder="http://" type="text">
 								</div>
 							</div>
 							
@@ -119,7 +119,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容">${version.descs}</textarea>
 								</div>
 							</div>
 							
