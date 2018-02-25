@@ -105,6 +105,21 @@ function changeState(ele) {
 					</div>
 	              </div>
 	            </div>
+	          	
+	          	<div class="col-md-12">
+	          		<div class="panel">
+	          			<div class="panel-body">
+	          				<div class="profile-desk">
+	          				<h1>附件下载</h1>
+		          		<p>
+		          			<a href="" style="color:#6bc5a4">预览下载</a>
+		          		</p>
+	          			</div>
+	          			</div>
+	          		</div>
+	          	</div>
+	          
+	          
 	          </div>
 	        </div>
 	        <div class="col-md-4">

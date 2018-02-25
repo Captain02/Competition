@@ -21,7 +21,6 @@ body a, .toggle-btn span {
 	-moz-transition: 0.2s all;
 	-ms-transition: 0.2s all;
 }
-
 .no-select {
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -30,6 +29,7 @@ body a, .toggle-btn span {
 
 body a:hover {
 	cursor: pointer;
+	text-decoration: underline;
 }
 
 body {
