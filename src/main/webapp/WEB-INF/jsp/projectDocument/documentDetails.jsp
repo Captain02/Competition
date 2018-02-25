@@ -87,9 +87,9 @@ function changeState(ele) {
 	                <div class="panel-body">
 	                  <div class="profile-desk">
 	                    <h1>文档描述</h1>
-	                    <div class="content"> 213432 </div>
+	                    <div class="content"> ${documentDetailed.descs} </div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/document/editor?id=${documentDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
 		                    <a onclick="" class="btn p-follow-btn">
 		                    	<i class="fa fa-times"></i>
 		                    	删除
@@ -106,17 +106,24 @@ function changeState(ele) {
 	              <ul class="p-info">
 	                <li>
 	                  <div class="title">文档名称</div>
-	                  <div class="desk"> </div>
+	                  <div class="desk">${documentDetailed.documentName} </div>
 	                </li>
 	                <li>
 	                  <div class="title">文档类型</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${documentDetailed.type}</div>
 	                </li>
 	                <li>
 	                  <div class="title">创建人</div>
-	                  <div class="desk"></div>
+	                  <div class="desk">${documentDetailed.createPeople}</div>
 	                </li>
-	              
+	                <li>
+	                  <div class="title">关键字</div>
+	                  <div class="desk">${documentDetailed.keyword}</div>
+	                </li>
+	              	<li>
+	                  <div class="title">创建时间</div>
+	                  <div class="desk">${documentDetailed.createTime}</div>
+	                </li>
 	              </ul>
 	            </div>
 	          </div>

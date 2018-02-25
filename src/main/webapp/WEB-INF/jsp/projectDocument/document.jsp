@@ -44,7 +44,7 @@
 				          <option value="进行">进行</option>
 				          <option value="结束">结束</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${documentName == '文档名'?null:projectName}" class="form-control" name="documentName">
+                        <input type="text" placeholder="输入项目名称" value="${documentName == '文档名'?null:documentName}" class="form-control" name="documentName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -71,7 +71,7 @@
 						</div>
                          
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/doucument/addPage'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/document/addPage'">
                                 <i>+</i>新文档
                             </button>
                         </div>
@@ -87,7 +87,7 @@
                                 <header class="om-wrapper-header">文档 / 总数：${pageInfo.total}</header>
 
                                 <div class="om-wrpper-body">
-                                    <form action="" id="user-list" class="user-list">
+                                    <form action="documentForm" id="user-list" class="user-list">
                                         <table class="table table-bordered table-striped table-project">
 
                                             <thead>
@@ -103,13 +103,13 @@
                                             <tbody>
                                           			<c:forEach items="${pageInfo.list}" var="document">
 	                                                <tr>
-	                                                	<td class="project-name"><a href="">${document.documentName}</a></td>
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/document/detailed?id=${document.id}">${document.documentName}</a></td>
 	                                                    <td>${document.type}</td>
 	                                                    <td>${document.createPeople}</td>
 	                                                    <td>${document.createTime}</td>
 	                                                    <td>
-	                                                    	<a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a> 
-	                                                    	<a href="" title="查看" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
+	                                                    	<a href="${APP_PATH}/admin/document/editor?id=${document.id}" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a> 
+	                                                    	<a href="${APP_PATH}/admin/document/detailed?id=${document.id}" title="查看" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
 	                                                    </td>
 	                                                </tr>
                                           			</c:forEach>

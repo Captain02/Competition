@@ -45,7 +45,7 @@
 				          <option value="待关闭">待关闭</option>
 				          <option value="已关闭">已关闭</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value=" " class="form-control" name="demandName">
+                        <input type="text" placeholder="输入项目名称" value="${demandName == '需求名称'?null:demandName}" class="form-control" name="demandName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 

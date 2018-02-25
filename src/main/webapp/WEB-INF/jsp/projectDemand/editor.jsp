@@ -82,7 +82,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>需求名称</label>
 								<div class="col-sm-10">
-									<input name="demandName" value="" class="form-control" placeholder="填写需求名称" type="text">
+									<input name="demandName" value="${demandDetailed.demandName}" class="form-control" placeholder="填写需求名称" type="text">
 								</div>
 							</div>
 							<div class="form-group">

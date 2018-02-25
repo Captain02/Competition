@@ -37,7 +37,7 @@ function save() {
 		 var formData = new FormData($("#documentForm")[0]);
 			//发送ajax请求
 			  $.ajax({
-				url:"${APP_PATH}/admin/document/add",
+				url:"${APP_PATH}/admin/document/editor",
 				type:"POST",
 				data:formData,
 		        contentType: false,  
@@ -80,17 +80,17 @@ function save() {
 						<header class="panel-heading">添加文档</header>
 						<div class="panel-body">
 						<form id="documentForm" action="" method="post">
-						
+						<input type="hidden" name="id" value="${documentDetailed.id}">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>文档名称</label>
 								<div class="col-sm-10">
-									<input name="documentName" value="" class="form-control" placeholder="填写文档名称" type="text">
+									<input name="documentName" value="${documentDetailed.documentName}" class="form-control" placeholder="填写文档名称" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">关键字</label>
 								<div class="col-sm-10">
-									<input name="keyword" value="" class="form-control" placeholder="填写文档名称" type="text">
+									<input name="keyword" value="${documentDetailed.keyword}" class="form-control" placeholder="填写文档名称" type="text">
 								</div>
 							</div>
 							
@@ -98,7 +98,7 @@ function save() {
 			                  <label class="col-sm-2 col-sm-2 control-label"><span>*</span>类型</label>
 			                  <div class="col-sm-10">
 			                    <select name="type" class="form-control">
-			                      <option value="">请选择类型</option>
+			                      <option value="${documentDetailed.type}">${documentDetailed.type}</option>
 			                      <option value="正文">正文</option>
 			                      <option value="连接">连接</option>
 			                    </select>
@@ -108,7 +108,7 @@ function save() {
                 			<div class="form-group">
 								<label for="" class="col-sm-2 control-label">正文</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容">${documentDetailed.descs}</textarea>
 								</div>
 							</div>
 							

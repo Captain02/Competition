@@ -1,6 +1,6 @@
 package com.hanming.oa.model;
 
-public class Document {
+public class DocumentDetailed {
 	private Integer id;
 
 	private Integer projectId;
@@ -9,7 +9,7 @@ public class Document {
 
 	private String type;
 
-	private Integer createPeople;
+	private String createPeople;
 
 	private String createTime;
 
@@ -53,11 +53,11 @@ public class Document {
 		this.type = type;
 	}
 
-	public Integer getCreatePeople() {
+	public String getCreatePeople() {
 		return createPeople;
 	}
 
-	public void setCreatePeople(Integer createPeople) {
+	public void setCreatePeople(String createPeople) {
 		this.createPeople = createPeople;
 	}
 
@@ -99,13 +99,6 @@ public class Document {
 
 	public void setDescs(String descs) {
 		this.descs = descs;
-	}
-
-	@Override
-	public String toString() {
-		return "Document [id=" + id + ", projectId=" + projectId + ", documentName=" + documentName + ", type=" + type
-				+ ", createPeople=" + createPeople + ", createTime=" + createTime + ", keyword=" + keyword
-				+ ", fileName=" + fileName + ", enclosure=" + enclosure + ", descs=" + descs + "]";
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.Document;
+import com.hanming.oa.model.DocumentDetailed;
 import com.hanming.oa.model.DocumentDisplay;
 
 public interface DocumentMapper {
@@ -21,4 +22,6 @@ public interface DocumentMapper {
     int updateByPrimaryKey(Document record);
     
     List<DocumentDisplay> list(@Param("type")String type, @Param("documentName")String documentName,@Param("projectId")Integer projectId);
+
+	DocumentDetailed detailedById(Integer id);
 }
