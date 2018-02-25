@@ -66,22 +66,14 @@
 
                          <div class="om-header-left">
                             <h3>
-                                <span class="om-title">项目管理</span>
-                                <span class="om-list pro-href"> 
-									<a class="btn btn-info btn-sm">团队</a> 
-									<a class="btn btn-danger btn-sm">需求</a>
-									<a class="btn btn-primary btn-sm">任务</a> 
-									<a class="btn btn-warning btn-sm">Bug</a> 
-									<a class="btn btn-success btn-sm">文档</a>
-									<a class="btn btn-danger btn-sm">版本</a>
-									<a class="btn btn-warning btn-sm">报表</a>
-								</span>
+                                <span class="om-title">团队管理</span>
+                                <jsp:include page="projectLeftManagement.jsp"></jsp:include>
                             </h3>
                         </div>
 
                         <div class="om-header-right">
                             <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/project/addPage'">
-                                <i>+</i>新需求
+                                <i>+</i>新成员
                             </button>
                         </div>
 
@@ -109,16 +101,16 @@
                                             </thead>
 
                                             <tbody>
-                                           
+                                           			<c:forEach items="${pageInfo.list}" var="user">
 	                                                <tr>
-	                                                	<td class="project-name"><a href="">1</a></td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
+	                                                	<td class="project-name"><a href="">${user.name}</a></td>
+	                                                    <td>${user.roleName}</td>
+	                                                    <td>${user.joinTime}</td>
 	                                                    <td>
 	                                                       <a href="javascript:;" class="js-team-single btn btn-danger btn-xs" data-id="1513241746363200256" title="删除"><i class="fa fa-trash-o"></i> 删除</a>
 	                                                    </td>
 	                                                </tr>
-                                           
+                                           			</c:forEach>
                                             </tbody>
 
                                         </table>
@@ -135,11 +127,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/project/list?pn=1&projectName=${projectName}&state=${state}">首页</a>
+                                            <a href="${APP_PATH}/admin/projectTeam/list?pn=1&userName=${userName}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum-1}&projectName=${projectName}&state=${state}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/projectTeam/list?pn=${pageInfo.pageNum-1}&userName=${userName}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -152,21 +144,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/project/list?pn=${pageNum}&projectName=${projectName}&state=${state}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/projectTeam/list?pn=${pageNum}&userName=${userName}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pageNum+1}&projectName=${projectName}&state=${state}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/projectTeam/list?pn=${pageInfo.pageNum+1}&userName=${userName}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/project/list?pn=${pageInfo.pages}&projectName=${projectName}&state=${state}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/projectTeam/list?pn=${pageInfo.pages}&userName=${userName}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>

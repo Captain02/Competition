@@ -19,7 +19,7 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
-import com.hanming.oa.model.User;
+import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.ProjectTeamService;
 
@@ -63,7 +63,7 @@ public class DemandController {
 	@RequestMapping(value = "/editorPage", method = RequestMethod.GET)
 	public String editorPage(@RequestParam(value = "editor") Integer demandId, Model model, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		List<User> team = projectTeamService.list(projectId);
+		List<UserByProjectId> team = projectTeamService.list(projectId,"姓名");
 		DemandDetailed demandDetailed = demandService.detaileById(demandId);
 		model.addAttribute("demandDetailed", demandDetailed);
 		model.addAttribute("team", team);
@@ -83,7 +83,7 @@ public class DemandController {
 	@RequestMapping(value = "/addPage", method = RequestMethod.GET)
 	public String addPage(Model model, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		List<User> team = projectTeamService.list(projectId);
+		List<UserByProjectId> team = projectTeamService.list(projectId,"姓名");
 		model.addAttribute("team", team);
 		return "projectDemand/add";
 	}

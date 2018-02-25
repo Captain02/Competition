@@ -22,6 +22,7 @@ import com.hanming.oa.model.Project;
 import com.hanming.oa.model.ProjectDetailed;
 import com.hanming.oa.model.ProjectDisplay;
 import com.hanming.oa.model.User;
+import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
@@ -103,7 +104,7 @@ public class ProjectController {
 	public String update(@RequestParam("projectId") Integer projectId, Model model) {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		List<User> list = userService.list();
-		List<User> team = projectTeamService.list(projectId);
+		List<UserByProjectId> team = projectTeamService.list(projectId,"姓名");
 		List<User> MyWhite = WhiteListServer.listByProjectId(projectId);
 		model.addAttribute("white", list);
 		model.addAttribute("MyWhite", MyWhite);

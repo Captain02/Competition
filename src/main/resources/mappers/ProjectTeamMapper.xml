@@ -10,6 +10,10 @@
   <sql id="Base_Column_List">
     id, userId, projectId, joinTime
   </sql>
+  <!-- 带有部门和角色的查询sql -->
+	<sql id="WithDepAndRole">
+		tu.oldHeadFile,tu.headFile,tu.id,tu.username,tu.`password`,tu.`name`,tu.sex,tu.phone,tu.qq,tu.edu,td.id as tdId,tr.id as trId, td.`name` as tdName,tr.`name` as trName
+	</sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -80,14 +84,21 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <!-- List<User> listByProjectId(Integer projectId); -->
-  <select id="listByProjectId" parameterType="Integer" resultType="com.hanming.oa.model.User">
+  <!-- List<User> listByProjectId(@Param("projectId")Integer projectId,@Param("userName")String userName); -->
+  <select id="listByProjectId" resultType="UserByProjectId">
   	SELECT
-	tu.id,tu.`name`
+  	ptt.id AS projectId,tu.id,tu.`name`, tr.`name` AS roleName,ptt.joinTime
 	FROM
 	projectteam ptt 
 	LEFT JOIN t_user tu ON tu.id=ptt.userId
-	WHERE ptt.id = #{projectId}
+	LEFT JOIN t_user_role tur ON tu.id = tur.userId
+	LEFT JOIN t_role tr ON tur.roleId = tr.id
+	<where>
+		ptt.id = #{projectId}
+		<if test="userName != '姓名'">
+			AND tu.`name`=#{userName}
+		</if>
+	</where>
   </select>
   
   
