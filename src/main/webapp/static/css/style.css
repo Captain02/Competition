@@ -589,10 +589,9 @@ form#addUserInfo header {
 }
 
 .tools a {
-	background: #E3E4E8;
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
-	color: #858582;
+	color: #000;
 	float: left;
 	margin-left: 3px;
 	padding: 10px;
@@ -1792,6 +1791,13 @@ table.table-project tbody tr td.project-name a:hover{
     font-size: 20px;
     margin: 0 0 5px 0;
     text-transform: uppercase;
+}
+.profile-desk ul{
+	margin-left: 40px;
+	list-style: disc ;
+}
+.profile-desk ul li{
+	margin: 5px 0;
 }
 .profile-desk .designation {
     color: #49586e;
