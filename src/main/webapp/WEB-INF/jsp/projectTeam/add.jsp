@@ -14,7 +14,16 @@
 <script type="text/javascript">
 function save() {
 	var ids=$('#ccid').val();
-	alert(ids);
+	$.ajax({
+		url:"${APP_PATH}/admin/projectTeam/add",
+		type:"POST",
+		data:{
+			'ids':ids
+		},
+		success : function(result) {
+			
+		}
+	})
 }
 </script>
 

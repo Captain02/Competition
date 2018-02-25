@@ -94,13 +94,20 @@
 	LEFT JOIN t_user_role tur ON tu.id = tur.userId
 	LEFT JOIN t_role tr ON tur.roleId = tr.id
 	<where>
-		ptt.id = #{projectId}
+		ptt.projectId = #{projectId}
 		<if test="userName != '姓名'">
 			AND tu.`name`=#{userName}
 		</if>
 	</where>
   </select>
   
-  
+  <!-- void inserList(@Param("projectId")Integer projectId, @Param("idsIntList")List<Integer> idsIntList); -->
+  <insert id="inserList">
+  	insert into projectteam (userId,projectId)
+  	values
+  	<foreach collection="idsIntList" item="ids" separator=",">  
+            (#{ids},#{projectId})  
+    </foreach> 
+  </insert>
   
 </mapper>
