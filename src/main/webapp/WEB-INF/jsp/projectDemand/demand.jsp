@@ -15,6 +15,7 @@
    pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 </head>
     <body class="bg-common">
 
@@ -63,9 +64,13 @@
                 <div class="wrapper">
 
                     <div class="om-header">
-
-                         <jsp:include page="projectLeftManagement.jsp"></jsp:include>
-
+						<div class="om-header-left">
+							<h3>
+								<span class="om-title">项目管理</span>
+								<jsp:include page="projectLeftManagement.jsp"></jsp:include>
+							</h3>
+						</div>
+                         
                         <div class="om-header-right">
                             <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
                                 <i>+</i>新需求
@@ -113,35 +118,8 @@
 	                                                    <td>${DemandDisplay.state}</td>
 	                                                    <td>${DemandDisplay.stage}</td>
 	                                                    <td>
-	                                                        <div class="btn-group">
-	                                                            <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                                                	操作
-	                                                                <span class="caret"></span>
-	                                                            </button>
-	                                                            <ul class="dropdown-menu">
-	                                                                <li>
-	                                                                    <a href="${APP_PATH}/admin/demand/editorPage?demandId=${DemandDisplay.id}">编辑</a>
-	                                                                </li>
-	                                                                <li role="separator" class="divider"></li>
-	                                                                 <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="挂起">草稿</a>
-	                                                                </li>
-	                                                                 <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="延期">激活</a>
-	                                                                </li>
-	                                                                 <li role="separator" class="divider"></li>
-	                                                                  <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="进行">已变更</a>
-	                                                                </li>
-	                                                                 <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="结束">待关闭</a>
-	                                                                </li>
-	                                                                 <li role="separator" class="divider"></li>
-	                                                                  <li>
-	                                                                    <a onclick="changeState(this);" data-projectId="${DemandDisplay.id}" data-state="进行">已关闭</a>
-	                                                                </li>
-	                                                            </ul>
-	                                                        </div>
+	                                                        <a href="" title="任务" class="btn btn-success btn-xs"><i class="fa fa-tasks"></i></a> 
+	                                                        <a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
 	                                                    </td>
 	                                                </tr>
                                             </c:forEach>

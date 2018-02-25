@@ -22,7 +22,7 @@
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
-	var editor = KindEditor.create('textarea[name="descs"],textarea[name="acceptance"]',{
+	var editor = KindEditor.create('textarea[name="descs"],textarea[name="acceptanceStand"]',{
 		allowFileManager : true,
 		filterMode:false,
 		allowImageUpload : true,
@@ -65,15 +65,17 @@ function save() {
 
 			</div>
 			<div class="wrapper">
-				<div class="om-header">
-					 <jsp:include page="projectLeftManagement.jsp"></jsp:include>
-					<div class="clearfix"></div>
-				</div>
+				<div class="om-header-left">
+							<h3>
+								<span class="om-title">需求管理</span>
+								<jsp:include page="projectLeftManagement.jsp"></jsp:include>
+							</h3>
+						</div>
 				
 				<div class="row">
 				<div class="col-lg-12">
 					<section class="panel">
-						<header class="panel-heading">添加需求</header>
+						<header class="panel-heading">编辑需求</header>
 						<div class="panel-body">
 						<form id="topicText" action="" method="post">
 						<input type="hidden" value="${demandDetailed.id}" name="id">
@@ -192,16 +194,6 @@ function save() {
 				</div>
 				
 			</div>
-			 <script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
-                    <script type="text/javascript">
-                        $('#mydatepicker').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mydatepicker2').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mycalendar').dcalendar();
-                    </script>
 		</div>
 	</section>
 </body>

@@ -33,7 +33,7 @@ function changeState(ele) {
 		type:"POST",
 		success:function(result){
 			$('#myModal').modal('show');
-			ShowTips('.modal-title','执行结果','.modal-body','项目状态更改成功');
+			ShowTips('.modal-title','执行结果','.modal-body','需求状态更改成功');
 			 setTimeout(function(){
 				 $('#myModal').modal('hide');
 				 window.location.reload();
@@ -95,14 +95,12 @@ function changeState(ele) {
 	                    <div class="content">${demandDetailed.acceptanceStand}</div>
 	                    <h1>关联项目</h1>
 	                    <div class="content">${demandDetailed.projectName}</div>
-						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/demand/editorPage?editor=${demandDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
-		                    <input type="hidden" value="${demandDetailed.state}">
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="草稿" data-project-state="${projectDetailed.state}" data-status="1">草稿</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="激活" data-project-state="${projectDetailed.state}" data-status="2">激活</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="已变更" data-project-state="${projectDetailed.state}" data-status="3">已变更</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="待关闭" data-project-state="${projectDetailed.state}" data-status="4">待关闭</a>
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="已关闭" data-project-state="${projectDetailed.state}" data-status="5">已关闭</a>  
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="草稿" data-project-state="${demandDetailed.state}" data-status="1">草稿</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="激活" data-project-state="${demandDetailed.state}" data-status="2">激活</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="已变更" data-project-state="${demandDetailed.state}" data-status="3">已变更</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="待关闭" data-project-state="${demandDetailed.state}" data-status="4">待关闭</a>
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="已关闭" data-project-state="${demandDetailed.state}" data-status="5">已关闭</a>  
 						</div>
 					</div>
 	              </div>

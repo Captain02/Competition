@@ -22,7 +22,7 @@
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
-	var editor = KindEditor.create('textarea[name="descs"],textarea[name="acceptance"]',{
+	var editor = KindEditor.create('textarea[name="descs"],textarea[name="acceptanceStand"]',{
 		allowFileManager : true,
 		filterMode:false,
 		allowImageUpload : true,
@@ -66,9 +66,14 @@ function save() {
 			</div>
 			<div class="wrapper">
 				<div class="om-header">
-					 <jsp:include page="projectLeftManagement.jsp"></jsp:include>
-					<div class="clearfix"></div>
-				</div>
+						<div class="om-header-left">
+							<h3>
+								<span class="om-title">需求管理</span>
+								<jsp:include page="projectLeftManagement.jsp"></jsp:include>
+							</h3>
+						</div>
+                        <div class="clearfix"></div>
+                    </div>
 				
 				<div class="row">
 				<div class="col-lg-12">
