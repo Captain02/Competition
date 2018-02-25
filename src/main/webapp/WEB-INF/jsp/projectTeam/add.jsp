@@ -11,6 +11,11 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 </head>
+<script type="text/javascript">
+function save() {
+	var ids="";
+}
+</script>
 
 <body class="bg-common">
 	<section>
@@ -52,7 +57,7 @@
 							<div class="form-group">
 			                  <label class="col-lg-2 col-sm-2 control-label"></label>
 			                  <div class="col-lg-10">
-			                    <button type="submit" class="btn btn-primary">添加成员</button>
+			                    <button type="button" onclick="save()" class="btn btn-primary">添加成员</button>
 			                  </div>
 			                </div>
 						</form>
@@ -79,10 +84,12 @@
 		      		
 		      		 <li>
 		      		 	<div class="form-group">
-		      		 		<label class="checkbox-inline">
-     								<input class="resourceId" value="" type="checkbox" data-userid="" name="whiteListName">
-   									李白
-  							</label>
+		      		 		<c:forEach items="${users}" var="user">
+			      		 		<label class="checkbox-inline">
+	     								<input class="resourceId" value="${user.name}" type="checkbox" data-userid="${user.id}" name="whiteListName">
+	   									${user.name}
+	  							</label>
+		      		 		</c:forEach>
 		      		 	</div>
 		      		 </li>
 			       		

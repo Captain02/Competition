@@ -19,4 +19,8 @@ public class ProjectTeamService {
 		return list;
 	}
 
+	public void inserList(Integer projectId, List<Integer> idsIntList) {
+		projectTeamMapper.inserList(projectId,idsIntList);
+	}
+
 }

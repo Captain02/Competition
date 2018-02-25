@@ -72,8 +72,8 @@
                         </div>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/project/addPage'">
-                                <i>+</i>新成员
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/projectTeam/addPage'">
+                                <i>+</i>添加成员
                             </button>
                         </div>
 

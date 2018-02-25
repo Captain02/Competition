@@ -21,4 +21,6 @@ public interface ProjectTeamMapper {
     int updateByPrimaryKey(ProjectTeam record);
 
 	List<UserByProjectId> listByProjectId(@Param("projectId")Integer projectId,@Param("userName")String userName);
+
+	void inserList(@Param("projectId")Integer projectId, @Param("idsIntList")List<Integer> idsIntList);
 }
