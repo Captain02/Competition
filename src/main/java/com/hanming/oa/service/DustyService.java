@@ -22,9 +22,10 @@ public class DustyService {
 
 	@Autowired
 	DustyMapper dustyMapper;
-	
-	public List<DustyDisplay> list(String type, String state, String dustyName, Integer herfPage, Integer projectId, Integer userId) {
-		List<DustyDisplay> list = dustyMapper.list(type,state,dustyName,herfPage,projectId,userId);
+
+	public List<DustyDisplay> list(String type, String state, String dustyName, Integer herfPage, Integer projectId,
+			Integer userId) {
+		List<DustyDisplay> list = dustyMapper.list(type, state, dustyName, herfPage, projectId, userId);
 		return list;
 	}
 
@@ -60,16 +61,18 @@ public class DustyService {
 				e.printStackTrace();
 			}
 		}
-		if (i==1) {
+		if (i == 1) {
 			for (Integer integer : idInt) {
 				dusty.setAssignor(integer);
 				dustyMapper.insertSelective(dusty);
 			}
-		}else {
-			for (Integer integer : idInt) {
-				dustyMapper.updateByPrimaryKeySelective(dusty);
-			}
+		} else {
+			dustyMapper.updateByPrimaryKeySelective(dusty);
 		}
+	}
+
+	public void addBatch(List<Dusty> dusties) {
+		dustyMapper.addBatch(dusties);
 	}
 
 }

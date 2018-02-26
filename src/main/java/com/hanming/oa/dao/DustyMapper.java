@@ -27,4 +27,5 @@ public interface DustyMapper {
 
 	DustyDetailed detailedById(Integer id);
 
+	void addBatch(@Param("list")List<Dusty> dusties);
 }

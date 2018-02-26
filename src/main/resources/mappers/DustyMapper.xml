@@ -305,4 +305,13 @@
 	WHERE pdy.id=#{id}
   </select>
   
+  <!-- void addBatch(@Param("list")List<Dusty> dusties); -->
+  <insert id="addBatch">
+  	insert into projectdusty (projectId,demandId,creatPeople,assignor,taskType,taskName,descs,remarks,`grade`,workTime,`state`)
+  	values
+  	<foreach collection="list" item="dusty" separator=",">  
+     (#{dusty.projectId},#{dusty.demandId},#{dusty.creatPeople},#{dusty.assignor},#{dusty.taskType},#{dusty.taskName},#{dusty.descs},#{dusty.remarks},#{dusty.grade},#{dusty.workTime},#{dusty.state})  
+    </foreach> 
+  </insert>
+  
 </mapper>

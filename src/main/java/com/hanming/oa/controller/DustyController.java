@@ -181,17 +181,40 @@ public class DustyController {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
 		List<DemandDisplay> demands = demandService.list("需求状态", "需求名称", projectId);
+		
+		List<Integer> counts = Arrays.asList(1,2,3,4,5,6,7,8,9,0);
+		
 		model.addAttribute("team", team);
+		model.addAttribute("counts", counts);
 		model.addAttribute("demands", demands);
+		
 		return "projectDusty/addBatch";
 	}
 	
 	//批量添加
 	@ResponseBody
 	@RequestMapping(value = "/addBatch", method = RequestMethod.POST)
-	public Msg addBatch(@RequestBody List<Dusty> dustys) {
-		System.out.println(dustys);
-		return null;
+	public Msg addBatch(@RequestBody List<Dusty> dustys,HttpServletRequest request) {
+		
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		
+		List<Dusty> dusties = dustys.stream()
+			.filter((x) -> {
+				if ((x.getTaskName()!=null)&&(x.getTaskName()!="")) {
+					x.setProjectId(projectId);
+					x.setState("未开始");
+					x.setCreatPeople(userId);
+					return true;
+				}else {
+					return false;
+				}
+			})
+			.collect(Collectors.toList());
+		
+		dustyService.addBatch(dusties);
+		
+		return Msg.success();
 	}
 	
 	//克隆

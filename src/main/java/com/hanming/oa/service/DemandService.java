@@ -18,6 +18,7 @@ import com.hanming.oa.dao.DemandMapper;
 import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
+import com.hanming.oa.model.Dusty;
 
 @Service
 public class DemandService {
