@@ -1,6 +1,8 @@
 package com.hanming.oa.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,6 +33,7 @@ import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.DustyService;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 @Controller
 @RequestMapping("/admin/dusty")
@@ -80,6 +83,7 @@ public class DustyController {
 		List<DemandDisplay> demands = demandService.list("需求状态", "需求名称", projectId);
 		model.addAttribute("team", team);
 		model.addAttribute("demands", demands);
+		model.addAttribute("dustyDetailed", new DustyDetailed());
 		return "projectDusty/add";
 	}
 
@@ -93,11 +97,13 @@ public class DustyController {
 		dusty.setProjectId(projectId);
 		dusty.setState("进行中");
 		
-		Set<Integer> idInt = null;
+		Set<Integer> idInt =null;
 		String[] ids = ccid.split("-");
 		List<String> idStr = Arrays.asList(ids);
-		if (idStr.get(0) != "" && idStr!=null) {
+		if (!("".equals(idStr.get(0))) && idStr!=null) {
 			idInt = idStr.stream().map((x) -> Integer.parseInt(x)).collect(Collectors.toSet());
+		}else {
+			idInt = new HashSet<>();
 		}
 		idInt.add(dusty.getAssignor());
 
@@ -186,5 +192,18 @@ public class DustyController {
 	public Msg addBatch(@RequestBody List<Dusty> dustys) {
 		System.out.println(dustys);
 		return null;
+	}
+	
+	//克隆
+	@RequestMapping(value = "/clone", method = RequestMethod.GET)
+	public String clone(@RequestParam("id") Integer id, Model model,HttpServletRequest request) {
+		DustyDetailed dustyDetailed = dustyService.detailedById(id);
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
+		List<DemandDisplay> demands = demandService.list("需求状态", "需求名称", projectId);
+		model.addAttribute("dustyDetailed", dustyDetailed);
+		model.addAttribute("team", team);
+		model.addAttribute("demands", demands);
+		return "projectDusty/add";
 	}
 }

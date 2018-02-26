@@ -98,6 +98,7 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>任务类型</label>
 								<div class="col-sm-10">
 									<select name="taskType" class="form-control">
+				                      <option value="${dustyDetailed.taskType}" >${dustyDetailed.taskType}</option>
 				                      <option value="设计" >设计</option>
 							          <option value="开发" >开发</option>
 							          <option value="测试" >测试</option>
@@ -124,21 +125,21 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">任务名称</label>
 								<div class="col-sm-10">
-									<input name="taskName" value="" class="form-control" placeholder="任务名称" type="text">
+									<input name="taskName" value="${dustyDetailed.taskName}" class="form-control" placeholder="任务名称" type="text">
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容">${dustyDetailed.descs}</textarea>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>备注</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="remarks" class="form-control" style="height: 300px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="remarks" class="form-control" style="height: 300px;" placeholder="请填写内容">${dustyDetailed.remarks}</textarea>
 								</div>
 							</div>
 							
@@ -146,6 +147,7 @@ function save() {
 			                  <label class="col-sm-2 col-sm-2 control-label">优先级</label>
 			                  <div class="col-sm-10">
 			                    <select name="grade" class="form-control">
+			                      <option value="${dustyDetailed.grade}">${dustyDetailed.grade}</option>
 			                      <option value="1级">1级</option>
 			                      <option value="2级">2级</option>
 			                      <option value="3级">3级</option>
@@ -157,7 +159,7 @@ function save() {
                 		<div class="form-group">
 							<label for="" class="col-sm-2 control-label">预计工时</label>
 							<div class="col-sm-10">
-								<input name="workTime" value="" class="form-control" placeholder="预计工时" type="text">
+								<input name="workTime" value="${dustyDetailed.workTime}" class="form-control" placeholder="预计工时" type="text">
 							</div>
 						</div>
 						
@@ -165,9 +167,9 @@ function save() {
 							<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 							<div class="col-sm-10">
 								<div class="input-group input-large" data-date-format="yyyy-mm-dd">
-				                      <input value="" class="form-control dpd1" name="startTime" placeholder="开始日期"  type="text">
+				                      <input value="${dustyDetailed.startTime}" class="form-control dpd1" name="startTime" placeholder="开始日期"  type="text">
 				                      <span class="input-group-addon">To</span>
-				                      <input value="" class="form-control dpd2" name="endTime" placeholder="结束日期" type="text">
+				                      <input value="${dustyDetailed.endTime}" class="form-control dpd2" name="endTime" placeholder="结束日期" type="text">
                    				</div>
 							</div>
 						</div>
@@ -180,35 +182,16 @@ function save() {
 							</div>
 						</div>
                           
-                         <!--  <div class="form-group addprocessPerson noProcessPerson">
-                              <div class="col-sm-2">
-                                  <label for="" class="control-label text-center">
-                                     	 审批人（点击可删除）
-                                  </label>
-                              </div>
-                              <div class="col-sm-10">
-
-                                  填入点击的审批人信息
-                                  <div class="person-name-area person-name-list">
-
-                                  </div>
-
-
-                                  <span class="glyphicon glyphicon-plus-sign btn-person"></span>
-
-                                  <div class="clearfix"></div>
-
-                              </div>
-
-                            </div> -->
-							
 						  <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>
                                 <div class="col-sm-10">
                                     <input id="file" type="file" name="file">
                                 </div>
                           </div>
-							
+							<c:if test="${dustyDetailed.fileName != null}">
+								<input type="hidden" value="${dustyDetailed.enclosure}" name="enclosure" >
+								<input type="hidden" value="${dustyDetailed.fileName}" name="fileName" >
+							</c:if>
 							
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>

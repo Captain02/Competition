@@ -113,6 +113,7 @@ function dele(ele) {
 		                    <a onclick="changeState(this);" data-state="已暂停" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已暂停</a>
 		                    <a onclick="changeState(this);" data-state="已取消" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已取消</a>
 		                    <a onclick="changeState(this);" data-state="已关闭" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已关闭</a> 
+		                    <a href="${APP_PATH}/admin/dusty/clone?id=${dustyDetailed.id}" class="btn p-follow-btn">克隆</a> 
 						</div>
 					</div>
 	              </div>

@@ -175,27 +175,6 @@ function save() {
 						</div>
 						
                           
-                         <!--  <div class="form-group addprocessPerson noProcessPerson">
-                              <div class="col-sm-2">
-                                  <label for="" class="control-label text-center">
-                                     	 审批人（点击可删除）
-                                  </label>
-                              </div>
-                              <div class="col-sm-10">
-
-                                  填入点击的审批人信息
-                                  <div class="person-name-area person-name-list">
-
-                                  </div>
-
-
-                                  <span class="glyphicon glyphicon-plus-sign btn-person"></span>
-
-                                  <div class="clearfix"></div>
-
-                              </div>
-
-                            </div> -->
 							
 						  <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>
