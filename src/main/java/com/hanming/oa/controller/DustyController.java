@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.model.DemandDisplay;
+import com.hanming.oa.model.DustyDetailed;
 import com.hanming.oa.model.DustyDisplay;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserByProjectId;
@@ -74,4 +75,12 @@ public class DustyController {
 		return "projectDusty/add";
 	}
 	
+	
+	//跳转详情
+	@RequestMapping(value="/detailed",method=RequestMethod.GET)
+	public String detailed(@RequestParam("id")Integer id,Model model) {
+		 DustyDetailed dustyDetailed =  dustyService.detailedById(id);
+		model.addAttribute("dustyDetailed", dustyDetailed);
+		return "projectDusty/dustyDetails";
+	}
 }

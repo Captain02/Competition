@@ -122,7 +122,7 @@
                                            		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
 	                                                <tr>
 	                                                    <td>${DustyDisplay.grade}</td>
-	                                                	<td class="project-name"><a href="">${DustyDisplay.taskName}</a></td>
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${DustyDisplay.id}">${DustyDisplay.taskName}</a></td>
 	                                                    <td>${DustyDisplay.state}</td>
 	                                                    <td>${DustyDisplay.endTime}</td>
 	                                                    <td>${DustyDisplay.assignor}</td>

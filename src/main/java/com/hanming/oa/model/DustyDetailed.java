@@ -1,21 +1,17 @@
 package com.hanming.oa.model;
 
-import java.util.Date;
-
-public class Dusty {
+public class DustyDetailed {
 	private Integer id;
 
-	private Integer projectId;
-
-	private Integer demandId;
+	private String demandName;
 
 	private String taskType;
 
-	private Integer completPeople;
+	private String completPeople;
 
-	private Integer creatPeople;
+	private String creatPeople;
 
-	private Integer assignor;
+	private String assignor;
 
 	private String taskName;
 
@@ -47,20 +43,12 @@ public class Dusty {
 		this.id = id;
 	}
 
-	public Integer getProjectId() {
-		return projectId;
+	public String getDemandName() {
+		return demandName;
 	}
 
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
-	}
-
-	public Integer getDemandId() {
-		return demandId;
-	}
-
-	public void setDemandId(Integer demandId) {
-		this.demandId = demandId;
+	public void setDemandName(String demandName) {
+		this.demandName = demandName;
 	}
 
 	public String getTaskType() {
@@ -71,27 +59,27 @@ public class Dusty {
 		this.taskType = taskType;
 	}
 
-	public Integer getCompletPeople() {
+	public String getCompletPeople() {
 		return completPeople;
 	}
 
-	public void setCompletPeople(Integer completPeople) {
+	public void setCompletPeople(String completPeople) {
 		this.completPeople = completPeople;
 	}
 
-	public Integer getCreatPeople() {
+	public String getCreatPeople() {
 		return creatPeople;
 	}
 
-	public void setCreatPeople(Integer creatPeople) {
+	public void setCreatPeople(String creatPeople) {
 		this.creatPeople = creatPeople;
 	}
 
-	public Integer getAssignor() {
+	public String getAssignor() {
 		return assignor;
 	}
 
-	public void setAssignor(Integer assignor) {
+	public void setAssignor(String assignor) {
 		this.assignor = assignor;
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.Dusty;
+import com.hanming.oa.model.DustyDetailed;
 import com.hanming.oa.model.DustyDisplay;
 
 public interface DustyMapper {
@@ -23,4 +24,7 @@ public interface DustyMapper {
 	List<DustyDisplay> list(@Param("type") String type, @Param("state") String state,
 			@Param("dustyName") String dustyName, @Param("herfPage") Integer herfPage,
 			@Param("projectId") Integer projectId, @Param("userId") Integer userId);
+
+	DustyDetailed detailedById(Integer id);
+
 }

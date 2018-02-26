@@ -259,7 +259,7 @@
 	<where>
 		pdy.projectId=#{projectId}
 		<if test="type != '任务类型'">
-			AND pdy.type=#{type}
+			AND pdy.taskType=#{type}
 		</if>
 		<if test="state != '任务状态'">
 			AND pdy.state=#{state}
@@ -286,4 +286,21 @@
 		</if>
 	</where>
   </select>
+  
+  <!-- DustyDetailed detailedById(Integer id); -->
+  <select id="detailedById" parameterType="Integer" resultType="DustyDetailed">
+  	SELECT
+	pdy.id,d.demandName,tu2.`name` AS completPeople,pdy.grade,pdy.taskName,
+	pdy.state,pdy.endTime,pdy.workTime,
+	tu.`name` AS creatPeople,tu2.`name` AS assignor,
+	pdy.descs,pdy.remarks,pdy.createTime,
+	pdy.startTime,pdy.enclosure,pdy.fileName,
+	pdy.taskType
+	FROM projectdusty pdy
+	LEFT JOIN t_user tu ON tu.id=pdy.creatPeople
+	LEFT JOIN t_user tu2 ON tu2.id=pdy.completPeople
+	LEFT JOIN demand d ON d.id=pdy.demandId
+	WHERE pdy.id=#{id}
+  </select>
+  
 </mapper>
