@@ -253,7 +253,7 @@
 	pdy.id,pdy.grade,pdy.taskName,pdy.state,pdy.endTime,pdy.workTime,tu.`name` AS creatPeople,tu2.`name` AS assignor,d.demandName AS demandName
 	FROM projectdusty pdy
 	LEFT JOIN t_user tu ON tu.id=pdy.creatPeople
-	LEFT JOIN t_user tu2 ON tu2.id=pdy.completPeople
+	LEFT JOIN t_user tu2 ON tu2.id=pdy.assignor
 	LEFT JOIN demand d ON d.id=pdy.demandId
 	LEFT JOIN project p ON p.id=pdy.projectId
 	<where>

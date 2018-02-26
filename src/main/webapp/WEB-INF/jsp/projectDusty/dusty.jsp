@@ -16,7 +16,38 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script type="text/javascript">
+function changeState(ele) {
+	var state = $(ele).attr('data-state');
+	var id = $(ele).attr('data-id');
+	$.ajax({
+		url:"${APP_PATH}/admin/dusty/changeState",
+		data:{
+			'state':state,
+			'id':id
+		},
+		type:"POST",
+		success:function(result){
+		}
+	})
+	}
+function assignTask(ele) {
+	var dustyId = $(ele).attr('data-dustyId');
+	var assignor = $(ele).attr('data-assignor');
+	$.ajax({
+		url:"${APP_PATH}/admin/dusty/assignTask",
+		data:{
+			'dustyId':dustyId,
+			'assignor':assignor
+		},
+		type:"POST",
+		success:function(result){
+		}
+	})
+	}
+</script>
 </head>
+
     <body class="bg-common">
 
         <section>
@@ -102,58 +133,58 @@
 
                                 <div class="om-wrpper-body">
                                     <form action="" id="user-list" class="user-list">
-                                        <table class="table table-bordered table-striped table-project">
+                                    <table class="table table-bordered table-striped table-project">
 
-                                            <thead>
+                                        <thead>
+                                            <tr>
+                                             <th>级别</th>
+                                             <th>名称</th>
+                                             <th>状态</th>
+                                             <th>截止日期</th>
+                                             <th>创建者</th>
+                                             <th>指派给</th>
+                                             <th>预工时</th>
+                                             <th>需求</th>
+                                             <th>操作</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
                                                 <tr>
-                                                 <th>级别</th>
-                                                 <th>名称</th>
-                                                 <th>状态</th>
-                                                 <th>截止日期</th>
-                                                 <th>指派给</th>
-                                                 <th>完成者</th>
-                                                 <th>预工时</th>
-                                                 <th>需求</th>
-                                                 <th>操作</th>
+                                                    <td>${DustyDisplay.grade}</td>
+                                                	<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${DustyDisplay.id}">${DustyDisplay.taskName}</a></td>
+                                                    <td>${DustyDisplay.state}</td>
+                                                    <td>${DustyDisplay.endTime}</td>
+                                                    <td>${DustyDisplay.creatPeople}</td>
+                                                    <td>${DustyDisplay.assignor}</td>
+                                                    <td>${DustyDisplay.workTime}</td>
+                                                    <td>${DustyDisplay.demandName}</td>
+                                                    <td>
+                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派">
+															<i class="glyphicon glyphicon-hand-right"></i>
+														</a>
+														
+														<a onclick="changeState(this);" data-state="进行中" data-id="${DustyDisplay.id}" class="btn btn-success btn-xs" title="开始">
+															<i class="glyphicon glyphicon-triangle-right "></i>
+														</a>
+														
+														<a onclick="changeState(this);" data-state="已完成" data-id="${DustyDisplay.id}" class="btn btn-info btn-xs" title="完成">
+															<i class="glyphicon glyphicon-ok-sign "></i>
+														</a>
+														
+														<a href="${APP_PATH}/admin/dusty/editor?id=${DustyDisplay.id}" class="btn btn-danger btn-xs" title="编辑">
+															<i class="glyphicon glyphicon-edit"></i>
+														</a>
+														
+                                                    </td>
                                                 </tr>
-                                            </thead>
+                                       		</c:forEach>
+                                       
+                                        </tbody>
 
-                                            <tbody>
-                                           		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
-	                                                <tr>
-	                                                    <td>${DustyDisplay.grade}</td>
-	                                                	<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${DustyDisplay.id}">${DustyDisplay.taskName}</a></td>
-	                                                    <td>${DustyDisplay.state}</td>
-	                                                    <td>${DustyDisplay.endTime}</td>
-	                                                    <td>${DustyDisplay.assignor}</td>
-	                                                    <td>${DustyDisplay.creatPeople}</td>
-	                                                    <td>${DustyDisplay.workTime}</td>
-	                                                    <td>${DustyDisplay.demandName}</td>
-	                                                    <td>
-	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派" data-toggle="modal" data-target="#myModal">
-																<i class="glyphicon glyphicon-hand-right"></i>
-															</a>
-															
-															<a href="" class="btn btn-success btn-xs" title="开始">
-																<i class="glyphicon glyphicon-triangle-right "></i>
-															</a>
-															
-															<a href="" class="btn btn-info btn-xs" title="完成">
-																<i class="glyphicon glyphicon-ok-sign "></i>
-															</a>
-															
-															<a href="" class="btn btn-danger btn-xs" title="编辑">
-																<i class="glyphicon glyphicon-edit"></i>
-															</a>
-															
-	                                                    </td>
-	                                                </tr>
-                                           		</c:forEach>
-                                           
-                                            </tbody>
-
-                                        </table>
-                                    </form>
+                                    </table>
+                                </form>
                                 </div>
 
                             </div>
@@ -230,16 +261,38 @@
         <h4 class="modal-title" id="myModalLabel">任务指派给？</h4>
       </div>
       <div class="modal-body">
-        <select id="acceptid" class="form-control">
-              <option value="">请选择指派给</option>
-        </select>
-        <p style="margin-bottom: 10px;"></p>
-        <textarea id="note" placeholder="备注说明" style="height:90px;" class="form-control"></textarea>
+        <table class="table table-bordered table-hover text-center">
+						<thead>
+							<tr>
+								<th>用户名</th>
+								<th>姓名</th>
+								<th>部门</th>
+								<th>职位</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${users}" var="user">
+								<tr>
+									<td>${user.userName}</td>
+									<td>${user.name}</td>
+									<td style="width:20%;">${user.departmentName}</td>
+									<td style="width:20%;">${user.roleName}</td>
+									<td>
+										<!-- hidden 1 -->
+										<button class="btn btn-defalut btn-success btn-sm" data-dustyId="" data-assignor="" onclick="assignTask(this);">
+											<span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
+										</button>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
             <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
             <button class="btn btn-primary js-dialog-taskaccept" type="button">提交</button>
-          </div>
+          </div> -->
     </div>
   </div>
 </div>

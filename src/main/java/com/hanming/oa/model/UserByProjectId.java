@@ -11,6 +11,36 @@ public class UserByProjectId {
 
 	private String joinTime;
 
+	private String departmentName;
+
+	private Integer userId;
+
+	private String userName;
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public Integer getProjectTeamId() {
 		return projectTeamId;
 	}

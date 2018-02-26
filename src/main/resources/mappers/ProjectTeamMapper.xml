@@ -87,10 +87,12 @@
   <!-- List<User> listByProjectId(@Param("projectId")Integer projectId,@Param("userName")String userName); -->
   <select id="listByProjectId" resultType="UserByProjectId">
   	SELECT
-  	ptt.id AS projectTeamId,tu.id,tu.`name`, tr.`name` AS roleName,ptt.joinTime
+  	ptt.id AS projectTeamId,tu.id,tu.`name`, tr.`name` AS roleName,ptt.joinTime,td.`name` AS departmentName,tu.id AS userId,tu.`username` AS userName
 	FROM
 	projectteam ptt 
 	LEFT JOIN t_user tu ON tu.id=ptt.userId
+	LEFT JOIN t_department_user tdu ON tdu.userId = tu.id
+	LEFT JOIN t_department td ON td.id = tdu.departmentId
 	LEFT JOIN t_user_role tur ON tu.id = tur.userId
 	LEFT JOIN t_role tr ON tur.roleId = tr.id
 	<where>

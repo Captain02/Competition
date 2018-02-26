@@ -183,4 +183,13 @@ public class Dusty {
 		this.fileName = fileName;
 	}
 
+	@Override
+	public String toString() {
+		return "Dusty [id=" + id + ", projectId=" + projectId + ", demandId=" + demandId + ", taskType=" + taskType
+				+ ", completPeople=" + completPeople + ", creatPeople=" + creatPeople + ", assignor=" + assignor
+				+ ", taskName=" + taskName + ", descs=" + descs + ", remarks=" + remarks + ", grade=" + grade
+				+ ", workTime=" + workTime + ", state=" + state + ", createTime=" + createTime + ", startTime="
+				+ startTime + ", endTime=" + endTime + ", enclosure=" + enclosure + ", fileName=" + fileName + "]";
+	}
+
 }

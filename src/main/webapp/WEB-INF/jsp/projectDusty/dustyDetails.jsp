@@ -23,21 +23,28 @@
 <script type="text/javascript">
 function changeState(ele) {
 	var state = $(ele).attr('data-state');
-	var projectId = $(ele).attr('data-projectId');
+	var id = $(ele).attr('data-id');
 	$.ajax({
-		url:"${APP_PATH}/admin/project/changeState",
+		url:"${APP_PATH}/admin/dusty/changeState",
 		data:{
 			'state':state,
-			'projectId':projectId
+			'id':id
 		},
 		type:"POST",
 		success:function(result){
-			$('#myModal').modal('show');
-			ShowTips('.modal-title','执行结果','.modal-body','项目状态更改成功');
-			 setTimeout(function(){
-				 $('#myModal').modal('hide');
-				 window.location.reload();
-			 },1000);
+		}
+	})
+}
+
+function dele(ele) {
+	var id = $(ele).attr('data-id');
+	$.ajax({
+		url:"${APP_PATH}/admin/dusty/dele",
+		data:{
+			'id':id
+		},
+		type:"POST",
+		success:function(result){
 		}
 	})
 }
@@ -98,14 +105,14 @@ function changeState(ele) {
 	                    <h1>关联项目</h1>
 	                    <div class="content">${dustyDetailed.demandName}</div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
-		                    <a onclick="" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">未开始</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">进行中</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">已完成</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">已暂停</a>
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">已取消</a>
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">已关闭</a> 
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
+		                    <a onclick="dele(this);" data-id="${dustyDetailed.id}" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
+		                    <a onclick="changeState(this);" data-state="未开始" data-id="${dustyDetailed.id}" class="btn p-follow-btn">未开始</a> 
+		                    <a onclick="changeState(this);" data-state="进行中" data-id="${dustyDetailed.id}" class="btn p-follow-btn">进行中</a> 
+		                    <a onclick="changeState(this);" data-state="已完成" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已完成</a> 
+		                    <a onclick="changeState(this);" data-state="已暂停" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已暂停</a>
+		                    <a onclick="changeState(this);" data-state="已取消" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已取消</a>
+		                    <a onclick="changeState(this);" data-state="已关闭" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已关闭</a> 
 						</div>
 					</div>
 	              </div>

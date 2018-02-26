@@ -35,7 +35,18 @@ $(function(){
 
 function save() {
 	//抄送人id
-	var copyToUserId = $('#ccid')
+	//var copyToUserId = $('#ccid')
+	var formData = new FormData($("#DustyForm")[0]);
+	//发送ajax请求
+	  $.ajax({
+		url:"${APP_PATH}/admin/dusty/add",
+		type:"POST",
+		data:formData,
+        contentType: false,  
+        processData: false, 
+		success:function(result){
+		}
+	})  
 }
 </script>
 </head>
@@ -70,13 +81,12 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading">添加任务</header>
 						<div class="panel-body">
-						<form id="demandForm" action="" method="post">
+						<form id="DustyForm" action="" method="post">
 						
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>关联需求</label>
 								<div class="col-sm-10">
-									<select name="needsid" class="form-control">
-				                      <option value="">请选择项目需求</option> 
+									<select name="demandId" class="form-control">
 				                      <c:forEach items="${demands}" var="demand">
 										<option value="${demand.id}">${demand.demandName}</option>
 									</c:forEach>
@@ -88,7 +98,14 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>任务类型</label>
 								<div class="col-sm-10">
 									<select name="taskType" class="form-control">
-				                      <option value="">请选择任务类型</option>
+				                      <option value="设计" >设计</option>
+							          <option value="开发" >开发</option>
+							          <option value="测试" >测试</option>
+							          <option value="研究" >研究</option>
+							          <option value="讨论" >讨论</option>
+							          <option value="界面" >界面</option>
+							          <option value="事务" >事务</option>
+							          <option value="其他" >其他</option>
 				                    </select>
 								</div>
 							</div>
@@ -97,7 +114,6 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>指派给</label>
 								<div class="col-sm-10">
 								<select name="assignor" class="form-control">
-									<option value="">请选择指派人</option>
 									<c:forEach items="${team}" var="user">
 										<option value="${user.id}">${user.name}</option>
 									</c:forEach>
@@ -108,7 +124,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">任务名称</label>
 								<div class="col-sm-10">
-									<input name="workTime" value="" class="form-control" placeholder="任务名称" type="text">
+									<input name="taskName" value="" class="form-control" placeholder="任务名称" type="text">
 								</div>
 							</div>
 							
@@ -122,15 +138,14 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>备注</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="acceptanceStand" class="form-control" style="height: 300px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="remarks" class="form-control" style="height: 300px;" placeholder="请填写内容"></textarea>
 								</div>
 							</div>
 							
 							<div class="form-group">
 			                  <label class="col-sm-2 col-sm-2 control-label">优先级</label>
 			                  <div class="col-sm-10">
-			                    <select name="level" class="form-control">
-			                      <option value="">请选择优先级</option>
+			                    <select name="grade" class="form-control">
 			                      <option value="1级">1级</option>
 			                      <option value="2级">2级</option>
 			                      <option value="3级">3级</option>
@@ -142,7 +157,7 @@ function save() {
                 		<div class="form-group">
 							<label for="" class="col-sm-2 control-label">预计工时</label>
 							<div class="col-sm-10">
-								<input name="workTime" value="" class="form-control" placeholder="任务名称" type="text">
+								<input name="workTime" value="" class="form-control" placeholder="预计工时" type="text">
 							</div>
 						</div>
 						
@@ -150,9 +165,9 @@ function save() {
 							<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 							<div class="col-sm-10">
 								<div class="input-group input-large" data-date-format="yyyy-mm-dd">
-				                      <input value="" class="form-control dpd1" name="startDate" placeholder="开始日期"  type="text">
+				                      <input value="" class="form-control dpd1" name="startTime" placeholder="开始日期"  type="text">
 				                      <span class="input-group-addon">To</span>
-				                      <input value="" class="form-control dpd2" name="endDate" placeholder="结束日期" type="text">
+				                      <input value="" class="form-control dpd2" name="endTime" placeholder="结束日期" type="text">
                    				</div>
 							</div>
 						</div>
@@ -160,7 +175,7 @@ function save() {
 						<div class="form-group">
 							<label for="" class="col-sm-2 control-label">抄送给</label>
 							<div class="col-sm-10">
-								<input name="workTime" value="" class="form-control" id="cc-username" placeholder="点击选择抄送人" type="text">
+								<input name="" value="" class="form-control" id="cc-username" placeholder="点击选择抄送人" type="text">
 								<input name="ccid" id="ccid" value="" type="hidden">
 							</div>
 						</div>
@@ -216,12 +231,9 @@ function save() {
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">抄送给？</h4>
 				      </div>
-				      <c:forEach items="${MyWhite}" var="MyWhitePeople">
-				      <input type="hidden" value="${MyWhitePeople.id}" class="hasResourceId">
-				      </c:forEach>
 				      <div class="modal-body">
 				      	<ul class="white-name-list clearfix">
-				      		 <c:forEach items="${white}" var="people">
+				      		 <c:forEach items="${team}" var="people">
 				      		 <li>
 				      		 	<div class="form-group">
 				      		 		<label class="checkbox-inline">
