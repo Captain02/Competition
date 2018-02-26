@@ -116,7 +116,7 @@ function assignTask(ele) {
                             <a id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/dusty/addPage'">
                                 <i>+</i>新任务
                             </a>
-                            <a id="addButton" type="button" class="btn btn-warning btn-sm" onclick="">
+                            <a id="addButton" type="button" class="btn btn-warning btn-sm" onclick="window.location.href='${APP_PATH}/admin/dusty/addBatch'">
                                 <i>+</i>批量添加
                             </a>
                         </div>

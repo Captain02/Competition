@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -166,5 +167,24 @@ public class DustyController {
 
 		dustyService.insert(dusty,file,null,0,request);
 		return Msg.success();
+	}
+	
+	//跳转批量添加
+	@RequestMapping(value = "/addBatch", method = RequestMethod.GET)
+	public String addBatchPage(Model model,HttpServletRequest request) {
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
+		List<DemandDisplay> demands = demandService.list("需求状态", "需求名称", projectId);
+		model.addAttribute("team", team);
+		model.addAttribute("demands", demands);
+		return "projectDusty/addBatch";
+	}
+	
+	//批量添加
+	@ResponseBody
+	@RequestMapping(value = "/addBatch", method = RequestMethod.POST)
+	public Msg addBatch(@RequestBody List<Dusty> dustys) {
+		System.out.println(dustys);
+		return null;
 	}
 }

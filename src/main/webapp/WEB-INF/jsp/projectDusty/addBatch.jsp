@@ -90,6 +90,9 @@ function save() {
 					  <td>
 					  	<select name="needsid" class="form-control">
                       		<option value="">相关需求</option>
+                      		 <c:forEach items="${demands}" var="demand">
+								<option value="${demand.id}">${demand.demandName}</option>
+							</c:forEach>
 						</select>
 					  </td>
                       <td><input name="name" class="form-control" type="text"></td>
@@ -109,6 +112,9 @@ function save() {
                       <td>
                       	<select name="acceptid" class="form-control">
               				<option value="">指派给</option>
+              				<c:forEach items="${team}" var="user">
+								<option value="${user.id}">${user.name}</option>
+							</c:forEach>
             			</select>
             		</td>
                       <td><input name="tasktime" class="form-control" type="number"></td>
