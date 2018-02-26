@@ -152,6 +152,7 @@ function assignTask(ele) {
                                         <tbody>
                                        		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
                                                 <tr>
+                                                    <input value="${DustyDisplay.id}" type="hidden" >
                                                     <td>${DustyDisplay.grade}</td>
                                                 	<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${DustyDisplay.id}">${DustyDisplay.taskName}</a></td>
                                                     <td>${DustyDisplay.state}</td>
