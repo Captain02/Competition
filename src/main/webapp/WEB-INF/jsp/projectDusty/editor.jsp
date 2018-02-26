@@ -21,7 +21,7 @@
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
-	var editor = KindEditor.create('textarea[name="descs"],textarea[name="acceptanceStand"]',{
+	var editor = KindEditor.create('textarea[name="descs"],textarea[name="remarks"]',{
 		allowFileManager : true,
 		filterMode:false,
 		allowImageUpload : true,
@@ -63,7 +63,6 @@ function save() {
 				</a>
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 				<div class="clearfix"></div>
-
 			</div>
 			<div class="wrapper">
 				<div class="om-header">
@@ -175,13 +174,6 @@ function save() {
 							</div>
 						</div>
 						
-						<div class="form-group">
-							<label for="" class="col-sm-2 control-label">抄送给</label>
-							<div class="col-sm-10">
-								<input name="" value="" class="form-control" id="cc-username" placeholder="点击选择抄送人" type="text">
-								<input name="ccid" id="ccid" value="" type="hidden">
-							</div>
-						</div>
                           
                          <!--  <div class="form-group addprocessPerson noProcessPerson">
                               <div class="col-sm-2">

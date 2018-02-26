@@ -21,7 +21,7 @@
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
-	var editor = KindEditor.create('textarea[name="descs"],textarea[name="acceptanceStand"]',{
+	var editor = KindEditor.create('textarea[name="descs"],textarea[name="remarks"]',{
 		allowFileManager : true,
 		filterMode:false,
 		allowImageUpload : true,
