@@ -6,8 +6,9 @@
 
 //隐藏侧边栏效果
 $(function () {
+	$('body').addClass('stickey-menu');
 	//隐藏侧边栏的效果
-    var flag = 1;
+    var flag = 0;
     var toggleBtn = $('.toggle-btn');
     var bodyClass = $('body');
     var menuText = $('.nav-user a');

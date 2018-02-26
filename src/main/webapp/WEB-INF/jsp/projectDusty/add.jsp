@@ -34,7 +34,8 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
-	
+	//抄送人id
+	var copyToUserId = $('#ccid')
 }
 </script>
 </head>
@@ -156,6 +157,13 @@ function save() {
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">抄送给</label>
+							<div class="col-sm-10">
+								<input name="workTime" value="" class="form-control" id="cc-username" placeholder="点击选择抄送人" type="text">
+								<input name="ccid" id="ccid" value="" type="hidden">
+							</div>
+						</div>
                           
                          <!--  <div class="form-group addprocessPerson noProcessPerson">
                               <div class="col-sm-2">
@@ -198,6 +206,43 @@ function save() {
 					</section>
 				</div>
 					
+				</div>
+				
+				<!-- 模态框 -->
+				 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">抄送给？</h4>
+				      </div>
+				      <c:forEach items="${MyWhite}" var="MyWhitePeople">
+				      <input type="hidden" value="${MyWhitePeople.id}" class="hasResourceId">
+				      </c:forEach>
+				      <div class="modal-body">
+				      	<ul class="white-name-list clearfix">
+				      		 <c:forEach items="${white}" var="people">
+				      		 <li>
+				      		 	<div class="form-group">
+				      		 		<label class="checkbox-inline">
+       								<input class="resourceId" value="${people.id}" type="checkbox" data-userid="${people.id}" name="whiteListName">
+     									${people.name}
+    									</label>
+				      		 	</div>
+				      		 </li>
+					       		
+				      </c:forEach>
+				      	</ul>
+				      
+				      </div>
+				      <div class="modal-footer">
+				      
+				      	<button type="button" class="btn btn-default no" data-dismiss="modal">取消</button>
+				        <button type="button" class="btn btn-primary yes-add">确认</button>
+				        
+				      </div>
+				    </div>
+				  </div>
 				</div>
 				
 			</div>
