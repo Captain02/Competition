@@ -76,6 +76,9 @@ function save() {
 								<div class="col-sm-10">
 									<select name="needsid" class="form-control">
 				                      <option value="">请选择项目需求</option> 
+				                      <c:forEach items="${demands}" var="demand">
+										<option value="${demand.id}">${demand.demandName}</option>
+									</c:forEach>
 		                    		</select>
 								</div>
 							</div>
@@ -94,6 +97,9 @@ function save() {
 								<div class="col-sm-10">
 								<select name="assignor" class="form-control">
 									<option value="">请选择指派人</option>
+									<c:forEach items="${team}" var="user">
+										<option value="${user.id}">${user.name}</option>
+									</c:forEach>
 								</select>
 								</div>
 							</div>
@@ -124,10 +130,10 @@ function save() {
 			                  <div class="col-sm-10">
 			                    <select name="level" class="form-control">
 			                      <option value="">请选择优先级</option>
-			                      <option value="1">1级</option>
-			                      <option value="2">2级</option>
-			                      <option value="3">3级</option>
-			                      <option value="4">4级</option>
+			                      <option value="1级">1级</option>
+			                      <option value="2级">2级</option>
+			                      <option value="3级">3级</option>
+			                      <option value="4级">4级</option>
 			                    </select>
 			                  </div>
                 		</div>
@@ -150,26 +156,8 @@ function save() {
 							</div>
 						</div>
 						
-						<div class="form-group">
-                            <div class="col-sm-2">
-                                <label for="" class="control-label">
-                                   	 流程选择
-                                </label>
-                            </div>
-                            
-                            <div class="col-sm-10">
-                                 <select name="processDefinitionKey" class="form-control selectProcessKey">
-                                    <option value="tip" style="display: none;">请选择一个审批流程</option>
-                                </select>
-                                
-                                <p class="processTips noProcessPerson">
-                                	选择了<span class="processName"></span>流程，
-                                	请添加<span class="processPersonNum"></span>位审批人
-                                </p>
-                            </div>
-                          </div>
                           
-                          <div class="form-group addprocessPerson noProcessPerson">
+                         <!--  <div class="form-group addprocessPerson noProcessPerson">
                               <div class="col-sm-2">
                                   <label for="" class="control-label text-center">
                                      	 审批人（点击可删除）
@@ -177,7 +165,7 @@ function save() {
                               </div>
                               <div class="col-sm-10">
 
-                                  <!-- 填入点击的审批人信息 -->
+                                  填入点击的审批人信息
                                   <div class="person-name-area person-name-list">
 
                                   </div>
@@ -189,7 +177,7 @@ function save() {
 
                               </div>
 
-                            </div>
+                            </div> -->
 							
 						  <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>

@@ -74,14 +74,15 @@
                         <div class="om-header-right">
                        		
 							<div class="tools pull-left" style="margin-right: 3px;">
-								<a href="" class="btn btn-default btn-sm active">指派给我</a>
-								<a href="" class="btn btn-default btn-sm">由我创建</a>
-								<a href="" class="btn btn-default btn-sm">由我解决</a>
-								<a href="" class="btn btn-default btn-sm">由我关闭</a>
-								<a href="" class="btn btn-default btn-sm">由我取消</a>
+								<a href="${APP_PATH}/admin/dusty/list?herfPage=0" class="btn btn-default btn-sm">显示全部</a>
+								<a href="${APP_PATH}/admin/dusty/list?herfPage=1" class="btn btn-default btn-sm active">指派给我</a>
+								<a href="${APP_PATH}/admin/dusty/list?herfPage=2" class="btn btn-default btn-sm">由我创建</a>
+								<a href="${APP_PATH}/admin/dusty/list?herfPage=3" class="btn btn-default btn-sm">由我解决</a>
+								<a href="${APP_PATH}/admin/dusty/list?herfPage=4" class="btn btn-default btn-sm">由我关闭</a>
+								<a href="${APP_PATH}/admin/dusty/list?herfPage=5" class="btn btn-default btn-sm">由我取消</a>
 							</div>
 							
-                            <a id="addButton" type="button" class="btn btn-success btn-sm" onclick="">
+                            <a id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/dusty/addPage'">
                                 <i>+</i>新任务
                             </a>
                             <a id="addButton" type="button" class="btn btn-warning btn-sm" onclick="">
@@ -118,16 +119,16 @@
                                             </thead>
 
                                             <tbody>
-                                           
+                                           		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
 	                                                <tr>
-	                                                    <td>1</td>
-	                                                	<td class="project-name"><a href="">1</a></td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
+	                                                    <td>${DustyDisplay.grade}</td>
+	                                                	<td class="project-name"><a href="">${DustyDisplay.taskName}</a></td>
+	                                                    <td>${DustyDisplay.state}</td>
+	                                                    <td>${DustyDisplay.endTime}</td>
+	                                                    <td>${DustyDisplay.assignor}</td>
+	                                                    <td>${DustyDisplay.creatPeople}</td>
+	                                                    <td>${DustyDisplay.workTime}</td>
+	                                                    <td>${DustyDisplay.demandName}</td>
 	                                                    <td>
 	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派">
 																<i class="glyphicon glyphicon-hand-right"></i>
@@ -147,6 +148,7 @@
 															
 	                                                    </td>
 	                                                </tr>
+                                           		</c:forEach>
                                            
                                             </tbody>
 
@@ -164,11 +166,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/demand/list?pn=1&projectName=${demandName}&state=${state}">首页</a>
+                                            <a href="${APP_PATH}/admin/dusty/list?pn=1&type=${type}&state=${state}&dustyName=${dustyName}&herfPage=${herfPage}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum-1}&projectName=${demandName}&state=${state}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/dusty/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}&dustyName=${dustyName}&herfPage=${herfPage}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -181,21 +183,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/demand/list?pn=${pageNum}&projectName=${demandName}&state=${state}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/dusty/list?pn=${pageNum}&type=${type}&state=${state}&dustyName=${dustyName}&herfPage=${herfPage}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum+1}&projectName=${demandName}&state=${state}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/dusty/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}&dustyName=${dustyName}&herfPage=${herfPage}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pages}&projectName=${demandName}&state=${state}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/dusty/list?pn=${pageInfo.pages}&type=${type}&state=${state}&dustyName=${dustyName}&herfPage=${herfPage}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>
