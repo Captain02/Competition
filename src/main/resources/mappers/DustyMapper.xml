@@ -295,10 +295,12 @@
 	tu.`name` AS creatPeople,tu2.`name` AS assignor,
 	pdy.descs,pdy.remarks,pdy.createTime,
 	pdy.startTime,pdy.enclosure,pdy.fileName,
-	pdy.taskType
+	pdy.taskType,tu.id AS creatPeopleId,tu2.id AS assignorId,tu3.id AS completPeopleId,
+	tu3.`name` AS completPeople,d.id AS demandId
 	FROM projectdusty pdy
 	LEFT JOIN t_user tu ON tu.id=pdy.creatPeople
-	LEFT JOIN t_user tu2 ON tu2.id=pdy.completPeople
+	LEFT JOIN t_user tu2 ON tu2.id=pdy.assignor
+	LEFT JOIN t_user tu3 ON tu3.id=pdy.completPeople
 	LEFT JOIN demand d ON d.id=pdy.demandId
 	WHERE pdy.id=#{id}
   </select>

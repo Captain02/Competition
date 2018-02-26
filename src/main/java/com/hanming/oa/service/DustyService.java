@@ -67,7 +67,6 @@ public class DustyService {
 			}
 		}else {
 			for (Integer integer : idInt) {
-				dusty.setAssignor(integer);
 				dustyMapper.updateByPrimaryKeySelective(dusty);
 			}
 		}

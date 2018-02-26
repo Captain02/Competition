@@ -135,6 +135,36 @@ public class DustyController {
 	@ResponseBody
 	@RequestMapping(value = "/assignTask", method = RequestMethod.POST)
 	public Msg dele(@RequestParam("dustyId") Integer dustyId,@RequestParam("assignor") Integer assignor) {
+		Dusty dusty = new Dusty();
+		dusty.setId(dustyId);
+		dusty.setAssignor(assignor);
+		dustyService.update(dusty);
+		return Msg.success();
+	}
+	
+	//跳转编辑
+	@RequestMapping(value="/editor",method=RequestMethod.GET)
+	public String editor(@RequestParam("id") Integer id, Model model,HttpServletRequest request) {
+		DustyDetailed dustyDetailed = dustyService.detailedById(id);
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
+		List<DemandDisplay> demands = demandService.list("需求状态", "需求名称", projectId);
+		model.addAttribute("dustyDetailed", dustyDetailed);
+		model.addAttribute("team", team);
+		model.addAttribute("demands", demands);
+		return "projectDusty/editor";
+	}
+	
+	// 添加
+	@ResponseBody
+	@RequestMapping(value = "/editor", method = RequestMethod.POST)
+	public Msg editor(Dusty dusty, @RequestParam("ccid") String ccid, MultipartFile file, HttpServletRequest request) {
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		dusty.setCreatPeople(userId);
+		dusty.setProjectId(projectId);
+
+		dustyService.insert(dusty,file,null,0,request);
 		return Msg.success();
 	}
 }

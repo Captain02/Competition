@@ -3,9 +3,17 @@ package com.hanming.oa.model;
 public class DustyDetailed {
 	private Integer id;
 
+	private Integer demandId;
+	
 	private String demandName;
 
 	private String taskType;
+	
+	private Integer completPeopleId;
+
+	private Integer creatPeopleId;
+
+	private Integer assignorId;
 
 	private String completPeople;
 
@@ -43,6 +51,14 @@ public class DustyDetailed {
 		this.id = id;
 	}
 
+	public Integer getDemandId() {
+		return demandId;
+	}
+
+	public void setDemandId(Integer demandId) {
+		this.demandId = demandId;
+	}
+
 	public String getDemandName() {
 		return demandName;
 	}
@@ -57,6 +73,30 @@ public class DustyDetailed {
 
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
+	}
+
+	public Integer getCompletPeopleId() {
+		return completPeopleId;
+	}
+
+	public void setCompletPeopleId(Integer completPeopleId) {
+		this.completPeopleId = completPeopleId;
+	}
+
+	public Integer getCreatPeopleId() {
+		return creatPeopleId;
+	}
+
+	public void setCreatPeopleId(Integer creatPeopleId) {
+		this.creatPeopleId = creatPeopleId;
+	}
+
+	public Integer getAssignorId() {
+		return assignorId;
+	}
+
+	public void setAssignorId(Integer assignorId) {
+		this.assignorId = assignorId;
 	}
 
 	public String getCompletPeople() {
@@ -170,5 +210,4 @@ public class DustyDetailed {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
 }
