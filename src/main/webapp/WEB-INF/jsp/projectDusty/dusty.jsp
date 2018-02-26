@@ -130,7 +130,7 @@
 	                                                    <td>${DustyDisplay.workTime}</td>
 	                                                    <td>${DustyDisplay.demandName}</td>
 	                                                    <td>
-	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派">
+	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派" data-toggle="modal" data-target="#myModal">
 																<i class="glyphicon glyphicon-hand-right"></i>
 															</a>
 															
@@ -227,11 +227,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
+        <h4 class="modal-title" id="myModalLabel">任务指派给？</h4>
       </div>
       <div class="modal-body">
-        
+        <select id="acceptid" class="form-control">
+              <option value="">请选择指派给</option>
+        </select>
+        <p style="margin-bottom: 10px;"></p>
+        <textarea id="note" placeholder="备注说明" style="height:90px;" class="form-control"></textarea>
       </div>
+      <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+            <button class="btn btn-primary js-dialog-taskaccept" type="button">提交</button>
+          </div>
     </div>
   </div>
 </div>
