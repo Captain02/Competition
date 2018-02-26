@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -152,7 +152,7 @@ function assignTask(ele) {
                                         <tbody>
                                        		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
                                                 <tr>
-                                                    <input value="${DustyDisplay.id}" type="hidden" >
+                                                    <input value="${DustyDisplay.id}" type="hidden" class="dustyDisplayId">
                                                     <td>${DustyDisplay.grade}</td>
                                                 	<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${DustyDisplay.id}">${DustyDisplay.taskName}</a></td>
                                                     <td>${DustyDisplay.state}</td>
@@ -162,7 +162,7 @@ function assignTask(ele) {
                                                     <td>${DustyDisplay.workTime}</td>
                                                     <td>${DustyDisplay.demandName}</td>
                                                     <td>
-                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派">
+                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派" data-toggle="modal" data-target="#myModal">
 															<i class="glyphicon glyphicon-hand-right"></i>
 														</a>
 														
@@ -249,6 +249,10 @@ function assignTask(ele) {
 						var toolsA = $('.tools > a');
 						$(toolsA[thisPagelocationHref]).addClass('active');
 						$(toolsA[thisPagelocationHref]).siblings().removeClass('active');
+						
+						$('.btn-assign').click(function(){
+							$('.btn-select-assign').attr('data-dustyId',$(this).parent().siblings('input.dustyDisplayId').val());
+						})
 					})
 				</script>
         </section>
@@ -281,7 +285,7 @@ function assignTask(ele) {
 									<td style="width:20%;">${user.roleName}</td>
 									<td>
 										<!-- hidden 1 -->
-										<button class="btn btn-defalut btn-success btn-sm" data-dustyId="" data-assignor="" onclick="assignTask(this);">
+										<button class="btn btn-defalut btn-success btn-sm btn-select-assign" data-assignor="${user.id}" onclick="assignTask(this);">
 											<span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
 										</button>
 									</td>

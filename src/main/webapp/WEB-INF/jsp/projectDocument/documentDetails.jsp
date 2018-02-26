@@ -52,7 +52,12 @@ function dele(ele) {
 			'id':id,
 		},
 		success:function(result){
-			
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','执行结果','.modal-body','文档删除成功');
+			 setTimeout(function(){
+				 $('#myModal').modal('hide');
+				 window.location.reload();
+			 },1000);
 		}
 	})
 }
