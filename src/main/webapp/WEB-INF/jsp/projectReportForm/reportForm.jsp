@@ -25,25 +25,27 @@ function callbackFn(myChart,jsonURL){
 		type : "GET",
 		success : function(result) {
 			
-			 myChart.setOption({
-				 
-                 series: [{  
-                     name: '',
-                     
-                     data: ''
-                 }],
-                 
-                 legend: {
- 			        data:''
- 			    }
 			 
-             });  
-			 // 设置加载等待隐藏  
-             myChart.hideLoading();
 		}
 	})
 }
 
+myChart.setOption({
+	 
+    series: [{  
+        name: '${userName}',
+        
+        data: '${userByGroupNum}'
+    }],
+    
+    legend: {
+        data:''
+    }
+
+});  
+
+// 设置加载等待隐藏  
+myChart.hideLoading();
 function initReport(myChart,text,subText){
 	myChart.setOption({
 		title:{

@@ -19,9 +19,9 @@ public class BugDetailed {
 
 	private String assginor;
 
-	private Integer completPeople;
+	private Integer completPeopleId;
 
-	private String completpeople;
+	private String completPeople;
 
 	private String endtime;
 
@@ -115,20 +115,20 @@ public class BugDetailed {
 		this.assginor = assginor;
 	}
 
-	public Integer getCompletPeople() {
+	public Integer getCompletPeopleId() {
+		return completPeopleId;
+	}
+
+	public void setCompletPeopleId(Integer completPeopleId) {
+		this.completPeopleId = completPeopleId;
+	}
+
+	public String getCompletPeople() {
 		return completPeople;
 	}
 
-	public void setCompletPeople(Integer completPeople) {
+	public void setCompletPeople(String completPeople) {
 		this.completPeople = completPeople;
-	}
-
-	public String getCompletpeople() {
-		return completpeople;
-	}
-
-	public void setCompletpeople(String completpeople) {
-		this.completpeople = completpeople;
 	}
 
 	public String getEndtime() {

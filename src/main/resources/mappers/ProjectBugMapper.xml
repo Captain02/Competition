@@ -263,16 +263,16 @@
   <!-- BugDetailed detailedById(Integer id); -->
   <select id="detailedById" resultType="BugDetailed">
   	SELECT
-	pb.id,pb.grade,pb.bugTitle,pb.state,pb.creatPeople AS createPeopeleId,tu.`name` AS createPeopele,
+	pb.id,pb.grade,pb.bugTitle,pb.state,pb.creatPeople AS createPeopeleId,tu.`name` AS creatPeople,
 	pb.createTime,pb.assginor AS assginorId,tu2.`name` AS assginor,pb.completPeople AS completPeopleId,tu3.`name` AS completPeople,
 	pb.endTime,pb.demandId,d.demandName,pb.projectTaskId,pdy.taskName AS projectTaskName,pb.descs,
 	pb.operatingSystem,pb.browser,pb.enclosure,pb.fileName
 	FROM projectbug pb
 	LEFT JOIN t_user tu ON tu.id=pb.creatPeople
 	LEFT JOIN t_user tu2 ON tu2.id=pb.assginor
-	LEFT JOIN t_user tu3 ON tu3.id=pb.creatPeople
+	LEFT JOIN t_user tu3 ON tu3.id=pb.completPeople
 	LEFT JOIN demand d ON d.id=pb.demandId
 	LEFT JOIN projectdusty pdy ON pdy.id=pb.projectTaskId
-	WHERE pb.projectId=#{id}
+	WHERE pb.id=#{id}
   </select>
 </mapper>

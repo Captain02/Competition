@@ -96,7 +96,7 @@ function changeState(ele) {
 	                    <h1>关联项目</h1>
 	                    <div class="content">${bugDetailed.projectTaskName}</div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href="${APP_PATH}/admin/bug/detailed?bugId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/bug/editor?bugId=${bugDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
 		                    <a onclick="changeState(this);" class="btn p-follow-btn">设计如此</a> 
 		                    <a onclick="changeState(this);" class="btn p-follow-btn">重复Bug</a> 
@@ -154,7 +154,7 @@ function changeState(ele) {
 	                </li>
 	                <li>
 	                  <div class="title">完成者</div>
-	                  <div class="desk">${bugDetailed.completpeople}</div>
+	                  <div class="desk">${bugDetailed.completPeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">操作系统</div>

@@ -116,7 +116,7 @@
 	                                                <tr>
 	                                           			<input type="hidden" value="${bugDisplay.id}" >
 	                                                    <td>${bugDisplay.grade}</td>
-	                                                	<td class="project-name"><a href="${APP_PATH}/admin/demand/bug?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
 	                                                    <td>${bugDisplay.state}</td>
 	                                                    <td>${bugDisplay.creatPeople}</td>
 	                                                    <td>${bugDisplay.creatTime}</td>
@@ -126,7 +126,7 @@
 	                                                    <td>
 	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派"><i class="glyphicon glyphicon-hand-right"></i></a>
 	                                                        <a href="" class="btn btn-info btn-xs" title="完成"><i class="glyphicon glyphicon-ok-sign "></i></a>
-	                                                        <a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
+	                                                        <a href="${APP_PATH}/admin/bug/editor?bugId=${bugDisplay.id}" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
 	                                                    </td>
 	                                                </tr>
                                            		</c:forEach>

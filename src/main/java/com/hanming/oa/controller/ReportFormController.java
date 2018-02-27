@@ -31,7 +31,7 @@ public class ReportFormController {
 		System.out.println(users);
 		
 		Map<String, Long> map = users.stream()
-			.map(UserByProjectId::getName)
+			.map(UserByProjectId::getRoleName)
 			.collect(Collectors.groupingBy(p -> p,Collectors.counting()));
 		
 		model.addAttribute("userName", map.keySet());

@@ -34,7 +34,17 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
-	
+	 var formData = new FormData($("#demandForm")[0]);
+		//发送ajax请求
+		  $.ajax({
+			url:"${APP_PATH}/admin/demand/add",
+			type:"POST",
+			data:formData,
+	        contentType: false,  
+	        processData: false, 
+			success:function(result){
+			}
+		})  
 }
 </script>
 </head>
@@ -74,7 +84,7 @@ function save() {
 								<label for="" class="col-sm-2 control-label">关联需求</label>
 								<div class="col-sm-10">
 									<select name="demandId" class="form-control">
-					                      <option value="">项目需求</option>
+					                      <option value="${bugDetailed.demandId}">${bugDetailed.demandName}</option>
 					                      <c:forEach items="${DemandDisplay}" var="DemandDisplay">
 					                      <option value="${DemandDisplay.id}">${DemandDisplay.demandName}</option>
 					                      </c:forEach>
@@ -86,10 +96,10 @@ function save() {
 								<label for="" class="col-sm-2 control-label">关联任务</label>
 								<div class="col-sm-10">
 									<select name="projectTaskId" class="form-control">
-				                      <option value="">项目任务</option>
-				                       <c:forEach items="${DustyDisplay}" var="DemandDisplay">
-				                      <option value="${DustyDisplay.id}">${DustyDisplay.taskName}</option>
-				                      </c:forEach>
+				                      <option value="${bugDetailed.projectTaskId}">${bugDetailed.projectTaskName}</option>
+					                      <c:forEach items="${DustyDisplay}" var="DemandDisplay">
+					                      <option value="${DustyDisplay.id}">${DustyDisplay.taskName}</option>
+					                      </c:forEach>
                     				</select>
 								</div>
 							</div>
@@ -97,7 +107,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">指派给</label>
 								<div class="col-sm-10">
-								<select name="assignor" class="form-control">
+								<select name="assginor" class="form-control">
 			                     <c:forEach items="${team}" var="people">
 			                      <option value="${people.id}">${people.name}</option>
 			                     </c:forEach>
@@ -116,14 +126,14 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>Bug标题</label>
 								<div class="col-sm-10">
-									<input name="bugTitle" value="" class="form-control" placeholder="输入测试名称" type="text">
+									<input name="bugTitle" value="${bugDetailed.bugTitle}" class="form-control" placeholder="输入测试名称" type="text">
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
-									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<textarea id="editor_id" name="descs" class="form-control" style="height: 400px;" placeholder="请填写内容">${bugDetailed.descs}</textarea>
 								</div>
 							</div>
 							
@@ -131,7 +141,7 @@ function save() {
 			                  <label class="col-sm-2 col-sm-2 control-label">优先级</label>
 			                  <div class="col-sm-10">
 			                    <select name="grade" class="form-control">
-			                      <option value="">Bug优先级</option>
+			                      <option value="${bugDetailed.grade}">${bugDetailed.grade}</option>
 			                      <option value="1级">1级</option>
 			                      <option value="2级">2级</option>
 			                      <option value="3级">3级</option>
@@ -214,9 +224,6 @@ function save() {
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">抄送给？</h4>
 				      </div>
-				      <c:forEach items="${MyWhite}" var="MyWhitePeople">
-				      <input type="hidden" value="${MyWhitePeople.id}" class="hasResourceId">
-				      </c:forEach>
 				      <div class="modal-body">
 				      	<ul class="white-name-list clearfix">
 				      		 <c:forEach items="${white}" var="people">
