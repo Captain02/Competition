@@ -42,6 +42,16 @@ public class DustyDetailed {
 	private String enclosure;
 
 	private String fileName;
+	
+	private String projectName;
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
 	public Integer getId() {
 		return id;

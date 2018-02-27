@@ -9,7 +9,7 @@
 	                           <a href="${APP_PATH}/admin/projectTeam/list" class="btn btn-info btn-sm">团队</a> 
 	                           <a href="${APP_PATH}/admin/demand/list" class="btn btn-danger btn-sm">需求</a> 
 	                           <a href="${APP_PATH}/admin/dusty/list" class="btn btn-primary btn-sm">任务</a> 
-	                           <a href="" class="btn btn-warning btn-sm">Bug</a> 
+	                           <a href="${APP_PATH}/admin/bug/list" class="btn btn-warning btn-sm">Bug</a> 
 	                           <a href="${APP_PATH}/admin/document/list" class="btn btn-success btn-sm">文档</a> 
 	                           <a href="${APP_PATH}/admin/version/list" class="btn btn-danger btn-sm">版本</a> 
 	                           <a href="${APP_PATH}/admin/reportForms/reportForm" class="btn btn-warning btn-sm">报表</a>

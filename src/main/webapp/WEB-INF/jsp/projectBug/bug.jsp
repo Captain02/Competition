@@ -73,10 +73,10 @@
                          
                         <div class="om-header-right">
 	                        <div class="tools pull-left" style="margin-right: 3px;">
-	                        		<a href="" class="btn btn-default btn-sm active">全部</a>
-									<a href="" class="btn btn-default btn-sm">指派给我</a>
-									<a href="" class="btn btn-default btn-sm">由我创建</a>
-									<a href="" class="btn btn-default btn-sm">由我解决</a>
+	                        		<a href="${APP_PATH}/admin/bug/list?hrefPage=0" class="btn btn-default btn-sm active">全部</a>
+									<a href="${APP_PATH}/admin/bug/list?hrefPage=1" class="btn btn-default btn-sm">指派给我</a>
+									<a href="${APP_PATH}/admin/bug/list?hrefPage=2" class="btn btn-default btn-sm">由我创建</a>
+									<a href="${APP_PATH}/admin/bug/list?hrefPage=3" class="btn btn-default btn-sm">由我解决</a>
 							</div>
                             <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
                                 <i>+</i>提Bug
@@ -112,23 +112,24 @@
                                             </thead>
 
                                             <tbody>
-                                           
+                                           		<c:forEach items="${pageInfo.list}" var="bugDisplay">
 	                                                <tr>
-	                                               
-	                                                    <td>1</td>
-	                                                	<td class="project-name"><a href="${APP_PATH}/admin/demand/detailed?demandId=${DemandDisplay.id}">1</a></td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
-	                                                    <td>1</td>
+	                                           			<input type="hidden" value="${bugDisplay.id}" >
+	                                                    <td>${bugDisplay.grade}</td>
+	                                                	<td class="project-name"><a href="${APP_PATH}/admin/demand/bug?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
+	                                                    <td>${bugDisplay.state}</td>
+	                                                    <td>${bugDisplay.creatPeople}</td>
+	                                                    <td>${bugDisplay.creatTime}</td>
+	                                                    <td>${bugDisplay.assginor}</td>
+	                                                    <td>${bugDisplay.completpeople}</td>
+	                                                    <td>${bugDisplay.endtime}</td>
 	                                                    <td>
 	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派"><i class="glyphicon glyphicon-hand-right"></i></a>
 	                                                        <a href="" class="btn btn-info btn-xs" title="完成"><i class="glyphicon glyphicon-ok-sign "></i></a>
 	                                                        <a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
 	                                                    </td>
 	                                                </tr>
+                                           		</c:forEach>
                                             
                                             </tbody>
 

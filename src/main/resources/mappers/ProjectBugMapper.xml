@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.ProjectBugMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.ProjectBug">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="projectId" jdbcType="INTEGER" property="projectId" />
+    <result column="demandId" jdbcType="INTEGER" property="demandId" />
+    <result column="projectTaskId" jdbcType="INTEGER" property="projectTaskId" />
+    <result column="bugTitle" jdbcType="VARCHAR" property="bugTitle" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="descs" jdbcType="VARCHAR" property="descs" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="operatingSystem" jdbcType="VARCHAR" property="operatingSystem" />
+    <result column="browser" jdbcType="VARCHAR" property="browser" />
+    <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
+    <result column="fileName" jdbcType="VARCHAR" property="fileName" />
+    <result column="assginor" jdbcType="INTEGER" property="assginor" />
+    <result column="creatPeople" jdbcType="INTEGER" property="creatPeople" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="endTime" jdbcType="VARCHAR" property="endTime" />
+    <result column="completPeople" jdbcType="INTEGER" property="completPeople" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, projectId, demandId, projectTaskId, bugTitle, state, descs, grade, operatingSystem, 
+    browser, enclosure, fileName, assginor, creatPeople, createTime, endTime, completPeople
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from projectbug
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from projectbug
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.ProjectBug">
+    insert into projectbug (id, projectId, demandId, 
+      projectTaskId, bugTitle, state, 
+      descs, grade, operatingSystem, 
+      browser, enclosure, fileName, 
+      assginor, creatPeople, createTime, 
+      endTime, completPeople)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{demandId,jdbcType=INTEGER}, 
+      #{projectTaskId,jdbcType=INTEGER}, #{bugTitle,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{descs,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{operatingSystem,jdbcType=VARCHAR}, 
+      #{browser,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+      #{assginor,jdbcType=INTEGER}, #{creatPeople,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=VARCHAR}, #{completPeople,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.ProjectBug">
+    insert into projectbug
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        projectId,
+      </if>
+      <if test="demandId != null">
+        demandId,
+      </if>
+      <if test="projectTaskId != null">
+        projectTaskId,
+      </if>
+      <if test="bugTitle != null">
+        bugTitle,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="descs != null">
+        descs,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="operatingSystem != null">
+        operatingSystem,
+      </if>
+      <if test="browser != null">
+        browser,
+      </if>
+      <if test="enclosure != null">
+        enclosure,
+      </if>
+      <if test="fileName != null">
+        fileName,
+      </if>
+      <if test="assginor != null">
+        assginor,
+      </if>
+      <if test="creatPeople != null">
+        creatPeople,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      <if test="completPeople != null">
+        completPeople,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null">
+        #{demandId,jdbcType=INTEGER},
+      </if>
+      <if test="projectTaskId != null">
+        #{projectTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="bugTitle != null">
+        #{bugTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingSystem != null">
+        #{operatingSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="assginor != null">
+        #{assginor,jdbcType=INTEGER},
+      </if>
+      <if test="creatPeople != null">
+        #{creatPeople,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="completPeople != null">
+        #{completPeople,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.ProjectBug">
+    update projectbug
+    <set>
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null">
+        demandId = #{demandId,jdbcType=INTEGER},
+      </if>
+      <if test="projectTaskId != null">
+        projectTaskId = #{projectTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="bugTitle != null">
+        bugTitle = #{bugTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingSystem != null">
+        operatingSystem = #{operatingSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        browser = #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="assginor != null">
+        assginor = #{assginor,jdbcType=INTEGER},
+      </if>
+      <if test="creatPeople != null">
+        creatPeople = #{creatPeople,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="completPeople != null">
+        completPeople = #{completPeople,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.ProjectBug">
+    update projectbug
+    set projectId = #{projectId,jdbcType=INTEGER},
+      demandId = #{demandId,jdbcType=INTEGER},
+      projectTaskId = #{projectTaskId,jdbcType=INTEGER},
+      bugTitle = #{bugTitle,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      operatingSystem = #{operatingSystem,jdbcType=VARCHAR},
+      browser = #{browser,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      assginor = #{assginor,jdbcType=INTEGER},
+      creatPeople = #{creatPeople,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=VARCHAR},
+      completPeople = #{completPeople,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- List<BugDisplay> list(@Param("state") String state, @Param("name") String name, @Param("hrefPage") Integer hrefPage,
+			@Param("projectId") Integer projectId,@Param("userId") Integer userId); -->
+  <select id="list" resultType="BugDisplay">
+  	SELECT
+	pb.id,pb.grade,pb.bugTitle,pb.state,tu.`name` AS creatPeople,tu2.`name` AS assginor,pb.createTime,pb.completPeople,pb.endTime,pb.createTime AS creatTime
+	FROM projectbug pb
+	LEFT JOIN t_user tu ON tu.id = pb.creatPeople
+	LEFT JOIN t_user tu2 ON tu2.id = pb.completPeople
+	<where>
+		pb.projectId = #{projectId}
+		<if test="name != '名称'">
+			AND pb.bugTitle=#{name}
+		</if>
+		<if test="state != '状态'">
+			AND pb.state=#{state}
+		</if>
+		<if test="hrefPage == 1">
+			AND pb.assginor=#{userId}
+		</if>
+		<if test="hrefPage == 2">
+			AND pb.creatPeople=#{userId}
+		</if>
+		<if test="hrefPage == 3">
+			AND pb.completPeople=#{userId}
+		</if>
+	</where>
+  </select>
+  
+  <!-- BugDetailed detailedById(Integer id); -->
+  <select id="detailedById" resultType="BugDetailed">
+  	SELECT
+	pb.id,pb.grade,pb.bugTitle,pb.state,pb.creatPeople AS createPeopeleId,tu.`name` AS createPeopele,
+	pb.createTime,pb.assginor AS assginorId,tu2.`name` AS assginor,pb.completPeople AS completPeopleId,tu3.`name` AS completPeople,
+	pb.endTime,pb.demandId,d.demandName,pb.projectTaskId,pdy.taskName AS projectTaskName,pb.descs,
+	pb.operatingSystem,pb.browser,pb.enclosure,pb.fileName
+	FROM projectbug pb
+	LEFT JOIN t_user tu ON tu.id=pb.creatPeople
+	LEFT JOIN t_user tu2 ON tu2.id=pb.assginor
+	LEFT JOIN t_user tu3 ON tu3.id=pb.creatPeople
+	LEFT JOIN demand d ON d.id=pb.demandId
+	LEFT JOIN projectdusty pdy ON pdy.id=pb.projectTaskId
+	WHERE pb.projectId=#{id}
+  </select>
+</mapper>

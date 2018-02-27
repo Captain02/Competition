@@ -96,14 +96,14 @@ function dele(ele) {
 	              <div class="panel">
 	                <div class="panel-body">
 	                  <div class="profile-desk">
+	                    <h1>关联项目</h1>
+	                    <div class="content">${dustyDetailed.demandName}</div>
 	                    <h1>任务描述</h1>
 	                    <div class="content">${dustyDetailed.descs}</div>
 	                    <h1>任务备注</h1>
 	                    <div class="content">${dustyDetailed.remarks}</div>
 	                    <h1>关联需求</h1>
-	                    <div class="content">${dustyDetailed.descs}</div>
-	                    <h1>关联项目</h1>
-	                    <div class="content">${dustyDetailed.demandName}</div>
+	                    <div class="content">${dustyDetailed.projectName}</div>
 						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="dele(this);" data-id="${dustyDetailed.id}" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  

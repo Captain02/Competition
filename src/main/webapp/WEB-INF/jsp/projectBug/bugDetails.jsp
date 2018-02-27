@@ -90,13 +90,13 @@ function changeState(ele) {
 	                <div class="panel-body">
 	                  <div class="profile-desk">
 	                    <h1>测试描述</h1>
-	                    <div class="content">${dustyDetailed.descs}</div>
+	                    <div class="content">${bugDetailed.descs}</div>
 	                    <h1>关联需求</h1>
-	                    <div class="content">${dustyDetailed.descs}</div>
+	                    <div class="content">${bugDetailed.demandName}</div>
 	                    <h1>关联项目</h1>
-	                    <div class="content">${dustyDetailed.demandName}</div>
+	                    <div class="content">${bugDetailed.projectTaskName}</div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/bug/detailed?bugId=${projectDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
 		                    <a onclick="changeState(this);" class="btn p-follow-btn">设计如此</a> 
 		                    <a onclick="changeState(this);" class="btn p-follow-btn">重复Bug</a> 
@@ -114,7 +114,7 @@ function changeState(ele) {
 	          				<div class="profile-desk">
 		          				<h1>附件下载</h1>
 				          		<p>
-				          			<a href="" style="color:#6bc5a4">${dustyDetailed.fileName == null?'无附件':dustyDetailed.fileName}</a>
+				          			<a href="" style="color:#6bc5a4">${bugDetailed.fileName == null?'无附件':bugDetailed.fileName}</a>
 				          		</p>
 	          				</div>
 		          			<div class="profile-desk" style="margin-top: 15px;">
@@ -134,35 +134,35 @@ function changeState(ele) {
 	              <ul class="p-info">
 	                <li>
 	                  <div class="title">Bug标题</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.bugTitle}</div>
 	                </li>
 	                <li>
 	                  <div class="title">优先级</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.grade}</div>
 	                </li>
 	                <li>
 	                  <div class="title">状态</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.state}</div>
 	                </li>
 	                <li>
 	                  <div class="title">创建人</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.creatPeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">指派人</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.assginor}</div>
 	                </li>
 	                <li>
 	                  <div class="title">完成者</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.completpeople}</div>
 	                </li>
 	                <li>
 	                  <div class="title">操作系统</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.operatingSystem}</div>
 	                </li>
 	                <li>
 	                  <div class="title">浏览器</div>
-	                  <div class="desk">1</div>
+	                  <div class="desk">${bugDetailed.browser}</div>
 	                </li>
 	              </ul>
 	            </div>
