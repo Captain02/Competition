@@ -17,12 +17,89 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <script src="${APP_PATH}/static/js/echarts.js"></script>
-<style>
-	.pie-chart{width: 620px;height:400px;}
-	@media screen and (max-width: 768px) {
-		.pie-chart{width: 384px;height:430px;}
-	}
-</style>
+<script type="text/javascript">
+function callbackFn(myChart,jsonURL){ 
+	$.ajax({
+		url :jsonURL,
+		data :'',
+		type : "GET",
+		success : function(result) {
+			
+			 myChart.setOption({
+				 
+                 series: [{  
+                     name: '',
+                     
+                     data: ''
+                 }],
+                 
+                 legend: {
+ 			        data:''
+ 			    }
+			 
+             });  
+			 // 设置加载等待隐藏  
+             myChart.hideLoading();
+		}
+	})
+}
+
+function initReport(myChart,text,subText){
+	myChart.setOption({
+		title:{
+			text:text,
+			subtext:subText,
+			x:'center'
+		},
+		tooltip:{
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		 },
+		 legend: {
+		        orient: 'vertical',
+		        left: 'left',
+		        
+		    },
+		    series : [
+		        {
+		           
+		            type: 'pie',
+		            radius : '55%',
+		            center: ['50%', '60%'],
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+});
+}
+</script>
+
+<script type="text/javascript">
+	$(function(){
+		
+		var chartTeam = echarts.init(document.getElementById('chartTeam'));
+    	//执行初始化方法initReport
+    	initReport(chartTeam,'项目团队人员','职称比例');
+    	//执行数据填充方法callbackFn，series里面的name参数的值应和初始化方法中subText参数值一样
+    	
+    	
+    	var chartNeedsAccept = echarts.init(document.getElementById('chartNeedsAccept'));
+    	var chartNeedsUser = echarts.init(document.getElementById('chartNeedsUser'));
+    	var chartNeedsSource = echarts.init(document.getElementById('chartNeedsSource'));
+    	var chartTasksAccept = echarts.init(document.getElementById('chartTasksAccept'));
+    	var chartTasksUser = echarts.init(document.getElementById('chartTasksUser'));
+    	var chartTasksComplete = echarts.init(document.getElementById('chartTasksComplete'));
+    	var chartTasksSource = echarts.init(document.getElementById('chartTasksSource'));
+    	var chartTestsAccept = echarts.init(document.getElementById('chartTestsAccept'));
+    	var chartTestsUser = echarts.init(document.getElementById('chartTestsUser'));
+    	var chartTestsComplete = echarts.init(document.getElementById('chartTestsComplete'));
+	})
+</script>
 </head>
     <body class="bg-common">
 
@@ -78,11 +155,7 @@
 							</h3>
 						</div>
                          
-                        <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
-                                <i>+</i>新需求
-                            </button>
-                        </div>
+                      
 
 
                         <div class="clearfix"></div>
@@ -90,18 +163,118 @@
 
                     
                         <div class="row">
+                        
+                        	<!-- 1.项目成员职称比例  -->
                             <div class="col-sm-6">
-
                                 <section class="panel">
-                                	<header class="panel-heading">需求 / 总数：${pageInfo.total}</header>
+                                	<header class="panel-heading">项目成员职称比例</header>
                                 	<div class="panel-body">
                                 		<div id="chartTeam" class="pie-chart"></div>
                                 	</div>
                                 </section>
-
-                               
+                            </div>
+                            
+                            <!-- 2.项目需求接受人比例  -->
+                            <div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目需求接受人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartNeedsAccept" class="pie-chart"></div>
+                                	</div>
+                                </section>
                             </div>
 
+							<!-- 3.项目需求创建人比例  -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目需求创建人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartNeedsUser" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 4.项目需求来源比例  -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目需求来源比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartNeedsSource" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 5.项目任务接受人比例  -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务接收人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTasksAccept" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 6.项目任务创建人比例  -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务创建人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTasksUser" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 7.项目任务完成人比例  -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务完成人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTasksComplete" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 8.项目任务类型比例  -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务完成人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTasksSource" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 9.项目Bug接受人比例   -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务完成人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTestsAccept" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 10.项目Bug创建人比例    -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务完成人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTestsUser" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							<!-- 11.项目Bug完成人比例     -->
+							<div class="col-sm-6">
+                                <section class="panel">
+                                	<header class="panel-heading">项目任务完成人比例</header>
+                                	<div class="panel-body">
+                                		<div id="chartTestsComplete" class="pie-chart"></div>
+                                	</div>
+                                </section>
+                            </div>
+							
+							
                         </div>
 
                     </div>
@@ -109,37 +282,5 @@
 
         </section>
         
-       
     </body>
-<script type="text/javascript">
-option = { 
-		title:{text: '项目团队人员', subtext: '职称比例',x:'center'}, 
-		tooltip:{trigger: 'item',formatter: "{a} <br/>{b} : {c} ({d}%)"},
-	    legend:{orient: 'vertical',left: 'left',
-	    	data: [ "部门经理","总经理"]},
-	    series : [
-	        {
-	            name: '职称比例',
-	            type: 'pie',
-	            radius : '55%',
-	            center: ['50%', '60%'],
-	            data:[
-					
-					{value: 1 , name:"部门经理"},
-					{value: 1 , name:"总经理"}
-					
-	            ],
-	            itemStyle: {
-	                emphasis: {
-	                    shadowBlur: 10,
-	                    shadowOffsetX: 0,
-	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-	                }
-	            }
-	        }
-	    ]
-};
-var chartTeam = echarts.init(document.getElementById('chartTeam'));
-chartTeam.setOption(option);
-</script>
 </html>

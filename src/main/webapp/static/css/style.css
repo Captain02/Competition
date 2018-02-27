@@ -1809,3 +1809,7 @@ table.table-project tbody tr td.project-name a:hover{
     background: #6bc5a4;
     color: #fff;
 }
+.pie-chart{width: 620px;height:400px;}
+	@media screen and (max-width: 768px) {
+		.pie-chart{width: 384px;height:430px;}
+	}
