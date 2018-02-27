@@ -16,9 +16,6 @@
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
-<script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
-<script src="${APP_PATH}/static/js/addPerson.js"></script>
-<!--初始化kindEditor配置 -->
 <script type="text/javascript">
 (function($){
     $.fn.serializeJson = function(){
