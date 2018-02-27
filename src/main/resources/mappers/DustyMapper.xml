@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.DustyMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Dusty">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="projectId" jdbcType="INTEGER" property="projectId" />
+    <result column="demandId" jdbcType="INTEGER" property="demandId" />
+    <result column="taskType" jdbcType="VARCHAR" property="taskType" />
+    <result column="completPeople" jdbcType="INTEGER" property="completPeople" />
+    <result column="creatPeople" jdbcType="INTEGER" property="creatPeople" />
+    <result column="assignor" jdbcType="INTEGER" property="assignor" />
+    <result column="taskName" jdbcType="VARCHAR" property="taskName" />
+    <result column="descs" jdbcType="VARCHAR" property="descs" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="workTime" jdbcType="VARCHAR" property="workTime" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="startTime" jdbcType="VARCHAR" property="startTime" />
+    <result column="endTime" jdbcType="VARCHAR" property="endTime" />
+    <result column="enclosure" jdbcType="VARCHAR" property="enclosure" />
+    <result column="fileName" jdbcType="VARCHAR" property="fileName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, projectId, demandId, taskType, completPeople, creatPeople, assignor, taskName, 
+    descs, remarks, grade, workTime, state, createTime, startTime, endTime, enclosure, 
+    fileName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from projectdusty
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from projectdusty
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Dusty">
+    insert into projectdusty (id, projectId, demandId, 
+      taskType, completPeople, creatPeople, 
+      assignor, taskName, descs, 
+      remarks, grade, workTime, 
+      state, createTime, startTime, 
+      endTime, enclosure, fileName
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{demandId,jdbcType=INTEGER}, 
+      #{taskType,jdbcType=VARCHAR}, #{completPeople,jdbcType=INTEGER}, #{creatPeople,jdbcType=INTEGER}, 
+      #{assignor,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{descs,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{workTime,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Dusty">
+    insert into projectdusty
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="projectId != null">
+        projectId,
+      </if>
+      <if test="demandId != null">
+        demandId,
+      </if>
+      <if test="taskType != null">
+        taskType,
+      </if>
+      <if test="completPeople != null">
+        completPeople,
+      </if>
+      <if test="creatPeople != null">
+        creatPeople,
+      </if>
+      <if test="assignor != null">
+        assignor,
+      </if>
+      <if test="taskName != null">
+        taskName,
+      </if>
+      <if test="descs != null">
+        descs,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="workTime != null">
+        workTime,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="startTime != null">
+        startTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      <if test="enclosure != null">
+        enclosure,
+      </if>
+      <if test="fileName != null">
+        fileName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null">
+        #{demandId,jdbcType=INTEGER},
+      </if>
+      <if test="taskType != null">
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="completPeople != null">
+        #{completPeople,jdbcType=INTEGER},
+      </if>
+      <if test="creatPeople != null">
+        #{creatPeople,jdbcType=INTEGER},
+      </if>
+      <if test="assignor != null">
+        #{assignor,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null">
+        #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Dusty">
+    update projectdusty
+    <set>
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="demandId != null">
+        demandId = #{demandId,jdbcType=INTEGER},
+      </if>
+      <if test="taskType != null">
+        taskType = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="completPeople != null">
+        completPeople = #{completPeople,jdbcType=INTEGER},
+      </if>
+      <if test="creatPeople != null">
+        creatPeople = #{creatPeople,jdbcType=INTEGER},
+      </if>
+      <if test="assignor != null">
+        assignor = #{assignor,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        taskName = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null">
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null">
+        workTime = #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        startTime = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="enclosure != null">
+        enclosure = #{enclosure,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Dusty">
+    update projectdusty
+    set projectId = #{projectId,jdbcType=INTEGER},
+      demandId = #{demandId,jdbcType=INTEGER},
+      taskType = #{taskType,jdbcType=VARCHAR},
+      completPeople = #{completPeople,jdbcType=INTEGER},
+      creatPeople = #{creatPeople,jdbcType=INTEGER},
+      assignor = #{assignor,jdbcType=INTEGER},
+      taskName = #{taskName,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      workTime = #{workTime,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      startTime = #{startTime,jdbcType=VARCHAR},
+      endTime = #{endTime,jdbcType=VARCHAR},
+      enclosure = #{enclosure,jdbcType=VARCHAR},
+      fileName = #{fileName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- List<DustyDisplay> list(@Param("type")String type, @Param("state")String state, @Param("dustyName")String dustyName,
+  							   @Param("herfPage")Integer herfPage, @Param("projectId")Integer projectId,@Param("userId") Integer userId); -->
+  <select id="list" resultType="DustyDisplay">
+  	SELECT
+	pdy.id,pdy.grade,pdy.taskName,pdy.state,pdy.endTime,pdy.workTime,tu.`name` AS creatPeople,tu2.`name` AS assignor,d.demandName AS demandName
+	FROM projectdusty pdy
+	LEFT JOIN t_user tu ON tu.id=pdy.creatPeople
+	LEFT JOIN t_user tu2 ON tu2.id=pdy.assignor
+	LEFT JOIN demand d ON d.id=pdy.demandId
+	LEFT JOIN project p ON p.id=pdy.projectId
+	<where>
+		pdy.projectId=#{projectId}
+		<if test="type != '任务类型'">
+			AND pdy.taskType=#{type}
+		</if>
+		<if test="state != '任务状态'">
+			AND pdy.state=#{state}
+		</if>
+		<if test="dustyName != '任务名称'">
+			AND pdy.dustyName=#{dustyName}
+		</if>
+		<if test="herfPage == 1">
+			AND pdy.assignor=#{userId}
+		</if>
+		<if test="herfPage == 2">
+			AND pdy.creatPeople=#{userId}
+		</if>
+		<if test="herfPage == 3">
+			AND pdy.completPeople=#{userId}
+		</if>
+		<if test="herfPage == 4">
+			AND pdy.completPeople=#{userId}
+			AND pdy.state = '已关闭'
+		</if>
+		<if test="herfPage == 5">
+			AND pdy.completPeople=#{userId}
+			AND pdy.state = '已取消'
+		</if>
+	</where>
+  </select>
+  
+  <!-- DustyDetailed detailedById(Integer id); -->
+  <select id="detailedById" parameterType="Integer" resultType="DustyDetailed">
+  	SELECT
+	pdy.id,d.demandName,tu2.`name` AS completPeople,pdy.grade,pdy.taskName,
+	pdy.state,pdy.endTime,pdy.workTime,
+	tu.`name` AS creatPeople,tu2.`name` AS assignor,
+	pdy.descs,pdy.remarks,pdy.createTime,
+	pdy.startTime,pdy.enclosure,pdy.fileName,
+	pdy.taskType,tu.id AS creatPeopleId,tu2.id AS assignorId,tu3.id AS completPeopleId,
+	tu3.`name` AS completPeople,d.id AS demandId
+	FROM projectdusty pdy
+	LEFT JOIN t_user tu ON tu.id=pdy.creatPeople
+	LEFT JOIN t_user tu2 ON tu2.id=pdy.assignor
+	LEFT JOIN t_user tu3 ON tu3.id=pdy.completPeople
+	LEFT JOIN demand d ON d.id=pdy.demandId
+	WHERE pdy.id=#{id}
+  </select>
+  
+  <!-- void addBatch(@Param("list")List<Dusty> dusties); -->
+  <insert id="addBatch">
+  	insert into projectdusty (projectId,demandId,creatPeople,assignor,taskType,taskName,descs,remarks,`grade`,workTime,`state`)
+  	values
+  	<foreach collection="list" item="dusty" separator=",">  
+     (#{dusty.projectId},#{dusty.demandId},#{dusty.creatPeople},#{dusty.assignor},#{dusty.taskType},#{dusty.taskName},#{dusty.descs},#{dusty.remarks},#{dusty.grade},#{dusty.workTime},#{dusty.state})  
+    </foreach> 
+  </insert>
+  
+</mapper>
