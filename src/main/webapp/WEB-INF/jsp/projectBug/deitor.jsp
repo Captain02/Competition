@@ -37,7 +37,7 @@ function save() {
 	 var formData = new FormData($("#demandForm")[0]);
 		//发送ajax请求
 		  $.ajax({
-			url:"${APP_PATH}/admin/demand/add",
+			url:"${APP_PATH}/admin/bug/editor",
 			type:"POST",
 			data:formData,
 	        contentType: false,  
@@ -80,6 +80,7 @@ function save() {
 						<header class="panel-heading">添加BUG</header>
 						<div class="panel-body">
 						<form id="demandForm" action="" method="post">
+						<input type="hidden" value="${bugDetailed.id}" name="id" >
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">关联需求</label>
 								<div class="col-sm-10">
@@ -97,7 +98,7 @@ function save() {
 								<div class="col-sm-10">
 									<select name="projectTaskId" class="form-control">
 				                      <option value="${bugDetailed.projectTaskId}">${bugDetailed.projectTaskName}</option>
-					                      <c:forEach items="${DustyDisplay}" var="DemandDisplay">
+					                      <c:forEach items="${DustyDisplay}" var="DustyDisplay">
 					                      <option value="${DustyDisplay.id}">${DustyDisplay.taskName}</option>
 					                      </c:forEach>
                     				</select>

@@ -16,6 +16,26 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+<script type="text/javascript">
+	function changeState(ele){
+		var id = $(ele).attr('data-id');
+		var state = $(ele).attr('data-state');
+		
+		$.ajax({
+			url:"${APP_PATH}/admin/bug/changeState",
+			data:{
+				'id':id,
+				'state':state
+			},
+			type:"POST",
+			success:function(result){
+				
+			}
+			
+		})
+	}
+
+</script>
 </head>
     <body class="bg-common">
 
@@ -78,7 +98,7 @@
 									<a href="${APP_PATH}/admin/bug/list?hrefPage=2" class="btn btn-default btn-sm">由我创建</a>
 									<a href="${APP_PATH}/admin/bug/list?hrefPage=3" class="btn btn-default btn-sm">由我解决</a>
 							</div>
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/demand/addPage'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/bug/add'">
                                 <i>+</i>提Bug
                             </button>
                         </div>
@@ -125,7 +145,7 @@
 	                                                    <td>${bugDisplay.endtime}</td>
 	                                                    <td>
 	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派"><i class="glyphicon glyphicon-hand-right"></i></a>
-	                                                        <a href="" class="btn btn-info btn-xs" title="完成"><i class="glyphicon glyphicon-ok-sign "></i></a>
+	                                                        <a onclick="changeState(this);" class="btn btn-info btn-xs" data-id="${bugDisplay.id}" data-state="已完成" title="完成"><i class="glyphicon glyphicon-ok-sign "></i></a>
 	                                                        <a href="${APP_PATH}/admin/bug/editor?bugId=${bugDisplay.id}" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
 	                                                    </td>
 	                                                </tr>

@@ -34,7 +34,17 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
-	
+	var formData = new FormData($("#bugFrom")[0]);
+	//发送ajax请求
+	  $.ajax({
+		url:"${APP_PATH}/admin/bug/add",
+		type:"POST",
+		data:formData,
+        contentType: false,  
+        processData: false, 
+		success:function(result){
+		}
+	})  
 }
 </script>
 </head>
@@ -69,7 +79,7 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading">添加BUG</header>
 						<div class="panel-body">
-						<form id="demandForm" action="" method="post">
+						<form id="bugFrom" action="" method="post">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">关联需求</label>
 								<div class="col-sm-10">
@@ -87,7 +97,7 @@ function save() {
 								<div class="col-sm-10">
 									<select name="projectTaskId" class="form-control">
 				                      <option value="">项目任务</option>
-				                       <c:forEach items="${DustyDisplay}" var="DemandDisplay">
+				                       <c:forEach items="${DustyDisplay}" var="DustyDisplay">
 				                      <option value="${DustyDisplay.id}">${DustyDisplay.taskName}</option>
 				                      </c:forEach>
                     				</select>
@@ -97,7 +107,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">指派给</label>
 								<div class="col-sm-10">
-								<select name="assignor" class="form-control">
+								<select name="assginor" class="form-control">
 			                     <c:forEach items="${team}" var="people">
 			                      <option value="${people.id}">${people.name}</option>
 			                     </c:forEach>
@@ -144,7 +154,6 @@ function save() {
 		                  <label class="col-sm-2 col-sm-2 control-label">操作系统/浏览器</label>
 		                  <div class="col-sm-10">
 		                    <select name="operatingSystem" class="form-control" style="width: 50%;float:left">
-		                      <option value="${bugDetailed.operatingSystem}">${bugDetailed.operatingSystem}</option>
 		                      <option value="全部">全部</option>
 		                      <option value="windows">Windows</option>
 		                      <option value="Windows 8">Windows 8</option>
@@ -167,7 +176,6 @@ function save() {
 		                      <option value="其他">其他</option>
 		                    </select>
 		                    <select name="browser" class="form-control" style="width: 50%">
-		                      <option value="${bugDetailed.browser}">${bugDetailed.browser}</option>
 		                      <option value="全部">全部</option>
 		                      <option value="IE系列">IE系列</option>
 		                      <option value="IE11">IE11</option>
@@ -214,12 +222,9 @@ function save() {
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">抄送给？</h4>
 				      </div>
-				      <c:forEach items="${MyWhite}" var="MyWhitePeople">
-				      <input type="hidden" value="${MyWhitePeople.id}" class="hasResourceId">
-				      </c:forEach>
 				      <div class="modal-body">
 				      	<ul class="white-name-list clearfix">
-				      		 <c:forEach items="${white}" var="people">
+				      		 <c:forEach items="${team}" var="people">
 				      		 <li>
 				      		 	<div class="form-group">
 				      		 		<label class="checkbox-inline">

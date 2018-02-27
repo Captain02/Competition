@@ -23,12 +23,12 @@
 <script type="text/javascript">
 function changeState(ele) {
 	var state = $(ele).attr('data-state');
-	var projectId = $(ele).attr('data-projectId');
+	var bugId = $(ele).attr('data-bugId');
 	$.ajax({
-		url:"${APP_PATH}/admin/project/changeState",
+		url:"${APP_PATH}/admin/bug/changeState",
 		data:{
 			'state':state,
-			'projectId':projectId
+			'id':bugId
 		},
 		type:"POST",
 		success:function(result){
@@ -98,12 +98,14 @@ function changeState(ele) {
 						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/bug/editor?bugId=${bugDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">设计如此</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">重复Bug</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">外部原因</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">无法重现</a>
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">延期处理</a>
-		                    <a onclick="changeState(this);" class="btn p-follow-btn">不予解决</a> 
+		                    <a onclick="changeState(this);" data-state="设计如此" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">设计如此</a> 
+		                    <a onclick="changeState(this);" data-state="重复Bu" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">重复Bug</a> 
+		                    <a onclick="changeState(this);" data-state="外部原因" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">外部原因</a> 
+		                    <a onclick="changeState(this);" data-state="无法重现" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">无法重现</a>
+		                    <a onclick="changeState(this);" data-state="延期处理" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">延期处理</a>
+		                    <a onclick="changeState(this);" data-state="不予解决" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">不予解决</a> 
+		                    <a onclick="changeState(this);" data-state="待解决" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">待解决</a> 
+		                    <a onclick="changeState(this);" data-state="已完成" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">已完成</a> 
 						</div>
 					</div>
 	              </div>

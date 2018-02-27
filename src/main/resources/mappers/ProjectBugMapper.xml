@@ -236,10 +236,11 @@
 			@Param("projectId") Integer projectId,@Param("userId") Integer userId); -->
   <select id="list" resultType="BugDisplay">
   	SELECT
-	pb.id,pb.grade,pb.bugTitle,pb.state,tu.`name` AS creatPeople,tu2.`name` AS assginor,pb.createTime,pb.completPeople,pb.endTime,pb.createTime AS creatTime
+	pb.id,pb.grade,pb.bugTitle,pb.state,tu.`name` AS creatPeople,tu2.`name` AS completPeople,tu3.`name` AS assginor,pb.createTime,pb.completPeople,pb.endTime,pb.createTime AS creatTime
 	FROM projectbug pb
 	LEFT JOIN t_user tu ON tu.id = pb.creatPeople
 	LEFT JOIN t_user tu2 ON tu2.id = pb.completPeople
+	LEFT JOIN t_user tu3 ON tu3.id = pb.assginor
 	<where>
 		pb.projectId = #{projectId}
 		<if test="name != '名称'">

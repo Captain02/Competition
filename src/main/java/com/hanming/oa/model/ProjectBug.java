@@ -1,6 +1,5 @@
 package com.hanming.oa.model;
 
-import java.util.Date;
 
 public class ProjectBug {
 	private Integer id;
@@ -31,7 +30,7 @@ public class ProjectBug {
 
 	private Integer creatPeople;
 
-	private Date createTime;
+	private String createTime;
 
 	private String endTime;
 
@@ -149,11 +148,11 @@ public class ProjectBug {
 		this.creatPeople = creatPeople;
 	}
 
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 
@@ -171,6 +170,15 @@ public class ProjectBug {
 
 	public void setCompletPeople(Integer completPeople) {
 		this.completPeople = completPeople;
+	}
+
+	@Override
+	public String toString() {
+		return "ProjectBug [id=" + id + ", projectId=" + projectId + ", demandId=" + demandId + ", projectTaskId="
+				+ projectTaskId + ", bugTitle=" + bugTitle + ", state=" + state + ", descs=" + descs + ", grade="
+				+ grade + ", operatingSystem=" + operatingSystem + ", browser=" + browser + ", enclosure=" + enclosure
+				+ ", fileName=" + fileName + ", assginor=" + assginor + ", creatPeople=" + creatPeople + ", createTime="
+				+ createTime + ", endTime=" + endTime + ", completPeople=" + completPeople + "]";
 	}
 
 }
