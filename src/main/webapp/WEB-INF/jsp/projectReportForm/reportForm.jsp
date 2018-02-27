@@ -39,7 +39,7 @@ myChart.setOption({
     }],
     
     legend: {
-        data:''
+        data:'${userName}'
     }
 
 });  
