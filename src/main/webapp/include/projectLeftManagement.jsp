@@ -12,5 +12,5 @@
 			 <a	href="${APP_PATH}/admin/demand/list" class="btn btn-warning btn-sm">Bug</a>
 			 <a	href="${APP_PATH}/admin/document/list" class="btn btn-success btn-sm">文档</a>
 			 <a	href="${APP_PATH}/admin/version/list" class="btn btn-danger btn-sm">版本</a>
-			 <a	href="${APP_PATH}/admin/demand/list" class="btn btn-warning btn-sm">报表</a>
+			 <a	href="${APP_PATH}/admin/reportForms/reportForm" class="btn btn-warning btn-sm">报表</a>
 		</span>

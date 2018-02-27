@@ -1,6 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -27,13 +26,11 @@ import com.hanming.oa.model.DemandDisplay;
 import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.DustyDetailed;
 import com.hanming.oa.model.DustyDisplay;
-import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.DustyService;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Controller
 @RequestMapping("/admin/dusty")
