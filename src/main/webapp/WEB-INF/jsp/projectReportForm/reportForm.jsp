@@ -28,13 +28,13 @@ function callbackFn(myChart,name,jsonURL){
 			myChart.hideLoading();
 			myChart.setOption({
 			    series: [{  
-			        name: name,
+			        name: result.extend.userName,
 			        
-			        data: '${userByGroupNum}'
+			        data: result.extend.userByGroupNum
 			    }],
 			    
 			    legend: {
-			        data:'${userName}'
+			        data:result.extend.userName
 			    }
 
 			});  
@@ -82,7 +82,7 @@ function initReport(myChart,text,subText){
     	//执行初始化方法initReport
     	initReport(chartTeam,'项目团队人员','职称比例');
     	//执行数据填充方法callbackFn，series里面的name参数的值应和初始化方法中subText参数值一样
-    	callbackFn(chartTeam,'职称比例',jsonURL);
+    	callbackFn(chartTeam,'职称比例',"${APP_PATH}/admin/reportForms/report");
     	
     	var chartNeedsAccept = echarts.init(document.getElementById('chartNeedsAccept'));
     	var chartNeedsUser = echarts.init(document.getElementById('chartNeedsUser'));

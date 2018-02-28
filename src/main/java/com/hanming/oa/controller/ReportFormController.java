@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.ProjectTeamService;
 
@@ -23,8 +25,16 @@ public class ReportFormController {
 	@Autowired
 	ProjectTeamService projectTeamService;
 
-	@RequestMapping(value="/reportForm",method=RequestMethod.GET)
-	public String list(Model model,HttpServletRequest request) {
+	// 跳转
+	@RequestMapping(value = "/reportForm", method = RequestMethod.GET)
+	public String list() {
+
+		return "projectReportForm/reportForm";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/report", method = RequestMethod.GET)
+	public Msg report(Model model,HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		
 		List<UserByProjectId> users = projectTeamService.list(projectId, "姓名");
@@ -36,7 +46,6 @@ public class ReportFormController {
 		
 		model.addAttribute("userName", map.keySet());
 		model.addAttribute("userByGroupNum", map.values());
-		
-		return "projectReportForm/reportForm";
+		return Msg.success().add("userName", map.keySet()).add("userByGroupNum", map.values());
 	}
 }
