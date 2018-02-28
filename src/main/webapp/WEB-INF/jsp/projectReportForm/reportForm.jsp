@@ -22,7 +22,9 @@ function callbackFn(myChart,name,jsonURL){
 	myChart.showLoading();
 	$.ajax({
 		url :jsonURL,
-		data :'',
+		data :{
+			'name':name,
+		},
 		type : "GET",
 		success : function(result) {
 			myChart.hideLoading();
@@ -87,38 +89,47 @@ function initReport(myChart,text,subText){
     	
     	var chartNeedsUser = echarts.init(document.getElementById('chartNeedsUser'));
     	initReport(chartNeedsUser,'项目需求创建人','需求创建人比例');
+    	callbackFn(chartNeedsUser,'需求创建人比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartNeedsSource = echarts.init(document.getElementById('chartNeedsSource'));
     	initReport(chartNeedsSource,'项目需求来源','需求来源比例');
+    	callbackFn(chartNeedsSource,'需求来源比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTasksAccept = echarts.init(document.getElementById('chartTasksAccept'));
     	initReport(chartTasksAccept,'项目任务指派人','任务指派比例');
+    	callbackFn(chartTasksAccept,'任务指派比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTasksUser = echarts.init(document.getElementById('chartTasksUser'));
     	initReport(chartTasksUser,'项目任务创建人','任务创建人比例');
+    	callbackFn(chartTasksUser,'任务创建人比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTasksComplete = echarts.init(document.getElementById('chartTasksComplete'));
     	initReport(chartTasksComplete,'项目任务完成人','任务完成人比例');
+    	callbackFn(chartTasksComplete,'任务完成人比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTasksSource = echarts.init(document.getElementById('chartTasksSource'));
     	initReport(chartTasksSource,'项目任务类型','任务类型比例');
+    	callbackFn(chartTasksSource,'任务类型比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTestsAccept = echarts.init(document.getElementById('chartTestsAccept'));
     	initReport(chartTestsAccept,'项目Bug指派人','Bug指派比例');
+    	callbackFn(chartTestsAccept,'Bug指派比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTestsUser = echarts.init(document.getElementById('chartTestsUser'));
     	initReport(chartTestsUser,'项目Bug创建人','Bug创建人比例');
+    	callbackFn(chartTestsUser,'Bug创建人比例',"${APP_PATH}/admin/reportForms/report");
     	
     	
     	var chartTestsComplete = echarts.init(document.getElementById('chartTestsComplete'));
     	initReport(chartTestsComplete,'项目Bug完成人','Bug完成人比例');
+    	callbackFn(chartTestsComplete,'Bug完成人比例',"${APP_PATH}/admin/reportForms/report");
 	})
 </script>
 </head>

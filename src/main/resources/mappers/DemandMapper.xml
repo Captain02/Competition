@@ -236,7 +236,7 @@
   <!-- List<DemandDisplay> list(@Param("state")String state, @Param("demandName")String demandName, @Param("projectId")Integer projectId); -->
 <select id="list" resultType="DemandDisplay">
   SELECT
-	dd.id,tu.`name` AS createPeopele,tu2.`name` AS assignor,dd.workTime,dd.createTime,dd.state,dd.stage,dd.grade,dd.demandName
+	dd.id,tu.`name` AS createPeopele,tu2.`name` AS assignor,dd.workTime,dd.createTime,dd.state,dd.stage,dd.grade,dd.demandName,dd.source
 	FROM demand dd
 	LEFT JOIN t_user tu ON tu.id = dd.createPeopele
 	LEFT JOIN t_user tu2 ON tu2.id = dd.assignor

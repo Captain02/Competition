@@ -250,10 +250,11 @@
   							   @Param("herfPage")Integer herfPage, @Param("projectId")Integer projectId,@Param("userId") Integer userId); -->
   <select id="list" resultType="DustyDisplay">
   	SELECT
-	pdy.id,pdy.grade,pdy.taskName,pdy.state,pdy.endTime,pdy.workTime,tu.`name` AS creatPeople,tu2.`name` AS assignor,d.demandName AS demandName
+	pdy.id,pdy.grade,pdy.taskName,pdy.state,pdy.endTime,pdy.workTime,tu.`name` AS creatPeople,tu2.`name` AS assignor,d.demandName AS demandName,tu3.`name` AS completName
 	FROM projectdusty pdy
 	LEFT JOIN t_user tu ON tu.id=pdy.creatPeople
 	LEFT JOIN t_user tu2 ON tu2.id=pdy.assignor
+	LEFT JOIN t_user tu3 ON tu3.id=pdy.completPeople
 	LEFT JOIN demand d ON d.id=pdy.demandId
 	LEFT JOIN project p ON p.id=pdy.projectId
 	<where>

@@ -18,6 +18,16 @@ public class DustyDisplay {
 	private String workTime;
 
 	private String demandName;
+	
+	private String completName;
+
+	public String getCompletName() {
+		return completName;
+	}
+
+	public void setCompletName(String completName) {
+		this.completName = completName;
+	}
 
 	public Integer getId() {
 		return id;
