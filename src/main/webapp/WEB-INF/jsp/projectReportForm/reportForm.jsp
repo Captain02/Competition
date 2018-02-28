@@ -28,6 +28,7 @@ function callbackFn(myChart,name,jsonURL){
 		data :'',
 		type : "GET",
 		success : function(result) {
+			console.log(result.extend.roleName)
 			myChart.hideLoading();
 			myChart.setOption({
 			    series: [{  
@@ -37,11 +38,7 @@ function callbackFn(myChart,name,jsonURL){
 			    }],
 			    
 			    legend: {
-			        data:[ 
-				        
-			        	result.extend.roleName
-				        
-				      ]
+			        data:result.extend.roleName 
 			    }
 
 			});  
@@ -104,7 +101,7 @@ function initReport(myChart,text,subText){
 	})
 </script>
 </head>
-    <body class="bg-common">
+    <body class="bg-common stickey-menu">
 
         <section>
 
