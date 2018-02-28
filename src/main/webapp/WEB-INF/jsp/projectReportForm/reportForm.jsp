@@ -18,34 +18,30 @@
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <script src="${APP_PATH}/static/js/echarts.js"></script>
 <script type="text/javascript">
-function callbackFn(myChart,jsonURL){ 
+function callbackFn(myChart,name,jsonURL){ 
+	myChart.showLoading();
 	$.ajax({
 		url :jsonURL,
 		data :'',
 		type : "GET",
 		success : function(result) {
-			
-			 
+			myChart.hideLoading();
+			myChart.setOption({
+			    series: [{  
+			        name: name,
+			        
+			        data: '${userByGroupNum}'
+			    }],
+			    
+			    legend: {
+			        data:'${userName}'
+			    }
+
+			});  
 		}
 	})
 }
 
-myChart.setOption({
-	 
-    series: [{  
-        name: '${userName}',
-        
-        data: '${userByGroupNum}'
-    }],
-    
-    legend: {
-        data:'${userName}'
-    }
-
-});  
-
-// 设置加载等待隐藏  
-myChart.hideLoading();
 function initReport(myChart,text,subText){
 	myChart.setOption({
 		title:{
@@ -60,11 +56,9 @@ function initReport(myChart,text,subText){
 		 legend: {
 		        orient: 'vertical',
 		        left: 'left',
-		        
 		    },
 		    series : [
 		        {
-		           
 		            type: 'pie',
 		            radius : '55%',
 		            center: ['50%', '60%'],
@@ -77,7 +71,7 @@ function initReport(myChart,text,subText){
 		            }
 		        }
 		    ]
-});
+	});
 }
 </script>
 
@@ -88,7 +82,7 @@ function initReport(myChart,text,subText){
     	//执行初始化方法initReport
     	initReport(chartTeam,'项目团队人员','职称比例');
     	//执行数据填充方法callbackFn，series里面的name参数的值应和初始化方法中subText参数值一样
-    	
+    	callbackFn(chartTeam,'职称比例',jsonURL);
     	
     	var chartNeedsAccept = echarts.init(document.getElementById('chartNeedsAccept'));
     	var chartNeedsUser = echarts.init(document.getElementById('chartNeedsUser'));
