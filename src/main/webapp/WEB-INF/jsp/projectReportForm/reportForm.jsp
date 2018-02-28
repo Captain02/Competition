@@ -19,21 +19,16 @@
 <script src="${APP_PATH}/static/js/echarts.js"></script>
 <script type="text/javascript">
 function callbackFn(myChart,name,jsonURL){ 
-	
-	
 	myChart.showLoading();
-	
 	$.ajax({
 		url :jsonURL,
 		data :'',
 		type : "GET",
 		success : function(result) {
-			console.log(result.extend.roleName)
 			myChart.hideLoading();
 			myChart.setOption({
 			    series: [{  
 			        name: name,
-			        
 			        data: result.extend.roleProportion
 			    }],
 			    
@@ -83,21 +78,47 @@ function initReport(myChart,text,subText){
 	$(function(){
 		
 		var chartTeam = echarts.init(document.getElementById('chartTeam'));
-    	//执行初始化方法initReport
     	initReport(chartTeam,'项目团队人员','职称比例');
-    	//执行数据填充方法callbackFn，series里面的name参数的值应和初始化方法中subText参数值一样
     	callbackFn(chartTeam,'职称比例',"${APP_PATH}/admin/reportForms/report");
     	
     	var chartNeedsAccept = echarts.init(document.getElementById('chartNeedsAccept'));
+    	initReport(chartNeedsAccept,'项目需求指派人','需求指派比例');
+    	callbackFn(chartNeedsAccept,'需求指派比例',"${APP_PATH}/admin/reportForms/report");
+    	
     	var chartNeedsUser = echarts.init(document.getElementById('chartNeedsUser'));
+    	initReport(chartNeedsUser,'项目需求创建人','需求创建人比例');
+    	
+    	
     	var chartNeedsSource = echarts.init(document.getElementById('chartNeedsSource'));
+    	initReport(chartNeedsSource,'项目需求来源','需求来源比例');
+    	
+    	
     	var chartTasksAccept = echarts.init(document.getElementById('chartTasksAccept'));
+    	initReport(chartTasksAccept,'项目任务指派人','任务指派比例');
+    	
+    	
     	var chartTasksUser = echarts.init(document.getElementById('chartTasksUser'));
+    	initReport(chartTasksUser,'项目任务创建人','任务创建人比例');
+    	
+    	
     	var chartTasksComplete = echarts.init(document.getElementById('chartTasksComplete'));
+    	initReport(chartTasksComplete,'项目任务完成人','任务完成人比例');
+    	
+    	
     	var chartTasksSource = echarts.init(document.getElementById('chartTasksSource'));
+    	initReport(chartTasksSource,'项目任务类型','任务类型比例');
+    	
+    	
     	var chartTestsAccept = echarts.init(document.getElementById('chartTestsAccept'));
+    	initReport(chartTestsAccept,'项目Bug指派人','Bug指派比例');
+    	
+    	
     	var chartTestsUser = echarts.init(document.getElementById('chartTestsUser'));
+    	initReport(chartTestsUser,'项目Bug创建人','Bug创建人比例');
+    	
+    	
     	var chartTestsComplete = echarts.init(document.getElementById('chartTestsComplete'));
+    	initReport(chartTestsComplete,'项目Bug完成人','Bug完成人比例');
 	})
 </script>
 </head>
@@ -267,7 +288,7 @@ function initReport(myChart,text,subText){
 							<!-- 11.项目Bug完成人比例     -->
 							<div class="col-sm-6">
                                 <section class="panel">
-                                	<header class="panel-heading">项目任务完成人比例</header>
+                                	<header class="panel-heading">项目BUG完成人比例</header>
                                 	<div class="panel-body">
                                 		<div id="chartTestsComplete" class="pie-chart"></div>
                                 	</div>
