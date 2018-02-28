@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDisplay;
 import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.DustyDetailed;
@@ -74,13 +75,15 @@ public class DustyController {
 
 	// 跳转添加页
 	@RequestMapping(value = "/addPage", method = RequestMethod.GET)
-	public String addPage(Model model, HttpServletRequest request) {
+	public String addPage(Model model, HttpServletRequest request,@RequestParam(value="id",defaultValue="0")Integer id) {
+		Demand demand = demandService.select(id);
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
 		List<DemandDisplay> demands = demandService.list("需求状态", "需求名称", projectId);
 		model.addAttribute("team", team);
 		model.addAttribute("demands", demands);
 		model.addAttribute("dustyDetailed", new DustyDetailed());
+		model.addAttribute("singleDemand", demand);
 		return "projectDusty/add";
 	}
 

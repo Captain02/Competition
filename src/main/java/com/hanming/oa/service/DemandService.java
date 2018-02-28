@@ -72,4 +72,9 @@ public class DemandService {
 
 	}
 
+	public Demand select(Integer id) {
+		Demand demand = demandMapper.selectByPrimaryKey(id);
+		return demand;
+	}
+
 }

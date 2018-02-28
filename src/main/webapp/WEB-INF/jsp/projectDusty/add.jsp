@@ -87,6 +87,7 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>关联需求</label>
 								<div class="col-sm-10">
 									<select name="demandId" class="form-control">
+										<option value="${singleDemand.id}">${singleDemand.demandName}</option>
 				                      <c:forEach items="${demands}" var="demand">
 										<option value="${demand.id}">${demand.demandName}</option>
 									</c:forEach>

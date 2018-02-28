@@ -118,8 +118,8 @@
 	                                                    <td>${DemandDisplay.state}</td>
 	                                                    <td>${DemandDisplay.stage}</td>
 	                                                    <td>
-	                                                        <a href="" title="任务" class="btn btn-success btn-xs"><i class="fa fa-tasks"></i></a> 
-	                                                        <a href="" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
+	                                                        <a href="${APP_PATH}/admin/dusty/addPage?id=${DemandDisplay.id}" title="任务" class="btn btn-success btn-xs"><i class="fa fa-tasks"></i></a> 
+	                                                        <a href="${APP_PATH}/admin/demand/editorPage?editor=${DemandDisplay.id}" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
 	                                                    </td>
 	                                                </tr>
                                             </c:forEach>
