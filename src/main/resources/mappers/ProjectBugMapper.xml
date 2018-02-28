@@ -48,7 +48,7 @@
       #{assginor,jdbcType=INTEGER}, #{creatPeople,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{endTime,jdbcType=VARCHAR}, #{completPeople,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.ProjectBug">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.ProjectBug">
     insert into projectbug
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

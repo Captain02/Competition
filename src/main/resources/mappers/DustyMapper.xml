@@ -52,7 +52,7 @@
       #{endTime,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.Dusty">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Dusty">
     insert into projectdusty
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

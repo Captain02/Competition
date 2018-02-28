@@ -27,9 +27,12 @@ import com.hanming.oa.model.DemandDisplay;
 import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.DustyDetailed;
 import com.hanming.oa.model.DustyDisplay;
+import com.hanming.oa.model.ProjectHistory;
+import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.DustyService;
+import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
 
@@ -45,6 +48,8 @@ public class DustyController {
 	UserService userService;
 	@Autowired
 	ProjectTeamService projectTeamService;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -95,8 +100,6 @@ public class DustyController {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		dusty.setCreatPeople(userId);
 		dusty.setProjectId(projectId);
-		dusty.setState("进行中");
-		
 		Set<Integer> idInt =null;
 		String[] ids = ccid.split("-");
 		List<String> idStr = Arrays.asList(ids);
@@ -106,8 +109,7 @@ public class DustyController {
 			idInt = new HashSet<>();
 		}
 		idInt.add(dusty.getAssignor());
-
-		dustyService.insert(dusty,file,idInt,1,request);
+		dustyService.insert(dusty,file,idInt,1,request,projectId,userId);
 		return Msg.success();
 	}
 
@@ -115,7 +117,9 @@ public class DustyController {
 	@RequestMapping(value = "/detailed", method = RequestMethod.GET)
 	public String detailed(@RequestParam("id") Integer id, Model model) {
 		DustyDetailed dustyDetailed = dustyService.detailedById(id);
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id,"任务");
 		model.addAttribute("dustyDetailed", dustyDetailed);
+		model.addAttribute("dustyHistory", list);
 		return "projectDusty/dustyDetails";
 	}
 
@@ -123,10 +127,17 @@ public class DustyController {
 	@ResponseBody
 	@RequestMapping(value = "/changeState", method = RequestMethod.POST)
 	public Msg changeState(@RequestParam("state") String state, @RequestParam("id") Integer id) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		Dusty dusty = new Dusty();
 		dusty.setState(state);
 		dusty.setId(id);
 		dustyService.update(dusty);
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("任务");
+		projectHistory.setTypeId(dusty.getId());
+		projectHistory.setOperationType("修改了任务状态为"+state);
+		projectHistoryService.insertSelective(projectHistory);
 		return Msg.success();
 	}
 
@@ -142,10 +153,17 @@ public class DustyController {
 	@ResponseBody
 	@RequestMapping(value = "/assignTask", method = RequestMethod.POST)
 	public Msg dele(@RequestParam("dustyId") Integer dustyId,@RequestParam("assignor") Integer assignor) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		Dusty dusty = new Dusty();
 		dusty.setId(dustyId);
 		dusty.setAssignor(assignor);
 		dustyService.update(dusty);
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("任务");
+		projectHistory.setTypeId(dustyId);
+		projectHistory.setOperationType("修改了任务的指派人");
+		projectHistoryService.insertSelective(projectHistory);
 		return Msg.success();
 	}
 	
@@ -162,16 +180,14 @@ public class DustyController {
 		return "projectDusty/editor";
 	}
 	
-	// 添加
+	// 编辑
 	@ResponseBody
 	@RequestMapping(value = "/editor", method = RequestMethod.POST)
-	public Msg editor(Dusty dusty, @RequestParam("ccid") String ccid, MultipartFile file, HttpServletRequest request) {
+	public Msg editor(Dusty dusty,MultipartFile file, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		dusty.setCreatPeople(userId);
-		dusty.setProjectId(projectId);
-
-		dustyService.insert(dusty,file,null,0,request);
+		
+		dustyService.insert(dusty,file,null,0,request,projectId,userId);
 		return Msg.success();
 	}
 	

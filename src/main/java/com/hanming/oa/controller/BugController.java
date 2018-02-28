@@ -1,6 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.io.Reader;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,7 +13,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,14 +25,17 @@ import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BugDetailed;
 import com.hanming.oa.model.BugDisplay;
-import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
+import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.DustyDisplay;
 import com.hanming.oa.model.ProjectBug;
+import com.hanming.oa.model.ProjectHistory;
+import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.BugService;
 import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.DustyService;
+import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.ProjectTeamService;
 
 @Controller
@@ -49,6 +50,8 @@ public class BugController {
 	ProjectTeamService projectTeamService;
 	@Autowired
 	DustyService dustyService;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -65,6 +68,9 @@ public class BugController {
 		List<BugDisplay> list = bugService.list(state, name, hrefPage, projectId, userId);
 		pageInfo = new PageInfo<>(list);
 
+		List<UserByProjectId> users = projectTeamService.list(projectId, "姓名");
+
+		model.addAttribute("users", users);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);
 		model.addAttribute("name", name);
@@ -77,7 +83,9 @@ public class BugController {
 	@RequestMapping(value = "/detailed", method = RequestMethod.GET)
 	public String detailed(@RequestParam("bugId") Integer id, Model model) {
 		BugDetailed bugDetailed = bugService.detailedById(id);
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id,"bug");
 		model.addAttribute("bugDetailed", bugDetailed);
+		model.addAttribute("bugHistory", list);
 		return "projectBug/bugDetails";
 	}
 
@@ -99,14 +107,16 @@ public class BugController {
 		model.addAttribute("team", team);
 		return "projectBug/deitor";
 	}
-	
-	//编辑
+
+	// 编辑
 	@ResponseBody
-	@RequestMapping(value="/editor",method=RequestMethod.POST)
-	public Msg editor(ProjectBug projectBug,MultipartFile file,HttpServletRequest request) {
+	@RequestMapping(value = "/editor", method = RequestMethod.POST)
+	public Msg editor(ProjectBug projectBug, MultipartFile file, HttpServletRequest request) {
+		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		projectBug.setState("待解决");
 
-		bugService.insert(projectBug,file,null,0,request);
+		bugService.insert(projectBug, file, null, 0, request, projectId, userId);
 		return Msg.success();
 	}
 
@@ -125,35 +135,36 @@ public class BugController {
 		model.addAttribute("team", team);
 		return "projectBug/add";
 	}
-	
-	//添加
+
+	// 添加
 	@ResponseBody
-	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public Msg add(@RequestParam("ccid") String ccid,ProjectBug projectBug,MultipartFile file,HttpServletRequest request) {
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public Msg add(@RequestParam("ccid") String ccid, ProjectBug projectBug, MultipartFile file,
+			HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		projectBug.setCreatPeople(userId);
 		projectBug.setProjectId(projectId);
 		projectBug.setState("待解决");
-		
-		Set<Integer> idInt =null;
+
+		Set<Integer> idInt = null;
 		String[] ids = ccid.split("-");
 		List<String> idStr = Arrays.asList(ids);
-		if (!("".equals(idStr.get(0))) && idStr!=null) {
+		if (!("".equals(idStr.get(0))) && idStr != null) {
 			idInt = idStr.stream().map((x) -> Integer.parseInt(x)).collect(Collectors.toSet());
-		}else {
+		} else {
 			idInt = new HashSet<>();
 		}
 		idInt.add(projectBug.getAssginor());
 
-		bugService.insert(projectBug,file,idInt,1,request);
+		bugService.insert(projectBug, file, idInt, 1, request, projectId, userId);
 		return Msg.success();
 	}
-	
-	//改变状态
+
+	// 改变状态
 	@ResponseBody
-	@RequestMapping(value="/changeState",method=RequestMethod.POST)
-	public Msg changeState(@RequestParam("id")Integer id,@RequestParam("state")String state) {
+	@RequestMapping(value = "/changeState", method = RequestMethod.POST)
+	public Msg changeState(@RequestParam("id") Integer id, @RequestParam("state") String state) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		ProjectBug projectBug = new ProjectBug();
 		projectBug.setId(id);
@@ -161,6 +172,30 @@ public class BugController {
 		projectBug.setCompletPeople(userId);
 		projectBug.setEndTime(DateTool.dateToString(new Date()));
 		bugService.update(projectBug);
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("bug");
+		projectHistory.setTypeId(projectBug.getId());
+		projectHistory.setOperationType("修改了bug状态为" + state);
+		projectHistoryService.insertSelective(projectHistory);
+		return Msg.success();
+	}
+
+	// 修改指派人
+	@ResponseBody
+	@RequestMapping(value = "/assignTask", method = RequestMethod.POST)
+	public Msg dele(@RequestParam("bugId") Integer bugId, @RequestParam("assignor") Integer assignor) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		ProjectBug projectBug = new ProjectBug();
+		projectBug.setId(bugId);
+		projectBug.setAssginor(assignor);
+		bugService.update(projectBug);
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("bug");
+		projectHistory.setTypeId(bugId);
+		projectHistory.setOperationType("修改了bug的指派人");
+		projectHistoryService.insertSelective(projectHistory);
 		return Msg.success();
 	}
 }

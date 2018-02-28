@@ -10,18 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.dao.DustyMapper;
+import com.hanming.oa.dao.ProjectHistoryMapper;
 import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.DustyDetailed;
 import com.hanming.oa.model.DustyDisplay;
+import com.hanming.oa.model.ProjectHistory;
 
 @Service
 public class DustyService {
 
 	@Autowired
 	DustyMapper dustyMapper;
+	@Autowired
+	ProjectHistoryMapper projectHistoryMapper;
 
 	public List<DustyDisplay> list(String type, String state, String dustyName, Integer herfPage, Integer projectId,
 			Integer userId) {
@@ -42,7 +47,11 @@ public class DustyService {
 		dustyMapper.deleteByPrimaryKey(id);
 	}
 
-	public void insert(Dusty dusty, MultipartFile file, Set<Integer> idInt, int i, HttpServletRequest request) {
+	@Transactional
+	public void insert(Dusty dusty, MultipartFile file, Set<Integer> idInt, int i, HttpServletRequest request,
+			Integer projectId, Integer userId) {
+		
+		dusty.setState("进行中");
 		if (file != null) {
 			String path = request.getSession().getServletContext().getRealPath("Dusty");
 			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
@@ -65,9 +74,21 @@ public class DustyService {
 			for (Integer integer : idInt) {
 				dusty.setAssignor(integer);
 				dustyMapper.insertSelective(dusty);
+				ProjectHistory projectHistory = new ProjectHistory();
+				projectHistory.setOperationPeopleId(userId);
+				projectHistory.setHistoryType("任务");
+				projectHistory.setTypeId(dusty.getId());
+				projectHistory.setOperationType("创建了任务");
+				projectHistoryMapper.insertSelective(projectHistory);
 			}
 		} else {
 			dustyMapper.updateByPrimaryKeySelective(dusty);
+			ProjectHistory projectHistory = new ProjectHistory();
+			projectHistory.setOperationPeopleId(userId);
+			projectHistory.setHistoryType("任务");
+			projectHistory.setTypeId(dusty.getId());
+			projectHistory.setOperationType("编辑了任务");
+			projectHistoryMapper.insertSelective(projectHistory);
 		}
 	}
 

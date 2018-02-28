@@ -34,7 +34,21 @@
 			
 		})
 	}
-
+	function assignTask(ele) {
+		var bugIdId = $(ele).attr('data-bugId');
+		var assignor = $(ele).attr('data-assignor');
+		$.ajax({
+			url:"${APP_PATH}/admin/bug/assignTask",
+			data:{
+				'bugId':dustyId,
+				'assignor':assignor
+			},
+			type:"POST",
+			success:function(result){
+				
+			}
+		})
+	}
 </script>
 </head>
     <body class="bg-common stickey-menu">
@@ -235,7 +249,33 @@
         <h4 class="modal-title" id="myModalLabel">任务指派给？</h4>
       </div>
       <div class="modal-body">
-      
+      <table class="table table-bordered table-hover text-center">
+						<thead>
+							<tr>
+								<th>用户名</th>
+								<th>姓名</th>
+								<th>部门</th>
+								<th>职位</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${users}" var="user">
+								<tr>
+									<td>${user.userName}</td>
+									<td>${user.name}</td>
+									<td style="width:20%;">${user.departmentName}</td>
+									<td style="width:20%;">${user.roleName}</td>
+									<td>
+										<!-- hidden 1 -->
+										<button class="btn btn-defalut btn-success btn-sm btn-select-assign" data-assignor="${user.id}" onclick="assignTask(this);">
+											<span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>指派
+										</button>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
       </div>
     </div>
   </div>

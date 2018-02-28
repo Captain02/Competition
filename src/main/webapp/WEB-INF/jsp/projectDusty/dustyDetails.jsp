@@ -130,7 +130,9 @@ function dele(ele) {
 		          			<div class="profile-desk" style="margin-top: 15px;">
 		          				<h1>历史记录</h1>
 				          		<ul>
-                     			 <li>2018-02-25 15:37 李白创建了任务</li>
+				          		<c:forEach items="${dustyHistory}" var="history">
+                     			 <li>${history.operationTime}  ${history.operationPeople}  ${history.operationType}</li>
+				          		</c:forEach>
                     			</ul>
 		          			</div>
 	          			</div>

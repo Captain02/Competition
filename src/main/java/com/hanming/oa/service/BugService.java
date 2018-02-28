@@ -14,9 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.dao.ProjectBugMapper;
+import com.hanming.oa.dao.ProjectHistoryMapper;
 import com.hanming.oa.model.BugDetailed;
 import com.hanming.oa.model.BugDisplay;
 import com.hanming.oa.model.ProjectBug;
+import com.hanming.oa.model.ProjectHistory;
 
 
 @Service
@@ -24,6 +26,8 @@ public class BugService {
 
 	@Autowired
 	ProjectBugMapper projectBugMapper;
+	@Autowired
+	ProjectHistoryMapper projectHistoryMapper;
 
 	public List<BugDisplay> list(String state, String name, Integer hrefPage, Integer projectId, Integer userId) {
 		List<BugDisplay> list = projectBugMapper.list(state,name,hrefPage,projectId,userId);
@@ -37,7 +41,7 @@ public class BugService {
 
 	@Transactional
 	public void insert(ProjectBug projectBug, MultipartFile file, Set<Integer> idInt, int i,
-			HttpServletRequest request) {
+			HttpServletRequest request, Integer projectId, Integer userId) {
 		if (file != null) {
 			String path = request.getSession().getServletContext().getRealPath("ProjectBug");
 			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
@@ -60,9 +64,21 @@ public class BugService {
 			for (Integer integer : idInt) {
 				projectBug.setAssginor(integer);
 				projectBugMapper.insertSelective(projectBug);
+				ProjectHistory projectHistory = new ProjectHistory();
+				projectHistory.setOperationPeopleId(userId);
+				projectHistory.setHistoryType("bug");
+				projectHistory.setTypeId(projectBug.getId());
+				projectHistory.setOperationType("创建了bug");
+				projectHistoryMapper.insertSelective(projectHistory);
 			}
 		} else {
 			projectBugMapper.updateByPrimaryKeySelective(projectBug);
+			ProjectHistory projectHistory = new ProjectHistory();
+			projectHistory.setOperationPeopleId(userId);
+			projectHistory.setHistoryType("bug");
+			projectHistory.setTypeId(projectBug.getId());
+			projectHistory.setOperationType("编辑了bug");
+			projectHistoryMapper.insertSelective(projectHistory);
 		}
 	}
 

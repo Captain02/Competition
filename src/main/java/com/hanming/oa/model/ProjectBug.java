@@ -172,13 +172,4 @@ public class ProjectBug {
 		this.completPeople = completPeople;
 	}
 
-	@Override
-	public String toString() {
-		return "ProjectBug [id=" + id + ", projectId=" + projectId + ", demandId=" + demandId + ", projectTaskId="
-				+ projectTaskId + ", bugTitle=" + bugTitle + ", state=" + state + ", descs=" + descs + ", grade="
-				+ grade + ", operatingSystem=" + operatingSystem + ", browser=" + browser + ", enclosure=" + enclosure
-				+ ", fileName=" + fileName + ", assginor=" + assginor + ", creatPeople=" + creatPeople + ", createTime="
-				+ createTime + ", endTime=" + endTime + ", completPeople=" + completPeople + "]";
-	}
-
 }
