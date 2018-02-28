@@ -28,8 +28,6 @@ function callbackFn(myChart,name,jsonURL){
 		data :'',
 		type : "GET",
 		success : function(result) {
-			console.log(result.extend.role);
-			console.log(result.extend.map);
 			myChart.hideLoading();
 			myChart.setOption({
 			    series: [{  

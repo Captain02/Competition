@@ -81,6 +81,7 @@ public class ProjectTeamController {
 	}
 	
 	//删除成员
+	@ResponseBody
 	@RequestMapping(value="dele",method=RequestMethod.POST)
 	public Msg dele(@RequestParam("id")Integer id) {
 		projectTeamService.deleById(id);

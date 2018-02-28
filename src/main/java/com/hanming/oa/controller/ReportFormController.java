@@ -2,6 +2,7 @@ package com.hanming.oa.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.UserByProjectId;
-import com.hanming.oa.reportForm.roleReprotForm;
+import com.hanming.oa.reportForm.RoleReprotForm;
 import com.hanming.oa.service.ProjectTeamService;
 
 
@@ -52,16 +53,15 @@ public class ReportFormController {
 		
 		Set<Entry<String,Long>> entrySet = map.entrySet();
 		
-		List<Object> roleProportion  = new ArrayList<>();
+		List<RoleReprotForm> roleProportion  = new ArrayList<>();
 		
 		List<String> roleName = new ArrayList<>();
 		
 		for (Entry<String, Long> entry : entrySet) {
-			roleReprotForm rrf = new roleReprotForm(entry.getValue(),entry.getKey());
+			RoleReprotForm rrf = new RoleReprotForm(entry.getValue(),entry.getKey());
 			roleProportion.add(rrf);
 			roleName.add(entry.getKey());
 		}
-		
 		return Msg.success().add("roleProportion", roleProportion).add("roleName", roleName);
 	}
 }

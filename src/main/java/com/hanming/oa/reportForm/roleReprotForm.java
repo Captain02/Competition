@@ -1,6 +1,6 @@
 package com.hanming.oa.reportForm;
 
-public class roleReprotForm {
+public class RoleReprotForm {
 
 	public Long value;
 
@@ -22,13 +22,13 @@ public class roleReprotForm {
 		this.name = name;
 	}
 
-	public roleReprotForm(Long value, String name) {
+	public RoleReprotForm(Long value, String name) {
 		super();
 		this.value = value;
 		this.name = name;
 	}
 
-	public roleReprotForm() {
+	public RoleReprotForm() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
