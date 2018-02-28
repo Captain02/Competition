@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hanming.oa.dao.ProjectMapper;
+import com.hanming.oa.dao.ProjectTeamMapper;
 import com.hanming.oa.dao.WhiteListMapper;
 import com.hanming.oa.model.Project;
 import com.hanming.oa.model.ProjectDetailed;
@@ -21,7 +22,7 @@ public class ProjectService {
 	ProjectMapper projectMapper;
 	@Autowired
 	WhiteListMapper whiteListMapper;
-
+	
 	public List<ProjectDisplay> list(String state, String projectName, Integer userId) {
 		List<ProjectDisplay> list = projectMapper.list(state, projectName,userId);
 		return list;
@@ -48,6 +49,7 @@ public class ProjectService {
 		List<String> strIdList = Arrays.asList(strIds);
 		if (strIdList.size() > 0 && strIdList != null && strIdList.get(0)!="") {
 			List<Integer> intIdList = strIdList.stream().map((x) -> Integer.parseInt(x)).collect(Collectors.toList());
+			whiteListMapper.deleByWhiteIdList(strIdList);
 			whiteListMapper.insertList(project.getId(),intIdList);
 		}
 	}

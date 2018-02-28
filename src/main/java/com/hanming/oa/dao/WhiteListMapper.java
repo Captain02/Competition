@@ -25,4 +25,6 @@ public interface WhiteListMapper {
 	void deleteByProjectId(Integer id);
 
 	List<User> listByProjectId(Integer projectId);
+
+	void deleByWhiteIdList(@Param("list")List<String> strIdList);
 }

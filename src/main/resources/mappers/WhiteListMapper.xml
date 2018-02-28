@@ -91,4 +91,13 @@
   	LEFT JOIN t_user tu ON tu.id=wl.userId
   	where wl.projectId = #{projectId}
   </select>
+  
+  <!-- void deleByWhiteIdList(@Param("list")List<String> strIdList); -->
+  <delete id="deleByWhiteIdList">
+  	delete from whitelist
+  	where userId IN
+  	<foreach item="item" index="index" collection="list"  open="(" separator="," close=")"> 
+    #{item} 
+    </foreach>
+  </delete>
 </mapper>
