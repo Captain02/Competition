@@ -93,10 +93,10 @@
                          
                         <div class="om-header-right">
 	                        <div class="tools pull-left" style="margin-right: 3px;">
-	                        		<a href="${APP_PATH}/admin/bug/list?hrefPage=0" class="btn btn-default btn-sm active">全部</a>
-									<a href="${APP_PATH}/admin/bug/list?hrefPage=1" class="btn btn-default btn-sm">指派给我</a>
-									<a href="${APP_PATH}/admin/bug/list?hrefPage=2" class="btn btn-default btn-sm">由我创建</a>
-									<a href="${APP_PATH}/admin/bug/list?hrefPage=3" class="btn btn-default btn-sm">由我解决</a>
+	                        		<a href="${APP_PATH}/admin/bug/list?herfPage=0" class="btn btn-default btn-sm active">全部</a>
+									<a href="${APP_PATH}/admin/bug/list?herfPage=1" class="btn btn-default btn-sm">指派给我</a>
+									<a href="${APP_PATH}/admin/bug/list?herfPage=2" class="btn btn-default btn-sm">由我创建</a>
+									<a href="${APP_PATH}/admin/bug/list?herfPage=3" class="btn btn-default btn-sm">由我解决</a>
 							</div>
                             <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/bug/add'">
                                 <i>+</i>提Bug
@@ -167,11 +167,11 @@
                                 <nav aria-label="Page navigation">
                                     <ul class="pagination pagination-control">
                                         <li>
-                                            <a href="${APP_PATH}/admin/demand/list?pn=1&projectName=${demandName}&state=${state}">首页</a>
+                                            <a href="${APP_PATH}/admin/demand/list?pn=1&projectName=${demandName}&state=${state}&herfPage=${herfPage}">首页</a>
                                         </li>
                                         <c:if test="${pageInfo.hasPreviousPage}">
                                             <li>
-                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum-1}&projectName=${demandName}&state=${state}" aria-label="Previous">
+                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum-1}&projectName=${demandName}&state=${state}&herfPage=${herfPage}" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -184,21 +184,21 @@
                                             </c:if>
                                             <c:if test="${pageNum!=pageInfo.pageNum}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/demand/list?pn=${pageNum}&projectName=${demandName}&state=${state}">${pageNum}</a>
+                                                    <a href="${APP_PATH}/admin/demand/list?pn=${pageNum}&projectName=${demandName}&state=${state}&herfPage=${herfPage}">${pageNum}</a>
                                                 </li>
                                             </c:if>
                                         </c:forEach>
 
                                         <c:if test="${pageInfo.hasNextPage }">
                                             <li>
-                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum+1}&projectName=${demandName}&state=${state}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pageNum+1}&projectName=${demandName}&state=${state}&herfPage=${herfPage}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
                                         </c:if>
 
                                         <li>
-                                            <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pages}&projectName=${demandName}&state=${state}" aria-label="Next">
+                                            <a href="${APP_PATH}/admin/demand/list?pn=${pageInfo.pages}&projectName=${demandName}&state=${state}&herfPage=${herfPage}" aria-label="Next">
                                                 <span aria-hidden="true">末页</span>
                                             </a>
                                         </li>

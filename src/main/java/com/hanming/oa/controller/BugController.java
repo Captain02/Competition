@@ -55,7 +55,7 @@ public class BugController {
 	public String list(@RequestParam(value = "pn", defaultValue = "0") Integer pn,
 			@RequestParam(value = "state", defaultValue = "状态") String state,
 			@RequestParam(value = "name", defaultValue = "名称") String name,
-			@RequestParam(value = "hrefPage", defaultValue = "0") Integer hrefPage, HttpServletRequest request,
+			@RequestParam(value = "herfPage", defaultValue = "0") Integer hrefPage, HttpServletRequest request,
 			Model model) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
@@ -68,7 +68,7 @@ public class BugController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);
 		model.addAttribute("name", name);
-		model.addAttribute("hrefPage", hrefPage);
+		model.addAttribute("herfPage", hrefPage);
 
 		return "projectBug/bug";
 	}

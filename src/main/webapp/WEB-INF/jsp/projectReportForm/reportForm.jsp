@@ -19,22 +19,31 @@
 <script src="${APP_PATH}/static/js/echarts.js"></script>
 <script type="text/javascript">
 function callbackFn(myChart,name,jsonURL){ 
+	
+	
 	myChart.showLoading();
+	
 	$.ajax({
 		url :jsonURL,
 		data :'',
 		type : "GET",
 		success : function(result) {
+			console.log(result.extend.role);
+			console.log(result.extend.map);
 			myChart.hideLoading();
 			myChart.setOption({
 			    series: [{  
-			        name: result.extend.userName,
+			        name: name,
 			        
-			        data: result.extend.userByGroupNum
+			        data: result.extend.roleProportion
 			    }],
 			    
 			    legend: {
-			        data:result.extend.userName
+			        data:[ 
+				        
+			        	result.extend.roleName
+				        
+				      ]
 			    }
 
 			});  
