@@ -39,7 +39,7 @@ function callbackFn(myChart,jsonURL){
 </script>
 </head>
 
-<body class="bg-common charts">
+<body class="bg-common charts stickey-menu">
 	<section>
 
 		<!-- 页面模版，每页左侧区域固定不变 -->

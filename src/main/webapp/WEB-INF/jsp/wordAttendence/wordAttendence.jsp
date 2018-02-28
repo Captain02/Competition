@@ -121,7 +121,7 @@ function deleAll(){
 }
 </script>
 
-<body class="bg-common">
+<body class="bg-common stickey-menu">
 	<section>
 
 		<!-- 页面模版，每页左侧区域固定不变 -->

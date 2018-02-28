@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="bg-common">
+<body class="bg-common stickey-menu">
 
     <section>
 

@@ -42,7 +42,7 @@
 			</script>
 	</head>
 
-	<body class="bg-common">
+	<body class="bg-common stickey-menu">
 		<jsp:include page="iniLeftMenu.jsp"></jsp:include>
 		<div class="main-content">
 			<div class="content-head content-head-section">

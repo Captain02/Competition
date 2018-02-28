@@ -12,6 +12,7 @@
 
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link rel="stylesheet" href="${APP_PATH}/static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
@@ -63,7 +64,7 @@ function save() {
 </script>
 </head>
 
-<body class="bg-common">
+<body class="bg-common stickey-menu">
 	<section>
 		<!-- 页面模版，每页左侧区域固定不变 -->
 		<jsp:include page="iniLeftMenu.jsp"></jsp:include>
@@ -109,10 +110,10 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 								<div class="col-sm-10">
-									<div class="input-group input-large custom-date-range">
-					                      <input class="form-control dpd1" id="mydatepicker2" name="started" placeholder="开始日期" type="text">
+									<div class="input-group input-large" data-date-format="yyyy-mm-dd">
+					                      <input value="${projectDetailed.startDate}" class="form-control dpd1" name="startDate" placeholder="开始日期"  type="text">
 					                      <span class="input-group-addon">To</span>
-					                      <input class="form-control dpd2" id="mydatepicker" name="ended" placeholder="结束日期" type="text">
+					                      <input value="${projectDetailed.endDate}" class="form-control dpd2" name="endDate" placeholder="结束日期" type="text">
                     				</div>
 								</div>
 							</div>
@@ -141,5 +142,30 @@ function save() {
 			
 		</div>
 	</section>
+	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+			 		<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+			 		<script type="text/javascript">
+			 		 $(function(){
+			 			 var checkin = $('.dpd1').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 				 language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+			 				$('.dpd1').datetimepicker('hide');
+			 	            $('.dpd2')[0].focus();
+			 			 })
+			 			
+			            
+			 			 var checkout = $('.dpd2').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 			     language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+				 				$('.dpd2').datetimepicker('hide');
+				 			 })
+			 		 })
+			 		</script>
 </body>
 </html>

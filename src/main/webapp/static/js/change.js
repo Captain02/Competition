@@ -6,7 +6,6 @@
 
 //隐藏侧边栏效果
 $(function () {
-	$('body').addClass('stickey-menu');
 	//隐藏侧边栏的效果
     var flag = 0;
     var toggleBtn = $('.toggle-btn');
@@ -253,7 +252,7 @@ $(function () {
      
      //载入页面的时候如果自定义按钮被勾选了，那么白名单框就显示出来
      $('input[name="releaseControl"]:checked').each(function(){
- 		if($(this).val() == 1){
+ 		if($(this).attr('data-control-value') == 1){
  			$('#whitename').show();
  		}
  		else{
@@ -264,7 +263,7 @@ $(function () {
     //自定义访问控制
 	$('input[name="releaseControl"]').on('click', function(){
   		var obj = $(this);
-  		if (obj.val() == 1) {
+  		if (obj.attr('data-control-value') == 1) {
   			$('#whitename').show();
   		} else {
   			$('#whitename').hide();

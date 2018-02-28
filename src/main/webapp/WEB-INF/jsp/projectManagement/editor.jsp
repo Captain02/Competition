@@ -52,7 +52,7 @@ function save() {
 </script>
 </head>
 
-<body class="bg-common">
+<body class="bg-common stickey-menu">
 	<section>
 		<!-- 页面模版，每页左侧区域固定不变 -->
 		<jsp:include page="iniLeftMenu.jsp"></jsp:include>
@@ -95,6 +95,7 @@ function save() {
 									<input name="projectAliasName" value="${projectDetailed.projectAliasName}" class="form-control" placeholder="取个别名" type="text">
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">开始和结束日期</label>
 								<div class="col-sm-10">
@@ -105,6 +106,7 @@ function save() {
                     				</div>
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
@@ -159,13 +161,13 @@ function save() {
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
 									<label class="radio-inline">
-									  <input name="releaseControl" value="公开（所有人）" type="radio" data-releaseControl="${projectDetailed.releaseControl}">公开（所有人）
+									  <input name="releaseControl" value="公开（所有人）" type="radio" data-control-value="0" data-releaseControl="${projectDetailed.releaseControl}">公开（所有人）
 									</label>
 									<label class="radio-inline">
-									  <input name="releaseControl" value="自定义（团队成员和白名单的成员可以访问）" type="radio" data-releaseControl="${projectDetailed.releaseControl}">自定义（团队成员和白名单的成员可以访问）
+									  <input name="releaseControl" value="自定义（团队成员和白名单的成员可以访问）" data-control-value="1" type="radio" data-releaseControl="${projectDetailed.releaseControl}">自定义（团队成员和白名单的成员可以访问）
 									</label>
 									<label class="radio-inline">
-									  <input name="releaseControl" value="私有（只有项目团队成员才能访问）" type="radio" data-releaseControl="${projectDetailed.releaseControl}">私有（只有项目团队成员才能访问）
+									  <input name="releaseControl" value="私有（只有项目团队成员才能访问）" data-control-value="2" type="radio" data-releaseControl="${projectDetailed.releaseControl}">私有（只有项目团队成员才能访问）
 									</label>
 									</div>
 							</div>

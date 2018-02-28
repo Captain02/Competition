@@ -82,7 +82,7 @@ function replies(ele) {
 </script>
 </head>
 
-<body class="bg-common">
+<body class="bg-common stickey-menu">
 	<section>
 		<!-- 页面模版，每页左侧区域固定不变 -->
 <jsp:include page="iniLeftMenu.jsp"></jsp:include>

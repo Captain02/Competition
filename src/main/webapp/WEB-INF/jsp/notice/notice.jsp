@@ -40,7 +40,7 @@ function dele(ele) {
 </head>
 
 
-    <body class="bg-common">
+    <body class="bg-common stickey-menu">
 
         <section>
 

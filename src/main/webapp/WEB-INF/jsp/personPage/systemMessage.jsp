@@ -18,10 +18,7 @@
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 </head>
-
-<body>
-
-    <body class="bg-common">
+    <body class="bg-common stickey-menu">
 
         <section>
 

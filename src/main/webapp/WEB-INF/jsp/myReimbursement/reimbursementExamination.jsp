@@ -35,7 +35,7 @@ function examination(state) {
 </script>
 </head>
 
-<body class="bg-common approve">
+<body class="bg-common approve stickey-menu">
     <section>
 
         <!-- 页面模版，每页左侧区域固定不变 -->
