@@ -28,9 +28,10 @@ function changeState(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			
 		}
 	})
-	}
+}
 function assignTask(ele) {
 	var dustyId = $(ele).attr('data-dustyId');
 	var assignor = $(ele).attr('data-assignor');
@@ -42,9 +43,10 @@ function assignTask(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			
 		}
 	})
-	}
+}
 </script>
 </head>
 
@@ -153,7 +155,7 @@ function assignTask(ele) {
                                        		<c:forEach items="${pageInfo.list}" var="DustyDisplay">
                                                 <tr>
                                                     <input value="${DustyDisplay.id}" type="hidden" class="dustyDisplayId">
-                                                    <td>${DustyDisplay.grade}</td>
+                                                    <td class="project-grade" data-grade="${DustyDisplay.grade}"><span class="label">${DustyDisplay.grade}</span></td>
                                                 	<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${DustyDisplay.id}">${DustyDisplay.taskName}</a></td>
                                                     <td>${DustyDisplay.state}</td>
                                                     <td>${DustyDisplay.endTime}</td>
@@ -257,7 +259,7 @@ function assignTask(ele) {
 				</script>
         </section>
         
-         <!-- 模态框 -->
+ <!-- 模态框 -->
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -294,10 +296,6 @@ function assignTask(ele) {
 						</tbody>
 					</table>
       </div>
-      <!-- <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-            <button class="btn btn-primary js-dialog-taskaccept" type="button">提交</button>
-          </div> -->
     </div>
   </div>
 </div>

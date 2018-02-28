@@ -109,7 +109,7 @@
                                             <c:forEach items="${pageInfo.list}" var="DemandDisplay">
 	                                                <tr>
 	                                                <input type="hidden" value="${DemandDisplay.id}">
-	                                                    <td>${DemandDisplay.grade}</td>
+	                                                    <td data-grade="${DemandDisplay.grade}" class="project-grade"><span class="label">${DemandDisplay.grade}</span></td>
 	                                                	<td class="project-name"><a href="${APP_PATH}/admin/demand/detailed?demandId=${DemandDisplay.id}">${DemandDisplay.demandName}</a></td>
 	                                                    <td>${DemandDisplay.createPeopele}</td>
 	                                                    <td>${DemandDisplay.assignor}</td>

@@ -229,6 +229,26 @@ $(function () {
 		}
 	})//end
 	
+	//动态添加项目级别样式
+	$('td.project-grade').each(function(){
+		switch ($(this).attr('data-grade')) {
+		case '1级':
+			$(this).find('span.label').addClass('label-danger');
+			break;
+		case '2级':
+			$(this).find('span.label').addClass('label-warning');
+			break;
+		case '3级':
+			$(this).find('span.label').addClass('label-primary');
+			break;
+		case '4级':
+			$(this).find('span.label').addClass('label-default');
+			break;
+		default:
+			break;
+		}
+	})
+	
 	//弹出白名单窗口
 	$('#cc-username').click(function(){
        $('#myModal').modal('show');
