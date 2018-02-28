@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -57,6 +58,7 @@ public class ProjectTeamController {
 	}
 
 	// 添加成员
+	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Msg add(@RequestParam(value = "ids", defaultValue = "") String ids,HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");

@@ -47,9 +47,11 @@ public class ProjectController {
 			@RequestParam(value = "state", defaultValue = "项目状态") String state,
 			@RequestParam(value = "projectName", defaultValue = "项目名称") String projectName, Model model) {
 
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		
 		PageInfo<ProjectDisplay> pageInfo = null;
 		PageHelper.startPage(pn, 8);
-		List<ProjectDisplay> list = projectService.list(state, projectName);
+		List<ProjectDisplay> list = projectService.list(state, projectName,userId);
 		pageInfo = new PageInfo<>(list,5);
 
 		model.addAttribute("pageInfo", pageInfo);

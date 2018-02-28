@@ -197,17 +197,23 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
  
-  <!-- List<ProjectDisplay> list(@Param("state")String state, @Param("projectName")String projectName); -->
+  <!-- List<ProjectDisplay> list(@Param("state")String state, @Param("projectName")String projectName, @Param("userId")Integer userId); -->
   <select id="list" resultType="ProjectDisplay">
     SELECT
-	pt.id,pt.projectName,pt.projectAliasName,tu.`name` AS createPeople ,tuu.`name` AS projectResponsiblePeople,pt.endDate,pt.startDate,pt.state
+	DISTINCT pt.id,pt.projectName,pt.projectAliasName,tu.`name` AS createPeople ,tuu.`name` AS projectResponsiblePeople,pt.endDate,pt.startDate,pt.state
 	FROM
 	project pt
 	LEFT JOIN t_user tu ON tu.id=pt.createPeople
 	LEFT JOIN t_user tuu ON tuu.id=pt.projectResponsiblePeople
+	LEFT JOIN projectteam ptt ON ptt.projectId=pt.id
+	LEFT JOIN t_user tuu3 ON tuu3.id=ptt.userId
+	LEFT JOIN whitelist wl ON wl.projectId=pt.id
+	LEFT JOIN t_user tuu4 ON tuu4.id=wl.userId
+	
 	<where>
+		pt.releaseControl = '公开（所有人）' OR tuu3.id=#{userId} OR tuu4.id=#{userId}
 		<if test="state != '项目状态'">
-			pt.state = #{state}
+			AND pt.state = #{state}
 		</if>
 		<if test="projectName != '项目名称'">
 			AND pt.projectName = #{projectName}

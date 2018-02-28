@@ -159,13 +159,13 @@ function save() {
 				                  <label class="col-sm-2 col-sm-2 control-label">访问控制</label>
 				                  <div class="col-sm-10">
 									<label class="radio-inline">
-									  <input name="releaseControl" value="0" type="radio" data-releaseControl="${projectDetailed.releaseControl}">公开（所有人）
+									  <input name="releaseControl" value="公开（所有人）" type="radio" data-releaseControl="${projectDetailed.releaseControl}">公开（所有人）
 									</label>
 									<label class="radio-inline">
-									  <input name="releaseControl" value="1" type="radio" data-releaseControl="${projectDetailed.releaseControl}">自定义（团队成员和白名单的成员可以访问）
+									  <input name="releaseControl" value="自定义（团队成员和白名单的成员可以访问）" type="radio" data-releaseControl="${projectDetailed.releaseControl}">自定义（团队成员和白名单的成员可以访问）
 									</label>
 									<label class="radio-inline">
-									  <input name="releaseControl" value="2" type="radio" data-releaseControl="${projectDetailed.releaseControl}">私有（只有项目团队成员才能访问）
+									  <input name="releaseControl" value="私有（只有项目团队成员才能访问）" type="radio" data-releaseControl="${projectDetailed.releaseControl}">私有（只有项目团队成员才能访问）
 									</label>
 									</div>
 							</div>

@@ -22,8 +22,8 @@ public class ProjectService {
 	@Autowired
 	WhiteListMapper whiteListMapper;
 
-	public List<ProjectDisplay> list(String state, String projectName) {
-		List<ProjectDisplay> list = projectMapper.list(state, projectName);
+	public List<ProjectDisplay> list(String state, String projectName, Integer userId) {
+		List<ProjectDisplay> list = projectMapper.list(state, projectName,userId);
 		return list;
 	}
 
