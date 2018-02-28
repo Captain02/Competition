@@ -144,7 +144,7 @@
 	                                                    <td>${bugDisplay.completpeople}</td>
 	                                                    <td>${bugDisplay.endtime}</td>
 	                                                    <td>
-	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派"><i class="glyphicon glyphicon-hand-right"></i></a>
+	                                                        <a class="btn btn-warning btn-xs btn-assign" title="指派" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-hand-right"></i></a>
 	                                                        <a onclick="changeState(this);" class="btn btn-info btn-xs" data-id="${bugDisplay.id}" data-state="已完成" title="完成"><i class="glyphicon glyphicon-ok-sign "></i></a>
 	                                                        <a href="${APP_PATH}/admin/bug/editor?bugId=${bugDisplay.id}" title="编辑" class="btn btn-danger btn-xs"><i class="fa fa-pencil-square-o"></i></a>
 	                                                    </td>
@@ -210,24 +210,36 @@
                     </div>
                 </div>
             </div>
-
+				<script type="text/javascript">
+					$(function(){
+						var locationHref = location.href.split('herfPage=');
+						var thisPagelocationHref = locationHref[1];
+						console.log(thisPagelocationHref);
+						var toolsA = $('.tools > a');
+						$(toolsA[thisPagelocationHref]).addClass('active');
+						$(toolsA[thisPagelocationHref]).siblings().removeClass('active');
+						
+						$('.btn-assign').click(function(){
+							$('.btn-select-assign').attr('data-dustyId',$(this).parent().siblings('input.dustyDisplayId').val());
+						})
+					})
+			</script>
         </section>
         
-         <!-- 模态框 -->
+ <!-- 模态框 -->
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
+        <h4 class="modal-title" id="myModalLabel">任务指派给？</h4>
       </div>
       <div class="modal-body">
-        
+      
       </div>
     </div>
   </div>
 </div>
-
     </body>
 
 </html>
