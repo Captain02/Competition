@@ -103,25 +103,26 @@
                                             </thead>
 
                                             <tbody>
-											
+													<c:forEach items="${pageInfo.list}" var="myCollectionDisplay">
 	                                                <tr>
 	                                                <td colspan="1">
 	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
 	                                                   <div class="info-desc" style="margin-left: 20px;">
 		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
-		                                                   	<img src="${APP_PATH}/personHeadFile/140.png" alt="" />
+		                                                   	<img src="${APP_PATH}/personHeadFile/${myCollectionDisplay.userHead}" alt="" />
 		                                                   </a>
 		                                                   <a href="" class="pull-left info-user">
-		                                                   	<strong>张三</strong>
-		                                                   	<span>这里随意放</span>
+		                                                   	<strong>${myCollectionDisplay.userName}</strong>
+		                                                   	<span>${myCollectionDisplay.userName}的${myCollectionDisplay.topicType} ${myCollectionDisplay.topicName}</span>
 		                                                   </a>
 		                                                   <a href="" class="pull-right text-muted info-time">
-		                                                   	<small>这里放日期</small>
+		                                                   	<small>${myCollectionDisplay.collectionDate}</small>
 		                                                   </a>
 	                                                   </div>
 	                                                </td>
 	                                                   
 	                                                </tr>
+													</c:forEach>
 												
 	                                                
 													
