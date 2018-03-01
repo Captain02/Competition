@@ -26,7 +26,12 @@ function dele(ele) {
 			'id':id
 		},
 		success:function(result){
-			
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','删除结果','.modal-body','成功删除团队成员');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.reload();
+			},1000);
 		}
 	})
 }
@@ -188,7 +193,7 @@ function dele(ele) {
 
         </section>
         
-         <!-- 模态框 -->
+<!-- 模态框 -->
  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -196,9 +201,7 @@ function dele(ele) {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
-      <div class="modal-body">
-        
-      </div>
+      <div class="modal-body"></div>
     </div>
   </div>
 </div>

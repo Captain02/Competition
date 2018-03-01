@@ -21,7 +21,12 @@ function save() {
 			'ids':ids
 		},
 		success : function(result) {
-			
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','添加结果','.modal-body','成功添加团队成员');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href="${APP_PATH}/admin/projectTeam/list";
+			},1000);
 		}
 	})
 }
