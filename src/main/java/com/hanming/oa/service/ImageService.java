@@ -36,7 +36,7 @@ public class ImageService {
 					"我想知道图片背后的故事","<img src=\" "+ request.getContextPath() +"/myImage/"+fileName+"\"  height=\"50%\" width=\"50%\"  alt=\"\" />",
 					userId,
 					DateTool.dateToString(new Date()),
-					"myImage") ;
+					"相册") ;
 			bbsTopicService.insertTopic(bbsTopic);
 			
 			//插入我的相册

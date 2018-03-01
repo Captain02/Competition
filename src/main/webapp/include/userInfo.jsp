@@ -58,7 +58,7 @@ String basePath2 = request.getScheme() + "://"
                             </li>
                             <li role="separator" class="divider"></li>
                              <li>
-                                <a href="#">我的收藏</a>
+                                <a href="${APP_PATH}/admin/MyCollection/list">我的收藏</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>

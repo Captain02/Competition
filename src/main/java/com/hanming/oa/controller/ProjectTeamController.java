@@ -65,7 +65,6 @@ public class ProjectTeamController {
 		if (ids == "") {
 			return Msg.fail();
 		} else {
-			if (ids.contains("-")) {
 				String[] strIds = ids.split("-");
 				List<String> idsStrList = Arrays.asList(strIds);
 				if (idsStrList.get(0) != "") {
@@ -75,7 +74,6 @@ public class ProjectTeamController {
 					projectTeamService.inserList(projectId,idsIntList);
 					return Msg.success();
 				}
-			}
 		}
 		return Msg.fail();
 	}

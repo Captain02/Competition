@@ -126,7 +126,7 @@ public class BBSTopicService {
 		bbsTopic.setText(text);
 		bbsTopic.setUserId(userId);
 		bbsTopic.setTitle(title);
-		bbsTopic.setType("knowledge");
+		bbsTopic.setType("知识");
 		bbsTopicMapper.insertSelective(bbsTopic);
 
 		for (Integer labelId : intIdsList) {

@@ -13,6 +13,7 @@ import com.hanming.oa.dao.BBSRepliesMapper;
 import com.hanming.oa.model.BBSCollection;
 import com.hanming.oa.model.BBSReplies;
 import com.hanming.oa.model.BBSTopic;
+import com.hanming.oa.model.MyCollectionDisplay;
 import com.hanming.oa.model.SystemMessage;
 
 @Service
@@ -102,5 +103,6 @@ public class BBSCollectionService {
 		}
 		systemMessageService.insert(systemMessage);
 	}
+
 
 }

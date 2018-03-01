@@ -206,7 +206,7 @@
 	LEFT JOIN bbslabeltopic blt ON blt.topicId=bt.id
 	LEFT JOIN bbslabel bl ON bl.id=blt.labelId
 	<where>
-	type = 'knowledge'
+	type = '知识'
 	 <if test="labelId != 0">
 	    AND  bl.id = #{labelId}
 	 </if>

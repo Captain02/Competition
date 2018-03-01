@@ -104,4 +104,23 @@
     </foreach>
   </delete>
   
+  <!-- List<MyCollectionDisplay> listByMyId(@Param("name")String name, @Param("type")String type, @Param("userId")Integer userId); -->
+  <select id="listByMyId" resultType="MyCollectionDisplay">
+  	SELECT
+	bt.id,tu.id AS userId, tu.headFile AS userHead,bt.id AS topicId,bt.title AS topicName,bt.type AS topicType,bc.collectionTime,tu.`name` AS userName
+	FROM bbscollection  bc
+	LEFT JOIN bbstopic bt ON bt.id=bc.topicId
+	LEFT JOIN t_user tu ON tu.id=bc.userId
+	<where>
+			bc.userId = #{userId}
+		<if test="name != '名称'">
+			AND bt.title = #{name}
+		</if>
+		<if test="type != '类型'">
+			AND bt.type = #{type}
+		</if>
+	</where>
+	
+  </select>
+  
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.BBSCollection;
+import com.hanming.oa.model.MyCollectionDisplay;
 
 public interface BBSCollectionMapper {
 	int deleteByPrimaryKey(Integer id);
@@ -28,4 +29,6 @@ public interface BBSCollectionMapper {
 	Integer countNumByTopic(@Param("topicId") Integer topicId);
 
 	void deleByTopicIdList(List<Integer> bbsTopicIds);
+
+	List<MyCollectionDisplay> listByMyId(@Param("name")String name, @Param("type")String type, @Param("userId")Integer userId);
 }
