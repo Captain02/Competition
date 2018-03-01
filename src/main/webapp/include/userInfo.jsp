@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
       pageContext.setAttribute("APP_PATH", request.getContextPath());
        
@@ -17,20 +18,21 @@ String basePath2 = request.getScheme() + "://"
                     <li>
                         <a class="fa fa-envelope-o btn-myinfo dropdown-toggle" title="消息" data-toggle="dropdown"></a>
                         <div class="dropdown-menu dropdown-menu-head pull-right">
-                        	<h5 class="title">您有0最新消息</h5>
+                        	<h5 class="title">您有${systemMessagesize}未读消息</h5>
                         	<ul class="dropdown-list normal-list" >
                         		<li class="myinfo">
-                        			<a>
+                        				<c:forEach items="${systemMessage}" var="message">
+                        			<a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${message.topicId}&isCancel=${message.id}">
                         				<span class="myinfo-type">
-                        					<img src="${APP_PATH}/personHeadFile/140.png" alt="" />
+                        					<img src="${APP_PATH}/personHeadFile/${message.headFile}" alt="" />
                         				</span>
-                        				
                         				<span class="myinfo-desc">
-                        					<span class="myinfo-name">李白</span>
-                        					<span class="myinfo-msg">请求添加我为好友</span>
+                        					<span class="myinfo-name">${message.userName}</span>
+                        					<span class="myinfo-msg">${message.action}  ${message.text}  ${message.title}</span>
                         				</span>
                         				
                         			</a>
+                        				</c:forEach>
                         		</li>
                         		<li>
                         			<a href="${APP_PATH}/admin/systemMessage/list">查看更多</a>

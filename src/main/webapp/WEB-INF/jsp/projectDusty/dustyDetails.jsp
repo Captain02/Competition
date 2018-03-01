@@ -107,12 +107,12 @@ function dele(ele) {
 						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/dusty/detailed?id=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="dele(this);" data-id="${dustyDetailed.id}" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
-		                    <a onclick="changeState(this);" data-state="未开始" data-id="${dustyDetailed.id}" class="btn p-follow-btn">未开始</a> 
-		                    <a onclick="changeState(this);" data-state="进行中" data-id="${dustyDetailed.id}" class="btn p-follow-btn">进行中</a> 
-		                    <a onclick="changeState(this);" data-state="已完成" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已完成</a> 
-		                    <a onclick="changeState(this);" data-state="已暂停" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已暂停</a>
-		                    <a onclick="changeState(this);" data-state="已取消" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已取消</a>
-		                    <a onclick="changeState(this);" data-state="已关闭" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已关闭</a> 
+		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="未开始" data-id="${dustyDetailed.id}" class="btn p-follow-btn">未开始</a> 
+		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="进行中" data-id="${dustyDetailed.id}" class="btn p-follow-btn">进行中</a> 
+		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="已完成" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已完成</a> 
+		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="已暂停" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已暂停</a>
+		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="已取消" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已取消</a>
+		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="已关闭" data-id="${dustyDetailed.id}" class="btn p-follow-btn">已关闭</a> 
 		                    <a href="${APP_PATH}/admin/dusty/clone?id=${dustyDetailed.id}" class="btn btn-warning"><i class="fa fa-files-o"></i>
 		                                                                     克隆
 		                    </a> 

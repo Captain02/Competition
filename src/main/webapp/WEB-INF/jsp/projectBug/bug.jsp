@@ -81,7 +81,7 @@
 				          <option value="延期处理">延期处理</option>
 				          <option value="不予解决">不予解决</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${name}" class="form-control" name="demandName">
+                        <input type="text" placeholder="输入项目名称" value="${name}" class="form-control" name="name">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.NoticeDisplay;
+import com.hanming.oa.model.SystemMessageDisplay;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.BBSTopicService;
 import com.hanming.oa.service.NoticeService;
+import com.hanming.oa.service.SystemMessageService;
 import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
 
@@ -35,6 +38,8 @@ public class PersonPageController {
 	NoticeService noticeService;
 	@Autowired
 	BBSTopicService bbsTopicService;
+	@Autowired
+	SystemMessageService systemMessageService;
 
 	// 跳转个人主页
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -64,6 +69,12 @@ public class PersonPageController {
 			model.addAttribute("topics", topics);
 		}
 		
+		//系统消息
+		List<SystemMessageDisplay> systemMessageDisplay = systemMessageService.list("类型","未读",user.getId());
+		int size = systemMessageDisplay.size();
+		Collections.reverse(systemMessageDisplay);
+		model.addAttribute("systemMessage", systemMessageDisplay.subList(0, 2));
+		model.addAttribute("systemMessagesize", size);
 
 		model.addAttribute("user", user);
 		return "personPage/personPage";
