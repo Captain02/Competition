@@ -118,6 +118,27 @@ function dele(ele) {
 					</div>
 	              </div>
 	            </div>
+	          	 	<div class="col-md-12">
+	          		<div class="panel">
+	          			<div class="panel-body">
+	          				<div class="profile-desk">
+		          				<h1>附件下载</h1>
+				          		<p>
+				          			<a href="" style="color:#6bc5a4">附件下载</a>
+				          		</p>
+	          				</div>
+		          			<div class="profile-desk" style="margin-top: 15px;">
+		          				<h1>历史记录</h1>
+				          		<ul>
+                     			
+                     			 <li>123412</li>
+				          		
+                    			</ul>
+		          			</div>
+	          			</div>
+	          		</div>
+	          	</div>
+	          
 	          </div>
 	        </div>
 	        <div class="col-md-4">
