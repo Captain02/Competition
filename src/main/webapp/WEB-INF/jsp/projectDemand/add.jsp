@@ -43,6 +43,12 @@ function save() {
 	        contentType: false,  
 	        processData: false, 
 			success:function(result){
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新需求');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.history.go(-1);
+				},1000);
 			}
 		})  
 }
@@ -185,6 +191,20 @@ function save() {
 				
 			</div>
 			
+		</div>
+		
+		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"></h4>
+		      </div>
+		      
+		      <div class="modal-body">
+		      </div>
+		    </div>
+		  </div>
 		</div>
 	</section>
 </body>

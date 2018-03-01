@@ -102,6 +102,20 @@ function changeState(ele) {
 					</div>
 	              </div>
 	            </div>
+	          	<div class="col-md-12">
+	          		<div class="panel">
+	          			<div class="panel-body">
+		          			<div class="profile-desk" style="margin-top: 15px;">
+		          				<h1>历史记录</h1>
+				          		<ul>
+				          		
+                     			 <li>超级管理员做了一些改动</li>
+				          		
+                    			</ul>
+		          			</div>
+	          			</div>
+	          		</div>
+	          	</div>
 	          </div>
 	        </div>
 	        <div class="col-md-4">

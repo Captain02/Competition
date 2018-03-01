@@ -45,6 +45,7 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
+			
 		}
 	})  
 }

@@ -86,7 +86,7 @@ function dele(ele) {
 
                          <div class="om-header-left">
                             <h3>
-                                <span class="om-title">团队管理</span>
+                                <span class="om-title">项目管理</span>
                                 <jsp:include page="projectLeftManagement.jsp"></jsp:include>
                             </h3>
                         </div>

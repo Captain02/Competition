@@ -15,8 +15,6 @@
   pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
-<script src="${APP_PATH}/static/js/selectAll.js"></script>
 </head>
     <body class="bg-common stickey-menu">
 
@@ -92,21 +90,12 @@
                                     <form action="" id="user-list" class="user-list">
                                         <table class="table table-info">
 
-                                            <thead>
-                                                <tr>
-                                                <th colspan="1">
-                                                	<input type="checkbox" name="selectAll" class="selectAll pull-left" id="selectAll">
-                                                	<button class="btn btn-danger btn-sm pull-left" style="margin-left: 20px;">删除</button>
-                                                </th>
-                                                  
-                                                </tr>
-                                            </thead>
+                                        
 
                                             <tbody>
 													<c:forEach items="${pageInfo.list}" var="myCollectionDisplay">
 	                                                <tr>
 	                                                <td colspan="1">
-	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
 	                                                   <div class="info-desc" style="margin-left: 20px;">
 		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
 		                                                   	<img src="${APP_PATH}/personHeadFile/${myCollectionDisplay.userHead}" alt="" />

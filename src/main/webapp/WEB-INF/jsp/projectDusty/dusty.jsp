@@ -70,15 +70,15 @@ function assignTask(ele) {
                     <form action="${APP_PATH}/admin/demand/list" class="serach-form" method="get">
 
                         
-						<select name="state" class="form-control">
-				          <option value="需求状态">需求状态</option>
-				          <option value="草稿">草稿</option>
-				          <option value="激活">激活</option>
-				          <option value="已变更">已变更</option>
-				          <option value="待关闭">待关闭</option>
-				          <option value="已关闭">已关闭</option>
+						<select name="type" class="form-control">
+				          <option style="display: none;">任务类型</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value=" " class="form-control" name="demandName">
+       					
+       					<select name="state" class="form-control">
+				          <option style="display: none;">任务状态</option>
+       					</select>
+       					
+                        <input type="text" placeholder="输入任务名称" value="" class="form-control" name="dustyName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
