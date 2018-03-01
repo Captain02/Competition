@@ -21,6 +21,7 @@ import com.hanming.oa.model.BBSDetailedTopic;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BBSLabel;
 import com.hanming.oa.model.Comments;
+import com.hanming.oa.model.SystemMessage;
 import com.hanming.oa.service.BBSCollectionService;
 import com.hanming.oa.service.BBSLabelService;
 import com.hanming.oa.service.BBSLabelTopicService;
@@ -79,8 +80,16 @@ public class KnowledgeSharingController {
 	// 查看某个贴
 	@RequestMapping(value = "/detailedTopic", method = RequestMethod.GET)
 	public String detailedTopicPage(@RequestParam(value = "topicId") Integer topicId,
-			@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+			@RequestParam(value = "isCancel", defaultValue = "0") Integer isCancel, Model model) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		
+		if (isCancel!=0) {
+			SystemMessage systemMessage = new SystemMessage();
+			systemMessage.setId(isCancel);
+			systemMessage.setState("已读");
+			systemMessageService.update(systemMessage);
+		}
 
 		BBSDetailedTopic bbsDetailedTopic = bbsTopicService.bbsDetailedTopic(topicId);
 
@@ -97,8 +106,6 @@ public class KnowledgeSharingController {
 
 		Integer likeNum = bbsLikeService.selectCountLikeByUserIdAndTopicId(userId, topicId);
 		Integer collectionNum = bbsCollectionService.selectCountCollectionByUserAndTopic(userId, topicId);
-		// Integer commenstNum =
-		// bbsRepliesService.selectCountCommentByUserAndTopic(topicId);
 
 		model.addAttribute("likeNum", likeNum);
 		model.addAttribute("collectionNum", collectionNum);
@@ -134,7 +141,7 @@ public class KnowledgeSharingController {
 				return Msg.fail();
 			}
 		} else {
-			int i = bbsTopicService.update(text, title, sketch, ids,topicId);
+			int i = bbsTopicService.update(text, title, sketch, ids, topicId);
 			if (i == 1) {
 				return Msg.success();
 			} else {
@@ -156,15 +163,13 @@ public class KnowledgeSharingController {
 
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		} else {
-			
+
 			isLike = bbsLikeService.likeTopic(userId, topicId);
 			Integer likeNum = bbsLikeService.countByTopicId(topicId);
 
 			return Msg.success().add("isLike", isLike).add("likeNum", likeNum);
 		}
 	}
-
-	
 
 	// 收藏
 	@ResponseBody
@@ -249,15 +254,13 @@ public class KnowledgeSharingController {
 			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
 
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
+
 		bbsCollectionService.addCollection(text, topicid, byUserId, repliesId, userId);
 
-		
 		bbsTopicService.updateCommentsAddOne(topicid);
 
 		return "redirect:detailedTopic?pn=" + pn + "&topicId=" + topicid;
 	}
-
 
 	// 跳转修改页
 	@RequestMapping(value = "/updateTopicPage", method = RequestMethod.GET)

@@ -111,7 +111,7 @@
 		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
 		                                                   	<img src="${APP_PATH}/personHeadFile/${systemMessage.headFile}" alt="" />
 		                                                   </a>
-		                                                   <a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${systemMessage.topicId}" class="pull-left info-user">
+		                                                   <a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${systemMessage.topicId}&isCancel=${systemMessage.id}" class="pull-left info-user">
 		                                                   	<strong>${systemMessage.userName}</strong>
 		                                                   	<span>${systemMessage.action}  ${systemMessage.text}  ${systemMessage.title}</span>
 		                                                   </a>

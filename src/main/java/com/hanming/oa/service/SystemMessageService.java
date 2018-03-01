@@ -23,4 +23,8 @@ public class SystemMessageService {
 		return list;
 	}
 
+	public void update(SystemMessage systemMessage) {
+		SystemMessageMapper.updateByPrimaryKeySelective(systemMessage);
+	}
+
 }
