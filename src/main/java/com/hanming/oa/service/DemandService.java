@@ -74,7 +74,7 @@ public class DemandService {
 			demandMapper.updateByPrimaryKeySelective(demand);
 			//历史消息
 			projectHistory.setTypeId(demand.getId());
-			projectHistory.setOperationType("修改了需求");
+			projectHistory.setOperationType("编辑了需求");
 			projectHistoryService.insertSelective(projectHistory);
 		} else {
 			demandMapper.insertSelective(demand);

@@ -77,7 +77,7 @@ function save() {
 					<section class="panel">
 						<header class="panel-heading">编辑需求</header>
 						<div class="panel-body">
-						<form id="topicText" action="" method="post">
+						<form id="demandForm" action="" method="post">
 						<input type="hidden" value="${demandDetailed.id}" name="id">
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>需求名称</label>

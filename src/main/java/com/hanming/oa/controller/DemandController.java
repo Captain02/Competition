@@ -1,13 +1,17 @@
 package com.hanming.oa.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +24,13 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
+import com.hanming.oa.model.ProjectBug;
 import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.ProjectTeamService;
+import com.hanming.oa.service.UpDownFileService;
 
 @Controller
 @RequestMapping("/admin/demand")
@@ -36,6 +42,8 @@ public class DemandController {
 	ProjectTeamService projectTeamService;
 	@Autowired
 	ProjectHistoryService projectHistoryService;
+	@Autowired
+	UpDownFileService upDownFileService;
 
 	// 列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -113,7 +121,36 @@ public class DemandController {
 		Demand demand = new Demand();
 		demand.setId(demandId);
 		demand.setState(state);
-		demandService.update(userId,demand);
+		demandService.update(userId, demand);
 		return Msg.success();
+	}
+
+	// 文件下载
+	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) {
+
+		Demand demand = demandService.select(id);
+
+		try {
+			upDownFileService.down(response, request, demand, "Demand");
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

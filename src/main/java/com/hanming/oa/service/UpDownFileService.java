@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.Document;
 import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.Holiday;
@@ -73,6 +74,9 @@ public class UpDownFileService {
 		}else if (obj instanceof Document) {
 			enclosure = ((Document) obj).getEnclosure();
 			filename = ((Document) obj).getFileName();
+		}else if (obj instanceof Demand) {
+			enclosure = ((Demand) obj).getEnclosure();
+			filename = ((Demand) obj).getFileName();
 		}
 
 		// 获取文件
