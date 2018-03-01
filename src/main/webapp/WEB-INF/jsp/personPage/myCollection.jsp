@@ -111,11 +111,11 @@
 		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
 		                                                   	<img src="${APP_PATH}/personHeadFile/${myCollectionDisplay.userHead}" alt="" />
 		                                                   </a>
-		                                                   <a href="" class="pull-left info-user">
+		                                                   <a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${myCollectionDisplay.topicId}" class="pull-left info-user">
 		                                                   	<strong>${myCollectionDisplay.userName}</strong>
 		                                                   	<span>${myCollectionDisplay.userName}的${myCollectionDisplay.topicType} ${myCollectionDisplay.topicName}</span>
 		                                                   </a>
-		                                                   <a href="" class="pull-right text-muted info-time">
+		                                                   <a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${myCollectionDisplay.topicId}" class="pull-right text-muted info-time">
 		                                                   	<small>${myCollectionDisplay.collectionDate}</small>
 		                                                   </a>
 	                                                   </div>
@@ -135,11 +135,11 @@
                                 <nav aria-label="Page navigation" class="pull-right">
 									  <ul class="pagination pagination-sm">
 									    <li>
-                                                <a href="${APP_PATH}/admin/systemMessage/list?pn=1&type=${type}&state=${state}">首页</a>
+                                                <a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=1&type=${type}&name=${name}">首页</a>
                                             </li>
                                             <c:if test="${pageInfo.hasPreviousPage}">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}" aria-label="Previous">
+                                                    <a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum-1}&type=${type}&name=${name}" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
@@ -152,21 +152,21 @@
                                                 </c:if>
                                                 <c:if test="${pageNum!=pageInfo.pageNum}">
                                                     <li>
-                                                        <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageNum}&type=${type}&state=${state}">${pageNum}</a>
+                                                        <a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageNum}&type=${type}&name=${name}">${pageNum}</a>
                                                     </li>
                                                 </c:if>
                                             </c:forEach>
 
                                             <c:if test="${pageInfo.hasNextPage }">
                                                 <li>
-                                                    <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}" aria-label="Next">
+                                                    <a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum+1}&type=${type}&name=${name}" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
                                             </c:if>
 
                                             <li>
-                                                <a href="${APP_PATH}/admin/systemMessage/list?pn=${pageInfo.pages}&type=${type}&state=${state}" aria-label="Next">
+                                                <a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pages}&type=${type}&name=${name}" aria-label="Next">
                                                     <span aria-hidden="true">末页</span>
                                                 </a>
                                             </li>
