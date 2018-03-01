@@ -39,12 +39,10 @@
                         
 						<select name="type" class="form-control">
 				          <option value="类型">类型</option>
-				          <option value="挂起">挂起</option>
-				          <option value="延期">延期</option>
-				          <option value="进行">进行</option>
-				          <option value="结束">结束</option>
+				          <option value="正文">正文</option>
+				          <option value="连接">连接</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${documentName == '文档名'?null:documentName}" class="form-control" name="documentName">
+                        <input type="text" placeholder="输入项目名称" value="${documentName}" class="form-control" name="documentName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 

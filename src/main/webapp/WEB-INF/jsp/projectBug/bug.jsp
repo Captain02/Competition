@@ -68,18 +68,20 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="${APP_PATH}/admin/demand/list" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/bug/list" class="serach-form" method="get">
 
                         
 						<select name="state" class="form-control">
-				          <option value="需求状态">需求状态</option>
-				          <option value="草稿">草稿</option>
-				          <option value="激活">激活</option>
-				          <option value="已变更">已变更</option>
-				          <option value="待关闭">待关闭</option>
-				          <option value="已关闭">已关闭</option>
+				          <option value="状态">状态</option>
+				          <option value="设计如此">设计如此</option>
+				          <option value="重复bug">重复bug</option>
+				          <option value="外部原因">外部原因</option>
+				          <option value="已解决">已解决</option>
+				          <option value="无法重现">无法重现</option>
+				          <option value="延期处理">延期处理</option>
+				          <option value="不予解决">不予解决</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${demandName == '需求名称'?null:demandName}" class="form-control" name="demandName">
+                        <input type="text" placeholder="输入项目名称" value="${name}" class="form-control" name="demandName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
