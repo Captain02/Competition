@@ -17,6 +17,7 @@ import com.hanming.oa.dao.ProjectBugMapper;
 import com.hanming.oa.dao.ProjectHistoryMapper;
 import com.hanming.oa.model.BugDetailed;
 import com.hanming.oa.model.BugDisplay;
+import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.ProjectBug;
 import com.hanming.oa.model.ProjectHistory;
 
@@ -84,6 +85,11 @@ public class BugService {
 
 	public void update(ProjectBug projectBug) {
 		projectBugMapper.updateByPrimaryKeySelective(projectBug);
+	}
+
+	public ProjectBug select(Integer id) {
+		ProjectBug bug = projectBugMapper.selectByPrimaryKey(id);
+		return bug;
 	}
 
 }

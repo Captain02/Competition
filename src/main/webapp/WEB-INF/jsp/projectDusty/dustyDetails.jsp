@@ -105,7 +105,7 @@ function dele(ele) {
 	                    <h1>关联需求</h1>
 	                    <div class="content">${dustyDetailed.projectName}</div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href="${APP_PATH}/admin/project/editor?projectId=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/dusty/detailed?id=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="dele(this);" data-id="${dustyDetailed.id}" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
 		                    <a onclick="changeState(this);" data-state="未开始" data-id="${dustyDetailed.id}" class="btn p-follow-btn">未开始</a> 
 		                    <a onclick="changeState(this);" data-state="进行中" data-id="${dustyDetailed.id}" class="btn p-follow-btn">进行中</a> 
@@ -121,12 +121,14 @@ function dele(ele) {
 	          	<div class="col-md-12">
 	          		<div class="panel">
 	          			<div class="panel-body">
+	          				<c:if test="${dustyDetailed.fileName != null}">
 	          				<div class="profile-desk">
 		          				<h1>附件下载</h1>
 				          		<p>
-				          			<a href="" style="color:#6bc5a4">${dustyDetailed.fileName == null?'无附件':dustyDetailed.fileName}</a>
+				          			<a href="${APP_PATH}/admin/dusty/down/${dustyDetailed.id}" style="color:#6bc5a4">${dustyDetailed.fileName}</a>
 				          		</p>
 	          				</div>
+	          				</c:if>
 		          			<div class="profile-desk" style="margin-top: 15px;">
 		          				<h1>历史记录</h1>
 				          		<ul>

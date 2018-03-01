@@ -71,4 +71,9 @@ public class DocumentService {
 		documentMapper.deleteByPrimaryKey(id);
 	}
 
+	public Document select(Integer id) {
+		Document document = documentMapper.selectByPrimaryKey(id);
+		return document;
+	}
+
 }

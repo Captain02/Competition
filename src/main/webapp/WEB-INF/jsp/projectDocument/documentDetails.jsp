@@ -121,12 +121,14 @@ function dele(ele) {
 	          	 	<div class="col-md-12">
 	          		<div class="panel">
 	          			<div class="panel-body">
+	          				<c:if test="${documentDetailed.fileName != null}">
 	          				<div class="profile-desk">
 		          				<h1>附件下载</h1>
 				          		<p>
-				          			<a href="" style="color:#6bc5a4">附件下载</a>
+				          			<a href="${APP_PATH}/admin/document/down/${documentDetailed.id}" style="color:#6bc5a4">${documentDetailed.fileName}</a>
 				          		</p>
 	          				</div>
+	          				</c:if>
 		          			<div class="profile-desk" style="margin-top: 15px;">
 		          				<h1>历史记录</h1>
 				          		<ul>

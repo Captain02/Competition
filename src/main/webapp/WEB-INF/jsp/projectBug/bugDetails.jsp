@@ -113,12 +113,14 @@ function changeState(ele) {
 	          	<div class="col-md-12">
 	          		<div class="panel">
 	          			<div class="panel-body">
+	          				<c:if test="${bugDetailed.fileName != null}">
 	          				<div class="profile-desk">
 		          				<h1>附件下载</h1>
 				          		<p>
-				          			<a href="" style="color:#6bc5a4">${bugDetailed.fileName == null?'无附件':bugDetailed.fileName}</a>
+				          			<a href="${APP_PATH}/admin/bug/down/${bugDetailed.id}" style="color:#6bc5a4">${bugDetailed.fileName}</a>
 				          		</p>
 	          				</div>
+	          				</c:if>
 		          			<div class="profile-desk" style="margin-top: 15px;">
 		          				<h1>历史记录</h1>
 				          		<ul>

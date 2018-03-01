@@ -20,7 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hanming.oa.model.Document;
+import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.Holiday;
+import com.hanming.oa.model.ProjectBug;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.User;
@@ -61,6 +64,15 @@ public class UpDownFileService {
 		} else if (obj instanceof UserThingsByThingsId) {
 			enclosure = ((UserThingsByThingsId) obj).getEnclosure();
 			filename = ((UserThingsByThingsId) obj).getFilename();
+		}else if (obj instanceof Dusty) {
+			enclosure = ((Dusty) obj).getEnclosure();
+			filename = ((Dusty) obj).getFileName();
+		}else if (obj instanceof ProjectBug) {
+			enclosure = ((ProjectBug) obj).getEnclosure();
+			filename = ((ProjectBug) obj).getFileName();
+		}else if (obj instanceof Document) {
+			enclosure = ((Document) obj).getEnclosure();
+			filename = ((Document) obj).getFileName();
 		}
 
 		// 获取文件

@@ -1,5 +1,7 @@
 package com.hanming.oa.controller;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -8,11 +10,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +41,7 @@ import com.hanming.oa.service.DemandService;
 import com.hanming.oa.service.DustyService;
 import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.ProjectTeamService;
+import com.hanming.oa.service.UpDownFileService;
 
 @Controller
 @RequestMapping("admin/bug")
@@ -52,6 +57,8 @@ public class BugController {
 	DustyService dustyService;
 	@Autowired
 	ProjectHistoryService projectHistoryService;
+	@Autowired
+	UpDownFileService upDownFileService;
 
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -83,7 +90,7 @@ public class BugController {
 	@RequestMapping(value = "/detailed", method = RequestMethod.GET)
 	public String detailed(@RequestParam("bugId") Integer id, Model model) {
 		BugDetailed bugDetailed = bugService.detailedById(id);
-		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id,"bug");
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id, "bug");
 		model.addAttribute("bugDetailed", bugDetailed);
 		model.addAttribute("bugHistory", list);
 		return "projectBug/bugDetails";
@@ -197,5 +204,34 @@ public class BugController {
 		projectHistory.setOperationType("修改了bug的指派人");
 		projectHistoryService.insertSelective(projectHistory);
 		return Msg.success();
+	}
+
+	// 文件下载
+	@RequestMapping(value = "/down/{id}", method = RequestMethod.GET)
+	public void down(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) {
+
+		ProjectBug projectBug = bugService.select(id);
+
+		try {
+			upDownFileService.down(response, request, projectBug, "ProjectBug");
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

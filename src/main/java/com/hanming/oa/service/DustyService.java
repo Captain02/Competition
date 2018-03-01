@@ -96,4 +96,9 @@ public class DustyService {
 		dustyMapper.addBatch(dusties);
 	}
 
+	public Dusty select(Integer id) {
+		Dusty dusty = dustyMapper.selectByPrimaryKey(id);
+		return dusty;
+	}
+
 }
