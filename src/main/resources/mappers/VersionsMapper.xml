@@ -37,7 +37,7 @@
       #{descs,jdbcType=VARCHAR}, #{lssuePackageAddress,jdbcType=VARCHAR}, #{lssuePackageName,jdbcType=VARCHAR}, 
       #{createPeople,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.Versions">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Versions">
     insert into versions
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

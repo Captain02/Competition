@@ -44,7 +44,7 @@
       #{productPeople,jdbcType=INTEGER}, #{testPeople,jdbcType=INTEGER}, #{releasePeople,jdbcType=INTEGER}, 
       #{releaseControl,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.Project">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Project">
     insert into project
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +20,10 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
+import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.model.UserByProjectId;
 import com.hanming.oa.service.DemandService;
+import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.ProjectTeamService;
 
 @Controller
@@ -31,6 +34,8 @@ public class DemandController {
 	DemandService demandService;
 	@Autowired
 	ProjectTeamService projectTeamService;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	// 列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -42,7 +47,7 @@ public class DemandController {
 		PageInfo<DemandDisplay> pageInfo = null;
 		PageHelper.startPage(pn, 8);
 		List<DemandDisplay> list = demandService.list(state, demandName, projectId);
-		pageInfo = new PageInfo<>(list,5);
+		pageInfo = new PageInfo<>(list, 5);
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);
@@ -55,27 +60,30 @@ public class DemandController {
 	@RequestMapping(value = "/detailed", method = RequestMethod.GET)
 	public String detailed(@RequestParam(value = "demandId") Integer demandId, Model model) {
 		DemandDetailed demandDetailed = demandService.detaileById(demandId);
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(demandId, "需求");
+		model.addAttribute("demandHistory", list);
 		model.addAttribute("demandDetailed", demandDetailed);
 		return "projectDemand/demandDetails";
 	}
 
 	// 编辑页
 	@RequestMapping(value = "/editorPage", method = RequestMethod.GET)
-	public String editorPage(@RequestParam(value = "editor") Integer demandId, Model model, HttpServletRequest request) {
+	public String editorPage(@RequestParam(value = "editor") Integer demandId, Model model,
+			HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		List<UserByProjectId> team = projectTeamService.list(projectId,"姓名");
+		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
 		DemandDetailed demandDetailed = demandService.detaileById(demandId);
 		model.addAttribute("demandDetailed", demandDetailed);
 		model.addAttribute("team", team);
 		return "projectDemand/editor";
 	}
-	
-	//编辑
+
+	// 编辑
 	@ResponseBody
 	@RequestMapping(value = "/editor", method = RequestMethod.POST)
-	public Msg editorPage(Demand demand,MultipartFile file,HttpServletRequest request) {
+	public Msg editorPage(Demand demand, MultipartFile file, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		demandService.insert(demand,file,request,projectId,0);
+		demandService.insert(demand, file, request, projectId, 0);
 		return Msg.success();
 	}
 
@@ -83,7 +91,7 @@ public class DemandController {
 	@RequestMapping(value = "/addPage", method = RequestMethod.GET)
 	public String addPage(Model model, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		List<UserByProjectId> team = projectTeamService.list(projectId,"姓名");
+		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
 		model.addAttribute("team", team);
 		return "projectDemand/add";
 	}
@@ -91,9 +99,21 @@ public class DemandController {
 	// 添加
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(Demand demand,MultipartFile file,HttpServletRequest request) {
+	public Msg add(Demand demand, MultipartFile file, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
-		demandService.insert(demand,file,request,projectId,1);
+		demandService.insert(demand, file, request, projectId, 1);
+		return Msg.success();
+	}
+
+	// 改变状态
+	@ResponseBody
+	@RequestMapping(value = "/changeState", method = RequestMethod.POST)
+	public Msg changeState(@RequestParam("demandId") Integer demandId, @RequestParam("state") String state) {
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		Demand demand = new Demand();
+		demand.setId(demandId);
+		demand.setState(state);
+		demandService.update(userId,demand);
 		return Msg.success();
 	}
 }

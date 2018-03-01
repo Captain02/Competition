@@ -21,8 +21,10 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Project;
 import com.hanming.oa.model.ProjectDetailed;
 import com.hanming.oa.model.ProjectDisplay;
+import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserByProjectId;
+import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.ProjectTeamService;
 import com.hanming.oa.service.UserService;
@@ -40,6 +42,8 @@ public class ProjectController {
 	UserService userService;
 	@Autowired
 	WhiteListServer WhiteListServer;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	// 遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -65,7 +69,8 @@ public class ProjectController {
 	@ResponseBody
 	@RequestMapping(value = "/changeState", method = RequestMethod.POST)
 	public Msg changState(@RequestParam("state") String state, @RequestParam("projectId") Integer projectId) {
-		projectService.updateStateByProjectId(state, projectId);
+		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		projectService.updateStateByProjectId(state, projectId,userId);
 		return Msg.success();
 	}
 
@@ -96,7 +101,7 @@ public class ProjectController {
 		project.setState("进行");
 		project.setReleaseControl("公开（所有人）");
 
-		projectService.insert(project);
+		projectService.insert(project,userId);
 
 		return Msg.success();
 	}
@@ -129,11 +134,16 @@ public class ProjectController {
 	@RequestMapping(value = "/projectDetails", method = RequestMethod.GET)
 	public String detailed(@RequestParam("projectId") Integer projectId, Model model,HttpServletRequest request) {
 		request.getSession().setAttribute("projectId", projectId);
+		
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(projectId, "项目");
+		model.addAttribute("projectHistory", list);
+		
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		model.addAttribute("projectDetailed", projectDetailed);
 		model.addAttribute("subDays",
 				(DateTool.substractTime(projectDetailed.getEndDate(), DateTool.dateToYearMonthDay(new Date()))) / 60
 						/ 12);
+		
 
 		return "projectManagement/projectDetails";
 	}

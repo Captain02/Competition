@@ -23,7 +23,9 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Document;
 import com.hanming.oa.model.DocumentDetailed;
 import com.hanming.oa.model.DocumentDisplay;
+import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.service.DocumentService;
+import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.UpDownFileService;
 
 @Controller
@@ -34,6 +36,8 @@ public class DocumentController {
 	DocumentService documentService;
 	@Autowired
 	UpDownFileService upDownFileService;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	// 列表
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -75,6 +79,8 @@ public class DocumentController {
 	@RequestMapping(value = "/detailed", method = RequestMethod.GET)
 	public String documentDetailed(@RequestParam(value = "id") Integer id, Model model) {
 		DocumentDetailed documentDetailed = documentService.detailedById(id);
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id, "文档");
+		model.addAttribute("documentHistory", list);
 		model.addAttribute("documentDetailed", documentDetailed);
 		return "projectDocument/documentDetails";
 	}

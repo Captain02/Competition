@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.dao.VersionsMapper;
+import com.hanming.oa.model.ProjectHistory;
 import com.hanming.oa.model.Versions;
 
 @Service
@@ -21,6 +22,8 @@ public class VersionServer {
 	
 	@Autowired
 	VersionsMapper versionsMapper;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	public List<Versions> list(String versionName, Integer projectId) {
 		List<Versions> list = versionsMapper.list(versionName,projectId);
@@ -57,10 +60,19 @@ public class VersionServer {
 				e.printStackTrace();
 			}
 		}
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("版本");
 		if (i == 0) {
 			versionsMapper.updateByPrimaryKeySelective(versions);
+			projectHistory.setTypeId(versions.getId());
+			projectHistory.setOperationType("修改了版本");
+			projectHistoryService.insertSelective(projectHistory);
 		} else {
 			versionsMapper.insertSelective(versions);
+			projectHistory.setTypeId(versions.getId());
+			projectHistory.setOperationType("创建了版本");
+			projectHistoryService.insertSelective(projectHistory);
 		}
 	}
 

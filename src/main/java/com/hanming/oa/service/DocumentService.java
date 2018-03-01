@@ -18,13 +18,16 @@ import com.hanming.oa.dao.DocumentMapper;
 import com.hanming.oa.model.Document;
 import com.hanming.oa.model.DocumentDetailed;
 import com.hanming.oa.model.DocumentDisplay;
+import com.hanming.oa.model.ProjectHistory;
 
 @Service
 public class DocumentService {
 	
 	@Autowired
 	DocumentMapper documentMapper;
-
+	@Autowired
+	ProjectHistoryService projectHistoryService;
+	
 	public List<DocumentDisplay> list(String type, String documentName, Integer projectId) {
 		List<DocumentDisplay> list = documentMapper.list(type,documentName,projectId);
 		return list;
@@ -33,7 +36,7 @@ public class DocumentService {
 	@Transactional
 	public void insert(Document document, MultipartFile file, HttpServletRequest request, Integer projectId, int i) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-
+		
 		document.setProjectId(projectId);
 		document.setCreatePeople(userId);
 		if (file != null) {
@@ -56,8 +59,22 @@ public class DocumentService {
 		}
 		if (i == 0) {
 			documentMapper.updateByPrimaryKeySelective(document);
+			ProjectHistory projectHistory = new ProjectHistory();
+			projectHistory.setOperationPeopleId(userId);
+			projectHistory.setHistoryType("文档");
+			projectHistory.setTypeId(document.getId());
+			projectHistory.setOperationType("修改了文档");
+			projectHistoryService.insertSelective(projectHistory);
 		} else {
 			documentMapper.insertSelective(document);
+			//添加历史记录
+			ProjectHistory projectHistory = new ProjectHistory();
+			projectHistory.setOperationPeopleId(userId);
+			projectHistory.setHistoryType("文档");
+			projectHistory.setTypeId(document.getId());
+			projectHistory.setOperationType("创建了文档");
+			projectHistoryService.insertSelective(projectHistory);
+
 		}
 
 	}

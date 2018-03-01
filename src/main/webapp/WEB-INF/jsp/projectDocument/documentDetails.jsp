@@ -132,9 +132,9 @@ function dele(ele) {
 		          			<div class="profile-desk" style="margin-top: 15px;">
 		          				<h1>历史记录</h1>
 				          		<ul>
-                     			
-                     			 <li>123412</li>
-				          		
+				          		<c:forEach items="${documentHistory}" var="history">
+                     			 <li>${history.operationTime}  ${history.operationPeople}  ${history.operationType}</li>
+				          		</c:forEach>
                     			</ul>
 		          			</div>
 	          			</div>

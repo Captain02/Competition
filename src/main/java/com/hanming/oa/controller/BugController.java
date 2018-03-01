@@ -90,8 +90,8 @@ public class BugController {
 	public String detailed(@RequestParam("bugId") Integer id, Model model) {
 		BugDetailed bugDetailed = bugService.detailedById(id);
 		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id, "bug");
-		model.addAttribute("bugDetailed", bugDetailed);
 		model.addAttribute("bugHistory", list);
+		model.addAttribute("bugDetailed", bugDetailed);
 		return "projectBug/bugDetails";
 	}
 

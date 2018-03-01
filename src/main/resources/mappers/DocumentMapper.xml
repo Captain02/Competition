@@ -37,7 +37,7 @@
       #{keyword,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{enclosure,jdbcType=VARCHAR}, 
       #{descs,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.Document">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.Document">
     insert into document
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

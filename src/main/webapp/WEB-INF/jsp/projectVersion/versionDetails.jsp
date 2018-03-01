@@ -21,27 +21,6 @@
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 <script type="text/javascript">
-function changeState(ele) {
-	var state = $(ele).attr('data-state');
-	var projectId = $(ele).attr('data-projectId');
-	$.ajax({
-		url:"${APP_PATH}/admin/project/changeState",
-		data:{
-			'state':state,
-			'projectId':projectId
-		},
-		type:"POST",
-		success:function(result){
-			$('#myModal').modal('show');
-			ShowTips('.modal-title','执行结果','.modal-body','项目状态更改成功');
-			 setTimeout(function(){
-				 $('#myModal').modal('hide');
-				 window.location.reload();
-			 },1000);
-		}
-	})
-}
-
 function dele(ele) {
 	var id = $(ele).attr('data-id');
 	
@@ -113,6 +92,20 @@ function dele(ele) {
 					</div>
 	              </div>
 	            </div>
+	            <div class="col-md-12">
+	          		<div class="panel">
+	          			<div class="panel-body">
+		          			<div class="profile-desk" style="margin-top: 15px;">
+		          				<h1>历史记录</h1>
+				          		<ul>
+				          		<c:forEach items="${versionHistory}" var="history">
+                     			 <li>${history.operationTime}  ${history.operationPeople}  ${history.operationType}</li>
+				          		</c:forEach>
+                    			</ul>
+		          			</div>
+	          			</div>
+	          		</div>
+	          	</div>
 	          </div>
 	        </div>
 	        <div class="col-md-4">

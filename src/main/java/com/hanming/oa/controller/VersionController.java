@@ -16,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.ProjectHistoryDisplay;
 import com.hanming.oa.model.Versions;
+import com.hanming.oa.service.ProjectHistoryService;
 import com.hanming.oa.service.VersionServer;
 
 @Controller
@@ -25,6 +27,8 @@ public class VersionController {
 
 	@Autowired
 	VersionServer versionServer;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	//遍历
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -48,6 +52,8 @@ public class VersionController {
 	@RequestMapping(value="/detailed",method=RequestMethod.GET)
 	public String detailed(@RequestParam(value="id")Integer id,Model model) {
 		Versions version = versionServer.detailedById(id);
+		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(id, "版本");
+		model.addAttribute("versionHistory", list);
 		model.addAttribute("version", version);
 		return "projectVersion/versionDetails";
 	}

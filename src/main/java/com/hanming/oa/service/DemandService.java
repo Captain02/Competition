@@ -18,13 +18,15 @@ import com.hanming.oa.dao.DemandMapper;
 import com.hanming.oa.model.Demand;
 import com.hanming.oa.model.DemandDetailed;
 import com.hanming.oa.model.DemandDisplay;
-import com.hanming.oa.model.Dusty;
+import com.hanming.oa.model.ProjectHistory;
 
 @Service
 public class DemandService {
 
 	@Autowired
 	DemandMapper demandMapper;
+	@Autowired
+	ProjectHistoryService projectHistoryService;
 
 	public List<DemandDisplay> list(String state, String demandName, Integer projectId) {
 
@@ -41,6 +43,7 @@ public class DemandService {
 	public void insert(Demand demand, MultipartFile file, HttpServletRequest request, Integer projectId,
 			Integer isInsert) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
+		
 
 		demand.setCreateTime(DateTool.dateToString(new Date()));
 		demand.setProjectId(projectId);
@@ -64,10 +67,21 @@ public class DemandService {
 				e.printStackTrace();
 			}
 		}
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("需求");
 		if (isInsert == 0) {
 			demandMapper.updateByPrimaryKeySelective(demand);
+			//历史消息
+			projectHistory.setTypeId(demand.getId());
+			projectHistory.setOperationType("修改了需求");
+			projectHistoryService.insertSelective(projectHistory);
 		} else {
 			demandMapper.insertSelective(demand);
+			//历史消息
+			projectHistory.setTypeId(demand.getId());
+			projectHistory.setOperationType("创建了需求");
+			projectHistoryService.insertSelective(projectHistory);
 		}
 
 	}
@@ -75,6 +89,17 @@ public class DemandService {
 	public Demand select(Integer id) {
 		Demand demand = demandMapper.selectByPrimaryKey(id);
 		return demand;
+	}
+
+	@Transactional
+	public void update(Integer userId, Demand demand) {
+		demandMapper.updateByPrimaryKeySelective(demand);
+		ProjectHistory projectHistory = new ProjectHistory();
+		projectHistory.setOperationPeopleId(userId);
+		projectHistory.setHistoryType("需求");
+		projectHistory.setTypeId(demand.getId());
+		projectHistory.setOperationType("更改了需求的状态为"+demand.getState());
+		projectHistoryService.insertSelective(projectHistory);
 	}
 
 }

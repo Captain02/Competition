@@ -108,9 +108,9 @@ function changeState(ele) {
 		          			<div class="profile-desk" style="margin-top: 15px;">
 		          				<h1>历史记录</h1>
 				          		<ul>
-				          		
-                     			 <li>超级管理员做了一些改动</li>
-				          		
+				          		<c:forEach items="${projectHistory}" var="history">
+                     			 <li>${history.operationTime}  ${history.operationPeople}  ${history.operationType}</li>
+				          		</c:forEach>
                     			</ul>
 		          			</div>
 	          			</div>

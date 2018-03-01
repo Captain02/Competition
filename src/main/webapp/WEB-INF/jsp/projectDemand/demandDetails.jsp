@@ -23,12 +23,14 @@
 <script type="text/javascript">
 function changeState(ele) {
 	var state = $(ele).attr('data-state');
-	var projectId = $(ele).attr('data-projectId');
+	var demandId = $(ele).attr('data-demandId');
+	alert(state);
+	alert(demandId);
 	$.ajax({
-		url:"${APP_PATH}/admin/project/changeState",
+		url:"${APP_PATH}/admin/demand/changeState",
 		data:{
 			'state':state,
-			'projectId':projectId
+			'demandId':demandId
 		},
 		type:"POST",
 		success:function(result){
@@ -96,11 +98,11 @@ function changeState(ele) {
 	                    <h1>关联项目</h1>
 	                    <div class="content">${demandDetailed.projectName}</div>
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/demand/editorPage?editor=${demandDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp; 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="草稿" data-project-state="${demandDetailed.state}" data-status="1">草稿</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="激活" data-project-state="${demandDetailed.state}" data-status="2">激活</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="已变更" data-project-state="${demandDetailed.state}" data-status="3">已变更</a> 
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="待关闭" data-project-state="${demandDetailed.state}" data-status="4">待关闭</a>
-		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-projectId="${demandDetailed.id}" data-state="已关闭" data-project-state="${demandDetailed.state}" data-status="5">已关闭</a>  
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-demandId="${demandDetailed.id}" data-state="草稿" data-project-state="${demandDetailed.state}" data-status="1">草稿</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-demandId="${demandDetailed.id}" data-state="激活" data-project-state="${demandDetailed.state}" data-status="2">激活</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-demandId="${demandDetailed.id}" data-state="已变更" data-project-state="${demandDetailed.state}" data-status="3">已变更</a> 
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-demandId="${demandDetailed.id}" data-state="待关闭" data-project-state="${demandDetailed.state}" data-status="4">待关闭</a>
+		                    <a onclick="changeState(this);" class="btn p-follow-btn" data-demandId="${demandDetailed.id}" data-state="已关闭" data-project-state="${demandDetailed.state}" data-status="5">已关闭</a>  
 						</div>
 					</div>
 	              </div>
@@ -115,6 +117,14 @@ function changeState(ele) {
 		          			<a href="" style="color:#6bc5a4">预览下载</a>
 		          		</p>
 	          			</div>
+	          			<div class="profile-desk" style="margin-top: 15px;">
+		          				<h1>历史记录</h1>
+				          		<ul>
+				          		<c:forEach items="${demandHistory}" var="history">
+                     			 <li>${history.operationTime}  ${history.operationPeople}  ${history.operationType}</li>
+				          		</c:forEach>
+                    			</ul>
+		          			</div>
 	          			</div>
 	          		</div>
 	          	</div>

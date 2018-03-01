@@ -53,7 +53,7 @@
       #{createTime,jdbcType=VARCHAR}, #{descs,jdbcType=LONGVARCHAR}, #{acceptanceStand,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hanming.oa.model.DemandWithBLOBs">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.hanming.oa.model.DemandWithBLOBs">
     insert into demand
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
