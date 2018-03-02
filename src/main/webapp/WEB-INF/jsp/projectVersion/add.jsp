@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加需求</title>
+<title>项目管理</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -43,6 +43,12 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新版本');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/version/list';
+			},1000);
 		}
 	}) 
 }
@@ -131,6 +137,21 @@ function save() {
 						</div>
 						</form>
 						</div>
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel"></h4>
+				      </div>
+				      <div class="modal-body">
+				      
+				      
+				      </div>
+				     
+				    </div>
+				  </div>
+				</div>
 					</section>
 				</div>
 					

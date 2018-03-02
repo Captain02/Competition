@@ -47,7 +47,7 @@ function save() {
 				ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新需求');
 				setTimeout(function(){
 					$('#myModal').modal('hide');
-					window.history.go(-1);
+					window.location.href="${APP_PATH}/admin/demand/list";
 				},1000);
 			}
 		})  

@@ -35,17 +35,23 @@
 		})
 	}
 	function assignTask(ele) {
-		var bugIdId = $(ele).attr('data-bugId');
+		var bugId = $(ele).attr('data-bugId');
 		var assignor = $(ele).attr('data-assignor');
 		$.ajax({
 			url:"${APP_PATH}/admin/bug/assignTask",
 			data:{
-				'bugId':dustyId,
+				'bugId':bugId,
 				'assignor':assignor
 			},
 			type:"POST",
 			success:function(result){
-				
+				$('#myModal').modal('show');
+				ShowTips('.modal-title', '执行结果', '.modal-body',
+					'<b style = "color:#5cb85c;">指派成功</b>');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.reload();
+				},1000);
 			}
 		})
 	}
@@ -150,7 +156,7 @@
                                             <tbody>
                                            		<c:forEach items="${pageInfo.list}" var="bugDisplay">
 	                                                <tr>
-	                                           			<input type="hidden" value="${bugDisplay.id}" >
+	                                           			<input type="hidden" value="${bugDisplay.id}" class="bugdisplayId">
 	                                                    <td>${bugDisplay.grade}</td>
 	                                                	<td class="project-name"><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
 	                                                    <td>${bugDisplay.state}</td>
@@ -236,7 +242,7 @@
 						$(toolsA[thisPagelocationHref]).siblings().removeClass('active');
 						
 						$('.btn-assign').click(function(){
-							$('.btn-select-assign').attr('data-dustyId',$(this).parent().siblings('input.dustyDisplayId').val());
+							$('.btn-select-assign').attr('data-bugId',$(this).parent().siblings('input.bugdisplayId').val());
 						})
 					})
 			</script>

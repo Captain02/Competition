@@ -28,6 +28,8 @@ function changeState(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','操作结果','.modal-body','任务状态更改成功');
 			
 		}
 	})
@@ -43,7 +45,13 @@ function assignTask(ele) {
 		},
 		type:"POST",
 		success:function(result){
-			
+			$('#myModal').modal('show');
+			ShowTips('.modal-title', '执行结果', '.modal-body',
+				'<b style = "color:#5cb85c;">指派成功</b>');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.reload();
+			},1000);
 		}
 	})
 }

@@ -43,6 +43,13 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
+			$('#myModal').modal('show');
+			$('.modal-footer').remove();
+			ShowTips('.modal-title','添加结果','.modal-body','成功添加一个测试');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/bug/list';
+			},1000);
 		}
 	})  
 }
