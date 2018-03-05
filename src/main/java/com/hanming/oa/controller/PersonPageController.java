@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDisplayTopic;
+import com.hanming.oa.model.BugDisplay;
+import com.hanming.oa.model.DustyDisplay;
 import com.hanming.oa.model.NoticeDisplay;
+import com.hanming.oa.model.ProjectDisplay;
 import com.hanming.oa.model.SystemMessageDisplay;
 import com.hanming.oa.model.User;
 import com.hanming.oa.service.BBSTopicService;
+import com.hanming.oa.service.BugService;
+import com.hanming.oa.service.DustyService;
 import com.hanming.oa.service.NoticeService;
+import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.SystemMessageService;
 import com.hanming.oa.service.UpDownFileService;
 import com.hanming.oa.service.UserService;
@@ -40,6 +45,12 @@ public class PersonPageController {
 	BBSTopicService bbsTopicService;
 	@Autowired
 	SystemMessageService systemMessageService;
+	@Autowired
+	ProjectService projectService;
+	@Autowired
+	BugService bugService;
+	@Autowired
+	DustyService dustyService;
 
 	// 跳转个人主页
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -71,10 +82,37 @@ public class PersonPageController {
 		
 		//系统消息
 		List<SystemMessageDisplay> systemMessageDisplay = systemMessageService.list("类型","未读",user.getId());
-		int size = systemMessageDisplay.size();
 		Collections.reverse(systemMessageDisplay);
-		model.addAttribute("systemMessage", systemMessageDisplay.subList(0, 2));
-		model.addAttribute("systemMessagesize", size);
+		if (systemMessageDisplay.size()>5) {
+			model.addAttribute("systemMessageDisplay", systemMessageDisplay.subList(0, 5));
+		}else {
+			model.addAttribute("systemMessageDisplay", systemMessageDisplay);
+		}
+		
+		//需求
+		List<ProjectDisplay> ProjectDisplay = projectService.list("项目状态", "项目名称",user.getId());
+		if (ProjectDisplay.size()>5) {
+			model.addAttribute("ProjectDisplay", ProjectDisplay.subList(0, 5));
+		}else {
+			model.addAttribute("ProjectDisplay", ProjectDisplay);
+		}
+		
+		//bug
+		List<BugDisplay> BugDisplay = bugService.list("状态", "名称", 0, 0, user.getId());
+		if (BugDisplay.size()>5) {
+			model.addAttribute("BugDisplay", BugDisplay.subList(0, 5));
+		}else {
+			model.addAttribute("BugDisplay", BugDisplay);
+		}
+		
+		//任务
+		List<DustyDisplay> DustyDisplay = dustyService.list("任务类型", "任务状态", "任务名称", 0, 0, user.getId());
+		if (ProjectDisplay.size()>5) {
+			model.addAttribute("DustyDisplay", DustyDisplay.subList(0, 5));
+		}else {
+			model.addAttribute("DustyDisplay", DustyDisplay);
+		}
+		
 
 		model.addAttribute("user", user);
 		return "personPage/personPage";
@@ -92,8 +130,6 @@ public class PersonPageController {
 	@RequestMapping(value = "/upPersonHeadFile", method = RequestMethod.POST)
 	public Msg upPersonHeadFile(@RequestParam(value = "imgData") String dataURL,
 			@RequestParam(value = "oldImg", defaultValue = "") String oldImg, HttpServletRequest request) {
-		// Integer userId = (Integer)
-		// SecurityUtils.getSubject().getSession().getAttribute("id");
 
 		upDownFileService.upPersonHead(dataURL, request, "");
 		if (!("".equals(oldImg))) {

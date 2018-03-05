@@ -258,7 +258,9 @@
 	LEFT JOIN demand d ON d.id=pdy.demandId
 	LEFT JOIN project p ON p.id=pdy.projectId
 	<where>
-		pdy.projectId=#{projectId}
+		<if test="projectId != 0">
+			pdy.projectId=#{projectId}
+		</if>
 		<if test="type != '任务类型'">
 			AND pdy.taskType=#{type}
 		</if>

@@ -17,7 +17,6 @@ import com.hanming.oa.dao.ProjectBugMapper;
 import com.hanming.oa.dao.ProjectHistoryMapper;
 import com.hanming.oa.model.BugDetailed;
 import com.hanming.oa.model.BugDisplay;
-import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.ProjectBug;
 import com.hanming.oa.model.ProjectHistory;
 
