@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanming.oa.dao.ScheduleMapper">
+  <resultMap id="BaseResultMap" type="com.hanming.oa.model.Schedule">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="startTime" jdbcType="VARCHAR" property="startTime" />
+    <result column="endTime" jdbcType="VARCHAR" property="endTime" />
+    <result column="allDay" jdbcType="VARCHAR" property="allDay" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="userID" jdbcType="VARCHAR" property="userID" />
+    <result column="isFinish" jdbcType="VARCHAR" property="isFinish" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, startTime, endTime, allDay, color, userID, isFinish, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from schedule
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from schedule
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hanming.oa.model.Schedule">
+    insert into schedule (id, title, startTime, 
+      endTime, allDay, color, 
+      userID, isFinish, createTime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{allDay,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{userID,jdbcType=VARCHAR}, #{isFinish,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanming.oa.model.Schedule">
+    insert into schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="startTime != null">
+        startTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      <if test="allDay != null">
+        allDay,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="userID != null">
+        userID,
+      </if>
+      <if test="isFinish != null">
+        isFinish,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="allDay != null">
+        #{allDay,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="userID != null">
+        #{userID,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinish != null">
+        #{isFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanming.oa.model.Schedule">
+    update schedule
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        startTime = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="allDay != null">
+        allDay = #{allDay,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="userID != null">
+        userID = #{userID,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinish != null">
+        isFinish = #{isFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Schedule">
+    update schedule
+    set title = #{title,jdbcType=VARCHAR},
+      startTime = #{startTime,jdbcType=VARCHAR},
+      endTime = #{endTime,jdbcType=VARCHAR},
+      allDay = #{allDay,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      userID = #{userID,jdbcType=VARCHAR},
+      isFinish = #{isFinish,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
