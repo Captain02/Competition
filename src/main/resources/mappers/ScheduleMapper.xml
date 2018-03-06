@@ -2,37 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hanming.oa.dao.ScheduleMapper">
   <resultMap id="BaseResultMap" type="com.hanming.oa.model.Schedule">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="startTime" jdbcType="VARCHAR" property="startTime" />
     <result column="endTime" jdbcType="VARCHAR" property="endTime" />
-    <result column="allDay" jdbcType="VARCHAR" property="allDay" />
+    <result column="allDay" jdbcType="INTEGER" property="allDay" />
     <result column="color" jdbcType="VARCHAR" property="color" />
-    <result column="userID" jdbcType="VARCHAR" property="userID" />
-    <result column="isFinish" jdbcType="VARCHAR" property="isFinish" />
+    <result column="userID" jdbcType="INTEGER" property="userID" />
+    <result column="isFinish" jdbcType="INTEGER" property="isFinish" />
     <result column="createTime" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, title, startTime, endTime, allDay, color, userID, isFinish, createTime
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from schedule
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from schedule
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hanming.oa.model.Schedule">
     insert into schedule (id, title, startTime, 
       endTime, allDay, color, 
       userID, isFinish, createTime
       )
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
-      #{endTime,jdbcType=VARCHAR}, #{allDay,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
-      #{userID,jdbcType=VARCHAR}, #{isFinish,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{allDay,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+      #{userID,jdbcType=INTEGER}, #{isFinish,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.hanming.oa.model.Schedule">
@@ -68,7 +68,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
@@ -80,16 +80,16 @@
         #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="allDay != null">
-        #{allDay,jdbcType=VARCHAR},
+        #{allDay,jdbcType=INTEGER},
       </if>
       <if test="color != null">
         #{color,jdbcType=VARCHAR},
       </if>
       <if test="userID != null">
-        #{userID,jdbcType=VARCHAR},
+        #{userID,jdbcType=INTEGER},
       </if>
       <if test="isFinish != null">
-        #{isFinish,jdbcType=VARCHAR},
+        #{isFinish,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=VARCHAR},
@@ -109,33 +109,42 @@
         endTime = #{endTime,jdbcType=VARCHAR},
       </if>
       <if test="allDay != null">
-        allDay = #{allDay,jdbcType=VARCHAR},
+        allDay = #{allDay,jdbcType=INTEGER},
       </if>
       <if test="color != null">
         color = #{color,jdbcType=VARCHAR},
       </if>
       <if test="userID != null">
-        userID = #{userID,jdbcType=VARCHAR},
+        userID = #{userID,jdbcType=INTEGER},
       </if>
       <if test="isFinish != null">
-        isFinish = #{isFinish,jdbcType=VARCHAR},
+        isFinish = #{isFinish,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         createTime = #{createTime,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hanming.oa.model.Schedule">
     update schedule
     set title = #{title,jdbcType=VARCHAR},
       startTime = #{startTime,jdbcType=VARCHAR},
       endTime = #{endTime,jdbcType=VARCHAR},
-      allDay = #{allDay,jdbcType=VARCHAR},
+      allDay = #{allDay,jdbcType=INTEGER},
       color = #{color,jdbcType=VARCHAR},
-      userID = #{userID,jdbcType=VARCHAR},
-      isFinish = #{isFinish,jdbcType=VARCHAR},
+      userID = #{userID,jdbcType=INTEGER},
+      isFinish = #{isFinish,jdbcType=INTEGER},
       createTime = #{createTime,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- List<Event> list(@Param("userId")Integer userId); -->
+  <select id="list" resultType="Event">
+   	SELECT
+		sc.id,sc.title,sc.startTime,sc.endTime,sc.allDay,sc.color
+		FROM `schedule` sc
+		WHERE sc.userID=#{userId}
+  </select>
+  
 </mapper>

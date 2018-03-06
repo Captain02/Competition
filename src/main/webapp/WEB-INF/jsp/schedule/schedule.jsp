@@ -21,6 +21,14 @@
 	
     <link rel="stylesheet" href="${APP_PATH}/static/js/fullcalendar/css/fullcalendar.min.css" />
 	<script type="text/javascript">
+	$.ajax({
+		url:"${APP_PATH}/admin/schedule/scheduleds",
+		data:'',
+		type:"GET",
+		success:function(result){
+			console.log(result);
+		}
+	})
 	function save(){
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",

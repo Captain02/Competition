@@ -1,29 +1,29 @@
 package com.hanming.oa.model;
 
 public class Schedule {
-    private String id;
+	private Integer id;
 
-    private String title;
+	private String title;
 
-    private String startTime;
+	private String startTime;
 
-    private String endTime;
+	private String endTime;
 
-    private String allDay;
+	private Integer allDay;
 
-    private String color;
+	private String color;
 
-    private String userID;
+	private Integer userID;
 
-    private String isFinish;
+	private Integer isFinish;
 
-    private String createTime;
+	private String createTime;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -51,11 +51,11 @@ public class Schedule {
 		this.endTime = endTime;
 	}
 
-	public String getAllDay() {
+	public Integer getAllDay() {
 		return allDay;
 	}
 
-	public void setAllDay(String allDay) {
+	public void setAllDay(Integer allDay) {
 		this.allDay = allDay;
 	}
 
@@ -67,19 +67,19 @@ public class Schedule {
 		this.color = color;
 	}
 
-	public String getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 
-	public String getIsFinish() {
+	public Integer getIsFinish() {
 		return isFinish;
 	}
 
-	public void setIsFinish(String isFinish) {
+	public void setIsFinish(Integer isFinish) {
 		this.isFinish = isFinish;
 	}
 
@@ -89,13 +89,6 @@ public class Schedule {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-
-	@Override
-	public String toString() {
-		return "Schedule [id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", allDay=" + allDay + ", color=" + color + ", userID=" + userID + ", isFinish=" + isFinish
-				+ ", createTime=" + createTime + "]";
 	}
 
 }
