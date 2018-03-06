@@ -74,6 +74,18 @@ public class DateTool {
 		String absenteeism = hours + " 小时 " + minutes + " 分钟";
 		return absenteeism;
 	}
+	
+	public static Date stringToDate(String date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date utilDate = null;
+		try {
+			utilDate = formatter.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return utilDate;
+	}
 
 	public static void main(String[] args) {
 		Boolean date = compareDate("13:00:00","18:00:00");

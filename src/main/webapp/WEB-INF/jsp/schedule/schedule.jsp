@@ -165,6 +165,15 @@
         	    console.log(event.id);
         	    if(dayDelta._days != 0){
         	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._days+'天！');
+        	        $.ajax({
+        	        	url:"${APP_PATH}/admin/schedule/updateDay",
+        	        	data:{
+        	        		'days':dayDelta._days,
+        	        		'start':event.start,
+        	        		'end':event.end,
+        	        		'id':event.id,
+        	        	},
+        	        })
         	    }else if(dayDelta._milliseconds != 0){
         	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');
         	    }else{

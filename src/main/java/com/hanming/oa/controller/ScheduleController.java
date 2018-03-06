@@ -1,15 +1,18 @@
 package com.hanming.oa.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Event;
 import com.hanming.oa.model.Schedule;
@@ -21,31 +24,54 @@ public class ScheduleController {
 
 	@Autowired
 	ScheduleService scheduleService;
-	
-	//遍历
-	@RequestMapping(value="/list",method=RequestMethod.GET)
+
+	// 遍历
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list() {
-		
+
 		return "schedule/schedule";
 	}
-	
-	//保存
+
+	// 保存
 	@ResponseBody
-	@RequestMapping(value="/save",method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Msg save(Schedule schedule) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		schedule.setUserID(userId);
 		scheduleService.insert(schedule);
 		return Msg.success();
 	}
-	
-	//遍历
+
+	// 遍历
 	@ResponseBody
-	@RequestMapping(value="/scheduleds",method=RequestMethod.GET)
+	@RequestMapping(value = "/scheduleds", method = RequestMethod.GET)
 	public Msg scheduleds() {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		List<Event> events = scheduleService.list(userId);
 		return Msg.success().add("schedules", events);
 	}
-	
+
+	// 改变天数
+	@RequestMapping(value = "/updateDay", method = RequestMethod.POST)
+	public Msg updateDay(@RequestParam(value = "days", required = false) Integer days,
+			@RequestParam(value = "start", required = false) String start,
+			@RequestParam(value = "end", required = false) String end,
+			@RequestParam(value = "id", required = false) Integer id) {
+		Calendar cal = Calendar.getInstance();
+		Schedule schedule = new Schedule();
+		
+		cal.setTime(DateTool.stringToDate(start)); 
+		cal.add(5, days);
+		schedule.setStartTime(DateTool.dateToString(cal.getTime()));
+		
+		cal.setTime(DateTool.stringToDate(end)); 
+		cal.add(5, days);
+		schedule.setEndTime(DateTool.dateToString(cal.getTime()));
+		
+		schedule.setId(id);
+		scheduleService.update(schedule);
+		
+		return Msg.success();
+	}
+
 }

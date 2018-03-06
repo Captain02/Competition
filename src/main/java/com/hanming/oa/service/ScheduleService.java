@@ -24,4 +24,8 @@ public class ScheduleService {
 		return lists;
 	}
 
+	public void update(Schedule schedule) {
+		scheduleMapper.updateByPrimaryKeySelective(schedule);
+	}
+
 }
