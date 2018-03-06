@@ -1814,3 +1814,6 @@ table.table-project tbody tr td.project-name a:hover{
 	@media screen and (max-width: 768px) {
 		.pie-chart{width: 384px;height:430px;}
 	}
+.sc-input:hover{
+	cursor:not-allowed; 
+}

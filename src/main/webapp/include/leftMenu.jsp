@@ -12,8 +12,16 @@
                     <a href="${APP_PATH}/admin/personPage/list">
                         <span class="glyphicon glyphicon-home left-list-icon"></span>
                         <span class="menu-text">个人主页</span>
-                        </a>
+                    </a>
                 </li>
+                
+                 <li>
+                    <a href="">
+                        <span class="glyphicon glyphicon-calendar left-list-icon"></span>
+                        <span class="menu-text">日程管理</span>
+                    </a>
+                </li>
+                
                 <li>
                     <a href="${APP_PATH}/admin/project/list">
                         <span class="glyphicon glyphicon-bookmark left-list-icon"></span>
