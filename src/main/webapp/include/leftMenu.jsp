@@ -53,9 +53,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://">
+                    <a href="${APP_PATH}/admin/schedule/list">
                         <span class="glyphicon glyphicon-pushpin left-list-icon"></span>
-                        <span class="menu-text">简历管理</span>
+                        <span class="menu-text">日程管理</span>
                     </a>
                 </li>
                 <li>

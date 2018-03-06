@@ -1,1 +1,0 @@
-<jsp:include page="/include/userInfo.jsp"></jsp:include>

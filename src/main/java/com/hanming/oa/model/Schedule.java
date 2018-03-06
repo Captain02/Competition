@@ -91,4 +91,11 @@ public class Schedule {
 		this.createTime = createTime;
 	}
 
+	@Override
+	public String toString() {
+		return "Schedule [id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", allDay=" + allDay + ", color=" + color + ", userID=" + userID + ", isFinish=" + isFinish
+				+ ", createTime=" + createTime + "]";
+	}
+
 }

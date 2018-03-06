@@ -20,7 +20,18 @@
 	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	
     <link rel="stylesheet" href="${APP_PATH}/static/js/fullcalendar/css/fullcalendar.min.css" />
-
+	<script type="text/javascript">
+	function save(){
+		$.ajax({
+				url:"${APP_PATH}/admin/schedule/save",
+				data:$('#scheduleForm').serialize(),
+				type:"POST",
+				success:function(result){
+					
+				}
+			})
+	}	
+	</script>
 	
 </head>
 
@@ -43,7 +54,7 @@
 					  			<header class="panel-heading">日程设置</header>
 					  			<div class="panel-body">
 					  			
-					  		<form action="">
+					  		<form id="scheduleForm" action="">
 					  		
 					  			<div class="form-group">
 				                  <label>日程名称</label>
@@ -54,7 +65,7 @@
 								<div class="form-group">
 									<label for="">开始日期</label>
 									<div class="input-group date form_datetime">
-									    <input class="form-control" type="text" value="" readonly>
+									    <input name="startTime" class="form-control" type="text" value="" readonly>
 									    <span class="input-group-addon"><i class="fa fa-times"></i></span>
 									    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									</div>
@@ -63,13 +74,13 @@
 								<div class="form-group">
 									<label for="">结束日期</label>
 									<div class="input-group date form_datetime">
-									    <input class="form-control" type="text" value="" readonly>
+									    <input name="endTime" class="form-control" type="text" value="" readonly>
 									    <span class="input-group-addon"><i class="fa fa-times"></i></span>
 									    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									</div>
 								</div>
 								
-								<button class="btn btn-success" type="submit">提交</button>
+								<button class="btn btn-success" type="button" onclick="save()">提交</button>
 								
 					  	</form>
 								
