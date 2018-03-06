@@ -31,7 +31,7 @@ public class Event {
 		this.title = title;
 	}
 
-	public String getStartTime() {
+	public String getStart() {
 		return start;
 	}
 
@@ -39,7 +39,7 @@ public class Event {
 		this.start = start;
 	}
 
-	public String getEndTime() {
+	public String getEnd() {
 		return end;
 	}
 
