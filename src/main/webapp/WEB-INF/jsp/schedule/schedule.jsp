@@ -20,6 +20,9 @@
 	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	
     <link rel="stylesheet" href="${APP_PATH}/static/js/fullcalendar/css/fullcalendar.min.css" />
+    <script src="${APP_PATH}/static/fullcalendar/lib/moment.min.js"></script>
+    <script src="${APP_PATH}/static/fullcalendar/fullcalendar.min.js"></script>
+    <script src="${APP_PATH}/static/fullcalendar/locale-all.js"></script>
 	<script type="text/javascript">
 	$.ajax({
 		url:"${APP_PATH}/admin/schedule/scheduleds",
@@ -27,8 +30,13 @@
 		type:"GET",
 		success:function(result){
 			console.log(result);
+			$.each(result.extend.schedules,function (index, term) {
+				console.log(term);
+                $("#calendar").fullCalendar('renderEvent', term, true);
+            });
 		}
 	})
+	
 	function save(){
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",
@@ -38,7 +46,8 @@
 					
 				}
 			})
-	}	
+	}
+	
 	</script>
 	
 </head>
@@ -114,9 +123,7 @@
 
         </section>
         
-        <script src="${APP_PATH}/static/fullcalendar/lib/moment.min.js"></script>
-        <script src="${APP_PATH}/static/fullcalendar/fullcalendar.min.js"></script>
-        <script src="${APP_PATH}/static/fullcalendar/locale-all.js"></script>
+       
         <script type="text/javascript">
         $(function () {  
             $(".form_datetime").datetimepicker({
@@ -147,6 +154,26 @@
              week: '周',
              day: '日'
          },
+       	//Event是否可被拖动或者拖拽
+         editable: true,
+         //Event被拖动时的不透明度
+         dragOpacity: 0.5,
+         eventDrop : function( event, dayDelta, revertFunc ) {
+        	    //do something here...
+        	    console.log('eventDrop --- start ---');
+        	    console.log('eventDrop被执行，Event的title属性值为：', event.title);
+        	    console.log(event.id);
+        	    if(dayDelta._days != 0){
+        	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._days+'天！');
+        	    }else if(dayDelta._milliseconds != 0){
+        	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');
+        	    }else{
+        	        console.log('eventDrop被执行，Event的start和end时间没有改变！');
+        	    }
+        	    //revertFunc();
+        	    console.log('eventDrop --- end ---');
+        	    // ...
+        	}
        			})
        		})
        </script>

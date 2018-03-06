@@ -16,7 +16,7 @@
                 </li>
                 
                  <li>
-                    <a href="">
+                    <a href="${APP_PATH}/admin/schedule/list">
                         <span class="glyphicon glyphicon-calendar left-list-icon"></span>
                         <span class="menu-text">日程管理</span>
                     </a>
@@ -30,7 +30,7 @@
                 </li>
                 <li>
                     <a href="${APP_PATH}/admin/wordAttendence/list">
-                        <span class="glyphicon glyphicon-calendar left-list-icon"></span>
+                        <span class="glyphicon glyphicon-bell left-list-icon"></span>
                         <span class="menu-text">考勤管理</span>
                     </a>
                 </li>
@@ -50,12 +50,6 @@
                     <a href="${APP_PATH}/admin/image/list">
                         <span class="glyphicon glyphicon-camera left-list-icon"></span>
                         <span class="menu-text">员工相册</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="${APP_PATH}/admin/schedule/list">
-                        <span class="glyphicon glyphicon-pushpin left-list-icon"></span>
-                        <span class="menu-text">日程管理</span>
                     </a>
                 </li>
                 <li>
