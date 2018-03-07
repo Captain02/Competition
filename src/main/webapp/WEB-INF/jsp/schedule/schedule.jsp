@@ -48,25 +48,23 @@
 			})
 	}
 	function updateDay(days,start,end,id){
-//         		alert(days);
         		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
-        		alert(startTime);
         		
         		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
-        		alert(endTime);
         		
-//         		alert(id);
+		alert(startTime);
+		alert(endTime);
+         		alert(id);
 		$.ajax({
         	url:"${APP_PATH}/admin/schedule/updateDay",
         	data:{
         		'days':days,
-        		'start':event.start,
-        		'end':event.end,
-        		'id':event.id
+        		'start':startTime,
+        		'end':endTime,
+        		'id':id
         	},
         	type:"POST",
         	success:function(result){
-        		alert(result);
         	}
         }) 
 	}

@@ -1,5 +1,7 @@
 package com.hanming.oa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -58,16 +60,11 @@ public class ScheduleController {
 			@RequestParam(value = "start", required = false) String start,
 			@RequestParam(value = "end", required = false) String end,
 			@RequestParam(value = "id", required = false) Integer id) {
-		Calendar cal = Calendar.getInstance();
+		System.out.println("++++++++++++++++++++++++++"+start);
 		Schedule schedule = new Schedule();
 		
-		cal.setTime(DateTool.stringToDate(start)); 
-		cal.add(5, days);
-		schedule.setStartTime(DateTool.dateToString(cal.getTime()));
-		
-		cal.setTime(DateTool.stringToDate(end)); 
-		cal.add(5, days);
-		schedule.setEndTime(DateTool.dateToString(cal.getTime()));
+		schedule.setStartTime(start);
+		schedule.setEndTime(end);
 		
 		schedule.setId(id);
 		scheduleService.update(schedule);
