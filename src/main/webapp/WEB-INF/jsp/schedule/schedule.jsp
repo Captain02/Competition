@@ -112,6 +112,7 @@
 									</div>
 								</div>
 								
+								<input type="hidden"  name="id"/>
 								<button class="btn btn-success" type="button" onclick="save()">提交</button>
 								
 					  	</form>
@@ -171,6 +172,8 @@
 					},
 					editable : true,
 					dragOpacity: 0.5,
+					
+					//拖动改变日程日期
 					eventDrop : function( event, dayDelta, revertFunc ) {
 					    if(dayDelta._days != 0){
 					        days = dayDelta._days;
@@ -180,10 +183,21 @@
 					    }else{
 					        console.log('eventDrop被执行，Event的start和end时间没有改变！');
 					    }
-					    //revertFunc();
-					    console.log('eventDrop --- end ---');
-					    // ...
+					},
+					
+					//拖拽改变日程日期
+					eventResize:function(event,dayDelta,minuteDelta,revertFunc){
+						
+					},
+					
+					//点击查看日程详情
+					eventClick:function(event){
+						$('input[name="id"]').val(event.id);
+						$('input[name="title"]').val(event.title);
+						$('input[name="startTime"]').val(new Date(event.start).format('yyyy-MM-dd hh:mm:ss'));
+						$('input[name="endTime"]').val(new Date(event.end).format('yyyy-MM-dd hh:mm:ss'));
 					}
+					
 				})
 			})
        </script>
