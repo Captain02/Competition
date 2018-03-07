@@ -11,7 +11,7 @@ public class Event {
 
 	private String color;
 
-	private String allDay;
+	private Boolean allDay;
 
 	private String className;
 
@@ -55,12 +55,20 @@ public class Event {
 		this.color = color;
 	}
 
-	public String getAllDay() {
+	public Boolean getAllDay() {
 		return allDay;
 	}
 
-	public void setAllDay(String allDay) {
+	public void setAllDay(Boolean allDay) {
 		this.allDay = allDay;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	public String getClassName() {

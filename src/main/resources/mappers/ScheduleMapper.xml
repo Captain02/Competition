@@ -142,7 +142,7 @@
   <!-- List<Event> list(@Param("userId")Integer userId); -->
   <select id="list" resultType="Event">
    	SELECT
-		sc.id,sc.title,sc.startTime,sc.endTime,sc.allDay,sc.color
+		sc.id,sc.title,sc.startTime,sc.endTime,sc.allDay,sc.color,sc.allDay
 		FROM `schedule` sc
 		WHERE sc.userID=#{userId}
   </select>

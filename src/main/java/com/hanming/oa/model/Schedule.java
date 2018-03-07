@@ -9,7 +9,7 @@ public class Schedule {
 
 	private String endTime;
 
-	private Integer allDay;
+	private String allDay;
 
 	private String color;
 
@@ -51,11 +51,11 @@ public class Schedule {
 		this.endTime = endTime;
 	}
 
-	public Integer getAllDay() {
+	public String getAllDay() {
 		return allDay;
 	}
 
-	public void setAllDay(Integer allDay) {
+	public void setAllDay(String allDay) {
 		this.allDay = allDay;
 	}
 
