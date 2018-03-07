@@ -14,15 +14,15 @@
     <title>日程管理</title>
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
 	<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
+	
 	<link rel="stylesheet" href="${APP_PATH}/static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	
-    <link rel="stylesheet" href="${APP_PATH}/static/js/fullcalendar/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="${APP_PATH}/static/js/fullcalendar/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="${APP_PATH}/static/fullcalendar/fullcalendar.min.css" />
     <script src="${APP_PATH}/static/fullcalendar/lib/moment.min.js"></script>
     <script src="${APP_PATH}/static/fullcalendar/fullcalendar.min.js"></script>
-    <script src="${APP_PATH}/static/fullcalendar/jquery-ui-1.9.2.custom.min.js"></script>
+    
 	<script type="text/javascript">
 	$.ajax({
 		url:"${APP_PATH}/admin/schedule/scheduleds",
@@ -196,8 +196,6 @@
    	    	        "h+" : this.getHours()-8,                 //小时 
    	    	        "m+" : this.getMinutes(),                 //分 
    	    	        "s+" : this.getSeconds(),                 //秒 
-   	    	        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
-   	    	        "S"  : this.getMilliseconds()             //毫秒 
     	    }; 
     	    if(/(y+)/.test(fmt)) {
     	            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
