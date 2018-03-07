@@ -49,22 +49,18 @@
 	}
 	function updateDay(days,start,end,id){
         		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
-        		
         		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
-        		
-		alert(startTime);
-		alert(endTime);
-         		alert(id);
 		$.ajax({
         	url:"${APP_PATH}/admin/schedule/updateDay",
         	data:{
         		'days':days,
-        		'start':startTime,
-        		'end':endTime,
-        		'id':id
+        		'start':event.start,
+        		'end':event.end,
+        		'id':event.id
         	},
         	type:"POST",
         	success:function(result){
+        		alert(result);
         	}
         }) 
 	}
@@ -157,8 +153,6 @@
         </script>
         
        <script type="text/javascript">
-       var days = 0;
-       var object = "";
        		$(function(){
        			$('#calendar').fullCalendar({
        			 header: {
@@ -176,10 +170,10 @@
              week: '周',
              day: '日'
          },
-       	//Event是否可被拖动或者拖拽
-         editable: true,
-         //Event被拖动时的不透明度
+         editable : true,
+         
          dragOpacity: 0.5,
+         dragScroll : true,
          eventDrop : function( event, dayDelta, revertFunc ) {
         	    //do something here...
         	    console.log('eventDrop --- start ---');
@@ -212,8 +206,6 @@
     	        "h+" : this.getHours(),                   //小时 
     	        "m+" : this.getMinutes(),                 //分 
     	        "s+" : this.getSeconds(),                 //秒 
-    	        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
-    	        "S"  : this.getMilliseconds()             //毫秒 
     	    }; 
     	    if(/(y+)/.test(fmt)) {
     	            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
