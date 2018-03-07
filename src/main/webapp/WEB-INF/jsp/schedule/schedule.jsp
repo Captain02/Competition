@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>部门管理</title>
+    <title>日程管理</title>
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
 	<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 	<link rel="stylesheet" href="${APP_PATH}/static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="${APP_PATH}/static/js/fullcalendar/css/fullcalendar.min.css" />
     <script src="${APP_PATH}/static/fullcalendar/lib/moment.min.js"></script>
     <script src="${APP_PATH}/static/fullcalendar/fullcalendar.min.js"></script>
-    <script src="${APP_PATH}/static/fullcalendar/locale-all.js"></script>
+    <script src="${APP_PATH}/static/fullcalendar/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 	$.ajax({
 		url:"${APP_PATH}/admin/schedule/scheduleds",
@@ -153,49 +153,40 @@
         </script>
         
        <script type="text/javascript">
-       		$(function(){
-       			$('#calendar').fullCalendar({
-       			 header: {
-       	            left: 'month,agendaWeek,agendaDay',
-       	            center: 'title',
-       	            right: 'today, prev, next'
-       	        },
-       	    monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-       	    monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-       	    dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
-       	    dayNamesShort: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
-       	 buttonText: {
-             today: '今天',
-             month: '月',
-             week: '周',
-             day: '日'
-         },
-         editable : true,
-         
-         dragOpacity: 0.5,
-         dragScroll : true,
-         eventDrop : function( event, dayDelta, revertFunc ) {
-        	    //do something here...
-        	    console.log('eventDrop --- start ---');
-        	    console.log('eventDrop被执行，Event的title属性值为：', event.title);
-        	    console.log(event.id);
-        	    if(dayDelta._days != 0){
-        	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._days+'天！');
-        	        days = dayDelta._days;
-        	        updateDay(days,event.start,event.end,event.id);
-        	    }else if(dayDelta._milliseconds != 0){
-        	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');
-        	    }else{
-        	        console.log('eventDrop被执行，Event的start和end时间没有改变！');
-        	    }
-        	    //revertFunc();
-        	    console.log('eventDrop --- end ---');
-        	    // ...
-        	}
-       			})
-       		})
-       		
-       		
+			$(function(){
+				$('#calendar').fullCalendar({
+					header: {
+						left: 'month,agendaWeek,agendaDay',
+						center: 'title',
+						right: 'today, prev, next'
+					},
+					monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+					monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+					dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+					dayNamesShort: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+					buttonText: {
+					    today: '今天',
+					    month: '月',
+					    week: '周',
+					    day: '日'
+					},
+					editable : true,
+					dragOpacity: 0.5,
+					eventDrop : function( event, dayDelta, revertFunc ) {
+					    if(dayDelta._days != 0){
+					        days = dayDelta._days;
+					        updateDay(days,event.start,event.end,event.id);
+					    }else if(dayDelta._milliseconds != 0){
+					        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');
+					    }else{
+					        console.log('eventDrop被执行，Event的start和end时间没有改变！');
+					    }
+					    //revertFunc();
+					    console.log('eventDrop --- end ---');
+					    // ...
+					}
+				})
+			})
        </script>
         
        <script type="text/javascript">
