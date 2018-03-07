@@ -52,6 +52,7 @@ public class ScheduleController {
 	}
 
 	// 改变天数
+	@ResponseBody
 	@RequestMapping(value = "/updateDay", method = RequestMethod.POST)
 	public Msg updateDay(@RequestParam(value = "days", required = false) Integer days,
 			@RequestParam(value = "start", required = false) String start,

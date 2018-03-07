@@ -47,7 +47,25 @@
 				}
 			})
 	}
-	
+	function updateDay(days,start,end,id){
+        		alert(days);
+        		alert(start);
+        		alert(end);
+        		alert(id);
+		$.ajax({
+        	url:"${APP_PATH}/admin/schedule/updateDay",
+        	data:{
+        		'days':days,
+        		'start':event.start,
+        		'end':event.end,
+        		'id':event.id
+        	},
+        	type:"POST",
+        	success:function(result){
+        		alert(result);
+        	}
+        }) 
+	}
 	</script>
 	
 </head>
@@ -137,6 +155,8 @@
         </script>
         
        <script type="text/javascript">
+       var days = 0;
+       var object = "";
        		$(function(){
        			$('#calendar').fullCalendar({
        			 header: {
@@ -165,15 +185,8 @@
         	    console.log(event.id);
         	    if(dayDelta._days != 0){
         	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._days+'天！');
-        	        $.ajax({
-        	        	url:"${APP_PATH}/admin/schedule/updateDay",
-        	        	data:{
-        	        		'days':dayDelta._days,
-        	        		'start':event.start,
-        	        		'end':event.end,
-        	        		'id':event.id,
-        	        	},
-        	        })
+        	        days = dayDelta._days;
+        	        updateDay(days,event.start,event.end,event.id);
         	    }else if(dayDelta._milliseconds != 0){
         	        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');
         	    }else{
@@ -185,6 +198,8 @@
         	}
        			})
        		})
+       		
+       		
        </script>
         
         
