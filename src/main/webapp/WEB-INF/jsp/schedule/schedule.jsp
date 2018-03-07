@@ -54,9 +54,9 @@
         	url:"${APP_PATH}/admin/schedule/updateDay",
         	data:{
         		'days':days,
-        		'start':event.start,
-        		'end':event.end,
-        		'id':event.id
+        		'start':startTime,
+        		'end':endTime,
+        		'id':id
         	},
         	type:"POST",
         	success:function(result){
