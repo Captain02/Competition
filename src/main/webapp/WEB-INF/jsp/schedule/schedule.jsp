@@ -113,7 +113,12 @@
 								</div>
 								
 								<input type="hidden"  name="id"/>
-								<button class="btn btn-success" type="button" onclick="save()">提交</button>
+								
+								<div class="form-group">
+									<button class="btn btn-success" type="button" onclick="save()">提交</button>
+									<button class="btn btn-warning" type="button" onclick="">修改</button>
+									<button class="btn btn-danger" type="button" onclick="">删除</button>
+								</div>
 								
 					  	</form>
 								
