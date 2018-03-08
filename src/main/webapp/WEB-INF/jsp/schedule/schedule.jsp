@@ -187,9 +187,7 @@
 					
 					//拖拽改变日程日期
 					eventResize:function(event,dayDelta,minuteDelta,revertFunc){
-						alert(dayDelta);
-						alert(minuteDelta);
-						//updateDay(days,event.start,event.end,event.id);
+						updateDay(0,event.start,event.end,event.id);
 					},
 					
 					//点击查看日程详情
