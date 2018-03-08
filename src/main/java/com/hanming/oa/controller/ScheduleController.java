@@ -1,9 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -14,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Event;
 import com.hanming.oa.model.Schedule;
@@ -37,14 +32,18 @@ public class ScheduleController {
 	// 保存
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Msg save(Schedule schedule) {
+	public Msg save(Schedule schedule,@RequestParam("isInsert")Integer isInsert) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		schedule.setUserID(userId);
-		if (schedule.getId()!=null) {
+		if (isInsert==1) {
+			schedule.setId(null);
 			scheduleService.insert(schedule);
-		}else {
+		}else if (isInsert==0) {
 			scheduleService.update(schedule);
+		}else if (isInsert==-1) {
+			scheduleService.dele(schedule);
 		}
+		
 		return Msg.success();
 	}
 

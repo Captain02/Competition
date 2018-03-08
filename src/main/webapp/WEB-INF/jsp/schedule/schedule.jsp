@@ -37,16 +37,18 @@
 		}
 	})
 	
-	function save(){
+	function save(ele){
+		var isInsert = $(ele).attr('data-isInsert');
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",
-				data:$('#scheduleForm').serialize(),
+				data:"isInsert="+isInsert+'&'+$('#scheduleForm').serialize(),
 				type:"POST",
 				success:function(result){
 					
 				}
 			})
 	}
+	
 	function updateDay(days,start,end,id){
         		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
         		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
@@ -115,9 +117,9 @@
 								<input type="hidden"  name="id"/>
 								
 								<div class="form-group">
-									<button class="btn btn-success" type="button" onclick="save()">提交</button>
-									<button class="btn btn-warning" type="button" onclick="">修改</button>
-									<button class="btn btn-danger" type="button" onclick="">删除</button>
+									<button class="btn btn-success" data-isInsert="1" type="button" onclick="save(this);">提交</button>
+									<button class="btn btn-warning" data-isInsert="0" type="button" onclick="save(this);">修改</button>
+									<button class="btn btn-danger" data-isInsert="-1" type="button" onclick="save(this);">删除</button>
 								</div>
 								
 					  	</form>

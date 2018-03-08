@@ -28,4 +28,8 @@ public class ScheduleService {
 		scheduleMapper.updateByPrimaryKeySelective(schedule);
 	}
 
+	public void dele(Schedule schedule) {
+		scheduleMapper.deleteByPrimaryKey(schedule.getId());
+	}
+
 }
