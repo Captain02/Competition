@@ -38,6 +38,12 @@
 	})
 	
 	function save(ele){
+		$('input.schedu-info').each(function(){
+			if($(this).val() == ''){
+				alert('请填写完整日程信息');
+				return false;
+			}
+		})
 		var isInsert = $(ele).attr('data-isInsert');
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",
@@ -50,6 +56,7 @@
 	}
 	
 	function updateDay(days,start,end,id){
+		
         		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
         		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
 		$.ajax({
@@ -62,6 +69,7 @@
         	},
         	type:"POST",
         	success:function(result){
+        		
         	}
         }) 
 	}
@@ -92,15 +100,15 @@
 					  		
 					  			<div class="form-group">
 				                  <label>日程名称</label>
-				                  <input class="form-control" name="title" placeholder="日程名称" type="text">
+				                  <input class="schedu-info form-control" name="title" placeholder="日程名称" type="text">
                					</div>
 					  			
 					  			
 								<div class="form-group">
 									<label for="">开始日期</label>
 									<div class="input-group date form_datetime">
-									    <input name="startTime" class="form-control" type="text" value="" readonly>
-									    <span class="input-group-addon"><i class="fa fa-times"></i></span>
+									    <input name="startTime" class="schedu-info form-control" type="text" value="" readonly>
+									    <span class="input-group-addon clearTime"><i class="fa fa-times"></i></span>
 									    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									</div>
 								</div>
@@ -108,18 +116,18 @@
 								<div class="form-group">
 									<label for="">结束日期</label>
 									<div class="input-group date form_datetime">
-									    <input name="endTime" class="form-control" type="text" value="" readonly>
-									    <span class="input-group-addon"><i class="fa fa-times"></i></span>
+									    <input name="endTime" class="schedu-info form-control" type="text" value="" readonly>
+									    <span class="input-group-addon clearTime"><i class="fa fa-times"></i></span>
 									    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 									</div>
 								</div>
 								
 								<input type="hidden"  name="id"/>
 								
-								<div class="form-group">
-									<button class="btn btn-success" data-isInsert="1" type="button" onclick="save(this);">提交</button>
-									<button class="btn btn-warning" data-isInsert="0" type="button" onclick="save(this);">修改</button>
-									<button class="btn btn-danger" data-isInsert="-1" type="button" onclick="save(this);">删除</button>
+								<div class="form-group schedule-control">
+									<button class="btn btn-success btn-save" data-isInsert="1" type="button" onclick="save(this);">提交</button>
+									<button class="btn btn-warning btn-editor" data-isInsert="0" type="button" onclick="save(this);">修改</button>
+									<button class="btn btn-danger btn-delete" data-isInsert="-1" type="button" onclick="save(this);">删除</button>
 								</div>
 								
 					  	</form>
@@ -161,6 +169,12 @@
         
        <script type="text/javascript">
 			$(function(){
+				if($('input[name="id"]').val() ==''){
+					$('button.btn-editor').attr('disabled','disabled');
+					$('button.btn-delete').attr('disabled','disabled');
+				}
+				var scheduleInfOld = new Array();
+				$('input[name="id"]').val('');
 				$('#calendar').fullCalendar({
 					header: {
 						left: 'month,agendaWeek,agendaDay',
@@ -199,12 +213,31 @@
 					
 					//点击查看日程详情
 					eventClick:function(event){
+						$('button.btn-delete').removeAttr('disabled','disabled');
+						$('button.btn-save').attr('disabled','disabled');
 						$('input[name="id"]').val(event.id);
+						scheduleInfOld.push(event.title,new Date(event.start).format('yyyy-MM-dd hh:mm:ss'),new Date(event.end).format('yyyy-MM-dd hh:mm:ss'));
 						$('input[name="title"]').val(event.title);
 						$('input[name="startTime"]').val(new Date(event.start).format('yyyy-MM-dd hh:mm:ss'));
 						$('input[name="endTime"]').val(new Date(event.end).format('yyyy-MM-dd hh:mm:ss'));
 					}
 				})
+				
+				$('input.schedu-info').each(function(){
+					$(this).change(function(){
+						if($.inArray($(this).val(),scheduleInfOld) == -1 && $(this).val() != ''){
+							$('button.btn-editor').removeAttr('disabled','disabled');
+						}
+					})
+				})
+				
+				$('.clearTime').click(function(){
+					if($('input[name="startTime"]').val()=='' && $('input[name="endTime"]').val()==''){
+						$('button.btn-save').removeAttr('disabled','disabled');
+					}
+				})
+				
+				
 			})
        </script>
         
