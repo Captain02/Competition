@@ -40,7 +40,11 @@ public class ScheduleController {
 	public Msg save(Schedule schedule) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		schedule.setUserID(userId);
-		scheduleService.insert(schedule);
+		if (schedule.getId()!=null) {
+			scheduleService.insert(schedule);
+		}else {
+			scheduleService.update(schedule);
+		}
 		return Msg.success();
 	}
 
@@ -60,7 +64,7 @@ public class ScheduleController {
 			@RequestParam(value = "start", required = false) String start,
 			@RequestParam(value = "end", required = false) String end,
 			@RequestParam(value = "id", required = false) Integer id) {
-		System.out.println("++++++++++++++++++++++++++"+start);
+		
 		Schedule schedule = new Schedule();
 		
 		schedule.setStartTime(start);

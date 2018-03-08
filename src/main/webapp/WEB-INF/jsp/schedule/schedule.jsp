@@ -187,7 +187,9 @@
 					
 					//拖拽改变日程日期
 					eventResize:function(event,dayDelta,minuteDelta,revertFunc){
-						
+						alert(dayDelta);
+						alert(minuteDelta);
+						//updateDay(days,event.start,event.end,event.id);
 					},
 					
 					//点击查看日程详情
@@ -197,7 +199,6 @@
 						$('input[name="startTime"]').val(new Date(event.start).format('yyyy-MM-dd hh:mm:ss'));
 						$('input[name="endTime"]').val(new Date(event.end).format('yyyy-MM-dd hh:mm:ss'));
 					}
-					
 				})
 			})
        </script>
@@ -210,7 +211,7 @@
    	    	        "h+" : this.getHours()-8,                 //小时 
    	    	        "m+" : this.getMinutes(),                 //分 
    	    	        "s+" : this.getSeconds(),                 //秒 
-    	    }; 
+    	    };
     	    if(/(y+)/.test(fmt)) {
     	            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
     	    }
@@ -220,7 +221,7 @@
     	         }
     	     }
     	    return fmt; 
-    	}        
+    	}
        </script>
         
         
