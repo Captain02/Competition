@@ -224,11 +224,21 @@ String basePath2 = request.getScheme() + "://"
 													<tr>
 														<th>项目名称</th>
 														<th>结束日期</th>
-														<th class="numeric">状态</th>
-														<th class="numeric">项目负责人</th>
+														<th>状态</th>
+														<th>项目负责人</th>
 													</tr>
 												</thead>
 												<tbody>
+													<tr>
+														<td class="project-name">
+															<a href="">项目管理</a>
+														</td>
+														<td>项目管理</td>
+														<td>项目管理</td>
+														<td class="project-name">
+															<a href="">张三</a>
+														</td>
+													</tr>
 												</tbody>
 											</table>
 										</div>
@@ -237,6 +247,34 @@ String basePath2 = request.getScheme() + "://"
 							</div>
 						</div>
 
+<!-- 						我的任务 -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 								<div class="panel"> -->
+<!-- 									<div class="panel-body"> -->
+<!-- 										<div class="person-desk"> -->
+<!-- 											<h1> -->
+<!-- 												我的审批 -->
+<!-- 											</h1> -->
+<!-- 											<table -->
+<!-- 												class="table table-bordered table-striped table-condensed cf text-center"  style="margin-bottom: 0px;" > -->
+<!-- 												<thead class="cf"> -->
+<!-- 													<tr> -->
+<%-- 														<td><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask">请假</a></td> --%>
+<%-- 														<td><a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask">报销</a></td> --%>
+<%-- 														<td><a href="${APP_PATH}/admin/myThingsTask/myThingsTask">物品</a></td> --%>
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<!-- 												</tbody> -->
+<!-- 											</table> -->
+	
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
 						<!-- 我的任务 -->
 						<div class="row">
 							<div class="col-md-12">
@@ -244,30 +282,74 @@ String basePath2 = request.getScheme() + "://"
 									<div class="panel-body">
 										<div class="person-desk">
 											<h1>
-												我的审批
+												任务 <a href="" style="font-size: 16px; color: #65CEA7;"
+													class="pull-right">更多</a>
 											</h1>
 											<table
-												class="table table-bordered table-striped table-condensed cf text-center"  style="margin-bottom: 0px;" >
+												class="table table-bordered table-striped table-condensed cf">
 												<thead class="cf">
 													<tr>
-														<td><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask">请假</a></td>
-														<td><a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask">报销</a></td>
-														<td><a href="${APP_PATH}/admin/myThingsTask/myThingsTask">物品</a></td>
+														<th>任务名称</th>
+														<th>结束日期</th>
+														<th>状态</th>
+														<th>预计工时</th>
 													</tr>
 												</thead>
 												<tbody>
+													<tr>
+														<td class="project-name">
+															<a href="">改改bug</a>
+														</td>
+														<td>1-1-1-1</td>
+														<td>已解决</td>
+														<td>5</td>
+													</tr>
 												</tbody>
 											</table>
-	
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						
+						<!-- 我的Bug -->
 						<div class="row">
-							<div class="col-md-12">BUG</div>
+							<div class="col-md-12">
+								<div class="panel">
+									<div class="panel-body">
+										<div class="person-desk">
+											<h1>
+												BUG <a href="" style="font-size: 16px; color: #65CEA7;"
+													class="pull-right">更多</a>
+											</h1>
+											<table
+												class="table table-bordered table-striped table-condensed cf">
+												<thead class="cf">
+													<tr>
+														<th>Bug标题</th>
+														<th>创建日期</th>
+														<th>状态</th>
+														<th>创建人</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="project-name">
+															<a href="">数据库链接有错误</a>
+														</td>
+														<td>1-1-1-1</td>
+														<td>已解决</td>
+														<td>张三</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+						
+						
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel">
@@ -328,8 +410,30 @@ String basePath2 = request.getScheme() + "://"
 				              </div>
 							</div>
 						</div>
+						
+						<!--我的相册 -->
 						<div class="row">
-							<div class="col-md-12">相册</div>
+							<div class="col-md-12">
+								<div class="panel">
+							<header class="panel-heading"> 相册 <span class="pull-right"> <a href="${APP_PATH}/admin/KnowledgeSharing/list">更多</a></span> </header>
+								<div class="panel-body">
+									<div id="gallery" class="media-gal">
+										<div class="images item ">
+											<a href="">
+												<img src="${APP_PATH}/static/em.jpg" alt="" />
+											</a>
+											<p class="img-title"> <a>我的旅游照片</a> </p>
+											<p class="img-desc"> <a>我想知道照片背后的故事</a> </p>
+											<p></p>
+											<p>
+												<a><i class="glyphicon glyphicon-edit"></i></a>
+												<a><i class="glyphicon glyphicon-trash"></i></a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
 						</div>
 					</div>
 

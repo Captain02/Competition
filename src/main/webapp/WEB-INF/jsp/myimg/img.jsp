@@ -58,10 +58,7 @@ $(function(){
 			},
 			type:"POST",
 			success:function(result){
-				console.log(result);
-				console.log(result.extend.title);
-				console.log(result.extend.topicId);
-				console.log(result.extend.summary);
+				
 			}
 		});
 	})
