@@ -229,16 +229,18 @@ String basePath2 = request.getScheme() + "://"
 													</tr>
 												</thead>
 												<tbody>
+												<c:forEach items="${ProjectDisplay}" var="projectDisplay">
 													<tr>
 														<td class="project-name">
-															<a href="">项目管理</a>
+															<a href="">${projectDisplay.projectName}</a>
 														</td>
-														<td>项目管理</td>
-														<td>项目管理</td>
+														<td>${projectDisplay.endDate}</td>
+														<td>${projectDisplay.state}</td>
 														<td class="project-name">
-															<a href="">张三</a>
+															<a href="">${projectDisplay.projectResponsiblePeople}</a>
 														</td>
 													</tr>
+												</c:forEach>
 												</tbody>
 											</table>
 										</div>
@@ -296,14 +298,16 @@ String basePath2 = request.getScheme() + "://"
 													</tr>
 												</thead>
 												<tbody>
+												<c:forEach items="${DustyDisplay}" var="dustyDisplay">
 													<tr>
 														<td class="project-name">
-															<a href="">改改bug</a>
+															<a href="">${dustyDisplay.taskName}</a>
 														</td>
-														<td>1-1-1-1</td>
-														<td>已解决</td>
-														<td>5</td>
+														<td>${dustyDisplay.endTime}</td>
+														<td>${dustyDisplay.state}</td>
+														<td>${dustyDisplay.workTime}</td>
 													</tr>
+												</c:forEach>
 												</tbody>
 											</table>
 										</div>
@@ -333,14 +337,16 @@ String basePath2 = request.getScheme() + "://"
 													</tr>
 												</thead>
 												<tbody>
+												<c:forEach items="${BugDisplay}" var="bugDisplay">
 													<tr>
 														<td class="project-name">
-															<a href="">数据库链接有错误</a>
+															<a href="">${bugDisplay.bugTitle}</a>
 														</td>
-														<td>1-1-1-1</td>
-														<td>已解决</td>
-														<td>张三</td>
+														<td>${bugDisplay.creatTime}</td>
+														<td>${bugDisplay.state}</td>
+														<td>${bugDisplay.creatPeople}</td>
 													</tr>
+												</c:forEach>
 												</tbody>
 											</table>
 										</div>

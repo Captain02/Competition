@@ -89,7 +89,7 @@ public class PersonPageController {
 			model.addAttribute("systemMessageDisplay", systemMessageDisplay);
 		}
 		
-		//需求
+		//项目
 		List<ProjectDisplay> ProjectDisplay = projectService.list("项目状态", "项目名称",user.getId());
 		if (ProjectDisplay.size()>5) {
 			model.addAttribute("ProjectDisplay", ProjectDisplay.subList(0, 5));
