@@ -242,7 +242,7 @@
 	LEFT JOIN t_user tu2 ON tu2.id = pb.completPeople
 	LEFT JOIN t_user tu3 ON tu3.id = pb.assginor
 	<where>
-		<if test="projectId != 0">
+		<if test="projectId != null">
 			pb.projectId = #{projectId}
 		</if>
 		<if test="name != '名称'">

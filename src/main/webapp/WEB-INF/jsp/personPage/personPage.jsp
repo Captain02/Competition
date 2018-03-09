@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sh" uri="http://shiro.apache.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -177,7 +179,7 @@ String basePath2 = request.getScheme() + "://"
 								<div class="panel">
 									<div class="panel-body">
 										<h4>公告
-											<a href="" style="font-size: 16px; color: #65CEA7;" class="pull-right">更多</a>
+											<a href="${APP_PATH}/admin/notice/list" style="font-size: 16px; color: #65CEA7;" class="pull-right">更多</a>
 										</h4>
 										 <ul class="dropdown-list">
 										 <!-- li标签从数据库中遍历生成 -->
@@ -226,7 +228,7 @@ String basePath2 = request.getScheme() + "://"
 									<div class="panel-body">
 										<div class="person-desk">
 											<h1>
-												项目 <a href="" style="font-size: 16px; color: #65CEA7;"
+												项目 <a href="${APP_PATH}/admin/project/list" style="font-size: 16px; color: #65CEA7;"
 													class="pull-right">更多</a>
 											</h1>
 											<table
@@ -295,7 +297,7 @@ String basePath2 = request.getScheme() + "://"
 									<div class="panel-body">
 										<div class="person-desk">
 											<h1>
-												任务 <a href="" style="font-size: 16px; color: #65CEA7;"
+												任务 <a href="${APP_PATH}/admin/dusty/list" style="font-size: 16px; color: #65CEA7;"
 													class="pull-right">更多</a>
 											</h1>
 											<table
@@ -334,7 +336,7 @@ String basePath2 = request.getScheme() + "://"
 									<div class="panel-body">
 										<div class="person-desk">
 											<h1>
-												BUG <a href="" style="font-size: 16px; color: #65CEA7;"
+												BUG <a href="${APP_PATH}/admin/bug/list" style="font-size: 16px; color: #65CEA7;"
 													class="pull-right">更多</a>
 											</h1>
 											<table
@@ -432,21 +434,19 @@ String basePath2 = request.getScheme() + "://"
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel">
-							<header class="panel-heading"> 相册 <span class="pull-right"> <a href="${APP_PATH}/admin/KnowledgeSharing/list">更多</a></span> </header>
+							<header class="panel-heading"> 相册 <span class="pull-right"> <a href="${APP_PATH}/admin/image/list">更多</a></span> </header>
 								<div class="panel-body">
 									<div id="gallery" class="media-gal">
+										<c:forEach items="${MyImageDispaly}" var="MyImageDispaly">
 										<div class="images item ">
-											<a href="">
-												<img src="${APP_PATH}/static/em.jpg" alt="" />
+											<a href="${APP_PATH}/myImage/${MyImageDispaly.imageName}" data-lightbox="example-set">
+												<img src="${APP_PATH}/myImage/${MyImageDispaly.imageName}" alt="" />
 											</a>
-											<p class="img-title"> <a>我的旅游照片</a> </p>
-											<p class="img-desc"> <a>我想知道照片背后的故事</a> </p>
-											<p></p>
-											<p>
-												<a><i class="glyphicon glyphicon-edit"></i></a>
-												<a><i class="glyphicon glyphicon-trash"></i></a>
-											</p>
+											<p class="img-title"><a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${MyImageDispaly.topicId}">${fn:substring(MyImageDispaly.title,0, 10)}</a> </p>
+											<p class="img-desc">${MyImageDispaly.sketch}</p>
+											<p>${MyImageDispaly.userName}${fn:substring(MyImageDispaly.date, 0, 10)}上传</p>
 										</div>
+									</c:forEach>
 									</div>
 								</div>
 							</div>

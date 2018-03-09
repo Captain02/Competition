@@ -18,6 +18,7 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BugDisplay;
 import com.hanming.oa.model.DustyDisplay;
+import com.hanming.oa.model.MyImageDispaly;
 import com.hanming.oa.model.NoticeDisplay;
 import com.hanming.oa.model.ProjectDisplay;
 import com.hanming.oa.model.SystemMessageDisplay;
@@ -25,6 +26,7 @@ import com.hanming.oa.model.User;
 import com.hanming.oa.service.BBSTopicService;
 import com.hanming.oa.service.BugService;
 import com.hanming.oa.service.DustyService;
+import com.hanming.oa.service.ImageService;
 import com.hanming.oa.service.NoticeService;
 import com.hanming.oa.service.ProjectService;
 import com.hanming.oa.service.SystemMessageService;
@@ -51,6 +53,8 @@ public class PersonPageController {
 	BugService bugService;
 	@Autowired
 	DustyService dustyService;
+	@Autowired
+	ImageService imageService;
 
 	// 跳转个人主页
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -66,53 +70,61 @@ public class PersonPageController {
 		if (Notices.size() > 2) {
 			List<NoticeDisplay> reverseNotices = Notices.subList(0, 2);
 			model.addAttribute("Notices", reverseNotices);
-		}else {
+		} else {
 			model.addAttribute("Notices", Notices);
 		}
-		
+
 		// 知识
-		List<BBSDisplayTopic> topics = bbsTopicService.selectDisplayTopic(0,0);
+		List<BBSDisplayTopic> topics = bbsTopicService.selectDisplayTopic(0, 0);
 		Collections.reverse(topics);
 		if (topics.size() > 2) {
 			List<BBSDisplayTopic> reverseTopics = topics.subList(0, 2);
 			model.addAttribute("topics", reverseTopics);
-		}else {
+		} else {
 			model.addAttribute("topics", topics);
 		}
-		
-		//系统消息
-		List<SystemMessageDisplay> systemMessageDisplay = systemMessageService.list("类型","未读",user.getId());
+
+		// 系统消息
+		List<SystemMessageDisplay> systemMessageDisplay = systemMessageService.list("类型", "未读", user.getId());
 		Collections.reverse(systemMessageDisplay);
-		if (systemMessageDisplay.size()>5) {
-			model.addAttribute("systemMessageDisplay", systemMessageDisplay.subList(0, 5));
-		}else {
-			model.addAttribute("systemMessageDisplay", systemMessageDisplay);
+		if (systemMessageDisplay.size() > 5) {
+			model.addAttribute("systemMessage", systemMessageDisplay.subList(0, 5));
+		} else {
+			model.addAttribute("systemMessage", systemMessageDisplay);
 		}
-		
-		//项目
-		List<ProjectDisplay> ProjectDisplay = projectService.list("项目状态", "项目名称",user.getId());
-		if (ProjectDisplay.size()>5) {
+		model.addAttribute("systemMessagesize", systemMessageDisplay.size());
+
+		// 项目
+		List<ProjectDisplay> ProjectDisplay = projectService.list("项目状态", "项目名称", user.getId());
+		if (ProjectDisplay.size() > 5) {
 			model.addAttribute("ProjectDisplay", ProjectDisplay.subList(0, 5));
-		}else {
+		} else {
 			model.addAttribute("ProjectDisplay", ProjectDisplay);
 		}
-		
-		//bug
-		List<BugDisplay> BugDisplay = bugService.list("状态", "名称", 0, 0, user.getId());
-		if (BugDisplay.size()>5) {
+
+		// bug
+		List<BugDisplay> BugDisplay = bugService.list("状态", "名称", 0, null, user.getId());
+		if (BugDisplay.size() > 5) {
 			model.addAttribute("BugDisplay", BugDisplay.subList(0, 5));
-		}else {
+		} else {
 			model.addAttribute("BugDisplay", BugDisplay);
 		}
-		
-		//任务
-		List<DustyDisplay> DustyDisplay = dustyService.list("任务类型", "任务状态", "任务名称", 0, 0, user.getId());
-		if (ProjectDisplay.size()>5) {
+
+		// 任务
+		List<DustyDisplay> DustyDisplay = dustyService.list("任务类型", "任务状态", "任务名称", 0, null, user.getId());
+		if (ProjectDisplay.size() > 5) {
 			model.addAttribute("DustyDisplay", DustyDisplay.subList(0, 5));
-		}else {
+		} else {
 			model.addAttribute("DustyDisplay", DustyDisplay);
 		}
-		
+
+		// 相册
+		List<MyImageDispaly> MyImageDispaly = imageService.selectList(user.getId());
+		if (MyImageDispaly.size() > 5) {
+			model.addAttribute("MyImageDispaly", MyImageDispaly.subList(0, 5));
+		} else {
+			model.addAttribute("MyImageDispaly", MyImageDispaly);
+		}
 
 		model.addAttribute("user", user);
 		return "personPage/personPage";
