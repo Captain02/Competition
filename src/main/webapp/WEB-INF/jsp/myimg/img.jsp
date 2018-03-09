@@ -12,6 +12,7 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link href="${APP_PATH}/static/lightbox/css/lightbox.min.css" rel="stylesheet">
 </head>
 <script type="text/javascript">
 function dele(ele) {
@@ -23,7 +24,7 @@ function dele(ele) {
 		},
 		type:"POST",
 		success:function(result){
-			//弹出模态框，一秒后刷新
+			
 		}
 	})
 	
@@ -44,7 +45,6 @@ $(function(){
 	$('.modal-body').find('textarea[name="summary"]').blur(function(){
 		$('.modal-footer').find('button.yes').attr('data-editor-summary',$(this).val());
 	})
-	//在这里发送编辑的ajax
 	$('.yes').click(function(){
 		var topicId = $(this).attr('data-topicId');
 		var title = $(this).attr('data-editor-title');
@@ -108,7 +108,7 @@ $(function(){
 									<div id="gallery" class="media-gal">
 									<c:forEach items="${MyImageDispaly}" var="MyImageDispaly">
 										<div class="images item ">
-											<a href="">
+											<a href="${APP_PATH}/myImage/${MyImageDispaly.imageName}" data-lightbox="example-set">
 												<img src="${APP_PATH}/myImage/${MyImageDispaly.imageName}" alt="" />
 											</a>
 											<p class="img-title"><a href="${APP_PATH}/admin/KnowledgeSharing/detailedTopic?topicId=${MyImageDispaly.topicId}">${fn:substring(MyImageDispaly.title,0, 10)}</a> </p>
@@ -156,5 +156,6 @@ $(function(){
    </div>
  </div>
 </div>
+	<script src="${APP_PATH}/static/lightbox/js/lightbox.min.js"></script>
 </body>
 </html>

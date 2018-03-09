@@ -22,6 +22,7 @@ String basePath2 = request.getScheme() + "://"
 	+ request.getServerName() + ":" + request.getServerPort()
 	+ path + "/";
 %>
+<link rel="stylesheet" href="${APP_PATH}/static/calendar/clndr.css">
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 </head>
@@ -111,9 +112,6 @@ String basePath2 = request.getScheme() + "://"
 				<a href="" class="toggle-btn"> <span
 					class="glyphicon glyphicon-th-list"></span>
 				</a>
-
-
-
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 
 				<div class="clearfix"></div>
@@ -201,7 +199,20 @@ String basePath2 = request.getScheme() + "://"
 									</div>
 								</div>
 							</div>
-							<div class="col-md-12">日历区域</div>
+							
+							<div class="col-md-12">
+				              <div class="panel">
+				                <div class="panel-body">
+				                  <div class="calendar-block ">
+				                    <div class="cal1"> </div>
+				                  </div>
+				                </div>
+				              </div>
+            			</div>
+							
+							
+							
+							
 						</div>
 					</div>
 
@@ -600,6 +611,10 @@ $('.message-history').click(function(){
 
 </script>
 
+<script src="${APP_PATH}/static/calendar/js/clndr.js"></script>
+<script src="${APP_PATH}/static/calendar/js/evnt.calendar.init.js"></script>
+<script src="${APP_PATH}/static/calendar/js/moment-2.2.1.js"></script>
+<script src="${APP_PATH}/static/calendar/js/underscore-min.js"></script>
 </body>
 
 </html>
