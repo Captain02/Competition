@@ -83,18 +83,23 @@ $(function () {
 
 function addthingsForm() {
     var persons = "";
+    var things = $("#thingsForm").serializeJson();
+    alert(things);
     $.each($(".addPerson"), function () {
         persons += $(this).text() + "-";
     })
     var formData = new FormData($("#thingsForm")[0]);
+    alert(formData);
     formData.append('persons', persons);
     //发送ajax请求
     $.ajax({
         url: "${APP_PATH}/admin/things/add",
         type: "POST",
-        data: formData,
+        data:formData,
         contentType: false,
         processData: false,
+        //contentType : 'application/json;charset=utf-8', //设置请求头信息
+        //dataType:"json",
         success: function (result) {
             if (result.code == 100) {
                 $('#myModal').modal('show');
