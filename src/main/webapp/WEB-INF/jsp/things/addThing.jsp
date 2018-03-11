@@ -107,8 +107,8 @@ function addthingsForm() {
                     '已成功提交报销申请' + '</b>');
                 ShowEle('.yes', 'show');
             } */
-        	result.extend.filename
-			result.extend.enclosure
+//         	console.log(result.extend.filename);
+//          console.log(result.extend.enclosure);
         }
     })
 }
@@ -235,6 +235,10 @@ function addthingsForm() {
                                                 <div class="col-sm-10">
                                                     <input id="file" type="file" name="file">
                                                 </div>
+                                                
+                                                <input type="hidden" name="filename" />
+                                                <input type="hidden" name="enclosure" />
+                                                 
                                             </div>
                                             
                                             <div class="form-group ">
