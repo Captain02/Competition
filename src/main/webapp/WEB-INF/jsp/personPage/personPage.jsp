@@ -392,18 +392,18 @@ String basePath2 = request.getScheme() + "://"
 															<th>请假日期</th>
 															<th>天数</th>
 															<th>状态</th>
-															<th>结果</th>
 														</tr>
 													</thead>
 													
 													<tbody>
-														<tr>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-														</tr>
+												<c:forEach items="${holidays}" var="holiday">
+													<tr>
+														<td >${holiday.type}</td>
+														<td>${holiday.date}</td>
+														<td>${holiday.holidaydays}</td>
+														<td>${holiday.test}</td>
+													</tr>
+												</c:forEach>
 													</tbody>
 												</table>
 											</div>
@@ -416,18 +416,18 @@ String basePath2 = request.getScheme() + "://"
 															<th>金额</th>
 															<th>状态</th>
 															<th>报销日期</th>
-															<th>结果</th>
 														</tr>
 													</thead>
 													
 													<tbody>
-														<tr>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-														</tr>
+														<c:forEach items="${listReimbursement}" var="Reimbursement">
+													<tr>
+														<td >${Reimbursement.type}</td>
+														<td>${Reimbursement.money}</td>
+														<td>${Reimbursement.test}</td>
+														<td>${Reimbursement.date}</td>
+													</tr>
+												</c:forEach>
 													</tbody>
 												</table>
 											</div>
@@ -440,18 +440,18 @@ String basePath2 = request.getScheme() + "://"
 															<th>物品名称</th>
 															<th>申请时间</th>
 															<th>状态</th>
-															<th>结果</th>
 														</tr>
 													</thead>
 													
 													<tbody>
-														<tr>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-															<td>1</td>
-														</tr>
+														<c:forEach items="${listTings}" var="Tings">
+													<tr>
+														<td >${Tings.purpose}</td>
+														<td>${Tings.name}</td>
+														<td>${Tings.date}</td>
+														<td>${Tings.state}</td>
+													</tr>
+												</c:forEach>
 													</tbody>
 												</table>
 											</div>
