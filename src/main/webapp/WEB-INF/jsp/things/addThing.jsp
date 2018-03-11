@@ -326,13 +326,13 @@ function addthingsForm() {
 							"<div class='form-group'>"+
 							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>物品名称</label>"+
 							"<div class='col-sm-10'>"+
-							"<input name='name' class='form-control' placeholder='请输入物品名称' type='number'>"+
+							"<input name='name' class='form-control' placeholder='请输入物品名称' type='text'>"+
 							"</div>"+
 							"</div>"+
 							"<div class='form-group'>"+
 							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>领用数量</label>"+
 							"<div class='col-sm-10'>"+
-							"<input name='number' class='form-control' placeholder='请输入物品数量' type='text'>"+
+							"<input name='number' class='form-control' placeholder='请输入物品数量' type='number'>"+
 							"</div>"+
 							"</div>"+
 							"</div>"+
