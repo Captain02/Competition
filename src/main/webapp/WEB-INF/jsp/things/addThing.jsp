@@ -107,7 +107,8 @@ function addthingsForm() {
                     '已成功提交报销申请' + '</b>');
                 ShowEle('.yes', 'show');
             } */
-            
+        	result.extend.filename
+			result.extend.enclosure
         }
     })
 }

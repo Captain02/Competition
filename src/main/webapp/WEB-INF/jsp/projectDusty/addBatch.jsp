@@ -81,8 +81,6 @@ function save() {
         dataType:"json",
 		data:$("#taskbatch-form").serializeJson(),
 		success:function(result){
-			result.extend.filename
-			result.extend.enclosure
 		}
 	}) 
 }
