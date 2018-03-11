@@ -12,11 +12,6 @@
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
-<!-- Date -->
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
-
-
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 添加审批人 -->
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
@@ -87,25 +82,6 @@ function addReimbursement() {
 				<a href="" class="toggle-btn"> <span
 					class="glyphicon glyphicon-th-list"></span>
 				</a>
-
-				<form action="" class="serach-form">
-
-					<select class="form-control">
-						<option>用户状态</option>
-						<option>占个位置</option>
-						<option>占个位置</option>
-						<option>占个位置</option>
-						<option>占个位置</option>
-					</select> <input type="text" placeholder="请输入用户名、姓名" value=""
-						class="form-control">
-
-					<button type="button" class="btn btn-primary">搜索</button>
-
-
-					<div class="clearfix"></div>
-				</form>
-
-
 				<div class="content-head-right"></div>
 
 				<div class="clearfix"></div>
@@ -127,7 +103,6 @@ function addReimbursement() {
 						<div class="row">
 							<div class="col-lg-12">
 								<section class="panel">
-									<header class="panel-heading"> </header>
 									<div class="panel-body">
 										<div class="alert alert-block alert-danger fade in">
 											<button type="button" class="close close-sm"
@@ -140,7 +115,7 @@ function addReimbursement() {
 											id="addReimbursement" novalidate="novalidate">
 
 											<div class="js-expenseBox">
-												<div class="alert alert-info fade in">报销明细</div>
+												<div class="alert alert-info fade in">报销明细(1)</div>
 												<div class="form-group">
 													<label class="col-sm-2 col-sm-2 control-label"> <span>*</span>报销金额
 													</label>
@@ -165,7 +140,16 @@ function addReimbursement() {
 															style="height: 94px;" class="form-control"></textarea>
 													</div>
 												</div>
-												
+											</div>
+											
+											<div class="form-group">
+												<label for="" class="col-md-2"></label>
+												<div class="col-md-10 text-center">
+													<a class="add-details">
+														<i class="glyphicon glyphicon-plus-sign" style="font-size: 15px;"></i>
+														添加明细
+													</a>
+												</div>
 											</div>
 
 
@@ -226,13 +210,6 @@ function addReimbursement() {
 
 			</div>
 		</div>
-		<script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
-		<script type="text/javascript">
-			$('#mydatepicker2').dcalendarpicker({
-				format : 'yyyy-mm-dd'
-			});
-			$('#mycalendar').dcalendar();
-		</script>
 	</section>
 	<!-- 模态框 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -278,6 +255,38 @@ function addReimbursement() {
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$('.add-details').click(function(){
+			var detailsLength = $('.js-expenseBox').length;
+			var html =	$(
+							"<div class='js-expenseBox'>"+
+				          	"<div class='alert alert-info fade in'>报销明细("+(detailsLength+1)+")</div>"+
+							"<div class='form-group'>"+
+							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>报销金额</label>"+
+							"<div class='col-sm-10'>"+
+							"<input name='money' class='form-control' placeholder='请输入金额' type='number'>"+
+							"</div>"+
+							"</div>"+
+							"<div class='form-group'>"+
+							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>报销类型</label>"+
+							"<div class='col-sm-10'>"+
+							"<input name='type' class='form-control' placeholder='请输入报销类型，如采购经费、活动经费' type='text'>"+
+							"</div>"+
+							"</div>"+
+							"<div class='form-group'>"+
+							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>报销明细</label>"+
+							"<div class='col-sm-10'>"+
+							"<textarea name='detailed' placeholder='报销明细' style='height: 94px;' class='form-control'></textarea>"+
+							"</div>"+
+							"</div>"+
+							"</div>"
+						);
+			$('.js-expenseBox:eq('+(detailsLength-1)+')').after(html);
+		})
+	</script>
+	
+	
 </body>
 
 </html>
