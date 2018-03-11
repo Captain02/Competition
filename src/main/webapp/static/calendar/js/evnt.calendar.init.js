@@ -9,7 +9,7 @@ $(document).ready( function() {
 
     // here's some magic to make sure the dates are happening this month.
     var thisMonth = moment().format('YYYY-MM');
-
+    
     var eventArray = [
         { startDate: thisMonth + '-10', endDate: thisMonth + '-14', title: 'Multi-Day Event' },
         { startDate: thisMonth + '-21', endDate: thisMonth + '-23', title: 'Another Multi-Day Event' }
@@ -48,7 +48,7 @@ $(document).ready( function() {
             },
             nextYear: function() {
                 console.log('next year.');
-            },
+            }, 
             previousYear: function() {
                 console.log('previous year.');
             },

@@ -36,6 +36,15 @@ $(function(){
 				if (result.code==200) {
 					alert("今天已经完成签到");
 				}
+				else if(result.code=100){
+					$('.modal-footer').remove();
+					$('#myModal').modal('show');
+					ShowTips('.modal-title','系统提示','.modal-body','打卡成功');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+						window.location.reload();
+					},1000)
+				}
 			}
 		}) 
 	});
@@ -113,7 +122,10 @@ function deleAll(){
 		},
 		success:function(result){
 			if (result.code==100) {
-				alert("删除成功");
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.reload();
+				},1000)
 			}
 		}
 		})  
@@ -338,10 +350,10 @@ function deleAll(){
                		<div class="main" id="main" style="width: 100%; height: 200px; margin-top: 15px;"></div>
                		<script type="text/javascript">
                	
-                 // 基于准备好的dom，初始化echarts实例
+                
                  var myChart = echarts.init(document.getElementById('main'));
 
-                 // 指定图表的配置项和数据
+                
                  var option = {
                 		    tooltip: {
                 		        trigger: 'item',

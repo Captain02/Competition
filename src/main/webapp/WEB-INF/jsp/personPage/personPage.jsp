@@ -262,7 +262,6 @@ String basePath2 = request.getScheme() + "://"
 							</div>
 						</div>
 
-<!-- 						我的任务 -->
 <!-- 						<div class="row"> -->
 <!-- 							<div class="col-md-12"> -->
 <!-- 								<div class="panel"> -->
@@ -367,6 +366,104 @@ String basePath2 = request.getScheme() + "://"
 								</div>
 							</div>
 						</div>
+						
+						<!-- 我的审批 -->
+						<div class="row">
+							<div class="col-md-12">
+								<section class="panel">
+								
+									<!-- 选项卡切换 -->
+									<header class="panel-heading my-approval-tab">
+										<ul class="nav nav-tabs">
+										  <li role="presentation" class="active"><a href="#myholiday" data-toggle="tab">请假</a></li>
+										  <li role="presentation"><a href="#myreimbursement" data-toggle="tab">报销</a></li>
+										  <li role="presentation"><a href="#mything" data-toggle="tab">物品</a></li>
+										</ul>
+									</header>
+									
+									<!-- 选项卡面板 -->
+									<div class="panel-body my-approval-tab-content">
+										<div class="tab-content">
+											<div class="tab-pane fade in active" id="myholiday">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>类型</th>
+															<th>请假日期</th>
+															<th>天数</th>
+															<th>状态</th>
+															<th>结果</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<tr>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											
+											<div class="tab-pane fade" id="myreimbursement">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>类型</th>
+															<th>金额</th>
+															<th>状态</th>
+															<th>报销日期</th>
+															<th>结果</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<tr>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											
+											<div class="tab-pane fade" id=mything>
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>用途</th>
+															<th>物品名称</th>
+															<th>申请时间</th>
+															<th>状态</th>
+															<th>结果</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<tr>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+															<td>1</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									
+								</section>
+							</div>
+						</div>
+						
+						
+						
 						
 						
 						<div class="row">
