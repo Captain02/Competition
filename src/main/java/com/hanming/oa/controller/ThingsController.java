@@ -30,7 +30,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
-import com.hanming.oa.model.Dusty;
 import com.hanming.oa.model.Things;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserThingsByThingsId;
@@ -102,8 +101,11 @@ public class ThingsController {
 	// 我要申请物品
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file,
-			HttpServletRequest request, String processDefinitionKey) {
+	public Msg add(MultipartFile file, HttpServletRequest request, String processDefinitionKey,Things things) {
+			System.out.println(things.getName());
+			System.out.println(things.getPurpose());
+			System.out.println(things.getNumber());
+			System.out.println(file.getOriginalFilename());
 		String enclosure = thingsService.upFile(file,request);
 		/*int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
