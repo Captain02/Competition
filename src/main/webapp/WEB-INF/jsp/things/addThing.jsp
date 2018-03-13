@@ -109,17 +109,9 @@ function addthingsForm() {
             } */
 //         	console.log(result.extend.filename);
 //          console.log(result.extend.enclosure);
-			
-			var purpose = $('input[name="purpose"]').val();
-			var details = $('textarea[name="details"]').val();
-			var selectProcessKey = $('select[name="processDefinitionKey"]').val();
-			
-			alert(purpose + details + selectProcessKey);
         }
     })
 }
-
-
 </script>
 
 </head>
