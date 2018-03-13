@@ -147,12 +147,13 @@
 
                 <div class="row">
                     <div class="jumbotron text-center welcome-text" style="background-color:transparent;">
-                        <h2>欢迎使用企业自动化办公系统！</h2>
+                        <h2>轻轻松松走完流程审核</h2>
                         <br>
                         <br>
                         <br>
-                        <a href="" target="_blank">公司官网</a> ·
-                        <a href="" target="_blank">公司简介</a> ·
+                        <a href="${APP_PATH}/admin/holiday/list" target="_blank">请假</a> ·
+                        <a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask" target="_blank">报销</a> ·
+                        <a href="${APP_PATH}/admin/myThingsTask/myThingsTask" target="_blank">物品</a>
                     </div>
                 </div>
 

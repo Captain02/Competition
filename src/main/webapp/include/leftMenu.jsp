@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${APP_PATH}/admin/holiday/list">
+                    <a href="${APP_PATH}/admin/welcome/weclomeApproval">
                         <span class="glyphicon glyphicon-edit left-list-icon"></span>
                         <span class="menu-text">审批管理</span>
                     </a>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${APP_PATH}/admin/user/list">
+                    <a href="${APP_PATH}/admin/welcome/organization">
                         <span class="glyphicon glyphicon-user left-list-icon"></span>
                         <span class="menu-text">组织管理</span>
                     </a>

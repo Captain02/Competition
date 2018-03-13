@@ -76,7 +76,7 @@
                         </a>
                 </li>
                 <li>
-                    <a href="${APP_PATH}/admin/user/list">
+                    <a href="${APP_PATH}/admin/welcome/organization">
                         <span class="glyphicon glyphicon-user left-list-icon"></span>
                         <span class="menu-text">组织管理</span>
                         </a>
@@ -147,13 +147,15 @@
 
                 <div class="row">
                     <div class="jumbotron text-center welcome-text" style="background-color:transparent;">
-                        <h2>轻轻松松走完流程审核</h2>
+                        <h2>轻轻松松完成组织管理</h2>
                         <br>
                         <br>
                         <br>
-                        <a href="" target="_blank">请假</a> ·
-                        <a href="" target="_blank">报销</a> ·
-                        <a href="" target="_blank">物品</a>
+                        <a href="${APP_PATH}/admin/user/list" target="_blank">员工</a> 
+						<a href="${APP_PATH}/admin/department/list" target="_blank">部门</a>
+						<a href="${APP_PATH}/admin/role/list" target="_blank">职称</a> 
+						<a href="${APP_PATH}/admin/notice/list" target="_blank">公告</a> 
+						<a href="${APP_PATH}/admin/resource/list" target="_blank">权限</a>
                     </div>
                 </div>
 
