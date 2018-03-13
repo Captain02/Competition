@@ -102,20 +102,16 @@ public class ThingsController {
 	// 我要申请物品
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, @RequestParam("persons") String persons, @RequestBody List<Things> things,
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons,Things things,
 			HttpServletRequest request, String processDefinitionKey) {
-		
-		for (Things things2 : things) {
-			System.out.println(things2.getName());
-		}
-		/*int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
+
+		int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
 		if (i == 1) {
 			return Msg.success();
 		} else {
 			return Msg.fail();
-		}*/
-		return Msg.fail();
+		}
 	}
 
 	// 查询当前流程图
