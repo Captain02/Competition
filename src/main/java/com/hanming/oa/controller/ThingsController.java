@@ -102,13 +102,11 @@ public class ThingsController {
 	// 我要申请物品
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, @RequestParam("persons") String persons,@RequestBody List<Things> things,Things things3,
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons, @RequestBody List<Things> things,
 			HttpServletRequest request, String processDefinitionKey) {
-		System.out.println(things3);
-		System.out.println(persons);
-		System.out.println(file.getOriginalFilename());
+		
 		for (Things things2 : things) {
-			System.out.println(things2);
+			System.out.println(things2.getName());
 		}
 		/*int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
