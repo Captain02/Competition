@@ -84,21 +84,6 @@ $(function () {
 function addthingsForm() {
     var persons = "";
     var things = $("#thingsForm").serializeJson();
-    
-    var namesArray = new Array();
-    var numberArray = new Array();
-    
-    $('input[name="name"]').each(function(){
-    	namesArray.push($(this).val());
-    })
-    $('input[name="number"]').each(function(){
-    	numberArray.push($(this).val());
-    })
-    
-    var nameStr = namesArray.join(',');
-    var numberStr = numberArray.join(',');
-    
-    
     alert(things);
     $.each($(".addPerson"), function () {
         persons += $(this).text() + "-";
@@ -107,17 +92,32 @@ function addthingsForm() {
     alert(formData);
     formData.append('persons', persons);
     //发送ajax请求
-//     $.ajax({
-//         url: "${APP_PATH}/admin/things/add",
-//         type: "POST",
-//         data:formData,
-//         contentType: false,
-//         processData: false,
-//         success: function (result) {
-	
+    $.ajax({
+        url: "${APP_PATH}/admin/things/add",
+        type: "POST",
+        data:formData,
+        contentType: false,
+        processData: false,
+        success: function (result) {
 			
-//         }
-//     })
+			/* var purpose = $('input[name="purpose"]').val();
+			var details = $('textarea[name="details"]').val();
+			var selectProcessKey = $('select[name="processDefinitionKey"]').val(); */
+			
+			/* alert(purpose + details + selectProcessKey);
+			
+				$.ajax({
+					url:'',
+					data:$("#thingsForm").serializeJson(),
+					contentType : 'application/json;charset=utf-8', //设置请求头信息
+			        dataType:"json",
+			        type: "POST",
+			        success: function (result) {
+			        	
+			        }
+				}) */
+        }
+    })
 }
 
 
