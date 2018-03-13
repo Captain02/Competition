@@ -98,24 +98,23 @@ function addthingsForm() {
         data:formData,
         contentType: false,
         processData: false,
+        //contentType : 'application/json;charset=utf-8', //设置请求头信息
+        //dataType:"json",
         success: function (result) {
+            /* if (result.code == 100) {
+                $('#myModal').modal('show');
+                ShowTips('.modal-title', '操作结果', '.modal-body', '<b style = "color:#5cb85c;">' +
+                    '已成功提交报销申请' + '</b>');
+                ShowEle('.yes', 'show');
+            } */
+//         	console.log(result.extend.filename);
+//          console.log(result.extend.enclosure);
 			
-			/* var purpose = $('input[name="purpose"]').val();
+			var purpose = $('input[name="purpose"]').val();
 			var details = $('textarea[name="details"]').val();
-			var selectProcessKey = $('select[name="processDefinitionKey"]').val(); */
+			var selectProcessKey = $('select[name="processDefinitionKey"]').val();
 			
-			/* alert(purpose + details + selectProcessKey);
-			
-				$.ajax({
-					url:'',
-					data:$("#thingsForm").serializeJson(),
-					contentType : 'application/json;charset=utf-8', //设置请求头信息
-			        dataType:"json",
-			        type: "POST",
-			        success: function (result) {
-			        	
-			        }
-				}) */
+			alert(purpose + details + selectProcessKey);
         }
     })
 }

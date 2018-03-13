@@ -172,7 +172,7 @@ public class ThingsService {
 	}
 
 	public String upFile(MultipartFile file, HttpServletRequest request) {
-		if (file != null && !("".equals(file.getOriginalFilename()))) {
+		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
 			String path = request.getSession().getServletContext().getRealPath("ExaminationFile");
 			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
 			
