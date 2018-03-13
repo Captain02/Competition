@@ -63,7 +63,12 @@ function replies(ele) {
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
 
-	repliescontent = $(ele).siblings('div.editor-container-area').html();
+	console.log(repliesId);
+	console.log(byRepliesUserId);
+	console.log(repliescontent);
+	
+	repliescontent = $(ele).siblings('input.editor-container-area').val();
+	
 	$.ajax({
 		url: "${APP_PATH}/admin/KnowledgeSharing/addReplies",
 		data: {
@@ -264,14 +269,7 @@ function replies(ele) {
 												<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表" onclick="replies (this);" />
 											</div>
 											
-											<script type="text/javascript">
-											//初始化emojiPicker配置
-											window.emojiPicker = new EmojiPicker({
-												  emojiable_selector: '[data-emojiable=true]',
-												  assetsPath: '${APP_PATH}/static/emoji-picker/lib/img/',
-												  popupButtonClasses: 'fa fa-smile-o'
-												}).discover();
-											</script>
+											
 	
 										</div>
 									</div>

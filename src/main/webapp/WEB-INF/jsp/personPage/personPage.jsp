@@ -352,7 +352,7 @@ String basePath2 = request.getScheme() + "://"
 										  <li role="presentation" class="approval-tab active" data-more-href="${APP_PATH}/admin/myHolidayTask/myHolidayTask"><a href="#myholiday" data-toggle="tab">请假</a></li>
 										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask"><a href="#myreimbursement" data-toggle="tab">报销</a></li>
 										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myThingsTask/myThingsTask"><a href="#mything" data-toggle="tab">物品</a></li>
-										  <li class="pull-right my-approval-more"><a style="color: #65CEA7;">更多</a></li>
+										  <li class="pull-right my-approval-more"><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask" style="color: #65CEA7;">更多</a></li>
 										</ul>
 									</header>
 									

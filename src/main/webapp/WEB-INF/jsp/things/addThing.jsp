@@ -125,23 +125,6 @@ function addthingsForm() {
                     <span class="glyphicon glyphicon-th-list"></span>
                 </a>
 
-                <form action="" class="serach-form">
-
-                    <select class="form-control">
-                        <option>用户状态</option>
-                        <option>占个位置</option>
-                        <option>占个位置</option>
-                        <option>占个位置</option>
-                        <option>占个位置</option>
-                    </select>
-                    <input type="text" placeholder="请输入用户名、姓名" value="" class="form-control">
-
-                    <button type="button" class="btn btn-primary">搜索</button>
-
-
-                    <div class="clearfix"></div>
-                </form>
-
 
                 <div class="content-head-right"></div>
 
@@ -181,7 +164,7 @@ function addthingsForm() {
                                             </div>
                                             <!-- 此处以后可以动态的添加明细 -->
                                             <div class="js-expenseBox">
-                                                <div class="alert alert-info fade in">领用明细(1)</div>
+                                                <div class="alert alert-info fade in">领用明细</div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 col-sm-2 control-label">
                                                         <span>*</span>物品名称
@@ -202,15 +185,6 @@ function addthingsForm() {
                                                
                                             </div>
                                             
-                                            <div class="form-group">
-												<label for="" class="col-md-2"></label>
-												<div class="col-md-10 text-center">
-													<a class="add-details">
-														<i class="glyphicon glyphicon-plus-sign" style="font-size: 15px;"></i>
-														添加明细
-													</a>
-												</div>
-											</div>
 											
                                               <div class="form-group">
                                                     <label class="col-sm-2 col-sm-2 control-label">
@@ -316,31 +290,6 @@ function addthingsForm() {
             </div>
         </div>
     </div>
-    
-    <script type="text/javascript">
-		$('.add-details').click(function(){
-			var detailsLength = $('.js-expenseBox').length;
-			var html =	$(
-							"<div class='js-expenseBox'>"+
-				          	"<div class='alert alert-info fade in'>领用明细("+(detailsLength+1)+")</div>"+
-							"<div class='form-group'>"+
-							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>物品名称</label>"+
-							"<div class='col-sm-10'>"+
-							"<input name='name' class='form-control' placeholder='请输入物品名称' type='text'>"+
-							"</div>"+
-							"</div>"+
-							"<div class='form-group'>"+
-							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>领用数量</label>"+
-							"<div class='col-sm-10'>"+
-							"<input name='number' class='form-control' placeholder='请输入物品数量' type='number'>"+
-							"</div>"+
-							"</div>"+
-							"</div>"+
-							"</div>"
-						);
-			$('.js-expenseBox:eq('+(detailsLength-1)+')').after(html);
-		})
-	</script>
     
 </body>
 

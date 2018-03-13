@@ -115,7 +115,7 @@ function addReimbursement() {
 											id="addReimbursement" novalidate="novalidate">
 
 											<div class="js-expenseBox">
-												<div class="alert alert-info fade in">报销明细(1)</div>
+												<div class="alert alert-info fade in">报销明细</div>
 												<div class="form-group">
 													<label class="col-sm-2 col-sm-2 control-label"> <span>*</span>报销金额
 													</label>
@@ -142,16 +142,6 @@ function addReimbursement() {
 												</div>
 											</div>
 											
-											<div class="form-group">
-												<label for="" class="col-md-2"></label>
-												<div class="col-md-10 text-center">
-													<a class="add-details">
-														<i class="glyphicon glyphicon-plus-sign" style="font-size: 15px;"></i>
-														添加明细
-													</a>
-												</div>
-											</div>
-
 
 											<div class="form-group">
 												<label class="col-sm-2 col-sm-2 control-label"
@@ -255,36 +245,6 @@ function addReimbursement() {
 			</div>
 		</div>
 	</div>
-	
-	<script type="text/javascript">
-		$('.add-details').click(function(){
-			var detailsLength = $('.js-expenseBox').length;
-			var html =	$(
-							"<div class='js-expenseBox'>"+
-				          	"<div class='alert alert-info fade in'>报销明细("+(detailsLength+1)+")</div>"+
-							"<div class='form-group'>"+
-							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>报销金额</label>"+
-							"<div class='col-sm-10'>"+
-							"<input name='money' class='form-control' placeholder='请输入金额' type='number'>"+
-							"</div>"+
-							"</div>"+
-							"<div class='form-group'>"+
-							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>报销类型</label>"+
-							"<div class='col-sm-10'>"+
-							"<input name='type' class='form-control' placeholder='请输入报销类型，如采购经费、活动经费' type='text'>"+
-							"</div>"+
-							"</div>"+
-							"<div class='form-group'>"+
-							"<label class='col-sm-2 col-sm-2 control-label'> <span>*</span>报销明细</label>"+
-							"<div class='col-sm-10'>"+
-							"<textarea name='detailed' placeholder='报销明细' style='height: 94px;' class='form-control'></textarea>"+
-							"</div>"+
-							"</div>"+
-							"</div>"
-						);
-			$('.js-expenseBox:eq('+(detailsLength-1)+')').after(html);
-		})
-	</script>
 	
 	
 </body>
