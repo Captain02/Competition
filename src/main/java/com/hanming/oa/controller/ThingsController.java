@@ -2,13 +2,7 @@ package com.hanming.oa.controller;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,15 +69,15 @@ public class ThingsController {
 			List<Things> list = null;
 			list = thingsService.listLikeTypeAndApproved(state, name);
 			pageInfo = new PageInfo<Things>(list, 5);
-
+			
 			model.addAttribute("pageInfo", pageInfo);
-		} else {
+		}else {
 			PageInfo<Things> pageInfo = null;
 			PageHelper.startPage(pn, 8);
 			List<Things> list = null;
 			list = thingsService.listLikeStateType(state, name);
 			pageInfo = new PageInfo<Things>(list, 5);
-
+			
 			model.addAttribute("pageInfo", pageInfo);
 		}
 
@@ -107,33 +101,19 @@ public class ThingsController {
 	// 我要申请物品
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, HttpServletRequest request, String processDefinitionKey, Things things,
-			@RequestParam("nameStr") String nameStr, @RequestParam("numberStr") String numberStr) {
-		System.out.println(things);
-		List<Things> thingsList = new ArrayList<Things>();
-		String[] nameStrArry = nameStr.split(",");
-		String[] numberStrArry = numberStr.split(",");
-		List<String> nameList = Arrays.asList(nameStrArry);
-		List<String> numberLisr = Arrays.asList(numberStr);
-		List<Integer> list = numberLisr.stream()
-					.map((x) -> Integer.parseInt(x))
-					.collect(Collectors.toList());
-		for (Integer integer : list) {
-			Things things2 = new Things();
-			things2.setPurpose(things.getPurpose());
-			things2.setDetails(things.getDetails());
-		}
-		System.out.println(things.getPurpose());
-		System.out.println(nameStr);
-		System.out.println(numberStr);
-		System.out.println(file.getOriginalFilename());
-		String enclosure = thingsService.upFile(file, request);
-		/*
-		 * int i = thingsService.addThings(persons, file, things, request,
-		 * processDefinitionKey);
-		 * 
-		 * if (i == 1) { return Msg.success(); } else { return Msg.fail(); }
-		 */
+	public Msg add(MultipartFile file, HttpServletRequest request, String processDefinitionKey,Things things) {
+			System.out.println(things.getName());
+			System.out.println(things.getPurpose());
+			System.out.println(things.getNumber());
+			System.out.println(file.getOriginalFilename());
+		String enclosure = thingsService.upFile(file,request);
+		/*int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
+
+		if (i == 1) {
+			return Msg.success();
+		} else {
+			return Msg.fail();
+		}*/
 		return Msg.success().add("filename", file.getOriginalFilename()).add("enclosure", enclosure);
 	}
 

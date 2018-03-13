@@ -77,7 +77,7 @@ public class HolidayService {
 
 		// 添加相关数据
 		holiday.setTest("审核中");
-		if (file != null) {
+		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
 			String path = request.getSession().getServletContext().getRealPath("ExaminationFile");
 			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
 			

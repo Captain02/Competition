@@ -104,21 +104,20 @@ function addthingsForm() {
         persons += $(this).text() + "-";
     })
     var formData = new FormData($("#thingsForm")[0]);
+    alert(formData);
     formData.append('persons', persons);
-    formData.append('nameStr', nameStr);
-    formData.append('numberStr', numberStr);
     //发送ajax请求
-     $.ajax({
-         url: "${APP_PATH}/admin/things/add",
-         type: "POST",
-         data:formData,
-         contentType: false,
-         processData: false,
-         success: function (result) {
+//     $.ajax({
+//         url: "${APP_PATH}/admin/things/add",
+//         type: "POST",
+//         data:formData,
+//         contentType: false,
+//         processData: false,
+//         success: function (result) {
 	
 			
-         }
-     })
+//         }
+//     })
 }
 
 
@@ -246,6 +245,9 @@ function addthingsForm() {
                                                     <input id="file" type="file" name="file">
                                                 </div>
                                                 
+                                                <input type="hidden" name="filename" />
+                                                <input type="hidden" name="enclosure" />
+                                                 
                                             </div>
                                             
                                             <div class="form-group ">
