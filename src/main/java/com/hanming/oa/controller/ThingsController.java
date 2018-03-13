@@ -102,9 +102,14 @@ public class ThingsController {
 	// 我要申请物品
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file,
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons,@RequestBody List<Things> things,Things things3,
 			HttpServletRequest request, String processDefinitionKey) {
-		String enclosure = thingsService.upFile(file,request);
+		System.out.println(things3);
+		System.out.println(persons);
+		System.out.println(file.getOriginalFilename());
+		for (Things things2 : things) {
+			System.out.println(things2);
+		}
 		/*int i = thingsService.addThings(persons, file, things, request, processDefinitionKey);
 
 		if (i == 1) {
@@ -112,7 +117,7 @@ public class ThingsController {
 		} else {
 			return Msg.fail();
 		}*/
-		return Msg.success().add("filename", file.getOriginalFilename()).add("enclosure", enclosure);
+		return Msg.fail();
 	}
 
 	// 查询当前流程图

@@ -171,25 +171,5 @@ public class ThingsService {
 		return list;
 	}
 
-	public String upFile(MultipartFile file, HttpServletRequest request) {
-		if (file != null || file.getOriginalFilename() != null || !("".equals(file.getOriginalFilename()))) {
-			String path = request.getSession().getServletContext().getRealPath("ExaminationFile");
-			String fileName = new Date().toString().replace(":", "-") + file.getOriginalFilename();
-			
-			File dir = new File(path, fileName);
-			if (!dir.exists()) {
-				dir.mkdirs();
-			}
-
-			try {
-				file.transferTo(dir);
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-			}
-			return fileName;
-		}
-		return null;
-	}
-
 
 }

@@ -24,11 +24,11 @@
 
 <script type="text/javascript">
 (function($){
-	    $.fn.serializeJson = function(){
-	        var jsonData1 = {};
-	        var serializeArray = this.serializeArray();
-	        // 先转换成{"id": ["12","14"], "name": ["aaa","bbb"], "pwd":["pwd1","pwd2"]}这种形式
-	        $(serializeArray).each(function () {
+    $.fn.serializeJson = function(){
+        var jsonData1 = {};
+        var serializeArray = this.serializeArray();
+        // 先转换成{"id": ["12","14"], "name": ["aaa","bbb"], "pwd":["pwd1","pwd2"]}这种形式
+        $(serializeArray).each(function () {
             if (jsonData1[this.name]) {
                 if ($.isArray(jsonData1[this.name])) {
                     jsonData1[this.name].push(this.value);
@@ -101,13 +101,12 @@ function addthingsForm() {
         //contentType : 'application/json;charset=utf-8', //设置请求头信息
         //dataType:"json",
         success: function (result) {
-            /* if (result.code == 100) {
+            if (result.code == 100) {
                 $('#myModal').modal('show');
                 ShowTips('.modal-title', '操作结果', '.modal-body', '<b style = "color:#5cb85c;">' +
                     '已成功提交报销申请' + '</b>');
                 ShowEle('.yes', 'show');
-            } */
-            
+            }
         }
     })
 }
