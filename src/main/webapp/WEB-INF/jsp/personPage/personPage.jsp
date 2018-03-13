@@ -262,6 +262,32 @@ String basePath2 = request.getScheme() + "://"
 							</div>
 						</div>
 
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 								<div class="panel"> -->
+<!-- 									<div class="panel-body"> -->
+<!-- 										<div class="person-desk"> -->
+<!-- 											<h1> -->
+<!-- 												我的审批 -->
+<!-- 											</h1> -->
+<!-- 											<table -->
+<!-- 												class="table table-bordered table-striped table-condensed cf text-center"  style="margin-bottom: 0px;" > -->
+<!-- 												<thead class="cf"> -->
+<!-- 													<tr> -->
+<%-- 														<td><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask">请假</a></td> --%>
+<%-- 														<td><a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask">报销</a></td> --%>
+<%-- 														<td><a href="${APP_PATH}/admin/myThingsTask/myThingsTask">物品</a></td> --%>
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<!-- 												</tbody> -->
+<!-- 											</table> -->
+	
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
 						<!-- 我的任务 -->
 						<div class="row">
@@ -349,10 +375,9 @@ String basePath2 = request.getScheme() + "://"
 									<!-- 选项卡切换 -->
 									<header class="panel-heading my-approval-tab">
 										<ul class="nav nav-tabs">
-										  <li role="presentation" class="approval-tab active" data-more-href="${APP_PATH}/admin/myHolidayTask/myHolidayTask"><a href="#myholiday" data-toggle="tab">请假</a></li>
-										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask"><a href="#myreimbursement" data-toggle="tab">报销</a></li>
-										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myThingsTask/myThingsTask"><a href="#mything" data-toggle="tab">物品</a></li>
-										  <li class="pull-right my-approval-more"><a style="color: #65CEA7;">更多</a></li>
+										  <li role="presentation" class="active"><a href="#myholiday" data-toggle="tab">请假</a></li>
+										  <li role="presentation"><a href="#myreimbursement" data-toggle="tab">报销</a></li>
+										  <li role="presentation"><a href="#mything" data-toggle="tab">物品</a></li>
 										</ul>
 									</header>
 									
@@ -373,7 +398,7 @@ String basePath2 = request.getScheme() + "://"
 													<tbody>
 												<c:forEach items="${holidays}" var="holiday">
 													<tr>
-														<td>${holiday.type}</td>
+														<td >${holiday.type}</td>
 														<td>${holiday.date}</td>
 														<td>${holiday.holidaydays}</td>
 														<td>${holiday.test}</td>
@@ -687,20 +712,6 @@ $('.message-history').click(function(){
 <script src="${APP_PATH}/static/calendar/js/evnt.calendar.init.js"></script>
 <script src="${APP_PATH}/static/calendar/js/moment-2.2.1.js"></script>
 <script src="${APP_PATH}/static/calendar/js/underscore-min.js"></script>
-
-<script type="text/javascript">
-	$(function(){
-		var myApprovalTab = $('.my-approval-tab ul li.approval-tab');
-		var myApprovalMore = $('.my-approval-tab ul li.my-approval-more a');
-		
-		myApprovalTab.each(function(){
-			$(this).click(function(){
-				myApprovalMore.attr('href',$(this).attr('data-more-href'));
-			})
-		})
-	})
-</script>
-
 </body>
 
 </html>
