@@ -374,7 +374,6 @@ function addMessageToMessageList(data,thisClass){
 	$('p.input-chat-text').focus();
 }//end
 
-
 //点击消息列表中的消息，弹出会话框，并把消息添加到会话框中
 function addMessage(data,ele){
 	data['fromName'] = ele.find('p.charts-friends-info-abbr').html();

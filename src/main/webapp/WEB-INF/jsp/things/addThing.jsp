@@ -15,10 +15,6 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 
-<!-- Date -->
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
-
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 
 <!-- 添加审批人 -->
@@ -202,7 +198,7 @@ function addthingsForm() {
                                             </div>
                                             <!-- 此处以后可以动态的添加明细 -->
                                             <div class="js-expenseBox">
-                                                <div class="alert alert-info fade in">领用明细</div>
+                                                <div class="alert alert-info fade in">领用明细(1)</div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 col-sm-2 control-label">
                                                         <span>*</span>物品名称
@@ -216,10 +212,24 @@ function addthingsForm() {
                                                         <span>*</span>领用数量
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <input name="number" class="form-control" placeholder="请输入报销类型，如采购经费、活动经费" type="number">
+                                                        <input name="number" class="form-control" placeholder="请输入物品数量" type="number">
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                              
+                                               
+                                            </div>
+                                            
+                                            <div class="form-group">
+												<label for="" class="col-md-2"></label>
+												<div class="col-md-10 text-center">
+													<a class="add-details">
+														<i class="glyphicon glyphicon-plus-sign" style="font-size: 15px;"></i>
+														添加明细
+													</a>
+												</div>
+											</div>
+											
+                                              <div class="form-group">
                                                     <label class="col-sm-2 col-sm-2 control-label">
                                                         <span>*</span>领用详情
                                                     </label>
@@ -227,9 +237,8 @@ function addthingsForm() {
                                                         <textarea name="details" placeholder="领用详情" style="height: 94px;" class="form-control"></textarea>
                                                     </div>
                                                 </div>
-                                               
-                                            </div>
-
+												
+											
 
                                             <div class="form-group">
                                                 <label class="col-sm-2 col-sm-2 control-label" style="padding-top: 2px;">上传附件</label>
@@ -287,13 +296,6 @@ function addthingsForm() {
 
             </div>
         </div>
-        <script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
-        <script type="text/javascript">
-            $('#mydatepicker2').dcalendarpicker({
-                format: 'yyyy-mm-dd'
-            });
-            $('#mycalendar').dcalendar();
-        </script>
     </section>
     <!-- 模态框 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -319,11 +321,6 @@ function addthingsForm() {
 							<li><a>${user.username}</a>:${user.name }:${user.role.name}
 							</li>
 						</c:forEach>
-
-
-
-
-
                     </ul>
                 </div>
 
@@ -337,7 +334,6 @@ function addthingsForm() {
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     
     <script type="text/javascript">
 		$('.add-details').click(function(){
@@ -364,8 +360,6 @@ function addthingsForm() {
 		})
 	</script>
     
-=======
->>>>>>> parent of 25b82ea... 批量添加明细
 </body>
 
 </html>
