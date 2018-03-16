@@ -55,22 +55,23 @@ $(function(){
 	})
 })
 
-$('.yes').click(function(){
-		var topicId = $(this).attr('data-topicId');
-		var title = $(this).attr('data-editor-title');
-		var summary = $(this).attr('data-editor-summary');
-		$.ajax({
-			url:"${APP_PATH}/admin/image/update",
-			data:{
-				'topicId':topicId,
-				'title':title,
-				'summary':summary
-			},
-			type:"POST",
-			success:function(result){
-				alert('success');
-			}
-		});
+$('.inputto').click(function(){
+	     alert("aa");
+// 		 var topicId = $(this).attr('data-topicId');
+// 		var title = $(this).attr('data-editor-title');
+// 		var summary = $(this).attr('data-editor-summary');
+// 		$.ajax({
+// 			url:"${APP_PATH}/admin/image/update",
+// 			data:{
+// 				'topicId':topicId,
+// 				'title':title,
+// 				'summary':summary
+// 			},
+// 			type:"POST",
+// 			success:function(result){
+// 				alert('success');
+// 			}
+// 		});
 	})
 </script>
 <body class="bg-common stickey-menu">
@@ -159,7 +160,7 @@ $('.yes').click(function(){
       <div class="form-group"><label for="message-text" class="control-label">说明:</label><textarea class="form-control" name="summary">我想知道相片背后的故事</textarea></div>
     </div>
     <div class="modal-footer">
-     	<button type="button" class="btn btn-success yes">提交</button>
+     	<button type="button" class="btn btn-success inputto">提交</button>
         <button type="button" class="btn btn-default no" data-dismiss="modal">取消</button>
      </div>
    </div>

@@ -73,6 +73,7 @@ public class ImageController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Msg update(@RequestParam("topicId") Integer topicId, @RequestParam("title") String title,
 			@RequestParam("summary") String sketch) {
+		System.out.println(topicId+title+sketch);
 		BBSTopic bbsTopic = new BBSTopic(topicId, title, sketch, null, null, null, null);
 		bbsTopicService.update(bbsTopic);
 		
