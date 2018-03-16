@@ -5,13 +5,16 @@
 <html lang="en">
 
 <head>
+	
 	<%
 		pageContext.setAttribute("APP_PATH", request.getContextPath());
 	%>
+	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>日程管理</title>
+    <link rel="stylesheet" href="${APP_PATH}/static/fullcalendar/fullcalendar.min.css" />
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
 	<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 	
@@ -19,7 +22,7 @@
 	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	
-    <link rel="stylesheet" href="${APP_PATH}/static/fullcalendar/fullcalendar.min.css" />
+	
     <script src="${APP_PATH}/static/fullcalendar/lib/moment.min.js"></script>
     <script src="${APP_PATH}/static/fullcalendar/fullcalendar.min.js"></script>
     
@@ -29,7 +32,6 @@
 		data:'',
 		type:"GET",
 		success:function(result){
-			console.log(result);
 			$.each(result.extend.schedules,function (index, term) {
 				console.log(term);
                 $("#calendar").fullCalendar('renderEvent', term, true);
@@ -57,8 +59,8 @@
 	
 	function updateDay(days,start,end,id){
 		
-        		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
-        		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
+ 		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
+ 		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
 		$.ajax({
         	url:"${APP_PATH}/admin/schedule/updateDay",
         	data:{
@@ -85,11 +87,30 @@
             <jsp:include page="iniLeftMenu.jsp"></jsp:include>
 
             <div class="main-content">
+             <!-- 页面模版，每页主体部分头部按需更改 -->
+            <div class="content-head content-head-section">
+
+                <a href="" class="toggle-btn">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                </a>
+
+
+                <div class="content-head-right"></div>
+
+                <div class="clearfix"></div>
+
+            </div>
                 <!-- 页面模版，按需更改 -->
                 <div class="wrapper">
+                <div class="om-header">
 
+                        <div class="om-header-left">
+                            <h3>
+                                <span class="om-title">日程管理</span>
+                            </h3>
+                        </div>
 
-                   
+                        
 					  <div class="row">
 					  	<div class="col-md-3">
 					  		<div class="panel">
@@ -125,9 +146,9 @@
 								<input type="hidden"  name="id"/>
 								
 								<div class="form-group schedule-control">
-									<button class="btn btn-success btn-save" data-isInsert="1" type="button" onclick="save(this);">提交</button>
-									<button class="btn btn-warning btn-editor" data-isInsert="0" type="button" onclick="save(this);">修改</button>
-									<button class="btn btn-danger btn-delete" data-isInsert="-1" type="button" onclick="save(this);">删除</button>
+									<button class="btn btn-success btn-save btn-sm" data-isInsert="1" type="button" onclick="save(this);">提交</button>
+									<button class="btn btn-warning btn-editor btn-sm" data-isInsert="0" type="button" onclick="save(this);">修改</button>
+									<button class="btn btn-danger btn-delete btn-sm" data-isInsert="-1" type="button" onclick="save(this);">删除</button>
 								</div>
 								
 					  	</form>
@@ -151,6 +172,7 @@
 
                     </div>
                 </div>
+               </div>
 
         </section>
         
@@ -177,9 +199,9 @@
 				$('input[name="id"]').val('');
 				$('#calendar').fullCalendar({
 					header: {
-						left: 'month,agendaWeek,agendaDay',
-						center: 'title',
-						right: 'today, prev, next'
+						left: 'prev,next today',
+			            center: 'title',
+			            right: 'month,agendaWeek,agendaDay,listMonth'
 					},
 					monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
 					monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
@@ -189,7 +211,10 @@
 					    today: '今天',
 					    month: '月',
 					    week: '周',
-					    day: '日'
+					    day: '日',
+					    prev:'上一月',
+					    next:'下一月',
+					    list:'月总览'
 					},
 					editable : true,
 					dragOpacity: 0.5,

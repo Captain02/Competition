@@ -40,6 +40,18 @@
                         <span class="menu-text">审批管理</span>
                     </a>
                 </li>
+                 <li>
+                    <a href="${APP_PATH}/admin/welcome/organization">
+                        <span class="glyphicon glyphicon-user left-list-icon"></span>
+                        <span class="menu-text">组织管理</span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="${APP_PATH}/admin/deploy/list">
+                        <span class="glyphicon glyphicon-retweet left-list-icon"></span>
+                        <span class="menu-text">流程管理</span>
+                    </a>
+                </li>
                 <li>
                     <a href="${APP_PATH}/admin/KnowledgeSharing/list">
                         <span class="glyphicon glyphicon-duplicate left-list-icon"></span>
@@ -52,18 +64,8 @@
                         <span class="menu-text">员工相册</span>
                     </a>
                 </li>
-                <li>
-                    <a href="${APP_PATH}/admin/welcome/organization">
-                        <span class="glyphicon glyphicon-user left-list-icon"></span>
-                        <span class="menu-text">组织管理</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="${APP_PATH}/admin/deploy/list">
-                        <span class="glyphicon glyphicon-retweet left-list-icon"></span>
-                        <span class="menu-text">流程管理</span>
-                    </a>
-                </li>
+               
+               
 
             </ul>
 

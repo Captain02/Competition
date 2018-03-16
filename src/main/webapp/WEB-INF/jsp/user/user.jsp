@@ -164,6 +164,12 @@ String basePath2 = request.getScheme() + "://"
 
                     <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
                    
+                   	<ul class="breadcrumb pull-left">
+				        <li> <a href="">自动化办公系统</a> </li>
+				        <li> <a href="">组织管理</a> </li>
+				        <li class="active">员工</li>
+      				</ul>
+                   
                     <div class="om-header-right">
                         <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/user/add'">
                             <i>+</i>添加新员工</button>

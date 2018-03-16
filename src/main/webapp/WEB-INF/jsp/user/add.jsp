@@ -15,7 +15,7 @@
 	      pageContext.setAttribute("APP_PATH", request.getContextPath());
     %>
 
-<jsp:include page="iniCssHref.jsp"></jsp:include>
+	<jsp:include page="iniCssHref.jsp"></jsp:include>
 
 
 <!-- 用于前端正则校验和后端Ajax校验的脚本 -->
@@ -346,8 +346,8 @@ function update() {
 
                                         </div>
 
-<!-- 联系方式填写区 -->
-<div class="form-group">
+									<!-- 联系方式填写区 -->
+									<div class="form-group">
 
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">

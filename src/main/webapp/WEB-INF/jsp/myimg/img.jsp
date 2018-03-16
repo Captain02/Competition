@@ -24,7 +24,15 @@ function dele(ele) {
 		},
 		type:"POST",
 		success:function(result){
-			
+			setTimeout(function(){
+				$('.modal-footer').remove();
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','操作结果','.modal-body','删除成功');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.reload();
+				},1000)
+			})
 		}
 	})
 	
@@ -45,7 +53,9 @@ $(function(){
 	$('.modal-body').find('textarea[name="summary"]').blur(function(){
 		$('.modal-footer').find('button.yes').attr('data-editor-summary',$(this).val());
 	})
-	$('.yes').click(function(){
+})
+
+$('.yes').click(function(){
 		var topicId = $(this).attr('data-topicId');
 		var title = $(this).attr('data-editor-title');
 		var summary = $(this).attr('data-editor-summary');
@@ -58,11 +68,10 @@ $(function(){
 			},
 			type:"POST",
 			success:function(result){
-				
+				alert('success');
 			}
 		});
 	})
-})
 </script>
 <body class="bg-common stickey-menu">
 	<section>

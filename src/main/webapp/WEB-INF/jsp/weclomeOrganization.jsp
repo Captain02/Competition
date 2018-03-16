@@ -151,11 +151,11 @@
                         <br>
                         <br>
                         <br>
-                        <a href="${APP_PATH}/admin/user/list" target="_blank">员工</a> 
-						<a href="${APP_PATH}/admin/department/list" target="_blank">部门</a>
-						<a href="${APP_PATH}/admin/role/list" target="_blank">职称</a> 
-						<a href="${APP_PATH}/admin/notice/list" target="_blank">公告</a> 
-						<a href="${APP_PATH}/admin/resource/list" target="_blank">权限</a>
+                        <a href="${APP_PATH}/admin/user/list">员工</a> 
+						<a href="${APP_PATH}/admin/department/list">部门</a>
+						<a href="${APP_PATH}/admin/role/list">职称</a> 
+						<a href="${APP_PATH}/admin/notice/list">公告</a> 
+						<a href="${APP_PATH}/admin/resource/list">权限</a>
                     </div>
                 </div>
 
