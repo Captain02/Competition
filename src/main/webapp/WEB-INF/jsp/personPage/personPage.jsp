@@ -220,126 +220,102 @@ String basePath2 = request.getScheme() + "://"
 
 					<!-- 右侧 -->
 					<div class="col-md-8">
-
+					
 						<!-- 我的项目 -->
 						<div class="row">
 							<div class="col-md-12">
-								<div class="panel">
-									<div class="panel-body">
-										<div class="person-desk">
-											<h1>
-												项目 <a href="${APP_PATH}/admin/project/list" style="font-size: 16px; color: #65CEA7;"
-													class="pull-right">更多</a>
-											</h1>
-											<table
-												class="table table-bordered table-striped table-condensed cf">
-												<thead class="cf">
+								<section class="panel">
+								
+									<!-- 选项卡切换 -->
+									<header class="panel-heading my-approval-tab">
+										<ul class="nav nav-tabs">
+										  <li role="presentation" class="approval-tab active" data-more-href="${APP_PATH}/admin/myHolidayTask/myHolidayTask"><a href="#myDusty" data-toggle="tab">任务</a></li>
+										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask"><a href="#myBug" data-toggle="tab">Bug</a></li>
+										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myThingsTask/myThingsTask"><a href="#myProject" data-toggle="tab">项目</a></li>
+										  <li class="pull-right my-approval-more"><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask" style="color: #65CEA7;">更多</a></li>
+										</ul>
+									</header>
+									
+									<!-- 审批选项卡面板 -->
+									<div class="panel-body my-approval-tab-content">
+										<div class="tab-content">
+											<div class="tab-pane fade in active" id="myDusty">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>级别</th>
+															<th>名称</th>
+															<th>结束日期</th>
+															<th>状态</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+												<c:forEach items="${holidays}" var="holiday">
 													<tr>
-														<th>项目名称</th>
-														<th>结束日期</th>
-														<th>状态</th>
-														<th>项目负责人</th>
-													</tr>
-												</thead>
-												<tbody>
-												<c:forEach items="${ProjectDisplay}" var="projectDisplay">
-													<tr>
-														<td class="project-name">
-															<a href="">${projectDisplay.projectName}</a>
-														</td>
-														<td>${projectDisplay.endDate}</td>
-														<td>${projectDisplay.state}</td>
-														<td class="project-name">
-															<a href="">${projectDisplay.projectResponsiblePeople}</a>
-														</td>
+														<td>${holiday.type}</td>
+														<td>${holiday.date}</td>
+														<td>${holiday.holidaydays}</td>
+														<td>${holiday.test}</td>
 													</tr>
 												</c:forEach>
-												</tbody>
-											</table>
+													</tbody>
+												</table>
+											</div>
+											
+											<div class="tab-pane fade" id="myBug">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>Bug标题</th>
+															<th>创建日期</th>
+															<th>状态</th>
+															<th>创建人</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<c:forEach items="${listReimbursement}" var="Reimbursement">
+															<tr>
+																<td>${Reimbursement.type}</td>
+																<td>${Reimbursement.money}</td>
+																<td>${Reimbursement.test}</td>
+																<td>${Reimbursement.date}</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+											
+											<div class="tab-pane fade" id=myProject>
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>项目名称</th>
+															<th>结束日期</th>
+															<th>状态</th>
+															<th>负责人</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<c:forEach items="${listTings}" var="Tings">
+													<tr>
+														<td >${Tings.purpose}</td>
+														<td>${Tings.name}</td>
+														<td>${Tings.date}</td>
+														<td>${Tings.state}</td>
+													</tr>
+												</c:forEach>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
-								</div>
+									
+								</section>
 							</div>
 						</div>
-
-						
-						
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col-md-12"> -->
-<!-- 								<div class="panel"> -->
-<!-- 									<div class="panel-body"> -->
-<!-- 										<div class="person-desk"> -->
-<!-- 											<h1> -->
-<%-- 												任务 <a href="${APP_PATH}/admin/dusty/list" style="font-size: 16px; color: #65CEA7;" --%>
-<!-- 													class="pull-right">更多</a> -->
-<!-- 											</h1> -->
-<!-- 											<table -->
-<!-- 												class="table table-bordered table-striped table-condensed cf"> -->
-<!-- 												<thead class="cf"> -->
-<!-- 													<tr> -->
-<!-- 														<th>任务名称</th> -->
-<!-- 														<th>结束日期</th> -->
-<!-- 														<th>状态</th> -->
-<!-- 														<th>预计工时</th> -->
-<!-- 													</tr> -->
-<!-- 												</thead> -->
-<!-- 												<tbody> -->
-<%-- 												<c:forEach items="${DustyDisplay}" var="dustyDisplay"> --%>
-<!-- 													<tr> -->
-<!-- 														<td class="project-name"> -->
-<%-- 															<a href="">${dustyDisplay.taskName}</a> --%>
-<!-- 														</td> -->
-<%-- 														<td>${dustyDisplay.endTime}</td> --%>
-<%-- 														<td>${dustyDisplay.state}</td> --%>
-<%-- 														<td>${dustyDisplay.workTime}</td> --%>
-<!-- 													</tr> -->
-<%-- 												</c:forEach> --%>
-<!-- 												</tbody> -->
-<!-- 											</table> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-						
-						
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col-md-12"> -->
-<!-- 								<div class="panel"> -->
-<!-- 									<div class="panel-body"> -->
-<!-- 										<div class="person-desk"> -->
-<!-- 											<h1> -->
-<%-- 												BUG <a href="${APP_PATH}/admin/bug/list" style="font-size: 16px; color: #65CEA7;" --%>
-<!-- 													class="pull-right">更多</a> -->
-<!-- 											</h1> -->
-<!-- 											<table -->
-<!-- 												class="table table-bordered table-striped table-condensed cf"> -->
-<!-- 												<thead class="cf"> -->
-<!-- 													<tr> -->
-<!-- 														<th>Bug标题</th> -->
-<!-- 														<th>创建日期</th> -->
-<!-- 														<th>状态</th> -->
-<!-- 														<th>创建人</th> -->
-<!-- 													</tr> -->
-<!-- 												</thead> -->
-<!-- 												<tbody> -->
-<%-- 												<c:forEach items="${BugDisplay}" var="bugDisplay"> --%>
-<!-- 													<tr> -->
-<!-- 														<td class="project-name"> -->
-<%-- 															<a href="">${bugDisplay.bugTitle}</a> --%>
-<!-- 														</td> -->
-<%-- 														<td>${bugDisplay.creatTime}</td> --%>
-<%-- 														<td>${bugDisplay.state}</td> --%>
-<%-- 														<td>${bugDisplay.creatPeople}</td> --%>
-<!-- 													</tr> -->
-<%-- 												</c:forEach> --%>
-<!-- 												</tbody> -->
-<!-- 											</table> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 						
 						<!-- 我的审批 -->
 						<div class="row">
@@ -356,7 +332,7 @@ String basePath2 = request.getScheme() + "://"
 										</ul>
 									</header>
 									
-									<!-- 选项卡面板 -->
+									<!-- 审批选项卡面板 -->
 									<div class="panel-body my-approval-tab-content">
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="myholiday">

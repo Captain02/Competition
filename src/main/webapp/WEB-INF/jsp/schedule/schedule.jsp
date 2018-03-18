@@ -46,10 +46,7 @@
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",
 				data:"isInsert="+isInsert+'&'+$('#scheduleForm').serialize(),
-				type:"POST",
-				success:function(result){
-					
-				}
+				type:"POST"
 			})
 	}
 	
@@ -65,10 +62,7 @@
         		'end':endTime,
         		'id':id
         	},
-        	type:"POST",
-        	success:function(result){
-        		
-        	}
+        	type:"POST"
         }) 
 	}
 	</script>
