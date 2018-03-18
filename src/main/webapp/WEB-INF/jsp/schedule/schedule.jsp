@@ -46,7 +46,11 @@
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",
 				data:"isInsert="+isInsert+'&'+$('#scheduleForm').serialize(),
-				type:"POST"
+				type:"POST",
+				success:function(result){
+					alert(isInsert);
+				}
+				
 			})
 	}
 	

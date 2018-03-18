@@ -253,7 +253,7 @@ String basePath2 = request.getScheme() + "://"
 													<tbody>
 												<c:forEach items="${DustyDisplay}" var="dustyDisplay">
 													<tr>
-														<td>${dustyDisplay.taskName}</td>
+														<td class="project-grade" data-grade="${dustyDisplay.grade}"><span class="label">${dustyDisplay.grade}</span></td>
 														<td>${dustyDisplay.endTime}</td>
 														<td>${dustyDisplay.state}</td>
 														<td>${dustyDisplay.workTime}</td>
