@@ -151,9 +151,9 @@
                         <br>
                         <br>
                         <br>
-                        <a href="${APP_PATH}/admin/holiday/list" target="_blank">请假</a> ·
-                        <a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask" target="_blank">报销</a> ·
-                        <a href="${APP_PATH}/admin/myThingsTask/myThingsTask" target="_blank">物品</a>
+                        <a href="${APP_PATH}/admin/holiday/list">请假</a>
+                        <a href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask">报销</a>
+                        <a href="${APP_PATH}/admin/myThingsTask/myThingsTask">物品</a>
                     </div>
                 </div>
 

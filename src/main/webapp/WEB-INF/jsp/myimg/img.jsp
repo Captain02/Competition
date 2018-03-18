@@ -38,41 +38,61 @@ function dele(ele) {
 	
 }
 function editor(ele){
-	var topicId = $(ele).attr('data-topicId');
 	$('#myModal').modal('show');
-	ShowTips('.modal-title','编辑'+$(ele).parent().siblings('p.img-title').find('a').html(),null);
-	$('.modal-body').find('input[name="title"]').val($(ele).parent().siblings('p.img-title').find('a').html());
-	$('.modal-body').find('textarea[name="summary"]').val($(ele).parent().siblings('p.img-desc').html());
-	$('.modal-footer').find('button.yes').attr('data-topicId',$(ele).attr('data-topicId'));
+
+	var title = $(ele).attr('data-imgtitle');
+	var sumary = $(ele).attr('data-img-sumary');
+	
+	var iputTitle = $('.modal-body').find('input[name="title"]');
+	var inputSumary = $('.modal-body').find('textarea[name="summary"]');
+	
+	var btnImgInfo = $('.modal-footer').find('button.inputto');
+	
+	ShowTips('.modal-title','编辑相册：'+title,null);
+	
+	iputTitle.val(title);
+	inputSumary.val(sumary);
+	
+	btnImgInfo.attr({
+		'data-topicId':$(ele).attr('data-topicId'),
+		'data-editor-title':title,
+		'data-editor-summary':sumary
+	})
+	
+	
 }
 
 $(function(){
+	var btnInput = $('.modal-footer').find('button.inputto');
+	
 	$('.modal-body').find('input[name="title"]').blur(function(){
-		$('.modal-footer').find('button.yes').attr('data-editor-title',$(this).val());
+		btnInput.attr('data-editor-title',$(this).val());
 	})
 	$('.modal-body').find('textarea[name="summary"]').blur(function(){
-		$('.modal-footer').find('button.yes').attr('data-editor-summary',$(this).val());
+		btnInput.attr('data-editor-summary',$(this).val());
 	})
+	
+	$('.inputto').click(function(){
+   		var topicId = $(this).attr('data-topicId');
+   		var title = $(this).attr('data-editor-title');
+   		var summary = $(this).attr('data-editor-summary')
+   		
+   		$.ajax({
+   			url:"${APP_PATH}/admin/image/update",
+   			data:{
+   				'topicId':topicId,
+   				'title':title,
+   				'summary':summary
+   			},
+   			type:"POST",	
+   			success:function(result){
+   				window.location.reload();
+   			}
+   		});
+   	})
+
 })
 
-$('.inputto').click(function(){
-	     alert("aa");
-// 		 var topicId = $(this).attr('data-topicId');
-// 		var title = $(this).attr('data-editor-title');
-// 		var summary = $(this).attr('data-editor-summary');
-// 		$.ajax({
-// 			url:"${APP_PATH}/admin/image/update",
-// 			data:{
-// 				'topicId':topicId,
-// 				'title':title,
-// 				'summary':summary
-// 			},
-// 			type:"POST",
-// 			success:function(result){
-// 				alert('success');
-// 			}
-// 		});
-	})
 </script>
 <body class="bg-common stickey-menu">
 	<section>
@@ -126,7 +146,7 @@ $('.inputto').click(function(){
 											<p>${MyImageDispaly.userName}${fn:substring(MyImageDispaly.date, 0, 10)}上传</p>
 											<p>
 												<c:if test="${isByMy!=0}">
-												<a data-topicId="${MyImageDispaly.topicId}" onclick="editor(this)"><i class="glyphicon glyphicon-edit"></i></a>
+												<a data-topicId="${MyImageDispaly.topicId}" data-imgtitle="${fn:substring(MyImageDispaly.title,0, 10)}" data-img-sumary="${MyImageDispaly.sketch}" onclick="editor(this)"><i class="glyphicon glyphicon-edit"></i></a>
 												<a data-topicId="${MyImageDispaly.topicId}" onclick="dele(this)"><i class="glyphicon glyphicon-trash"></i></a>
 												</c:if>
 											</p>
@@ -161,6 +181,9 @@ $('.inputto').click(function(){
     </div>
     <div class="modal-footer">
      	<button type="button" class="btn btn-success inputto">提交</button>
+     	<script type="text/javascript">
+     	
+     	</script>
         <button type="button" class="btn btn-default no" data-dismiss="modal">取消</button>
      </div>
    </div>

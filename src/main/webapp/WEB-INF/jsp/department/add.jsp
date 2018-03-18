@@ -99,7 +99,7 @@
             <!-- 页面模版，按需更改 -->
             <div class="wrapper">
 
-                <div class="row">
+                
                     <div class="om-header">
                     
                         <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
@@ -115,7 +115,7 @@
 
                                 <div class="om-wrpper-body">
                                     <sf:form action="${APP_PATH}/admin/department/add" id="addDepartmentInfo" method="post" modelAttribute="department">
-                                        <header>基本信息（带*号的为必填项）</header>
+                                       
 
                                         <!-- 部门名填写区域 -->
                                         <div class="form-group">
@@ -204,7 +204,6 @@
                 </div>
 
             </div>
-        </div>
     </section>
     
      <!-- 模态框 -->

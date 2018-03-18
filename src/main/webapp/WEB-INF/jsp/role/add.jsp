@@ -96,7 +96,7 @@ function update() {
             <!-- 页面模版，按需更改 -->
             <div class="wrapper">
 
-                <div class="row">
+               
                     <div class="om-header">
                         <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
                         <div class="clearfix"></div>
@@ -110,7 +110,6 @@ function update() {
 
                                 <div class="om-wrpper-body">
                                     <sf:form action="" id="addRoleInfo" modelAttribute="role">
-                                        <header>基本信息（带*号的为必填项）</header>
 
                                         <!-- 用户名填写区域 -->
                                         <div class="form-group">
@@ -182,7 +181,6 @@ function update() {
                 </div>
 
             </div>
-        </div>
     </section>
     
       <!-- 模态框 -->

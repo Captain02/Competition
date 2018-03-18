@@ -166,7 +166,7 @@ function update() {
             <!-- 页面模版，按需更改 -->
             <div class="wrapper">
 
-                <div class="row">
+                
                     <div class="om-header">
                     
                         <jsp:include page="iniOrganizationManagementHref.jsp"></jsp:include>
@@ -448,7 +448,6 @@ function update() {
                 </div>
 
             </div>
-        </div>
     </section>
     
     <!-- 模态框 -->

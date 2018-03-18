@@ -27,25 +27,21 @@
     <script src="${APP_PATH}/static/fullcalendar/fullcalendar.min.js"></script>
     
 	<script type="text/javascript">
+	
+	/* 从数据库中返回所有的日程信息 */
 	$.ajax({
 		url:"${APP_PATH}/admin/schedule/scheduleds",
 		data:'',
 		type:"GET",
 		success:function(result){
 			$.each(result.extend.schedules,function (index, term) {
-				console.log(term);
                 $("#calendar").fullCalendar('renderEvent', term, true);
             });
 		}
 	})
 	
+	/* 日程的添加删除与修改 */
 	function save(ele){
-		$('input.schedu-info').each(function(){
-			if($(this).val() == ''){
-				alert('请填写完整日程信息');
-				return false;
-			}
-		})
 		var isInsert = $(ele).attr('data-isInsert');
 		$.ajax({
 				url:"${APP_PATH}/admin/schedule/save",
@@ -57,8 +53,8 @@
 			})
 	}
 	
+	/* 日程的拖动与拖拽 */
 	function updateDay(days,start,end,id){
-		
  		var startTime = new Date(start).format("yyyy-MM-dd hh:mm:ss");
  		var endTime = new Date(end).format("yyyy-MM-dd hh:mm:ss");
 		$.ajax({
@@ -191,11 +187,6 @@
         
        <script type="text/javascript">
 			$(function(){
-				if($('input[name="id"]').val() ==''){
-					$('button.btn-editor').attr('disabled','disabled');
-					$('button.btn-delete').attr('disabled','disabled');
-				}
-				var scheduleInfOld = new Array();
 				$('input[name="id"]').val('');
 				$('#calendar').fullCalendar({
 					header: {
@@ -212,7 +203,7 @@
 					    month: '月',
 					    week: '周',
 					    day: '日',
-					    prev:'上一月',
+					    prev:'上一月',   
 					    next:'下一月',
 					    list:'月总览'
 					},
@@ -238,40 +229,29 @@
 					
 					//点击查看日程详情
 					eventClick:function(event){
-						$('button.btn-delete').removeAttr('disabled','disabled');
-						$('button.btn-save').attr('disabled','disabled');
 						$('input[name="id"]').val(event.id);
-						scheduleInfOld.push(event.title,new Date(event.start).format('yyyy-MM-dd hh:mm:ss'),new Date(event.end).format('yyyy-MM-dd hh:mm:ss'));
+						
+						var evetnStartTime = new Date(event.start).format('yyyy-MM-dd hh:mm:ss')
+						var eventEndTime = new Date(event.end).format('yyyy-MM-dd hh:mm:ss')
+						
+						/* 格式化日期并填充 */
 						$('input[name="title"]').val(event.title);
-						$('input[name="startTime"]').val(new Date(event.start).format('yyyy-MM-dd hh:mm:ss'));
-						$('input[name="endTime"]').val(new Date(event.end).format('yyyy-MM-dd hh:mm:ss'));
+						$('input[name="startTime"]').val(evetnStartTime);
+						$('input[name="endTime"]').val(eventEndTime);
+
 					}
 				})
-				
-				$('input.schedu-info').each(function(){
-					$(this).change(function(){
-						if($.inArray($(this).val(),scheduleInfOld) == -1 && $(this).val() != ''){
-							$('button.btn-editor').removeAttr('disabled','disabled');
-						}
-					})
-				})
-				
-				$('.clearTime').click(function(){
-					if($('input[name="startTime"]').val()=='' && $('input[name="endTime"]').val()==''){
-						$('button.btn-save').removeAttr('disabled','disabled');
-					}
-				})
-				
-				
 			})
        </script>
         
        <script type="text/javascript">
+       
+       /* 格式化日期串  */
        Date.prototype.format = function(fmt) { 
     	     var o = { 
     	    		"M+" : this.getMonth()+1,                 //月份 
    	    	        "d+" : this.getDate(),                    //日 
-   	    	        "h+" : this.getHours()-8,                 //小时 
+   	    	        "h+" : this.getHours()-8,                //小时 
    	    	        "m+" : this.getMinutes(),                 //分 
    	    	        "s+" : this.getSeconds(),                 //秒 
     	    };

@@ -354,11 +354,12 @@ body a:hover {
 	margin: 0;
 	background: none;
 }
-.om-header ul.breadcrumb li.active{
+
+.om-header ul.breadcrumb li.active {
 	color: #65CEA7;
 }
 
-.om-header ul.breadcrumb li a{
+.om-header ul.breadcrumb li a {
 	color: #999999;
 }
 
@@ -378,9 +379,11 @@ body a:hover {
 	font-weight: bold;
 	margin-right: 1rem;
 }
-.om-header-left{
+
+.om-header-left {
 	margin-bottom: 15px;
 }
+
 .om-header-left span.om-list a:hover {
 	color: #000;
 	text-decoration: underline;
@@ -1780,23 +1783,47 @@ a.fileinput-upload {
 width
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 .5em
+
+
+
+
 
 
 ;
 margin-right
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 1
 em
+
+
+
+
 
 
 ;
@@ -1806,23 +1833,47 @@ em
 width
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 1
 em
+
+
+
+
 
 
 ;
 margin-right
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 .5em
+
+
+
+
 
 
 ;
@@ -1832,21 +1883,41 @@ margin-right
 width
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 1
 .5em
+
+
+
+
 
 
 ;
 margin-right
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 }
@@ -1866,23 +1937,47 @@ keyframes dot { 0% {
 width
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 .5em
+
+
+
+
 
 
 ;
 margin-right
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 1
 em
+
+
+
+
 
 
 ;
@@ -1892,23 +1987,47 @@ em
 width
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 1
 em
+
+
+
+
 
 
 ;
 margin-right
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 .5em
+
+
+
+
 
 
 ;
@@ -1918,21 +2037,41 @@ margin-right
 width
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 1
 .5em
+
+
+
+
 
 
 ;
 margin-right
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 }
@@ -2168,6 +2307,26 @@ table.table-project tbody tr td.project-name a:hover {
 
 .fc {
 	margin: -1px;
+}
+
+.fc-content {
+	border:1px solid #65cea7 !important;
+	background: #65cea7 !important;
+	height: 40px;
+	line-height: 40px;
+}
+.fc-event{
+	background-color: #65cea7;
+	border:1px solid #65cea7 !important;
+	border-radius: 5px;
+}
+.fc-day-header {
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	background: #65cea7 !important;
+	color: #fff;
+	text-transform: uppercase;
 }
 
 .fc-toolbar.fc-header-toolbar {

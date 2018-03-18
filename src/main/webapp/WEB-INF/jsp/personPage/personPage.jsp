@@ -263,83 +263,83 @@ String basePath2 = request.getScheme() + "://"
 						</div>
 
 						
-						<!-- 我的任务 -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel">
-									<div class="panel-body">
-										<div class="person-desk">
-											<h1>
-												任务 <a href="${APP_PATH}/admin/dusty/list" style="font-size: 16px; color: #65CEA7;"
-													class="pull-right">更多</a>
-											</h1>
-											<table
-												class="table table-bordered table-striped table-condensed cf">
-												<thead class="cf">
-													<tr>
-														<th>任务名称</th>
-														<th>结束日期</th>
-														<th>状态</th>
-														<th>预计工时</th>
-													</tr>
-												</thead>
-												<tbody>
-												<c:forEach items="${DustyDisplay}" var="dustyDisplay">
-													<tr>
-														<td class="project-name">
-															<a href="">${dustyDisplay.taskName}</a>
-														</td>
-														<td>${dustyDisplay.endTime}</td>
-														<td>${dustyDisplay.state}</td>
-														<td>${dustyDisplay.workTime}</td>
-													</tr>
-												</c:forEach>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 						
-						<!-- 我的Bug -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel">
-									<div class="panel-body">
-										<div class="person-desk">
-											<h1>
-												BUG <a href="${APP_PATH}/admin/bug/list" style="font-size: 16px; color: #65CEA7;"
-													class="pull-right">更多</a>
-											</h1>
-											<table
-												class="table table-bordered table-striped table-condensed cf">
-												<thead class="cf">
-													<tr>
-														<th>Bug标题</th>
-														<th>创建日期</th>
-														<th>状态</th>
-														<th>创建人</th>
-													</tr>
-												</thead>
-												<tbody>
-												<c:forEach items="${BugDisplay}" var="bugDisplay">
-													<tr>
-														<td class="project-name">
-															<a href="">${bugDisplay.bugTitle}</a>
-														</td>
-														<td>${bugDisplay.creatTime}</td>
-														<td>${bugDisplay.state}</td>
-														<td>${bugDisplay.creatPeople}</td>
-													</tr>
-												</c:forEach>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 								<div class="panel"> -->
+<!-- 									<div class="panel-body"> -->
+<!-- 										<div class="person-desk"> -->
+<!-- 											<h1> -->
+<%-- 												任务 <a href="${APP_PATH}/admin/dusty/list" style="font-size: 16px; color: #65CEA7;" --%>
+<!-- 													class="pull-right">更多</a> -->
+<!-- 											</h1> -->
+<!-- 											<table -->
+<!-- 												class="table table-bordered table-striped table-condensed cf"> -->
+<!-- 												<thead class="cf"> -->
+<!-- 													<tr> -->
+<!-- 														<th>任务名称</th> -->
+<!-- 														<th>结束日期</th> -->
+<!-- 														<th>状态</th> -->
+<!-- 														<th>预计工时</th> -->
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<%-- 												<c:forEach items="${DustyDisplay}" var="dustyDisplay"> --%>
+<!-- 													<tr> -->
+<!-- 														<td class="project-name"> -->
+<%-- 															<a href="">${dustyDisplay.taskName}</a> --%>
+<!-- 														</td> -->
+<%-- 														<td>${dustyDisplay.endTime}</td> --%>
+<%-- 														<td>${dustyDisplay.state}</td> --%>
+<%-- 														<td>${dustyDisplay.workTime}</td> --%>
+<!-- 													</tr> -->
+<%-- 												</c:forEach> --%>
+<!-- 												</tbody> -->
+<!-- 											</table> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
+						
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 								<div class="panel"> -->
+<!-- 									<div class="panel-body"> -->
+<!-- 										<div class="person-desk"> -->
+<!-- 											<h1> -->
+<%-- 												BUG <a href="${APP_PATH}/admin/bug/list" style="font-size: 16px; color: #65CEA7;" --%>
+<!-- 													class="pull-right">更多</a> -->
+<!-- 											</h1> -->
+<!-- 											<table -->
+<!-- 												class="table table-bordered table-striped table-condensed cf"> -->
+<!-- 												<thead class="cf"> -->
+<!-- 													<tr> -->
+<!-- 														<th>Bug标题</th> -->
+<!-- 														<th>创建日期</th> -->
+<!-- 														<th>状态</th> -->
+<!-- 														<th>创建人</th> -->
+<!-- 													</tr> -->
+<!-- 												</thead> -->
+<!-- 												<tbody> -->
+<%-- 												<c:forEach items="${BugDisplay}" var="bugDisplay"> --%>
+<!-- 													<tr> -->
+<!-- 														<td class="project-name"> -->
+<%-- 															<a href="">${bugDisplay.bugTitle}</a> --%>
+<!-- 														</td> -->
+<%-- 														<td>${bugDisplay.creatTime}</td> --%>
+<%-- 														<td>${bugDisplay.state}</td> --%>
+<%-- 														<td>${bugDisplay.creatPeople}</td> --%>
+<!-- 													</tr> -->
+<%-- 												</c:forEach> --%>
+<!-- 												</tbody> -->
+<!-- 											</table> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
 						<!-- 我的审批 -->
 						<div class="row">
