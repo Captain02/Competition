@@ -251,12 +251,12 @@ String basePath2 = request.getScheme() + "://"
 													</thead>
 													
 													<tbody>
-												<c:forEach items="${holidays}" var="holiday">
+												<c:forEach items="${DustyDisplay}" var="dustyDisplay">
 													<tr>
-														<td>${holiday.type}</td>
-														<td>${holiday.date}</td>
-														<td>${holiday.holidaydays}</td>
-														<td>${holiday.test}</td>
+														<td>${dustyDisplay.taskName}</td>
+														<td>${dustyDisplay.endTime}</td>
+														<td>${dustyDisplay.state}</td>
+														<td>${dustyDisplay.workTime}</td>
 													</tr>
 												</c:forEach>
 													</tbody>
@@ -275,12 +275,12 @@ String basePath2 = request.getScheme() + "://"
 													</thead>
 													
 													<tbody>
-														<c:forEach items="${listReimbursement}" var="Reimbursement">
+														<c:forEach items="${BugDisplay}" var="bugDisplay">
 															<tr>
-																<td>${Reimbursement.type}</td>
-																<td>${Reimbursement.money}</td>
-																<td>${Reimbursement.test}</td>
-																<td>${Reimbursement.date}</td>
+																<td>${bugDisplay.bugTitle}</td>
+																<td>${bugDisplay.creatTime}</td>
+																<td>${bugDisplay.state}</td>
+																<td>${bugDisplay.creatPeople}</td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -288,7 +288,7 @@ String basePath2 = request.getScheme() + "://"
 											</div>
 											
 											<div class="tab-pane fade" id=myProject>
-												<table class="table table-hover">
+												<table class="table table-hover table-project">
 													<thead>
 														<tr>
 															<th>项目名称</th>
@@ -299,12 +299,14 @@ String basePath2 = request.getScheme() + "://"
 													</thead>
 													
 													<tbody>
-														<c:forEach items="${listTings}" var="Tings">
+														<c:forEach items="${ProjectDisplay}" var="projectDisplay">
 													<tr>
-														<td >${Tings.purpose}</td>
-														<td>${Tings.name}</td>
-														<td>${Tings.date}</td>
-														<td>${Tings.state}</td>
+														<td class="project-name"><a href="">${projectDisplay.projectName}</a></td>
+														<td>${projectDisplay.endDate}</td>
+														<td>${projectDisplay.state}</td>
+														<td class="project-name">
+															<a href="">${projectDisplay.projectResponsiblePeople}</a>
+														</td>
 													</tr>
 												</c:forEach>
 													</tbody>
@@ -412,10 +414,6 @@ String basePath2 = request.getScheme() + "://"
 								</section>
 							</div>
 						</div>
-						
-						
-						
-						
 						
 						<div class="row">
 							<div class="col-md-12">
