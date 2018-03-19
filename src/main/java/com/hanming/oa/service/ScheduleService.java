@@ -32,4 +32,9 @@ public class ScheduleService {
 		scheduleMapper.deleteByPrimaryKey(schedule.getId());
 	}
 
+	public Schedule select(Integer scheduleId) {
+		Schedule schedule = scheduleMapper.selectByPrimaryKey(scheduleId);
+		return schedule;
+	}
+
 }

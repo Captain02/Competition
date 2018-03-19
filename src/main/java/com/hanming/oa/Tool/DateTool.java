@@ -76,7 +76,7 @@ public class DateTool {
 	}
 	
 	public static Date stringToDate(String date) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date utilDate = null;
 		try {
 			utilDate = formatter.parse(date);

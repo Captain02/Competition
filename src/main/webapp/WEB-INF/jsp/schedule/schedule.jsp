@@ -212,6 +212,7 @@
 					eventDrop : function( event, dayDelta, revertFunc ) {
 					    if(dayDelta._days != 0){
 					        days = dayDelta._days;
+					        alert(event.start);
 					        updateDay(days,event.start,event.end,event.id);
 					    }else if(dayDelta._milliseconds != 0){
 					        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');
@@ -228,14 +229,25 @@
 					//点击查看日程详情
 					eventClick:function(event){
 						$('input[name="id"]').val(event.id);
+						var schedule = event.id;
+						$.ajax({
+							url:'${APP_PATH}/admin/schedule/clickBySchedule',
+							data:{
+								'schedule':schedule
+							},
+							type:'GET',
+							success:function(result){
+								console.log(result);
+								$('input[name="title"]').val(result.extend.schedule.title);
+								$('input[name="startTime"]').val(result.extend.schedule.startTime);
+								$('input[name="endTime"]').val(result.extend.schedule.endTime); 
+							}
+						})
 						
-						var evetnStartTime = new Date(event.start).format('yyyy-MM-dd hh:mm:ss')
+						/* var evetnStartTime = new Date(event.start).format('yyyy-MM-dd hh:mm:ss')
 						var eventEndTime = new Date(event.end).format('yyyy-MM-dd hh:mm:ss')
-						
-						/* 格式化日期并填充 */
-						$('input[name="title"]').val(event.title);
-						$('input[name="startTime"]').val(evetnStartTime);
-						$('input[name="endTime"]').val(eventEndTime);
+						 格式化日期并填充 
+						*/
 
 					}
 				})
