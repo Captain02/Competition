@@ -24,8 +24,18 @@ public class Comments {
 
 	private String repliesUserHeadFile;
 
+	private String state;
+
 	private List<Comments> comments;
-	
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public List<Comments> getComments() {
 		return comments;
 	}

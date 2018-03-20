@@ -59,6 +59,7 @@
     <result column="repliesUserId" jdbcType="INTEGER" property="repliesUserId" />
     <result column="repliesUserName" jdbcType="VARCHAR" property="repliesUserName" />
     <result column="repliesUserHeadFile" jdbcType="VARCHAR" property="repliesUserHeadFile" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
     
     <collection property="comments" javaType="ArrayList" column="id" ofType="Comments" select="getCommentsByRepliceId" />
     
@@ -237,7 +238,7 @@
   <!-- getCommentsByRepliceId -->
   <select id="getCommentsByRepliceId" resultType="Comments">
   	SELECT
-	br.id,tu.id AS userId,tu.`name` AS userName,tu.headFile AS userHeadFile,br.date,br.text,br.repliesId,tus.id AS repliesUserId,tus.`name` AS repliesUserName,tus.headFile AS repliesUserHeadFile
+	br.id,tu.id AS userId,tu.`name` AS userName,tu.headFile AS userHeadFile,br.date,br.text,br.repliesId,tus.id AS repliesUserId,tus.`name` AS repliesUserName,tus.headFile AS repliesUserHeadFile,br.state
 	FROM bbsreplies br
 	LEFT JOIN bbsreplies brs ON brs.repliesId=br.id
 	LEFT JOIN bbstopic bt ON bt.id=br.TopicId
@@ -260,7 +261,7 @@
   <!-- getCommentsByTopicId -->
   <select id="getCommentsByTopicId" resultMap="CommentsMap">
   	SELECT DISTINCT
-	br.id,tu.id AS userId,tu.`name` AS userName,tu.headFile AS userHeadFile,br.date,br.text,br.repliesId,tus.id AS repliesUserId,tus.`name` AS repliesUserName,tus.headFile AS repliesUserHeadFile
+	br.id,tu.id AS userId,tu.`name` AS userName,tu.headFile AS userHeadFile,br.date,br.text,br.repliesId,tus.id AS repliesUserId,tus.`name` AS repliesUserName,tus.headFile AS repliesUserHeadFile,br.state
 	FROM bbsreplies br
 	LEFT JOIN bbsreplies brs ON brs.repliesId=br.id
 	LEFT JOIN bbstopic bt ON bt.id=br.TopicId

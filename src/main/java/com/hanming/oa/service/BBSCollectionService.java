@@ -13,7 +13,6 @@ import com.hanming.oa.dao.BBSRepliesMapper;
 import com.hanming.oa.model.BBSCollection;
 import com.hanming.oa.model.BBSReplies;
 import com.hanming.oa.model.BBSTopic;
-import com.hanming.oa.model.MyCollectionDisplay;
 import com.hanming.oa.model.SystemMessage;
 
 @Service
@@ -26,8 +25,8 @@ public class BBSCollectionService {
 	@Autowired
 	SystemMessageService systemMessageService;
 	@Autowired
-	BBSRepliesMapper BBSRepliesMapper;	
-	
+	BBSRepliesMapper BBSRepliesMapper;
+
 	public Integer selectCountCollectionByUserAndTopic(Integer userId, Integer topicId) {
 		Integer collectionNum = bbsCollectionMapper.selectCountCollectionByUserAndTopic(userId, topicId);
 		return collectionNum;
@@ -81,8 +80,9 @@ public class BBSCollectionService {
 	}
 
 	@Transactional
-	public void addCollection(String text, Integer topicid, Integer byUserId, Integer repliesId, Integer userId) {
-		//添加评论
+	public void addCollection(String text, Integer topicid, Integer byUserId, Integer repliesId, Integer userId,
+			String state) {
+		// 添加评论
 		BBSReplies bbsReplies = new BBSReplies();
 
 		bbsReplies.setRepliesid(repliesId);
@@ -90,12 +90,13 @@ public class BBSCollectionService {
 		bbsReplies.setRepliseuserid(userId);
 		bbsReplies.setTopicid(topicid);
 		bbsReplies.setText(text);
+		bbsReplies.setState(state);
 		BBSRepliesMapper.insert(bbsReplies);
-		
+
 		// 插入消息
 		BBSTopic bbsTopic = bbsTopicService.selectByPrimaryKey(topicid);
 		SystemMessage systemMessage = new SystemMessage(null, userId, "评论", bbsTopic.getTitle(), topicid, "未读",
-						DateTool.dateToString(new Date()));
+				DateTool.dateToString(new Date()));
 		if ("knowledge".equals(bbsTopic.getType())) {
 			systemMessage.setText("知识");
 		} else {
@@ -103,6 +104,5 @@ public class BBSCollectionService {
 		}
 		systemMessageService.insert(systemMessage);
 	}
-
 
 }

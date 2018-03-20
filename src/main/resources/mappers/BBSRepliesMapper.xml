@@ -26,10 +26,10 @@
   <insert id="insert" parameterType="com.hanming.oa.model.BBSReplies">
     insert into bbsreplies (id, userId, repliseUserId, 
       TopicId, repliesId, date, 
-      text)
+      text,state)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{repliseuserid,jdbcType=INTEGER}, 
       #{topicid,jdbcType=INTEGER}, #{repliesid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
-      #{text,jdbcType=VARCHAR})
+      #{text,jdbcType=VARCHAR},#{state,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hanming.oa.model.BBSReplies">
     insert into bbsreplies
@@ -55,6 +55,9 @@
       <if test="text != null">
         text,
       </if>
+      <if test="state != null">
+        state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -77,6 +80,9 @@
       </if>
       <if test="text != null">
         #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

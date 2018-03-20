@@ -17,7 +17,10 @@ $(function() {
 	
 	$('.btn-reply-lz-reply').each(function() {
 		$(this).click(function() {
+			var btnEditorReply = $(this).parents('div.core-reply-container').siblings('div.lzl-editor-container').find('input.btn-editor-reply');
+			btnEditorReply.attr('data-reply-state','1');
 			$('input.editor-container-area').attr('data-byrepliesuserid',$(this).siblings('#ByRepliesUserId').val());
+			
 		});
 	});
 

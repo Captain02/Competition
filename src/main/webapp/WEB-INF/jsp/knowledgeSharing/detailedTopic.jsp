@@ -57,13 +57,14 @@ function collectionTopic() {
 var repliesId, byRepliesUserId, repliescontent;
 
 function replies(ele) {
+	
+	var state = $(ele).attr('data-reply-state');
+	alert(state);
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
 	
 	repliescontent = $(ele).siblings('input.editor-container-area').val();
 	
-	alert(repliesId);
-	alert(byRepliesUserId);
 	
 	$.ajax({
 		url : "${APP_PATH}/admin/KnowledgeSharing/addReplies",
@@ -72,7 +73,8 @@ function replies(ele) {
 			'topicId' : topicId,
 			'repliesId' : repliesId,
 			'byUserId' : byRepliesUserId,
-			'pn' : pn
+			'pn' : pn,
+			'state':state
 		},
 		type : "POST",
 		success : function(result) {
@@ -204,8 +206,11 @@ function replies(ele) {
 																				
 																				<div class="lzl-cnt">
 																					<a href="" class="lzl-username">${childComments.repliesUserName}</a>
+																					<input type="hidden" value="${childComments.state}" id="asdasd">
+																					<c:if test="${childComments.state != 0}">
 																					<span>回复</span> 
 																					<a href="" class="lzl-reply-username">${childComments.userName}</a>:
+																					</c:if>
 																					<span>${childComments.text}</span>
 																					
 																					<div class="lzl-content_reply">
@@ -230,7 +235,7 @@ function replies(ele) {
 													<div class="lzl-editor-container">
 														<div class="editor-container clearfix">
 															<input class="editor-container-area form-control" id="editor" data-comments-id="${comments.id}" type="text"> 
-															<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表" onclick="replies (this);" />
+															<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表"  data-reply-state="0" onclick="replies (this);" />
 														</div>
 													</div>
 													

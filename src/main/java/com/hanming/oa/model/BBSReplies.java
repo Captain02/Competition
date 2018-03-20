@@ -3,73 +3,83 @@ package com.hanming.oa.model;
 import java.util.Date;
 
 public class BBSReplies {
-    private Integer id;
+	private Integer id;
 
-    private Integer userid;
+	private Integer userid;
 
-    private Integer repliseuserid;
+	private Integer repliseuserid;
 
-    private Integer topicid;
+	private Integer topicid;
 
-    private Integer repliesid;
+	private Integer repliesid;
 
-    private Date date;
+	private Date date;
 
-    private String text;
+	private String text;
 
-    public Integer getId() {
-        return id;
-    }
+	private String state;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getState() {
+		return state;
+	}
 
-    public Integer getUserid() {
-        return userid;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getRepliseuserid() {
-        return repliseuserid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setRepliseuserid(Integer repliseuserid) {
-        this.repliseuserid = repliseuserid;
-    }
+	public Integer getUserid() {
+		return userid;
+	}
 
-    public Integer getTopicid() {
-        return topicid;
-    }
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
 
-    public void setTopicid(Integer topicid) {
-        this.topicid = topicid;
-    }
+	public Integer getRepliseuserid() {
+		return repliseuserid;
+	}
 
-    public Integer getRepliesid() {
-        return repliesid;
-    }
+	public void setRepliseuserid(Integer repliseuserid) {
+		this.repliseuserid = repliseuserid;
+	}
 
-    public void setRepliesid(Integer repliesid) {
-        this.repliesid = repliesid;
-    }
+	public Integer getTopicid() {
+		return topicid;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setTopicid(Integer topicid) {
+		this.topicid = topicid;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public Integer getRepliesid() {
+		return repliesid;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setRepliesid(Integer repliesid) {
+		this.repliesid = repliesid;
+	}
 
-    public void setText(String text) {
-        this.text = text == null ? null : text.trim();
-    }
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text == null ? null : text.trim();
+	}
 }

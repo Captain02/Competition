@@ -83,8 +83,8 @@ public class KnowledgeSharingController {
 			@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			@RequestParam(value = "isCancel", defaultValue = "0") Integer isCancel, Model model) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
-		if (isCancel!=0) {
+
+		if (isCancel != 0) {
 			SystemMessage systemMessage = new SystemMessage();
 			systemMessage.setId(isCancel);
 			systemMessage.setState("已读");
@@ -249,13 +249,13 @@ public class KnowledgeSharingController {
 
 	// 回帖
 	@RequestMapping(value = "/addReplies", method = RequestMethod.POST)
-	public String addReplies(@RequestParam("comment") String text, @RequestParam("pn") Integer pn,
-			@RequestParam("topicId") Integer topicid, @RequestParam("byUserId") Integer byUserId,
+	public String addReplies(@RequestParam("state") String state, @RequestParam("comment") String text,
+			@RequestParam("pn") Integer pn, @RequestParam("topicId") Integer topicid,
+			@RequestParam("byUserId") Integer byUserId,
 			@RequestParam(value = "repliesId", defaultValue = "0") Integer repliesId) {
-
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
-		bbsCollectionService.addCollection(text, topicid, byUserId, repliesId, userId);
+		bbsCollectionService.addCollection(text, topicid, byUserId, repliesId, userId, state);
 
 		bbsTopicService.updateCommentsAddOne(topicid);
 
