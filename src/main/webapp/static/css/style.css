@@ -827,7 +827,7 @@ ul.p-info .title, ul.p-info .desk {
 	color: #535351;
 	font-size: 14px;
 	font-weight: bold;
-	margin-bottom: 15px;
+	margin: 15px 0;
 }
 
 /* approve pagae */
@@ -948,6 +948,10 @@ ul.p-info .title, ul.p-info .desk {
 	color: #2a323f;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+.activity-time{
+	font-size: 12px;
+	font-style: italic;
 }
 
 .activity-desk a.user-name {
@@ -1083,8 +1087,6 @@ ul.p-info .title, ul.p-info .desk {
 	height: 80px;
 	float: left;
 	border: 5px solid #F1F2F7;
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
 }
 
 .author-name {
@@ -1093,6 +1095,7 @@ ul.p-info .title, ul.p-info .desk {
 
 .author-name a {
 	color: #65CEA7;
+	font-size: 12px;
 }
 
 .author-name a:hover {
@@ -1101,12 +1104,14 @@ ul.p-info .title, ul.p-info .desk {
 
 .d-author-post-content-main {
 	float: left;
-	padding: 0 0 20px 20px;
+	padding: 0 0 20px 30px;
 }
 
 .d-content {
-	padding: 24px 20px 0 0;
-	min-height: 170px;
+	padding-top:20px;
+	min-height: 150px;
+	color: #000;
+	overflow: auto;
 }
 
 .p-tail li {

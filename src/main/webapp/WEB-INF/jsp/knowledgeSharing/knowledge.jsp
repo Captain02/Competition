@@ -91,11 +91,11 @@ function deleteTopic(ele) {
 				<a href="" class="toggle-btn"> <span class="glyphicon glyphicon-th-list"></span></a>
 				<jsp:include page="iniUserInfo.jsp"></jsp:include>
 				<div class="clearfix"></div>
-
 			</div>
+			
 			<div class="wrapper">
-					<div class="row">
-						<div class="om-header" style="padding-left:30px;">
+			
+				<div class="om-header">
 					<div class="om-header-left">
 						<h3>
 							<span class="om-title">知识分享</span> <span class="om-list"></span>
@@ -107,11 +107,11 @@ function deleteTopic(ele) {
 						<a href="${APP_PATH}/admin/KnowledgeSharing/list" class="btn btn-success btn-sm">全部知识</a> 
 						<a href="${APP_PATH}/admin/KnowledgeSharing/add" class="btn btn-success btn-sm">+分享知识</a>
 					</div>
-
-
 					<div class="clearfix"></div>
 				</div>
 				
+				<div class="row">
+					<!-- 知识列表 -->
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-12">
@@ -163,11 +163,14 @@ function deleteTopic(ele) {
 																
 																<a onclick="deleteTopic(this)" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
 															</c:if>
-															<input type="hidden" value="${bbsDisplayTopic.id}">
-															<i class="fa fa-thumbs-o-up"></i>${bbsDisplayTopic.like}
-															<i class="fa fa-heart-o"></i>${bbsDisplayTopic.collection}
-															<i class="fa fa-comment-o"></i>${bbsDisplayTopic.comment}
-															<span class="activity-time">${bbsDisplayTopic.date}</span>
+																<input type="hidden" value="${bbsDisplayTopic.id}">
+																<i class="fa fa-thumbs-o-up"></i>
+																${bbsDisplayTopic.like}
+																<i class="fa fa-heart"></i>
+																${bbsDisplayTopic.collection}
+																<span class="activity-time">
+																	${bbsDisplayTopic.date}
+																</span>
 														</p>
 													</div>
 												</li>
@@ -180,14 +183,14 @@ function deleteTopic(ele) {
 											    <li>
 													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=1&isByMyId=${isByMyId}&labelId=${labelId}">首页</a>
 												</li>
-											<c:if test="${pageInfo.hasPreviousPage}">
-												<li>
-													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum-1}&isByMyId=${isByMyId}&labelId=${labelId}"
-													    aria-label="Previous">
-														<span aria-hidden="true">&laquo;</span>
-													</a>
-												</li>
-											</c:if>
+												<c:if test="${pageInfo.hasPreviousPage}">
+													<li>
+														<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=${pageInfo.pageNum-1}&isByMyId=${isByMyId}&labelId=${labelId}"
+														    aria-label="Previous">
+															<span aria-hidden="true">&laquo;</span>
+														</a>
+													</li>
+												</c:if>
 											<c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
 												<c:if test="${pageNum==pageInfo.pageNum}">
 													<li class="active">
@@ -221,8 +224,10 @@ function deleteTopic(ele) {
 									</div>
 								</div>
 							</div>
+					
 						</div>
 					</div>
+						<!-- 知识分类 -->
 					<div class="col-md-4">
 						<div class="panel">
 						<div class="panel-heading">
@@ -284,12 +289,17 @@ function deleteTopic(ele) {
 							</div>
 						</div>
 					</div>
-				</div>
 				
 				</div>
-			</div>
+					
+				
+				</div>
+				
+				
+				</div>
+				
 	</section>
-<script src="${APP_PATH}/static/js/labelMangement.js"></script>
+	<script src="${APP_PATH}/static/js/labelMangement.js"></script>
 
 
 <!--模态框 -->
