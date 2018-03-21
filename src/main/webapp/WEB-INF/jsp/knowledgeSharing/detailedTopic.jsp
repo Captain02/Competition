@@ -12,14 +12,16 @@
 	%>
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
 	
-	<!-- 字体图标 -->
 	<link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
-	<!-- 富文本编辑器 -->
 	<script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 	<script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
-	<!-- 刷新页面后回到上次浏览的位置 -->
 	<script src="${APP_PATH}/static/js/scrollLast.js"></script>
-
+	
+	<link rel="stylesheet" href="${APP_PATH}/static/emoji-picker/lib/css/emoji.css"/>
+	<script src="${APP_PATH}/static/emoji-picker/lib/js/config.js"></script>
+  	<script src="${APP_PATH}/static/emoji-picker/lib/js/util.js"></script>
+  	<script src="${APP_PATH}/static/emoji-picker/lib/js/jquery.emojiarea.js"></script>
+  	<script src="${APP_PATH}/static/emoji-picker/lib/js/emoji-picker.js"></script>
 
 <script type="text/javascript">
 function likeTopic() {
@@ -59,12 +61,10 @@ var repliesId, byRepliesUserId, repliescontent;
 function replies(ele) {
 	
 	var state = $(ele).attr('data-reply-state');
-	alert(state);
 	var topicId = $("#topicId").val();
 	var pn = $("#pn").val();
 	
-	repliescontent = $(ele).siblings('input.editor-container-area').val();
-	
+	repliescontent = $(ele).siblings('div.editor-container-area').html();
 	
 	$.ajax({
 		url : "${APP_PATH}/admin/KnowledgeSharing/addReplies",
@@ -83,6 +83,7 @@ function replies(ele) {
 	})
 }
 </script>
+
 </head>
 
 <body class="bg-common stickey-menu">
@@ -145,9 +146,6 @@ function replies(ele) {
 							</div>
 						</div>
 					</div>
-					
-					
-					
 
 					<!-- 精彩点评 -->
 					<div class="row">
@@ -234,11 +232,13 @@ function replies(ele) {
 													<!--回复框 -->
 													<div class="lzl-editor-container">
 														<div class="editor-container clearfix">
-															<input class="editor-container-area form-control" id="editor" data-comments-id="${comments.id}" type="text"> 
+															<span class="reply-userName"></span>
+															
+															<input class="editor-container-area form-control" id="editor" data-comments-id="${comments.id}" data-emojiable="true" type="text">
+															 
 															<input type="submit" class="btn btn-primary btn-sm btn-editor-reply pull-right" value="发表"  data-reply-state="0" onclick="replies (this);" />
 														</div>
 													</div>
-													
 												</div>
 												<div class="clearfix"></div>
 											</div>
@@ -272,10 +272,23 @@ function replies(ele) {
 
 	</section>
 	<script src="${APP_PATH}/static/js/activity-opreate.js"></script>
-	<script src="${APP_PATH}/static/js/reply.js"></script>
 
 	<script type="text/javascript">
 		$(function() {
+		//初始化emojiPicker配置
+		window.emojiPicker = new EmojiPicker({
+			  emojiable_selector: '[data-emojiable=true]',
+			  assetsPath: '${APP_PATH}/static/emoji-picker/lib/img/',
+			  popupButtonClasses: 'fa fa-smile-o'
+			}).discover();
+			
+			/* 盖楼 */
+			lPost = $('.l-post');
+			lNum = $('.l-num');
+			for (var i = 1; i <= lPost.length; i++) {
+				$(lNum[i - 1]).html(i);
+			}
+			
 			var options1 = {
 				minHeight : '300',
 				width : '100%',
@@ -297,6 +310,7 @@ function replies(ele) {
 			$('.ke-container').css('width', '100%');
 		})
 	</script>
+	<script src="${APP_PATH}/static/js/reply.js"></script>
 </body>
 
 </html>

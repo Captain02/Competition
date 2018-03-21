@@ -141,7 +141,7 @@ function deleteTopic(ele) {
 																标签：
 															    <span>
 															    	<c:forEach items="${bbsDisplayTopic.labelName}" var="labelName">
-															    		${labelName}、
+															    		${labelName}&nbsp;
 															    	</c:forEach>
 																</span>
 															</p>
@@ -163,14 +163,13 @@ function deleteTopic(ele) {
 																
 																<a onclick="deleteTopic(this)" title="删除" class="my-control"><i class="glyphicon glyphicon-trash"></i></a>
 															</c:if>
-																<input type="hidden" value="${bbsDisplayTopic.id}">
-																<i class="fa fa-thumbs-o-up"></i>
-																${bbsDisplayTopic.like}
-																<i class="fa fa-heart"></i>
-																${bbsDisplayTopic.collection}
-																<span class="activity-time">
-																	${bbsDisplayTopic.date}
-																</span>
+															
+															<input type="hidden" value="${bbsDisplayTopic.id}">
+															<i class="fa fa-thumbs-o-up"></i>
+															${bbsDisplayTopic.like}
+															<i class="fa fa-heart"></i>
+															${bbsDisplayTopic.collection}
+															<span class="activity-time">${bbsDisplayTopic.date}</span>
 														</p>
 													</div>
 												</li>
@@ -178,8 +177,8 @@ function deleteTopic(ele) {
 										</ul>
 										<!-- 分页 -->
 										<div class="page-nav pull-right">
-											<nav aria-label="Page navigation">
-											  <ul class="pagination">
+											<nav aria-label="Page navigation ">
+											  <ul class="pagination pagination-sm">
 											    <li>
 													<a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=1&isByMyId=${isByMyId}&labelId=${labelId}">首页</a>
 												</li>
