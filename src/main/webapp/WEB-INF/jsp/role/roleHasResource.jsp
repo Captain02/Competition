@@ -197,8 +197,8 @@ $(function(){
 	                                       <c:forEach items="${resources}" var="resources">
 	                                         <li>
 	                                            <div class="form-group">
-	                                                <label for="id" class="checkbox-inline ">
-	                                                    <input type="checkbox" name="id" class="resourceId" value="${resources.id}"> ${resources.name }
+	                                                <label for="${resources.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${resources.id}" id="${resources.id}"> ${resources.name }
 	                                                </label>
 	                                            </div>
 	                                        </li>
