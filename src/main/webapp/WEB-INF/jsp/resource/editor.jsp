@@ -106,7 +106,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
-                                                    栏　　目
+                                                    	栏　　目
                                                 </label>
                                             </div>
 
