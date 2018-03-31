@@ -34,7 +34,7 @@
     delete from projectbug
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hanming.oa.model.ProjectBug">
+  <insert id="insert" keyProperty="id" parameterType="com.hanming.oa.model.ProjectBug">
     insert into projectbug (id, projectId, demandId, 
       projectTaskId, bugTitle, state, 
       descs, grade, operatingSystem, 

@@ -80,5 +80,14 @@
   	INSERT INTO t_role_resource(roleId,resourceId)
         VALUES(#{roleId},#{resourceId})
   </insert>
+  
+  <!-- void addResourceListId(@Param("id")Integer id, @Param("collect")List<Integer> collect); -->
+  <insert id="addResourceListId">
+  	insert into t_role_resource(roleId,resourceId)
+  	values
+    <foreach collection="collect" item="ids" index="index" separator=",">
+        (#{id},#{ids})
+    </foreach>
+  </insert>
 
 </mapper>

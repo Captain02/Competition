@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.BBSDisplayTopic;
 import com.hanming.oa.model.BugDisplay;

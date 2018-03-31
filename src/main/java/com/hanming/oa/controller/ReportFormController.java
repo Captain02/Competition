@@ -135,6 +135,7 @@ public class ReportFormController {
 		if ("Bug指派比例".equals(name)) {
 			List<BugDisplay> list = bugService.list("状态", "名称", 0, projectId, 0);
 			Map<String, Long> map = list.stream()
+				.filter((x) -> x.getAssginor()!=null)
 				.map(BugDisplay::getAssginor)
 				.collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 			

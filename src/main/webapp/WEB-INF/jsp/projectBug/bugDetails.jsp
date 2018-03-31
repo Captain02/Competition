@@ -21,6 +21,20 @@
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 <script type="text/javascript">
+
+function dele(ele) {
+	var id = $(ele).attr('data-id');
+	$.ajax({
+		url:"${APP_PATH}/admin/bug/dele",
+		data:{
+			'id':id
+		},
+		type:"POST",
+		success:function(result){
+		}
+	})
+}
+
 function changeState(ele) {
 	var state = $(ele).attr('data-state');
 	var bugId = $(ele).attr('data-bugId');
@@ -97,7 +111,7 @@ function changeState(ele) {
 	                    <div class="content">${bugDetailed.projectTaskName}</div>
 						<input type="hidden" value="">
 		                    <a class="btn btn-danger" href="${APP_PATH}/admin/bug/editor?bugId=${bugDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
-		                    <a onclick="" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
+		                    <a onclick="dele(this);" data-id="${bugDetailed.id}" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
 		                    <a onclick="changeState(this);" data-project-state="${bugDetailed.state}" data-state="设计如此" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">设计如此</a> 
 		                    <a onclick="changeState(this);" data-project-state="${bugDetailed.state}" data-state="重复Bu" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">重复Bug</a> 
 		                    <a onclick="changeState(this);" data-project-state="${bugDetailed.state}" data-state="外部原因" data-bugId="${bugDetailed.id}" class="btn p-follow-btn">外部原因</a> 

@@ -120,8 +120,26 @@ public class RoleController {
 	public String roleHasRersource(@PathVariable("id") Integer id, @PathVariable("pn") Integer pn, Model model) {
 		model.addAttribute("pn", pn);
 		List<Resource> list = roleService.selectRoleHasResource(id);
+		List<Resource> system = resourceService.listByColumn("系统管理");
+		List<Resource> organization = resourceService.listByColumn("组织管理");
+		List<Resource> schedule = resourceService.listByColumn("日程管理");
+		List<Resource> project = resourceService.listByColumn("项目管理");
+		List<Resource> workAttendence = resourceService.listByColumn("考勤管理");
+		List<Resource> examination = resourceService.listByColumn("审批管理");
+		List<Resource> knowlege = resourceService.listByColumn("知识管理");
+		List<Resource> image = resourceService.listByColumn("相册管理");
+		List<Resource> processDefinition = resourceService.listByColumn("流程管理");
+		System.out.println("++++++++++++++++++++++++++++++++"+schedule);
 		model.addAttribute("roleHasResourceList", list);
-		model.addAttribute("resources", resourceService.list());
+		model.addAttribute("system", system);
+		model.addAttribute("resources", organization);
+		model.addAttribute("schedule", schedule);
+		model.addAttribute("project", project);
+		model.addAttribute("workAttendence", workAttendence);
+		model.addAttribute("examination", examination);
+		model.addAttribute("knowlege", knowlege);
+		model.addAttribute("image", image);
+		model.addAttribute("processDefinition", processDefinition);
 		model.addAttribute("roleId", id);
 		return "role/roleHasResource";
 	}

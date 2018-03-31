@@ -95,6 +95,14 @@
   	where name like "%" #{name} "%"
   </select>
   
+  <!-- List<Resource> listByColumn(@Param("columnStr")String columnStr); -->
+  <select id="listByColumn" resultType="Resource">
+  	select
+  	<include refid="Base_Column_List" />
+  	from t_resource
+  	where `column` = #{columnStr}
+  </select>
+  
   <!-- int selectRoleByResourceId(Integer id); -->
   <select id="selectRoleByResourceId" parameterType="Integer" resultType="Integer">
   	SELECT COUNT(*)

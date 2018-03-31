@@ -233,4 +233,12 @@ public class BugController {
 			e.printStackTrace();
 		}
 	}
+
+	// 删除
+	@ResponseBody
+	@RequestMapping(value = "/dele", method = RequestMethod.POST)
+	public Msg dele(@RequestParam("id") Integer id) {
+		bugService.delete(id);
+		return Msg.success();
+	}
 }

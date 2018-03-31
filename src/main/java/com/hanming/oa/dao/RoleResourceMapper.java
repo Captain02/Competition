@@ -1,5 +1,7 @@
 package com.hanming.oa.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.hanming.oa.model.RoleResource;
@@ -20,4 +22,6 @@ public interface RoleResourceMapper {
 	void deleteByRoleId(Integer id);
 
 	void addRoleResource(@Param("roleId") int roleId,@Param("resourceId") int resourceId);
+
+	void addResourceListId(@Param("id")Integer id, @Param("collect")List<Integer> collect);
 }

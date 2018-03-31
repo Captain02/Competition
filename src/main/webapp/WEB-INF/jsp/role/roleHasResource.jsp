@@ -115,7 +115,35 @@ $(function(){
 	                           </c:forEach>
 	
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-								  
+								  <!-- 系统管理 -->
+								  <div class="panel panel-default">
+								    <div class="panel-heading" role="tab" id="headingOne">
+								      <h4 class="panel-title">
+								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#ScheduleManagement" aria-expanded="false" aria-controls="ScheduleManagement">
+								          	权限：系统管理
+								        </a>
+								      </h4>
+								    </div>
+								    <div id="ScheduleManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								      <div class="panel-body">
+								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${system}" var="system">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${system.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${system.id}" id="${system.id}"> ${system.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
+								      </div>
+								   </div>
+								  </div>
 								  <!-- 权限：日程管理 -->
 								  <div class="panel panel-default">
 								    <div class="panel-heading" role="tab" id="headingOne">
@@ -127,7 +155,21 @@ $(function(){
 								    </div>
 								    <div id="ScheduleManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 								      <div class="panel-body">
-								       
+								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${schedule}" var="schedule">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${schedule.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${schedule.id}" id="${schedule.id}"> ${schedule.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								   </div>
 								  </div>
@@ -143,7 +185,21 @@ $(function(){
 								    </div>
 								    <div id="ProjectManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 								      <div class="panel-body">
-								       
+								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${project}" var="project">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${project.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${project.id}" id="${project.id}"> ${project.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								    </div>
 								  </div>
@@ -159,7 +215,21 @@ $(function(){
 								    </div>
 								    <div id="AttendanceManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 								      <div class="panel-body">
-								       
+								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${workAttendence}" var="workAttendence">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${workAttendence.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${workAttendence.id}" id="${workAttendence.id}"> ${workAttendence.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								    </div>
 								  </div>
@@ -175,7 +245,21 @@ $(function(){
 								    </div>
 								    <div id="ApprovalManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
 								      <div class="panel-body">
-								       
+								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${examination}" var="examination">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${examination.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${examination.id}" id="${examination.id}"> ${examination.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								    </div>
 								  </div>
@@ -221,7 +305,21 @@ $(function(){
 								    </div>
 								    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 								      <div class="panel-body">
-								        
+								        <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${processDefinition}" var="processDefinition">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${processDefinition.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${processDefinition.id}" id="${processDefinition.id}"> ${processDefinition.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								    </div>
 								  </div>
@@ -237,7 +335,21 @@ $(function(){
 								    </div>
 								    <div id="ProcessManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
 								      <div class="panel-body">
-								        
+								        <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${knowlege}" var="knowlege">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${knowlege.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${knowlege.id}" id="${knowlege.id}"> ${knowlege.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								    </div>
 								  </div>
@@ -253,7 +365,21 @@ $(function(){
 								    </div>
 								    <div id="StaffPhoto" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
 								      <div class="panel-body">
-								        
+								        <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
+	                               <li>
+	                                   <ul class="resource-name clearfix">
+	                                       <c:forEach items="${image}" var="image">
+	                                         <li>
+	                                            <div class="form-group">
+	                                                <label for="${image.id}" class="checkbox-inline ">
+	                                                    <input type="checkbox" name="id" class="resourceId" value="${image.id}" id="${image.id}"> ${image.name }
+	                                                </label>
+	                                            </div>
+	                                        </li>
+	                                        </c:forEach>
+	                                   </ul>
+	                               </li>
+	                           </ul>
 								      </div>
 								    </div>
 								  </div>

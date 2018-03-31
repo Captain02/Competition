@@ -74,5 +74,15 @@ public class ScheduleController {
 		
 		return Msg.success();
 	}
+	
+	//查询详细信息
+	@ResponseBody
+	@RequestMapping(value="/clickBySchedule",method=RequestMethod.GET)
+	public Msg clickBySchedule(@RequestParam("schedule")Integer id) {
+		
+		Schedule schedule = scheduleService.select(id);
+		
+		return Msg.success().add("schedule", schedule);
+	}
 
 }

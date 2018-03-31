@@ -1,11 +1,13 @@
 package com.hanming.oa.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hanming.oa.dao.ResourceMapper;
 import com.hanming.oa.dao.RoleMapper;
 import com.hanming.oa.dao.RoleResourceMapper;
 import com.hanming.oa.model.Resource;
@@ -19,6 +21,8 @@ public class RoleService {
 	RoleMapper roleMapper;
 	@Autowired
 	RoleResourceMapper roleResourceMapper;
+	@Autowired
+	ResourceMapper resourceMapper;
 
 	public int deleteByPrimaryKey(Integer id) {
 		int i = roleMapper.deleteByPrimaryKey(id);
@@ -30,8 +34,14 @@ public class RoleService {
 		return insert;
 	}
 
+	@Transactional
 	public int insertSelective(Role record) {
 		int insertSelective = roleMapper.insertSelective(record);
+		List<Resource> column = resourceMapper.listByColumn("默认权限");
+		List<Integer> collect = column.stream()
+				.map(Resource::getId)
+				.collect(Collectors.toList());
+		roleResourceMapper.addResourceListId(record.getId(),collect);
 		return insertSelective;
 	}
 

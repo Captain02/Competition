@@ -59,4 +59,10 @@ public class ResourceService {
 		return i;
 	}
 
+	public List<Resource> listByColumn(String columnStr) {
+		List<Resource> listByColumn = resourceMapper.listByColumn(columnStr);
+		return listByColumn;
+	}
+
+
 }

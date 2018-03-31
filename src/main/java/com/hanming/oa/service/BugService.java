@@ -91,4 +91,9 @@ public class BugService {
 		return bug;
 	}
 
+	public void delete(Integer id) {
+		projectBugMapper.deleteByPrimaryKey(id);
+	}
+
+
 }
