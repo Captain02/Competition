@@ -18,6 +18,7 @@
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
 <script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
@@ -34,6 +35,11 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 	//抄送人id
 	//var copyToUserId = $('#ccid')
 	var formData = new FormData($("#DustyForm")[0]);
@@ -45,13 +51,31 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
-			$('#myModal').modal('show');
-			$('.modal-footer').remove();
-			ShowTips('.modal-title','添加结果','.modal-body','成功添加一个任务');
-			setTimeout(function(){
-				$('#myModal').modal('hide');
-				window.location.href='${APP_PATH}/admin/dusty/list';
-			},1000);
+			if (result.code == 100) {
+				 $('#myModal').modal('show');
+					$('.modal-footer').remove();
+					ShowTips('.modal-title','添加结果','.modal-body','成功添加一个任务');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+						window.location.href='${APP_PATH}/admin/dusty/list';
+					},1000); 
+			}else{
+				if (undefined != result.extend.errorFields.descs) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+				if (undefined != result.extend.errorFields.remarks) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','备注不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+			}
+			
 		}
 	})  
 }
@@ -93,20 +117,22 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>关联需求</label>
 								<div class="col-sm-10">
-									<select name="demandId" class="form-control">
-										<option value="${singleDemand.id}">${singleDemand.demandName}</option>
+									<select name="demandId" class="form-control select-menu">
+										<option value="" style="display: none;">请选择关联哪个需求</option>
 				                      <c:forEach items="${demands}" var="demand">
 										<option value="${demand.id}">${demand.demandName}</option>
 									</c:forEach>
 		                    		</select>
+		                    		
+		                    		<span></span>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>任务类型</label>
 								<div class="col-sm-10">
-									<select name="taskType" class="form-control">
-				                      <option value="${dustyDetailed.taskType}" >${dustyDetailed.taskType}</option>
+									<select name="taskType" class="form-control select-menu">
+				                      <option value="" style="display: none;">请选择任务类型</option>
 				                      <option value="设计" >设计</option>
 							          <option value="开发" >开发</option>
 							          <option value="测试" >测试</option>
@@ -116,24 +142,29 @@ function save() {
 							          <option value="事务" >事务</option>
 							          <option value="其他" >其他</option>
 				                    </select>
+				                    
+				                    <span></span>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>指派给</label>
 								<div class="col-sm-10">
-								<select name="assignor" class="form-control">
+								<select name="assignor" class="form-control select-menu">
 									<c:forEach items="${team}" var="user">
 										<option value="${user.id}">${user.name}</option>
 									</c:forEach>
 								</select>
+								
+								<span></span>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">任务名称</label>
 								<div class="col-sm-10">
-									<input name="taskName" value="${dustyDetailed.taskName}" class="form-control" placeholder="任务名称" type="text">
+									<input name="taskName" value="${dustyDetailed.taskName}" class="form-control" id="name" placeholder="任务名称" type="text">
+									<span></span>
 								</div>
 							</div>
 							
@@ -154,13 +185,15 @@ function save() {
 							<div class="form-group">
 			                  <label class="col-sm-2 col-sm-2 control-label">优先级</label>
 			                  <div class="col-sm-10">
-			                    <select name="grade" class="form-control">
-			                      <option value="${dustyDetailed.grade}">${dustyDetailed.grade}</option>
+			                    <select name="grade" class="form-control select-menu">
+			                      <option value="" style="display: none;">请选择优先级</option>
 			                      <option value="1级">1级</option>
 			                      <option value="2级">2级</option>
 			                      <option value="3级">3级</option>
 			                      <option value="4级">4级</option>
 			                    </select>
+			                    
+			                    <span></span>
 			                  </div>
                 		</div>
                 		
@@ -204,7 +237,7 @@ function save() {
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
 							<div class="col-sm-10">
-								<button type="button" onclick="save()"  class="btn btn-success">提交</button>
+								<button type="button" onclick="save()"  class="btn btn-success save-button">提交</button>
 							</div>
 						</div>
 						</form>

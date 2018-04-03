@@ -31,6 +31,12 @@ function dele(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','操作结果','.modal-body','该版本已删除');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/bug/list';
+			},1000);
 		}
 	})
 }

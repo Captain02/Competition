@@ -118,7 +118,7 @@
       <if test="enclosure != null">
         enclosure = #{enclosure,jdbcType=VARCHAR},
       </if>
-      <if test="enclosure != null">
+      <if test="filename != null">
         filename = #{filename,jdbcType=VARCHAR},
       </if>
     </set>

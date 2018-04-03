@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 <script type="text/javascript">
 (function($){
     $.fn.serializeJson = function(){
@@ -72,8 +73,12 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 	//发送ajax请求
-	alert($("#taskbatch-form").serializeJson());
 	  $.ajax({
 		url:"${APP_PATH}/admin/dusty/addBatch",
 		type:"POST",
@@ -81,6 +86,12 @@ function save() {
         dataType:"json",
 		data:$("#taskbatch-form").serializeJson(),
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','操作结果','.modal-body','成功添加多个任务');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/dusty/list';
+			},1000);
 		}
 	}) 
 }
@@ -139,7 +150,7 @@ function save() {
 						<div class="panel-body">
 							<section id="unseen">
                 <form id="taskbatch-form" method="Post" novalidate="novalidate">
-                  <table class="table table-bordered table-striped table-condensed">
+                  <table class="table table-bordered table-striped table-condensed table-addBatch">
                     <thead>
                       <tr>
 						<th style="width:14%;">相关需求</th>
@@ -157,17 +168,18 @@ function save() {
                 <c:forEach items="${counts}">
                     <tr class="js-clone">
 					  <td>
-					  	<select name="demandId" class="form-control">
-                      		<option value="">相关需求</option>
+					  	<select name="demandId" class="form-control select-menu">
+                      		<option value="" style="display: none;">相关需求</option>
                       		 <c:forEach items="${demands}" var="demand">
 								<option value="${demand.id}">${demand.demandName}</option>
 							</c:forEach>
 						</select>
+						
+						<span></span>
 					  </td>
-                      <td><input name="taskName" class="form-control" type="text"></td>
+                      <td><input name="taskName" id="name" class="form-control" type="text"><span></span></td>
                       <td>
-                      	<select name="taskType" class="form-control">
-	                      <option value="">任务类型</option>
+                      	<select name="taskType" class="form-control select-menu">
 	                      <option value="1">设计</option>
 	                      <option value="2">开发</option>
 	                      <option value="3">测试</option>
@@ -179,16 +191,15 @@ function save() {
                     	</select>
                     </td>
                       <td>
-                      	<select name="assignor" class="form-control">
-              				<option value="">指派给</option>
+                      	<select name="assignor" class="form-control select-menu">
               				<c:forEach items="${team}" var="user">
 								<option value="${user.id}">${user.name}</option>
 							</c:forEach>
             			</select>
             		</td>
-                      <td><input name="workTime" class="form-control" type="number"></td>
-                      <td><input name="descs" class="form-control" type="text"></td>
-                      <td><select name="grade" class="form-control">
+                      <td><input name="workTime" class="form-control" type="number"><span></span></td>
+                      <td><input name="descs" id="name" class="form-control" type="text"></td>
+                      <td><select name="grade" class="form-control select-menu">
                       <option value="1级">1级</option>
                       <option value="2级">2级</option>
                       <option value="3级">3级</option>
@@ -239,6 +250,18 @@ function save() {
 			 		 })
 			 		</script>
 		</div>
+		<!-- 模态框 -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
 	</section>
 </body>
 </html>

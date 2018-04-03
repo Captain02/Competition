@@ -37,12 +37,12 @@
                     <form action="${APP_PATH}/admin/document/list" class="serach-form" method="get">
 
                         
-						<select name="type" class="form-control">
+						<select name="type" class="form-control" data-type="${type}">
 				          <option value="类型">类型</option>
 				          <option value="正文">正文</option>
 				          <option value="连接">连接</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${documentName}" class="form-control" name="documentName">
+                        <input type="text" placeholder="输入项目名称" value="${documentName == '文档名'?'':documentName}" class="form-control" name="documentName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 

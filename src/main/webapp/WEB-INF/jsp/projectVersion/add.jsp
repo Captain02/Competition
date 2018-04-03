@@ -13,10 +13,12 @@
 
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link rel="stylesheet" href="${APP_PATH}/static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
@@ -34,6 +36,11 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 	var formData = new FormData($("#versionForm")[0]);
 	//发送ajax请求
 	  $.ajax({
@@ -43,12 +50,22 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
-			$('#myModal').modal('show');
-			ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新版本');
-			setTimeout(function(){
-				$('#myModal').modal('hide');
-				window.location.href='${APP_PATH}/admin/version/list';
-			},1000);
+			if (result.code == 100) {
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新版本');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href='${APP_PATH}/admin/version/list';
+				},1000);
+			}else{
+				if (undefined != result.extend.errorFields.descs) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+			}
 		}
 	}) 
 }
@@ -90,14 +107,15 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>版本名称</label>
 								<div class="col-sm-10">
-									<input name="versionName" value="" class="form-control" placeholder="填写版本名称" type="text">
+									<input name="versionName" value="" class="form-control" id="name" placeholder="填写版本名称" type="text">
+									<span></span>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">打包日期</label>
 								<div class="col-sm-10">
-									<input name="versionTime" value="" class="form-control" placeholder="打包日期" type="text">
+									<input name="versionTime" value="" class="form-control dpd1" placeholder="打包日期" type="text">
 								</div>
 							</div>
 							
@@ -160,6 +178,21 @@ function save() {
 			</div>
 			
 		</div>
+		<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+			 		<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+			 		<script type="text/javascript">
+			 		 $(function(){
+			 			 var checkin = $('.dpd1').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 				 language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+			 				$('.dpd1').datetimepicker('hide'); 
+			 			 })
+			 			
+			 		 })
+			 		</script>
 	</section>
 </body>
 </html>

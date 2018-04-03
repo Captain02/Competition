@@ -17,11 +17,23 @@
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
+<script type="text/javascript">
+	function dele(ele){
+		//执行此方法，得到所选择的id
+		selectAllTips();
+	}
+	
+	$(function(){
+		var ids = $('.ids').val();
+		$('.yes').click(function(){
+			alert(ids);
+		})
+	})
+</script>
 </head>
     <body class="bg-common stickey-menu">
 
         <section>
-
             <!-- 页面模版，每页左侧区域固定不变 -->
              <jsp:include page="iniLeftMenu.jsp"></jsp:include>
 
@@ -39,14 +51,14 @@
 
                         
 
-                       <select class="form-control" name="type" value="类型">
+                       <select class="form-control" name="type" data-type="${type}">
                             <option>类型</option>
                             <option>点赞</option>
                             <option>评论</option>
                             <option>收藏</option>
                         </select>
-                        <select class="form-control" name="state" value="状态">
-                            <option>类型</option>
+                        <select class="form-control" name="state" data-type="${state}">
+                            <option>状态</option>
                             <option>已读</option>
                             <option>未读</option>
                         </select>
@@ -89,14 +101,15 @@
                                 <header class="om-wrapper-header">消息管理 / 总数：${pageInfo.total}</header>
 
                                 <div class="om-wrpper-body">
-                                    <form action="" id="user-list" class="user-list">
+                                   
                                         <table class="table table-info">
 
                                             <thead>
                                                 <tr>
                                                 <th colspan="1">
                                                 	<input type="checkbox" name="selectAll" class="selectAll pull-left" id="selectAll">
-                                                	<button class="btn btn-danger btn-sm pull-left" style="margin-left: 20px;">删除</button>
+                                                	<button class="btn btn-danger pull-left" style="margin-left: 20px;" onclick="dele();">删除</button>
+                                                	<input type="hidden" value=""  class="ids"/>
                                                 </th>
                                                   
                                                 </tr>
@@ -107,6 +120,7 @@
 	                                                <tr>
 	                                                <td colspan="1">
 	                                                   <input type="checkbox" name="selectItem" class="selectItem pull-left">
+	                                                   <input type="hidden" value="${systemMessage.id}">
 	                                                   <div class="info-desc" style="margin-left: 20px;">
 		                                                   <a href="这里加个人主页链接" class="pull-left info-img">
 		                                                   	<img src="${APP_PATH}/personHeadFile/${systemMessage.headFile}" alt="" />
@@ -128,7 +142,7 @@
                                             </tbody>
 
                                         </table>
-                                    </form>
+                                    
                                 </div>
                                 
                                 <nav aria-label="Page navigation" class="pull-right">

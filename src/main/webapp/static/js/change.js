@@ -315,6 +315,16 @@ $(function () {
 		})
 	});//end
 	
+//	select 赋值
+	$('form.serach-form select').each(function(){
+		var select = $(this)
+		$(this).children('option').each(function(){
+			if($(this).html() === select.attr('data-type')){
+				$(this).prop('selected',true);
+			}
+		})
+	})
+	
 })
 
 //动态插入消息节点到消息列表中

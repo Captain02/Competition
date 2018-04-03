@@ -10,11 +10,13 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,7 +105,9 @@ public class DustyController {
 	// 添加
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(Dusty dusty, @RequestParam("ccid") String ccid, MultipartFile file, HttpServletRequest request) {
+	public Msg add(@Valid Dusty dusty,BindingResult result, @RequestParam("ccid") String ccid, MultipartFile file, HttpServletRequest request) {
+		
+		
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		dusty.setCreatPeople(userId);
@@ -191,7 +195,8 @@ public class DustyController {
 	// 编辑
 	@ResponseBody
 	@RequestMapping(value = "/editor", method = RequestMethod.POST)
-	public Msg editor(Dusty dusty, MultipartFile file, HttpServletRequest request) {
+	public Msg editor(@Valid Dusty dusty,BindingResult result, MultipartFile file, HttpServletRequest request) {
+		
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 

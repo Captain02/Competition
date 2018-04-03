@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,13 +17,12 @@
 <script src="${APP_PATH}/static/js/echarts.js"></script>
 <script src="${APP_PATH}/static/js/shine.js"></script>
 <script type="text/javascript">
-function callbackFn(myChart,jsonURL){ 
+function callbackFn(myChart,jsonURL,data){ 
 		$.ajax({
 			url :jsonURL,
-			data : "date=2017",
+			data : "date="+data,
 			type : "GET",
 			success : function(result) {
-				
 				 myChart.setOption({  
                      series: [{  
                          // 根据名字对应到相应的系列  
@@ -36,6 +36,17 @@ function callbackFn(myChart,jsonURL){
 			}
 		})
 }
+
+$(function(){
+	$('.select-year').change(function(){
+		var showDivId = 'main';
+		var myChart = echarts.init(document.getElementById(showDivId));
+		var jsonURL = "${APP_PATH}/admin/reimbursement/dataAnalysis";
+		var data = $(this).val();
+		
+		callbackFn(myChart,jsonURL,data);
+	})
+})
 </script>
 </head>
 
@@ -94,6 +105,16 @@ function callbackFn(myChart,jsonURL){
 									style="font-size: 1.5rem; color: #1691be;">
 									<span class="glyphicon glyphicon-stats"
 										style="margin-right: 5px;"></span>报销数据统计图
+									
+									<select class="form-control pull-right select-year" style="width: 250px;">
+										<option style="display: none;">选择年份</option>
+										<c:forEach items="${years}" var="year">
+										<option>${year}</option>
+										</c:forEach>
+									</select>
+									
+									
+									
 								</header>
 
 								<div class="om-wrpper-body">									

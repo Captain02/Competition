@@ -17,6 +17,7 @@
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
 <!-- 动态显示流程审批人数量 -->
 <script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 <script type="text/javascript">
 
 
@@ -42,6 +43,11 @@ $(function(){
 
 
 function addReimbursement() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 	var persons = "";
 	$.each($(".addPerson"), function() {
 		persons += $(this).text() + "-";
@@ -60,6 +66,16 @@ function addReimbursement() {
 				$('#myModal').modal('show');
 				ShowTips('.modal-title','操作结果','.modal-body','<b style = "color:#5cb85c;">' + '已成功提交报销申请' + '</b>');
 				ShowEle('.yes','show');
+			}else{
+				if(undefined != result.extend.errorFields.money){
+            		show_validate_msg("#money", "error", "结束时间不为空");
+            	}
+				if(undefined != result.extend.errorFields.type){
+            		show_validate_msg("#type", "error", "请假天数不为空");
+            	}
+				if(undefined != result.extend.errorFields.detailed){
+            		show_validate_msg("#detailed", "error", "描述不为空");
+            	}
 			}
 		}
 	})
@@ -91,7 +107,7 @@ function addReimbursement() {
 			<!-- 页面模版，按需更改 -->
 			<div class="wrapper">
 
-				<div class="row">
+				
 					<div class="om-header">
 
 						<jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
@@ -120,24 +136,27 @@ function addReimbursement() {
 													<label class="col-sm-2 col-sm-2 control-label"> <span>*</span>报销金额
 													</label>
 													<div class="col-sm-10">
-														<input name="money" class="form-control"
+														<input id="money" name="money" class="form-control onlyNumber"
 															placeholder="请输入金额" type="number">
+														<span></span>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-2 col-sm-2 control-label"> <span>*</span>报销类型
 													</label>
 													<div class="col-sm-10">
-														<input name="type" class="form-control"
+														<input id="type" name="type" class="form-control notNull"
 															placeholder="请输入报销类型，如采购经费、活动经费" type="text">
+														<span></span>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-sm-2 col-sm-2 control-label"> <span>*</span>报销明细
 													</label>
 													<div class="col-sm-10">
-														<textarea name="detailed" placeholder="报销明细"
-															style="height: 94px;" class="form-control"></textarea>
+														<textarea id="detailed" name="detailed" placeholder="报销明细"
+															style="height: 94px;" class="form-control notNull"></textarea>
+														<span></span>
 													</div>
 												</div>
 											</div>
@@ -182,7 +201,7 @@ function addReimbursement() {
 												<label class="col-lg-2 col-sm-2 control-label"></label>
 												<div class="col-lg-10">
 													<button type="button" onclick="addReimbursement()"
-														class="btn btn-primary btn-success">提交保存</button>
+														class="btn btn-primary btn-success save-button">提交保存</button>
 														<span class="add-error-ms" style="color:red;"></span>
 												</div>
 											</div>
@@ -199,7 +218,6 @@ function addReimbursement() {
 				</div>
 
 			</div>
-		</div>
 	</section>
 	<!-- 模态框 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"

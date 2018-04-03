@@ -56,7 +56,7 @@ String basePath2 = request.getScheme() + "://"
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li>
-                                <a href="#">个人主页</a>
+                                <a href="${APP_PATH}/admin/personPage/list">个人主页</a>
                             </li>
                             <li role="separator" class="divider"></li>
                              <li>

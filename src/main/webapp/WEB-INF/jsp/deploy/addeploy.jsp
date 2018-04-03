@@ -11,8 +11,14 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 <script type="text/javascript">
 	function saveDeploy() {
+		//判定页面上是否有错误信息
+		ifErrorMessage();
+		 if ($('.save-button').attr("ajax-va") == "error") {
+		        return false;
+		}
 		var formData = new FormData($("#fileForm")[0]);
 		$.ajax({
 			url : "${APP_PATH}/admin/deploy/add",
@@ -21,7 +27,12 @@
 			processData : false,
 			contentType : false,
 			success : function(result) {
-				console.log(result);
+				$('#myModal').modal('show');
+				ShowTips('.modal-title','添加结果','.modal-body','成功添加一个流程');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href='${APP_PATH}/admin/deploy/list';
+				},1000);
 			}
 		})
 	}
@@ -94,14 +105,15 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input name="num" type="number" class="form-control">
+                                                        <input name="num" type="number" class="form-control onlyNumber">
+                                                        <span></span>
                                                     </div>
 
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label for="" class="control-label" style="text-align: left">
-                                                           	<input type="button" onclick="saveDeploy()" value="上传" class="btn btn-defult btn-success">
+                                                           	<input type="button" onclick="saveDeploy()" value="上传" class="btn btn-defult btn-success save-button">
                                                         </label>
                                                     </div>
                                                 </div>
@@ -120,6 +132,22 @@
 	
 			</div>
 		</div>
+		<!-- 模态框 -->
+				 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel"></h4>
+				      </div>
+				      <div class="modal-body">
+				      
+				      
+				      </div>
+				     
+				    </div>
+				  </div>
+				</div>
 		</section>
 	
 	</body>

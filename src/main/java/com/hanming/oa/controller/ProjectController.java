@@ -52,11 +52,11 @@ public class ProjectController {
 			@RequestParam(value = "projectName", defaultValue = "项目名称") String projectName, Model model) {
 
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		
+
 		PageInfo<ProjectDisplay> pageInfo = null;
 		PageHelper.startPage(pn, 8);
-		List<ProjectDisplay> list = projectService.list(state, projectName,userId);
-		pageInfo = new PageInfo<>(list,5);
+		List<ProjectDisplay> list = projectService.list(state, projectName, userId);
+		pageInfo = new PageInfo<>(list, 5);
 
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("state", state);
@@ -70,7 +70,7 @@ public class ProjectController {
 	@RequestMapping(value = "/changeState", method = RequestMethod.POST)
 	public Msg changState(@RequestParam("state") String state, @RequestParam("projectId") Integer projectId) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
-		projectService.updateStateByProjectId(state, projectId,userId);
+		projectService.updateStateByProjectId(state, projectId, userId);
 		return Msg.success();
 	}
 
@@ -87,7 +87,12 @@ public class ProjectController {
 	public Msg add(Model model, @RequestParam("projectName") String projectName,
 			@RequestParam("projectAlias") String projectAliasName,
 			@RequestParam("projectStartDate") String projectStartDate,
-			@RequestParam("projectEndDate") String projectEndDate, @RequestParam("projectDesc") String projectDesc) {
+			@RequestParam("projectEndDate") String projectEndDate,
+			@RequestParam(value = "projectDesc", defaultValue = "") String projectDesc) {
+		if ("".equals(projectDesc)) {
+			return Msg.fail().add("errorFields", "描述不为空");
+		}
+		
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 
 		Project project = new Project();
@@ -101,7 +106,7 @@ public class ProjectController {
 		project.setState("进行");
 		project.setReleaseControl("公开（所有人）");
 
-		projectService.insert(project,userId);
+		projectService.insert(project, userId);
 
 		return Msg.success();
 	}
@@ -111,7 +116,7 @@ public class ProjectController {
 	public String update(@RequestParam("projectId") Integer projectId, Model model) {
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		List<User> list = userService.list();
-		List<UserByProjectId> team = projectTeamService.list(projectId,"姓名");
+		List<UserByProjectId> team = projectTeamService.list(projectId, "姓名");
 		List<User> MyWhite = WhiteListServer.listByProjectId(projectId);
 		model.addAttribute("white", list);
 		model.addAttribute("MyWhite", MyWhite);
@@ -125,25 +130,27 @@ public class ProjectController {
 	@RequestMapping(value = "/editor", method = RequestMethod.POST)
 	public Msg update(Project project, @RequestParam(value = "whiteNameId", required = false) String whiteNameId,
 			@RequestParam(value = "descs", required = false) String descs) {
+		if ("".equals(descs)) {
+			return Msg.fail().add("errorFields", "描述不为空");
+		}
 		project.setDescs(descs);
-		projectService.update(project,whiteNameId);
+		projectService.update(project, whiteNameId);
 		return Msg.success();
 	}
 
 	// 跳转详情页
 	@RequestMapping(value = "/projectDetails", method = RequestMethod.GET)
-	public String detailed(@RequestParam("projectId") Integer projectId, Model model,HttpServletRequest request) {
+	public String detailed(@RequestParam("projectId") Integer projectId, Model model, HttpServletRequest request) {
 		request.getSession().setAttribute("projectId", projectId);
-		
+
 		List<ProjectHistoryDisplay> list = projectHistoryService.listByTypeAndTypeId(projectId, "项目");
 		model.addAttribute("projectHistory", list);
-		
+
 		ProjectDetailed projectDetailed = projectService.projectDetailed(projectId);
 		model.addAttribute("projectDetailed", projectDetailed);
 		model.addAttribute("subDays",
 				(DateTool.substractTime(projectDetailed.getEndDate(), DateTool.dateToYearMonthDay(new Date()))) / 60
 						/ 12);
-		
 
 		return "projectManagement/projectDetails";
 	}

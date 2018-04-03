@@ -2,10 +2,14 @@ package com.hanming.oa.controller;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -18,6 +22,7 @@ import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.User;
@@ -98,7 +104,7 @@ public class ReimbursementController {
 	// 我要报销
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file, @RequestParam("persons") String persons, Reimbursement reimbursement,
+	public Msg add(MultipartFile file, @RequestParam("persons") String persons,@Valid Reimbursement reimbursement,BindingResult result,
 			HttpServletRequest request, String processDefinitionKey) {
 		int i = reimbursementService.addReimbursement(persons, file, reimbursement, request, processDefinitionKey);
 
@@ -148,14 +154,23 @@ public class ReimbursementController {
 
 	// 跳转数据分析页面
 	@RequestMapping(value = "/dataAnalysisPage", method = RequestMethod.GET)
-	public String dataAnalysisPage() {
+	public String dataAnalysisPage(Model model) {
+		List<Reimbursement> list = reimbursementService.listLikeStateType("状态", "类型");
+			Set<String> collect = list.stream()
+			.map(Reimbursement::getDate)
+			.map((x) -> x.substring(0, 4))
+			.collect(Collectors.toSet());
+		model.addAttribute("years", collect);
 		return "reimbursement/analysis";
 	}
 
 	// 跳转数据分析
 	@ResponseBody
 	@RequestMapping(value = "/dataAnalysis", method = RequestMethod.GET)
-	public List<Object> dataAnalysis(@RequestParam(value = "date", defaultValue = "2017") String date) {
+	public List<Object> dataAnalysis(@RequestParam(value = "date", defaultValue = "undefined") String date) {
+		if ("undefined".equals(date)) {
+			date = DateTool.dateToString(new Date()).substring(0, 4);
+		}
 		List<Object> list = reimbursementService.dataAnalysisByMonth(date);
 
 		return list;
@@ -207,20 +222,6 @@ public class ReimbursementController {
 			e.printStackTrace();
 		}
 
-		/*
-		 * // 获取文件 String fileName =
-		 * request.getSession().getServletContext().getRealPath("upload") + "/" +
-		 * reimbursementByReimbursementId.getEnclosure(); // 获取输入流 InputStream bis = new
-		 * BufferedInputStream(new FileInputStream(new File(fileName))); // 假如以中文名下载的话
-		 * String filename = reimbursementByReimbursementId.getFilename(); //
-		 * 转码，免得文件名中文乱码 filename = URLEncoder.encode(filename, "UTF-8"); // 设置文件下载头
-		 * response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-		 * // 1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-		 * response.setContentType("multipart/form-data"); BufferedOutputStream out =
-		 * new BufferedOutputStream(response.getOutputStream()); int len = 0; byte[] bs
-		 * = new byte[1024]; while ((len = bis.read(bs)) != -1) { out.write(bs, 0, len);
-		 * out.flush(); } out.close(); bis.close();
-		 */
 	}
 
 	// 获得流程定义的KEY对应的人数

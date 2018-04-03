@@ -211,7 +211,7 @@
 	LEFT JOIN t_user tuu4 ON tuu4.id=wl.userId
 	
 	<where>
-		pt.releaseControl = '公开（所有人）' OR tuu3.id=#{userId} OR tuu4.id=#{userId}
+		(pt.releaseControl = '公开（所有人）' OR tuu3.id=#{userId} OR tuu4.id=#{userId})
 		<if test="state != '项目状态'">
 			AND pt.state = #{state}
 		</if>

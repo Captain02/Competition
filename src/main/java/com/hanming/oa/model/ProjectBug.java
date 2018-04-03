@@ -1,5 +1,6 @@
 package com.hanming.oa.model;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 public class ProjectBug {
 	private Integer id;
@@ -14,6 +15,7 @@ public class ProjectBug {
 
 	private String state;
 
+	@NotBlank(message = "描述不为空")
 	private String descs;
 
 	private String grade;

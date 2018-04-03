@@ -268,7 +268,7 @@
 			AND pdy.state=#{state}
 		</if>
 		<if test="dustyName != '任务名称'">
-			AND pdy.dustyName=#{dustyName}
+			AND pdy.taskName=#{dustyName}
 		</if>
 		<if test="herfPage == 1">
 			AND pdy.assignor=#{userId}

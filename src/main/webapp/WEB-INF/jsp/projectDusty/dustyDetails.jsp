@@ -32,6 +32,12 @@ function changeState(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','操作结果','.modal-body','任务状态更改成功');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.reload();
+			},1000);
 		}
 	})
 }
@@ -45,6 +51,12 @@ function dele(ele) {
 		},
 		type:"POST",
 		success:function(result){
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','操作结果','.modal-body','该任务已删除');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/dusty/list';
+			},1000);
 		}
 	})
 }

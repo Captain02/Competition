@@ -246,6 +246,7 @@ body a:hover {
 
 .wrapper {
 	padding: 15px;
+	position: relative;
 }
 
 .welcome-text h2 {

@@ -54,8 +54,10 @@ $(document).on("click",".dele",function(){
 function deleAll() {
 	//执行此方法，得到所选择的id
 	selectAllTips();
-	var ids = $('.ids').val();
-	
+}
+
+$(function(){
+var ids = $('.ids').val();
 	$('.yes').click(function(){
 		 $.ajax({
 				url:"${APP_PATH}/admin/deploy/dele/"+ids,
@@ -73,8 +75,7 @@ function deleAll() {
 				}
 			})  
 	});
-	
-}
+})
 </script>
 </head>
     <body class="bg-common stickey-menu">

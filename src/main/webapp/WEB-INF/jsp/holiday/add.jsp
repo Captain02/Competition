@@ -12,13 +12,13 @@
 <%
 pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
-<!-- 日历插件 -->
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/dcalendar.picker.css">
-<link rel="stylesheet" href="${APP_PATH}/static/js/Data/css/zzsc.css">
 
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<link rel="stylesheet" href="${APP_PATH}/static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <!-- 动态显示流程审批人数量 -->
 <script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	ShowEle('.yes','hide');
@@ -40,6 +40,11 @@ $(function(){
 });
 
 function addHoliday() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	}
 	var persons = "";
 	$.each($(".addPerson"),function(){
 		persons += $(this).text()+"-";
@@ -58,6 +63,19 @@ function addHoliday() {
 				$('#myModal').modal('show');
 				ShowTips('.modal-title','操作结果','.modal-body', '<b style = "color:#5cb85c;">已成功提交请假申请！</b>');
 				ShowEle('.yes','show');
+			}else{
+				if(undefined != result.extend.errorFields.endday){
+            		show_validate_msg("#endday", "error", "结束时间不为空");
+            	}
+				if(undefined != result.extend.errorFields.holidaydays){
+            		show_validate_msg("#holidaydays", "error", "请假天数不为空");
+            	}
+				if(undefined != result.extend.errorFields.reason){
+            		show_validate_msg("#reason", "error", "描述不为空");
+            	}
+				if(undefined != result.extend.errorFields.startday){
+            		show_validate_msg("#startday", "error", "开始时间不为空");
+            	}
 			}
 		}
 	})  
@@ -82,23 +100,6 @@ function addHoliday() {
                             <span class="glyphicon glyphicon-th-list"></span>
                         </a>
 
-                        <form  action="" class="serach-form">
-
-                            <select class="form-control">
-                                <option>用户状态</option>
-                                <option>占个位置</option>
-                                <option>占个位置</option>
-                                <option>占个位置</option>
-                                <option>占个位置</option>
-                            </select>
-
-                            <input type="text" placeholder="请输入用户名、姓名" value="" class="form-control">
-
-                            <button type="button" class="btn btn-primary">搜索</button>
-
-
-                            <div class="clearfix"></div>
-                        </form>
 
 
                         <div class="content-head-right"></div>
@@ -110,7 +111,7 @@ function addHoliday() {
                     <!-- 页面模版，按需更改 -->
                     <div class="wrapper">
 
-                        <div class="row">
+                        
                             <div class="om-header">
                             
                                 <jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
@@ -165,12 +166,15 @@ function addHoliday() {
 
                                                         <div class="input-group input-large">
                                                             <!-- 起始日期 -->
-                                                            <input id="mydatepicker2" class="form-control date1" name="startday" placeholder="开始日期" value="" type="text">
+                                                            <input id="startday" class="form-control dpd1" name="startday" placeholder="开始日期" value="" type="text">
+                                                            <span></span>
 
                                                             <span class="input-group-addon">To</span>
 
                                                             <!-- 结束日期 -->
-                                                            <input id="mydatepicker" class="form-control date2" name="endday" placeholder="结束日期" value="" type="text">
+                                                            <input id="endday" class="form-control dpd2" name="endday" placeholder="结束日期" value="" type="text">
+                                                            
+                                                            <span></span>
                                                         </div>
                                                     </div>
 
@@ -188,7 +192,8 @@ function addHoliday() {
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input name="holidaydays" type="text" placeholder="请输入请假天数" value="" class="form-control">
+                                                        <input id="holidaydays" name="holidaydays" type="text" placeholder="请输入请假天数" value="" class="form-control notNull onlyNumber">
+                                                        <span></span>
                                                     </div>
 
                                                 </div>
@@ -202,7 +207,8 @@ function addHoliday() {
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <textarea name="reason" placeholder="请假事由，如世界很大，我想出去走一走" style="height:200px;" class="form-control"></textarea>
+                                                        <textarea id="reason" name="reason" placeholder="请假事由，如世界很大，我想出去走一走" style="height:200px;" class="form-control notNull"></textarea>
+                                                        <span></span>
                                                     </div>
                                                 </div>
 
@@ -277,7 +283,7 @@ function addHoliday() {
                                     <div class="form-group">
                                         <label class="col-lg-2 col-sm-2 control-label"></label>
                                         <div class="col-lg-10">
-                                            <button type="button" onclick="addHoliday()" class="btn btn-success">提交保存</button>
+                                            <button type="button" onclick="addHoliday()" class="btn btn-success save-button">提交保存</button>
                                             <span class="add-error-ms" style="color:red;"></span>
                                         </div>
                                     </div>
@@ -338,17 +344,31 @@ function addHoliday() {
                     </div>
 
 
-                    <script type="text/javascript" src="${APP_PATH}/static/js/Data/js/dcalendar.picker.js"></script>
-                    <script type="text/javascript">
-                        $('#mydatepicker').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mydatepicker2').dcalendarpicker({
-                            format: 'yyyy-mm-dd'
-                        });
-                        $('#mycalendar').dcalendar();
-                    </script>
-                </div>
+                    <script src="${APP_PATH}/static/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+			 		<script src="${APP_PATH}/static/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+			 		<script type="text/javascript">
+			 		 $(function(){
+			 			 var checkin = $('.dpd1').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 				 language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+			 				$('.dpd1').datetimepicker('hide');
+			 	            $('.dpd2')[0].focus();
+			 			 })
+			 			
+			            
+			 			 var checkout = $('.dpd2').datetimepicker({
+			 				 format: 'yyyy-mm-dd',
+			 				 maxView:'year',
+			 				 minView:'month',
+			 			     language:'zh-CN'
+			 			 }).on('changeDate', function(ev) {
+				 				$('.dpd2').datetimepicker('hide');
+				 			 })
+			 		 })
+			 		</script>
             </section>
         </body>
 

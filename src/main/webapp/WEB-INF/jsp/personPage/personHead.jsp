@@ -32,7 +32,7 @@
 				        data: 'imgData='+imgBase64+"&oldImg="+imgUploaded,
 				        success: function (result) {
 				            if (result.code==100) {
-								alert("上传成功");
+				            	window.location.href='${APP_PATH}/admin/personPage/list';
 							}
 				        }
 				    });

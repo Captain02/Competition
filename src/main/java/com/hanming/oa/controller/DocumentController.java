@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,10 +71,11 @@ public class DocumentController {
 	// 添加
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(Document document, MultipartFile file, HttpServletRequest request) {
+	public Msg add(@Valid Document document, BindingResult result, MultipartFile file, HttpServletRequest request) {
+
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		documentService.insert(document, file, request, projectId, 1);
-		return "projectDocument/add";
+		return Msg.success();
 	}
 
 	// 详情
@@ -88,6 +91,7 @@ public class DocumentController {
 	// 编辑页
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
 	public String editor(@RequestParam(value = "id") Integer id, Model model) {
+		
 		DocumentDetailed documentDetailed = documentService.detailedById(id);
 		model.addAttribute("documentDetailed", documentDetailed);
 		return "projectDocument/editor";
@@ -96,7 +100,8 @@ public class DocumentController {
 	// 编辑
 	@ResponseBody
 	@RequestMapping(value = "/editor", method = RequestMethod.POST)
-	public Msg editor(Document document, MultipartFile file, HttpServletRequest request) {
+	public Msg editor(@Valid Document document, BindingResult result, MultipartFile file, HttpServletRequest request) {
+		
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		documentService.insert(document, file, request, projectId, 0);
 		return Msg.success();

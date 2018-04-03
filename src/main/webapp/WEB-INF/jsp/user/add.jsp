@@ -18,7 +18,6 @@
 	<jsp:include page="iniCssHref.jsp"></jsp:include>
 
 
-<!-- 用于前端正则校验和后端Ajax校验的脚本 -->
 <script src="${APP_PATH}/static/js/regAjax.js"></script>
 
 <script>
@@ -210,7 +209,7 @@ function update() {
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
                                                 <span>*</span>
-                                              密　码
+                                              	密　码
                                                 </label>
                                             </div>
 	                                            <div class="col-sm-10">
@@ -226,7 +225,7 @@ function update() {
                                             <div class="col-sm-2">
                                                 <label for="" class="control-label">
                                                    
-                                                    部　门
+                                                    	部　门
                                                 </label>
                                             </div>
 

@@ -36,14 +36,17 @@ public class MyThingsTaskService {
 
 		// 修改假条
 		Things things = new Things();
+		things.setId(userThingsByThingsId.getId());
 		if (state == 0) {
 			things.setState("已通过");
 			variables.put("msg", "已通过");
 			variables.put("completePeople", username);
+			thingsService.updateThings(things);
 		} else if (state == 1) {
 			things.setState("已通过");
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
+			thingsService.updateThings(things);
 		} else {
 			
 			//判断是否有下一审批人
@@ -52,16 +55,10 @@ public class MyThingsTaskService {
 				return 0;
 			}
 			
-			things.setState("已通过");
 			variables.put("msg", "审核中");
 			variables.put("completePeople", username);
 		}
-		// holiday.setTest("审核通过");
-		things.setId(userThingsByThingsId.getId());
-		thingsService.updateThings(things);
 
-		// 设置流程变量
-		//variables.put("getHolidaydays", userThingsByThingsId.getHolidaydays());
 		// 设置用户id
 		Authentication.setAuthenticatedUserId(username);
 		// 添加批注信息

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 
@@ -36,6 +37,11 @@ $(function(){
 
 //在这里发送ajax请求，保存添加的知识
 function save() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	}
 	//标题Id
 	var topicId = $('#topicId').val();
 	//获取标题内容
@@ -69,11 +75,12 @@ function save() {
 			'isUpdate':1
 		},
 		success:function(result){
-			if (result.code==100) {
-				alert("添加成功");
-			}else{
-				alert("添加失败");
-			}
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','添加结果','.modal-body','知识编辑成功');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/KnowledgeSharing/list?isByMyId=1';
+			},1000);
 		}
 	}) 
 }
@@ -114,13 +121,15 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">标题</label>
 								<div class="col-sm-10">
-									<sf:input name="title" path="title" class="form-control" placeholder="填写标签" type="text" />
+									<sf:input name="title" path="title" class="form-control notNull" placeholder="填写标签" type="text" />
+									<span></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">简介</label>
 								<div class="col-sm-10">
-									<sf:textarea path="sketch" name="sketch" placeholder="请填写简介" style="height:90px;" class="form-control"></sf:textarea>
+									<sf:textarea path="sketch" name="sketch" placeholder="请填写简介" style="height:90px;" class="form-control notNull"></sf:textarea>
+									<span></span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -168,6 +177,21 @@ function save() {
 				
 			</div>
 		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel"></h4>
+				      </div>
+				      <div class="modal-body">
+				      
+				      
+				      </div>
+				     
+				    </div>
+				  </div>
+				</div>
 	</section>
 	<script type="text/javascript">
 	

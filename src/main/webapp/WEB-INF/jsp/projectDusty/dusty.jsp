@@ -30,7 +30,10 @@ function changeState(ele) {
 		success:function(result){
 			$('#myModal').modal('show');
 			ShowTips('.modal-title','操作结果','.modal-body','任务状态更改成功');
-			
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.reload();
+			},1000);
 		}
 	})
 }
@@ -78,29 +81,29 @@ function assignTask(ele) {
                     <form action="${APP_PATH}/admin/dusty/list" class="serach-form" method="get">
 
                         
-						<select name="type" class="form-control">
+						<select name="type" class="form-control" data-type="${type}">
 				          <option value="" style="display: none;">任务类型</option>
-				         			  <option style="display: none;" value="设计" >设计</option>
-							          <option style="display: none;" value="开发" >开发</option>
-							          <option style="display: none;" value="测试" >测试</option>
-							          <option style="display: none;" value="研究" >研究</option>
-							          <option style="display: none;" value="讨论" >讨论</option>
-							          <option style="display: none;" value="界面" >界面</option>
-							          <option style="display: none;" value="事务" >事务</option>
-							          <option style="display: none;" value="其他" >其他</option>
+				         			  <option value="设计" >设计</option>
+							          <option value="开发" >开发</option>
+							          <option value="测试" >测试</option>
+							          <option value="研究" >研究</option>
+							          <option value="讨论" >讨论</option>
+							          <option value="界面" >界面</option>
+							          <option value="事务" >事务</option>
+							          <option value="其他" >其他</option>
        					</select>
        					
-       					<select name="state" class="form-control">
+       					<select name="state" class="form-control" data-type="${state}">
 				          <option value="" style="display: none;">状态</option>
-				          <option value="未开始" style="display: none;">未开始</option>
-				          <option value="进行中" style="display: none;">进行中</option>
-				          <option value="已完成" style="display: none;">已完成</option>
-				          <option value="已暂停" style="display: none;">已暂停</option>
-				          <option value="已取消" style="display: none;">已取消</option>
-				          <option value="已关闭" style="display: none;">已关闭</option>
+				          <option value="未开始">未开始</option>
+				          <option value="进行中">进行中</option>
+				          <option value="已完成">已完成</option>
+				          <option value="已暂停">已暂停</option>
+				          <option value="已取消">已取消</option>
+				          <option value="已关闭">已关闭</option>
        					</select>
        					
-                        <input type="text" placeholder="输入任务名称" value="${dustyName}" class="form-control" name="dustyName">
+                        <input type="text" placeholder="输入任务名称" value="${dustyName == '任务名称'?'':dustyName}" class="form-control" name="dustyName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 

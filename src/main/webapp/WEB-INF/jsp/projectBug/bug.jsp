@@ -77,7 +77,7 @@
                     <form action="${APP_PATH}/admin/bug/list" class="serach-form" method="get">
 
                         
-						<select name="state" class="form-control">
+						<select name="state" class="form-control" data-type="${state}">
 				          <option value="状态">状态</option>
 				          <option value="设计如此">设计如此</option>
 				          <option value="重复bug">重复bug</option>
@@ -86,8 +86,9 @@
 				          <option value="无法重现">无法重现</option>
 				          <option value="延期处理">延期处理</option>
 				          <option value="不予解决">不予解决</option>
+				          <option value="待解决">待解决</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${name}" class="form-control" name="name">
+                        <input type="text" placeholder="输入项目名称" value="${name=='名称'?'':名称}" class="form-control" name="name">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
@@ -157,7 +158,7 @@
                                            		<c:forEach items="${pageInfo.list}" var="bugDisplay">
 	                                                <tr>
 	                                           			<input type="hidden" value="${bugDisplay.id}" class="bugdisplayId">
-	                                                    <td>${bugDisplay.grade}</td>
+	                                                    <td data-grade="${bugDisplay.grade}" class="project-grade"><span class="label">${bugDisplay.grade}</span></td>
 	                                                	<td class="project-name"><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
 	                                                    <td>${bugDisplay.state}</td>
 	                                                    <td>${bugDisplay.creatPeople}</td>

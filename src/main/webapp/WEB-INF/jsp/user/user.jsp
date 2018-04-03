@@ -234,7 +234,7 @@ String basePath2 = request.getScheme() + "://"
                                                                 </li>
                                                                 <li role="separator" class="divider"></li>
                                                                 <li>
-                                                                    <a href="#">考勤</a>
+                                                                    <a href="${APP_PATH}/admin/wordAttendence/list?userName=${user.name}">考勤</a>
                                                                 </li>
                                                             </ul>
                                                         </div>

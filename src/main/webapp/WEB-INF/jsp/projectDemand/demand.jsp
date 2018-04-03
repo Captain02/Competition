@@ -37,7 +37,7 @@
                     <form action="${APP_PATH}/admin/demand/list" class="serach-form" method="get">
 
                         
-						<select name="state" class="form-control">
+						<select name="state" class="form-control" data-type="${state}">
 				          <option value="需求状态">需求状态</option>
 				          <option value="草稿">草稿</option>
 				          <option value="激活">激活</option>
@@ -45,7 +45,7 @@
 				          <option value="待关闭">待关闭</option>
 				          <option value="已关闭">已关闭</option>
        					</select>
-                        <input type="text" placeholder="输入项目名称" value="${demandName}" class="form-control" name="demandName">
+                        <input type="text" placeholder="输入项目名称" value="${demandName == '需求名称'?'':demandName}" class="form-control" name="demandName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 

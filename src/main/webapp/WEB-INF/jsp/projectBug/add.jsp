@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
@@ -34,6 +35,11 @@ $(function(){
 	$('.ke-container').css('width','100%');
 
 function save() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 	var formData = new FormData($("#bugFrom")[0]);
 	//发送ajax请求
 	  $.ajax({
@@ -43,13 +49,23 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
-			$('#myModal').modal('show');
-			$('.modal-footer').remove();
-			ShowTips('.modal-title','添加结果','.modal-body','成功添加一个测试');
-			setTimeout(function(){
-				$('#myModal').modal('hide');
-				window.location.href='${APP_PATH}/admin/bug/list';
-			},1000);
+			if (result.code == 100) {
+				$('#myModal').modal('show');
+				$('.modal-footer').remove();
+				ShowTips('.modal-title','添加结果','.modal-body','成功添加一个测试');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href='${APP_PATH}/admin/bug/list';
+				},1000);
+			}else{
+				if (undefined != result.extend.errorFields.descs) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','测试不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+			}
 		}
 	})  
 }
@@ -90,35 +106,41 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">关联需求</label>
 								<div class="col-sm-10">
-									<select name="demandId" class="form-control">
+									<select name="demandId" class="form-control select-menu">
 					                      <option value="">项目需求</option>
 					                      <c:forEach items="${DemandDisplay}" var="DemandDisplay">
 					                      <option value="${DemandDisplay.id}">${DemandDisplay.demandName}</option>
 					                      </c:forEach>
                    					</select>
+                   					
+                   					<span></span>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">关联任务</label>
 								<div class="col-sm-10">
-									<select name="projectTaskId" class="form-control">
+									<select name="projectTaskId" class="form-control select-menu">
 				                      <option value="">项目任务</option>
 				                       <c:forEach items="${DustyDisplay}" var="DustyDisplay">
 				                      <option value="${DustyDisplay.id}">${DustyDisplay.taskName}</option>
 				                      </c:forEach>
                     				</select>
+                    				
+                    				<span></span>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">指派给</label>
 								<div class="col-sm-10">
-								<select name="assginor" class="form-control">
+								<select name="assginor" class="form-control select-menu">
 			                     <c:forEach items="${team}" var="people">
 			                      <option value="${people.id}">${people.name}</option>
 			                     </c:forEach>
                     			</select>
+                    			
+                    			<span></span>
 								</div>
 							</div>
 							
@@ -133,7 +155,8 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>Bug标题</label>
 								<div class="col-sm-10">
-									<input name="bugTitle" value="" class="form-control" placeholder="输入测试名称" type="text">
+									<input name="bugTitle" value="" class="form-control" id="name" placeholder="Bug标题" type="text">
+									<span></span>
 								</div>
 							</div>
 							
@@ -147,20 +170,22 @@ function save() {
 							<div class="form-group">
 			                  <label class="col-sm-2 col-sm-2 control-label">优先级</label>
 			                  <div class="col-sm-10">
-			                    <select name="grade" class="form-control">
+			                    <select name="grade" class="form-control select-menu">
 			                      <option value="">Bug优先级</option>
 			                      <option value="1级">1级</option>
 			                      <option value="2级">2级</option>
 			                      <option value="3级">3级</option>
 			                      <option value="4级">4级</option>
 			                    </select>
+			                    
+			                    <span></span>
 			                  </div>
                 			</div>
 							
 					<div class="form-group">
 		                  <label class="col-sm-2 col-sm-2 control-label">操作系统/浏览器</label>
 		                  <div class="col-sm-10">
-		                    <select name="operatingSystem" class="form-control" style="width: 50%;float:left">
+		                    <select name="operatingSystem" class="form-control select-menu" style="width: 50%;float:left">
 		                      <option value="全部">全部</option>
 		                      <option value="windows">Windows</option>
 		                      <option value="Windows 8">Windows 8</option>
@@ -182,7 +207,8 @@ function save() {
 		                      <option value="Unix">Unix</option>
 		                      <option value="其他">其他</option>
 		                    </select>
-		                    <select name="browser" class="form-control" style="width: 50%">
+		                    
+		                    <select name="browser" class="form-control select-menu" style="width: 50%">
 		                      <option value="全部">全部</option>
 		                      <option value="IE系列">IE系列</option>
 		                      <option value="IE11">IE11</option>
@@ -199,6 +225,8 @@ function save() {
 		                      <option value="UC">UC</option>
 		                      <option value=">其他">其他</option>
 		                    </select>
+		                    
+		                    <span></span>
 		                  </div>
 			       </div>
 			       
@@ -212,7 +240,7 @@ function save() {
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
 							<div class="col-sm-10">
-								<button type="button" onclick="save()"  class="btn btn-success">提交</button>
+								<button type="button" onclick="save()"  class="btn btn-success save-button">提交</button>
 							</div>
 						</div>
 						</form>

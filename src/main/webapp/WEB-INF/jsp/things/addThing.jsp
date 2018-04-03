@@ -21,7 +21,7 @@
 <script src="${APP_PATH}/static/js/addPerson.js"></script>
 <!-- 动态显示流程审批人数量 -->
 <script src="${APP_PATH}/static/js/activeShowProcessPerson.js"></script>
-
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 <script type="text/javascript">
 (function($){
     $.fn.serializeJson = function(){
@@ -82,6 +82,11 @@ $(function () {
 });
 
 function addthingsForm() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
     var persons = "";
     $.each($(".addPerson"), function () {
         persons += $(this).text() + "-";
@@ -101,6 +106,19 @@ function addthingsForm() {
                 ShowTips('.modal-title', '操作结果', '.modal-body', '<b style = "color:#5cb85c;">' +
                     '已成功提交报销申请' + '</b>');
                 ShowEle('.yes', 'show');
+            }else{
+            	if(undefined != result.extend.errorFields.name){
+            		show_validate_msg("#name", "error", "描述不为空");
+            	}
+            	if(undefined != result.extend.errorFields.number){
+            		show_validate_msg("#number", "error", "描述不为空");
+            	}
+            	if(undefined != result.extend.errorFields.purpose){
+            		show_validate_msg("#purpose", "error", "描述不为空");
+            	}
+            	if(undefined != result.extend.errorFields.details){
+            		show_validate_msg("#details", "error", "描述不为空");
+            	}
             }
         }
     })
@@ -159,7 +177,8 @@ function addthingsForm() {
                                                     <span>*</span>物品用途
                                                 </label>
                                                 <div class="col-sm-10">
-                                                    <input name="purpose" class="form-control" placeholder="如办公用品 必填" type="text">
+                                                    <input id="purpose" name="purpose" class="form-control notNull" placeholder="如办公用品 必填" type="text">
+                                                    <span></span>
                                                 </div>
                                             </div>
                                             <!-- 此处以后可以动态的添加明细 -->
@@ -170,7 +189,8 @@ function addthingsForm() {
                                                         <span>*</span>物品名称
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <input name="name" class="form-control" placeholder="请输入物品名称" type="text">
+                                                        <input id="name" name="name" class="form-control notNull" placeholder="请输入物品名称" type="text">
+                                                        <span></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -178,7 +198,8 @@ function addthingsForm() {
                                                         <span>*</span>领用数量
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <input name="number" class="form-control" placeholder="请输入物品数量" type="number">
+                                                        <input id="number" name="number" class="form-control onlyNumber" placeholder="请输入物品数量" type="number">
+                                                        <span></span>
                                                     </div>
                                                 </div>
                                               
@@ -191,7 +212,8 @@ function addthingsForm() {
                                                         <span>*</span>领用详情
                                                     </label>
                                                     <div class="col-sm-10">
-                                                        <textarea name="details" placeholder="领用详情" style="height: 94px;" class="form-control"></textarea>
+                                                        <textarea id="details" name="details" placeholder="领用详情" style="height: 94px;" class="form-control notNull"></textarea>
+                                                        <span></span>
                                                     </div>
                                                 </div>
 												
@@ -234,7 +256,7 @@ function addthingsForm() {
                                             <div class="form-group">
                                                 <label class="col-lg-2 col-sm-2 control-label"></label>
                                                 <div class="col-lg-10">
-                                                    <button type="button" onclick="addthingsForm()" class="btn btn-primary btn-success">提交保存</button>
+                                                    <button type="button" onclick="addthingsForm()" class="btn btn-primary btn-success save-button">提交保存</button>
                                                     <span class="add-error-ms" style="color:red;"></span>
                                                 </div>
                                             </div>

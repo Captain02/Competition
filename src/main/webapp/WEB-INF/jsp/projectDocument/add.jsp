@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="${APP_PATH}/static/kindeditor/themes/default/default.css">
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
@@ -34,6 +35,11 @@ $(function(){
 })
 
 function save() {
+	//判定页面上是否有错误信息
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 		 var formData = new FormData($("#documentForm")[0]);
 			//发送ajax请求
 			  $.ajax({
@@ -43,12 +49,23 @@ function save() {
 		        contentType: false,  
 		        processData: false, 
 				success:function(result){
-					$('#myModal').modal('show');
-					ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新文档');
-					setTimeout(function(){
-						$('#myModal').modal('hide');
-						window.location.href='${APP_PATH}/admin/document/list';
-					},1000);
+					if (result.code == 100) {
+						$('#myModal').modal('show');
+						ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新文档');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+							window.location.href='${APP_PATH}/admin/document/list';
+						},1000);
+					}else{
+						if (undefined != result.extend.errorFields.descs) {
+			           		 $('#myModal').modal('show');
+								ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+								setTimeout(function(){
+									$('#myModal').modal('hide');
+								},3000); 
+						}
+					}
+					
 				}
 			})  
 }
@@ -90,7 +107,8 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>文档名称</label>
 								<div class="col-sm-10">
-									<input name="documentName" value="" class="form-control" placeholder="填写文档名称" type="text">
+									<input name="documentName" id="name"  value="" class="form-control" placeholder="填写文档名称" type="text">
+									<span></span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -103,11 +121,13 @@ function save() {
 							<div class="form-group">
 			                  <label class="col-sm-2 col-sm-2 control-label"><span>*</span>类型</label>
 			                  <div class="col-sm-10">
-			                    <select name="type" class="form-control">
+			                    <select name="type" class="form-control select-menu">
 			                      <option value="">请选择类型</option>
 			                      <option value="正文">正文</option>
 			                      <option value="连接">连接</option>
 			                    </select>
+			                    
+			                    <span></span>
 			                  </div>
                 			</div>
                 			
@@ -128,7 +148,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"></label>
 								<div class="col-sm-10">
-									<button type="button" onclick="save()"  class="btn btn-success">提交</button>
+									<button type="button" onclick="save()"  class="btn btn-success save-button">提交</button>
 								</div>
 						</div>
 						</form>

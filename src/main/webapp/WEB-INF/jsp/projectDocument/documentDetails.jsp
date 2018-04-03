@@ -56,7 +56,7 @@ function dele(ele) {
 			ShowTips('.modal-title','执行结果','.modal-body','文档删除成功');
 			 setTimeout(function(){
 				 $('#myModal').modal('hide');
-				 window.location.reload();
+				 window.location.href='${APP_PATH}/admin/document/list';
 			 },1000);
 		}
 	})

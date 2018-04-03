@@ -229,10 +229,10 @@ String basePath2 = request.getScheme() + "://"
 									<!-- 选项卡切换 -->
 									<header class="panel-heading my-approval-tab">
 										<ul class="nav nav-tabs">
-										  <li role="presentation" class="approval-tab active" data-more-href="${APP_PATH}/admin/myHolidayTask/myHolidayTask"><a href="#myDusty" data-toggle="tab">任务</a></li>
-										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myReimbursementTask/myReimbursementTask"><a href="#myBug" data-toggle="tab">Bug</a></li>
-										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/myThingsTask/myThingsTask"><a href="#myProject" data-toggle="tab">项目</a></li>
-										  <li class="pull-right my-approval-more"><a href="${APP_PATH}/admin/myHolidayTask/myHolidayTask" style="color: #65CEA7;">更多</a></li>
+										  <li role="presentation" class="approval-tab active" data-more-href="${APP_PATH}/admin/dusty/list"><a href="#myDusty" data-toggle="tab">任务</a></li>
+										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/bug/list"><a href="#myBug" data-toggle="tab">Bug</a></li>
+										  <li role="presentation" class="approval-tab" data-more-href="${APP_PATH}/admin/project/list"><a href="#myProject" data-toggle="tab">项目</a></li>
+										  <li class="pull-right my-approval-more"><a href="${APP_PATH}/admin/dusty/list" style="color: #65CEA7;">更多</a></li>
 										</ul>
 									</header>
 									
@@ -301,7 +301,7 @@ String basePath2 = request.getScheme() + "://"
 													<tbody>
 														<c:forEach items="${ProjectDisplay}" var="projectDisplay">
 													<tr>
-														<td class="project-name"><a href="">${projectDisplay.projectName}</a></td>
+														<td class="project-name"><a href="${APP_PATH}/admin/project/projectDetails?projectId=${projectDisplay.id}">${projectDisplay.projectName}</a></td>
 														<td>${projectDisplay.endDate}</td>
 														<td>${projectDisplay.state}</td>
 														<td class="project-name">

@@ -1,5 +1,7 @@
 package com.hanming.oa.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Document {
 	private Integer id;
 
@@ -19,6 +21,7 @@ public class Document {
 
 	private String enclosure;
 
+	@NotBlank(message = "描述不为空")
 	private String descs;
 
 	public Integer getId() {

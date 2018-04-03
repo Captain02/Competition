@@ -1,6 +1,5 @@
 package com.hanming.oa.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.activiti.engine.RepositoryService;
@@ -67,7 +66,7 @@ public class DeployController {
 	// 添上传流程部署ZIP文件
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(MultipartFile file,@RequestParam(value="num",defaultValue="1")Integer num) throws IOException {
+	public Msg add(MultipartFile file,@RequestParam(value="num",defaultValue="1")Integer num){
 		deployService.addDeploye(file,num);
 		return Msg.success();
 	}

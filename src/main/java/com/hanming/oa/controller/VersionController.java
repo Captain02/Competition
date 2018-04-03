@@ -3,10 +3,12 @@ package com.hanming.oa.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,7 +71,7 @@ public class VersionController {
 	//编辑
 	@ResponseBody
 	@RequestMapping(value="/editor",method=RequestMethod.POST)
-	public Msg editor(Versions versions, MultipartFile file, HttpServletRequest request) {
+	public Msg editor(@Valid Versions versions,BindingResult result, MultipartFile file, HttpServletRequest request) {
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		versionServer.insert(versions, file, request, projectId, 0);
 		return Msg.success();
@@ -84,7 +86,8 @@ public class VersionController {
 	//添加
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Msg add(Versions versions, MultipartFile file, HttpServletRequest request) {
+	public Msg add(@Valid Versions versions,BindingResult result, MultipartFile file, HttpServletRequest request) {
+		
 		Integer projectId = (Integer) request.getSession().getAttribute("projectId");
 		versionServer.insert(versions, file, request, projectId, 1);
 		return Msg.success();

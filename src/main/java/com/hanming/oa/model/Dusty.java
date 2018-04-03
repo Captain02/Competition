@@ -1,5 +1,7 @@
 package com.hanming.oa.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Dusty {
 	private Integer id;
 
@@ -17,8 +19,10 @@ public class Dusty {
 
 	private String taskName;
 
+	@NotBlank(message = "描述不为空")
 	private String descs;
 
+	@NotBlank(message = "备注不为空")
 	private String remarks;
 
 	private String grade;

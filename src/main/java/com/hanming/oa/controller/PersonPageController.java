@@ -129,7 +129,7 @@ public class PersonPageController {
 
 		// 任务
 		List<DustyDisplay> DustyDisplay = dustyService.list("任务类型", "任务状态", "任务名称", 0, null, user.getId());
-		if (ProjectDisplay.size() > 5) {
+		if (DustyDisplay.size() > 5) {
 			model.addAttribute("DustyDisplay", DustyDisplay.subList(0, 5));
 		} else {
 			model.addAttribute("DustyDisplay", DustyDisplay);

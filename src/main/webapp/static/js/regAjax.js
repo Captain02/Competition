@@ -17,7 +17,6 @@ function ifNum(eleValue) {
 
 //用来显示验证的结果
 function show_validate_msg(ele, status, msg) {
-    //清除当前元素效果
     $(ele).parent().removeClass("has-success has-error");
     $(ele).next("span").text("").addClass("showMessage").removeClass("successMessage errorMesage");
     if ("success" == status) {
@@ -28,6 +27,7 @@ function show_validate_msg(ele, status, msg) {
         $(ele).next("span").append('<i class="glyphicon glyphicon-remove-sign"></i>' + msg).addClass("errorMesage");
     }
 }
+
 //判断是否还存在错误信息
 function ifErrorMessage() {
     var showMessage = $(".showMessage");
@@ -42,46 +42,53 @@ function ifErrorMessage() {
 }
 
 $(function () {
-
+	//通用的不为空的校验
+	$('.notNull').each(function(){
+		$(this).change(function(){
+			var value = $(this).val();
+			ifNull(value)?show_validate_msg($(this), "error", "请正确填写相关内容"):show_validate_msg($(this), "success", "正确");
+		})
+	})
+	
+	//通用的只能是数字的校验
+	$('.onlyNumber').each(function(){
+		$(this).blur(function(){
+			var value = $(this).val();
+			ifNum(value)?show_validate_msg($(this), "success", "正确"):show_validate_msg($(this), "error", "只能填写数字");
+		})
+	})
+	
     //密码的前端校验
     $('#password').change(function () {
-
-        // 获得用户填写的用户名
         var password = $("#password").val();
-        //密码不为空
         if (ifNull(password)) {
             show_validate_msg("#password", "error", "密码不为空");
         }
-        //密码不能有中文
         else if (!ifSpecialStr(password)) {
             show_validate_msg("#password", "error", "密码不能有中文");
         } else {
             show_validate_msg("#password", "success", "密码可用");
         }        
     });
+    
     //姓名的前端校验
     $('#name').change(function () {
-
-        // 获得用户填写的姓名
         var name = $("#name").val();
-        //密码不为空
-        if (ifNull(name)) {
-            show_validate_msg("#name", "error", "姓名不能为空");
-
-        } else {
-            show_validate_msg("#name", "success", "用户名可用");
-        }
+        ifNull(name)?show_validate_msg("#name", "error", "名称不能为空"):show_validate_msg("#name", "success", "名称可用");
     });
+    
+    //别名的前端校验
+    $('#nameAlias').change(function(){
+    	var nameAlias = $('#nameAlias').val();
+    	ifNull(nameAlias)?show_validate_msg("#nameAlias", "error", "别名不能为空"):show_validate_msg("#nameAlias", "success", "别名可用");
+    })
+    
     //手机的前端校验
     $('#phone').change(function () {
-
-        // 获得用户填写的手机号码
         var phone = $("#phone").val();
-        //手机号码不为空
         if (ifNull(phone)) {
             show_validate_msg("#phone", "error", "手机不能为空");
         }
-        //手机号码只能为数字
         else if (!ifNum(phone)) {
             show_validate_msg("#phone", "error", "手机号码只能为数字");
 
@@ -89,11 +96,10 @@ $(function () {
             show_validate_msg("#phone", "success", "手机号可用");
         }
     });
+    
     //部门名的前端校验
     $('#departmentname').change(function () {
-        //获取用户填写的部门名
         var departname = $('#departmentname').val();
-        //部门名不为空
         if (ifNull(departname)) {
             show_validate_msg("#departmentname", "error", "部门名不能为空");
         }else{
@@ -103,9 +109,7 @@ $(function () {
 
     //部门地址的前端校验
     $('#departmentaddress').change(function () {
-        //获取用户填写的部门名
         var departmentaddress = $('#departmentaddress').val();
-        //部门名不为空
         if (ifNull(departmentaddress)) {
             show_validate_msg("#departmentaddress", "error", "部门地址不能为空");
         }else{
@@ -145,6 +149,27 @@ $(function () {
     	
     });
     
+    //选择菜单的前端校验
+    $('.select-menu').change(function(){
+    	var selectValue = $(this).val();
+    	ifNull(selectValue)?show_validate_msg($(this), "error", "没有选择任何内容"):show_validate_msg($(this), "success", "正确");
+    })
+    
+    
+    //批量添加的校驗
+    $('.table-addBatch select.select-menu').each(function(){
+    	$(this).change(function(){
+    		var selectValue = $(this).val();
+    		ifNull(selectValue)?show_validate_msg($(this), "error", "没有选择任何内容"):show_validate_msg($(this), "success", "正确");
+    	})
+    })
+    $('.table-addBatch input#name').each(function(){
+    	$(this).change(function(){
+    		var name = $(this).val();
+    		ifNull(name)?show_validate_msg($(this), "error", "请正确填写相关内容"):show_validate_msg($(this), "success", "正确");
+    	})
+    })
+    
     //权限描述的前端校验
     $("#resource-desc").change(function(){
     	var resourceDesc = $("#resource-desc").val();
@@ -181,7 +206,6 @@ $(function () {
         }
     	
     });
-    
     $("#truePassword").change(function(){
     	var newPassword = $("#newPassword").val();
     	var truePassword = $("#truePassword").val();

@@ -45,7 +45,30 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
-			
+			if (result.code == 100) {
+				 $('#myModal').modal('show');
+					$('.modal-footer').remove();
+					ShowTips('.modal-title','添加结果','.modal-body','成功添加一个任务');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+						window.location.href='${APP_PATH}/admin/dusty/list';
+					},1000); 
+			}else{
+				if (undefined != result.extend.errorFields.descs) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+				if (undefined != result.extend.errorFields.remarks) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','备注不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+			}
 		}
 	})  
 }

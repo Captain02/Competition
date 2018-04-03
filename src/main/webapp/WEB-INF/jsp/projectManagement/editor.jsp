@@ -43,7 +43,23 @@ function save() {
         data: $("#projectForm2").serialize()+"&whiteNameId="+whiteNameId,
         type: "POST",
         success: function (result) {
-        	alert("a");
+        	if (result.code == 100) {
+				$('#myModal').modal('show');
+				$('.modal-footer').remove();
+				ShowTips('.modal-title','添加结果','.modal-body','成功创建一个项目');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href='${APP_PATH}/admin/project/list';
+				},1000);
+			}else{
+				if (undefined != result.extend.errorFields) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+			}
         }
     });
 }

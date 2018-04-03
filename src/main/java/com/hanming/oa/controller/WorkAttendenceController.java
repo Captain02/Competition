@@ -2,6 +2,8 @@ package com.hanming.oa.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,6 +54,8 @@ public class WorkAttendenceController {
 		}
 		if ("".equals(date)) {
 			date = DateTool.dateToYearMonthDay(new Date()).substring(0, 7);
+		}else {
+			date = date.substring(0, 7);
 		}
 
 		PageInfo<WorkAttendenceDisplay> pageInfo = null;
@@ -63,11 +67,14 @@ public class WorkAttendenceController {
 				.getWorkAttendenceByMonthStatistics(date,userId);
 
 		List<String> dateList = WorkAttendenceService.selectDateList(isByMyId, userName);
+		Set<String> dateLists = dateList.stream()
+				.map((x) -> x.substring(0, 7))
+				.collect(Collectors.toSet());
 
 		DateStandard dateStandard = dateStandardService.selectByprimaryKey(1);
 
 		model.addAttribute("dateStandard", dateStandard);
-		model.addAttribute("dateList", dateList);
+		model.addAttribute("dateList", dateLists);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("isByMyId", isByMyId);
 		model.addAttribute("userName", userName);

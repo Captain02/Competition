@@ -10,6 +10,7 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
 </head>
 <script type="text/javascript">
 function save() {

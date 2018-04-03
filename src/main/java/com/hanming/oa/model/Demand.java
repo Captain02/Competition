@@ -1,5 +1,7 @@
 package com.hanming.oa.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Demand {
 	private Integer id;
 
@@ -21,8 +23,10 @@ public class Demand {
 
 	private String workTime;
 
+	@NotBlank(message = "描述不为空")
 	private String descs;
 
+	@NotBlank(message = "验收标准不为空")
 	private String acceptanceStand;
 
 	private String enclosure;
@@ -103,20 +107,20 @@ public class Demand {
 		this.assignor = assignor;
 	}
 
-	public String getWorkTime() {
-		return workTime;
-	}
-
-	public void setWorkTime(String workTime) {
-		this.workTime = workTime;
-	}
-
 	public String getDescs() {
 		return descs;
 	}
 
 	public void setDescs(String descs) {
 		this.descs = descs;
+	}
+
+	public String getWorkTime() {
+		return workTime;
+	}
+
+	public void setWorkTime(String workTime) {
+		this.workTime = workTime;
 	}
 
 	public String getAcceptanceStand() {

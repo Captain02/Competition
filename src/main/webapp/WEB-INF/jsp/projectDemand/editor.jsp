@@ -44,6 +44,30 @@ function save() {
         contentType: false,  
         processData: false, 
 		success:function(result){
+			if (result.code == 100) {
+				 $('#myModal').modal('show');
+				ShowTips('.modal-title','添加结果','.modal-body','成功添加一个新需求');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href="${APP_PATH}/admin/demand/list";
+				},1000); 
+			}else{
+				//后端校验失败信息
+           	if (undefined != result.extend.errorFields.descs) {
+           		 $('#myModal').modal('show');
+					ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+					},3000); 
+				}
+           	if (undefined != result.extend.errorFields.acceptanceStand) {
+           		 $('#myModal').modal('show');
+					ShowTips('.modal-title','错误的操作','.modal-body','验收标准不为空');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+					},3000); 
+				}
+			}
 		}
 	}) 
 }
@@ -90,7 +114,7 @@ function save() {
 								<div class="col-sm-10">
 									<select name="source" class="form-control">
 									<c:if test="${demandDetailed.source!=''}">
-					                      <option value="">${demandDetailed.source}</option>
+					                      <option value="${demandDetailed.source}">${demandDetailed.source}</option>
 									</c:if>
 					                      <option value="">请选择来源</option>
 					                      <option value="客户">客户</option>
@@ -111,7 +135,7 @@ function save() {
 								<div class="col-sm-10">
 									<select name="grade" class="form-control">
 				                      <c:if test="${demandDetailed.grade!=''}">
-					                      <option value="">${demandDetailed.grade}</option>
+					                      <option value="${demandDetailed.grade}">${demandDetailed.grade}</option>
 									  </c:if>
 				                      <option value="">请选择优先级</option>
 				                      <option value="1级">1级</option>
@@ -126,7 +150,7 @@ function save() {
 								<div class="col-sm-10">
 								<select name="stage" class="form-control">
 								<c:if test="${demandDetailed.stage!=''}">
-			                      <option value="">${demandDetailed.stage}</option>
+			                      <option value="${demandDetailed.stage}">${demandDetailed.stage}</option>
 							  	</c:if>
 			                      <option value="请选择阶段">请选择阶段</option>
 			                      <option value="未开始">未开始</option>
@@ -157,7 +181,7 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label">预计工时</label>
 								<div class="col-sm-10">
-									<input name="wrokTime" value="${demandDetailed.workTime}" class="form-control" placeholder="预计工时" type="text">
+									<input name="workTime" value="${demandDetailed.workTime}" class="form-control" placeholder="预计工时" type="text">
 								</div>
 							</div>
 							<div class="form-group">

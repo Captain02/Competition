@@ -1,12 +1,19 @@
 package com.hanming.oa.model;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Reimbursement {
 	private Integer id;
 
+	@NotNull(message = "报销金额 不为空")
 	private Float money;
 
+	@NotBlank(message = "报销类型不为空")
 	private String type;
 
+	@NotBlank(message = "报销明细不为空")
 	private String detailed;
 
 	private String date;
@@ -18,14 +25,6 @@ public class Reimbursement {
 	private String enclosure;
 
 	private String filename;
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
 
 	public Integer getId() {
 		return id;
@@ -48,7 +47,7 @@ public class Reimbursement {
 	}
 
 	public void setType(String type) {
-		this.type = type == null ? null : type.trim();
+		this.type = type;
 	}
 
 	public String getDetailed() {
@@ -56,7 +55,7 @@ public class Reimbursement {
 	}
 
 	public void setDetailed(String detailed) {
-		this.detailed = detailed == null ? null : detailed.trim();
+		this.detailed = detailed;
 	}
 
 	public String getDate() {
@@ -72,7 +71,7 @@ public class Reimbursement {
 	}
 
 	public void setProcessinstanceid(String processinstanceid) {
-		this.processinstanceid = processinstanceid == null ? null : processinstanceid.trim();
+		this.processinstanceid = processinstanceid;
 	}
 
 	public String getTest() {
@@ -80,7 +79,7 @@ public class Reimbursement {
 	}
 
 	public void setTest(String test) {
-		this.test = test == null ? null : test.trim();
+		this.test = test;
 	}
 
 	public String getEnclosure() {
@@ -88,6 +87,15 @@ public class Reimbursement {
 	}
 
 	public void setEnclosure(String enclosure) {
-		this.enclosure = enclosure == null ? null : enclosure.trim();
+		this.enclosure = enclosure;
 	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 }

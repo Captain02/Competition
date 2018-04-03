@@ -61,12 +61,12 @@
                     <form action="${APP_PATH}/admin/project/list" class="serach-form" method="get">
 
                         
-						<select name="state" class="form-control">
+						<select name="state" class="form-control" data-type="${state}">
 				          <option value="">项目状态</option>
-				          <option value="1">挂起</option>
-				          <option value="2">延期</option>
-				          <option value="3">进行</option>
-				          <option value="4">结束</option>
+				          <option value="挂起">挂起</option>
+				          <option value="延期">延期</option>
+				          <option value="进行">进行</option>
+				          <option value="结束">结束</option>
        					</select>
                         <input type="text" placeholder="输入项目名称" value="${projectName == '项目名称'?'':projectName}" class="form-control" name="projectName">
 

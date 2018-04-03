@@ -31,7 +31,12 @@ function dele(ele) {
 			'id':id,
 		},
 		success:function(result){
-			
+			$('#myModal').modal('show');
+			ShowTips('.modal-title','操作结果','.modal-body','该版本已删除');
+			setTimeout(function(){
+				$('#myModal').modal('hide');
+				window.location.href='${APP_PATH}/admin/version/list';
+			},1000);
 		}
 	})
 }

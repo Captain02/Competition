@@ -36,14 +36,17 @@ public class MyReimbursementTaskService {
 
 		// 修改假条
 		Reimbursement reimbursement = new Reimbursement();
+		reimbursement.setId(userReimbursementByReimbursementId.getId());
 		if (state==0) {
 			reimbursement.setTest("已通过");
 			variables.put("msg", "已通过");
 			variables.put("completePeople", username);
+			reimbursementService.updateReimbursement(reimbursement);
 		}else if (state==1) {
 			reimbursement.setTest("未通过");
 			variables.put("msg", "未通过");
 			variables.put("completePeople", username);
+			reimbursementService.updateReimbursement(reimbursement);
 		}else {
 			
 			//判断是否有下一审批人
@@ -55,12 +58,6 @@ public class MyReimbursementTaskService {
 			variables.put("msg", "审核中");
 			variables.put("completePeople", username);
 		}
-//		reimbursement.setTest("审核通过");
-		reimbursement.setId(userReimbursementByReimbursementId.getId());
-		reimbursementService.updateReimbursement(reimbursement);
-
-//		// 设置流程变量
-//		variables.put("getHolidaydays", userReimbursementByReimbursementId.getHolidaydays());
 		// 设置用户id
 		Authentication.setAuthenticatedUserId(username);
 		// 添加批注信息

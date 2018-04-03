@@ -18,6 +18,8 @@
 <script src="${APP_PATH}/static/kindeditor/kindeditor-all-min.js"></script>
 <script src="${APP_PATH}/static/kindeditor/lang/zh-CN.js"></script>
 
+<script src="${APP_PATH}/static/js/regAjax.js"></script>
+
 <!--初始化kindEditor配置 -->
 <script type="text/javascript">
 $(function(){
@@ -35,17 +37,20 @@ $(function(){
 })
 
 function save() {
+	ifErrorMessage();
+	 if ($('.save-button').attr("ajax-va") == "error") {
+	        return false;
+	    }
 	//获取项目名称
 	var projectName = $('input[name="projectName"]').val();
 	//获取项目别名
 	var projectAlias = $('input[name="projectAlias"]').val();
 	//开始日期
-	var projectStartDate = $('input[name="started"]').val();
+	var projectStartDate = $('input[name="startDate"]').val();
 	//结束日期
-	var projectEndDate = $('input[name="ended"]').val();
+	var projectEndDate = $('input[name="endDate"]').val();
 	//获取描述
 	var projectDesc = $('#editor_id').val();
-	
 	$.ajax({
 		url:"${APP_PATH}/admin/project/add",
 		type:"POST",
@@ -57,7 +62,23 @@ function save() {
 			'projectDesc':projectDesc
 		},
 		success:function(result){
-			alert("添加成功");
+			if (result.code == 100) {
+				$('#myModal').modal('show');
+				$('.modal-footer').remove();
+				ShowTips('.modal-title','添加结果','.modal-body','成功创建一个项目');
+				setTimeout(function(){
+					$('#myModal').modal('hide');
+					window.location.href='${APP_PATH}/admin/project/list';
+				},1000);
+			}else{
+				if (undefined != result.extend.errorFields) {
+	           		 $('#myModal').modal('show');
+						ShowTips('.modal-title','错误的操作','.modal-body','描述不为空');
+						setTimeout(function(){
+							$('#myModal').modal('hide');
+						},3000); 
+				}
+			}
 		}
 	})
 }
@@ -98,13 +119,15 @@ function save() {
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>项目名称</label>
 								<div class="col-sm-10">
-									<input name="projectName" value="" class="form-control" placeholder="填写名称" type="text">
+									<input class="form-control" id="name" name="projectName" value=""  placeholder="填写名称" type="text">
+									<span></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-2 control-label"><span>*</span>项目别名</label>
 								<div class="col-sm-10">
-									<input name="projectAlias" value="" class="form-control" placeholder="取个别名" type="text">
+									<input class="form-control" id="nameAlias" name="projectAlias" value=""  placeholder="取个别名" type="text">
+									<span></span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -121,6 +144,7 @@ function save() {
 								<label for="" class="col-sm-2 control-label"><span>*</span>描述</label>
 								<div class="col-sm-10">
 									<textarea id="editor_id" name="content" class="form-control" style="height: 400px;" placeholder="请填写内容"></textarea>
+									<span></span>
 								</div>
 							</div>
 							
@@ -128,7 +152,7 @@ function save() {
 							<div class="form-group">
 							<label for="" class="col-sm-2 control-label"></label>
 							<div class="col-sm-10">
-								<button type="button" onclick="save()"  class="btn btn-success">提交</button>
+								<button type="button" onclick="save()"  class="btn btn-success save-button">提交</button>
 							</div>
 						</div>
 						</form>
@@ -167,5 +191,20 @@ function save() {
 				 			 })
 			 		 })
 			 		</script>
+			 		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel"></h4>
+				      </div>
+				      <div class="modal-body">
+				      	
+				      
+				      </div>
+				     
+				    </div>
+				  </div>
+				</div>
 </body>
 </html>

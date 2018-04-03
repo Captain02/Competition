@@ -63,6 +63,7 @@ public class BugService {
 		if (i == 1) {
 			for (Integer integer : idInt) {
 				projectBug.setAssginor(integer);
+				projectBug.setId(null);
 				projectBugMapper.insertSelective(projectBug);
 				ProjectHistory projectHistory = new ProjectHistory();
 				projectHistory.setOperationPeopleId(userId);

@@ -121,7 +121,12 @@
                                     </form>
                                 </div>
                                 
-                                <nav aria-label="Page navigation" class="pull-right">
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation" class="pull-right" style="position: absolute; right: 40px; bottom: 0;">
 									  <ul class="pagination pagination-sm">
 									    <li>
                                                 <a href="${APP_PATH}/admin/KnowledgeSharing/list?pn=1&type=${type}&name=${name}">首页</a>
@@ -162,10 +167,7 @@
 									  </ul>
 								</nav>
 
-                            </div>
-
-                        </div>
-                    </div>
+                            
                 </div>
             </div>
 

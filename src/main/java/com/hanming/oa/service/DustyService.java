@@ -73,6 +73,7 @@ public class DustyService {
 		if (i == 1) {
 			for (Integer integer : idInt) {
 				dusty.setAssignor(integer);
+				dusty.setId(null);
 				dustyMapper.insertSelective(dusty);
 				ProjectHistory projectHistory = new ProjectHistory();
 				projectHistory.setOperationPeopleId(userId);

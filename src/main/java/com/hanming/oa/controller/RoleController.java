@@ -6,9 +6,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +23,8 @@ import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Resource;
 import com.hanming.oa.model.Role;
 import com.hanming.oa.service.ResourceService;
-import com.hanming.oa.service.RoleService;
 import com.hanming.oa.service.RoleResourceService;
+import com.hanming.oa.service.RoleService;
 
 @Controller
 @RequestMapping("/admin/role")

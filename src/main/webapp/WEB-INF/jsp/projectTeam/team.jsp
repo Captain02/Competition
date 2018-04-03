@@ -54,17 +54,9 @@ function dele(ele) {
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
 
-                    <form action="${APP_PATH}/admin/project/list" class="serach-form" method="get">
+                    <form action="${APP_PATH}/admin/projectTeam/list" class="serach-form" method="get">
 
-                        
-						<select name="state" class="form-control">
-				          <option value="">项目状态</option>
-				          <option value="1">挂起</option>
-				          <option value="2">延期</option>
-				          <option value="3">进行</option>
-				          <option value="4">结束</option>
-       					</select>
-                        <input type="text" placeholder="输入项目名称" value="${projectName == '项目名称'?'':projectName}" class="form-control" name="projectName">
+                        <input type="text" placeholder="输入项目名称" value="${userName == '需求'?'':userName}" class="form-control" name="userName">
 
                         <button type="submit" class="btn btn-primary">搜索</button>
 
