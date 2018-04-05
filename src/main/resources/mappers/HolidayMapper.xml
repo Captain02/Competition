@@ -158,7 +158,7 @@
   
   <!-- Holiday selectHolidayByHolidayId(Integer holidayId); -->
   <select id="selectHolidayByHolidayId" resultType="UserHolidayByHolidayId" parameterType="Integer">
-  	SELECT ho.date,ho.id,ho.type,ho.startday,ho.endday,ho.holidaydays,ho.test,ho.reason,ho.enclosure,ho.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department,ho.filename filename
+  	SELECT DISTINCT ho.date,ho.id,ho.type,ho.startday,ho.endday,ho.holidaydays,ho.test,ho.reason,ho.enclosure,ho.processInstanceId,tu.id tuId,tu.username,tu.`name` ,tr.`name` role,td.`name` department,ho.filename filename
 	FROM holiday ho
 	LEFT JOIN user_holiday uh ON uh.holidayId = ho.id
 	LEFT JOIN t_user tu ON tu.id = uh.userId

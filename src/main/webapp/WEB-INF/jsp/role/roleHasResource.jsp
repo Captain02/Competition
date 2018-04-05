@@ -52,27 +52,27 @@ $(function(){
 		}
 	});
 	
-// 	$(".resourceId").on("click",function(){
-// 		var c = 0;
-// 		var ifChecked = this.checked;
-// 		var roleId = "${roleId}";
-//         var resourceId = $(this).val();
+	$(".resourceId").on("click",function(){
+		var c = 0;
+		var ifChecked = this.checked;
+		var roleId = "${roleId}";
+        var resourceId = $(this).val();
         
-// 		if (ifChecked) {
-// 			c = 1;
-// 		}
+		if (ifChecked) {
+			c = 1;
+		}
 		
-// 		 $.ajax({
-// 			url:"${APP_PATH}/admin/role/updateResource",
-// 			data:"roleId="+roleId+"&resourceId="+resourceId+"&check="+c,
-// 			type:"GET",
-// 			success:function(result){
-// 				if (result.code==200) {
-// 					alert("修改失败");
-// 				}
-// 			}
-// 		}) 
-// 	})
+		 $.ajax({
+			url:"${APP_PATH}/admin/role/updateResource",
+			data:"roleId="+roleId+"&resourceId="+resourceId+"&check="+c,
+			type:"GET",
+			success:function(result){
+				if (result.code==200) {
+					alert("修改失败");
+				}
+			}
+		}) 
+	})
 	
 })
 </script>
@@ -119,12 +119,12 @@ $(function(){
 								  <div class="panel panel-default">
 								    <div class="panel-heading" role="tab" id="headingOne">
 								      <h4 class="panel-title">
-								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#ScheduleManagement" aria-expanded="false" aria-controls="ScheduleManagement">
+								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#system" href="#SystemManagement" aria-expanded="false" aria-controls="SystemManagement">
 								          	权限：系统管理
 								        </a>
 								      </h4>
 								    </div>
-								    <div id="ScheduleManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								    <div id="SystemManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 								      <div class="panel-body">
 								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
 	                               <li>
@@ -146,14 +146,14 @@ $(function(){
 								  </div>
 								  <!-- 权限：日程管理 -->
 								  <div class="panel panel-default">
-								    <div class="panel-heading" role="tab" id="headingOne">
+								    <div class="panel-heading" role="tab" id="headingNine">
 								      <h4 class="panel-title">
-								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#ScheduleManagement" aria-expanded="false" aria-controls="ScheduleManagement">
+								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#ScheduleManagement" href="#ScheduleManagement" aria-expanded="false" aria-controls="ScheduleManagement">
 								          	权限：日程管理
 								        </a>
 								      </h4>
 								    </div>
-								    <div id="ScheduleManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								    <div id="ScheduleManagement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
 								      <div class="panel-body">
 								       <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
 	                               <li>
@@ -296,14 +296,14 @@ $(function(){
 								 
 								 <!-- 权限：流程管理 --> 
 								 <div class="panel panel-default">
-								    <div class="panel-heading" role="tab" id="headingThree">
+								    <div class="panel-heading" role="tab" id="headingSix">
 								      <h4 class="panel-title">
-								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
 								          	权限：流程管理
 								        </a>
 								      </h4>
 								    </div>
-								    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
 								      <div class="panel-body">
 								        <ul id="resource-list" name="resource-list" class="list-unstyled resource-list clearfix">
 	                               <li>
@@ -389,13 +389,7 @@ $(function(){
 									                       
                             </form>
                             
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <input name="id" value="0" type="hidden">
-                                    <button type="submit" class="btn btn-success">保 存</button>
-                                </div>
-                            </div>
-                            
+                           
 	                    </div>
 		           </div>
 		      </div>        
