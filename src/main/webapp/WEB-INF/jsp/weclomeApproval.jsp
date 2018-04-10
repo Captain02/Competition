@@ -109,11 +109,6 @@
                     <div class="content-head-right">
                         <ul class="login-info">
                             <li>
-                                <a href="">
-                                    <i class="glyphicon glyphicon-envelope"></i>
-                                </a>
-                            </li>
-                            <li>
                                 <span>欢迎！</span>
                                 <a href="#" data-toggle="dropdown">
                                     <sh:principal property="name"></sh:principal>

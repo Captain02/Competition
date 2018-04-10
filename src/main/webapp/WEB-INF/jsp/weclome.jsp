@@ -23,6 +23,7 @@
     <script src="${APP_PATH}/static/js/bootstrap.min.js"></script>
 
     <script src="${APP_PATH}/static/js/change.js"></script>
+    <link rel="stylesheet" href="${APP_PATH}/static/css/font-awesome.css">
 
 </head>
 
@@ -109,11 +110,6 @@
                 <!-- 此处显示登录所用的用户名以及职位，用include标签包含进来 -->
                     <div class="content-head-right">
                         <ul class="login-info">
-                            <li>
-                                <a href="">
-                                    <i class="glyphicon glyphicon-envelope"></i>
-                                </a>
-                            </li>
                             <li>
                                 <span>欢迎！</span>
                                 <a href="#" data-toggle="dropdown">

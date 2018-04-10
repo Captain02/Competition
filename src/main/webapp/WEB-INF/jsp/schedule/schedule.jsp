@@ -94,7 +94,7 @@
                 </a>
 
 
-                <div class="content-head-right"></div>
+               <jsp:include page="iniUserInfo.jsp"></jsp:include>
 
                 <div class="clearfix"></div>
 
