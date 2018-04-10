@@ -37,8 +37,8 @@ public class ScheduleController {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		schedule.setUserID(userId);
 		if (isInsert == 1) {
-			if (("00:00:00".equals(schedule.getStartTime().substring(11, 16)))
-					&& ("00:00:00".equals(schedule.getEndTime().substring(11, 16)))) {
+			if (("00:00".equals(schedule.getStartTime().substring(11, 16)))
+					&& ("00:00".equals(schedule.getEndTime().substring(11, 16)))) {
 
 				schedule.setAllDay("1");
 			}

@@ -143,6 +143,7 @@ public class DustyController {
 		Dusty dusty = new Dusty();
 		dusty.setState(state);
 		dusty.setId(id);
+		dusty.setCompletPeople(userId);
 		dustyService.update(dusty);
 		ProjectHistory projectHistory = new ProjectHistory();
 		projectHistory.setOperationPeopleId(userId);
