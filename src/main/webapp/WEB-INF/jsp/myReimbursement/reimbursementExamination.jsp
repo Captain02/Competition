@@ -144,7 +144,7 @@ function examination(state) {
                                                  </div>
                                                  <div class="col-sm-10 approve-result">
                                                  <span class="enclosureName">${enclosureName}</span>
-                                                     <button type="button" class="btn btn-default">
+                                                     <button onclick="window.location.href='${APP_PATH}/admin/reimbursement/down/${userReimbursementByReimbursementId.id}'" type="button" class="btn btn-default">
                                                          <span class="glyphicon glyphicon-arrow-down"></span>下载附件</button>
                                                  </div>
                                              </div>

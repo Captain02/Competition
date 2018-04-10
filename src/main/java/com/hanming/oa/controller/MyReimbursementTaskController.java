@@ -142,8 +142,7 @@ public class MyReimbursementTaskController {
 		}
 
 		model.addAttribute("enclosureName",
-				"".equals(userReimbursementByReimbursementId.getEnclosure().substring(14)) ? "没有附件"
-						: userReimbursementByReimbursementId.getEnclosure().substring(14));
+				"".equals(userReimbursementByReimbursementId.getFilename()) ? "没有附件" : userReimbursementByReimbursementId.getFilename());
 		model.addAttribute("comment", commentList);
 		model.addAttribute("userReimbursementByReimbursementId", userReimbursementByReimbursementId);
 

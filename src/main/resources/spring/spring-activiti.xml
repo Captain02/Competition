@@ -10,7 +10,7 @@
     <!-- 配置事务管理器 -->
     <property name="transactionManager" ref="txManager" />
     <!-- 配置表的生成策略，没有表则自动生成表 -->
-    <property name="databaseSchemaUpdate" value="flase" />
+    <property name="databaseSchemaUpdate" value="true" />
     <property name="jobExecutorActivate" value="false" />
   </bean>
   

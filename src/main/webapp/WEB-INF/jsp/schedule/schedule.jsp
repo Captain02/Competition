@@ -217,7 +217,6 @@
 					eventDrop : function( event, dayDelta, revertFunc ) {
 					    if(dayDelta._days != 0){
 					        days = dayDelta._days;
-					        alert(event.start);
 					        updateDay(days,event.start,event.end,event.id);
 					    }else if(dayDelta._milliseconds != 0){
 					        console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds/1000+'秒！');

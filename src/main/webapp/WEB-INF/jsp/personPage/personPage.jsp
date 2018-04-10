@@ -254,9 +254,9 @@ String basePath2 = request.getScheme() + "://"
 												<c:forEach items="${DustyDisplay}" var="dustyDisplay">
 													<tr>
 														<td class="project-grade" data-grade="${dustyDisplay.grade}"><span class="label">${dustyDisplay.grade}</span></td>
+														<td><a href="${APP_PATH}/admin/dusty/detailed?id=${dustyDisplay.id}">${dustyDisplay.taskName}</a></td>
 														<td>${dustyDisplay.endTime}</td>
 														<td>${dustyDisplay.state}</td>
-														<td>${dustyDisplay.workTime}</td>
 													</tr>
 												</c:forEach>
 													</tbody>
@@ -267,6 +267,7 @@ String basePath2 = request.getScheme() + "://"
 												<table class="table table-hover">
 													<thead>
 														<tr>
+															<th>级别</th>
 															<th>Bug标题</th>
 															<th>创建日期</th>
 															<th>状态</th>
@@ -277,7 +278,8 @@ String basePath2 = request.getScheme() + "://"
 													<tbody>
 														<c:forEach items="${BugDisplay}" var="bugDisplay">
 															<tr>
-																<td>${bugDisplay.bugTitle}</td>
+																<td>${bugDisplay.grade}</td>
+																<td><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
 																<td>${bugDisplay.creatTime}</td>
 																<td>${bugDisplay.state}</td>
 																<td>${bugDisplay.creatPeople}</td>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Event;
 import com.hanming.oa.model.Schedule;
@@ -32,18 +33,24 @@ public class ScheduleController {
 	// 保存
 	@ResponseBody
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public Msg save(Schedule schedule,@RequestParam("isInsert")Integer isInsert) {
+	public Msg save(Schedule schedule, @RequestParam("isInsert") Integer isInsert) {
 		Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("id");
 		schedule.setUserID(userId);
-		if (isInsert==1) {
+		if (isInsert == 1) {
+			if (("00:00:00".equals(schedule.getStartTime().substring(11, 16)))
+					&& ("00:00:00".equals(schedule.getEndTime().substring(11, 16)))) {
+
+				schedule.setAllDay("1");
+			}
+
 			schedule.setId(null);
 			scheduleService.insert(schedule);
-		}else if (isInsert==0) {
+		} else if (isInsert == 0) {
 			scheduleService.update(schedule);
-		}else if (isInsert==-1) {
-			scheduleService.dele(schedule);
+		} else if (isInsert == -1) {
+			scheduleService.dele(schedule);  
 		}
-		
+
 		return Msg.success();
 	}
 
@@ -63,25 +70,25 @@ public class ScheduleController {
 			@RequestParam(value = "start", required = false) String start,
 			@RequestParam(value = "end", required = false) String end,
 			@RequestParam(value = "id", required = false) Integer id) {
-		
+
 		Schedule schedule = new Schedule();
-		
+
 		schedule.setStartTime(start);
 		schedule.setEndTime(end);
-		
+
 		schedule.setId(id);
 		scheduleService.update(schedule);
-		
+
 		return Msg.success();
 	}
-	
-	//查询详细信息
+
+	// 查询详细信息
 	@ResponseBody
-	@RequestMapping(value="/clickBySchedule",method=RequestMethod.GET)
-	public Msg clickBySchedule(@RequestParam("schedule")Integer id) {
-		
+	@RequestMapping(value = "/clickBySchedule", method = RequestMethod.GET)
+	public Msg clickBySchedule(@RequestParam("schedule") Integer id) {
+
 		Schedule schedule = scheduleService.select(id);
-		
+
 		return Msg.success().add("schedule", schedule);
 	}
 

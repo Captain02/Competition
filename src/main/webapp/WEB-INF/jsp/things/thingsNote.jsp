@@ -115,7 +115,7 @@
                                         </div>
  
                                         <!--endprint-->
-                                        <button type="button" class="btn btn-default" onclick="window.location.href='${APP_PATH}/admin/things/down/${userHolidayByHolidayId.id}'">
+                                        <button type="button" class="btn btn-default" onclick="window.location.href='${APP_PATH}/admin/things/down/${userThingsByThingsId.id}'">
                                             <span class="glyphicon glyphicon-arrow-down"></span>下载附件
                                         </button>
                                     </div>

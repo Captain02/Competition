@@ -109,7 +109,8 @@ public class DeployService {
 	// 流程部署
 	@Transactional
 	public void addDeploye(MultipartFile file, Integer num) {
-		Deployment deploy;
+		
+		Deployment deploy = null;
 		try {
 			// 开始部署
 			deploy = repositoryService.createDeployment()// 创建部署

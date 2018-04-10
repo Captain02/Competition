@@ -117,7 +117,7 @@ function dele(ele) {
 	                    <h1>关联需求</h1>
 	                    <div class="content">${dustyDetailed.projectName}</div>
 						<input type="hidden" value="">
-		                    <a class="btn btn-danger" href="${APP_PATH}/admin/dusty/detailed?id=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
+		                    <a class="btn btn-danger" href="${APP_PATH}/admin/dusty/editor?id=${dustyDetailed.id}"> <i class="fa fa-check"></i> 编辑</a>&nbsp;
 		                    <a onclick="dele(this);" data-id="${dustyDetailed.id}" class="btn p-follow-btn"><i class="fa fa-times"></i>删除</a>  
 		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="未开始" data-id="${dustyDetailed.id}" class="btn p-follow-btn">未开始</a> 
 		                    <a onclick="changeState(this);" data-project-state="${dustyDetailed.state}" data-state="进行中" data-id="${dustyDetailed.id}" class="btn p-follow-btn">进行中</a> 
