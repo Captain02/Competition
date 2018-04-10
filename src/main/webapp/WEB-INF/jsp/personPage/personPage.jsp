@@ -236,11 +236,11 @@ String basePath2 = request.getScheme() + "://"
 										</ul>
 									</header>
 									
-									<!-- 审批选项卡面板 -->
+									<!-- 项目选项卡面板 -->
 									<div class="panel-body my-approval-tab-content">
 										<div class="tab-content">
 											<div class="tab-pane fade in active" id="myDusty">
-												<table class="table table-hover">
+												<table class="table table-hover table-project">
 													<thead>
 														<tr>
 															<th>级别</th>
@@ -254,7 +254,7 @@ String basePath2 = request.getScheme() + "://"
 												<c:forEach items="${DustyDisplay}" var="dustyDisplay">
 													<tr>
 														<td class="project-grade" data-grade="${dustyDisplay.grade}"><span class="label">${dustyDisplay.grade}</span></td>
-														<td><a href="${APP_PATH}/admin/dusty/detailed?id=${dustyDisplay.id}">${dustyDisplay.taskName}</a></td>
+														<td class="project-name"><a href="${APP_PATH}/admin/dusty/detailed?id=${dustyDisplay.id}">${dustyDisplay.taskName}</a></td>
 														<td>${dustyDisplay.endTime}</td>
 														<td>${dustyDisplay.state}</td>
 													</tr>
@@ -264,7 +264,7 @@ String basePath2 = request.getScheme() + "://"
 											</div>
 											
 											<div class="tab-pane fade" id="myBug">
-												<table class="table table-hover">
+												<table class="table table-hover table-project">
 													<thead>
 														<tr>
 															<th>级别</th>
@@ -279,7 +279,7 @@ String basePath2 = request.getScheme() + "://"
 														<c:forEach items="${BugDisplay}" var="bugDisplay">
 															<tr>
 																<td>${bugDisplay.grade}</td>
-																<td><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
+																<td class="project-name"><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
 																<td>${bugDisplay.creatTime}</td>
 																<td>${bugDisplay.state}</td>
 																<td>${bugDisplay.creatPeople}</td>
@@ -304,7 +304,7 @@ String basePath2 = request.getScheme() + "://"
 														<c:forEach items="${ProjectDisplay}" var="projectDisplay">
 													<tr>
 														<td class="project-name"><a href="${APP_PATH}/admin/project/projectDetails?projectId=${projectDisplay.id}">${projectDisplay.projectName}</a></td>
-														<td>${projectDisplay.endDate}</td>
+														<td class="project-name">${projectDisplay.endDate}</td>
 														<td>${projectDisplay.state}</td>
 														<td class="project-name">
 															<a href="">${projectDisplay.projectResponsiblePeople}</a>
