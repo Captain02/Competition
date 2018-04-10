@@ -253,6 +253,7 @@ function replies(ele) {
 													<input id="pn" type="hidden" name="pn" value="${pageInfo.pageNum}" /> 
 													<input type="hidden" name="topicId" value="${bbsDetailedTopic.id}" /> 
 													<input type="hidden" name="byUserId" value="${bbsDetailedTopic.userId}" />
+													<input type="hidden" name="state" value="0" />
 													
 													<button type="submit" class="btn btn-primary pull-right btn-sm">我来点评</button>
 												</div>
