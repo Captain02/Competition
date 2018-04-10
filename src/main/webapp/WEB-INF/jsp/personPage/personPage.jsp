@@ -278,7 +278,7 @@ String basePath2 = request.getScheme() + "://"
 													<tbody>
 														<c:forEach items="${BugDisplay}" var="bugDisplay">
 															<tr>
-																<td>${bugDisplay.grade}</td>
+																<td class="project-grade" data-grade="${bugDisplay.grade}"><span class="label">${bugDisplay.grade}</span></td>
 																<td class="project-name"><a href="${APP_PATH}/admin/bug/detailed?bugId=${bugDisplay.id}">${bugDisplay.bugTitle}</a></td>
 																<td>${bugDisplay.creatTime}</td>
 																<td>${bugDisplay.state}</td>
