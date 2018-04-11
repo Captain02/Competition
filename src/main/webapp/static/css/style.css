@@ -75,7 +75,7 @@ body a:hover {
 	width: 130px;
 	position: fixed;
 	height: 100%;
-	z-index: 9999;
+	z-index: 2;
 }
 
 .nav-hover {
@@ -109,7 +109,7 @@ body a:hover {
 	position: fixed;
 	top: 0;
 	left: 130px;
-	z-index: 999;
+	z-index: 1;
 	width: 100%;
 }
 
@@ -326,13 +326,10 @@ body a:hover {
 /* footer */
 .footer {
 	width: 100%;
-	position: absolute;
-	bottom: 0;
 	line-height: 80px;
 	background-color: #1069a4;
 	border-top: 7px solid #0a5685;
 	text-align: center;
-	font-family: fzlt;
 	font-size: 1.4rem;
 	color: #fff;
 	letter-spacing: 1px;
@@ -793,7 +790,6 @@ ul.p-info .title, ul.p-info .desk {
 	color: #65CEA7;
 }
 
-
 /* 请假条页 */
 .blog h1 {
 	font-size: 18px;
@@ -951,7 +947,8 @@ ul.p-info .title, ul.p-info .desk {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-.activity-time{
+
+.activity-time {
 	font-size: 12px;
 	font-style: italic;
 }
@@ -1111,7 +1108,7 @@ ul.p-info .title, ul.p-info .desk {
 }
 
 .d-content {
-	padding-top:20px;
+	padding-top: 20px;
 	min-height: 150px;
 	color: #000;
 	overflow: auto;
@@ -1795,7 +1792,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1803,7 +1854,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .5em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1818,7 +1923,61 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1826,8 +1985,62 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1845,7 +2058,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1853,8 +2120,62 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1869,7 +2190,61 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1877,7 +2252,61 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .5em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1895,7 +2324,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1903,8 +2386,62 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 .5em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1919,11 +2456,83 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1949,7 +2558,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1957,7 +2620,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .5em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1972,7 +2689,61 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1980,8 +2751,62 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1999,7 +2824,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2007,8 +2886,62 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2023,7 +2956,61 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2031,7 +3018,61 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .5em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2049,7 +3090,61 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2057,8 +3152,62 @@ width
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1
 .5em
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2073,11 +3222,83 @@ margin-right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2318,16 +3539,18 @@ table.table-project tbody tr td.project-name a:hover {
 }
 
 .fc-content {
-	border:1px solid #65cea7 !important;
+	border: 1px solid #65cea7 !important;
 	background: #65cea7 !important;
 	height: 40px;
 	line-height: 40px;
 }
-.fc-event{
+
+.fc-event {
 	background-color: #65cea7;
-	border:1px solid #65cea7 !important;
+	border: 1px solid #65cea7 !important;
 	border-radius: 5px;
 }
+
 .fc-day-header {
 	height: 45px;
 	line-height: 45px;
@@ -2348,4 +3571,42 @@ table.table-project tbody tr td.project-name a:hover {
 	color: #474752;
 	font-weight: 300;
 	padding: 0 10px;
+}
+
+@media ( max-width :360px) {
+	.top-title {
+		font-size: 3rem
+	}
+	.login-form {
+		width: 100%;
+		margin: 0 auto;
+	}
+	.small, small {
+		display: none;
+	}
+	.modal-content {
+		z-index: 3;
+	}
+	.calendar {
+		display: none;
+	}
+	.serach-form {
+		display: none;
+	}
+	.type {
+		display: none;
+	}
+	.data {
+		display: none;
+	}
+	.page-area {
+		right: -5px;
+		width: 100%;
+	}
+	.days{
+		width: 18%;
+	}
+	.control-label{
+	text-align: left;
+	}
 }

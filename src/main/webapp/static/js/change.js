@@ -23,9 +23,11 @@ $(function () {
     toggleBtn.click(function () {
         if (flag) {
             $('body').addClass('stickey-menu');
+            $('.content-head-right').removeClass('hidden');
             flag = 0;
         } else {
             $('body').removeClass('stickey-menu');
+            $('.content-head-right').addClass('hidden');
             flag = 1;
         }
         return false;

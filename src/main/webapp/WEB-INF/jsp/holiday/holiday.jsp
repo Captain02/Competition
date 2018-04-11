@@ -104,7 +104,7 @@
                             </button>
                             
                             <c:if test="${approved == '全部'}">
-	                            <button id="delButton" type="button" class="btn btn-success fnish-process" onclick="window.location.href='${APP_PATH}/admin/holiday/list?approved=已审批'">
+	                            <button id="delButton" type="button" class="btn btn-success fnish-process btn-sm" onclick="window.location.href='${APP_PATH}/admin/holiday/list?approved=已审批'">
 	                                <i class="glyphicon glyphicon-check"></i>已审批
 	                            </button>
                             </c:if>
@@ -144,9 +144,9 @@
                                             	<c:if test="${approved != '全部'}">
 	                                            	<th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
                                             	</c:if>
-                                                <th>类型</th>
-                                                <th class="hidden-phone hidden-xs">请假日期</th>
-                                                <th>天数</th>
+                                                <th class="type">类型</th>
+                                                <th class="data">请假日期</th>
+                                                <th class="days">天数</th>
                                                 <th>原因</th>
                                                 <th>状态</th>
                                                 <th>操作</th>
@@ -160,14 +160,14 @@
 		                                                   <input type="checkbox" name="selectItem" class="selectItem">
 		                                                </td>
 	                                            	</c:if>
-	                                                <td>${holiday.type} <input type="hidden" value="${holiday.processinstanceid}" /></td>
-	                                                <td>${holiday.date}</td>
+	                                                <td class="type">${holiday.type} <input type="hidden" value="${holiday.processinstanceid}" /></td>
+	                                                <td class="data">${holiday.date}</td>
 	                                                <td>${holiday.holidaydays}</td>
 	                                                <td>${holiday.reason}</td>
 	                                                <td><span class="label label-success">${holiday.test}</span></td>
 	                                                <td>
 		                                                <div class="btn-group">
-	                                                       <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	                                                       <button type="button" class="btn btn-danger dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 	                                                                                                                                                                                                                                         操作
 	                                                            <span class="caret"></span>
 	                                                        </button>
