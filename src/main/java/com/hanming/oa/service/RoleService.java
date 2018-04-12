@@ -93,7 +93,7 @@ public class RoleService {
 			return 0;
 		} else {
 			roleMapper.deleteByPrimaryKey(id);
-			roleResourceMapper.deleteByRoleId(id);
+			roleResourceMapper.deleteAllByRoleId(id);
 			return 1;
 		}
 	}

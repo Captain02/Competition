@@ -41,7 +41,7 @@ $(document).on("click",".dele",function(){
 				}else if(result.code==200){
 					$('#myModal').modal('show');
 					$('.modal-title').html('删除结果回执');
-					ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '的相关信息');
+					ShowTips('.modal-title','删除结果回执','.modal-body','职称中包含成员，无法删除');
 					ShowEle('.yes','hide','.no','hide','.down','show');
 					
 					

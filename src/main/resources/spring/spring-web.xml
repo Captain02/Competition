@@ -33,7 +33,7 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">    
 	    <!-- 设置默认编码 -->  
 	    <property name="defaultEncoding" value="utf-8"></property>  
-	    <property name="maxUploadSize" value="1000000"></property>
+	    <property name="maxUploadSize" value="30000000"></property>
 	</bean> 
 
 </beans>

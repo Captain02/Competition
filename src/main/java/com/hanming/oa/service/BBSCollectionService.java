@@ -91,6 +91,7 @@ public class BBSCollectionService {
 		bbsReplies.setTopicid(topicid);
 		bbsReplies.setText(text);
 		bbsReplies.setState(state);
+		bbsReplies.setDate(DateTool.dateToString(new Date()));
 		BBSRepliesMapper.insert(bbsReplies);
 
 		// 插入消息

@@ -1,6 +1,5 @@
 package com.hanming.oa.model;
 
-import java.util.Date;
 
 public class BBSReplies {
 	private Integer id;
@@ -13,19 +12,11 @@ public class BBSReplies {
 
 	private Integer repliesid;
 
-	private Date date;
+	private String date;
 
 	private String text;
 
 	private String state;
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
 
 	public Integer getId() {
 		return id;
@@ -67,11 +58,11 @@ public class BBSReplies {
 		this.repliesid = repliesid;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -80,6 +71,15 @@ public class BBSReplies {
 	}
 
 	public void setText(String text) {
-		this.text = text == null ? null : text.trim();
+		this.text = text;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 }

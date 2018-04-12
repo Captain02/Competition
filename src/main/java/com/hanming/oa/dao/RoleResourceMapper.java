@@ -19,9 +19,11 @@ public interface RoleResourceMapper {
 
     int updateByPrimaryKey(RoleResource record);
 
-	void deleteByRoleId(Integer id);
+	void deleteByRoleId(@Param("id")Integer id, @Param("resourceId")Integer resourceId);
 
 	void addRoleResource(@Param("roleId") int roleId,@Param("resourceId") int resourceId);
 
 	void addResourceListId(@Param("id")Integer id, @Param("collect")List<Integer> collect);
+
+	void deleteAllByRoleId(@Param("id")Integer id);
 }

@@ -325,6 +325,9 @@ body a:hover {
 
 /* footer */
 .footer {
+	position:absolute;
+	left:0;
+	bottom:0;
 	width: 100%;
 	line-height: 80px;
 	background-color: #1069a4;

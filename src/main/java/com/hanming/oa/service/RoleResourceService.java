@@ -42,8 +42,8 @@ public class RoleResourceService {
 		return i;
 	}
 
-	public void deleteByRoleId(int parseInt) {
-		roleResourceMapper.deleteByRoleId(parseInt);
+	public void deleteByRoleId(int parseInt, int resourceId) {
+		roleResourceMapper.deleteByRoleId(parseInt,resourceId);
 	}
 
 	public void addRoleResource(Integer roleId, Integer resourceId) {

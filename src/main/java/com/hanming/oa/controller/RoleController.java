@@ -126,7 +126,6 @@ public class RoleController {
 		List<Resource> knowlege = resourceService.listByColumn("知识管理");
 		List<Resource> image = resourceService.listByColumn("相册管理");
 		List<Resource> processDefinition = resourceService.listByColumn("流程管理");
-		System.out.println("++++++++++++++++++++++++++++++++"+schedule);
 		model.addAttribute("roleHasResourceList", list);
 		model.addAttribute("system", system);
 		model.addAttribute("resources", organization);
@@ -148,7 +147,7 @@ public class RoleController {
 			@RequestParam(value = "resourceId") String resourceId, @RequestParam(value = "check") String check) {
 		if (check != null) {
 			if (Integer.parseInt(check) == 0) {
-				roleResourceService.deleteByRoleId(Integer.parseInt(roleId));
+				roleResourceService.deleteByRoleId(Integer.parseInt(roleId), Integer.parseInt(resourceId));
 			}
 			if (Integer.parseInt(check) == 1) {
 				roleResourceService.addRoleResource(Integer.parseInt(roleId), Integer.parseInt(resourceId));

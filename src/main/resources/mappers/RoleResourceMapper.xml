@@ -69,8 +69,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!-- void deleteByRoleId(Integer id); -->
-  <delete id="deleteByRoleId" parameterType="Integer">
+  <!-- void deleteByRoleId(@Param("id")Integer id, @Param("resourceId")Integer resourceId); -->
+  <delete id="deleteByRoleId">
+  	delete from t_role_resource
+    where roleId = #{id,jdbcType=INTEGER} AND resourceId = #{resourceId}
+  </delete>
+  
+  <!-- void deleteAllByRoleId(Integer id); -->
+  <delete id="deleteAllByRoleId">
   	delete from t_role_resource
     where roleId = #{id,jdbcType=INTEGER}
   </delete>
