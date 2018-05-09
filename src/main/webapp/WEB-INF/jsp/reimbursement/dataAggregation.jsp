@@ -8,32 +8,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>报销管理</title>
+<title>报销数据汇总</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<script src="${APP_PATH}/static/js/selectAll.js"></script>
-
-<script type="text/javascript">
-		//单个删除
-		
-		//批量删除
-		function deleAll() {
-			//执行此方法，得到所选择的id
-			selectAllTips();
-			var ids = $('.ids').val();
-			
-			$('.yes').click(function(){
-				$.ajax({
-					url:"${APP_PATH}/admin/reimbursement/dele/"+ids,
-					type:"GET",
-					success:function(result) {
-					}
-				})
-			})
-		}
-	</script>
 
 </head>
 
@@ -55,15 +34,12 @@
 
 
 				<form action="${APP_PATH}/admin/reimbursement/list" class="serach-form" method="get">
-					
-					<input type="hidden" name="approved" value="${approved}">	
+					<input placeholder="请输入用户名" value="" class="form-control" name="userName" type="text">
 					
                      <select class="form-control" name="state">
-	                     <option>状态</option>
-	                     <option>已通过</option>
-						 <option>未通过</option>
-						 <option>审核中</option>
+	                    <option value="" style="display: none;">选择月份</option>
                     </select>
+                    
 					<button type="submit" class="btn btn-primary">搜索</button>
 
                      <div class="clearfix"></div>
@@ -81,35 +57,6 @@
 				<div class="om-header">
 					<jsp:include page="iniHolidayManagementHref.jsp"></jsp:include>
 
-					<div class="om-header-right ">
-						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/dataAnalysisPage'" type="button" class="btn btn-warning btn-sm">
-							<i class=" glyphicon glyphicon-globe" ></i>数据分析
-						</button>
-						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/dataAnalysisPage'" type="button" class="btn btn-info btn-sm">
-							<i class=" glyphicon glyphicon-cloud-download" ></i>数据汇总
-						</button>
-						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/add'" type="button" class="btn btn-success btn-sm">
-							<i>+</i>我要报销
-						</button>
-						<c:if test="${approved == '全部'}">
-						 <button id="delButton" type="button" class="btn btn-success btn-sm fnish-process" onclick="window.location.href='${APP_PATH}/admin/reimbursement/list?approved=已审批'">
-                                <i class="glyphicon glyphicon-check"></i>已审批
-                           </button>
-                           </c:if>
-                           <c:if test="${approved != '全部'}">
-                           <button id="delButton" type="button" class="btn btn-warning btn-sm do-process" onclick="window.location.href='${APP_PATH}/admin/reimbursement/list?approved=全部'">
-                               <i class="glyphicon glyphicon-time"></i>全部
-                           </button>
-                           </c:if>
-                            
-                          <c:if test="${approved != '全部'}">
-							  <button id="delButton" type="button" class="btn btn-sm btn-danger " onclick="deleAll()">
-	                                <i>-</i>批量删除
-	                          </button>
-                          </c:if>
-                          
-                          <input type="hidden" value=""  class="ids"/>
-					</div>
 
 					<div class="clearfix"></div>
 				</div>
@@ -118,63 +65,36 @@
 					<div class="row">
 						<div class="col-sm-12">
 
-							<header class="om-wrapper-header">报销 / 总数：${pageInfo.total}</header>
+							<header class="om-wrapper-header">月度报销数据汇总 / 总数：${pageInfo.total}</header>
 
 							<div class="om-wrpper-body">
 								<form action="" id="user-list" class="user-list">
 									<table class="table table-hover general-table">
+										
 										<thead>
 											<tr>
-											<c:if test="${approved != '全部'}">
-												<th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
-											</c:if>
-												<th>类型</th>
-												<th>状态</th>
-												<th>金额</th>
-												<th class="hidden-phone">报销日期</th>
+												<th>用户名</th>
+												<th>姓名</th>
+												<th>部门</th>
+												<th>职称</th>
+												<th>金额(元)</th>
 												<th>操作</th>
 											</tr>
 										</thead>
+										
 										<tbody>
-											<c:forEach items="${pageInfo.list}" var="reimbursement">
-												<tr>
-													<c:if test="${approved != '全部'}">
-													   <td>
-		                                                   <input type="checkbox" name="selectItem" class="selectItem">
-		                                                </td>
-													</c:if>
-													<td>${reimbursement.type}<input type="hidden" value="${reimbursement.processinstanceid}" /></td>
-													<td><span class="label label-success">${reimbursement.test}</span></td>
-													<td>${reimbursement.money}</td>
-													<td>${reimbursement.date}</td>
-													<td>
-														<div class="btn-group">
-															<button type="button" class="btn btn-primary btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																操作
-																<span class="caret"></span>
-															</button>
-															<ul class="dropdown-menu">
-																<li>
-																	<a href="${APP_PATH}/admin/reimbursement/reimbursementNote/${reimbursement.id}">查看报销单</a>
-																</li>
-																<li role="separator" class="divider"></li>
-																<li>
-																	<a href="${APP_PATH}/admin/reimbursement/showCurrentView/${reimbursement.processinstanceid}">查看进度</a>
-																</li>
-																<c:if test="${approved != '全部'}">
-																	  <li role="separator" class="divider"></li>
-			                                                        <li>
-			                                                            <a href="${APP_PATH}/admin/reimbursement/dele/${reimbursement.processinstanceid}">删除</a>
-			                                                        </li>
-																</c:if>
-	
-															</ul>
-														</div>
-													</td>
-												</tr>
-											</c:forEach>
+											<tr>
+												<td>admin </td>
+												<td>张三</td>
+												<td>财务部</td>
+												<td>经理</td>
+												<td>3000</td>
+												<td>
+													<button class="btn btn-info btn-sm">查看详情</button>
+												</td>
+											</tr>
 										</tbody>
-
+										
 									</table>
 								</form>
 							</div>
