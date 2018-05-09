@@ -248,5 +248,11 @@ public class ReimbursementController {
 
 		return Msg.success();
 	}
+	
+	//跳转数据汇总
+	@RequestMapping(value="/dataAnalysisPage",method=RequestMethod.GET)
+	public String dateAggregationPage() {
+		return "reimbursement/dataAggregation";
+	}
 
 }
