@@ -9,74 +9,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>流程部署</title>
+    <title>添加模块</title>
 
 <%
    pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
-<!-- 控制按钮的状态以及模态框展示的信息 -->
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
-<script type="text/javascript">
-<!-- 初始状态下，关闭按钮是隐藏的 -->
-$(function(){
-	ShowEle('.down','hide');
-});
-$(document).on("click",".dele",function(){
-	var name = $(this).parents("tr").find("td:eq(2)").text();
-	var ids = $(this).attr("value");
-	 ShowTips('.modal-title','删除确认？','.modal-body','确认删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '吗？');
-	 $('.yes').click(function(){
-		 $.ajax({
-				url:"${APP_PATH}/admin/deploy/dele/"+ids,
-				type:"DELETE",
-				success:function(result) {
-					if (result.code==100) {
-						 $('#myModal').modal('show');
-						 ShowTips('.modal-title','删除结果回执','.modal-body','已成功删除' + '<b style = "color:#c9302c;">' + name + '</b>' + '的相关信息');
-						 ShowEle('.yes','hide','.no','hide','.down','show');
-					}else{
-						$('#myModal').modal('show');
-						ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败,该部门还存在人员!' + '</b>');
-						ShowEle('.yes','hide','.no','hide','.down','show');
-					}
-				}
-			})
-
-	 });
-		
-	 $('.no').click(function(){
-			$('#myModal').modal('hide');
-		});
-		ShowEle('.yes','show','.no','show');
-});
-
-function deleAll() {
-	//执行此方法，得到所选择的id
-	selectAllTips();
-}
-
-$(function(){
-var ids = $('.ids').val();
-	$('.yes').click(function(){
-		 $.ajax({
-				url:"${APP_PATH}/admin/deploy/dele/"+ids,
-				type:"DELETE",
-				success:function(result){
-					if (result.code==100) {
-						 $('#myModal').modal('show');
-						 ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">已成功删除！</b>');
-						 ShowEle('.yes','hide','.no','hide','.down','show');
-					}else{
-						$('#myModal').modal('show');
-						ShowTips('.modal-title','删除结果回执','.modal-body','<b style = "color:#c9302c;">' + '操作失败' + '</b>');
-						ShowEle('.yes','hide','.no','hide','.down','show');
-					}
-				}
-			})  
-	});
-})
-</script>
 </head>
     <body class="bg-common stickey-menu">
 
@@ -131,10 +70,10 @@ var ids = $('.ids').val();
                         </div>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success" onclick="window.location.href='${APP_PATH}/admin/deploy/addeploy'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/deploy/addeploy'">
                                 <i>+</i>添加
                             </button>
-                            <button id="delButton" type="button" class="btn btn-danger " onclick="deleAll()">
+                            <button id="delButton" type="button" class="btn btn-danger btn-sm" onclick="deleAll()">
                                 <i>-</i>批量删除
                             </button>
                             <input type="hidden" value=""  class="ids"/>
@@ -148,49 +87,31 @@ var ids = $('.ids').val();
                         <div class="row">
                             <div class="col-sm-12">
 
-                                <header class="om-wrapper-header">流程部署 / 总数：${pageInfo.total}</header>
+                                <header class="om-wrapper-header">添加模块 </header>
 
                                 <div class="om-wrpper-body">
-                                    <form action="" id="user-list" class="user-list">
-                                        <table class="table table-bordered table-striped">
-
-                                            <thead>
-                                                <tr>
-                                                <th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
-                                                    <th>编号</th>
-                                                    <th>流程名称</th>
-                                                    <th>部署时间</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-												<c:forEach items="${pageInfo.list}" var="deploy">
-	                                                <tr>
-	                                                <td>
-	                                                   <input type="checkbox" name="selectItem" class="selectItem">
-	                                                </td>
-	                                                    <td>${deploy.id} <input type="hidden" value="${deploy.id}" /></td>
-	                                                    <td>${deploy.name}</td>
-	                                                    <td><fmt:formatDate value="${deploy.deploymentTime }" pattern="yyyy-MM-dd"/></td>
-	                                                    <td>
-	                                                        <div class="btn-group">
-	                                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                                                	操作
-	                                                                <span class="caret"></span>
-	                                                            </button>
-	                                                            <ul class="dropdown-menu">
-	                                                                <li>
-	                                                                    <a class="dele" value="${deploy.id}" data-toggle="modal" data-target="#myModal">删除</a>
-	                                                                </li>
-	                                                            </ul>
-	                                                        </div>
-	                                                    </td>
-	                                                </tr>
-													</c:forEach>
-                                            </tbody>
-
-                                        </table>
+                                    <form action="" id="modelAdd" class="model-add">
+                                        
+                                         <div class="form-group">
+										    <label class="col-md-2 control-label" for="modelName">模型名称</label>
+										    <div class="col-md-10">
+										    	<input type="text" class="form-control" id="modelName" placeholder="请输入模型名称">
+										    </div>
+						 				 </div>
+						 				 
+										  <div class="form-group">
+										    <label class="col-md-2 control-label" for="modelId">模型唯一标识</label>
+										    <div class="col-md-10"><input type="text" class="form-control" id="modelId" placeholder="请输入模型标识"></div>
+										  </div>
+						  
+						  				<div class="form-group">
+						  					<label class="col-md-2 control-label" for=""></label>
+						  					<div class="col-md-10">
+					  						 	<button type="reset" class="btn btn-default btn-warning">重置</button>
+					  							<button type="submit" class="btn btn-default btn-success">保存</button>
+						  					</div>
+						  				</div>
+                                        
                                     </form>
                                 </div>
 
