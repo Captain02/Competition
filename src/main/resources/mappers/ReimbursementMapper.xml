@@ -279,4 +279,24 @@
     </where>
   </select>
   
+  <!-- List<ReimbursementCollect> dataCollectPage(@Param("username")String username, @Param("date")String date); -->
+  <select id="dataCollectPage" resultType="ReimbursementCollect">
+  	SELECT tu.id, tu.username,tu.`name`,td.`name` AS departmentName, tr.`name` AS roleName,r.money ,LEFT(r.date,7) AS `date`
+	FROM t_user tu
+	INNER JOIN t_user_role tur ON tur.userId=tu.id
+	INNER JOIN t_role tr ON tr.id = tur.roleId
+	INNER JOIN t_department_user tdu ON tdu.userId=tu.id
+	INNER JOIN t_department td ON td.id = tdu.departmentId
+	INNER JOIN user_reimbursement ur ON ur.userId = tu.id
+	INNER JOIN reimbursement r ON r.id = ur.reimbursementId
+  	<where>
+  		<if test="username != null">
+  			tu.`name` = #{username}
+  		</if>
+  		<if test="date != null">
+  			AND r.date LIKE '%' #{date} '%'
+  		</if>
+  	</where>
+		GROUP BY LEFT(r.date,7)
+  </select>
 </mapper>

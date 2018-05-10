@@ -36,6 +36,7 @@ import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
 import com.hanming.oa.model.Reimbursement;
+import com.hanming.oa.model.ReimbursementCollect;
 import com.hanming.oa.model.User;
 import com.hanming.oa.model.UserReimbursementByReimbursementId;
 import com.hanming.oa.service.DeployService;
@@ -250,8 +251,16 @@ public class ReimbursementController {
 	}
 	
 	//跳转数据汇总
-	@RequestMapping(value="/dataAnalysisPage",method=RequestMethod.GET)
-	public String dateAggregationPage() {
+	@RequestMapping(value="/dataCollectPage",method=RequestMethod.GET)
+	public String dateAggregationPage(@RequestParam(value="pn",defaultValue="1")Integer pn,@RequestParam(value="userName",required = false)String username,
+			@RequestParam(value="date",required = false)String date,Model model) {
+		PageInfo<ReimbursementCollect> pageInfo = null;
+		PageHelper.startPage(pn, 8);
+		List<ReimbursementCollect> list =  reimbursementService.dataCollectPage(username,date);
+		pageInfo = new PageInfo<>(list,5);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("userName", username);
+		model.addAttribute("date", date);
 		return "reimbursement/dataAggregation";
 	}
 

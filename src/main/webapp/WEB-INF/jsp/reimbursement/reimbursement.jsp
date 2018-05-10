@@ -85,7 +85,7 @@
 						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/dataAnalysisPage'" type="button" class="btn btn-warning btn-sm">
 							<i class=" glyphicon glyphicon-globe" ></i>数据分析
 						</button>
-						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/dataAnalysisPage'" type="button" class="btn btn-info btn-sm">
+						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/dataCollectPage'" type="button" class="btn btn-info btn-sm">
 							<i class=" glyphicon glyphicon-cloud-download" ></i>数据汇总
 						</button>
 						<button id="addButton" onclick="window.location.href='${APP_PATH}/admin/reimbursement/add'" type="button" class="btn btn-success btn-sm">

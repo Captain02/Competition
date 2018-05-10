@@ -26,6 +26,7 @@ import com.hanming.oa.dao.UserReimbursementMapper;
 import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementAndExaminationTime;
+import com.hanming.oa.model.ReimbursementCollect;
 import com.hanming.oa.model.UserReimbursement;
 import com.hanming.oa.model.UserReimbursementByReimbursementId;
 
@@ -202,6 +203,11 @@ public class ReimbursementService {
 	public List<Reimbursement> listLikeTypeAndApproved(String state, String type) {
 		List<Reimbursement> list = reimbursementMapper.listLikeTypeAndApproved(state,type);
 		return list;
+	}
+
+	public List<ReimbursementCollect> dataCollectPage(String username, String date) {
+		List<ReimbursementCollect> reimbursementCollect = reimbursementMapper.dataCollectPage(username, date);
+		return reimbursementCollect;
 	}
 
 }

@@ -37,7 +37,7 @@
 					<input placeholder="请输入用户名" value="" class="form-control" name="userName" type="text">
 					
                      <select class="form-control" name="state">
-	                    <option value="" style="display: none;">选择月份</option>
+	                    <option style="display: none;">选择月份</option>
                     </select>
                     
 					<button type="submit" class="btn btn-primary">搜索</button>
@@ -77,22 +77,26 @@
 												<th>姓名</th>
 												<th>部门</th>
 												<th>职称</th>
+												<th>日期</th>
 												<th>金额(元)</th>
 												<th>操作</th>
 											</tr>
 										</thead>
 										
 										<tbody>
-											<tr>
-												<td>admin </td>
-												<td>张三</td>
-												<td>财务部</td>
-												<td>经理</td>
-												<td>3000</td>
-												<td>
-													<button class="btn btn-info btn-sm">查看详情</button>
-												</td>
-											</tr>
+											<c:forEach items="${pageInfo.list}" var="reimbursementCollect">
+												<tr>
+													<td>${reimbursementCollect.username}</td>
+													<td>${reimbursementCollect.name}</td>
+													<td>${reimbursementCollect.departmentName}</td>
+													<td>${reimbursementCollect.roleName}</td>
+													<td>${reimbursementCollect.date}</td>
+													<td>${reimbursementCollect.money}</td>
+													<td>
+														<button class="btn btn-info btn-sm">查看详情</button>
+													</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 										
 									</table>
@@ -109,11 +113,11 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pagination-control">
 									<li>
-										<a href="${APP_PATH}/admin/reimbursement/list?pn=1&type=${type}&state=${state}&approved=${approved}">首页</a>
+										<a href="${APP_PATH}/admin/reimbursement/dataCollectPage?pn=1&userName=${userName}&date=${date}">首页</a>
 									</li>
 									<c:if test="${pageInfo.hasPreviousPage}">
 										<li>
-											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum-1}&type=${type}&state=${state}&approved=${approved}" aria-label="Previous">
+											<a href="${APP_PATH}/admin/reimbursement/dataCollectPage?pn=${pageInfo.pageNum-1}&userName=${userName}&date=${date}" aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
 											</a>
 										</li>
@@ -126,21 +130,21 @@
 										</c:if>
 										<c:if test="${pageNum!=pageInfo.pageNum}">
 											<li>
-												<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageNum}&type=${type}&state=${state}&approved=${approved}">${pageNum}</a>
+												<a href="${APP_PATH}/admin/reimbursement/dataCollectPage?pn=${pageNum}&userName=${userName}&date=${date}">${pageNum}</a>
 											</li>
 										</c:if>
 									</c:forEach>
 
 									<c:if test="${pageInfo.hasNextPage }">
 										<li>
-											<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pageNum+1}&type=${type}&state=${state}&approved=${approved}" aria-label="Next">
+											<a href="${APP_PATH}/admin/reimbursement/dataCollectPage?pn=${pageInfo.pageNum+1}&userName=${userName}&date=${date}" aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 										</li>
 									</c:if>
 
 									<li>
-										<a href="${APP_PATH}/admin/reimbursement/list?pn=${pageInfo.pages}&type=${type}&state=${state}&approved=${approved}" aria-label="Next">
+										<a href="${APP_PATH}/admin/reimbursement/dataCollectPage?pn=${pageInfo.pages}&userName=${userName}&date=${date}" aria-label="Next">
 											<span aria-hidden="true">末页</span>
 										</a>
 									</li>
