@@ -96,7 +96,7 @@
 													<td>${reimbursementCollect.date}</td>
 													<td>${reimbursementCollect.money}</td>
 													<td>
-														<button class="btn btn-info btn-sm">查看详情</button>
+														<a class="btn btn-info btn-sm">查看详情</a>
 													</td>
 												</tr>
 											</c:forEach>
