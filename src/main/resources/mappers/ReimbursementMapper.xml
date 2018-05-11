@@ -290,10 +290,10 @@
 	INNER JOIN user_reimbursement ur ON ur.userId = tu.id
 	INNER JOIN reimbursement r ON r.id = ur.reimbursementId
   	<where>
-  		<if test="username != null">
+  		<if test="username != ''">
   			tu.username = #{username}
   		</if>
-  		<if test="date != null">
+  		<if test="date != ''">
   			AND r.date LIKE '%'#{date}'%'
   		</if>
   	</where>

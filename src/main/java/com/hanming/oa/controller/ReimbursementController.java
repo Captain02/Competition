@@ -254,8 +254,8 @@ public class ReimbursementController {
 	
 	//跳转数据汇总
 	@RequestMapping(value="/dataCollectPage",method=RequestMethod.GET)
-	public String dateAggregationPage(@RequestParam(value="pn",defaultValue="1")Integer pn,@RequestParam(value="userName",required = false)String username,
-			@RequestParam(value="date",required = false)String date,Model model) {
+	public String dateAggregationPage(@RequestParam(value="pn",defaultValue="1")Integer pn,@RequestParam(value="userName",defaultValue="")String username,
+			@RequestParam(value="date",defaultValue="")String date,Model model) {
 		PageInfo<ReimbursementCollect> pageInfo = null;
 		PageHelper.startPage(pn, 8);
 		List<ReimbursementCollect> list =  reimbursementService.dataCollectPage(username,date);

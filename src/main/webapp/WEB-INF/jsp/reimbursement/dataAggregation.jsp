@@ -39,7 +39,7 @@
                      <select class="form-control" name="state">
 	                    <option style="display: none;">选择月份</option>
 	                    <c:forEach items="${collectDate}" var="date">
-	                    <option style="display: none;" value="${date}">${date}</option>
+	                    <option value="${date}">${date}</option>
 	                    </c:forEach>
                     </select>
                     
