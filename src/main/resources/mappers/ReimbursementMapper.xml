@@ -299,4 +299,16 @@
   	</where>
 		GROUP BY LEFT(r.date,7)
   </select>
+  
+  <!-- List<DetailedRembursement> selectByUsernameAndDate(@Param("username")String username, @Param("data")String data); -->
+  <select id="selectByUsernameAndDate" resultType="DetailedRembursement" >
+  	SELECT r.money AS money, r.date AS date, tu.username AS username
+	FROM t_user tu
+	INNER JOIN user_reimbursement ur ON ur.userId = tu.id
+	INNER JOIN reimbursement r ON r.id = ur.reimbursementId
+  	<where>
+  			tu.`name` = #{username}
+  			AND r.date LIKE '%' #{date} '%'
+  	</where>
+  </select>
 </mapper>

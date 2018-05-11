@@ -2,6 +2,7 @@ package com.hanming.oa.controller;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hanming.oa.Tool.DateTool;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.model.DetailedRembursement;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementCollect;
 import com.hanming.oa.model.User;
@@ -258,10 +260,19 @@ public class ReimbursementController {
 		PageHelper.startPage(pn, 8);
 		List<ReimbursementCollect> list =  reimbursementService.dataCollectPage(username,date);
 		pageInfo = new PageInfo<>(list,5);
+		Set<String> collectDate = list.stream().map(ReimbursementCollect::getDate).collect(Collectors.toSet());
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("userName", username);
 		model.addAttribute("date", date);
+		model.addAttribute("collectDate", collectDate);
 		return "reimbursement/dataAggregation";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/detailedRembursement",method=RequestMethod.GET)
+	public void detailedRembursement(@RequestParam("username")String username,@RequestParam("date")String data) {
+		List<DetailedRembursement> detailedRembursement = new ArrayList<>();
+		detailedRembursement = reimbursementService.selectByUsernameAndDate(username,data);
 	}
 
 }

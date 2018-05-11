@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hanming.oa.model.DetailedRembursement;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementAndExaminationTime;
 import com.hanming.oa.model.ReimbursementCollect;
@@ -44,4 +45,6 @@ public interface ReimbursementMapper {
 	List<Reimbursement> listLikeTypeAndApproved(@Param("state") String state, @Param("type") String type);
 
 	List<ReimbursementCollect> dataCollectPage(@Param("username")String username, @Param("date")String date);
+
+	List<DetailedRembursement> selectByUsernameAndDate(@Param("username")String username, @Param("data")String data);
 }

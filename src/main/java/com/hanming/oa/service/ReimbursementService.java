@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hanming.oa.dao.ReimbursementMapper;
 import com.hanming.oa.dao.UserReimbursementMapper;
+import com.hanming.oa.model.DetailedRembursement;
 import com.hanming.oa.model.Holiday;
 import com.hanming.oa.model.Reimbursement;
 import com.hanming.oa.model.ReimbursementAndExaminationTime;
@@ -208,6 +209,11 @@ public class ReimbursementService {
 	public List<ReimbursementCollect> dataCollectPage(String username, String date) {
 		List<ReimbursementCollect> reimbursementCollect = reimbursementMapper.dataCollectPage(username, date);
 		return reimbursementCollect;
+	}
+
+	public List<DetailedRembursement> selectByUsernameAndDate(String username, String data) {
+		List<DetailedRembursement> detailedRembursement = reimbursementMapper.selectByUsernameAndDate( username,  data);
+		return detailedRembursement;
 	}
 
 }
