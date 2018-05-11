@@ -211,8 +211,8 @@ public class ReimbursementService {
 		return reimbursementCollect;
 	}
 
-	public List<DetailedRembursement> selectByUsernameAndDate(String username, String data) {
-		List<DetailedRembursement> detailedRembursement = reimbursementMapper.selectByUsernameAndDate( username,  data);
+	public List<DetailedRembursement> selectByUsernameAndDate(String username, String date) {
+		List<DetailedRembursement> detailedRembursement = reimbursementMapper.selectByUsernameAndDate( username,  date);
 		return detailedRembursement;
 	}
 

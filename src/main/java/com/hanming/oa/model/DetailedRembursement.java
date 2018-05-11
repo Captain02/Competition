@@ -2,18 +2,19 @@ package com.hanming.oa.model;
 
 public class DetailedRembursement {
 	
-	private String username;
+	private String type;
 	
 	private String date;
 	
 	private Float money;
 
-	public String getUsername() {
-		return username;
+
+	public String getType() {
+		return type;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getDate() {

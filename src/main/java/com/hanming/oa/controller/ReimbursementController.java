@@ -267,12 +267,22 @@ public class ReimbursementController {
 		model.addAttribute("collectDate", collectDate);
 		return "reimbursement/dataAggregation";
 	}
-	
+	//跳转详情页
+	@RequestMapping(value="/detailedRembursementPage",method=RequestMethod.GET)
+	public String detailedRembursementPage(Model model,@RequestParam("username")String username,@RequestParam("date")String date) {
+		model.addAttribute("username", username);
+		model.addAttribute("date", date);
+		return "reimbursement/reimbursementDetails";
+	}
+	//详情页数据
 	@ResponseBody
 	@RequestMapping(value="/detailedRembursement",method=RequestMethod.GET)
-	public void detailedRembursement(@RequestParam("username")String username,@RequestParam("date")String data) {
+	public Msg detailedRembursement(@RequestParam("username")String username,@RequestParam("date")String date) {
 		List<DetailedRembursement> detailedRembursement = new ArrayList<>();
-		detailedRembursement = reimbursementService.selectByUsernameAndDate(username,data);
+		detailedRembursement = reimbursementService.selectByUsernameAndDate(username,date);
+		List<String> types = detailedRembursement.stream().map(DetailedRembursement::getType).collect(Collectors.toList());
+		List<Float> moneys = detailedRembursement.stream().map(DetailedRembursement::getMoney).collect(Collectors.toList());
+		return Msg.success().add("types", types).add("moneys", moneys);
 	}
 
 }

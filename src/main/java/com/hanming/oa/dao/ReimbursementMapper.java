@@ -46,5 +46,5 @@ public interface ReimbursementMapper {
 
 	List<ReimbursementCollect> dataCollectPage(@Param("username")String username, @Param("date")String date);
 
-	List<DetailedRembursement> selectByUsernameAndDate(@Param("username")String username, @Param("data")String data);
+	List<DetailedRembursement> selectByUsernameAndDate(@Param("username")String username, @Param("date")String date);
 }

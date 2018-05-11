@@ -18,12 +18,14 @@
 <script src="${APP_PATH}/static/js/shine.js"></script>
 
 <script type="text/javascript">
+
 function callbackFn(myChart,name,jsonURL){ 
 	myChart.showLoading();
 	$.ajax({
-		url :jsonURL,
+		url :'${APP_PATH}/admin/reimbursement/detailedRembursement',
 		data :{
-			'name':name,
+			'username':'${username}',
+			'date':'${date}'
 		},
 		type : "GET",
 		success : function(result) {
@@ -32,13 +34,13 @@ function callbackFn(myChart,name,jsonURL){
 			   
 				xAxis: {
 		        	type: 'category',
-		            data: ['1','2','3','4','5','6','7','8','9','10','11','12']  
+		            data: result.extend.types
 		        },  
 		        yAxis: {},  
 		        series: [{
 	                name: '销量',
 	                type: 'bar',
-	                data: [5, 20, 36, 10, 10, 20]
+	                data: result.extend.moneys
 	            }]
 
 			});  

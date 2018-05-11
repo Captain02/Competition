@@ -96,7 +96,7 @@
 													<td>${reimbursementCollect.date}</td>
 													<td>${reimbursementCollect.money}</td>
 													<td>
-														<a class="btn btn-info btn-sm">查看详情</a>
+														<a href="${APP_PATH}/admin/reimbursement/detailedRembursementPage?username=${reimbursementCollect.username}&date=${reimbursementCollect.date}" class="btn btn-info btn-sm">查看详情</a>
 													</td>
 												</tr>
 											</c:forEach>

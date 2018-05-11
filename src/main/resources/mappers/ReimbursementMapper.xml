@@ -291,23 +291,23 @@
 	INNER JOIN reimbursement r ON r.id = ur.reimbursementId
   	<where>
   		<if test="username != null">
-  			tu.`name` = #{username}
+  			tu.username = #{username}
   		</if>
   		<if test="date != null">
-  			AND r.date LIKE '%' #{date} '%'
+  			AND r.date LIKE '%'#{date}'%'
   		</if>
   	</where>
 		GROUP BY LEFT(r.date,7)
   </select>
   
-  <!-- List<DetailedRembursement> selectByUsernameAndDate(@Param("username")String username, @Param("data")String data); -->
+  <!-- List<DetailedRembursement> selectByUsernameAndDate(@Param("username")String username, @Param("date")String date); -->
   <select id="selectByUsernameAndDate" resultType="DetailedRembursement" >
-  	SELECT r.money AS money, r.date AS date, tu.username AS username
+  	SELECT r.money AS money, r.date AS date, r.type AS type
 	FROM t_user tu
 	INNER JOIN user_reimbursement ur ON ur.userId = tu.id
 	INNER JOIN reimbursement r ON r.id = ur.reimbursementId
   	<where>
-  			tu.`name` = #{username}
+  			tu.username = #{username}
   			AND r.date LIKE '%' #{date} '%'
   	</where>
   </select>
