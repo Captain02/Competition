@@ -103,6 +103,11 @@
 										    <label class="col-md-2 control-label" for="modelId">模型唯一标识</label>
 										    <div class="col-md-10"><input type="text" class="form-control" id="modelId" placeholder="请输入模型标识"></div>
 										  </div>
+										  
+										   <div class="form-group">
+										    <label class="col-md-2 control-label" for="modelId">描述</label>
+										    <div class="col-md-10"><input type="text" class="form-control" id="modelDesc" placeholder="请输入模型唯一描述"></div>
+										  </div>
 						  
 						  				<div class="form-group">
 						  					<label class="col-md-2 control-label" for=""></label>
