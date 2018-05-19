@@ -73,10 +73,6 @@
                             <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/model/createPage'">
                                 <i>+</i>添加
                             </button>
-                            <button id="delButton" type="button" class="btn btn-danger btn-sm" onclick="deleAll()">
-                                <i>-</i>批量删除
-                            </button>
-                            <input type="hidden" value=""  class="ids"/>
                         </div>
 
 
@@ -95,10 +91,10 @@
 
                                             <thead>
                                                 <tr>
-                                                <th><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"></th>
                                                     <th>Key</th>
                                                     <th>名称</th>
                                                     <th>描述</th>
+                                                    <th>操作</th>
                                                 </tr>
                                             </thead>
 
@@ -108,6 +104,20 @@
 	                                                <td>${model.key} <input type="hidden" value="${model.key}" /></td>
                                                     <td>${model.name}</td>
                                                     <td>${model.version}</td>
+                                                    <td>
+                                                    	<button class="btn btn-success btn-sm btn-edit">
+                                                    		<i class="glyphicon glyphicon-edit"></i>
+                                                    		编辑
+                                                    	</button>
+                                                    	<button class="btn btn-info btn-sm btn-deploy">
+	                                                    	<i class="glyphicon glyphicon-briefcase"></i>
+	                                                    	部署
+                                                    	</button>
+                                                    	<button class="btn btn-warning btn-sm btn-upload">
+	                                                    	<i class="glyphicon glyphicon-minus"></i>
+	                                                    	删除
+                                                    	</button>
+                                                    </td>
 													</c:forEach>
                                             </tbody>
 
