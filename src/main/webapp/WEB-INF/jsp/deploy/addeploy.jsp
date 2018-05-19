@@ -72,7 +72,7 @@
 								<span class="om-title">流程管理</span> <span class="om-list">
 									<a href="${APP_PATH}/admin/deploy/list">流程部署</a>
                                     <a href="${APP_PATH}/admin/processDefinition/list">流程定义</a>
-	
+									<a href="${APP_PATH}/admin/model/list">模块管理</a>
 								</span>
 							</h3>
 						</div>

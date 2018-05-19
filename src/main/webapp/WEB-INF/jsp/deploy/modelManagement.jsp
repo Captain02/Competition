@@ -16,6 +16,42 @@
 %>
 <jsp:include page="iniCssHref.jsp"></jsp:include>
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
+<script type="text/javascript">
+	function deployModel(ele){
+		var modelId = $(ele).attr('data-modelId');
+		$.ajax({
+			url:'${APP_PATH}/admin/model/deployModel',
+			data:{
+				'modelId':modelId
+			},
+			type:'POST',
+			success:function(result){
+				if (result.code==100) {
+					console.log(result);
+					/* 部署成功自动刷新 */
+				}
+			}
+		})
+	}
+	function deleModel(ele){
+		var modelId = $(ele).attr('data-modelId');
+		alert(modelId)
+		$.ajax({
+			url:'${APP_PATH}/admin/model/deleModel',
+			data:{
+				'modelId':modelId
+			},
+			type:'POST',
+			success:function(result){
+				console.log(result);
+				if (result.code==100) {
+					console.log(result);
+					/* 部署成功自动刷新 */
+				}
+			}
+		})
+	}
+</script>
 </head>
     <body class="bg-common stickey-menu">
 
@@ -105,15 +141,15 @@
                                                     <td>${model.name}</td>
                                                     <td>${model.version}</td>
                                                     <td>
-                                                    	<button class="btn btn-success btn-sm btn-edit">
+                                                    	<a href="/static/process-editor/modeler.html?modelId=${model.id}" class="btn btn-success btn-sm btn-edit">
                                                     		<i class="glyphicon glyphicon-edit"></i>
                                                     		编辑
-                                                    	</button>
-                                                    	<button class="btn btn-info btn-sm btn-deploy">
+                                                    	</a>
+                                                    	<button onclick="deployModel(this);" data-modelId="${model.id}" class="btn btn-info btn-sm btn-deploy">
 	                                                    	<i class="glyphicon glyphicon-briefcase"></i>
 	                                                    	部署
                                                     	</button>
-                                                    	<button class="btn btn-warning btn-sm btn-upload">
+                                                    	<button onclick="deleModel(this);" data-modelId="${model.id}" class="btn btn-warning btn-sm btn-upload">
 	                                                    	<i class="glyphicon glyphicon-minus"></i>
 	                                                    	删除
                                                     	</button>

@@ -1,20 +1,28 @@
 package com.hanming.oa.controller;
 
 import java.util.List;
+import java.util.Locale;
 
+import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Deployment;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.hanming.oa.Tool.Msg;
 
 @Controller
 @RequestMapping("admin/model")
@@ -73,5 +81,32 @@ public class ModelController {
 		} catch (Exception e) {
 		}
 		return null;
+	}
+	
+	//部署模型
+	@ResponseBody
+	@RequestMapping(value="/deployModel",method=RequestMethod.POST)
+	public Msg deployModel(@RequestParam(value="modelId")String modelId) {
+	    try {
+	        org.activiti.engine.repository.Model modelData = repositoryService.getModel(modelId);
+	        ObjectNode modelNode = (ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
+	        byte[] bpmnBytes = null;
+	        BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+	        bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+	        String processName = modelData.getName() + ".bpmn20.xml";
+	        Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes,"utf-8")).deploy();
+	        return Msg.success();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return Msg.fail();
+	}
+	
+	//删除
+	@ResponseBody
+	@RequestMapping(value="/deleModel",method=RequestMethod.POST)
+	public Msg deleModel(@RequestParam(value="modelId")String modelId) {
+		repositoryService.deleteModel(modelId);
+		return Msg.success();
 	}
 }
