@@ -27,15 +27,19 @@
 			type:'POST',
 			success:function(result){
 				if (result.code==100) {
-					console.log(result);
 					/* 部署成功自动刷新 */
+					$('#myModal').modal('show');
+					ShowTips('.modal-title','执行结果','.modal-body','模块部署成功!');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+						window.location.reload();
+					},2000)
 				}
 			}
 		})
 	}
 	function deleModel(ele){
 		var modelId = $(ele).attr('data-modelId');
-		alert(modelId)
 		$.ajax({
 			url:'${APP_PATH}/admin/model/deleModel',
 			data:{
@@ -46,7 +50,12 @@
 				console.log(result);
 				if (result.code==100) {
 					console.log(result);
-					/* 部署成功自动刷新 */
+					$('#myModal').modal('show');
+					ShowTips('.modal-title','执行结果','.modal-body','删除成功!');
+					setTimeout(function(){
+						$('#myModal').modal('hide');
+						window.location.reload();
+					},2000)
 				}
 			}
 		})
@@ -119,10 +128,8 @@
                         <div class="row">
                             <div class="col-sm-12">
 
-<%--                                 <header class="om-wrapper-header">模块管理 / 总数：${pageInfo.total}</header> --%>
-
                                 <div class="om-wrpper-body">
-                                    <form action="" id="user-list" class="user-list">
+                                   
                                         <table class="table table-bordered table-striped">
 
                                             <thead>
@@ -158,58 +165,11 @@
                                             </tbody>
 
                                         </table>
-                                    </form>
                                 </div>
 
                             </div>
 
                         </div>
-
-                        <!-- 分页 -->
-<!--                         <div class="page-area"> -->
-<!--                             <div class="container page-possiton"> -->
-<!--                                 <nav aria-label="Page navigation"> -->
-<!--                                     <ul class="pagination pagination-control"> -->
-<!--                                         <li> -->
-<%--                                             <a href="${APP_PATH}/admin/deploy/list?pn=1&name=${name}">首页</a> --%>
-<!--                                         </li> -->
-<%--                                         <c:if test="${pageInfo.hasPreviousPage}"> --%>
-<!--                                             <li> -->
-<%--                                                 <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum-1}&name=${name}" aria-label="Previous"> --%>
-<!--                                                     <span aria-hidden="true">&laquo;</span> -->
-<!--                                                 </a> -->
-<!--                                             </li> -->
-<%--                                         </c:if> --%>
-<%--                                         <c:forEach items="${pageInfo.navigatepageNums}" var="pageNum"> --%>
-<%--                                             <c:if test="${pageNum==pageInfo.pageNum}"> --%>
-<!--                                                 <li class="active"> -->
-<%--                                                     <a href="#">${pageNum}</a> --%>
-<!--                                                 </li> -->
-<%--                                             </c:if> --%>
-<%--                                             <c:if test="${pageNum!=pageInfo.pageNum}"> --%>
-<!--                                                 <li> -->
-<%--                                                     <a href="${APP_PATH}/admin/deploy/list?pn=${pageNum}&name=${name}">${pageNum}</a> --%>
-<!--                                                 </li> -->
-<%--                                             </c:if> --%>
-<%--                                         </c:forEach> --%>
-
-<%--                                         <c:if test="${pageInfo.hasNextPage }"> --%>
-<!--                                             <li> -->
-<%--                                                 <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum+1}&name=${name}" aria-label="Next"> --%>
-<!--                                                     <span aria-hidden="true">&raquo;</span> -->
-<!--                                                 </a> -->
-<!--                                             </li> -->
-<%--                                         </c:if> --%>
-
-<!--                                         <li> -->
-<%--                                             <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pages}&name=${name}" aria-label="Next"> --%>
-<!--                                                 <span aria-hidden="true">末页</span> -->
-<!--                                             </a> -->
-<!--                                         </li> -->
-<!--                                     </ul> -->
-<!--                                 </nav> -->
-<!--                             </div> -->
-<!--                         </div> -->
 
                     </div>
                 </div>
@@ -218,31 +178,19 @@
         </section>
         
          <!-- 模态框 -->
- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-      
-        <button type="button" class="btn btn-warning yes">确认</button>
-        <button type="button" class="btn btn-success no">取消</button>
-        
-        <!-- 用于页面跳转的按钮 -->
-<%--         <form action="${APP_PATH}/admin/deploy/list"> --%>
-<%--         	<input type="hidden" value="${pageInfo.pageNum}" name="pn"> --%>
-<!--         	<button type="submit" class="btn btn-danger down">关闭</button> -->
-<!--         </form> -->
-        
-      </div>
-    </div>
-  </div>
-</div>
+		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"></h4>
+		      </div>
+		      <div class="modal-body">
+		        
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
     </body>
 

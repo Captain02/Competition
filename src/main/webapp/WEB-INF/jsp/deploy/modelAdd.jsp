@@ -96,7 +96,12 @@
 										  </div>
 										  
 										   <div class="form-group">
-										    <label class="col-md-2 control-label" for="modelId">描述</label>
+										    <label class="col-md-2 control-label" for="people">人数</label>
+										    <div class="col-md-10"><input type="text" name="modelKey" class="form-control" id="people" placeholder="请输入人数"></div>
+										  </div>
+										  										  
+										   <div class="form-group">
+										    <label class="col-md-2 control-label" for="modelDesc">描述</label>
 										    <div class="col-md-10"><input type="text" name="modelDescription" class="form-control" id="modelDesc" placeholder="请输入模型唯一描述"></div>
 										  </div>
 						  
@@ -120,34 +125,6 @@
             </div>
 
         </section>
-        
-         <!-- 模态框 -->
- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"></h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-      
-        <button type="button" class="btn btn-warning yes">确认</button>
-        <button type="button" class="btn btn-success no">取消</button>
-        
-        <!-- 用于页面跳转的按钮 -->
-        <form action="${APP_PATH}/admin/deploy/list">
-        	<input type="hidden" value="${pageInfo.pageNum}" name="pn">
-        	<button type="submit" class="btn btn-danger down">关闭</button>
-        </form>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
     </body>
 
 </html>
