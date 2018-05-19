@@ -23,6 +23,7 @@ public class ModelController {
 	@Autowired
 	RepositoryService repositoryService;
 
+	//列表
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String list(Model model) {
 		List<org.activiti.engine.repository.Model> pageInfo = repositoryService.createModelQuery().list();
@@ -30,6 +31,14 @@ public class ModelController {
 		return "deploy/modelManagement";
 	}
 	
+	//跳转添加页
+	@RequestMapping(value="/createPage",method=RequestMethod.GET)
+	public String addModelPage() {
+		
+		return "deploy/modelAdd";
+	}
+	
+	//跳转绘制流程
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createModel(@RequestParam("modelName") String modelName, @RequestParam("modelKey") String modelKey, @RequestParam("modelDescription") String description) {
 

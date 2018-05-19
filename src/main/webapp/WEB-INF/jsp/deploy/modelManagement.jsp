@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/deploy/addeploy'">
+                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/model/createPage'">
                                 <i>+</i>添加
                             </button>
                             <button id="delButton" type="button" class="btn btn-danger btn-sm" onclick="deleAll()">
