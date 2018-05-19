@@ -103,7 +103,7 @@
                                             </thead>
 
                                             <tbody>
-												<c:forEach items="${list}" var="model">
+												<c:forEach items="${pageInfo}" var="model">
 	                                                <tr>
 	                                                <td>${model.key} <input type="hidden" value="${model.key}" /></td>
                                                     <td>${model.name}</td>

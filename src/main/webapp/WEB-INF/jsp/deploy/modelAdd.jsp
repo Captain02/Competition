@@ -69,15 +69,6 @@
                             </h3>
                         </div>
 
-                        <div class="om-header-right">
-                            <button id="addButton" type="button" class="btn btn-success btn-sm" onclick="window.location.href='${APP_PATH}/admin/deploy/addeploy'">
-                                <i>+</i>添加
-                            </button>
-                            <button id="delButton" type="button" class="btn btn-danger btn-sm" onclick="deleAll()">
-                                <i>-</i>批量删除
-                            </button>
-                            <input type="hidden" value=""  class="ids"/>
-                        </div>
 
 
                         <div class="clearfix"></div>
@@ -90,23 +81,23 @@
                                 <header class="om-wrapper-header">添加模块 </header>
 
                                 <div class="om-wrpper-body">
-                                    <form action="" id="modelAdd" class="model-add">
+                                    <form action="${APP_PATH}/admin/model/create" id="modelAdd" class="model-add" method="get">
                                         
                                          <div class="form-group">
 										    <label class="col-md-2 control-label" for="modelName">模型名称</label>
 										    <div class="col-md-10">
-										    	<input type="text" class="form-control" id="modelName" placeholder="请输入模型名称">
+										    	<input type="text" class="form-control" name="modelName" id="modelName" placeholder="请输入模型名称">
 										    </div>
 						 				 </div>
 						 				 
 										  <div class="form-group">
 										    <label class="col-md-2 control-label" for="modelId">模型唯一标识</label>
-										    <div class="col-md-10"><input type="text" class="form-control" id="modelId" placeholder="请输入模型标识"></div>
+										    <div class="col-md-10"><input type="text" name="modelKey" class="form-control" id="modelId" placeholder="请输入模型标识"></div>
 										  </div>
 										  
 										   <div class="form-group">
 										    <label class="col-md-2 control-label" for="modelId">描述</label>
-										    <div class="col-md-10"><input type="text" class="form-control" id="modelDesc" placeholder="请输入模型唯一描述"></div>
+										    <div class="col-md-10"><input type="text" name="modelDescription" class="form-control" id="modelDesc" placeholder="请输入模型唯一描述"></div>
 										  </div>
 						  
 						  				<div class="form-group">
@@ -122,52 +113,6 @@
 
                             </div>
 
-                        </div>
-
-                        <!-- 分页 -->
-                        <div class="page-area">
-                            <div class="container page-possiton">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination pagination-control">
-                                        <li>
-                                            <a href="${APP_PATH}/admin/deploy/list?pn=1&name=${name}">首页</a>
-                                        </li>
-                                        <c:if test="${pageInfo.hasPreviousPage}">
-                                            <li>
-                                                <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum-1}&name=${name}" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                        <c:forEach items="${pageInfo.navigatepageNums}" var="pageNum">
-                                            <c:if test="${pageNum==pageInfo.pageNum}">
-                                                <li class="active">
-                                                    <a href="#">${pageNum}</a>
-                                                </li>
-                                            </c:if>
-                                            <c:if test="${pageNum!=pageInfo.pageNum}">
-                                                <li>
-                                                    <a href="${APP_PATH}/admin/deploy/list?pn=${pageNum}&name=${name}">${pageNum}</a>
-                                                </li>
-                                            </c:if>
-                                        </c:forEach>
-
-                                        <c:if test="${pageInfo.hasNextPage }">
-                                            <li>
-                                                <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pageNum+1}&name=${name}" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </c:if>
-
-                                        <li>
-                                            <a href="${APP_PATH}/admin/deploy/list?pn=${pageInfo.pages}&name=${name}" aria-label="Next">
-                                                <span aria-hidden="true">末页</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
                         </div>
 
                     </div>
