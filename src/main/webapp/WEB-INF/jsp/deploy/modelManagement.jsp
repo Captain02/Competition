@@ -18,25 +18,22 @@
 <script src="${APP_PATH}/static/js/selectAll.js"></script>
 <script type="text/javascript">
 	function deployModel(ele){
-		var modelId = $(ele).attr('data-modelId');
-		$.ajax({
-			url:'${APP_PATH}/admin/model/deployModel',
-			data:{
-				'modelId':modelId
-			},
-			type:'POST',
-			success:function(result){
-				if (result.code==100) {
-					/* 部署成功自动刷新 */
-					$('#myModal').modal('show');
-					ShowTips('.modal-title','执行结果','.modal-body','模块部署成功!');
-					setTimeout(function(){
-						$('#myModal').modal('hide');
-						window.location.reload();
-					},2000)
-				}
-			}
-		})
+// 		var modelId = $(ele).attr('data-modelId');
+// 		$.ajax({
+// 			url:'${APP_PATH}/admin/model/deployModel',
+// 			data:{
+// 				'modelId':modelId
+// 			},
+// 			type:'POST',
+// 			success:function(result){
+// 				if (result.code==100) {
+// 					$('#DeployModal').modal('show');
+// 				}
+// 			}
+// 		})
+		$('#DeployModal').modal('show');
+		$('#DeployModal').find('input[name="modelId"]').val($(ele).attr('data-modelId'));
+		
 	}
 	function deleModel(ele){
 		var modelId = $(ele).attr('data-modelId');
@@ -50,10 +47,10 @@
 				console.log(result);
 				if (result.code==100) {
 					console.log(result);
-					$('#myModal').modal('show');
+					$('#DelModal').modal('show');
 					ShowTips('.modal-title','执行结果','.modal-body','删除成功!');
 					setTimeout(function(){
-						$('#myModal').modal('hide');
+						$('#DelModal').modal('hide');
 						window.location.reload();
 					},2000)
 				}
@@ -177,8 +174,8 @@
 
         </section>
         
-         <!-- 模态框 -->
-		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <!-- 删除模态框 -->
+		 <div class="modal fade" id="DelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -192,6 +189,39 @@
 		  </div>
 		</div>
 
+		<!-- 部署模态框 -->
+		 <div class="modal fade" id="DeployModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"></h4>
+		      </div>
+		      
+		      <form action="${APP_PATH}/admin/model/deployModel" method="post">
+			      <div class="modal-body">
+			      	<div class="form-group" style="border-bottom: 0 none;">
+			      		<label for="" class="col-md-2" style="padding-top:7px;">流程人数</label>
+			      		<div class="col-md-10">
+			      			<input class="form-control" type="number" id="People" name="people" placeholder="输入人数" />
+			      		</div>
+			      	</div>
+			      </div>
+		      
+			       <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			        <button type="submit" class="btn btn-primary btn-deploy">确认</button>
+			        <input type="hidden"  name="modelId" />
+			      </div>
+		      </form>
+		      
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		
     </body>
 
 </html>

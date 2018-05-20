@@ -96,11 +96,6 @@
 										  </div>
 										  
 										   <div class="form-group">
-										    <label class="col-md-2 control-label" for="people">人数</label>
-										    <div class="col-md-10"><input type="text" name="modelKey" class="form-control" id="people" placeholder="请输入人数"></div>
-										  </div>
-										  										  
-										   <div class="form-group">
 										    <label class="col-md-2 control-label" for="modelDesc">描述</label>
 										    <div class="col-md-10"><input type="text" name="modelDescription" class="form-control" id="modelDesc" placeholder="请输入模型唯一描述"></div>
 										  </div>

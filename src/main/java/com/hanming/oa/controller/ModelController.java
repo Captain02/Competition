@@ -23,11 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.hanming.oa.Tool.Msg;
+import com.hanming.oa.service.DeployService;
 
 @Controller
 @RequestMapping("admin/model")
 public class ModelController {
 	
+	@Autowired
+	DeployService deployService;
 	@Autowired
 	RepositoryService repositoryService;
 
@@ -84,9 +87,8 @@ public class ModelController {
 	}
 	
 	//部署模型
-	@ResponseBody
 	@RequestMapping(value="/deployModel",method=RequestMethod.POST)
-	public Msg deployModel(@RequestParam(value="modelId")String modelId) {
+	public String deployModel(@RequestParam(value="modelId")String modelId,@RequestParam("people")Integer people) {
 	    try {
 	        org.activiti.engine.repository.Model modelData = repositoryService.getModel(modelId);
 	        ObjectNode modelNode = (ObjectNode) new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
@@ -95,11 +97,13 @@ public class ModelController {
 	        bpmnBytes = new BpmnXMLConverter().convertToXML(model);
 	        String processName = modelData.getName() + ".bpmn20.xml";
 	        Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes,"utf-8")).deploy();
-	        return Msg.success();
+	       
+	        deployService.updataPersonNumberByDeployId(deployment.getId(), people);
+	        
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-		return Msg.fail();
+	    return "redirect:/admin/model/list";
 	}
 	
 	//删除

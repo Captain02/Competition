@@ -57,6 +57,20 @@ function deleAll() {
 }
 
 $(function(){
+	$('.yes').click(function(){
+		var ids = $('.ids').val();
+		$.ajax({
+			url:'${APP_PATH}/admin/deploy/dele/'+ids,
+			type:'DELETE',
+			data:'',
+			success:function(result){
+				window.location.reload();
+			}
+		})
+	})
+})
+
+$(function(){
 var ids = $('.ids').val();
 	$('.yes').click(function(){
 		 $.ajax({
