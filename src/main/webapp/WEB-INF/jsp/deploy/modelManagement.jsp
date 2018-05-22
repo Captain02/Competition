@@ -145,7 +145,7 @@
                                                     <td>${model.name}</td>
                                                     <td>${model.version}</td>
                                                     <td>
-                                                    	<a href="/static/process-editor/modeler.html?modelId=${model.id}" class="btn btn-success btn-sm btn-edit">
+                                                    	<a href="${APP_PATH}/static/process-editor/modeler.html?modelId=${model.id}" class="btn btn-success btn-sm btn-edit">
                                                     		<i class="glyphicon glyphicon-edit"></i>
                                                     		编辑
                                                     	</a>

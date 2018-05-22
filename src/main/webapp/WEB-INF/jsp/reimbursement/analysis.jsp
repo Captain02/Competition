@@ -18,6 +18,9 @@
 <script src="${APP_PATH}/static/js/shine.js"></script>
 <script type="text/javascript">
 function callbackFn(myChart,jsonURL,data){ 
+	if (data == undefined) {
+		data = 'kong'
+	}
 		$.ajax({
 			url :jsonURL,
 			data : "date="+data,

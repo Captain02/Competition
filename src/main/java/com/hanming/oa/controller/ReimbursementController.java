@@ -176,8 +176,8 @@ public class ReimbursementController {
 	// 跳转数据分析
 	@ResponseBody
 	@RequestMapping(value = "/dataAnalysis", method = RequestMethod.GET)
-	public List<Object> dataAnalysis(@RequestParam(value = "date", defaultValue = "undefined") String date) {
-		if ("undefined".equals(date)) {
+	public List<Object> dataAnalysis(@RequestParam(value = "date", defaultValue = "kong") String date) {
+		if ("kong".equals(date)) {
 			date = DateTool.dateToString(new Date()).substring(0, 4);
 		}
 		List<Object> list = reimbursementService.dataAnalysisByMonth(date);
